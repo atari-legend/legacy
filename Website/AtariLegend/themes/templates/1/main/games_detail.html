@@ -605,7 +605,12 @@
             <br>
             <div class="games_main_details_screenshots_position_high">
                 <div class="standard_tile">
-                    <h1>{$game_info.game_name|upper}</h1>
+                    <h1>
+                        {$game_info.game_name|upper}
+                        {if isset($smarty.session.permission) and $smarty.session.permission == 1}
+                            <a href="../../admin/games/games_detail.php?game_id={$game_id}" title="Edit this game in CPANEL"><span class="fa fa-pencil"></span></a>
+                        {/if}
+                    </h1>
                     <div class="standard_tile_line"></div>
                     {if isset($screenshots)}
                         <div id="jssor_1" class="games_main_detail_screenshot">
