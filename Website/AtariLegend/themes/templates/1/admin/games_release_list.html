@@ -10,7 +10,7 @@
                     <li {if isset($release_id) and $release->getId() == $release_id}class="active"{/if}>
                         <a title="Delete release"
                             href="db_games_detail.php?action=delete_release&amp;game_id={$game->getId()}&amp;game_release_id[]={$release->getId()}"
-                            onclick="javascript:return confirm('This release will be deleted');">
+                            onclick="javascript:return confirm('This release will be deleted');" class="standard_tile_link">
                             <i class="fa fa-fw fa-trash" aria-hidden="true"></i>
                         </a>
 
