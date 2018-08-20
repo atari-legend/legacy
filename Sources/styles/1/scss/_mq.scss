@@ -52,6 +52,15 @@
     #child_1_user {
         margin-bottom: 5px;
     }
+    #gd_game_author,
+    #individual_id-autocomplete-display,
+    #gd_game_author_select,
+    #gd_game_dev,
+    #gd_game_dev_select,
+    #gd_aka,
+    #gd_aka_input{width: 140px;}
+
+    #gd_dev_role{width: 95px;}
 }
 @media screen and (max-width: 500px) {
     .user_main_container {
@@ -287,6 +296,7 @@
         max-width: 360px;
         min-width: 240px;
     }
+    #gd_game_name, #gd_game_category{width:75%;}
 }
 @media screen and (max-width: 799px) {
     .games_main_detail_nav,
