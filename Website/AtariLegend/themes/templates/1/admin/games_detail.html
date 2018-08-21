@@ -136,84 +136,6 @@ $('#input-tags3').selectize({
                         <br>
                         <hr class="separator_add">
                         <br>
-                        <b>Game information</b>
-                        <div id="gd_basic_game_info_1">
-                            <div class="gd_basic_game_info_row">
-                                <div class="gd_basic_game_info_row_check">
-                                    <div class="links_mod_checkbox">
-                                        <input type="checkbox" id="unreleased" name="unreleased" value="1" {if $game_info.game_unreleased == 1} checked{/if}>
-                                        <label for="unreleased"></label>
-                                    </div>
-                                </div>
-                                <div class="gd_basic_game_info_row_checktxt">Unreleased&nbsp;</div>
-                            </div>
-                            <div class="gd_basic_game_info_row">
-                                <div class="gd_basic_game_info_row_check">
-                                    <div class="links_mod_checkbox">
-                                        <input type="checkbox" id="development" name="development" value="1" {if $game_info.game_development == 1} checked{/if}>
-                                        <label for="development"></label>
-                                    </div>
-                                </div>
-                                <div class="gd_basic_game_info_row_checktxt">In development&nbsp;</div>
-                            </div>
-
-                            <div class="gd_basic_game_info_row">
-                                <div class="gd_basic_game_info_row_check">
-                                    <div class="links_mod_checkbox">
-                                        <input type="checkbox" id="unfinished" name="unfinished" value="1" {if $game_info.game_unfinished == 1} checked{/if}>
-                                        <label for="unfinished"></label>
-                                    </div>
-                                </div>
-                                <div class="gd_basic_game_info_row_checktxt">Unfinished&nbsp;</div>
-                            </div>
-                            <div class="gd_basic_game_info_row">
-                                <div class="gd_basic_game_info_row_check">
-                                    <div class="links_mod_checkbox">
-                                        <input type="checkbox" id="wanted" name="wanted" value="1" {if $game_info.game_wanted <> ''} checked{/if}>
-                                        <label for="wanted"></label>
-                                    </div>
-                                </div>
-                                <div class="gd_basic_game_info_row_checktxt">Wanted&nbsp;</div>
-                            </div>
-                            <div class="gd_basic_game_info_row">
-                                <div class="gd_basic_game_info_row_check">
-                                    <div class="links_mod_checkbox">
-                                        <input type="checkbox" id="arcade" name="arcade" value="1" {if $game_info.game_arcade == 1} checked{/if}>
-                                        <label for="arcade"></label>
-                                    </div>
-                                </div>
-                                <div class="gd_basic_game_info_row_checktxt">Arcade conversion&nbsp;</div>
-                            </div>
-                            <div class="gd_basic_game_info_row">
-                                <div class="gd_basic_game_info_row_check">
-                                    <div class="links_mod_checkbox">
-                                        <input type="checkbox" id="seuck" name="seuck" value="1" {if $game_info.game_seuck == 1} checked{/if}>
-                                        <label for="seuck"></label>
-                                    </div>
-                                </div>
-                                <div class="gd_basic_game_info_row_checktxt">SEUCK game&nbsp;</div>
-                            </div>
-                            <div class="gd_basic_game_info_row">
-                                <div class="gd_basic_game_info_row_check">
-                                    <div class="links_mod_checkbox">
-                                        <input type="checkbox" id="stos" name="stos" value="1" {if $game_info.game_stos == 1} checked{/if}>
-                                        <label for="stos"></label>
-                                    </div>
-                                </div>
-                                <div class="gd_basic_game_info_row_checktxt">STOS game&nbsp;</div>
-                            </div>
-                            <div class="gd_basic_game_info_row">
-                                <div class="gd_basic_game_info_row_check">
-                                    <div class="links_mod_checkbox">
-                                        <input type="checkbox" id="stac" name="stac" value="1" {if $game_info.game_stac == 1} checked{/if}>
-                                        <label for="stac"></label>
-                                    </div>
-                                </div>
-                                <div class="gd_basic_game_info_row_checktxt">STAC game&nbsp;</div>
-                            </div>
-                        </div>
-                        <hr class="separator_add">
-                        <br>
                         <b>Categories</b>&nbsp;&nbsp;<span class="help-hint">Click to choose and add categories</span>
                         <div class="control-group" id="gd_game_category">
                             <label for="input-tags"></label>
@@ -235,12 +157,92 @@ $('#input-tags3').selectize({
                                 },
                             });
                         </script>
-                    </div>
-                    <br>
-                    <br>
-                    <div class="gd_clear">
-                        <input type="submit" name="valider" value="Save changes" class="secondary_button">
-                    </div>
+                        <hr class="separator_add">
+                        <br>
+                        <b>Game information</b>
+                        <div class="gd_basic_game_info_container">
+                            <div id="gd_basic_game_info_1">
+                                <div class="gd_basic_game_info_row">
+                                    <div class="gd_basic_game_info_row_check">
+                                        <div class="links_mod_checkbox">
+                                            <input type="checkbox" id="unreleased" name="unreleased" value="1" {if $game_info.game_unreleased == 1} checked{/if}>
+                                            <label for="unreleased"></label>
+                                        </div>
+                                    </div>
+                                    <div class="gd_basic_game_info_row_checktxt">Unreleased&nbsp;</div>
+                                </div>
+                                <div class="gd_basic_game_info_row">
+                                    <div class="gd_basic_game_info_row_check">
+                                        <div class="links_mod_checkbox">
+                                            <input type="checkbox" id="development" name="development" value="1" {if $game_info.game_development == 1} checked{/if}>
+                                            <label for="development"></label>
+                                        </div>
+                                    </div>
+                                    <div class="gd_basic_game_info_row_checktxt">In development&nbsp;</div>
+                                </div>
+                                <div class="gd_basic_game_info_row">
+                                    <div class="gd_basic_game_info_row_check">
+                                        <div class="links_mod_checkbox">
+                                            <input type="checkbox" id="unfinished" name="unfinished" value="1" {if $game_info.game_unfinished == 1} checked{/if}>
+                                            <label for="unfinished"></label>
+                                        </div>
+                                    </div>
+                                    <div class="gd_basic_game_info_row_checktxt">Unfinished&nbsp;</div>
+                                </div>
+                                <div class="gd_basic_game_info_row">
+                                    <div class="gd_basic_game_info_row_check">
+                                        <div class="links_mod_checkbox">
+                                            <input type="checkbox" id="wanted" name="wanted" value="1" {if $game_info.game_wanted <> ''} checked{/if}>
+                                            <label for="wanted"></label>
+                                        </div>
+                                    </div>
+                                    <div class="gd_basic_game_info_row_checktxt">Wanted&nbsp;</div>
+                                </div>
+                            </div>
+                            <div id="gd_basic_game_info_2">
+                                <div class="gd_basic_game_info_row">
+                                    <div class="gd_basic_game_info_row_check">
+                                        <div class="links_mod_checkbox">
+                                            <input type="checkbox" id="arcade" name="arcade" value="1" {if $game_info.game_arcade == 1} checked{/if}>
+                                            <label for="arcade"></label>
+                                        </div>
+                                    </div>
+                                    <div class="gd_basic_game_info_row_checktxt">Arcade conversion&nbsp;</div>
+                                </div>
+                                <div class="gd_basic_game_info_row">
+                                    <div class="gd_basic_game_info_row_check">
+                                        <div class="links_mod_checkbox">
+                                            <input type="checkbox" id="seuck" name="seuck" value="1" {if $game_info.game_seuck == 1} checked{/if}>
+                                            <label for="seuck"></label>
+                                        </div>
+                                    </div>
+                                    <div class="gd_basic_game_info_row_checktxt">SEUCK game&nbsp;</div>
+                                </div>
+                                <div class="gd_basic_game_info_row">
+                                    <div class="gd_basic_game_info_row_check">
+                                        <div class="links_mod_checkbox">
+                                            <input type="checkbox" id="stos" name="stos" value="1" {if $game_info.game_stos == 1} checked{/if}>
+                                            <label for="stos"></label>
+                                        </div>
+                                    </div>
+                                    <div class="gd_basic_game_info_row_checktxt">STOS game&nbsp;</div>
+                                </div>
+                                <div class="gd_basic_game_info_row">
+                                    <div class="gd_basic_game_info_row_check">
+                                        <div class="links_mod_checkbox">
+                                            <input type="checkbox" id="stac" name="stac" value="1" {if $game_info.game_stac == 1} checked{/if}>
+                                            <label for="stac"></label>
+                                        </div>
+                                    </div>
+                                    <div class="gd_basic_game_info_row_checktxt">STAC game&nbsp;</div>
+                                </div>
+                            </div>
+                        </div>
+                        <hr class="separator_add">
+                        <br>
+                        <div class="gd_clear">
+                            <input type="submit" name="valider" value="Save changes" class="secondary_button">
+                        </div>
                 </form>
             </fieldset>
             <br>
@@ -271,6 +273,7 @@ $('#input-tags3').selectize({
                             </a>
 
                             <input type="text" value="{$author.ind_name}" class="standard_input input_large" disabled id="gd_game_author">
+                            <a href="../individuals/individuals_edit.php?ind_id={$author.ind_id}" class="standard_tile_link"><i class="fa fa-pencil" aria-hidden="true"></i></a>
 
                             <select name="new_author_type_id"
                                 onchange="jQuery('#update-author-{$author.game_author_id}').show()"
@@ -280,7 +283,6 @@ $('#input-tags3').selectize({
                                     <option value="{$author_type.author_type_id}" {if $author_type.author_type eq $author.author_type_info} selected{/if}>{$author_type.author_type}</option>
                                 {/foreach}
                             </select>
-                            <a href="../individuals/individuals_edit.php?ind_id={$author.ind_id}" class="standard_tile_link"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>
                             <input type="submit" id="update-author-{$author.game_author_id}" style="display: none;" class="secondary_button" value="Update">
 
                         </form>
@@ -311,7 +313,7 @@ $('#input-tags3').selectize({
                             <option value="{$individual->getId()}">{$individual->getName()}</option>
                         {/foreach}
                     </select>
-
+                    <span class="gd_seperator_small">
                     <select name="author_type_id" class="standard_select select_medium">
                         <option value="" selected="selected">-</option>
                         {foreach from=$author_types item=author_type}
@@ -319,7 +321,7 @@ $('#input-tags3').selectize({
                         {/foreach}
                     </select>
 
-                    <button type="submit" class="secondary_button">Add new author</button>
+                    <button type="submit" class="secondary_button">Add author</button>
                 </form>
 
                 <br>
@@ -343,7 +345,7 @@ $('#input-tags3').selectize({
                             <input type="hidden" name="developer_role_id" value="{$developer.developer_role_id}">
 
                             <input type="text" value="{$developer.pub_dev_name}" class="standard_input input_large" disabled id="gd_game_dev">
-
+                            <a href="../company/company_edit.php?comp_id={$developer.pub_dev_id}" class="standard_tile_link"><i class="fa fa-pencil" aria-hidden="true"></i></a>
                             <select name="new_developer_role_id"
                                 onchange="jQuery('#update-developer-{$developer.pub_dev_id}').show()"
                                 class="standard_select select_medium">
@@ -352,7 +354,6 @@ $('#input-tags3').selectize({
                                     <option value="{$info.developer_role_id}" {if $developer.developer_role_id eq $info.developer_role_id} selected{/if}>{$info.developer_role}</option>
                                 {/foreach}
                             </select>
-                            <a href="../company/company_edit.php?comp_id={$developer.pub_dev_id}" class="standard_tile_link"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>
                             <input type="submit" id="update-developer-{$developer.pub_dev_id}" style="display: none;" class="secondary_button" value="Update">
 
                         </form>
@@ -367,28 +368,27 @@ $('#input-tags3').selectize({
 
                     <span class="fa fa-fw"></span>
 
-                    <select name="developerbrowse" onchange="browseDeveloper(this.value)" class="standard_select select_small">
+                    <select name="developerbrowse" onchange="browseDeveloper(this.value)" class="standard_select select_small" id="gd_dev_browse">
                         <option value="" SELECTED>-</option>
                         {html_options values=$az_value output=$az_output}
                     </select>
-
                     <span id="ajax_developer_browse">
-                        <select name="pub_dev_id" class="standard_select select_medium" style="width: 131px;" required>
+                        <select id="gd_dev_name" name="pub_dev_id" class="standard_select" required>
                             <option value="" selected="selected" disabled>0-9 &hellip;</option>
                             {foreach from=$pubdevs item=pubdev}
                                 <option value="{$pubdev->getId()}">{$pubdev->getName()}</option>
                             {/foreach}
                         </select>
                     </span>
-
-                    <select name="developer_role_id" class="standard_select select_medium" id="gd_dev_role">
+                    <span class="gd_seperator_small">
+                    <select name="developer_role_id" class="standard_select select_medium">
                         <option value="" selected="selected">-</option>
                         {foreach from=$developer_role item=line}
                             <option value="{$line.developer_role_id}">{$line.developer_role}</option>
                         {/foreach}
                     </select>
 
-                    <input type="submit" value="Add new developer" class="secondary_button">
+                    <input type="submit" value="Add developer" class="secondary_button">
                 </form>
                 <br>
             </fieldset>
@@ -444,7 +444,7 @@ $('#input-tags3').selectize({
                                     <option value="{$language.id}">{$language.name}</option>
                                 {/foreach}
                             </select>
-                            <input type="submit" name="valider" value="Add new AKA" class="secondary_button">
+                            <input type="submit" name="valider" value="Add AKA" class="secondary_button">
                         </form>
                     </fieldset>
                 </div>
