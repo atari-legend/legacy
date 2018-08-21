@@ -80,7 +80,7 @@
                     <td>{if $line.user_name != ''}<a href="../user/user_detail.php?user_id_selected={$line.user_id}" class="standard_tile_text_center">{$line.user_name}</a>{else}<i>n/a</i>{/if}</td>
                     <td>{if $line.join_date != ''}{$line.join_date}{else}<i>n/a</i>{/if}</td>
                     <td>{if $line.last_visit != ''}{$line.last_visit}{else}<i>n/a</i>{/if}</td>
-                    <td>{if $line.email != ''}<a href="mailto:{$line.email}" class="standard_tile_link_black"><i class="fa fa-envelope" aria-hidden="true"></i></a>{/if}</td>
+                    <td>{if $line.email != ''}{if $line.show_email == true}<a href="mailto:{$line.email}" class="standard_tile_link_black">{/if}<i class="fa fa-envelope" aria-hidden="true"></i></a>{/if}</td>
                 </tr>
                 {/foreach}
                 {else}

@@ -23,7 +23,7 @@ $start = microtime(true);
 if (isset($action) and $action == 'quick_search_users') {
     $last_visit_timestamp = date_to_timestamp($Date_Year, $Date_Month, $Date_Day);
 
-    $sql_query = "SELECT users.user_id, users.userid, users.email, users.join_date, users.last_visit FROM users";
+    $sql_query = "SELECT users.user_id, users.userid, users.email, users.join_date, users.last_visit, users.show_email FROM users";
 
     if (isset($with_comments) and $with_comments == "1") {
         $sql_query .= " LEFT JOIN comments ON (users.user_id = comments.user_id)";
@@ -207,6 +207,7 @@ if (isset($action) and $action == 'quick_search_users') {
             'user_name' => $query_users['userid'],
             'join_date' => $join_date,
             'last_visit' => $last_visit,
+            'show_email' => $query_users['show_email'],
             'email' => $email
         ));
     }
