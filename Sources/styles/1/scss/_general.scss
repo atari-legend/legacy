@@ -302,6 +302,19 @@ img {
 .standard_tile_link_black:hover {
     color: #ffffff;
 }
+
+.standard_tile_link_invert a:link {
+    color: #008b8b;
+}
+
+.standard_tile_link_invert a:visited {
+    color: #008b8b;
+}
+
+.standard_tile_link_invert a:hover {
+    color: #ffffff;
+}
+
 .standard_list_entry {
     position: relative;
     display: table;
