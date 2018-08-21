@@ -60,8 +60,18 @@
     #gd_aka,
     #gd_aka_input{width: 140px;}
 
-    #gd_dev_role{width: 95px;}
+    #gd_dev_browse{width: 25px;}
+    #gd_dev_name{
+        with: 100px;
+    }
 }
+
+@media screen and (min-width: 481px) {
+    #gd_dev_name{
+        with: 130px;
+    }
+}
+
 @media screen and (max-width: 500px) {
     .user_main_container {
         flex-direction: column;
@@ -425,9 +435,13 @@
     .games_main_input_site_text {
         width: 50%;
     }
+    .gd_basic_game_info_container,
     .user_details_container,
     .game_upload_container {
         flex-direction: column;
+    }
+    #gd_basic_game_info_1, #gd_basic_game_info_2{
+        width:100%;
     }
     .user_details_input_small {
         width: 90%;
