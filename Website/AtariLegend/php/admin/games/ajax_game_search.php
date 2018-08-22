@@ -52,11 +52,10 @@ $RESULTGAME = "SELECT game.game_id,
         LEFT JOIN game_stos ON (game.game_id = game_stos.game_id)
         LEFT JOIN game_stac ON (game.game_id = game_stac.game_id)
         LEFT JOIN game_wanted ON (game.game_id = game_wanted.game_id)
-        LEFT JOIN game_publisher ON (game_publisher.game_id = game.game_id)
-        LEFT JOIN pub_dev pd1 ON (pd1.pub_dev_id = game_publisher.pub_dev_id)
         LEFT JOIN game_developer ON (game_developer.game_id = game.game_id)
         LEFT JOIN pub_dev pd2 ON (pd2.pub_dev_id = game_developer.dev_pub_id)
         LEFT JOIN game_release ON (game_release.game_id = game.game_id)
+        LEFT JOIN pub_dev pd1 ON (pd1.pub_dev_id = game_release.pub_dev_id)
         WHERE ";
 
 $RESULTAKA = "SELECT
@@ -85,11 +84,10 @@ $RESULTAKA = "SELECT
       LEFT JOIN game_stos ON (game.game_id = game_stos.game_id)
       LEFT JOIN game_stac ON (game.game_id = game_stac.game_id)
       LEFT JOIN game_wanted ON (game.game_id = game_wanted.game_id)
-      LEFT JOIN game_publisher ON (game.game_id = game_publisher.game_id)
-      LEFT JOIN pub_dev pd1 ON (game_publisher.pub_dev_id = pd1.pub_dev_id)
       LEFT JOIN game_developer ON (game.game_id = game_developer.game_id)
       LEFT JOIN pub_dev pd2 on (pd2.pub_dev_id = game_developer.dev_pub_id)
       LEFT JOIN game_release on (game_release.game_id = game.game_id)
+      LEFT JOIN pub_dev pd1 ON (game_release.pub_dev_id = pd1.pub_dev_id)
      WHERE ";
 
 if (empty($action)) {
@@ -124,8 +122,6 @@ if (isset($action) and $action == "search") {
     //check the publisher select
     if (empty($publisher) or $publisher == '-') {
         $publisher_select = "";
-    } elseif ($publisher == "null") {
-        $publisher_select = " AND pd1.pub_dev_id IS NULL";
     } else {
         $publisher_select = " AND pd1.pub_dev_id = $publisher";
     }
@@ -145,7 +141,7 @@ if (isset($action) and $action == "search") {
     } elseif ($year == "no_year_set") {
         $year_select = " AND game_release.date IS NULL";
     } else {
-        $year_select = " AND CONVERT(YEAR(game_release.date), CHAR(4)) LIKE '$year%'";
+        $year_select = " AND CONVERT(YEAR(game_release.date), CHAR(4)) = $year";
     }
 
     //
