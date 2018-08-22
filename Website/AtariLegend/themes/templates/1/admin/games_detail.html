@@ -273,7 +273,7 @@ $('#input-tags3').selectize({
                             </a>
 
                             <input type="text" value="{$author.ind_name}" class="standard_input input_large" disabled id="gd_game_author">
-                            <a href="../individuals/individuals_edit.php?ind_id={$author.ind_id}" class="standard_tile_link"><i class="fa fa-pencil" aria-hidden="true"></i></a>
+                            <a href="../individuals/individuals_edit.php?ind_id={$author.ind_id}" title="Edit individual" class="standard_tile_link"><i class="fa fa-fw fa-pencil edit_author" aria-hidden="true"></i></a>
 
                             <select name="new_author_type_id"
                                 onchange="jQuery('#update-author-{$author.game_author_id}').show()"
@@ -313,7 +313,8 @@ $('#input-tags3').selectize({
                             <option value="{$individual->getId()}">{$individual->getName()}</option>
                         {/foreach}
                     </select>
-                    <span class="gd_seperator_small">
+                    <span class="fa fa-fw edit_author"></span>
+
                     <select name="author_type_id" class="standard_select select_medium">
                         <option value="" selected="selected">-</option>
                         {foreach from=$author_types item=author_type}
@@ -345,7 +346,8 @@ $('#input-tags3').selectize({
                             <input type="hidden" name="developer_role_id" value="{$developer.developer_role_id}">
 
                             <input type="text" value="{$developer.pub_dev_name}" class="standard_input input_large" disabled id="gd_game_dev">
-                            <a href="../company/company_edit.php?comp_id={$developer.pub_dev_id}" class="standard_tile_link"><i class="fa fa-pencil" aria-hidden="true"></i></a>
+                            <a href="../company/company_edit.php?comp_id={$developer.pub_dev_id}" title="Edit developer" class="standard_tile_link"><i class="fa fa-fw fa-pencil edit_author" aria-hidden="true"></i></a>
+
                             <select name="new_developer_role_id"
                                 onchange="jQuery('#update-developer-{$developer.pub_dev_id}').show()"
                                 class="standard_select select_medium">
@@ -380,7 +382,8 @@ $('#input-tags3').selectize({
                             {/foreach}
                         </select>
                     </span>
-                    <span class="gd_seperator_small">
+                    <span class="fa fa-fw edit_author"></span>
+
                     <select name="developer_role_id" class="standard_select select_medium">
                         <option value="" selected="selected">-</option>
                         {foreach from=$developer_role item=line}
