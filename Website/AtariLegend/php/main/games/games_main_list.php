@@ -45,11 +45,8 @@ if (empty($game_author)) {
             screenshot_game.screenshot_id,
             game_music.music_id,
             game_download.game_download_id,
-            pd1.pub_dev_name as 'publisher_name',
-            pd1.pub_dev_id as 'publisher_id',
             pd2.pub_dev_name as 'developer_name',
             pd2.pub_dev_id as 'developer_id',
-            YEAR(game_release.date) as game_release_year,
             game_cat_cross.game_cat_id,
             game_cat.game_cat_name
             FROM game
@@ -68,11 +65,10 @@ if (empty($game_author)) {
           LEFT JOIN game_stos ON (game.game_id = game_stos.game_id)
           LEFT JOIN game_stac ON (game.game_id = game_stac.game_id)
           LEFT JOIN game_wanted ON (game.game_id = game_wanted.game_id)
-          LEFT JOIN game_publisher ON (game_publisher.game_id = game.game_id)
-          LEFT JOIN pub_dev pd1 ON (pd1.pub_dev_id = game_publisher.pub_dev_id)
           LEFT JOIN game_developer ON (game_developer.game_id = game.game_id)
           LEFT JOIN pub_dev pd2 on (pd2.pub_dev_id = game_developer.dev_pub_id)
           LEFT JOIN game_release on (game_release.game_id = game.game_id)
+          LEFT JOIN pub_dev pd1 ON (pd1.pub_dev_id = game_release.pub_dev_id)
         WHERE ";
 } else {
     $RESULTGAME = "SELECT game.game_id,
@@ -82,11 +78,8 @@ if (empty($game_author)) {
             screenshot_game.screenshot_id,
             game_music.music_id,
             game_download.game_download_id,
-            pd1.pub_dev_name as 'publisher_name',
-            pd1.pub_dev_id as 'publisher_id',
             pd2.pub_dev_name as 'developer_name',
             pd2.pub_dev_id as 'developer_id',
-            YEAR(game_release.date) as game_release_year,
             game_cat_cross.game_cat_id,
             game_cat.game_cat_name
             FROM game
@@ -106,11 +99,10 @@ if (empty($game_author)) {
           LEFT JOIN game_stos ON (game.game_id = game_stos.game_id)
           LEFT JOIN game_stac ON (game.game_id = game_stac.game_id)
           LEFT JOIN game_wanted ON (game.game_id = game_wanted.game_id)
-          LEFT JOIN game_publisher ON (game_publisher.game_id = game.game_id)
-          LEFT JOIN pub_dev pd1 ON (pd1.pub_dev_id = game_publisher.pub_dev_id)
           LEFT JOIN game_developer ON (game_developer.game_id = game.game_id)
           LEFT JOIN pub_dev pd2 on (pd2.pub_dev_id = game_developer.dev_pub_id)
           LEFT JOIN game_release on (game_release.game_id = game.game_id)
+          LEFT JOIN pub_dev pd1 ON (pd1.pub_dev_id = game_release.pub_dev_id)
         WHERE ";
 }
 
@@ -123,11 +115,8 @@ if (empty($game_author)) {
              screenshot_game.screenshot_id,
              game_music.music_id,
              game_download.game_download_id,
-             pd1.pub_dev_name as 'publisher_name',
-             pd1.pub_dev_id as 'publisher_id',
              pd2.pub_dev_name as 'developer_name',
              pd2.pub_dev_id as 'developer_id',
-             YEAR(game_release.date) as game_release_year,
              game_cat_cross.game_cat_id,
              game_cat.game_cat_name
           FROM game_aka
@@ -147,11 +136,10 @@ if (empty($game_author)) {
           LEFT JOIN game_stos ON (game.game_id = game_stos.game_id)
           LEFT JOIN game_stac ON (game.game_id = game_stac.game_id)
           LEFT JOIN game_wanted ON (game.game_id = game_wanted.game_id)
-          LEFT JOIN game_publisher ON (game.game_id = game_publisher.game_id)
-          LEFT JOIN pub_dev pd1 ON (game_publisher.pub_dev_id = pd1.pub_dev_id)
           LEFT JOIN game_developer ON (game.game_id = game_developer.game_id)
           LEFT JOIN pub_dev pd2 on (pd2.pub_dev_id = game_developer.dev_pub_id)
           LEFT JOIN game_release on (game_release.game_id = game.game_id)
+          LEFT JOIN pub_dev pd1 ON (game_release.pub_dev_id = pd1.pub_dev_id)
          WHERE ";
 } else {
     $RESULTAKA = "SELECT
@@ -162,11 +150,8 @@ if (empty($game_author)) {
              screenshot_game.screenshot_id,
              game_music.music_id,
              game_download.game_download_id,
-             pd1.pub_dev_name as 'publisher_name',
-             pd1.pub_dev_id as 'publisher_id',
              pd2.pub_dev_name as 'developer_name',
              pd2.pub_dev_id as 'developer_id',
-             YEAR(game_release.date) as game_release_year,
              game_cat_cross.game_cat_id,
              game_cat.game_cat_name
           FROM game_aka
@@ -187,11 +172,10 @@ if (empty($game_author)) {
           LEFT JOIN game_stos ON (game.game_id = game_stos.game_id)
           LEFT JOIN game_stac ON (game.game_id = game_stac.game_id)
           LEFT JOIN game_wanted ON (game.game_id = game_wanted.game_id)
-          LEFT JOIN game_publisher ON (game.game_id = game_publisher.game_id)
-          LEFT JOIN pub_dev pd1 ON (game_publisher.pub_dev_id = pd1.pub_dev_id)
           LEFT JOIN game_developer ON (game.game_id = game_developer.game_id)
           LEFT JOIN pub_dev pd2 on (pd2.pub_dev_id = game_developer.dev_pub_id)
           LEFT JOIN game_release on (game_release.game_id = game.game_id)
+          LEFT JOIN pub_dev pd1 ON (game_release.pub_dev_id = pd1.pub_dev_id)
          WHERE ";
 }
 
@@ -251,8 +235,6 @@ if (isset($action) and $action == "search") {
     //check the publisher select
     if (empty($publisher) or $publisher == '-') {
         $publisher_select = "";
-    } elseif ($publisher == "null") {
-        $publisher_select = " AND pd1.pub_dev_id IS NULL";
     } else {
         $publisher_select = " AND pd1.pub_dev_id = $publisher";
     }
@@ -570,7 +552,6 @@ if (isset($action) and $action == "search") {
                     $game_id_1_result = $sql_game_search['game_id'];
 
                     $game_name = $sql_game_search['game_name'];
-                    $pub_name = $sql_game_search['publisher_name'];
                     $dev_name = $sql_game_search['developer_name'];
 
                     if ($sql_game_search['game_boxscan_id'] != '') {
@@ -596,12 +577,6 @@ if (isset($action) and $action == "search") {
 
                     if ($dev_name == '') {
                         $dev_name = 'n/a';
-                    }
-                    if ($pub_name == '') {
-                        $pub_name = 'n/a';
-                    }
-                    if ($sql_game_search['game_release_year'] == '') {
-                        $sql_game_search['game_release_year'] = 'n/a';
                     }
 
                     $ignore = 0;
@@ -633,11 +608,8 @@ if (isset($action) and $action == "search") {
                                 'id'=>$i,
                                 'game_id'=>$sql_game_search['game_id'],
                                 'game_name'=>$game_name,
-                                'publisher_id'=> $sql_game_search['publisher_id'],
-                                'publisher_name' => $pub_name,
                                 'developer_id' => $sql_game_search['developer_id'],
                                 'developer_name' => $dev_name,
-                                'year' => $sql_game_search['game_release_year'],
                                 'music' => $music,
                                 'boxscan' => $box,
                                 'download' => $down,
@@ -683,11 +655,8 @@ if (isset($action) and $action == "search") {
                             $smarty->append('game_search', array(
                                 'game_id' => $sql_game_search['game_id'],
                                 'game_name' => $game_name,
-                                'publisher_id' => $sql_game_search['publisher_id'],
-                                'publisher_name' => $pub_name,
                                 'developer_id' => $sql_game_search['developer_id'],
                                 'developer_name' => $dev_name,
-                                'year' => $sql_game_search['game_release_year'],
                                 'music' => $sql_game_search['music_id'],
                                 'boxscan' => $sql_game_search['game_boxscan_id'],
                                 'download' => $sql_game_search['game_download_id'],
