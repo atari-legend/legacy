@@ -65,6 +65,15 @@ img.edit-tile {
     width: 100%;
 }
 
+.gd_basic_game_info_container {
+    display: flex;
+}
+
+#gd_basic_game_info_1, #gd_basic_game_info_2{
+    width: 47.5%;
+    margin-left: 2%;
+}
+
 .gd_basic_game_info_row {
     display: table;
     width: 65%;
@@ -103,6 +112,14 @@ img.edit-tile {
 }
 #gd_text_area_big {
     height: 100%;
+}
+
+.gd_seperator_small{
+    margin-left:18px;
+}
+
+#games_detail .edit_author {
+    margin-right: 10px;
 }
 
 #file_upload_game_screenshots,
@@ -329,6 +346,8 @@ form.release_editor {
         font-weight: bold;
         display: inline-block;
         width: 230px;
+        vertical-align: top;
+        margin-top:6px;
     }
 
     .primary_button {
