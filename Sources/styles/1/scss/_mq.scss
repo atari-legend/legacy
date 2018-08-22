@@ -62,13 +62,13 @@
 
     #gd_dev_browse{width: 25px;}
     #gd_dev_name{
-        with: 100px;
+        width: 100px;
     }
 }
 
 @media screen and (min-width: 481px) {
     #gd_dev_name{
-        with: 130px;
+        width: 130px;
     }
 }
 
