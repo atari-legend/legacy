@@ -1,0 +1,129 @@
+{if count($releases) > 0}
+    <div class="standard_tile release_list">
+        <h1>{if count($releases) > 1}RELEASES{else}RELEASE INFO{/if}</h1>
+        <div class="standard_tile_line"></div>
+
+        <div class="standard_list_entry">
+            <table class="primary_table_list table_sm no_border">
+                {foreach from=$releases item=$release name=release}
+                    <tr>
+                        <td colspan="3" class="release_logo">
+                            <h4>{$release->getDate()|date_format:"Y"|default:"[no date]"}</h4>
+                        </td>
+                    </tr>
+                    {if $release->getName() != null}
+                        <tr>
+                            <td class="w-30"><span class="games_main_detail_info_right">Name</span></td>
+                            <td class="w-5">-</td>
+                            <td class="w-60">{$release->getName()}</td>
+                        </tr>
+                    {/if}
+                    {if $release->getPublisher() != null}
+                        <tr>
+                            <td class="w-30"><span class="games_main_detail_info_right">Publisher</span></td>
+                            <td class="w-5">-</td>
+                            <td class="w-60">
+                                <a class="standard_tile_link" href="games_main_list.php?publisher=283&amp;action=search">
+                                    {$release->getPublisher()->getName()}
+                                </a>
+                                {if $release->getPublisher()->getProfile() != null}
+                                    <a style="cursor: pointer;"
+                                        onclick="javascript:jQuery('#release_{$release->getId()}_publisher_profile_{$release->getPublisher()->getId()}').toggle()"
+                                        title="Click to view profile"
+                                        class="latest_comments_link">
+                                        <i class="fa fa-info-circle" aria-hidden="true"></i>
+                                    </a>
+                                {/if}
+
+                                {if $release->getPublisher()->getImage() != null}
+                                    <a href="../../includes/show_image.php?file={$release->getPublisher()->getImage()}"
+                                        data-lightbox="image-1"
+                                        data-title="{$release->getPublisher()->getName()}"
+                                        class="latest_comments_link">
+                                        <i class="fa fa-picture-o" aria-hidden="true"></i>
+                                    </a>
+                                {/if}
+                            </td>
+                        </tr>
+                        {if $release->getPublisher()->getProfile() != null}
+                            <tr style="display: none;"><td colspan="3"></td></tr>
+                            <tr style="display:none;" id="release_{$release->getId()}_publisher_profile_{$release->getPublisher()->getId()}">
+                                <td colspan="3">
+                                    <textarea id="profile{$release->getPublisher()->getId()}" class="primary_textarea" rows="6" style="margin-top:5px;margin-bottom:5px;font-size:10pt;margin-left:auto;margin-right:auto;" readonly>{$release->getPublisher()->getProfile()}</textarea>
+                                </td>
+                            </tr>
+                        {/if}
+                    {/if}
+                    {if $release->getType() != null}
+                        <tr>
+                            <td class="w-30"><span class="games_main_detail_info_right">Type</span></td>
+                            <td class="w-5">-</td>
+                            <td class="w-60">{$release->getType()}</td>
+                        </tr>
+                    {/if}
+                    {if $release->getLicense() != null}
+                        <tr>
+                            <td class="w-30"><span class="games_main_detail_info_right">License</span></td>
+                            <td class="w-5">-</td>
+                            <td class="w-60">{$release->getLicense()}</td>
+                        </tr>
+                    {/if}
+                    {if $release_location[$release->getId()]}
+                        <tr>
+                            <td class="w-30"><span class="games_main_detail_info_right">Locations</span></td>
+                            <td class="w-5">-</td>
+                            <td class="w-60">
+                                {foreach from=$release_location[$release->getId()] item=location_id name=location}
+                                    <div>
+                                        {if $locations[$location_id]->getCountryISO2() != null}
+                                            <img src="../../themes/templates/1/includes/img/vendor/country-flags-1.0/{$locations[$location_id]->getCountryISO2()|lower}.svg"
+                                                class="location_flag"
+                                                alt="Flag of {$locations[$location_id]->getName()|escape}">
+                                        {/if}
+                                        {$locations[$location_id]->getName()}
+                                    </div>
+                                {/foreach}
+                            </td>
+                        </tr>
+                    {/if}
+
+                    {if $release_resolution[$release->getId()]}
+                        <tr>
+                            <td class="w-30"><span class="games_main_detail_info_right">Resolutions</span></td>
+                            <td class="w-5">-</td>
+                            <td class="w-60">
+                                {foreach from=$release_resolution[$release->getId()] item=resolution_id name=resolution}
+                                    {$resolutions[$resolution_id]->getName()}<br>
+                                {/foreach}
+                            </td>
+                        </tr>
+                    {/if}
+
+                    {if $system_enhanced[$release->getId()]}
+                        <tr>
+                                <td class="w-30"><span class="games_main_detail_info_right">Enhanced</span></td>
+                                <td class="w-5">-</td>
+                                <td class="w-60">
+                                    {foreach from=$system_enhanced[$release->getId()] item=system_id name=system}
+                                        {$systems[$system_id]->getName()}<br>
+                                    {/foreach}
+                                </td>
+                        </tr>
+                    {/if}
+
+                    {if $system_incompatible[$release->getId()]}
+                        <tr>
+                                <td class="w-30"><span class="games_main_detail_info_right">Incompatible</span></td>
+                                <td class="w-5">-</td>
+                                <td class="w-60">
+                                    {foreach from=$system_incompatible[$release->getId()] item=system_id name=system}
+                                        {$systems[$system_id]->getName()}<br>
+                                    {/foreach}
+                                </td>
+                        </tr>
+                    {/if}
+                    {/foreach}
+            </table>
+        </div>
+    </div>
+{/if}

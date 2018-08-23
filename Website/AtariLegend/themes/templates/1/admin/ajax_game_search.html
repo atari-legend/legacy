@@ -47,9 +47,9 @@
         <table class="secondary_table_list table_hover table_sm text-nowrap">
             <tr>
                 <th class="mw-40">Game Name</th>
-                <th class="mw-20">Publisher</th>
+                <th class="mw-20">Random release publisher</th>
                 <th class="mw-20">Developer</th>
-                <th class="mw-10">Year</th>
+                <th class="mw-10">Random release year</th>
                 <th class="mw-10">Info</th>
             </tr>
             {foreach from=$game_search item=line}
@@ -132,7 +132,7 @@
             {/foreach}
             <tr>
                 <td colspan="5">
-                    {if $nr_of_games == 1}1 game found {else} {$nr_of_games} games found{/if} in {$query_time} sec
+                    {if $nr_of_games == 1}1 game found {else} {$nr_of_games} games found{/if} in {$query_time|string_format:"%.3f"} sec
                 </td>
             </tr>
         </table>
@@ -140,16 +140,6 @@
     <br>
 </div>
 </div>
-<!--This is the lazy load script with fader effect - fader is pure css class -->
-<script src="{$template_dir}includes/js/vendor/lazyload-8.0.1.min.js"></script>
-<script>
-(function () {
-    var ll = new LazyLoad({
-        threshold: 0
-    });
-}());
-</script>
-<!--end lazy load script with fader effect -->
 <br>
 <div class="standard_tile_text_center"><a href="javascript:history.go(-1)" class="standard_tile_link">back</a></div>
 <br>

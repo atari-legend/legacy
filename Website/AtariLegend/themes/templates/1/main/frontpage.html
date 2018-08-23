@@ -22,7 +22,13 @@
 //****************************************************************************************
 *}
 
-{block name=description}Find information, reviews and comments about Atari ST games, read interviews of famous Atari ST game developers, contribute missing information to the Atari Legend database.{/block}
+{if $action == 'register'}
+    {block name=description}Register an account to participate in the community and contribute to the content.{/block}
+{elseif $action == 'reset'}
+    {block name=description}Reset your Atari Legend account password.{/block}
+{else}
+    {block name=description}Information, reviews and comments about Atari ST games, interviews of famous Atari ST game developers, contribute missing information to the database.{/block}
+{/if}
 {block name=additional_scripts}
     <script src="{$template_dir}includes/js/vendor/lightbox-2.9.0.min.js"></script>
 
@@ -33,7 +39,7 @@
         })
     </script>
 
-    <script src="{$template_dir}includes/js/vendor/jssor.slider-25.2.1.min.js"></script>  <!-- This script is needed for the animation in the welcome tile -->
+    <script src="{$template_dir}includes/js/vendor/jssor.slider-27.3.0.min.js"></script>  <!-- This script is needed for the animation in the welcome tile -->
     {if isset($smarty_action) and $smarty_action == 'first_time'}<script src="{$template_dir}includes/js/vendor/animsition-4.0.2.min.js"></script>{/if}<!-- fade up script needed for the intro page -->
     <script src="{$template_dir}includes/js/vendor/jquery.dotdotdot-1.8.3.min.js"></script> <!--this script is used for the elipsis (...) effect of the latest news / reviews tile -->
     <script> <!-- This script is needed for the animation in the welcome tile -->
@@ -273,11 +279,13 @@
             <div id="welcome">
                 <!-- Slides Container -->
                 <div data-u="slides" class="welcome_slides">
+                    {capture}{$image|@shuffle}{/capture}
                     {foreach from=$image item=line}
+                        {if $line@iteration > 10}{break}{/if}
                         <div class="grid">
                             <figure class="effect-bubba" style="margin:0;max-width: 99.8%;">
                                 <img src="../../includes/show_image.php?file={$line.image_name}" data-u="image" class="standard_tile_image" alt=" ">
-                                <figcaption style="width:90%;height:80%;text-transform:0;box-sizing:content-box;" >
+                                <figcaption style="width:90%;height:80%;box-sizing:content-box;" >
                                     <h2> {$trivia_quote}</h2>
                                     <p style="text-transform:none;">
                                         <span class="trivia_tag"><br>Your number 1 Atari ST resource on the net!</span>

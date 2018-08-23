@@ -24,11 +24,11 @@ $(document).ready(function () {
 
     // Skin switcher
     $('.clearfix li a').click(function () {
-        var cssPath = '../../../themes/styles/' + $(this).attr('rel') + '/css/style.css';
-        var logoImgPath = '../../../themes/styles/' + $(this).attr('rel') + '/images/logos/top_logo01.png';
-        var logoImg480Path = '../../../themes/styles/' + $(this).attr('rel') + '/images/logos/top_logo01_480.png';
-        var logoBeePath = '../../../themes/styles/' + $(this).attr('rel') + '/images/top_right01.png';
-        var skin = $(this).attr('rel');
+        var skin = $(this).data('skin');
+        var cssPath = '../../../themes/styles/' + skin + '/css/style.css';
+        var logoImgPath = '../../../themes/styles/' + skin + '/images/logos/top_logo01.png';
+        var logoImg480Path = '../../../themes/styles/' + skin + '/images/logos/top_logo01_480.png';
+        var logoBeePath = '../../../themes/styles/' + skin + '/images/top_right01.png';
 
         $('link#main_stylesheet').attr('href', cssPath);
         $('#logo_img').attr('src', logoImgPath);

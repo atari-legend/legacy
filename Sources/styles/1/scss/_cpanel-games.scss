@@ -19,26 +19,33 @@
     width: 100%;
 }
 
+h1 {
+    a {
+        color: #00d3d3;
+    }
+}
+
 //*----------------------------------------------------------
 //Games detail
 //------------------------------------------------------------ */
+
+img.edit-tile {
+    width: 100%;
+}
+
+.gd_navigator {
+    button {
+        width: 100%;
+        margin-left: 0;
+    }
+
+    a {
+        display: block;
+    }
+}
+
 #games_detail {
     float: left;
-}
-#gd_left {
-    float: left;
-    width: 32%;
-}
-
-#gd_center {
-    float: left;
-    width: 32%;
-    margin-left: 2%;
-}
-
-#gd_right {
-    float: right;
-    width: 32%;
 }
 
 #gd_development {
@@ -47,9 +54,24 @@
     margin-top: 20px;
 }
 
+#gd_releases_info {
+    float: left;
+    width: 100%;
+    margin-top: 20px;
+}
+
 #gd_basic_game_info {
     float: left;
-    width: 60%;
+    width: 100%;
+}
+
+.gd_basic_game_info_container {
+    display: flex;
+}
+
+#gd_basic_game_info_1, #gd_basic_game_info_2{
+    width: 47.5%;
+    margin-left: 2%;
 }
 
 .gd_basic_game_info_row {
@@ -73,10 +95,7 @@
     width: 40%;
     margin-top: -285px;
 }
-#gd_other_features {
-    float: right;
-    width: 38%;
-}
+
 #gd_creator_info,
 #gd_publisher_info,
 #gd_developer_info {
@@ -95,11 +114,50 @@
     height: 100%;
 }
 
+.gd_seperator_small{
+    margin-left:18px;
+}
+
+#games_detail .edit_author {
+    margin-right: 10px;
+}
+
 #file_upload_game_screenshots,
 #file_upload_game_file,
 #file_upload_game_box,
 #file_upload_game_music {
     width: 60%;
+}
+
+hr.separator_add {
+    margin-top: 10px;
+    margin-bottom: 5px;
+    border: 0;
+    height: 1px;
+    background-image: linear-gradient(to right, #122323, rgba(0, 0, 0, 0));
+}
+
+.gd_left {
+    width: 50%;
+    float: left;
+}
+
+.gd_right {
+    width: 50%;
+    float: right;
+}
+
+.gd_clear {
+    clear: both;
+}
+
+.selectize-control {
+    z-index: 0;
+}
+
+select option.location_continent {
+    font-weight: bold;
+    background-color: #122323;
 }
 
 //*----------------------------------------------------------
@@ -234,4 +292,69 @@
 
 .dropdown_show {
     display: block;
+}
+
+//*----------------------------------------------------------
+// Navigation list inside a tile
+//------------------------------------------------------------ */
+ul.navigation-list {
+    list-style-type: none;
+    text-align: left;
+
+    li {
+        padding-top: 5px;
+        padding-bottom: 5px;
+
+        &.active {
+            background-color: #00d3d3;
+
+            a {
+                color: black;
+            }
+
+            small {
+                color: #333;
+            }
+
+            i {
+                color: #666;
+            }
+        }
+    }
+
+    a {
+        color: #00d3d3;
+
+        small {
+            color: #bbb;
+        }
+
+        i {
+            color: white;
+            margin-left: 5px;
+        }
+
+    }
+}
+
+/* ------------------------------------------------------------
+* Release editor
+* ----------------------------------------------------------*/
+
+form.release_editor {
+    label.input {
+        font-weight: bold;
+        display: inline-block;
+        width: 230px;
+        vertical-align: top;
+        margin-top:6px;
+    }
+
+    .primary_button {
+        margin-left: 0;
+    }
+
+    .secondary_button {
+        padding-top: 4px;
+    }
 }

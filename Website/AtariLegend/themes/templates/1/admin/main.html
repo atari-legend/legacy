@@ -24,7 +24,7 @@
         <meta name="description" content="Atari Legend : The number 1 Atari ST resource on the web">
         <meta name="keywords" content="atari, atari st, games, game, demo, demos, reviews, articles, interviews, st">
         <title> Atari Legend | Legends Never Die</title>
-        <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0">
+        <meta name="viewport" content="width=device-width, minimum-scale=1.0">
         <!-- start - let the site behave like a mobile app on phone -->
         <meta name="mobile-web-app-capable" content="yes"><!-- Chrome-->
         <meta name="apple-mobile-web-app-capable" content="yes"><!-- apple -->
@@ -33,6 +33,7 @@
         <link type="text/css" href="{$style_dir}css/vendor/jquery-ui-1.11.4.custom-theme.css" rel="Stylesheet">
         <link type="text/css" href="{$style_dir}css/vendor/notify-osd-51f8de7.css" hreflang="en" rel="stylesheet">
         <link type="text/css" href="{$style_dir}css/vendor/font-awesome-4.7.0/css/font-awesome.min.css" hreflang="en" rel="stylesheet"> <!-- Font awesome for icons-->
+        <link type="text/css" href="{$style_dir}css/vendor/selectize-0.12.4.css" hreflang="en" rel="stylesheet">
 
         <!-- start - get the icons used for mobile devices -->
         <link rel="icon" href="{$template_dir}includes/icons/favicon.png"> <!-- fav icon & Chrome mobile icon-->
@@ -43,6 +44,7 @@
         <!-- end - get the icons used for mobile devices -->
 
         <script src="{$template_dir}includes/js/vendor/jquery-2.1.4.min.js"></script> <!-- main jquery stuff -->
+        <script src="{$template_dir}includes/js/vendor/selectize-0.12.4.min.js"></script>
 
         {* Insert Google Analytics tags only on production *}
         {if $smarty.server.HTTP_HOST == $smarty.const.SITEHOST}
@@ -74,6 +76,7 @@
                                         <li><button class="sidebutton" id="games_side">GAMES</button>
                                             <ul class="sub-menu">
                                                 <li><a href="../games/games_main.php" title="Game editor" class="sidebutton_cpanel">GAME EDITOR</a></li>
+                                                <li><a href="../games/games_publishers_to_merge.php" title="Game publishers to merge" class="sidebutton_cpanel">GAME PUBLISHERS TO MERGE</a></li>
                                                 <li><a href="../games/games_series_main.php" title="Game series" class="sidebutton_cpanel">GAME SERIES</a></li>
                                                 <li><a href="../games/games_music.php" title="Game music" class="sidebutton_cpanel">GAME MUSIC</a></li>
                                                 <li><a href="../games/submission_games.php" title="Game submissions" class="sidebutton_cpanel">GAME SUBMISSIONS</a></li>
@@ -201,10 +204,11 @@
                                         <li>
                                             <button class="sidebutton" id="skin_side">SKIN</button>
                                             <ul class="sub-menu">
-                                                <li><a href="#" rel="1" class="sidebutton_cpanel">LEGACY</a></li>
-                                                <!--<li><a href="#" rel="2" class="sidebutton_cpanel">TOS 2.07</a></li>
-                                                <li><a href="#" rel="3" class="sidebutton_cpanel">PICASSO</a></li>-->
-                                            </ul>
+                                                <li><a href="#" data-skin="1" class="sidebutton_cpanel">LEGACY</a></li>
+                                                <!--
+                                                <li><a href="#" data-skin="2" class="sidebutton_cpanel">TOS 2.07</a></li>
+                                                <li><a href="#" data-skin="3" class="sidebutton_cpanel">PICASSO</a></li>                                            </ul>
+                                                -->
                                         </li>
                                     </ul>
                                 </nav>
@@ -291,6 +295,7 @@
                         <li><button type="button" class="topbutton" id="games">GAMES</button>
                             <ul>
                                 <li><a href="../games/games_main.php" title="Game editor" class="subbutton">GAME EDITOR</a></li>
+                                <li><a href="../games/games_publishers_to_merge.php" title="Game publishers to merge" class="subbutton">GAME PUBLISHERS TO MERGE</a></li>
                                 <li><a href="../games/games_series_main.php" title="Game series" class="subbutton">GAME SERIES</a></li>
                                 <li><a href="../games/games_music.php" title="Game music" class="subbutton">GAME MUSIC</a></li>
                                 <li><a href="../games/submission_games.php" title="Game submissions" class="subbutton">GAME SUBMISSIONS</a></li>
@@ -425,6 +430,7 @@
         <script src="{$template_dir}includes/js/vendor/jquery-ui-1.11.4.min.js"></script> <!-- main jqueryUI stuff -->
         <script src="{$template_dir}includes/js/vendor/notify-osd-51f8de7.min.js"></script>
 
+
         {if isset($edit_message)}
             <script> <!-- script needed for the side menu -->
                 $( document ).ready(function() {
@@ -441,5 +447,8 @@
 
         <script src="{$template_dir}includes/js/forms.js"></script> <!-- log on security script -->
         <script src="{$template_dir}includes/js/main.js"></script>
+
+        {* Inner pages can inject additional JS that gets put here, after jQuery is included *}
+        {block name=additional_scripts}{/block}
     </body>
 </html>
