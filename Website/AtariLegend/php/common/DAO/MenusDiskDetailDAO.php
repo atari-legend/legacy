@@ -4,6 +4,9 @@ namespace AL\Common\DAO;
 require_once __DIR__."/../../lib/Db.php";
 require_once __DIR__."/../Model/Menus/MenusDiskList.php";
 require_once __DIR__."/../Model/Menus/MenuDiskCredits.php";
+require_once __DIR__."/../Model/Menus/MenuDisk.php";
+require_once __DIR__."/../Model/Crew/Crew.php";
+require_once __DIR__."/../Model/Individual/Individual.php";
 
 /**
  * DAO for Comments
@@ -13,45 +16,6 @@ class MenusDiskDetailDAO {
 
     public function __construct($mysqli) {
         $this->mysqli = $mysqli;
-    }
-
-    /**
-     * Build the menu disk name
-     * @param integer $menu_sets_name
-     * @param integer $menu_disk_number
-     * @param integer $menu_disk_letter
-     * @param integer $menu_disk_part
-     * @param integer $menu_disk_version
-     * @return $menu_disk_name, name of menu disk
-     */
-    public function buildMenuDiskName(
-        $menu_sets_name,
-        $menu_disk_number,
-        $menu_disk_letter,
-        $menu_disk_part,
-        $menu_disk_version
-    ) {
-
-        // Create Menu disk name
-        $menu_disk_name = "$menu_sets_name ";
-        if (isset($menu_disk_number)) {
-            $menu_disk_name .= "$menu_disk_number";
-        }
-        if (isset($menu_disk_letter)) {
-            $menu_disk_name .= "$menu_disk_letter";
-        }
-        if (isset($menu_disk_part)) {
-            if (is_numeric($menu_disk_part)) {
-                $menu_disk_name .= " part $menu_disk_part";
-            } else {
-                $menu_disk_name .= "$menu_disk_part";
-            }
-        }
-        if (isset($menu_disk_version) and $menu_disk_version !== '') {
-            $menu_disk_name .= " v$menu_disk_version";
-        }
-
-        return $menu_disk_name;
     }
 
     /**
@@ -121,7 +85,7 @@ class MenusDiskDetailDAO {
             $menudisk = new \AL\Common\Model\Menus\MenusDiskList(
                 $menu_sets_id,
                 $menu_sets_name,
-                $menu_disk_name = $this->buildMenuDiskName(
+                $menu_disk_name = new \AL\Common\Model\Menus\MenuDisk(
                     $menu_sets_name,
                     $menu_disk_number,
                     $menu_disk_letter,
@@ -133,10 +97,12 @@ class MenusDiskDetailDAO {
                 $menu_disk_letter,
                 $menu_disk_version,
                 $menu_disk_part,
-                $crew_id,
-                $crew_name,
-                $ind_id,
-                $ind_name,
+                ($crew_id != null)
+                    ? new \AL\Common\Model\Crew\Crew($crew_id, $crew_name)
+                    : null,
+                ($ind_id != null)
+                    ? new \AL\Common\Model\Individual\Individual($ind_id, $ind_name)
+                    : null,
                 $state_id,
                 $menu_state,
                 $menu_disk_year_id,

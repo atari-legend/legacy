@@ -2,12 +2,12 @@
 namespace AL\Common\DAO;
 
 require_once __DIR__."/../../lib/Db.php";
-require_once __DIR__."/../Model/Menus/MenuTypes.php";
+require_once __DIR__."/../Model/Menus/MenuType.php";
 
 /**
  * DAO for Crew
  */
-class MenuTypesDAO {
+class MenuTypeDAO {
     private $mysqli;
 
     public function __construct($mysqli) {
@@ -16,11 +16,11 @@ class MenuTypesDAO {
 
     /**
      * Get all menu types
-     * @return \AL\Common\Model\Menus\MenuTypes[] A list of Menu Types
+     * @return \AL\Common\Model\Menus\MenuType[] A list of Menu Types
      */
     public function getAllMenuTypes() {
         $stmt = \AL\Db\execute_query(
-            "MenuTypesDAO: getAllMenuTypes",
+            "MenuTypeDAO: getAllMenuTypes",
             $this->mysqli,
             "SELECT menu_types_main_id, menu_types_text FROM menu_types_main",
             null,
@@ -28,7 +28,7 @@ class MenuTypesDAO {
         );
 
         \AL\Db\bind_result(
-            "MenuTypesDAO: getAllMenuTypes",
+            "MenuTypeDAO: getAllMenuTypes",
             $stmt,
             $menu_types_main_id,
             $menu_types_text
@@ -36,7 +36,7 @@ class MenuTypesDAO {
 
         $types = [];
         while ($stmt->fetch()) {
-            $types[] = new \AL\Common\Model\Menus\MenuTypes(
+            $types[] = new \AL\Common\Model\Menus\MenuType(
                 $menu_types_main_id,
                 $menu_types_text
             );
@@ -51,9 +51,9 @@ class MenuTypesDAO {
      * Get all menu types connected to a specific menu set
      * @return \AL\Common\Model\Menus\MenuTypes[] A list of Menu Types
      */
-    public function getMenuTypesConnectedToSet($menu_sets_id) {
+    public function getMenuTypesForMenuSet($menu_sets_id) {
         $stmt = \AL\Db\execute_query(
-            "MenuTypesDAO: getAllMenuTypes",
+            "MenuTypeDAO: getAllMenuTypes",
             $this->mysqli,
             "SELECT
                 menu_types_main.menu_types_main_id,
@@ -66,7 +66,7 @@ class MenuTypesDAO {
         );
 
         \AL\Db\bind_result(
-            "MenuTypesDAO: getAllMenuTypes",
+            "MenuTypeDAO: getAllMenuTypes",
             $stmt,
             $menu_types_main_id,
             $menu_types_text
@@ -74,7 +74,7 @@ class MenuTypesDAO {
 
         $types = [];
         while ($stmt->fetch()) {
-            $types[] = new \AL\Common\Model\Menus\MenuTypes(
+            $types[] = new \AL\Common\Model\Menus\MenuType(
                 $menu_types_main_id,
                 $menu_types_text
             );

@@ -19,9 +19,9 @@
     <td colspan="4" style="padding:0px;">
         <table class="primary_table_list no_border table_hover" id="menu_list_table">
             <tr>
-                <td class="w-30"><a onclick="closeeditDisk({$menus->getMenuDiskId()})" style="cursor: pointer;">{$menus->getMenuDiskName()}</a></td>
-                <td class="w-30">{if null !== $menus->getCrewId()}{$menus->getCrewName()}{else}<i>n/a</i>{/if}</td>
-                <td class="w-20">{if null !== $menus->getIndId()}{$menus->getIndName()}{else}<i>n/a</i>{/if}</td>
+                <td class="w-30"><a onclick="closeeditDisk({$menus->getMenuDiskId()})" style="cursor: pointer;">{$menus->getMenuDiskName()->getName()}</a></td>
+                <td class="w-30">{if null !== $menus->getCrew()}{$menus->getCrew()->getName()}{else}<i>n/a</i>{/if}</td>
+                <td class="w-20">{if null !== $menus->getIndividual()}{$menus->getIndividual()->getName()}{else}<i>n/a</i>{/if}</td>
                 <td class="text-right w-20">{if null !== $menus->getMenuState()}{$menus->getMenuState()}{else}<i>n/a</i>{/if}</td>
             </tr>
             <tr>
@@ -320,9 +320,9 @@
 
 {* CLOSE EDIT BOX FOR MENU DISKS *}
 {if isset($smarty_action) and $smarty_action == "close_edit_disk_box"}
-    <td class="w-30"><a onclick="editDisk({$menus->getMenuDiskId()})" style="cursor: pointer;">{$menus->getMenuDiskName()}</a></td>
-    <td class="w-30">{if null !== $menus->getCrewId()}{$menus->getCrewName()}{else}<i>n/a</i>{/if}</td>
-    <td class="w-20">{if null !== $menus->getIndId()}{$menus->getIndName()}{else}<i>n/a</i>{/if}</td>
+    <td class="w-30"><a onclick="editDisk({$menus->getMenuDiskId()})" style="cursor: pointer;">{$menus->getMenuDiskName()->getName()}</a></td>
+    <td class="w-30">{if null !== $menus->getCrew()}{$menus->getCrew()->getName()}{else}<i>n/a</i>{/if}</td>
+    <td class="w-20">{if null !== $menus->getIndividual()}{$menus->getIndividual()->getName()}{else}<i>n/a</i>{/if}</td>
     <td class="text-right w-20">{if null !== $menus->getMenuState()}{$menus->getMenuState()}{else}<i>n/a</i>{/if}</td>
 {/if}
 

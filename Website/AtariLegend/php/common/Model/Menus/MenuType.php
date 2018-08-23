@@ -4,7 +4,7 @@ namespace AL\Common\Model\Menus;
 /**
  * Maps to the `menu types` table
  */
-class MenuTypes {
+class MenuType {
     private $menu_types_main_id;
     private $menu_types_text;
 

@@ -10,29 +10,23 @@ class MenuSetsList {
     private $menu_sets_id;
     private $menu_sets_name;
     private $menu_disk_count;
-    private $crew_id;
-    private $crew_name;
-    private $ind_id;
-    private $ind_name;
+    private $crew;
+    private $individual;
     private $menu_types_text;
 
     public function __construct(
         $menu_sets_id,
         $menu_sets_name,
         $menu_disk_count,
-        $crew_id,
-        $crew_name,
-        $ind_id,
-        $ind_name,
+        $crew,
+        $individual,
         $menu_types_text
     ) {
         $this->menu_sets_id = $menu_sets_id;
         $this->menu_sets_name = $menu_sets_name;
         $this->menu_disk_count = $menu_disk_count;
-        $this->crew_id = $crew_id;
-        $this->crew_name = $crew_name;
-        $this->ind_id = $ind_id;
-        $this->ind_name = $ind_name;
+        $this->crew = $crew;
+        $this->individual = $individual;
         $this->menu_types_text = $menu_types_text;
     }
 
@@ -48,20 +42,12 @@ class MenuSetsList {
         return $this->menu_disk_count;
     }
 
-    public function getCrewId() {
-        return $this->crew_id;
+    public function getCrew() {
+        return $this->crew;
     }
 
-    public function getCrewName() {
-        return $this->crew_name;
-    }
-
-    public function getIndId() {
-        return $this->ind_id;
-    }
-
-    public function getIndName() {
-        return $this->ind_name;
+    public function getIndividual() {
+        return $this->individual;
     }
 
     public function getMenuTypesText() {

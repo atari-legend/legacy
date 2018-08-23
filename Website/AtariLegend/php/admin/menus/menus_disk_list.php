@@ -16,20 +16,20 @@
 include("../../config/common.php");
 include("../../config/admin.php");
 require_once __DIR__."/../../lib/Db.php";
-require_once __DIR__."/../../common/DAO/MenusSetDAO.php";
+require_once __DIR__."/../../common/DAO/MenuSetDAO.php";
 require_once __DIR__."/../../common/DAO/MenusDiskListDAO.php";
 require_once __DIR__."/../../common/DAO/CrewDAO.php";
 require_once __DIR__."/../../common/DAO/IndividualDAO.php";
-require_once __DIR__."/../../common/DAO/MenuTypesDAO.php";
+require_once __DIR__."/../../common/DAO/MenuTypeDAO.php";
 
 //load the search fields of the quick search side menu
 include("../../admin/games/quick_search_games.php");
 
 $menusDao = new AL\Common\DAO\MenusDiskListDAO($mysqli);
-$menusetDao = new AL\Common\DAO\MenusSetDAO($mysqli);
+$menusetDao = new AL\Common\DAO\MenuSetDAO($mysqli);
 $crewDao = new AL\Common\DAO\CrewDAO($mysqli);
 $individualDao = new AL\Common\DAO\IndividualDAO($mysqli);
-$menutypesDao = new AL\Common\DAO\MenuTypesDAO($mysqli);
+$menutypeDao = new AL\Common\DAO\MenuTypeDAO($mysqli);
 
 /*
  ************************************************************************************************
@@ -58,16 +58,16 @@ $smarty->assign('crews', $crewDao->getCrewsStartingWith("num"));
 $smarty->assign('individuals', $individualDao->getIndividualsStartingWith("num"));
 
 //Get list of crews connected to this menu set
-$smarty->assign('connected_crew', $menusetDao->getCrewsConnectedtoMenuSet($menu_sets_id));
+$smarty->assign('connected_crew', $menusetDao->getCrewsForMenuSet($menu_sets_id));
 
 //Get list of individuals connected to this menu set
-$smarty->assign('connected_ind', $menusetDao->getIndividualsConnectedtoMenuSet($menu_sets_id));
+$smarty->assign('connected_ind', $menusetDao->getIndividualsForMenuSet($menu_sets_id));
 
 //Get list of all menu types
-$smarty->assign('menu_types', $menutypesDao->getAllMenuTypes());
+$smarty->assign('menu_types', $menutypeDao->getAllMenuTypes());
 
 //Get list of menu types connected to menu set
-$smarty->assign('connected_menu_types', $menutypesDao->getMenuTypesConnectedToSet($menu_sets_id));
+$smarty->assign('connected_menu_types', $menutypeDao->getMenuTypesForMenuSet($menu_sets_id));
 
 $end1       = gettimeofday();
 $totaltime1 = (float) ($end1['sec'] - $start1['sec']) + ((float) ($end1['usec'] - $start1['usec']) / 1000000);

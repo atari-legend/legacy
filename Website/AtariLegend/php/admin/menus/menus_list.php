@@ -14,13 +14,12 @@
 //load all common functions
 include("../../config/common.php");
 include("../../config/admin.php");
-require_once __DIR__."/../../lib/Db.php";
-require_once __DIR__."/../../common/DAO/MenusSetDAO.php";
+require_once __DIR__."/../../common/DAO/MenuSetDAO.php";
 
 //load the search fields of the quick search side menu
 include("../../admin/games/quick_search_games.php");
 
-$menusDao = new AL\Common\DAO\MenusSetDAO($mysqli);
+$menusDao = new AL\Common\DAO\MenuSetDAO($mysqli);
 /*
  ************************************************************************************************
  This is the menus search list page
@@ -31,9 +30,9 @@ list($start2, $start3) = explode(":", exec('date +%N:%S'));
 
 //In all cases we search we start searching through the menu_set table
 //first. We look for menus released by crews/individuals
-$smarty->assign('menus_list', $menusDao->getMenuSetsBuild());
+$smarty->assign('menus_list', $menusDao->getMenuSets());
 
-$rows = count($menusDao->getMenuSetsBuild());
+$rows = count($menusDao->getMenuSets());
 
 $end1 = gettimeofday();
 $totaltime1 = (float) ($end1['sec'] - $start1['sec']) + ((float) ($end1['usec'] - $start1['usec']) / 1000000);

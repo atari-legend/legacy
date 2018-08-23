@@ -15,39 +15,6 @@ class CrewDAO {
     }
 
     /**
-     * Get all Crews
-     * @return \AL\Common\Model\Crew\Crew[] A list of crews
-     */
-    public function getAllCrews() {
-        $stmt = \AL\Db\execute_query(
-            "CrewDAO: getAllCrews",
-            $this->mysqli,
-            "SELECT crew_id, crew_name FROM crew ORDER BY crew_name ASC",
-            null,
-            null
-        );
-
-        \AL\Db\bind_result(
-            "CrewDAO: getAllCrews",
-            $stmt,
-            $crew_id,
-            $crew_name
-        );
-
-        $crews = [];
-        while ($stmt->fetch()) {
-            $crews[] = new \AL\Common\Model\Crew\Crew(
-                $crew_id,
-                $crew_name
-            );
-        }
-
-        $stmt->close();
-
-        return $crews;
-    }
-
-    /**
      * Search for crews
      * @return \AL\Common\Model\Crew\Crew[] A list of crews
      */
