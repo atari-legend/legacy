@@ -40,10 +40,12 @@
                                 <i class="fa fa-trash-o" id="comment_delete_icon{$line.comment_id}" aria-hidden="true" title="Click to delete comment"></i>
                             </a>
                         {/if}
-                        {if $line.email != ''}
-                            <a href="mailto:{$line.email}?subject=Comment%20of%20{$review.game_name|escape:'url'}%20review%20at%20Atari%20Legend" class="latest_comments_link" title="Click to email user">
-                                <i class="fa fa-envelope" aria-hidden="true"></i>
-                            </a>
+                        {if $line.show_email == '1'}
+                            {if $line.email != ''}
+                                <a href="mailto:{$line.email}?subject=Comment%20of%20{$review.game_name|escape:'url'}%20review%20at%20Atari%20Legend" class="latest_comments_link" title="Click to email user">
+                                    <i class="fa fa-envelope" aria-hidden="true"></i>
+                                </a>
+                            {/if}
                         {/if}
                         {if $line.user_fb != ''}
                             <a href="{$line.user_fb}" class="latest_comments_link" title="Click to visit Facebook profile">

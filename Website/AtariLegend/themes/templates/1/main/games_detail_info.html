@@ -15,7 +15,7 @@
 // This is the game info on the game detail page. This piece is always used as an include
 //****************************************************************************************
 *}
-<div class="standard_tile">
+<div class="standard_tile release_list">
     <div class="help-tip">
         <p>
             <i class="fa fa-info-circle" aria-hidden="true"></i> - Open/close the profile of a company or individual<br>
@@ -101,8 +101,12 @@
                             <span class="games_main_detail_info_left">
                                 <a href="games_main_list.php?publisher={$line.pub_id}&amp;action=search" class="standard_tile_link">{$line.pub_name}</a>
                                 {if $line.pub_profile != 'none'}
-                                    <a style="cursor: pointer;" onClick="Show_profile({$line.pub_id})" class="latest_comments_link"><i class="fa fa-info-circle" aria-hidden="true" id="profile_on{$line.pub_id}" text="click to view profile"></i></a>
-                                    <a style="cursor: pointer;" onClick="Hide_profile({$line.pub_id})" class="latest_comments_link"><i class="fa fa-info-circle" aria-hidden="true" id="profile_off{$line.pub_id}" style="display:none;" text="click to view profile"></i></a>
+                                    <a style="cursor: pointer;"
+                                        onclick="javascript:jQuery('#publisher_profile_{$line.pub_id}_{$position}').toggle()"
+                                        title="Click to view profile"
+                                        class="latest_comments_link">
+                                        <i class="fa fa-info-circle" aria-hidden="true"></i>
+                                    </a>
                                 {/if}
                                 {if $line.logo != 'none'}
                                     <a href="../../includes/show_image.php?file={$line.logo_pop}" data-lightbox="image-1" data-title="{$line.pub_name}" class="latest_comments_link"><i class="fa fa-picture-o" aria-hidden="true"></i></a>
@@ -114,45 +118,15 @@
                         </td>
                     </tr>
                     {if $line.pub_profile != ''}
-                        <tr></tr>
-                        <tr style="display:none;" id="profile{$line.pub_id}">
+                        <tr style="display: none;"><td colspan="3"></td></tr>
+                        <tr style="display:none;" id="publisher_profile_{$line.pub_id}_{$position}">
                             <td colspan="3" style="text-align:center;">
-                                <textarea id="profile{$line.pub_id}" class="primary_textarea" rows="5" style="margin-top:5px;margin-bottom:5px;font-size:10pt;margin-left:auto;margin-right:auto;" readonly>
+                                <textarea class="primary_textarea" rows="5" style="margin-top:5px;margin-bottom:5px;font-size:10pt;margin-left:auto;margin-right:auto;" readonly>
                                     {$line.pub_profile}
                                 </textarea>
                             </td>
                         </tr>
                     {/if}
-                {/foreach}
-            {/if}
-            {if isset($releases)}
-                {foreach from=$releases item=$release name=release}
-                {if $release->getDate() != null or $release->getName() != null}
-                    <tr>
-                        <td class="w-30">
-                            {if $smarty.foreach.release.index == 0}
-                                <span class="games_main_detail_info_right">Releases</span>
-                            {/if}
-                        </td>
-                        <td class="w-5">
-                            <span class="games_main_detail_info_left text-center">-</span>
-                        </td>
-                        <td class="w-60">
-                            <span class="games_main_detail_info_left">
-                                {if $release->getDate() != null}
-                                    <a href="games_main_list.php?year={$release->getDate()|date_format:"%Y"}&amp;action=search" class="standard_tile_link">
-                                        {$release->getDate()|date_format:"%Y"}
-                                    </a>
-                                {else}
-                                    (no date)
-                                {/if}
-                                {if $release->getName()}
-                                    <small class="standard_tile_subtext">as "<em>{$release->getName()}</em>"</small>
-                                {/if}
-                            </span>
-                        </td>
-                    </tr>
-                {/if}
                 {/foreach}
             {/if}
             {if isset($developer)}
@@ -162,13 +136,13 @@
                             {if $smarty.foreach.developer.index == 0}
                                 <span class="games_main_detail_info_right">Developer</span>
                             {/if}
-                            {if $line.continent != '' ||  $line.extra_info != ''}
+                            {if $line.extra_info != ''}
                                 <br><br>
                             {/if}
                         </td>
                         <td class="w-5">
                             <span class="games_main_detail_info_left text-center">-</span>
-                            {if $line.continent != '' ||  $line.extra_info != ''}
+                            {if $line.extra_info != ''}
                                 <br><br>
                             {/if}
                         </td>
@@ -176,23 +150,27 @@
                             <span class="games_main_detail_info_left">
                                 <a href="games_main_list.php?developer={$line.pub_id}&amp;action=search" class="standard_tile_link">{$line.pub_name}</a>
                                 {if $line.pub_profile != 'none'}
-                                    <a style="cursor: pointer;" onClick="Show_profile({$line.pub_id})" class="latest_comments_link"><i class="fa fa-info-circle" aria-hidden="true" id="profile_on{$line.pub_id}" text="click to view profile"></i></a>
-                                    <a style="cursor: pointer;" onClick="Hide_profile({$line.pub_id})" class="latest_comments_link"><i class="fa fa-info-circle" aria-hidden="true" id="profile_off{$line.pub_id}" style="display:none;" text="click to view profile"></i></a>
+                                    <a style="cursor: pointer;"
+                                        onclick="javascript:jQuery('#developer_profile_{$line.pub_id}_{$position}').toggle()"
+                                        title="Click to view profile"
+                                        class="latest_comments_link">
+                                        <i class="fa fa-info-circle" aria-hidden="true"></i>
+                                    </a>
                                 {/if}
                                 {if $line.logo != 'none'}
                                     <a href="../../includes/show_image.php?file={$line.logo_pop}" data-lightbox="image-1" data-title="{$line.pub_name}" class="latest_comments_link"><i class="fa fa-picture-o" aria-hidden="true"></i></a>
                                 {/if}
                             </span>
-                            {if $line.continent != '' ||  $line.extra_info != ''}
-                                <br><span class="standard_tile_subtext">{$line.continent}{if $line.continent != '' AND $line.extra_info != ''} - {/if}{$line.extra_info}</span>
+                            {if $line.extra_info != ''}
+                                <br><span class="standard_tile_subtext">{$line.extra_info}</span>
                             {/if}
                         </td>
                     </tr>
                     {if $line.pub_profile != ''}
-                        <tr></tr>
-                        <tr style="display:none;" id="profile{$line.pub_id}">
+                        <tr style="display: none;"><td colspan="3"></td></tr>
+                        <tr style="display:none;" id="developer_profile_{$line.pub_id}_{$position}">
                             <td colspan="3">
-                                <textarea id="profile{$line.pub_id}" class="primary_textarea" rows="6" style="margin-top:5px;margin-bottom:5px;font-size:10pt;margin-left:auto;margin-right:auto;" readonly>
+                                <textarea class="primary_textarea" rows="6" style="margin-top:5px;margin-bottom:5px;font-size:10pt;margin-left:auto;margin-right:auto;" readonly>
                                     {$line.pub_profile}
                                 </textarea>
                             </td>
@@ -235,8 +213,12 @@
                             <span class="games_main_detail_info_left">
                                 <a href="games_main_list.php?game_author={$line.ind_id}&amp;action=search" class="standard_tile_link">{$line.ind_name}</a>
                                 {if $line.ind_profile != 'none'}
-                                    <a style="cursor: pointer;" onClick="Show_profile_ind({$line.ind_id})" class="latest_comments_link"><i class="fa fa-info-circle" aria-hidden="true" id="profile_on_ind{$line.ind_id}" text="click to view profile"></i></a>
-                                    <a style="cursor: pointer;" onClick="Hide_profile_ind({$line.ind_id})" class="latest_comments_link"><i class="fa fa-info-circle" aria-hidden="true" id="profile_off_ind{$line.ind_id}" style="display:none;" text="click to view profile"></i></a>
+                                    <a style="cursor: pointer;"
+                                        onclick="javascript:jQuery('#individual_profile_{$line.ind_id}_{$smarty.foreach.game_author.index}_{$position}').toggle()"
+                                        title="Click to view profile"
+                                        class="latest_comments_link">
+                                        <i class="fa fa-info-circle" aria-hidden="true"></i>
+                                    </a>
                                 {/if}
                                 {if $line.ind_img != 'none'}
                                     <a href="../../includes/show_image.php?file={$line.ind_img}" data-lightbox="image-1" data-title="{$line.ind_name}" class="latest_comments_link"><i class="fa fa-picture-o" aria-hidden="true"></i></a>
@@ -254,10 +236,10 @@
                         </td>
                     </tr>
                     {if $line.ind_profile != ''}
-                        <tr></tr>
-                        <tr style="display:none;" id="profile_ind{$line.ind_id}">
+                        <tr style="display: none;"><td colspan="3"></td></tr>
+                        <tr style="display:none;" id="individual_profile_{$line.ind_id}_{$smarty.foreach.game_author.index}_{$position}">
                             <td colspan="3">
-                                <textarea id="profile{$line.ind_id}" class="primary_textarea" rows="6" style="margin-top:5px;margin-bottom:5px;font-size:10pt;margin-left:auto;margin-right:auto;" readonly>
+                                <textarea class="primary_textarea" rows="6" style="margin-top:5px;margin-bottom:5px;font-size:10pt;margin-left:auto;margin-right:auto;" readonly>
                                     {$line.ind_profile}
                                 </textarea>
                             </td>
@@ -265,15 +247,12 @@
                     {/if}
                 {/foreach}
             {/if}
-            {if $game_info.game_free == 1 || $game_info.game_unreleased == 1 || $game_info.game_development == 1 || $game_info.game_ste_only == 1 || $game_info.game_ste_enhan == 1
-                || $game_info.game_falcon_only == 1 ||  $game_info.game_falcon_enhan == 1 || $game_info.game_falcon_rgb == 1 || $game_info.game_falcon_vga == 1 || $game_info.game_mono == 1
+
+            {if $game_info.game_unreleased == 1 || $game_info.game_development == 1
                 || $game_info.game_wanted <> '' || $game_info.game_arcade == 1 || $game_info.game_seuck == 1 || $game_info.game_stos == 1 || $game_info.game_stac == 1}
                 <tr>
                     <td class="w-30">
                         <span class="games_main_detail_info_right">Specifics</span>
-                            {if $game_info.game_free == 1}
-                                <br>
-                            {/if}
                             {if $game_info.game_unreleased == 1}
                                 <br>
                             {/if}
@@ -281,27 +260,6 @@
                                 <br>
                             {/if}
                             {if $game_info.game_development == 1}
-                                <br>
-                            {/if}
-                            {if $game_info.game_ste_only == 1}
-                                <br>
-                            {/if}
-                            {if $game_info.game_ste_enhan == 1}
-                                <br>
-                            {/if}
-                            {if $game_info.game_falcon_only == 1}
-                                <br>
-                            {/if}
-                            {if $game_info.game_falcon_enhan == 1}
-                                <br>
-                            {/if}
-                            {if $game_info.game_falcon_rgb == 1}
-                                <br>
-                            {/if}
-                            {if $game_info.game_falcon_vga == 1}
-                                <br>
-                            {/if}
-                            {if $game_info.game_mono == 1}
                                 <br>
                             {/if}
                             {if $game_info.game_wanted <> ''}
@@ -322,9 +280,6 @@
                     </td>
                     <td class="w-5">
                         <span class="games_main_detail_info_left text-center">-</span>
-                            {if $game_info.game_free == 1}
-                                <br>
-                            {/if}
                             {if $game_info.game_unreleased == 1}
                                 <br>
                             {/if}
@@ -332,27 +287,6 @@
                                 <br>
                             {/if}
                             {if $game_info.game_development == 1}
-                                <br>
-                            {/if}
-                            {if $game_info.game_ste_only == 1}
-                                <br>
-                            {/if}
-                            {if $game_info.game_ste_enhan == 1}
-                                <br>
-                            {/if}
-                            {if $game_info.game_falcon_only == 1}
-                                <br>
-                            {/if}
-                            {if $game_info.game_falcon_enhan == 1}
-                                <br>
-                            {/if}
-                            {if $game_info.game_falcon_rgb == 1}
-                                <br>
-                            {/if}
-                            {if $game_info.game_falcon_vga == 1}
-                                <br>
-                            {/if}
-                            {if $game_info.game_mono == 1}
                                 <br>
                             {/if}
                             {if $game_info.game_wanted <> ''}
@@ -373,9 +307,6 @@
                     </td>
                     <td class="w-60">
                         <span class="standard_tile_subtext">
-                            {if $game_info.game_free == 1}
-                                Non-Commercial <br>
-                            {/if}
                             {if $game_info.game_unreleased == 1}
                                 Unreleased <br>
                             {/if}
@@ -384,27 +315,6 @@
                             {/if}
                             {if $game_info.game_development == 1}
                                 In development <br>
-                            {/if}
-                            {if $game_info.game_ste_only == 1}
-                                STe only <br>
-                            {/if}
-                            {if $game_info.game_ste_enhan == 1}
-                                STe enhanced <br>
-                            {/if}
-                            {if $game_info.game_falcon_only == 1}
-                                Falcon only <br>
-                            {/if}
-                            {if $game_info.game_falcon_enhan == 1}
-                                Falcon enhanced <br>
-                            {/if}
-                            {if $game_info.game_falcon_rgb == 1}
-                                Falcon RGB <br>
-                            {/if}
-                            {if $game_info.game_falcon_vga == 1}
-                                Falcon VGA <br>
-                            {/if}
-                            {if $game_info.game_mono == 1}
-                                Monochrome <br>
                             {/if}
                             {if $game_info.game_wanted <> ''}
                                 Wanted <br>
@@ -425,6 +335,7 @@
                     </td>
                 </tr>
             {/if}
+
             {if isset($aka)}
                 {foreach from=$aka item=line name=aka}
                     <tr>
@@ -432,14 +343,23 @@
                         {if $smarty.foreach.aka.index == 0}
                             <span class="games_main_detail_info_right">AKA</span>
                         {/if}
+                        {if $line.language != ''}
+                            <br><br>
+                        {/if}
                         </td>
                         <td class="w-5">
                             <span class="games_main_detail_info_left text-center">-</span>
+                            {if $line.language != ''}
+                                <br><br>
+                            {/if}
                         </td>
                         <td class="w-60">
                             <span class="games_main_detail_info_left">
                                 <a href="games_detail.php?game_id={$line.game_id}" class="standard_tile_link">{$line.game_aka_name}</a>
                             </span>
+                            {if $line.language != ''}
+                                <br><span class="standard_tile_subtext">{$line.language}</span>
+                            {/if}
                         </td>
                     </tr>
                 {/foreach}

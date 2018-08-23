@@ -13,6 +13,7 @@ class User {
     private $email;
     private $join_date;
     private $karma;
+    private $show_email;
     private $avatar;
     private $news_count;
 
@@ -22,6 +23,7 @@ class User {
         $email,
         $join_date,
         $karma,
+        $show_email,
         $avatar_ext,
         $news_count
     ) {
@@ -30,6 +32,7 @@ class User {
         $this->email = $email;
         $this->join_date = $join_date;
         $this->karma = $karma;
+        $this->show_email = $show_email;
 
         if ($avatar_ext != null && $avatar_ext != '') {
             $this->avatar = $GLOBALS['user_avatar_path'].$id.'.'.$avatar_ext;
@@ -58,6 +61,10 @@ class User {
 
     public function getKarma() {
         return $this->karma;
+    }
+    
+    public function getShowEmail() {
+        return $this->show_email;
     }
 
     public function getAvatar() {

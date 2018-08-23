@@ -175,23 +175,8 @@
         margin-bottom: 20px;
         margin-left: 5%;
     }
-    #gd_other_features_left {
-        float: left;
-        width: 100%;
-        margin-bottom: 20px;
-    }
     #gd_game_aka {
         margin-bottom: 20px;
-    }
-    #gd_other_features_right,
-    #gd_right,
-    #gd_center {
-        float: right;
-        width: 100%;
-    }
-    #gd_left {
-        float: left;
-        width: 100%;
     }
     #gd_publisher_info {
         margin-top: 0;
@@ -632,20 +617,8 @@
         width: 100%;
         margin-bottom: 20px;
     }
-    #gd_other_features,
     #column_right_cpanel {
         display: none;
-    }
-    #gd_other_features_left,
-    #gd_left {
-        float: left;
-        width: 49%;
-    }
-    #gd_other_features_right,
-    #gd_right,
-    #gd_center {
-        float: right;
-        width: 49%;
     }
     #column_left_cpanel {
         width: 25%;
@@ -679,12 +652,6 @@
     #child_1_user,
     #child_2_user {
         width: 100%;
-    }
-}
-@media screen and (min-width: 1280px) {
-    #gd_other_features_left,
-    #gd_other_features_right {
-        display: none;
     }
 }
 @media screen and (max-width: 1449px) {

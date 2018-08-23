@@ -133,6 +133,12 @@ module.exports = function (grunt) {
                     '!<%= webRoot %>php/{temp,vendor}/**/*.php'
                 ],
                 tasks: ['phpcs:all']
+            },
+            js: {
+                files: [
+                    '<%= webRoot %>/themes/templates/1/includes/js/*.js'
+                ],
+                tasks: ['eslint']
             }
         },
 

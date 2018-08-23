@@ -52,7 +52,26 @@
     #child_1_user {
         margin-bottom: 5px;
     }
+    #gd_game_author,
+    #individual_id-autocomplete-display,
+    #gd_game_author_select,
+    #gd_game_dev,
+    #gd_game_dev_select,
+    #gd_aka,
+    #gd_aka_input{width: 140px;}
+
+    #gd_dev_browse{width: 25px;}
+    #gd_dev_name{
+        width: 110px;
+    }
 }
+
+@media screen and (min-width: 481px) {
+    #gd_dev_name{
+        width: 130px;
+    }
+}
+
 @media screen and (max-width: 500px) {
     .user_main_container {
         flex-direction: column;
@@ -153,24 +172,11 @@
         margin-bottom: 20px;
         margin-left: 5%;
     }
-    #gd_other_features_left {
-        float: left;
-        width: 100%;
-        margin-bottom: 20px;
-    }
+
     #gd_game_aka {
         margin-bottom: 20px;
     }
-    #gd_other_features_right,
-    #gd_center,
-    #gd_right {
-        float: right;
-        width: 100%;
-    }
-    #gd_left {
-        float: left;
-        width: 100%;
-    }
+
     #gd_publisher_info {
         margin-top: 0;
     }
@@ -428,10 +434,20 @@
     .games_main_input_site_text {
         width: 50%;
     }
+    .gd_basic_game_info_container,
     .user_details_container,
     .game_upload_container {
         flex-direction: column;
     }
+    #gd_basic_game_info_1, #gd_basic_game_info_2{
+        width:100%;
+    }
+
+    #gd_basic_game_info_2{
+        margin-top: 20px;
+        width: 97%;
+    }
+
     .user_details_input_small {
         width: 90%;
     }
@@ -625,17 +641,6 @@
     }
 }
 @media screen and (min-width: 601px) and (max-width: 1279px) {
-    #gd_other_features_left,
-    #gd_left {
-        float: left;
-        width: 49%;
-    }
-    #gd_other_features_right,
-    #gd_right,
-    #gd_center {
-        float: right;
-        width: 49%;
-    }
     #gd_back,
     #gd_publisher_info {
         margin-top: 20px;
@@ -644,9 +649,6 @@
 @media screen and (max-width: 1279px) {
     #welcome {
         margin-top: 0;
-    }
-    #gd_other_features {
-        display: none;
     }
     #gd_basic_game_info {
         width: 100%;
@@ -664,10 +666,6 @@
     .whoisit_position_front {
         float: right;
         margin-top: 20px;
-    }
-    #gd_other_features_left,
-    #gd_other_features_right {
-        display: none;
     }
     body {
         background-image: url('../images/top_bg_sides.jpg');
@@ -768,6 +766,12 @@
     .column_right,
     .column_phone {
         display: none;
+    }
+    #gd_basic_game_info_1 {
+        width:31%;
+    }
+    #gd_basic_game_info_2{
+        width: 65%;
     }
 }
 @media screen and (max-width: 1549px) {

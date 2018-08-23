@@ -19,6 +19,7 @@ class NewsSubmission {
     private $email;
     private $join_date;
     private $karma;
+    private $show_email;
     private $avatar_ext;
     private $user_subm_count;
 
@@ -34,6 +35,7 @@ class NewsSubmission {
         $email,
         $join_date,
         $karma,
+        $show_email,
         $avatar_ext,
         $user_subm_count
     ) {
@@ -53,6 +55,7 @@ class NewsSubmission {
         }
        
         $this->karma = $karma;
+        $this->show_email = $show_email;
         $this->user_subm_count = $user_subm_count;
         
         if ($avatar_ext && $avatar_ext !== "") {
@@ -108,6 +111,10 @@ class NewsSubmission {
 
     public function getKarma() {
         return $this->karma;
+    }
+    
+    public function getShowEmail() {
+        return $this->show_email;
     }
     
     public function getAvatarImage() {

@@ -110,7 +110,6 @@
                     <td>
                         <div class="standard_tile_padding">
                             <div style="display:inline-block;float:left;padding-right:15px;">
-                            <a href="../interviews/interviews_detail.php?selected_interview_id={$line.interview_id}" class="links_addnew_link">
                                 {if $line.interview_img == 'none'}
                                     <img src="../../includes/show_image.php?file={$style_dir2}images/unknown.jpg&amp;resize=160,null,null,null" alt="{$line.individual_name}" class="user_stats_img_dark">
                                 {else}
@@ -118,14 +117,13 @@
                                         <img src="../../includes/show_image.php?file={$line.interview_img}&amp;resize=160,null,null,null" alt="{$line.individual_name}" class="user_stats_img_dark">
                                     </a>
                                 {/if}
-                            </a>
                             </div>
                             <h4 style="white-space: nowrap;overflow: hidden;text-overflow: ellipsis">
                                 <a href="../interviews/interviews_detail.php?selected_interview_id={$line.interview_id}" class="standard_tile_link">{$line.individual_name}</a>
                             </h4>
                             <h5 style="font-weight: bold;">{$line.interview_date} by <a href="../../admin/user/user_detail.php?user_id_selected={$line.interview_author_id}" class="latest_comments_link">{$line.interview_author}</a></h5>
                             <div class="interview_main_text">
-                                {$line.interview_intro}
+                                <div class="standard_tile_link_invert">{$line.interview_intro}</div>
                             </div>
                             <h2><a href="../interviews/interviews_detail.php?selected_interview_id={$line.interview_id}" class="standard_tile_link">Read more <i class="fa fa-chevron-right" aria-hidden="true"></i></a></h2>
                             <br>

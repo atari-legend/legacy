@@ -85,6 +85,18 @@
     border: 1px solid #008b8b;
     text-align: left;
 }
+
+.standard_input,
+.standard_select {
+    &:disabled {
+        border: dotted 1px #666;
+        background-color: #222;
+        color: #ccc;
+        cursor: not-allowed;
+    }
+}
+
+
 .input_small {
     width: 50px;
 }
@@ -133,12 +145,38 @@
     padding-bottom: 5px;
     background: #0d2e2e;
     border: 1px solid #008b8b;
+
+    &.button_danger {
+        background-color: $danger;
+        color: darken($danger, 40%);
+        border: solid 1px darken($danger, 20%);
+
+        &:hover {
+            background-color: darken($danger, 20%);
+            color: $danger;
+        }
+    }
+
+    &.button_info {
+        background-color: $info;
+        color: darken($info, 40%);
+        border: solid 1px darken($info, 20%);
+
+        &:hover {
+            background-color: darken($info, 20%);
+            color: $info;
+        }
+    }
 }
 
 .primary_button:hover {
     color: #ffffff;
     background: #006f6f;
     border: 1px solid #122323;
+}
+
+.primary_button a {
+    color: white;
 }
 
 label.primary_button {

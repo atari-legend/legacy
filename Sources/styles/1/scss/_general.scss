@@ -46,7 +46,7 @@ h2,
 h3,
 h4,
 h5,
-#news_head,
+.news_head,
 #main_nav_ul,
 .effect-tile,
 legend {
@@ -302,6 +302,19 @@ img {
 .standard_tile_link_black:hover {
     color: #ffffff;
 }
+
+.standard_tile_link_invert a:link {
+    color: #008b8b;
+}
+
+.standard_tile_link_invert a:visited {
+    color: #008b8b;
+}
+
+.standard_tile_link_invert a:hover {
+    color: #ffffff;
+}
+
 .standard_list_entry {
     position: relative;
     display: table;
@@ -575,6 +588,11 @@ img {
     content: '';
 }
 
+.help-hint {
+    font-size: small;
+    color: #bbb;
+}
+
 //* CSS animation */
 @-webkit-keyframes fadeIn {
     0% {
@@ -604,14 +622,20 @@ $headerBackgroundcolor: #000000;
 //The CSS for the tabs
 //-------------------------------------------------------------*/
 //* Style the tab */
-div.tab {
+div.tab,
+ul.tabs {
     overflow: hidden;
     border: 1px solid #00d3d3;
     background-color: #00d3d3;
 }
 
+ul.tabs {
+    list-style-type: none;
+}
+
 //* Style the buttons inside the tab */
-div.tab button {
+div.tab button,
+ul.tabs li {
     background-color: #00d3d3;
     float: left;
     border: none;
@@ -621,20 +645,40 @@ div.tab button {
     transition: .3s;
 }
 
+ul.tabs li a {
+    color: #000 !important;
+}
+
 //* Change background color of buttons on hover */
-div.tab button:hover {
+div.tab button:hover,
+ul.tabs li:hover {
     background-color: #006f6f;
 }
 
 //* Create an active/current tablink class */
-div.tab button.active {
+div.tab button.active,
+ul.tabs li.active {
     background-color: #0d2e2e;
     color: #ffffff;
+}
+
+ul.tabs li.active a {
+    color: #fff !important;
 }
 
 //* Style the tab content */
 .tabcontent {
     display: none;
+}
+
+.tabcontent.active {
+    display: block;
+}
+
+.tabpane {
+    padding: 20px;
+    border: dotted 1px transparentize(#00d3d3, .5);
+    border-top: none;
 }
 
 //*fade in effect on tab */

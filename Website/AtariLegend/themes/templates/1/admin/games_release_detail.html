@@ -1,0 +1,186 @@
+{block name=left_tile}
+    {include file='1/admin/games_detail_editing.html'}
+    <br>
+
+    {include file='1/admin/games_release_list.html'}
+{/block}
+
+{block name=additional_scripts}
+    <script src="{$template_dir}includes/js/ui.widgets.js"></script><!-- The autocomplete and dropdown switcher -->
+    <script src="{$template_dir}includes/js/ui.tabs.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('select[name=pub_dev_id]').altAutocomplete();
+            $('.tabs').tabs();
+        });
+    </script>
+{/block}
+
+
+{extends file='1/admin/main.html'} {block name=main_tile}
+<div class="standard_tile">
+    {if isset ($release)}
+        <h1>
+            {if $release->getDate()}{$release->getDate()|date_format:"%Y"}{/if}
+            RELEASE FOR
+            <a href="games_detail.php?game_id={$game->getId()}" class="standard_tile_link_reverse">{$game->getName()|UPPER}</a>
+        </h1>
+    {else}
+    <h1>Add a new release for
+            <a href="games_detail.php?game_id={$game->getId()}" class="standard_tile_link_reverse">{$game->getName()|UPPER}</a>
+        </h1>
+    {/if}
+
+    <div class="standard_tile_line"></div>
+
+    <form method="POST" class="release_editor">
+        <input type="hidden" name="game_id" value="{$game->getId()}">
+        <input type="hidden" name="release_id" value="{$release->getId()}">
+        <div class="standard_tile_padding">
+            <fieldset class="secondary_fieldset">
+                <legend class="primary_legend">Release information</legend>
+
+                <div class="help-hint">
+                    Each game can have multiple releases. A release has a date and different features, such as the fact that it was enhanced
+                    for a system (e.g. STe) or incompatible with others (e.g. Falcon).
+                </div>
+                <br>
+
+
+                <ul class="tabs">
+                    <li class="active"><a href="#tab-general">GENERAL</a></li>
+                    <li><a href="#tab-compatibility">COMPATIBILITY</a></li>
+                </ul>
+
+                <div id="tab-general" class="tabcontent tabpane active">
+
+                    <label class="input">Release date</label>
+                    {html_select_date time=$release->getDate() year_empty="Unknown" start_year=1984 display_days=0 display_months=0 class="standard_select select_large"}
+                    <br>
+
+                    <label class="input">Alternative title (optional)</label>
+                    <input type="text" name="name" class="standard_input input_large" value="{$release->getName()}">
+                    <br>
+                    <span class="help-hint">e.g.: Translated title if it's a country-specific release. Leave blank if the title is the same as the game.</span>
+                    <br>
+                    <br>
+
+                    <label class="input">License</label>
+                    <select name="license" class="standard_select select_large">
+                        {foreach from=$license_types item=type}
+                            <option {if $type == $release->getLicense()}selected{/if}>{$type}</option>
+                        {/foreach}
+                    </select>
+                    <br>
+
+                    <label class="input">Type</label>
+                    <select name="type" class="standard_select select_large">
+                        <option value="">-</option>
+                        {foreach from=$release_types item=release_type}
+                            <option {if $release_type == $release->getType() or (isset($type) and $type == $release_type)}selected{/if}>{$release_type}</option>
+                        {/foreach}
+                    </select>
+                    <br>
+
+                    <label class="input">Location</label>
+                    <select name="location[]" class="standard_select select_large" multiple size="15">
+                        {foreach from=$locations item=location}
+                            <option class="location_{$location->getType()|lower}"
+                                value="{$location->getId()}"
+                                {if in_array($location->getId(), $release_locations) or (isset($location_id) and $location_id == $location->getId())}selected{/if}>
+                                {if $location->getType() == 'Country'}&nbsp;&nbsp;{/if}
+                                {$location->getName()}
+                            </option>
+                        {/foreach}
+                    </select>
+                    <br>
+                    <span class="help-hint">Multiple values permitted. Unselect all values to remove all locations.</span>
+                    <br>
+                    <br>
+
+                    <label class="input">
+                        Publisher
+                        <a href="javascript:;"
+                            class="left_nav_link"
+                            id="pubdev_select_toggle"
+                            title="Click for dropdown mode">
+                            <i class="fa fa-fw fa-chevron-circle-down" aria-hidden="true"></i>
+                        </a>
+                    </label>
+
+                    <select name="pub_dev_id"
+                        class="standard_select select_large"
+                        data-alt-autocomplete-endpoint="../common/autocomplete.php?extraParams=pub_dev"
+                        data-alt-autocomplete-toggle="#pubdev_select_toggle"
+                        data-alt-autocomplete-placeholder="Start typing a publisher name…">
+                        <option value="">-</option>
+                        {foreach from=$publishers item=publisher}
+                            <option value="{$publisher->getId()}" {if ($release->getPublisher() != null and $publisher->getId() == $release->getPublisher()->getId()) or (isset($pub_dev_id) and $pub_dev_id == $publisher->getId())}selected{/if}>{$publisher->getName()}</option>
+                        {/foreach}
+                    </select>
+
+                    <a href="javascript:;"
+                        onclick="javascript:$('select[name=pub_dev_id').val(''); $('#pub_dev_id-autocomplete-display').val('')"
+                        title="Click to remove publisher">
+                        &times;
+                    </a>
+
+                </div>
+
+                <div id="tab-compatibility" class="tabcontent tabpane">
+
+                    <label class="input">Screen resolution</label>
+                    {foreach from=$resolutions item=resolution}
+                        <div class="checkbox links_mod_checkbox">
+                            <input type="checkbox"
+                                id="resolution_{$resolution->getId()}"
+                                name="resolution[]"
+                                {if in_array($resolution->getId(), $release_resolutions)}checked{/if}
+                                value="{$resolution->getId()}">
+                            <label for="resolution_{$resolution->getId()}"></label>
+                            &nbsp;{$resolution->getName()}<br>
+                        </div>
+                    {/foreach}
+                    <br>
+
+                    <label class="input">Enhanced for</label>
+                    {foreach from=$systems item=system}
+                        {* Nothing is ever enhanced for the base ST *}
+                        {if $system->getName() != 'ST'}
+                            <div class="checkbox links_mod_checkbox">
+                                <input type="checkbox"
+                                    id="system_enhanced_{$system->getId()}"
+                                    name="system_enhanced[]"
+                                    {if in_array($system->getId(), $system_enhanced)}checked{/if}
+                                    value="{$system->getId()}">
+                                <label for="system_enhanced_{$system->getId()}"></label>
+                                &nbsp;{$system->getName()}<br>
+                            </div>
+                        {/if}
+                    {/foreach}
+                    <br>
+
+                    <label class="input">Incompatible with</label>
+                    {foreach from=$systems item=system}
+                        <div class="checkbox links_mod_checkbox">
+                            <input type="checkbox"
+                                id="system_incompatible_{$system->getId()}"
+                                name="system_incompatible[]"
+                                {if in_array($system->getId(), $system_incompatible)}checked{/if}
+                                value="{$system->getId()}">
+                            <label for="system_incompatible_{$system->getId()}"></label>
+                            &nbsp;{$system->getName()}<br>
+                        </div>
+                    {/foreach}
+                </div>
+
+                <button type="submit" name="submit_type" value="save_and_back" class="primary_button">Save and close</button>
+                <button type="submit" name="submit_type" value="save" class="secondary_button">Save changes</button>
+                <a href="games_detail.php?game_id={$game->getId()}">Cancel</a>
+
+            </fieldset>
+            <br>
+        </div>
+    </form>
+</div>
+{/block}

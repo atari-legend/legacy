@@ -32,7 +32,7 @@
                 </h4>
                 <h5 style="font-weight: bold;">{$line.review_date} by <a href="../../admin/user/user_detail.php?user_id_selected={$line.user_id}" class="standard_tile_link">{$line.user_name}</a></h5>
                 <div class="standard_list_entry_news_text">
-                    {$line.review_text}
+                    <div class="standard_tile_link_invert">{$line.review_text}</div>
                 </div>
                 <div class="glyph_align_right">
                     <a href="../games/games_reviews_detail.php?review_id={$line.review_id}" class="standard_tile_link">

@@ -17,6 +17,10 @@ include("../../config/admin.php");
 //load the search fields of the quick search side menu
 include("../../admin/games/quick_search_games.php");
 
+require_once __DIR__."/../../common/DAO/GameDAO.php";
+$gameDao = new \AL\Common\DAO\GameDAO($mysqli);
+$smarty->assign('game', $gameDao->getGame($game_id));
+
 $i=0;
 
 //load the fact for this games
@@ -57,19 +61,14 @@ while ($sql_games_facts = $query_games_facts->fetch_array(MYSQLI_BOTH)) {
         'game_fact_nr' => $i,
         'game_fact' => $fact_text
     ));
-    
-    if (isset($game_name)){     
+
+    if (isset($game_name)){
     }else{
         $smarty->assign('game_name', $sql_games_facts['game_name']);
     }
 }
 
-if (isset($game_name)){    
-    $smarty->assign('game_name', $game_name);
-}
-
 $smarty->assign('game_id', $game_id);
-
 
 //Send all smarty variables to the templates
 $smarty->display("file:" . $cpanel_template_folder . "games_facts.html");

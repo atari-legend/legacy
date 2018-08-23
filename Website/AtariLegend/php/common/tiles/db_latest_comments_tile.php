@@ -64,7 +64,7 @@ if (isset($action)) {
         $comment = stripslashes($query_comment['comment']);
         $comment = trim($comment);
         $comment = RemoveSmillies($comment);
-
+            
         //this is needed, because users can change their own comments on the website, however this is done with JS (instead of a post with pure HTML)
         //The translation of the 'enter' breaks is different in JS, so in JS I do a conversion to a <br>. However, when we edit a comment, this <br> should not be
         //visible to the user, hence again, now this conversion in php
@@ -87,6 +87,7 @@ if (isset($action)) {
                   'user_website' => $query_comment['user_website'],
                   'user_twitter' => $query_comment['user_twitter'],
                   'user_af' => $query_comment['user_af'],
+                  'show_email' => $query_comment['show_email'],
                   'email' => $query_comment['email'])
         );
     }
