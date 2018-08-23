@@ -45,7 +45,7 @@ $smarty->assign('menus_list', $menusDao->getMenuDisksForSet($menu_sets_id));
 $menu_disk_rows = count($menusDao->getMenuDisksForSet($menu_sets_id));
 
 //Get menu set list array from db and push it to smarty
-$smarty->assign('menuset_list', $menusDao->getMenuSetsBuild());
+$smarty->assign('menuset_list', $menusetDao->getMenuSets());
 
 // Get menu set information on selected Set
 $menuset_info = $menusetDao->getMenuSetInfo($menu_sets_id);

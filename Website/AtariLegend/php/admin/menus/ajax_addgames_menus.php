@@ -72,13 +72,7 @@ $sql_build_demo_aka = "SELECT demo.demo_id AS 'software_id',
                             'n/a' AS publisher_name,
                             crew.crew_id AS 'developer_id',
                             crew.crew_name AS 'developer_name',
-                            demo_year.demo_aka.aka_name AS 'software_name',
-                            '0' AS publisher_id,
-                            'n/a' AS publisher_name,
-                            crew.crew_id AS 'developer_id',
-                            crew.crew_name AS 'developer_name',
                             demo_year.demo_year AS 'year',
-                            'Demo' AS software_typedemo_year AS 'year',
                             'Demo' AS software_type
                         FROM demo_aka
                         LEFT JOIN demo ON (demo_aka.demo_id = demo.demo_id)

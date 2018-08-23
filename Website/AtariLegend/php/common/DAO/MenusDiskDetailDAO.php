@@ -151,8 +151,9 @@ class MenusDiskDetailDAO {
         $menudiskcredits = [];
         while ($stmt->fetch()) {
             $menudiskcredits[] = new \AL\Common\Model\Menus\MenuDiskCredits(
-                $ind_id,
-                $ind_name,
+                ($ind_id != null)
+                    ? new \AL\Common\Model\Individual\Individual($ind_id, $ind_name)
+                    : null,
                 $menu_disk_credits_id,
                 $author_type_info
             );
