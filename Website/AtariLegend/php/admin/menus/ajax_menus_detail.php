@@ -21,7 +21,6 @@
 include("../../config/common.php");
 include("../../config/admin.php");
 include("../../admin/menus/db_menu_functions.php");
-require_once __DIR__."/../../lib/Db.php";
 require_once __DIR__."/../../common/DAO/MenusDiskDetailDAO.php";
 require_once __DIR__."/../../common/DAO/IndividualDAO.php";
 

@@ -98,7 +98,7 @@
                             {foreach from=$individuals item=line}
                                 <tr>
                                     <td class="w-45">{$line->getAuthorTypeInfo()}</td>
-                                    <td class="w-45"><a href="../individuals/individuals_edit.php?ind_id={$line->getIndId()}" class="standard_tile_text_left">{$line->getIndName()}</a></td>
+                                    <td class="w-45"><a href="../individuals/individuals_edit.php?ind_id={$line->getIndividual()->getId()}" class="standard_tile_text_left">{$line->getIndividual()->getName()}</a></td>
                                     <td class="text-right w-10">
                                         <input type="button" onclick="deleteCredits({$line->getCreditsId()},{$menus->getMenuDiskId()})" class="primary_button" value="delete" style="margin-right:5px;">
                                     </td>
