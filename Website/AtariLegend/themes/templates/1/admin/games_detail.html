@@ -130,38 +130,15 @@ $('#input-tags3').selectize({
                     <input type="hidden" name="game_id" value="{$game->getId()}">
                     <input type="hidden" name="action" value="modify_game">
                     <div>
-                        <b>Game name</b>
-                        <br>
-                        <input type="text" maxlength="255" name="game_name" value="{$game_info.game_name}" class="standard_input input_full" id="gd_game_name">
-                        <br>
-                        <hr class="separator_add">
-                        <br>
-                        <b>Categories</b>&nbsp;&nbsp;<span class="help-hint">Click to choose and add categories</span>
-                        <div class="control-group" id="gd_game_category">
-                            <label for="input-tags"></label>
-                            <select name="category[]" multiple id="input-tags" class="standard_select input_full">
-                            {foreach from=$cat item=line}
-                                <option value="{$line.cat_id}" {$line.cat_selected}>{$line.cat_name}</option>
-                            {/foreach}
-                            </select>
-                        </div>
-                        <script>
-                            $('#input-tags').selectize({
-                                plugins: ['remove_button'],
-                                persist: false,
-                                create: true,
-                                render: {
-                                    item: function(data, escape) {
-                                        return '<div class="primary_button" style="border-radius:3px;">' + escape(data.text) + '</div>';
-                                    }
-                                },
-                            });
-                        </script>
-                        <hr class="separator_add">
-                        <br>
-                        <b>Game information</b>
                         <div class="gd_basic_game_info_container">
                             <div id="gd_basic_game_info_1">
+                                <b>Game name</b>
+                                <br>
+                                <input type="text" maxlength="255" name="game_name" value="{$game_info.game_name}" class="standard_input input_large">
+                                <br>
+                                <br>
+                                <b>Game information</b>
+                                <br>
                                 <div class="gd_basic_game_info_row">
                                     <div class="gd_basic_game_info_row_check">
                                         <div class="links_mod_checkbox">
@@ -198,8 +175,6 @@ $('#input-tags3').selectize({
                                     </div>
                                     <div class="gd_basic_game_info_row_checktxt">Wanted&nbsp;</div>
                                 </div>
-                            </div>
-                            <div id="gd_basic_game_info_2">
                                 <div class="gd_basic_game_info_row">
                                     <div class="gd_basic_game_info_row_check">
                                         <div class="links_mod_checkbox">
@@ -237,8 +212,32 @@ $('#input-tags3').selectize({
                                     <div class="gd_basic_game_info_row_checktxt">STAC game&nbsp;</div>
                                 </div>
                             </div>
+                            <div id="gd_basic_game_info_2">
+                                <b>Categories</b>&nbsp;&nbsp;
+                                <div class="control-group">
+                                    <label for="input-tags"></label>
+                                    <select name="category[]" multiple id="input-tags" class="standard_select input_full">
+                                    {foreach from=$cat item=line}
+                                        <option value="{$line.cat_id}" {$line.cat_selected}>{$line.cat_name}</option>
+                                    {/foreach}
+                                    </select>
+                                </div>
+                                <br>
+                                <span class="help-hint">Click to choose and add categories</span>
+                                <script>
+                                    $('#input-tags').selectize({
+                                        plugins: ['remove_button'],
+                                        persist: false,
+                                        create: true,
+                                        render: {
+                                            item: function(data, escape) {
+                                                return '<div class="primary_button" style="border-radius:3px;">' + escape(data.text) + '</div>';
+                                            }
+                                        },
+                                    });
+                                </script>
+                            </div>
                         </div>
-                        <hr class="separator_add">
                         <br>
                         <div class="gd_clear">
                             <input type="submit" name="valider" value="Save changes" class="secondary_button">

@@ -62,7 +62,7 @@
 
     #gd_dev_browse{width: 25px;}
     #gd_dev_name{
-        width: 100px;
+        width: 110px;
     }
 }
 
@@ -306,7 +306,6 @@
         max-width: 360px;
         min-width: 240px;
     }
-    #gd_game_name, #gd_game_category{width:75%;}
 }
 @media screen and (max-width: 799px) {
     .games_main_detail_nav,
@@ -443,6 +442,12 @@
     #gd_basic_game_info_1, #gd_basic_game_info_2{
         width:100%;
     }
+
+    #gd_basic_game_info_2{
+        margin-top: 20px;
+        width: 97%;
+    }
+
     .user_details_input_small {
         width: 90%;
     }
@@ -761,6 +766,12 @@
     .column_right,
     .column_phone {
         display: none;
+    }
+    #gd_basic_game_info_1 {
+        width:31%;
+    }
+    #gd_basic_game_info_2{
+        width: 65%;
     }
 }
 @media screen and (max-width: 1549px) {
