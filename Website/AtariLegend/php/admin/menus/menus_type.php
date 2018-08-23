@@ -12,12 +12,12 @@
 //load all common functions
 include("../../config/common.php");
 include("../../config/admin.php");
-require_once __DIR__."/../../common/DAO/MenuTypesDAO.php";
+require_once __DIR__."/../../common/DAO/MenuTypeDAO.php";
 
 //load the search fields of the quick search side menu
 include("../../admin/games/quick_search_games.php");
 
-$menutypesDao = new AL\Common\DAO\MenuTypesDAO($mysqli);
+$menutypeDao = new AL\Common\DAO\MenuTypeDAO($mysqli);
 /*
  ************************************************************************************************
  This is the menus search list page
@@ -25,7 +25,7 @@ $menutypesDao = new AL\Common\DAO\MenuTypesDAO($mysqli);
  */
 
 //Get list of all menu types
-$smarty->assign('menu_type', $menutypesDao->getAllMenuTypes());
+$smarty->assign('menu_type', $menutypeDao->getAllMenuTypes());
 
 $smarty->assign("user_id", $_SESSION['user_id']);
 

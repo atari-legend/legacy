@@ -3,7 +3,7 @@
     <select name="crew_id" class="standard_select select_large">
         <option value="" selected>-</option>
         {foreach from=$crews item=line}
-            {html_options values=$line->getCrewId() output=$line->getCrewName()}
+            {html_options values=$line->getId() output=$line->getName()}
         {/foreach}
     </select>
 {/if}

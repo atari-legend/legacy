@@ -15,10 +15,8 @@ class MenusDiskList {
     private $menu_disk_letter;
     private $menu_disk_version;
     private $menu_disk_part;
-    private $crew_id;
-    private $crew_name;
-    private $ind_id;
-    private $ind_name;
+    private $crew;
+    private $individual;
     private $state_id;
     private $menu_state;
     private $menu_disk_year_id;
@@ -34,10 +32,8 @@ class MenusDiskList {
         $menu_disk_letter,
         $menu_disk_version,
         $menu_disk_part,
-        $crew_id,
-        $crew_name,
-        $ind_id,
-        $ind_name,
+        $crew,
+        $individual,
         $state_id,
         $menu_state,
         $menu_disk_year_id,
@@ -52,10 +48,8 @@ class MenusDiskList {
         $this->menu_disk_letter = $menu_disk_letter;
         $this->menu_disk_version = $menu_disk_version;
         $this->menu_disk_part = $menu_disk_part;
-        $this->crew_id = $crew_id;
-        $this->crew_name = $crew_name;
-        $this->ind_id = $ind_id;
-        $this->ind_name = $ind_name;
+        $this->crew = $crew;
+        $this->individual = $individual;
         $this->state_id = $state_id;
         $this->menu_state = $menu_state;
         $this->menu_disk_year_id = $menu_disk_year_id;
@@ -95,20 +89,12 @@ class MenusDiskList {
         return $this->menu_disk_part;
     }
 
-    public function getCrewId() {
-        return $this->crew_id;
+    public function getCrew() {
+        return $this->crew;
     }
 
-    public function getCrewName() {
-        return $this->crew_name;
-    }
-
-    public function getIndId() {
-        return $this->ind_id;
-    }
-
-    public function getIndName() {
-        return $this->ind_name;
+    public function getIndividual() {
+        return $this->individual;
     }
 
     public function getMenuStateId() {

@@ -65,11 +65,11 @@ The main game page
                     </tr>
                     {foreach from=$menus_list item=line}
                         <tr>
-                            <td>{if $line->getMenuSetsName() != ''}<a href="../menus/menus_disk_list.php?menu_sets_id={$line->getMenuSetsId()}" class="standard_tile_text_left">{$line->getMenuSetsName()}</a>{else}<i>n/a</i>{/if}</td>
-                            <td>{if $line->getCrewName() != ''}{$line->getCrewName()}{else}<i>n/a</i>{/if}</td>
-                            <td>{if $line->getIndName() != ''}{$line->getIndName()}{else}<i>n/a</i>{/if}</td>
-                            <td>{if $line->getMenuTypesText() != ''}{$line->getMenuTypesText()}{else}<i>n/a</i>{/if}</td>
-                            <td>{if $line->getMenuDiskCount() != ''}{$line->getMenuDiskCount()}{else}<i>0</i>{/if}</td>
+                            <td>{if null !== $line->getMenuSetsName()}<a href="../menus/menus_disk_list.php?menu_sets_id={$line->getMenuSetsId()}" class="standard_tile_text_left">{$line->getMenuSetsName()}</a>{else}<i>n/a</i>{/if}</td>
+                            <td>{if null !== $line->getCrew()}{$line->getCrew()->getName()}{else}<i>n/a</i>{/if}</td>
+                            <td>{if null !== $line->getIndividual()}{$line->getIndividual()->getName()}{else}<i>n/a</i>{/if}</td>
+                            <td>{if null !== $line->getMenuTypesText()}{$line->getMenuTypesText()}{else}<i>n/a</i>{/if}</td>
+                            <td>{if null !== $line->getMenuDiskCount()}{$line->getMenuDiskCount()}{else}<i>0</i>{/if}</td>
                         </tr>
                     {/foreach}
                     <tr>

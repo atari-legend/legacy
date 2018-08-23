@@ -9,7 +9,7 @@ require_once __DIR__."/../Model/Individual/Individual.php";
 /**
  * DAO for Comments
  */
-class MenusSetDAO {
+class MenuSetDAO {
     private $mysqli;
 
     public function __construct($mysqli) {
@@ -38,7 +38,7 @@ class MenusSetDAO {
             LEFT JOIN menu_types_main ON (menu_type.menu_types_main_id = menu_types_main.menu_types_main_id)";
 
         if (isset($menu_sets_id)) {
-            $query .= " WHERE menu_set.menu_sets_id = $menu_sets_id";
+            $query .= " WHERE menu_set.menu_sets_id = ?";
         }
 
         $query .= " ORDER BY menu_sets_name ASC";
@@ -49,11 +49,11 @@ class MenusSetDAO {
     /**
      * Get list of Menu sets
      */
-    public function getMenuSetsBuild() {
+    public function getMenuSets() {
 
         // Query Menu Sets
         $stmt = \AL\Db\execute_query(
-            "MenusDAO: getCommentsBuild",
+            "MenusDAO: getMenuSets",
             $this->mysqli,
             $this->getMenuSetListQuery(),
             null,
@@ -61,7 +61,7 @@ class MenusSetDAO {
         );
 
         \AL\Db\bind_result(
-            "MenusDAO: getCommentsBuild",
+            "MenusDAO: getMenuSets",
             $stmt,
             $menu_sets_id,
             $menu_sets_name,
@@ -79,10 +79,12 @@ class MenusSetDAO {
                 $menu_sets_id,
                 $menu_sets_name,
                 $menu_disk_count,
-                $crew_id,
-                $crew_name,
-                $ind_id,
-                $ind_name,
+                ($crew_id != null)
+                    ? new \AL\Common\Model\Crew\Crew($crew_id, $crew_name)
+                    : null,
+                ($ind_id != null)
+                    ? new \AL\Common\Model\Individual\Individual($ind_id, $ind_name)
+                    : null,
                 $menu_types_text
             );
         }
@@ -102,8 +104,8 @@ class MenusSetDAO {
             "MenusSetDAO: getMenuSetInfo",
             $this->mysqli,
             $this->getMenuSetListQuery($menu_sets_id),
-            null,
-            null
+            "i",
+            $menu_sets_id
         );
 
         \AL\Db\bind_result(
@@ -125,10 +127,12 @@ class MenusSetDAO {
                 $menu_sets_id,
                 $menu_sets_name,
                 $menu_disk_count,
-                $crew_id,
-                $crew_name,
-                $ind_id,
-                $ind_name,
+                ($crew_id != null)
+                    ? new \AL\Common\Model\Crew\Crew($crew_id, $crew_name)
+                    : null,
+                ($ind_id != null)
+                    ? new \AL\Common\Model\Individual\Individual($ind_id, $ind_name)
+                    : null,
                 $menu_types_text
             );
         }
@@ -142,9 +146,9 @@ class MenusSetDAO {
      * Get crews connected to Menu Set
      * @return \AL\Common\Model\Crew\Crew[] A list of crews
      */
-    public function getCrewsConnectedtoMenuSet($menu_sets_id) {
+    public function getCrewsForMenuSet($menu_sets_id) {
         $stmt = \AL\Db\execute_query(
-            "MenuSetDAO: getCrewsConnectedtoMenuSet",
+            "MenuSetDAO: getCrewsForMenuSet",
             $this->mysqli,
             "SELECT
                 crew.crew_id,
@@ -157,7 +161,7 @@ class MenusSetDAO {
         );
 
         \AL\Db\bind_result(
-            "MenuSetDAO: getCrewsConnectedtoMenuSet",
+            "MenuSetDAO: getCrewsForMenuSet",
             $stmt,
             $crew_id,
             $crew_name
@@ -181,9 +185,9 @@ class MenusSetDAO {
      * @param number $menu_sets_id ID of the menu set which we want individuals from
      * @return \AL\Common\Model\Individual\Individual The individual, or NULL if not found
      */
-    public function getIndividualsConnectedtoMenuSet($menu_sets_id) {
+    public function getIndividualsForMenuSet($menu_sets_id) {
         $stmt = \AL\Db\execute_query(
-            "MenuSetDAO: getIndividualsConnectedtoMenuSet: $menu_sets_id",
+            "MenuSetDAO: getIndividualsForMenuSet: $menu_sets_id",
             $this->mysqli,
             "SELECT
                 individuals.ind_id,
@@ -196,7 +200,7 @@ class MenusSetDAO {
         );
 
         \AL\Db\bind_result(
-            "MenuSetDAO: getIndividualsConnectedtoMenuSet: $menu_sets_id",
+            "MenuSetDAO: getIndividualsForMenuSet: $menu_sets_id",
             $stmt,
             $id,
             $name

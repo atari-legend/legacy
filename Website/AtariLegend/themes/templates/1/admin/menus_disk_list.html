@@ -103,7 +103,7 @@ The main game page
                 <select name="crew_id" class="standard_select select_large">
                     <option value="" selected>-</option>
                     {foreach from=$crews item=line}
-                        {html_options values=$line->getCrewId() output=$line->getCrewName()}
+                        {html_options values=$line->getId() output=$line->getName()}
                     {/foreach}
                 </select>
             </div>
@@ -115,7 +115,7 @@ The main game page
         <br>
         {if isset($connected_crew)}
         {foreach from=$connected_crew item=line}
-            {$line->getCrewName()} - <a href="#" class="standard_tile_link" onclick="deleteMenuSetCrewModal({$line->getCrewId()},{$menuset_info->getMenuSetsId()});">Delete</a><br>
+            {$line->getName()} - <a href="#" class="standard_tile_link" onclick="deleteMenuSetCrewModal({$line->getId()},{$menuset_info->getMenuSetsId()});">Delete</a><br>
         {/foreach}
         {/if}
         <br>
@@ -225,9 +225,9 @@ The main game page
                 {if isset($menus_list)}
                     {foreach from=$menus_list item=line}
                         <tr id="diskedit_ajax_{$line->getMenuDiskId()}">
-                            <td>{if $line->getMenuDiskId() != ''}<a onclick="editDisk({$line->getMenuDiskId()})" style="cursor: pointer;">{$line->getMenuDiskName()}</a>{else}<i>n/a</i>{/if}</td>
-                            <td>{if $line->getCrewId() != ''}{$line->getCrewName()}{else}<i>n/a</i>{/if}</td>
-                            <td>{if $line->getIndId() != ''}{$line->getIndName()}{else}<i>n/a</i>{/if}</td>
+                            <td>{if $line->getMenuDiskId() != ''}<a onclick="editDisk({$line->getMenuDiskId()})" style="cursor: pointer;">{$line->getMenuDiskName()->getName()}</a>{else}<i>n/a</i>{/if}</td>
+                            <td>{if $line->getCrew() != ''}{$line->getCrew()->getName()}{else}<i>n/a</i>{/if}</td>
+                            <td>{if $line->getIndividual() != ''}{$line->getIndividual()->getName()}{else}<i>n/a</i>{/if}</td>
                             <td class="text-right">{if $line->getMenuState() != ''}{$line->getMenuState()}{else}<i>n/a</i>{/if}</td>
                         </tr>
                     {/foreach}
