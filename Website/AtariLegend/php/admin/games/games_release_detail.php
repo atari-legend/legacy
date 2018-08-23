@@ -2,6 +2,7 @@
 
 include("../../config/common.php");
 include("../../config/admin.php");
+include("../../admin/games/quick_search_games.php");
 
 require_once __DIR__."/../../common/DAO/GameDAO.php";
 require_once __DIR__."/../../common/DAO/GameReleaseDAO.php";
