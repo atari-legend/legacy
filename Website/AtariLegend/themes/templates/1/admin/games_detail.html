@@ -21,26 +21,12 @@
 *}
 {extends file='1/admin/main.html'}
 {block name=left_tile}
-    {include file='1/admin/games_detail_editing.html'}
-    <br>
-
+    {if $game_screenshot <> null}
+        {include file='1/admin/games_detail_editing.html'}
+        <br>
+    {/if}
     {include file='1/admin/games_release_list.html'}
     <br>
-
-    {include file='1/admin/quick_search_games.html'}
-{/block}
-
-{block name=additional_scripts}
-    <script src="{$template_dir}includes/js/ui.widgets.js"></script><!-- The autocomplete and dropdown switcher -->
-    <script>
-        $(document).ready(function () {
-            $('select[name=individual_id]').altAutocomplete();
-        });
-    </script>
-{/block}
-
-{block name=right_tile}
-
     <div class="standard_tile text-center">
         <h1>MORE DATA</h1>
         <div class="standard_tile_line"></div>
@@ -74,6 +60,19 @@
             <br>
         </div>
     </div>
+{/block}
+
+{block name=additional_scripts}
+    <script src="{$template_dir}includes/js/ui.widgets.js"></script><!-- The autocomplete and dropdown switcher -->
+    <script>
+        $(document).ready(function () {
+            $('select[name=individual_id]').altAutocomplete();
+        });
+    </script>
+{/block}
+
+{block name=right_tile}
+    {include file='1/admin/quick_search_games.html'}
     <br>
     {include file='1/main/tile_bug_report.html'}
 {/block}

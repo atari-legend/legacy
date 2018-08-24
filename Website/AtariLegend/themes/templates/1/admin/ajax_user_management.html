@@ -62,10 +62,10 @@
             </tr>
             {/foreach}
             {else}
+                <br>
                 <div class="left_nav_section">No users found</div>
             {/if}
-            {if isset($nr_users)}
-            {if $nr_users != 0}
+            {if isset($users)}
                 <tr>
                     <td colspan="5">
                         <img width="38" height="22" style="float:left;" alt="" src="../../../themes/templates/1/includes/img/arrow_ltr.gif">
@@ -102,4 +102,3 @@
 </fieldset>
 </div>
 </form>
-        {/if}
