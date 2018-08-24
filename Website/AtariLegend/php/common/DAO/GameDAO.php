@@ -69,12 +69,20 @@ class GameDAO {
 
         $screenshot = null;
         if ($stmt->fetch()) {
-            $screenshot = $screenshot_id.".".$imgext;
+            if ($screenshot_id == null) {
+                $screenshot = null;
+            } else {
+                $screenshot = $screenshot_id.".".$imgext;
+            }
         }
-
+        
         $stmt->close();
-
-        return $GLOBALS['game_screenshot_path']."/".$screenshot;
+        
+        if ($screenshot == null) {
+            return $screenshot;
+        } else {
+            return $GLOBALS['game_screenshot_path']."/".$screenshot;
+        }
     }
 
     /**
