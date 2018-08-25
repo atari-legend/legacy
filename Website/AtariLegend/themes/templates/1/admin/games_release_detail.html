@@ -4,40 +4,6 @@
         <br>
     {/if}
     {include file='1/admin/games_release_list.html'}
-    <br>
-    <div class="standard_tile text-center">
-        <h1>MORE DATA</h1>
-        <div class="standard_tile_line"></div>
-        <div class="standard_tile_padding">
-            <div class="gd_navigator">
-                <a href="../games/games_facts.php?game_id={$game->getId()}" class="primary_button">Game facts <span class="help-hint">({$nr_facts})</span></a>
-                <a href="../games/games_screenshot_add.php?game_id={$game->getId()}" class="primary_button">Screenshots <span class="help-hint">({$nr_screenshots})</span></a>
-                <a href="../magazine/magazine_review_score.php?game_id={$game->getId()}" class="primary_button">Mag review scores <span class="help-hint">({$nr_magazines})</span></a>
-                <a href="../games/games_box.php?game_id={$game->getId()}" class="primary_button">Boxscans <span class="help-hint">({$nr_boxscans})</span></a>
-                <a href="../games/games_similar.php?game_id={$game->getId()}" class="primary_button">Similar Games <span class="help-hint">({$nr_similar})</span></a>
-                <a href="../games/games_review.php?game_id={$game->getId()}" class="primary_button">Reviews <span class="help-hint">({$nr_reviews})</span></a>
-                {if $nr_comments > 0}
-                    <a href="../games/games_comment.php?game_id={$game->getId()}" class="primary_button">Moderate comments</a>
-                {/if}
-            </div>
-            <br>
-            <div class="gd_navigator">
-                <a href="../../games/games_detail.php?game_id={$game->getId()}"
-                    class="primary_button button_info">
-                    <i class="fa fa-eye" aria-hidden="true"></i> View on main site
-                </a>
-            </div>
-            <br>
-            <div class="gd_navigator">
-                <a href="../games/db_games_detail.php?game_id={$game->getId()}&amp;action=delete_game"
-                    class="primary_button button_danger"
-                    onclick="javascript:return confirm('The game will be deleted')">
-                    <i class="fa fa-trash" aria-hidden="true"></i> Delete game
-                </a>
-            </div>
-            <br>
-        </div>
-    </div>
 {/block}
 
 {block name=additional_scripts}

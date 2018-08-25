@@ -136,44 +136,6 @@ if ($_SERVER['REQUEST_METHOD'] == "GET") {
     }
 }
 
-//***********************************************************************************
-//The game statistics below on the page
-//***********************************************************************************
-// Game facts
-$sql_facts = $mysqli->query("SELECT COUNT(*) AS C FROM game_fact WHERE game_id = $game_id") or die($mysqli->error);
-$facts = $sql_facts->fetch_array(MYSQLI_BOTH);
-$smarty->assign('nr_facts', $facts['C']);
-
-// Similar games
-$sql_similar = $mysqli->query("SELECT COUNT(*) AS C FROM game_similar WHERE game_id = '$game_id'") or die($mysqli->error);
-$similar = $sql_similar->fetch_array(MYSQLI_BOTH);
-$smarty->assign('nr_similar', $similar['C']);
-
-//Get the number of screenshots!
-$numberscreen = $mysqli->query("SELECT count(*) as count FROM screenshot_game WHERE game_id = '$game_id'") or die("couldn't get number of screenshots");
-$array = $numberscreen->fetch_array(MYSQLI_BOTH);
-$smarty->assign("nr_screenshots", $array['count']);
-
-//check the number of boxscans
-$numberbox = $mysqli->query("SELECT count(*) as count FROM game_boxscan WHERE game_id = '$game_id'") or die("couldn't get number of boxscans");
-$array = $numberbox->fetch_array(MYSQLI_BOTH);
-$smarty->assign("nr_boxscans", $array['count']);
-
-//Check how many reviews a game has
-$numberreviews = $mysqli->query("SELECT count(*) as count FROM review_game WHERE game_id = '$game_id'") or die("couldn't get number of reviews");
-$array = $numberreviews->fetch_array(MYSQLI_BOTH);
-$smarty->assign("nr_reviews", $array['count']);
-
-//check how many magazine reviews this game has
-$numbermag = $mysqli->query("SELECT count(*) as count FROM magazine_game WHERE game_id = '$game_id'") or die("couldn't get number of mag reviews");
-$array = $numbermag->fetch_array(MYSQLI_BOTH);
-$smarty->assign("nr_magazines", $array['count']);
-
-//Get the ner of comments
-$number_comments = $mysqli->query("SELECT count(*) as count FROM game_user_comments WHERE game_id = '$game_id'") or die("couldn't get number of comments");
-$array = $number_comments->fetch_array(MYSQLI_BOTH);
-$smarty->assign("nr_comments", $array['count']);
-
 $smarty->display("file:" . $cpanel_template_folder . "games_release_detail.html");
 
 mysqli_close($mysqli);
