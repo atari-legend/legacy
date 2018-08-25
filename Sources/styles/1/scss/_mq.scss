@@ -641,6 +641,9 @@
         float: right;
         width: 20%;
     }
+    #gd_more_data_left{
+        display: none;
+    }
 }
 @media screen and (min-width: 601px) and (max-width: 1279px) {
     #gd_back,
