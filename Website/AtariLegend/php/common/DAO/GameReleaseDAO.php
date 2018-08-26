@@ -191,8 +191,12 @@ class GameReleaseDAO {
             "DELETE FROM game_release_system_incompatible WHERE game_release_id = ?",
             "i", $release_id
         );
-
-
+        $stmt = \AL\Db\execute_query(
+            "GameRelaseDAO: deleteRelease",
+            $this->mysqli,
+            "DELETE FROM game_release_location WHERE game_release_id = ?",
+            "i", $release_id
+        );
         $stmt = \AL\Db\execute_query(
             "GameRelaseDAO: deleteRelease",
             $this->mysqli,
