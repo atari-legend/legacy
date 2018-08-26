@@ -224,10 +224,10 @@ The main game page
                 </tr>
                 {if isset($menus_list)}
                     {foreach from=$menus_list item=line}
-                        <tr id="diskedit_ajax_{$line->getMenuDiskId()}">
-                            <td>{if $line->getMenuDiskId() != ''}<a onclick="editDisk({$line->getMenuDiskId()})" style="cursor: pointer;">{$line->getMenuDiskName()->getName()}</a>{else}<i>n/a</i>{/if}</td>
-                            <td>{if $line->getCrew() != ''}{$line->getCrew()->getName()}{else}<i>n/a</i>{/if}</td>
-                            <td>{if $line->getIndividual() != ''}{$line->getIndividual()->getName()}{else}<i>n/a</i>{/if}</td>
+                        <tr id="diskedit_ajax_{$line->getMenuDisk()->getId()}">
+                            <td>{if null !== $line->getMenuDisk()}<a onclick="editDisk({$line->getMenuDisk()->getId()})" style="cursor: pointer;">{$line->getMenuDisk()->getName()}</a>{else}<i>n/a</i>{/if}</td>
+                            <td>{if null !== $line->getCrew()}{$line->getCrew()->getName()}{else}<i>n/a</i>{/if}</td>
+                            <td>{if null !== $line->getIndividual()}{$line->getIndividual()->getName()}{else}<i>n/a</i>{/if}</td>
                             <td class="text-right">{if $line->getMenuState() != ''}{$line->getMenuState()}{else}<i>n/a</i>{/if}</td>
                         </tr>
                     {/foreach}

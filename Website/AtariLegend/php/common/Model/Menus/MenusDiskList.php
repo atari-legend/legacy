@@ -10,11 +10,6 @@ class MenusDiskList {
     private $menu_sets_id;
     private $menu_sets_name;
     private $menu_disk_name;
-    private $menu_disk_id;
-    private $menu_disk_number;
-    private $menu_disk_letter;
-    private $menu_disk_version;
-    private $menu_disk_part;
     private $crew;
     private $individual;
     private $state_id;
@@ -27,11 +22,6 @@ class MenusDiskList {
         $menu_sets_id,
         $menu_sets_name,
         $menu_disk_name,
-        $menu_disk_id,
-        $menu_disk_number,
-        $menu_disk_letter,
-        $menu_disk_version,
-        $menu_disk_part,
         $crew,
         $individual,
         $state_id,
@@ -43,11 +33,6 @@ class MenusDiskList {
         $this->menu_sets_id = $menu_sets_id;
         $this->menu_sets_name = $menu_sets_name;
         $this->menu_disk_name = $menu_disk_name;
-        $this->menu_disk_id = $menu_disk_id;
-        $this->menu_disk_number = $menu_disk_number;
-        $this->menu_disk_letter = $menu_disk_letter;
-        $this->menu_disk_version = $menu_disk_version;
-        $this->menu_disk_part = $menu_disk_part;
         $this->crew = $crew;
         $this->individual = $individual;
         $this->state_id = $state_id;
@@ -65,28 +50,8 @@ class MenusDiskList {
         return $this->menu_sets_name;
     }
 
-    public function getMenuDiskName() {
+    public function getMenuDisk() {
         return $this->menu_disk_name;
-    }
-
-    public function getMenuDiskId() {
-        return $this->menu_disk_id;
-    }
-
-    public function getMenuDiskNumber() {
-        return $this->menu_disk_number;
-    }
-
-    public function getMenuDiskLetter() {
-        return $this->menu_disk_letter;
-    }
-
-    public function getMenuDiskVersion() {
-        return $this->menu_disk_version;
-    }
-
-    public function getMenuDiskPart() {
-        return $this->menu_disk_part;
     }
 
     public function getCrew() {

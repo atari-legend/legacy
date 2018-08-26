@@ -17,7 +17,7 @@ include("../../config/common.php");
 include("../../config/admin.php");
 require_once __DIR__."/../../lib/Db.php";
 require_once __DIR__."/../../common/DAO/MenuSetDAO.php";
-require_once __DIR__."/../../common/DAO/MenusDiskListDAO.php";
+require_once __DIR__."/../../common/DAO/MenuDiskListDAO.php";
 require_once __DIR__."/../../common/DAO/CrewDAO.php";
 require_once __DIR__."/../../common/DAO/IndividualDAO.php";
 require_once __DIR__."/../../common/DAO/MenuTypeDAO.php";
@@ -25,7 +25,7 @@ require_once __DIR__."/../../common/DAO/MenuTypeDAO.php";
 //load the search fields of the quick search side menu
 include("../../admin/games/quick_search_games.php");
 
-$menusDao = new AL\Common\DAO\MenusDiskListDAO($mysqli);
+$menusDao = new AL\Common\DAO\MenuDiskListDAO($mysqli);
 $menusetDao = new AL\Common\DAO\MenuSetDAO($mysqli);
 $crewDao = new AL\Common\DAO\CrewDAO($mysqli);
 $individualDao = new AL\Common\DAO\IndividualDAO($mysqli);

@@ -21,14 +21,14 @@
 include("../../config/common.php");
 include("../../config/admin.php");
 include("../../admin/menus/db_menu_functions.php");
-require_once __DIR__."/../../common/DAO/MenusDiskDetailDAO.php";
+require_once __DIR__."/../../common/DAO/MenuDiskDetailDAO.php";
 require_once __DIR__."/../../common/DAO/IndividualDAO.php";
 
 $individualDao = new AL\Common\DAO\IndividualDAO($mysqli);
 
 // EDIT BOX FOR A MENU DISK!!!
 if (isset($action) and $action == "edit_disk_box" and $menu_disk_id !== '') {
-    $menudetailDao = new AL\Common\DAO\MenusDiskDetailDAO($mysqli);
+    $menudetailDao = new AL\Common\DAO\MenuDiskDetailDAO($mysqli);
 
     $menu_detail = $menudetailDao->getMenuDiskDetail($menu_disk_id);
 
@@ -88,7 +88,7 @@ if (isset($action) and $action == "edit_disk_box" and $menu_disk_id !== '') {
     }
 
     // Get the menudisk credits
-    $menucreditDao = new AL\Common\DAO\MenusDiskDetailDAO($mysqli);
+    $menucreditDao = new AL\Common\DAO\MenuDiskDetailDAO($mysqli);
     $smarty->assign('individuals', $menucreditDao->getMenuDiskCredits($menu_disk_id));
 
     // Menu state dropdown
@@ -237,7 +237,7 @@ if (isset($action) and $action == "edit_disk_box" and $menu_disk_id !== '') {
  */
 
 if (isset($action) and $action == "close_edit_disk_box" and $menu_disk_id !== '') {
-    $menudetailDao = new AL\Common\DAO\MenusDiskDetailDAO($mysqli);
+    $menudetailDao = new AL\Common\DAO\MenuDiskDetailDAO($mysqli);
 
     $menu_detail = $menudetailDao->getMenuDiskDetail($menu_disk_id);
 

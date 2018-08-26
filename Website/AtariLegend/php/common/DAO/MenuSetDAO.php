@@ -2,7 +2,7 @@
 namespace AL\Common\DAO;
 
 require_once __DIR__."/../../lib/Db.php";
-require_once __DIR__."/../Model/Menus/MenuSetsList.php";
+require_once __DIR__."/../Model/Menus/MenuSet.php";
 require_once __DIR__."/../Model/Crew/Crew.php";
 require_once __DIR__."/../Model/Individual/Individual.php";
 
@@ -75,7 +75,7 @@ class MenuSetDAO {
 
         $menusets = [];
         while ($stmt->fetch()) {
-            $menusets[] = new \AL\Common\Model\Menus\MenuSetsList(
+            $menusets[] = new \AL\Common\Model\Menus\MenuSet(
                 $menu_sets_id,
                 $menu_sets_name,
                 $menu_disk_count,
@@ -123,7 +123,7 @@ class MenuSetDAO {
 
         $menusets = null;
         if ($stmt->fetch()) {
-            $menusets = new \AL\Common\Model\Menus\MenuSetsList(
+            $menusets = new \AL\Common\Model\Menus\MenuSet(
                 $menu_sets_id,
                 $menu_sets_name,
                 $menu_disk_count,

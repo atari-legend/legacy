@@ -10,7 +10,7 @@ require_once __DIR__."/../Model/Individual/Individual.php";
 /**
  * DAO for Comments
  */
-class MenusDiskListDAO {
+class MenuDiskListDAO {
     private $mysqli;
 
     public function __construct($mysqli) {
@@ -24,7 +24,7 @@ class MenusDiskListDAO {
      */
     public function getMenuDisksForSet($menu_sets_id) {
         $stmt = \AL\Db\execute_query(
-            "MenusDiskListDAO: getMenuDisksForSet",
+            "MenuDiskListDAO: getMenuDisksForSet",
             $this->mysqli,
             "SELECT
                  menu_disk.menu_sets_id,
@@ -59,7 +59,7 @@ class MenusDiskListDAO {
         );
 
         \AL\Db\bind_result(
-            "MenusDiskListDAO: getMenuDisksForSet",
+            "MenuDiskListDAO: getMenuDisksForSet",
             $stmt,
             $menu_sets_id,
             $menu_sets_name,
@@ -85,17 +85,13 @@ class MenusDiskListDAO {
                 $menu_sets_id,
                 $menu_sets_name,
                 $menu_disk_name = new \AL\Common\Model\Menus\MenuDisk(
+                    $menu_disk_id,
                     $menu_sets_name,
                     $menu_disk_number,
                     $menu_disk_letter,
                     $menu_disk_part,
                     $menu_disk_version
                 ),
-                $menu_disk_id,
-                $menu_disk_number,
-                $menu_disk_letter,
-                $menu_disk_version,
-                $menu_disk_part,
                 ($crew_id != null)
                     ? new \AL\Common\Model\Crew\Crew($crew_id, $crew_name)
                     : null,

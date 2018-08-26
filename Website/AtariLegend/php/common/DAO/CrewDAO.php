@@ -16,21 +16,23 @@ class CrewDAO {
 
     /**
      * Search for crews
+     * @param string $search_string can either be a single letter or "num" which represents numbers
      * @return \AL\Common\Model\Crew\Crew[] A list of crews
      */
     public function getCrewsStartingWith($search_string) {
         if (isset($search_string) and $search_string == "num") {
-            $crewbrowse = " WHERE crew_name REGEXP '^[0-9].*'";
+            $search_string = "^[0-9]";
         } else {
-            $crewbrowse = " WHERE crew_name LIKE '$search_string%'";
+            $search_string = "^$search_string";
         }
 
         $stmt = \AL\Db\execute_query(
             "CrewDAO: getCrewsStartingWith",
             $this->mysqli,
-            "SELECT crew_id, crew_name FROM crew". $crewbrowse ." ORDER BY crew_name ASC",
-            null,
-            null
+            "SELECT crew_id, crew_name FROM crew
+            WHERE LOWER(crew_name) REGEXP ? ORDER BY crew_name ASC",
+            "s",
+            strtolower($search_string)
         );
 
         \AL\Db\bind_result(

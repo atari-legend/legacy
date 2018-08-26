@@ -49,21 +49,23 @@ class IndividualDAO {
 
     /**
      * Browse individuals by first letter
+     * @param string $search_string can either be a single letter or "num" which represents numbers
      * @return \AL\Common\Model\Individual\Individual[] A list of individuals
      */
     public function getIndividualsStartingWith($search_string) {
         if (isset($search_string) and $search_string == "num") {
-            $indbrowse = " WHERE ind_name REGEXP '^[0-9].*'";
+            $search_string = "^[0-9]";
         } else {
-            $indbrowse = " WHERE ind_name LIKE '$search_string%'";
+            $search_string = "^$search_string";
         }
 
         $stmt = \AL\Db\execute_query(
             "IndividualDAO: getIndividualsStartingWith",
             $this->mysqli,
-            "SELECT ind_id, ind_name FROM individuals". $indbrowse ." ORDER BY ind_name ASC",
-            null,
-            null
+            "SELECT ind_id, ind_name FROM individuals
+            WHERE LOWER(ind_name) REGEXP ? ORDER BY ind_name ASC",
+            "s",
+            strtolower($search_string)
         );
 
         \AL\Db\bind_result(
