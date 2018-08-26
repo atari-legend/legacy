@@ -6,7 +6,7 @@ require_once __DIR__."/../../../config/config.php";
 /**
  * Maps to the Menu Sets tables
  */
-class MenuSetsList {
+class MenuSet {
     private $menu_sets_id;
     private $menu_sets_name;
     private $menu_disk_count;

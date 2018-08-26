@@ -8,6 +8,7 @@ require_once __DIR__."/../../../config/config.php";
  */
 
 class MenuDisk {
+    private $menu_disk_id;
     private $menu_sets_name;
     private $menu_disk_number;
     private $menu_disk_letter;
@@ -16,12 +17,14 @@ class MenuDisk {
     private $menu_disk_name;
 
     public function __construct(
+        $menu_disk_id,
         $menu_sets_name,
         $menu_disk_number,
         $menu_disk_letter,
         $menu_disk_part,
         $menu_disk_version
     ) {
+        $this->menu_disk_id = $menu_disk_id;
         $this->menu_sets_name = $menu_sets_name;
         $this->menu_disk_number = $menu_disk_number;
         $this->menu_disk_letter = $menu_disk_letter;
@@ -48,6 +51,10 @@ class MenuDisk {
         }
 
         $this->menu_disk_name = $menu_disk_name;
+    }
+
+    public function getId() {
+        return $this->menu_disk_id;
     }
 
     public function getName() {

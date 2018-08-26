@@ -11,7 +11,7 @@ require_once __DIR__."/../Model/Individual/Individual.php";
 /**
  * DAO for Comments
  */
-class MenusDiskDetailDAO {
+class MenuDiskDetailDAO {
     private $mysqli;
 
     public function __construct($mysqli) {
@@ -25,7 +25,7 @@ class MenusDiskDetailDAO {
      */
     public function getMenuDiskDetail($menu_disk_id) {
         $stmt = \AL\Db\execute_query(
-            "MenusDiskDetailDAO: getMenuDiskDetail",
+            "MenuDiskDetailDAO: getMenuDiskDetail",
             $this->mysqli,
             "SELECT
                  menu_disk.menu_sets_id,
@@ -60,7 +60,7 @@ class MenusDiskDetailDAO {
         );
 
         \AL\Db\bind_result(
-            "MenusDiskDetailDAO: getMenuDiskDetail",
+            "MenuDiskDetailDAO: getMenuDiskDetail",
             $stmt,
             $menu_sets_id,
             $menu_sets_name,
@@ -86,17 +86,13 @@ class MenusDiskDetailDAO {
                 $menu_sets_id,
                 $menu_sets_name,
                 $menu_disk_name = new \AL\Common\Model\Menus\MenuDisk(
+                    $menu_disk_id,
                     $menu_sets_name,
                     $menu_disk_number,
                     $menu_disk_letter,
                     $menu_disk_part,
                     $menu_disk_version
                 ),
-                $menu_disk_id,
-                $menu_disk_number,
-                $menu_disk_letter,
-                $menu_disk_version,
-                $menu_disk_part,
                 ($crew_id != null)
                     ? new \AL\Common\Model\Crew\Crew($crew_id, $crew_name)
                     : null,
@@ -123,7 +119,7 @@ class MenusDiskDetailDAO {
      */
     public function getMenuDiskCredits($menu_disk_id) {
         $stmt = \AL\Db\execute_query(
-            "MenusDiskDetailDAO: getMenuDiskCredits",
+            "MenuDiskDetailDAO: getMenuDiskCredits",
             $this->mysqli,
             "SELECT
                 individuals.ind_id,
@@ -140,7 +136,7 @@ class MenusDiskDetailDAO {
         );
 
         \AL\Db\bind_result(
-            "MenusDiskDetailDAO: getMenuDiskCredits",
+            "MenuDiskDetailDAO: getMenuDiskCredits",
             $stmt,
             $ind_id,
             $ind_name,
