@@ -1,6 +1,6 @@
 <?php
 /***************************************************************************
- *                                db_database_update.php
+ *                                db_database_update_legacy.php
  *                            -----------------------
  *   begin                : 2016-02-14
  *   copyright            : (C) 2016 Atari Legend
@@ -8,7 +8,7 @@
  *
  *
  *
- *   Id: db_database_update.php,v 1.00 2016-02-14 Silver Surfer
+ *   Id: db_database_update_legacy.php,v 1.00 2016-02-14 Silver Surfer
  *
  ***************************************************************************/
 
@@ -22,8 +22,8 @@ include("../../config/admin.php");
 // Start with getting the update script and do tests
 //****************************************************************************************
 if (isset($action) and $action == "update_database") {
-    // use glob and a foreach loop to search the database_scripts folder for update files
-    foreach (glob("../../admin/administration/database_scripts/*.php") as $filename) {
+    // use glob and a foreach loop to search the database_scripts/legacy folder for update files
+    foreach (glob("../../admin/administration/database_scripts/legacy/*.php") as $filename) {
         //we don't want to execute additions just yet
         if (strpos($filename, 'addition') !== false) {
             //do nothing
@@ -86,5 +86,5 @@ if (isset($action) and $action == "update_database") {
             }
         }
     }
-    header("Location: ../administration/database_update.php");
+    header("Location: ../administration/database_update_legacy.php");
 }
