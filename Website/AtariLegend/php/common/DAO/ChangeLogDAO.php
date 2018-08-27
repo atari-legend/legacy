@@ -82,7 +82,7 @@ class ChangeLogDAO {
             WHERE change_log.section = 'Games'
             HAVING change_log.sub_section IN ('AKA', 'Author', 'Box back', 'Box front', 'Creator',
                 'Developer', 'Game', 'Publisher', 'Screenshot', 'Similar', 'Submission', 'Release')
-            ORDER BY change_log.timestamp DESC LIMIT 20",
+            ORDER BY change_log.timestamp DESC LIMIT 10",
             null,
             null
         );

@@ -44,141 +44,58 @@ class ShortLog {
         $this->timestamp = $timestamp;
 
         if ($section="Games") {
+            $section_games = array(
+                "Box back" => array(
+                    "Update" => "Updated the boxscan of $section_name",
+                    "Insert" => "Added boxscan to $section_name",
+                    "Delete" =>"Removed a boxscan from $section_name"),
+                "Box front" => array(
+                    "Update" => "Updated the boxscan of $section_name",
+                    "Insert" => "Added boxscan to $section_name",
+                    "Delete" => "Removed a boxscan from $section_name"),
+                "Screenshot" => array(
+                    "Update" => "Updated the screenshots of $section_name",
+                    "Insert" => "Added a screenshot to $section_name",
+                    "Delete" => "Removed a screenshot from $section_name"),
+                "Developer" => array(
+                    "Update" => "Updated the developer of $section_name",
+                    "Insert" => "Added $sub_section_name to $section_name",
+                    "Delete" => "Removed $sub_section_name from $section_name"),
+                "Publisher" => array(
+                    "Update" => "Updated the publisher of $section_name",
+                    "Insert" => "Added $sub_section_name to $section_name",
+                    "Delete" => "Removed $sub_section_name from $section_name"),
+                "Release" => array(
+                    "Update" => "Updated a release of $section_name",
+                    "Insert" => "Added a release to $section_name",
+                    "Delete" => "Removed a release from $section_name"),
+                "Creator" => array(
+                    "Update" => "Updated $section_name",
+                    "Insert" => "Added $sub_section_name to $section_name",
+                    "Delete" => "Removed $sub_section_name from $section_name"),
+                "Author" => array(
+                    "Update" => "Updated $section_name",
+                    "Insert" => "Added $sub_section_name to $section_name",
+                    "Delete" => "Removed $sub_section_name from $section_name"),
+                "Similar" => array(
+                    "Update" => "Updated $section_name",
+                    "Insert" => "Added $sub_section_name as similar to $section_name",
+                    "Delete" => "Updated $section_name"),
+                "Game" => array(
+                    "Update" => "Updated $section_name",
+                    "Insert" => "Added a new game: $section_name",
+                    "Delete" => "Removed $section_name"),
+                "AKA" => array(
+                    "Update" => "Updated $section_name",
+                    "Insert" => "Added $sub_section_name to $section_name",
+                    "Delete" => "Removed $sub_section_name from $section_name"),
+            );
+
             $shortlog = "";
 
-            if ($sub_section =="Box back" or $sub_section =="Box front") {
-                if ($action == "Update") {
-                    $shortlog .= "Updated the boxscan of $section_name";
-                }
-                if ($action == "Insert") {
-                    $shortlog .= "Added boxscan to $section_name";
-                }
-                if ($action == "Delete") {
-                    $shortlog .= "Removed a boxscan from $section_name";
-                }
-            }
-            if ($sub_section =="Screenshot") {
-                if ($action == "Update") {
-                    $shortlog .= "Updated the screenshots of $section_name";
-                }
-                if ($action == "Insert") {
-                    $shortlog .= "Added a screenshot to $section_name";
-                }
-                if ($action == "Delete") {
-                    $shortlog .= "Removed a screenshot from $section_name";
-                }
-            }
-            if ($sub_section =="Developer" or $sub_section =="Publisher") {
-                if ($action == "Update") {
-                    $shortlog .= "Updated the developer of $section_name";
-                }
-                if ($action == "Insert") {
-                    $shortlog .= "Added $sub_section_name to $section_name";
-                }
-                if ($action == "Delete") {
-                    $shortlog .= "Removed $sub_section_name from $section_name";
-                }
-            }
-            if ($sub_section =="Release") {
-                if ($action == "Update") {
-                    $shortlog .= "Updated a release of $section_name";
-                }
-                if ($action == "Insert") {
-                    $shortlog .= "Added a release to $section_name";
-                }
-                if ($action == "Delete") {
-                    $shortlog .= "Removed a release from $section_name";
-                }
-            }
-            if ($sub_section =="Creator") {
-                if ($action == "Update") {
-                    $shortlog .= "Updated $section_name";
-                }
-                if ($action == "Insert") {
-                    $shortlog .= "Added $sub_section_name to $section_name";
-                }
-                if ($action == "Delete") {
-                    $shortlog .= "Removed $sub_section_name from $section_name";
-                }
-            }
-            if ($sub_section =="Author") {
-                if ($action == "Update") {
-                    $shortlog .= "Updated $section_name";
-                }
-                if ($action == "Insert") {
-                    $shortlog .= "Added $sub_section_name to $section_name";
-                }
-                if ($action == "Delete") {
-                    $shortlog .= "Removed $sub_section_name from $section_name";
-                }
-            }
-            if ($sub_section =="Similar") {
-                if ($action == "Update") {
-                    $shortlog .= "Updated $section_name";
-                }
-                if ($action == "Insert") {
-                    $shortlog .= "Added $sub_section_name as similar to $section_name";
-                }
-                if ($action == "Delete") {
-                    $shortlog .= "Updated $section_name";
-                }
-            }
-            if ($sub_section =="Game") {
-                if ($action == "Update") {
-                    $shortlog .= "Updated $section_name";
-                }
-                if ($action == "Insert") {
-                    $shortlog .= "Added a new game: $section_name";
-                }
-                if ($action == "Delete") {
-                    $shortlog .= "Removed $section_name";
-                }
-            }
-            if ($sub_section =="AKA") {
-                if ($action == "Update") {
-                    $shortlog .= "Updated $section_name";
-                }
-                if ($action == "Insert") {
-                    $shortlog .= "Added $sub_section_name to $section_name";
-                }
-                if ($action == "Delete") {
-                    $shortlog .= "Removed $sub_section_name from $section_name";
-                }
-            }
+            $shortlog = $section_games[$sub_section][$action];
 
             $this->shortlog = $shortlog;
-
-            $date = new \DateTime();
-            $now = $date->format('U');
-            $shortlog_date = "";
-
-            if ($now-$timestamp <60) {
-                $diff = $now-$timestamp;
-                $shortlog_date .= " $diff seconds ago";
-            }
-            if ($now-$timestamp >60 and $now-$timestamp <3600) {
-                $diff = $now-$timestamp;
-                $diff = floor($diff / 60);
-                $shortlog_date .= " $diff minutes ago";
-            }
-            if ($now-$timestamp >3600 and $now-$timestamp <86400) {
-                $diff = $now-$timestamp;
-                $diff = floor($diff / 3600);
-                $shortlog_date .= " $diff hours ago";
-            }
-            if ($now-$timestamp >86400 and $now-$timestamp <172800) {
-                $diff = $now-$timestamp;
-                $diff = floor($diff / 3600);
-                $shortlog_date .= " yesterday";
-            }
-            if ($now-$timestamp >172800) {
-                $time = new \DateTime();
-                $time->setTimestamp($timestamp);
-                $change_date = $time->format('M d');
-                $shortlog_date .= " on $change_date";
-            }
-
-            $this->shortlog_date = $shortlog_date;
         }
     }
 
@@ -228,9 +145,5 @@ class ShortLog {
 
     public function getShortlog() {
         return $this->shortlog;
-    }
-
-    public function getShortlogDate() {
-        return $this->shortlog_date;
     }
 }

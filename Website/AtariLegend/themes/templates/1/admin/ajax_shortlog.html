@@ -14,7 +14,7 @@
 *}
 
 {foreach from=$shortlog item=line}
-    <span style="color:white;">{$line->getUserName()} - {$line->getShortlogDate()}</span>
+    <span style="color:white;">{$line->getUserName()} - {$line->getTimestamp()|timeago}</span>
     <br><br>
     {$line->getShortLog()}<br>
     <hr class="separator_add_secondary">
