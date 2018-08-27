@@ -20,99 +20,16 @@ The game series add games page
 
 {extends file='1/admin/main.html'}
 
-{block name=java_script}
-<script>
-function browseGame(str) {
-    if (str == "") {
-        document.getElementById("game_list").innerHTML = "";
-        return;
-    } else {
-        if (window.XMLHttpRequest) {
-            // code for IE7+, Firefox, Chrome, Opera, Safari
-            xmlhttp = new XMLHttpRequest();
-        } else {
-            // code for IE6, IE5
-            xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
-        }
-        xmlhttp.onreadystatechange = function() {
-            if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
-                document.getElementById("game_list").innerHTML = xmlhttp.responseText;
-            }
-        }
-        xmlhttp.open("GET","../games/ajax_games_series.php?action=game_browse&query="+str,true);
-        xmlhttp.send();
-    }
-}
-
-function searchGame(str) {
-    if (str == "") {
-        str = "empty";
-            xmlhttp.onreadystatechange = function() {
-            if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
-                document.getElementById("gamesearch").innerHTML = xmlhttp.responseText;
-            }
-        }
-
-    } else {
-        if (window.XMLHttpRequest) {
-            // code for IE7+, Firefox, Chrome, Opera, Safari
-            xmlhttp = new XMLHttpRequest();
-        } else {
-            // code for IE6, IE5
-            xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
-        }
-        xmlhttp.onreadystatechange = function() {
-            if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
-                document.getElementById("gamesearch").innerHTML = xmlhttp.responseText;
-            }
-        }
-        if (str.length >= 3) {
-        xmlhttp.open("GET","../games/ajax_games_series.php?action=game_search&query="+str,true);
-        xmlhttp.send();
-    }
-    }
-}
-
-function deleteseries()
-{
-    // CONFIRM REQUIRES ONE ARGUMENT
-    var message = "Are you sure you want to delete this Serie?";
-    // CONFIRM IS BOOLEAN. THAT MEANS THAT
-    // IT RETURNS TRUE IF 'OK' IS CLICKED
-    // OTHERWISE IT RETURN FALSE
-    var return_value = confirm(message);
-
-    if (return_value !="0")
-    {
-        url="../games/db_games_series.php?action=delete_gameseries&amp;game_series_id={if isset($series_info.game_series_id)}{$series_info.game_series_id}{/if}";
-        location.href=url;
-    }
-}
-</script>
-{/block}
-
 {block name=title}Game Series{/block}
 
 {block name=main_tile}
 <div class="standard_tile" id="games_series_add_games">
-    <h1>{$series_info.game_series_name}</h1>
+    <h1>Add games to: <a href="games_series_editor.php?game_series_id={$game_series_id}">{$game_series->getName()}</a></h1>
     <div class="standard_tile_line"></div>
     <div class="standard_tile_padding">
         <div class="left_nav_section">
             Over here you can add games to a series.
         </div>
-        <br>
-        <br>
-        <fieldset class="secondary_fieldset centered_fieldset">
-        <legend class="primary_legend">Series options</legend>
-            <a style="cursor: pointer;" onClick="deleteseries(); return false;" class="left_nav_link">
-                Delete series
-            </a>
-            <br>
-            <a href="../games/games_series_add_games.php?series_page=addgames_series&amp;game_series_id={if isset($series_info.game_series_id)}{$series_info.game_series_id}{/if}" class="left_nav_link">
-                Add games
-            </a>
-        </fieldset>
         <br>
         <br>
         <fieldset class="secondary_fieldset centered_fieldset">
@@ -128,7 +45,9 @@ function deleteseries()
                     <br>
                     <br>
                     <input type="hidden" name="action" value="add_games_search">
-                    <input type="hidden" name="game_series_id" value="{$series_info.game_series_id}">
+                    <input type="hidden" name="game_series_id" value="{$game_series->getId()}">
+                    <span class="help-hint">Only games that are not already part of a series will be returned</span>
+                    <br>
                     <input type="submit" value="Search" class="secondary_button">
                     <br>
                 </div>
@@ -143,51 +62,39 @@ function deleteseries()
                 <tr>
                     <th class="mw-5">Info</th>
                     <th class="mw-40">Game Name</th>
-                    <th class="mw-20">Publisher</th>
                     <th class="mw-20">Developer</th>
-                    <th class="mw-10">Year</th>
                 </tr>
                 {foreach from=$series_link item=line}
                     <tr>
                         <td>
                             <div class="checkbox">
-                                <input type="checkbox" id="{$line.game_id}" name="game_id[]" value="{$line.game_id}">
-                                <label for="{$line.game_id}"></label>
+                                <input type="checkbox" id="game-{$line.game_id}" name="game_ids[]" value="{$line.game_id}">
+                                <label for="game-{$line.game_id}"></label>
                             </div>
                         </td>
-                        <td>{if $line.game_name != ''}<a href="games_detail.php?game_id={$line.game_id}" class="standard_tile_text_left">{$line.game_name}</a>
-                                {else}<i>n/a</i>{/if}
+                        <td>
+                            {if $line.game_name != ''}
+                                <a href="games_detail.php?game_id={$line.game_id}" class="standard_tile_text_left">{$line.game_name}</a>
+                            {else}
+                                <i>n/a</i>
+                            {/if}
                         </td>
-                        <td>{if $line.publisher_name != ''}
-                                <a href="games_main.php?publisher={$line.publisher_id}&amp;action=search" class="standard_tile_text_left">
-                                    {$line.publisher_name}
-                            </a>
-                                {else}
-                                    <i>n/a</i>
-                                {/if}</td>
-                        <td>{if $line.developer_name != ''}
+                        <td>
+                            {if $line.developer_name != ''}
                                 <a href="games_main.php?developer={$line.developer_id}&amp;action=search" class="standard_tile_text_left">
                                     {$line.developer_name}
                                 </a>
-                                {else}
-                                    <i>n/a</i>
-                                {/if}</td>
-                        <td>
-                            {if $line.year != ''}
-                                <a href="games_main.php?year={$line.year}&amp;action=search" class="standard_tile_text_left">
-                                    {$line.year}
-                                </a>
-                                {else}
-                                    <i>n/a</i>
-                                {/if}
-                            </td>
+                            {else}
+                                <i>n/a</i>
+                            {/if}
+                        </td>
                     </tr>
                 {/foreach}
                 <tr>
                     <td class="game_list_footer" colspan="5" style="width:100%;">
                         <input type="hidden" name="series_page" value="series_editor">
                         <input type="hidden" name="action" value="add_to_series">
-                        <input type="hidden" name="game_series_id" value="{if isset($series_info.game_series_id)}{$series_info.game_series_id}{/if}">
+                        <input type="hidden" name="game_series_id" value="{$game_series->getId()}">
                         <img src="../../../themes/templates/1/includes/img/arrow_ltr.gif" alt="" width="38" height="22" style="float:left;">
                         <input type="submit" value="Add" class="secondary_button">
                     </td>
@@ -201,7 +108,7 @@ function deleteseries()
         {/if}
         </form>
         <br>
-        <div class="standard_tile_text_center"><a href="../games/games_series_editor.php?series_page=series_editor&game_series_id={$series_info.game_series_id}" class="standard_tile_link">back</a></div>
+        <div class="standard_tile_text_center"><a href="../games/games_series_editor.php?series_page=series_editor&game_series_id={$game_series->getId()}" class="standard_tile_link">back</a></div>
     </div>
 </div>
 {/block}

@@ -2,17 +2,15 @@
 namespace AL\Common\Model\Game;
 
 /**
- * Maps to the `game` table
+ * Maps to the `game_series` table
  */
-class Game {
+class GameSeries {
     private $id;
     private $name;
-    private $series_id;
 
-    public function __construct($id, $name, $series_id = null) {
+    public function __construct($id, $name) {
         $this->id = $id;
         $this->name = $name;
-        $this->series_id = $series_id;
     }
 
     public function getId() {
@@ -21,9 +19,5 @@ class Game {
 
     public function getName() {
         return $this->name;
-    }
-
-    public function getSeriesId() {
-        return $this->series;
     }
 }

@@ -25,16 +25,10 @@ include("../../config/admin.php");
 //load the search fields of the quick search side menu
 include("../../admin/games/quick_search_games.php");
 
-// SERIES LIST DROPDOWN
+require_once __DIR__."/../../common/DAO/GameSeriesDAO.php";
 
-$sql_series = $mysqli->query("SELECT * FROM game_series ORDER BY game_series_name ASC") or die("Couldn't query Game Series Database1");
-
-while ($query_series = $sql_series->fetch_array(MYSQLI_BOTH)) {
-    $smarty->append('game_series', array(
-        'game_series_id' => $query_series['game_series_id'],
-        'game_series_name' => $query_series['game_series_name']
-    ));
-}
+$gameSeriesDao = new \AL\Common\DAO\GameSeriesDAO($mysqli);
+$smarty->assign('game_series', $gameSeriesDao->getAllGameSeries());
 
 //Send all smarty variables to the templates
 $smarty->display("file:" . $cpanel_template_folder . "games_series_main.html");

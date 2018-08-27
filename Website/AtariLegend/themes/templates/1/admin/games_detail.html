@@ -38,6 +38,11 @@
                 <a href="../games/games_box.php?game_id={$game->getId()}" class="primary_button">Boxscans <span class="help-hint">({$nr_boxscans})</span></a>
                 <a href="../games/games_similar.php?game_id={$game->getId()}" class="primary_button">Similar Games <span class="help-hint">({$nr_similar})</span></a>
                 <a href="../games/games_review.php?game_id={$game->getId()}" class="primary_button">Reviews <span class="help-hint">({$nr_reviews})</span></a>
+                {if isset($game_info.game_series_id)}
+                    <a href="../games/games_series_editor.php?game_series_id={$game_info.game_series_id}" class="primary_button"><span class="help-hint">Series:</span> {$game_info.game_series_name}</a>
+                {else}
+                    <a href="../games/games_series_main.php" class="primary_button">Add to a series</a>
+                {/if}
                 {if $nr_comments > 0}
                     <a href="../games/games_comment.php?game_id={$game->getId()}" class="primary_button">Moderate comments</a>
                 {/if}
@@ -83,6 +88,11 @@
                 <a href="../games/games_box.php?game_id={$game->getId()}" class="primary_button">Boxscans <span class="help-hint">({$nr_boxscans})</span></a>
                 <a href="../games/games_similar.php?game_id={$game->getId()}" class="primary_button">Similar Games <span class="help-hint">({$nr_similar})</span></a>
                 <a href="../games/games_review.php?game_id={$game->getId()}" class="primary_button">Reviews <span class="help-hint">({$nr_reviews})</span></a>
+                {if isset($game_info.game_series_id)}
+                    <a href="../games/games_series_editor.php?game_series_id={$game_info.game_series_id}" class="primary_button"><span class="help-hint">Series:</span> {$game_info.game_series_name}</a>
+                {else}
+                    <a href="../games/games_series_main.php" class="primary_button">Add to a series</a>
+                {/if}
                 {if $nr_comments > 0}
                     <a href="../games/games_comment.php?game_id={$game->getId()}" class="primary_button">Moderate comments</a>
                 {/if}

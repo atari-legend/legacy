@@ -44,12 +44,15 @@ $GameGenreDao = new \AL\Common\DAO\GameGenreDAO($mysqli);
 //***********************************************************************************
 $sql_game = $mysqli->query("SELECT game_name,
                game.game_id,
+               game.game_series_id,
+               game_series.name as game_series_name,
                game_development.development,
                game_unreleased.unreleased,
                game_unfinished.unfinished,
                game_wanted.game_wanted_id,
                game_arcade.arcade
                FROM game
+               LEFT JOIN game_series ON (game.game_series_id = game_series.id)
                LEFT JOIN game_unreleased ON (game.game_id = game_unreleased.game_id)
                LEFT JOIN game_development ON (game.game_id = game_development.game_id)
                LEFT JOIN game_arcade ON (game.game_id = game_arcade.game_id)
@@ -62,6 +65,8 @@ while ($game_info = $sql_game->fetch_array(MYSQLI_BOTH)) {
     $smarty->assign('game_info', array(
         'game_name' => $game_info['game_name'],
         'game_id' => $game_info['game_id'],
+        'game_series_id' => $game_info['game_series_id'],
+        'game_series_name' => $game_info['game_series_name'],
         'game_development' => $game_info['development'],
         'game_unreleased' => $game_info['unreleased'],
         'game_unfinished' => $game_info['unfinished'],
