@@ -28,28 +28,13 @@
 include("../../config/common.php");
 include("../../config/admin.php");
 include("../../admin/menus/db_menu_functions.php");
+require_once __DIR__."/../../common/DAO/MenuSetDAO.php";
+require_once __DIR__."/../../common/DAO/CrewDAO.php";
+require_once __DIR__."/../../common/DAO/IndividualDAO.php";
 //include("../../config/admin_rights.php"); /*--> We can not use it like this because of the ajax. redirecting does not work correctly with the inheritance of Ajax.
 
 //This is used for the AJAX parts when user rights do not suffice
 $osd_message = 'You do not have the necessary authorizations to perform this action';
-
-//****************************************************************************************
-// Add new menu set
-//****************************************************************************************
-
-if ($action == "menu_set_new") {
-    include("../../config/admin_rights.php");
-    if (isset($menu_sets_name)) {
-        $sql = $mysqli->query("INSERT INTO menu_set (menu_sets_name) VALUES ('$menu_sets_name')") or die('Error: ' . mysqli_error($mysqli));
-        $new_menu_set_id = $mysqli->insert_id;
-
-        create_log_entry('Menu set', $new_menu_set_id, 'Menu set', $new_menu_set_id, 'Insert', $_SESSION['user_id']);
-
-        $_SESSION['edit_message'] = "New Menu Set added";
-    }
-
-    header("Location: ../menus/menus_list.php");
-}
 
 //****************************************************************************************
 // Add new menu disk
@@ -118,89 +103,16 @@ if (isset($action) and $action == "multi_add_new_menu_disk") {
 }
 
 //****************************************************************************************
-// Edit menu_set name
-//****************************************************************************************
-if ($action == "menu_set_name_update") {
-    include("../../config/admin_rights.php");
-    if (isset($menu_sets_id) and $menu_sets_name !== "") {
-        $sql = $mysqli->query("UPDATE menu_set SET menu_sets_name='$menu_sets_name'
-              WHERE menu_sets_id='$menu_sets_id'") or die('Error: ' . mysqli_error($mysqli));
-
-        create_log_entry('Menu set', $menu_sets_id, 'Menu set', $menu_sets_id, 'Update', $_SESSION['user_id']);
-
-        $_SESSION['edit_message'] = "Menu Set Name updated!";
-    }
-    header("Location: ../menus/menus_disk_list.php?menu_sets_id=$menu_sets_id");
-}
-
-//****************************************************************************************
-// Connect crew to menu set
-//****************************************************************************************
-if ($action == "menu_set_crew_set") {
-    include("../../config/admin_rights.php");
-    if (isset($crew_id) and ($crew_id == !"") and isset($menu_sets_id)) {
-        $sql = $mysqli->query("INSERT INTO crew_menu_prod (crew_id,menu_sets_id) VALUES ('$crew_id','$menu_sets_id')") or die('Error: ' . mysqli_error($mysqli));
-        $_SESSION['edit_message'] = "Crew hooked to this Menu disk series";
-
-        create_log_entry('Menu set', $menu_sets_id, 'Crew', $crew_id, 'Insert', $_SESSION['user_id']);
-    }
-
-    if ($crew_id == "") {
-        $_SESSION['edit_message'] = "Please select a crew";
-    }
-
-    header("Location: ../menus/menus_disk_list.php?menu_sets_id=$menu_sets_id");
-}
-
-//****************************************************************************************
-// Connect individual to menu set
-//****************************************************************************************
-if ($action == "menu_set_ind_set") {
-    include("../../config/admin_rights.php");
-    if (isset($ind_id) and ($ind_id == !"") and isset($menu_sets_id)) {
-        $sql = $mysqli->query("INSERT INTO ind_menu_prod (ind_id,menu_sets_id) VALUES ('$ind_id','$menu_sets_id')") or die('Error: ' . mysqli_error($mysqli));
-        $_SESSION['edit_message'] = "Individual hooked to this Menu disk series";
-
-        create_log_entry('Menu set', $menu_sets_id, 'Individual', $ind_id, 'Insert', $_SESSION['user_id']);
-    }
-
-    if ($ind_id == "") {
-        $_SESSION['edit_message'] = "Please select an individual";
-    }
-
-    header("Location: ../menus/menus_disk_list.php?menu_sets_id=$menu_sets_id");
-}
-
-//****************************************************************************************
-// Connect menu type to menu set
-//****************************************************************************************
-if ($action == "menu_set_type_set") {
-    include("../../config/admin_rights.php");
-    if (isset($menu_type_browse) and ($menu_type_browse == !"") and isset($menu_sets_id)) {
-        $sql = $mysqli->query("INSERT INTO menu_type (menu_types_main_id,menu_sets_id) VALUES ('$menu_type_browse','$menu_sets_id')") or die('Error: ' . mysqli_error($mysqli));
-        $_SESSION['edit_message'] = "Menu set hooked to this Menu disk series";
-
-        create_log_entry('Menu set', $menu_sets_id, 'Menu type', $menu_type_browse, 'Insert', $_SESSION['user_id']);
-    }
-
-    if ($menu_type_browse == "") {
-        $_SESSION['edit_message'] = "Please select a menu set";
-    }
-    header("Location: ../menus/menus_disk_list.php?menu_sets_id=$menu_sets_id");
-}
-
-//****************************************************************************************
 // Quick add new crew
 //****************************************************************************************
 if ($action == "menu_set_crew_add") {
     include("../../config/admin_rights.php");
     if (isset($new_crew_name) and isset($menu_sets_id)) {
-        $sql         = $mysqli->query("INSERT INTO crew (crew_name) VALUES ('$new_crew_name')");
-        $new_crew_id = $mysqli->insert_id;
+        $crewDao = new AL\Common\DAO\CrewDAO($mysqli);
+
+        $new_crew_id = $crewDao->addCrew($new_crew_name);
 
         create_log_entry('Crew', $new_crew_id, 'Crew', $new_crew_id, 'Insert', $_SESSION['user_id']);
-
-        //mysqli_free_result($sql);
     }
     $_SESSION['edit_message'] = "$new_crew_name added to the crew database";
     header("Location: ../menus/menus_disk_list.php?menu_sets_id=$menu_sets_id");
@@ -212,59 +124,12 @@ if ($action == "menu_set_crew_add") {
 if ($action == "menu_set_ind_add") {
     include("../../config/admin_rights.php");
     if (isset($new_ind_name) and isset($menu_sets_id)) {
-        $sql        = $mysqli->query("INSERT INTO Individuals (ind_name) VALUES ('$new_ind_name')");
-        $new_ind_id = $mysqli->insert_id;
+        $individualDao = new AL\Common\DAO\IndividualDAO($mysqli);
+        $new_ind_id = $individualDao->addIndividual($new_ind_name);
 
         create_log_entry('Individuals', $new_ind_id, 'Individual', $new_ind_id, 'Insert', $_SESSION['user_id']);
-
-        //mysqli_free_result($sql);
     }
     $_SESSION['edit_message'] = "$new_ind_name added to the individuals database";
-    header("Location: ../menus/menus_disk_list.php?menu_sets_id=$menu_sets_id");
-}
-
-//****************************************************************************************
-// This is delete crew from menu series
-//****************************************************************************************
-if ($action == "delete_crew_from_menu_set") {
-    include("../../config/admin_rights.php");
-    if (isset($crew_id) and isset($menu_sets_id)) {
-        create_log_entry('Menu set', $menu_sets_id, 'Crew', $crew_id, 'Delete', $_SESSION['user_id']);
-
-        $mysqli->query("DELETE FROM crew_menu_prod WHERE crew_id='$crew_id' AND menu_sets_id='$menu_sets_id'") or die('Error: ' . mysqli_error($mysqli));
-    }
-
-    $_SESSION['edit_message'] = "Crew removed from Menu set";
-    header("Location: ../menus/menus_disk_list.php?menu_sets_id=$menu_sets_id");
-}
-
-//****************************************************************************************
-// This is the delete menu type from menu series
-//****************************************************************************************
-if ($action == "delete_menu_type_from_menu_set") {
-    include("../../config/admin_rights.php");
-    if (isset($menu_type_id) and isset($menu_sets_id)) {
-        create_log_entry('Menu set', $menu_sets_id, 'Menu type', $menu_type_id, 'Delete', $_SESSION['user_id']);
-
-        $mysqli->query("DELETE FROM menu_type WHERE menu_types_main_id='$menu_type_id' AND menu_sets_id='$menu_sets_id'") or die('Error: ' . mysqli_error($mysqli));
-    }
-
-    $_SESSION['edit_message'] = "Menu type removed from Menu set";
-    header("Location: ../menus/menus_disk_list.php?menu_sets_id=$menu_sets_id");
-}
-
-//****************************************************************************************
-// This is delete individuel from menu series
-//****************************************************************************************
-if ($action == "delete_ind_from_menu_set") {
-    include("../../config/admin_rights.php");
-    if (isset($ind_id) and isset($menu_sets_id)) {
-        create_log_entry('Menu set', $menu_sets_id, 'Individual', $ind_id, 'Delete', $_SESSION['user_id']);
-
-        $mysqli->query("DELETE FROM ind_menu_prod WHERE ind_id='$ind_id' AND menu_sets_id='$menu_sets_id'");
-    }
-
-    $_SESSION['edit_message'] = "Individual removed from Menu set";
     header("Location: ../menus/menus_disk_list.php?menu_sets_id=$menu_sets_id");
 }
 
@@ -620,21 +485,17 @@ if (isset($action) and $action == "add_screens") {
 
                 if ($ext !== "") {
                     // First we insert the directory path of where the file will be stored... this also creates an autoinc number for us.
-                    $sdbquery = $mysqli->query("INSERT INTO screenshot_main (screenshot_id,imgext) VALUES ('','$ext')") or die('Error: ' . mysqli_error($mysqli));
+                    $sdbquery = $mysqli->query("INSERT INTO screenshot_main (imgext) VALUES ('$ext')") or die('Error: ' . mysqli_error($mysqli));
 
                     //select the newly entered screenshot_id from the main table
-                    $SCREENSHOT = $mysqli->query("SELECT screenshot_id FROM screenshot_main
-                           ORDER BY screenshot_id desc") or die('Error: ' . mysqli_error($mysqli));
-
-                    $screenshotrow = $SCREENSHOT->fetch_row();
-                    $screenshot_id = $screenshotrow[0];
+                    $screenshot_id = $mysqli->insert_id;
 
                     $sdbquery = $mysqli->query("INSERT INTO screenshot_menu (menu_disk_id, screenshot_id) VALUES ($menu_disk_id, $screenshot_id)") or die('Error: ' . mysqli_error($mysqli));
 
                     // Rename the uploaded file to its autoincrement number and move it to its proper place.
-                    $file_data = rename($image['tmp_name'][$key], "$menu_screenshot_save_path$screenshotrow[0].$ext");
+                    $file_data = rename($image['tmp_name'][$key], "$menu_screenshot_save_path$screenshot_id.$ext");
 
-                    chmod("$menu_screenshot_save_path$screenshotrow[0].$ext", 0777);
+                    chmod("$menu_screenshot_save_path$screenshot_id.$ext", 0777);
 
                     $osd_message = "Screenshot uploaded";
 
@@ -703,7 +564,6 @@ if (isset($action) and $action == "delete_screen_from_menu_disk") {
         $screenshot_ext = $screenshotrow['imgext'];
 
         $sql = $mysqli->query("DELETE FROM screenshot_main WHERE screenshot_id = '$screenshot_id' ") or die('Error: ' . mysqli_error($mysqli));
-        $sql = $mysqli->query("DELETE FROM screenshot_menu WHERE screenshot_id = '$screenshot_id' ") or die('Error: ' . mysqli_error($mysqli));
 
         $new_path = $menu_screenshot_save_path;
         ;
@@ -1925,49 +1785,6 @@ if (isset($action) and ($action == "add_set_to_menu" or $action == "link_game_to
 
     //Send all smarty variables to the templates
     $smarty->display("file:" . $cpanel_template_folder . "ajax_menus_detail.html");
-}
-
-//****************************************************************************************
-// Delete menu set
-//****************************************************************************************
-if (isset($action) and ($action == "delete_set")) {
-    include("../../config/admin_rights.php");
-    //when deleting a set, we only check for menu disks
-    $sql = $mysqli->query("SELECT * FROM menu_disk WHERE menu_sets_id='$menu_sets_id'") or die('Error: ' . mysqli_error($mysqli));
-    if ($sql->num_rows > 0) {
-        $_SESSION['edit_message'] = "This set still has menu disks linked to it. Delete them first.";
-        header("Location: ../menus/menus_disk_list.php?menu_sets_id=$menu_sets_id");
-    } else {
-        create_log_entry('Menu set', $menu_sets_id, 'Menu set', $menu_sets_id, 'Delete', $_SESSION['user_id']);
-
-        $mysqli->query("DELETE from menu_set WHERE menu_sets_id='$menu_sets_id'") or die('Error: ' . mysqli_error($mysqli));
-        $mysqli->query("DELETE from crew_menu_prod WHERE menu_sets_id='$menu_sets_id'") or die('Error: ' . mysqli_error($mysqli));
-        $mysqli->query("DELETE from ind_menu_prod WHERE menu_sets_id='$menu_sets_id'") or die('Error: ' . mysqli_error($mysqli));
-        $_SESSION['edit_message'] = "Menuset completely removed";
-
-        //Send all smarty variables to the templates
-        header("Location: ../menus/menus_list.php");
-    }
-}
-
-//****************************************************************************************
-// Publish menu set
-//****************************************************************************************
-if (isset($action) and ($action == "publish_set")) {
-    include("../../config/admin_rights.php");
-    if ($online == 'online') {
-        $sql = $mysqli->query("UPDATE menu_set SET publish='1'
-            WHERE menu_sets_id='$menu_sets_id'");
-
-        $_SESSION['edit_message'] = "Menu set online";
-        header("Location: ../menus/menus_disk_list.php?menu_sets_id=$menu_sets_id");
-    } else {
-        $sql = $mysqli->query("UPDATE menu_set SET publish='0'
-            WHERE menu_sets_id='$menu_sets_id'");
-
-        $_SESSION['edit_message'] = "Menu set offline";
-        header("Location: ../menus/menus_disk_list.php?menu_sets_id=$menu_sets_id");
-    }
 }
 
 //****************************************************************************************

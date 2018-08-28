@@ -16,59 +16,21 @@
  */
 include("../../config/common.php");
 include("../../config/admin.php");
+require_once __DIR__."/../../common/DAO/CrewDAO.php";
+require_once __DIR__."/../../common/DAO/IndividualDAO.php";
+$crewDao = new AL\Common\DAO\CrewDAO($mysqli);
+$individualDao = new AL\Common\DAO\IndividualDAO($mysqli);
 
 // Crew browse function
 if (isset($action) and $action == "crew_browse") {
-    // Do a simple gamesearch... no aka's or the likes of that.
-    if (isset($query) and $query == "num") {
-        $crewbrowse_select = " WHERE crew_name REGEXP '^[0-9].*'";
-    } else {
-        $query = $mysqli->real_escape_string($query);
-        $crewbrowse_select = " WHERE crew_name LIKE '$query%'";
-    }
-
-    $sql_build = "SELECT * FROM crew ";
-
-    $sql_build .= $crewbrowse_select;
-    $sql_build .= " ORDER BY crew_name ASC";
-
-    $query = $mysqli->query($sql_build) or die("Couldn't query crew Database ($sql_build)");
-
+    $smarty->assign('crews', $crewDao->getCrewsStartingWith($query));
     $smarty->assign('smarty_action', 'crew_list');
-
-    while ($query_crew = $query->fetch_array(MYSQLI_BOTH)) { // This smarty is used for creating the list of crews
-        $smarty->append('crew', array(
-            'crew_id' => $query_crew['crew_id'],
-            'crew_name' => $query_crew['crew_name']
-        ));
-    }
 }
 
 // Individual browse function
 if (isset($action) and $action == "ind_browse") {
-    // Do a simple gamesearch... no aka's or the likes of that.
-    if (isset($query) and $query == "num") {
-        $indbrowse_select = " WHERE ind_name REGEXP '^[0-9].*'";
-    } else {
-        $query = $mysqli->real_escape_string($query);
-        $indbrowse_select = " WHERE ind_name LIKE '$query%'";
-    }
-
-    $sql_build = "SELECT * FROM individuals ";
-
-    $sql_build .= $indbrowse_select;
-    $sql_build .= " ORDER BY ind_name ASC";
-
-    $query = $mysqli->query($sql_build) or die("Couldn't query individual Database ($sql_build)");
-
+    $smarty->assign('individuals', $individualDao->getIndividualsStartingWith($query));
     $smarty->assign('smarty_action', 'ind_list');
-
-    while ($query_ind = $query->fetch_array(MYSQLI_BOTH)) { // This smarty is used for creating the list of crews
-        $smarty->append('ind', array(
-            'ind_id' => $query_ind['ind_id'],
-            'ind_name' => $query_ind['ind_name']
-        ));
-    }
 }
 
 // Add new menu disk box
