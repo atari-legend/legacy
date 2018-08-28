@@ -73,4 +73,30 @@ class ProgrammingLanguageDAO {
 
         return $programming_languages;
     }
+    
+    /**
+     * Set the list of programming languages for this game
+     *
+     * @param integer Game ID
+     * @param integer[] List of programming language IDs
+     */
+    public function setProgrammingLanguageForGame($game_id, $programming_languages) {
+        $stmt = \AL\Db\execute_query(
+            "ProgrammingLanguageDAO: setProgrammingLanguageForGame",
+            $this->mysqli,
+            "DELETE FROM game_programming_language WHERE game_id = ?",
+            "i", $game_id
+        );
+
+        foreach ($programming_languages as $id) {
+            $stmt = \AL\Db\execute_query(
+                "ProgrammingLanguageDAO: setProgrammingLanguageForGame",
+                $this->mysqli,
+                "INSERT INTO game_programming_language (game_id, programming_language_id) VALUES (?, ?)",
+                "ii", $game_id, $id
+            );
+        }
+
+        $stmt->close();
+    }
 }

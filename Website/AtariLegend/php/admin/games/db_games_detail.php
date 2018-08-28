@@ -26,9 +26,11 @@ include("../../config/admin_rights.php");
 
 require_once __DIR__."/../../common/DAO/GameReleaseDAO.php";
 require_once __DIR__."/../../common/DAO/ChangeLogDAO.php";
+require_once __DIR__."/../../common/DAO/ProgrammingLanguageDAO.php";
 
 $changeLogDao = new \AL\Common\DAO\ChangeLogDAO($mysqli);
 $gameReleaseDao = new \AL\Common\DAO\GameReleaseDAO($mysqli);
+$programmingLanguageDao = new \AL\Common\DAO\ProgrammingLanguageDAO($mysqli);
 
 if (isset($game_id)){
     $stmt = $mysqli->prepare("SELECT game_name FROM game WHERE game_id = ?") or die($mysqli->error);
@@ -181,6 +183,9 @@ if (isset($action) and $action == 'modify_game') {
             $sdbquery = $mysqli->query("INSERT INTO game_cat_cross (game_id,game_cat_id) VALUES ($game_id,$cat)");
         }
     }
+    
+    //Update the programming language
+    $programmingLanguageDao->setProgrammingLanguageForGame($game_id, isset($programming_language) ? $programming_language : []);
 
     // Update the Unreleased tick box info
     // Start off by deleting previos value
@@ -225,34 +230,6 @@ if (isset($action) and $action == 'modify_game') {
     // then insert the new value if it has been passed.
     if (isset($arcade)) {
         $sdbquery = $mysqli->query("INSERT INTO game_arcade (game_id,arcade) VALUES ('$game_id','$arcade')") or die("Couldn't insert arcade tick box info");
-    }
-
-    // UPDATE THE SEUCK TICK BOX INFO
-    // Start off by deleting previos value
-    $sdbquery = $mysqli->query("DELETE FROM game_seuck WHERE game_id='$game_id'");
-
-    // then insert the new value if it has been passed.
-    if (isset($seuck)) {
-        $sdbquery = $mysqli->query("INSERT INTO game_seuck (game_id,seuck) VALUES ('$game_id','$seuck')") or die("Couldn't insert seuck tick box info");
-    }
-
-    // UPDATE THE STOS TICK BOX INFO
-    // Start off by deleting previos value
-    $sdbquery = $mysqli->query("DELETE FROM game_stos WHERE game_id='$game_id'") or die("STOS Deletion failed");
-    ;
-
-    // then insert the new value if it has been passed.
-    if (isset($stos)) {
-        $sdbquery = $mysqli->query("INSERT INTO game_stos (game_id,stos) VALUES ('$game_id','$stos')");
-    }
-
-    // UPDATE THE STAC TICK BOX INFO
-    // Start off by deleting previos value
-    $sdbquery = $mysqli->query("DELETE FROM game_stac WHERE game_id='$game_id'");
-
-    // then insert the new value if it has been passed.
-    if (isset($stac)) {
-        $sdbquery = $mysqli->query("INSERT INTO game_stac (game_id,stac) VALUES ('$game_id','$stac')") or die("Couldn't insert stac tick box info");
     }
 
     $_SESSION['edit_message'] = "Game has been modified";
