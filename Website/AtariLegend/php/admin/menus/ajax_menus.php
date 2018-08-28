@@ -23,15 +23,13 @@ $individualDao = new AL\Common\DAO\IndividualDAO($mysqli);
 
 // Crew browse function
 if (isset($action) and $action == "crew_browse") {
-    $search_string = $mysqli->real_escape_string($query);
-    $smarty->assign('crews', $crewDao->getCrewsStartingWith($search_string));
+    $smarty->assign('crews', $crewDao->getCrewsStartingWith($query));
     $smarty->assign('smarty_action', 'crew_list');
 }
 
 // Individual browse function
 if (isset($action) and $action == "ind_browse") {
-    $search_string = $mysqli->real_escape_string($query);
-    $smarty->assign('individuals', $individualDao->getIndividualsStartingWith($search_string));
+    $smarty->assign('individuals', $individualDao->getIndividualsStartingWith($query));
     $smarty->assign('smarty_action', 'ind_list');
 }
 
