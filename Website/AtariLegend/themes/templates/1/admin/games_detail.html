@@ -245,7 +245,7 @@ $('#input-tags3').selectize({
                                 <b>Programming Language</b>&nbsp;&nbsp;
                                 <div class="control-group">
                                     <label for="input-tags2"></label>
-                                    <select name="category[]" multiple id="input-tags2" class="standard_select input_full">
+                                    <select name="programming_language[]" multiple id="input-tags2" class="standard_select input_full">
                                     {foreach from=$programming_languages item=line}
                                         <option value="{$line->getId()}"
                                             {if in_array($line->getId(), $game_programming_languages)}selected{/if}>

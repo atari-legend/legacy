@@ -103,25 +103,6 @@ while ($categories = $sql_categories->fetch_array(MYSQLI_BOTH)) {
 $smarty->assign('programming_languages', $ProgrammingLanguageDao->getAllProgrammingLanguages());
 $smarty->assign('game_programming_languages', $ProgrammingLanguageDao->getProgrammingLanguagesForGame($game_id));
 
-/* $sql_programming_language = $mysqli->query("SELECT * FROM programming_language ORDER BY name") or die("Error loading programming languages");
-
-while ($programming_language = $sql_programming_language->fetch_array(MYSQLI_BOTH)) {
-    $sql_game_programming_language = $mysqli->query("SELECT * FROM game_programming_language WHERE game_id='$game_id' AND programming_language_id=$programming_language[id]") or die("Error loading game_programming_language table");
-
-    $selected = $sql_game_programming_language->num_rows;
-    if ($selected == 1) {
-        $selected = 'selected';
-    } else {
-        $selected = '';
-    }
-
-    $smarty->append('programming_language', array(
-        'id' => $programming_language['id'],
-        'name' => $programming_language['name'],
-        'programming_language_selected' => $selected
-    ));
-} */
-
 
 //**********************************************************************************
 //Get the author info
