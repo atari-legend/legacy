@@ -37,3 +37,9 @@
 .spotlight_row{
     @extend .games_main_row_site;
 }
+
+//*-----------------------DB update-------------------------- */
+.database_update a.secondary_button {
+    display: block;
+    margin-bottom: 5px;
+}

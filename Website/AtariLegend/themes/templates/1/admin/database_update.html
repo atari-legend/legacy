@@ -12,31 +12,8 @@
 *}
 {extends file='1/admin/main.html'}
 
-{block name=java_script}
-<script>
-function UpdateDatabase(database_update_id) {
-    $('#JSGenericModal').dialog({
-        title: 'Continue?',
-        open: $('#JSGenericModalText').text('Are you sure? There is no going back from this...'),
-        resizable: false,
-        height: 200,
-        modal: true,
-        buttons: {
-            'Yes': function () {
-                $(this).dialog('close');
-                url="db_crew.php?crew_select="+crew_select+"&action=delete_crew";
-                location.href=url;
-            },
-            Cancel: function () {
-                $(this).dialog('close');
-            }
-        }
-    });
-}
-</script>
-{/block}
 {block name=main_tile}
-<div class="standard_tile">
+<div class="standard_tile database_update">
     <div class="help-tip">
         <p>This is an overview of the scripts that have been executed throughout the development of AL 2.0. Once a script is executed succesfully, it can't be executed again.
         {if $user_session.permission == '1'}
@@ -70,7 +47,7 @@ function UpdateDatabase(database_update_id) {
                 <td class="text-center">{$line.implementation_state}</td>
                 <td class="text-center">
                     {if $line.allow_execute=='yes'}
-                        <button class="secondary_button" onclick="UpdateDatabase({$line.database_update_id});">Execute</button>
+                        <a href="database_update.php?execute_id={$line.database_update_id}" class="secondary_button" onclick="javascript:return confirm('This change cannot be reverted. Proceed?');">Execute</button>
                     {/if}
                 </td>
             </tr>
