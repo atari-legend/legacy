@@ -4,7 +4,7 @@
  **************************************************************************/
 
 // Unique identifier set by developer.
-$database_update_id = 178;
+$database_update_id = 180;
 
 // Description of what the change will do.
 $update_description = "Insert programming languages into the programming languages table";
@@ -19,13 +19,13 @@ WHERE table_schema = '$db_databasename'
 AND table_name = 'programming_language' LIMIT 1";
 
 // Database change
-$database_update_sql = "INSERT INTO `programming_language` (`programming_language`) VALUES
-('STOS'),
-('SEUCK'),
-('STAC'),
-('ASM'),
-('GFA Basic'),
-('C');";
+$database_update_sql = "INSERT INTO `programming_language` (`name`, `description`) VALUES
+('STOS',''),
+('SEUCK','Shoot em Up Construction Kit'),
+('STAC','ST Adventure Creator'),
+('ASM','Assembler'),
+('GFA Basic',''),
+('C','');";
 
 // If the update should auto execute without user interaction set to "yes".
 $database_autoexecute = "yes";

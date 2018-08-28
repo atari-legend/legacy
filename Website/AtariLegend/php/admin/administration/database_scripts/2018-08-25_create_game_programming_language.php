@@ -4,7 +4,7 @@
  **************************************************************************/
 
 // Unique identifier set by developer.
-$database_update_id = 177;
+$database_update_id = 179;
 
 // Description of what the change will do.
 $update_description = "Create game_programming_language table";

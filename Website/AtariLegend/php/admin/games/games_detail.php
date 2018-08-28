@@ -28,11 +28,13 @@ require_once __DIR__."/../../common/DAO/GameReleaseDAO.php";
 require_once __DIR__."/../../common/DAO/GameDAO.php";
 require_once __DIR__."/../../common/DAO/IndividualDAO.php";
 require_once __DIR__."/../../common/DAO/PubDevDAO.php";
+require_once __DIR__."/../../common/DAO/ProgrammingLanguageDAO.php";
 
 $gameReleaseDao = new \AL\Common\DAO\GameReleaseDAO($mysqli);
 $gameDao = new \AL\Common\DAO\GameDAO($mysqli);
 $individualDao = new \Al\Common\DAO\IndividualDAO($mysqli);
 $pubDevDao = new \AL\Common\DAO\PubDevDAO($mysqli);
+$ProgrammingLanguageDao = new \AL\Common\DAO\ProgrammingLanguageDAO($mysqli);
 
 //***********************************************************************************
 //Let's get the general game info first.
@@ -43,22 +45,17 @@ $sql_game = $mysqli->query("SELECT game_name,
                game_unreleased.unreleased,
                game_unfinished.unfinished,
                game_wanted.game_wanted_id,
-               game_arcade.arcade,
-               game_seuck.seuck,
-               game_stos.stos,
-               game_stac.stac
+               game_arcade.arcade
                FROM game
                LEFT JOIN game_unreleased ON (game.game_id = game_unreleased.game_id)
                LEFT JOIN game_development ON (game.game_id = game_development.game_id)
                LEFT JOIN game_arcade ON (game.game_id = game_arcade.game_id)
-               LEFT JOIN game_seuck ON (game.game_id = game_seuck.game_id)
-               LEFT JOIN game_stos ON (game.game_id = game_stos.game_id)
-               LEFT JOIN game_stac ON (game.game_id = game_stac.game_id)
                LEFT JOIN game_unfinished ON (game.game_id = game_unfinished.game_id)
                LEFT JOIN game_wanted ON (game.game_id = game_wanted.game_id)
                  WHERE game.game_id='$game_id'") or die("Error getting game info: " . $mysqli->error);
 
 while ($game_info = $sql_game->fetch_array(MYSQLI_BOTH)) {
+        
     $smarty->assign('game_info', array(
         'game_name' => $game_info['game_name'],
         'game_id' => $game_info['game_id'],
@@ -66,10 +63,7 @@ while ($game_info = $sql_game->fetch_array(MYSQLI_BOTH)) {
         'game_unreleased' => $game_info['unreleased'],
         'game_unfinished' => $game_info['unfinished'],
         'game_wanted' => $game_info['game_wanted_id'],
-        'game_arcade' => $game_info['arcade'],
-        'game_seuck' => $game_info['seuck'],
-        'game_stos' => $game_info['stos'],
-        'game_stac' => $game_info['stac']
+        'game_arcade' => $game_info['arcade']
     ));
 }
 
@@ -84,7 +78,6 @@ $smarty->assign('game_releases', $gameReleaseDao->getReleasesForGame($game_id));
 //***********************************************************************************
 //get the game categories & the categories already selected for this game
 //***********************************************************************************
-
 $sql_categories = $mysqli->query("SELECT * FROM game_cat ORDER BY game_cat_name") or die("Error loading categories");
 
 while ($categories = $sql_categories->fetch_array(MYSQLI_BOTH)) {
@@ -103,6 +96,32 @@ while ($categories = $sql_categories->fetch_array(MYSQLI_BOTH)) {
         'cat_selected' => $selected
     ));
 }
+
+//*******************************************************************************************
+//get the programming languages and the programming languages already selected for this game
+//*******************************************************************************************
+$smarty->assign('programming_languages', $ProgrammingLanguageDao->getAllProgrammingLanguages());
+$smarty->assign('game_programming_languages', $ProgrammingLanguageDao->getProgrammingLanguagesForGame($game_id));
+
+/* $sql_programming_language = $mysqli->query("SELECT * FROM programming_language ORDER BY name") or die("Error loading programming languages");
+
+while ($programming_language = $sql_programming_language->fetch_array(MYSQLI_BOTH)) {
+    $sql_game_programming_language = $mysqli->query("SELECT * FROM game_programming_language WHERE game_id='$game_id' AND programming_language_id=$programming_language[id]") or die("Error loading game_programming_language table");
+
+    $selected = $sql_game_programming_language->num_rows;
+    if ($selected == 1) {
+        $selected = 'selected';
+    } else {
+        $selected = '';
+    }
+
+    $smarty->append('programming_language', array(
+        'id' => $programming_language['id'],
+        'name' => $programming_language['name'],
+        'programming_language_selected' => $selected
+    ));
+} */
+
 
 //**********************************************************************************
 //Get the author info
