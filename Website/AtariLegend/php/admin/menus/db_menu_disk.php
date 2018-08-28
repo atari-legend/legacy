@@ -128,8 +128,6 @@ if ($action == "menu_set_ind_add") {
         $new_ind_id = $individualDao->addIndividual($new_ind_name);
 
         create_log_entry('Individuals', $new_ind_id, 'Individual', $new_ind_id, 'Insert', $_SESSION['user_id']);
-
-        //mysqli_free_result($sql);
     }
     $_SESSION['edit_message'] = "$new_ind_name added to the individuals database";
     header("Location: ../menus/menus_disk_list.php?menu_sets_id=$menu_sets_id");
