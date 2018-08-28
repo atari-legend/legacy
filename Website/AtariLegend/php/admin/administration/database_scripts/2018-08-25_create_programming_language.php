@@ -4,7 +4,7 @@
  **************************************************************************/
 
 // Unique identifier set by developer.
-$database_update_id = 176;
+$database_update_id = 178;
 
 // Description of what the change will do.
 $update_description = "Create programming_language table";
@@ -22,7 +22,8 @@ LIMIT 1";
 // Database change
 $database_update_sql = "CREATE TABLE `programming_language` (
     `id` INT NOT NULL AUTO_INCREMENT COMMENT 'Unique ID of a programming language',
-    `programming_language` varchar(64) NOT NULL COMMENT 'programming_language',
+    `name` varchar(64) NOT NULL COMMENT 'programming_language',
+    `description` varchar(256) COMMENT 'Description',
     PRIMARY KEY (`id`)
   )
   ENGINE=InnoDB

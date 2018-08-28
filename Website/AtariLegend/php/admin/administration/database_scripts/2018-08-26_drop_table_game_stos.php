@@ -4,7 +4,7 @@
  ************************************************************************************************/
 
 // Unique identifier set by developer.
-$database_update_id = 180;
+$database_update_id = 184;
 
 // Description of what the change will do.
 $update_description = "Drop table game_stos";
