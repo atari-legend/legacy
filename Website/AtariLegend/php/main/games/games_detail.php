@@ -20,12 +20,14 @@ require_once __DIR__."/../../common/DAO/ResolutionDAO.php";
 require_once __DIR__."/../../common/DAO/SystemDAO.php";
 require_once __DIR__."/../../common/DAO/PubDevDAO.php";
 require_once __DIR__."/../../common/DAO/LocationDAO.php";
+require_once __DIR__."/../../common/DAO/ProgrammingLanguageDAO.php";
 
 $gameReleaseDao = new \AL\Common\DAO\GameReleaseDAO($mysqli);
 $resolutionDao = new \AL\Common\DAO\ResolutionDao($mysqli);
 $systemDao = new \AL\Common\DAO\SystemDao($mysqli);
 $pubDevDao = new \AL\Common\DAO\PubDevDAO($mysqli);
 $locationDao = new \AL\Common\DAO\LocationDAO($mysqli);
+$ProgrammingLanguageDao = new \AL\Common\DAO\ProgrammingLanguageDAO($mysqli);
 
 /**
  * Generates an SEO-friendly description of a game, depending on the data available
@@ -131,17 +133,11 @@ $sql_game = $mysqli->query("SELECT game_name,
                game_unreleased.unreleased,
                game_unfinished.unfinished,
                game_wanted.game_wanted_id,
-               game_arcade.arcade,
-               game_seuck.seuck,
-               game_stos.stos,
-               game_stac.stac
+               game_arcade.arcade
                FROM game
                LEFT JOIN game_unreleased ON (game.game_id = game_unreleased.game_id)
                LEFT JOIN game_development ON (game.game_id = game_development.game_id)
                LEFT JOIN game_arcade ON (game.game_id = game_arcade.game_id)
-               LEFT JOIN game_seuck ON (game.game_id = game_seuck.game_id)
-               LEFT JOIN game_stos ON (game.game_id = game_stos.game_id)
-               LEFT JOIN game_stac ON (game.game_id = game_stac.game_id)
                LEFT JOIN game_unfinished ON (game.game_id = game_unfinished.game_id)
                LEFT JOIN game_wanted ON (game.game_id = game_wanted.game_id)
                     WHERE game.game_id='$game_id'") or die("Error getting game info");
@@ -154,12 +150,13 @@ if ($game_info = $sql_game->fetch_array(MYSQLI_BOTH)) {
         'game_unreleased' => $game_info['unreleased'],
         'game_unfinished' => $game_info['unfinished'],
         'game_wanted' => $game_info['game_wanted_id'],
-        'game_arcade' => $game_info['arcade'],
-        'game_seuck' => $game_info['seuck'],
-        'game_stos' => $game_info['stos'],
-        'game_stac' => $game_info['stac']
+        'game_arcade' => $game_info['arcade']
     ));
 }
+
+// Get the programming languages
+$smarty->assign('programming_languages', $ProgrammingLanguageDao->getAllProgrammingLanguages());
+$smarty->assign('game_programming_languages', $ProgrammingLanguageDao->getProgrammingLanguagesForGame($game_id));
 
 $smarty->assign('resolutions', $resolutionDao->getAllResolutionsAsMap());
 $smarty->assign('systems', $systemDao->getAllSystemsAsMap());
