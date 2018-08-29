@@ -13,9 +13,14 @@
 //****************************************************************************************
 *}
 
-{foreach from=$shortlog item=line}
-    <span style="color:white;">{$line->getUserName()} - {$line->getTimestamp()|timeago}</span>
-    <br><br>
-    {$line->getShortLog()}<br>
-    <hr class="separator_add_secondary">
+{foreach from=$changelog item=log}
+    <div class="shortlog">
+        <img src="{$log->getUser()->getAvatar()}">
+        <span class="username">
+            <a class="standard_link_color" href="../user/user_detail.php?user_id_selected={$log->getUser()->getId()}">{$log->getUser()->getName()}</a>
+        </span>
+        <span class="timestamp">{$log->getTimestamp()|timeago}</span>
+
+        <div class="log">{$log->getShortLogMessage()}</div>
+    </div>
 {/foreach}

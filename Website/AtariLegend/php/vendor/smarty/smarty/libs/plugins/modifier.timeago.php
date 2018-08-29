@@ -17,33 +17,33 @@
 function smarty_modifier_timeago($timestamp) {
     $date = new \DateTime();
     $now = $date->format('U');
-    $shortlog_date = "";
+    $message = "";
 
     if ($now-$timestamp <60) {
         $diff = $now-$timestamp;
-        $shortlog_date .= " $diff seconds ago";
+        $message .= " $diff seconds ago";
     }
     if ($now-$timestamp >60 and $now-$timestamp <3600) {
         $diff = $now-$timestamp;
         $diff = floor($diff / 60);
-        $shortlog_date .= " $diff minutes ago";
+        $message .= " $diff minutes ago";
     }
     if ($now-$timestamp >3600 and $now-$timestamp <86400) {
         $diff = $now-$timestamp;
         $diff = floor($diff / 3600);
-        $shortlog_date .= " $diff hours ago";
+        $message .= " $diff hours ago";
     }
     if ($now-$timestamp >86400 and $now-$timestamp <172800) {
         $diff = $now-$timestamp;
         $diff = floor($diff / 3600);
-        $shortlog_date .= " yesterday";
+        $message .= " yesterday";
     }
     if ($now-$timestamp >172800) {
         $time = new \DateTime();
         $time->setTimestamp($timestamp);
         $change_date = $time->format('M d');
-        $shortlog_date .= " on $change_date";
+        $message .= " on $change_date";
     }
 
-    return $shortlog_date;
+    return $message;
 }
