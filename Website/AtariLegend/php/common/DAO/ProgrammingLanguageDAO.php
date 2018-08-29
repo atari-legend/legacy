@@ -66,7 +66,9 @@ class ProgrammingLanguageDAO {
 
         $programming_languages = [];
         while ($stmt->fetch()) {
-            $programming_languages[] = $programming_language_id;
+            $programming_languages[] = new \AL\Common\Model\Game\ProgrammingLanguage(
+                $programming_language_id, null
+            );
         }
 
         $stmt->close();

@@ -309,7 +309,8 @@
                 </tr>
             {/if}
             {foreach from=$game_programming_languages item=linked_programming_languages name=language}
-                {if in_array($linked_programming_languages->getId(), $programming_languages)}
+                {foreach from=$programming_languages item=all_programming_languages}
+                    {if $linked_programming_languages->getId() == $all_programming_languages->getId()}
                     <tr>
                         <td class="w-30">
                             {if $smarty.foreach.language.first}<span class="games_main_detail_info_right">Code</span>{/if}
@@ -321,11 +322,12 @@
                         </td>
                         <td class="w-60">
                             <span class="standard_tile_subtext">
-                                {$programming_languages->getName()}
+                                {$all_programming_languages->getName()}
                             </span>
                         </td>
                     </tr>
-                {/if}
+                    {/if}
+                {/foreach}
             {/foreach}
             {if isset($aka)}
                 {foreach from=$aka item=line name=aka}
