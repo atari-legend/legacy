@@ -308,27 +308,25 @@
                     </td>
                 </tr>
             {/if}
-            {if isset ($game_programming_languages)}
-                {foreach from=$programming_languages item=line}
-                    {if in_array($line->getId(), $game_programming_languages)}
-                        <tr>
-                            <td class="w-30">
-                                <span class="games_main_detail_info_right">Code</span>
-                                <br>
-                            </td>
-                            <td class="w-5">
-                                <span class="games_main_detail_info_left text-center">-</span>
-                                <br>
-                            </td>
-                            <td class="w-60">
-                                <span class="standard_tile_subtext">
-                                    {$line->getName()}
-                                </span>
-                            </td>
-                        </tr>
-                    {/if}
-                {/foreach}
-            {/if}
+            {foreach from=$game_programming_languages item=linked_programming_languages name=language}
+                {if in_array($linked_programming_languages->getId(), $programming_languages)}
+                    <tr>
+                        <td class="w-30">
+                            {if $smarty.foreach.language.first}<span class="games_main_detail_info_right">Code</span>{/if}
+                            <br>
+                        </td>
+                        <td class="w-5">
+                            <span class="games_main_detail_info_left text-center">-</span>
+                            <br>
+                        </td>
+                        <td class="w-60">
+                            <span class="standard_tile_subtext">
+                                {$programming_languages->getName()}
+                            </span>
+                        </td>
+                    </tr>
+                {/if}
+            {/foreach}
             {if isset($aka)}
                 {foreach from=$aka item=line name=aka}
                     <tr>
