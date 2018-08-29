@@ -31,13 +31,7 @@
 
         <hr class="separator_add_secondary">
         <div class="help-hint" style="text-align:justify;" id="jsShortLog">
-
-            {foreach from=$shortlog item=line}
-                <span style="color:white;">{$line->getUserName()} - {$line->getTimestamp()|timeago}</span>
-                <br><br>
-                {$line->getShortLog()}<br>
-                <hr class="separator_add_secondary">
-            {/foreach}
+            {include file='1/admin/ajax_shortlog.html'}
         </div>
     </div>
 </div>
