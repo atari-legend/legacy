@@ -21,7 +21,7 @@ AND column_name = 'game_extra_info_id'
 AND is_nullable = 'NO'";
 
 // Database change
-$database_update_sql = "../../admin/administration/database_scripts/2018-07-08_game_developer_game_extra_info_id_null_values_addition.php";
+$database_update_sql = "../../admin/administration/database_scripts/legacy/2018-07-08_game_developer_game_extra_info_id_null_values_addition.php";
 
 // If the update should auto execute without user interaction set to "yes".
 $database_autoexecute = "yes";
