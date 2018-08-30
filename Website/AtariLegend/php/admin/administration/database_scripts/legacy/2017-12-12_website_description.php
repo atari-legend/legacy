@@ -21,7 +21,7 @@ WHERE table_schema = '$db_databasename'
 AND table_name = 'website_description' LIMIT 1";
 
 // Database change
-$database_update_sql = "../../admin/administration/database_scripts/2017-12-12_website_description-addition.php";
+$database_update_sql = "../../admin/administration/database_scripts/legacy/2017-12-12_website_description-addition.php";
 
 // If the update should auto execute without user interaction set to "yes".
 $database_autoexecute = "yes";
