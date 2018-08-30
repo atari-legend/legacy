@@ -17,7 +17,7 @@ $test_condition = "SELECT *
 FROM game_release_location";
 
 // Database change
-$database_update_sql = "../../admin/administration/database_scripts/2018-07-29_relink_continent_location_release_addition.php";
+$database_update_sql = "../../admin/administration/database_scripts/legacy/2018-07-29_relink_continent_location_release_addition.php";
 
 // If the update should auto execute without user interaction set to "yes".
 $database_autoexecute = "yes";

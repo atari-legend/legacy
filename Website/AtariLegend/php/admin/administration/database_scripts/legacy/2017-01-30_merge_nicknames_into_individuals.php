@@ -25,7 +25,7 @@ $test_condition = "SELECT * FROM information_schema.columns
 WHERE table_schema = '$db_databasename' AND table_name = 'individuals' LIMIT 1";
 
 // Database change
-$database_update_sql = '../../admin/administration/database_scripts/2017-01-30_merge_nicknames_into_individuals-addition.php';
+$database_update_sql = '../../admin/administration/database_scripts/legacy/2017-01-30_merge_nicknames_into_individuals-addition.php';
 
 // If the update should auto execute without user interaction set to "yes".
 $database_autoexecute = "yes";

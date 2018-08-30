@@ -19,7 +19,7 @@ WHERE table_schema = '$db_databasename'
 AND table_name = 'game_release_system_enhanced' LIMIT 1";
 
 // Database change
-$database_update_sql ="../../admin/administration/database_scripts/2018-06-11_populate_release_enhan_falcon_addition.php";
+$database_update_sql ="../../admin/administration/database_scripts/legacy/2018-06-11_populate_release_enhan_falcon_addition.php";
 
 
 /*"INSERT INTO game_release_system_enhanced(`system_id`, `game_release_id`)

@@ -24,7 +24,7 @@ AND CCSA.character_set_name != 'utf8'
 LIMIT 1";
 
 // Database change
-$database_update_sql = '../../admin/administration/database_scripts/2017-10-30_convert_tables_to_utf8-addition.php';
+$database_update_sql = '../../admin/administration/database_scripts/legacy/2017-10-30_convert_tables_to_utf8-addition.php';
 
 // If the update should auto execute without user interaction set to "yes".
 $database_autoexecute = "yes";
