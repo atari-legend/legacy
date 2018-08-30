@@ -5,6 +5,7 @@
 
 require_once __DIR__.'/../../config/common.php';
 require_once __DIR__.'/../../config/admin.php';
+require_once __DIR__.'/../../config/admin_rights.php';
 
 require_once __DIR__."/../../common/DAO/GameDAO.php";
 require_once __DIR__."/../../common/DAO/PubDevDAO.php";
