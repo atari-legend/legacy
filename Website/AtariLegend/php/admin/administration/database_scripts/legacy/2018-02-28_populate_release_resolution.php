@@ -20,7 +20,7 @@ WHERE table_schema = '$db_databasename'
 AND table_name = 'game_release_resolution' LIMIT 1";
 
 // Database change
-$database_update_sql = "../../admin/administration/database_scripts/2018-02-28_populate_release_resolution_addition.php";
+$database_update_sql = "../../admin/administration/database_scripts/legacy/2018-02-28_populate_release_resolution_addition.php";
 
 // If the update should auto execute without user interaction set to "yes".
 $database_autoexecute = "yes";

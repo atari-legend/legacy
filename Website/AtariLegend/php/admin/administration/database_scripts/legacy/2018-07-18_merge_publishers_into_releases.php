@@ -21,7 +21,7 @@ AND pub_dev_id IS NOT NULL
 LIMIT 1";
 
 // Database change
-$database_update_sql = "../../admin/administration/database_scripts/2018-07-18_merge_publishers_into_releases_addition.php";
+$database_update_sql = "../../admin/administration/database_scripts/legacy/2018-07-18_merge_publishers_into_releases_addition.php";
 
 // If the update should auto execute without user interaction set to "yes".
 $database_autoexecute = "yes";
