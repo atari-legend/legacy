@@ -21,6 +21,7 @@ require_once __DIR__."/../../common/DAO/SystemDAO.php";
 require_once __DIR__."/../../common/DAO/PubDevDAO.php";
 require_once __DIR__."/../../common/DAO/LocationDAO.php";
 require_once __DIR__."/../../common/DAO/ProgrammingLanguageDAO.php";
+require_once __DIR__."/../../common/DAO/GameGenreDAO.php";
 
 $gameReleaseDao = new \AL\Common\DAO\GameReleaseDAO($mysqli);
 $resolutionDao = new \AL\Common\DAO\ResolutionDao($mysqli);
@@ -28,6 +29,7 @@ $systemDao = new \AL\Common\DAO\SystemDao($mysqli);
 $pubDevDao = new \AL\Common\DAO\PubDevDAO($mysqli);
 $locationDao = new \AL\Common\DAO\LocationDAO($mysqli);
 $ProgrammingLanguageDao = new \AL\Common\DAO\ProgrammingLanguageDAO($mysqli);
+$GameGenreDao = new \AL\Common\DAO\GameGenreDAO($mysqli);
 
 /**
  * Generates an SEO-friendly description of a game, depending on the data available
@@ -182,21 +184,20 @@ $smarty->assign('release_resolution', $release_resolution);
 $smarty->assign('release_location', $release_location);
 
 //***********************************************************************************
-//get the game categories & the categories already selected for this game
+//get the game genres & the genres already selected for this game
 //***********************************************************************************
-$sql_categories = $mysqli->query("SELECT * FROM game_cat
-                                           LEFT JOIN game_cat_cross ON (game_cat.game_cat_id = game_cat_cross.game_cat_id)
-                                           WHERE game_id='$game_id' ORDER BY game_cat_name") or die("Error loading categories");
+$smarty->assign('game_genres', $GameGenreDao->getAllGameGenres());
+$smarty->assign('game_genres_cross', $GameGenreDao->getGameGenresForGame($game_id));
 
-$game_categories = [];
-while ($categories = $sql_categories->fetch_array(MYSQLI_BOTH)) {
-    $game_categories[] = $categories['game_cat_name'];
-
-    $smarty->append('cat', array(
-        'cat_id' => $categories['game_cat_id'],
-        'cat_name' => $categories['game_cat_name']
-    ));
-}
+/* $game_genres = $GameGenreDao->getGameGenresForGame($game_id);
+$all_genres = $GameGenreDao->getAllGameGenres();
+foreach ($game_genres as $linked_genre) {
+    foreach ($all_genres as $genres_all) {
+        if ($linked_genre['id'] == $genres_all['id']) {
+            $game_categories = $genres_all['name'];
+        }
+    }
+} */
 
 //**********************************************************************************
 //Get the author info
