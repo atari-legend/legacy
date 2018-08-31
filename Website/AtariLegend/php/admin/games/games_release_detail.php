@@ -63,6 +63,8 @@ if ($_SERVER['REQUEST_METHOD'] == "GET") {
 
     }
 } else if ($_SERVER['REQUEST_METHOD'] == "POST") {
+    require_once __DIR__.'/../../config/admin_rights.php';
+    
     // Update existing release or create a new one
 
     $game = $gameDao->getGame($game_id);
