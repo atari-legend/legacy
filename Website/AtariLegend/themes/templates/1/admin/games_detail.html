@@ -217,33 +217,6 @@ $('#input-tags3').selectize({
                                     </div>
                                     <div class="gd_basic_game_info_row_checktxt">Arcade conversion&nbsp;</div>
                                 </div>
-                                <div class="gd_basic_game_info_row">
-                                    <div class="gd_basic_game_info_row_check">
-                                        <div class="links_mod_checkbox">
-                                            <input type="checkbox" id="seuck" name="seuck" value="1" {if $game_info.game_seuck == 1} checked{/if}>
-                                            <label for="seuck"></label>
-                                        </div>
-                                    </div>
-                                    <div class="gd_basic_game_info_row_checktxt">SEUCK game&nbsp;</div>
-                                </div>
-                                <div class="gd_basic_game_info_row">
-                                    <div class="gd_basic_game_info_row_check">
-                                        <div class="links_mod_checkbox">
-                                            <input type="checkbox" id="stos" name="stos" value="1" {if $game_info.game_stos == 1} checked{/if}>
-                                            <label for="stos"></label>
-                                        </div>
-                                    </div>
-                                    <div class="gd_basic_game_info_row_checktxt">STOS game&nbsp;</div>
-                                </div>
-                                <div class="gd_basic_game_info_row">
-                                    <div class="gd_basic_game_info_row_check">
-                                        <div class="links_mod_checkbox">
-                                            <input type="checkbox" id="stac" name="stac" value="1" {if $game_info.game_stac == 1} checked{/if}>
-                                            <label for="stac"></label>
-                                        </div>
-                                    </div>
-                                    <div class="gd_basic_game_info_row_checktxt">STAC game&nbsp;</div>
-                                </div>
                             </div>
                             <div id="gd_basic_game_info_2">
                                 <b>Categories</b>&nbsp;&nbsp;
@@ -256,9 +229,40 @@ $('#input-tags3').selectize({
                                     </select>
                                 </div>
                                 <br>
-                                <span class="help-hint">Click to choose and add categories</span>
                                 <script>
                                     $('#input-tags').selectize({
+                                        plugins: ['remove_button'],
+                                        persist: false,
+                                        create: true,
+                                        render: {
+                                            item: function(data, escape) {
+                                                return '<div class="primary_button" style="border-radius:3px;">' + escape(data.text) + '</div>';
+                                            }
+                                        },
+                                    });
+                                </script>
+                                <br>
+                                <b>Programming Language</b>&nbsp;&nbsp;
+                                <div class="control-group">
+                                    <label for="input-tags2"></label>
+                                    <select name="programming_language[]" multiple id="input-tags2" class="standard_select input_full">
+                                    {foreach from=$programming_languages item=all_programming_languages}
+                                        <option value="{$all_programming_languages->getId()}"
+                                            {foreach from=$game_programming_languages item=linked_programming_languages name=language}
+                                                {if $linked_programming_languages->getId() == $all_programming_languages->getId()}
+                                                    selected
+                                                {/if}
+                                            {/foreach}
+                                            >
+                                            {$all_programming_languages->getName()}
+                                        </option>
+                                    {/foreach}
+                                    </select>
+                                </div>
+                                <br>
+                                <span class="help-hint">Click to choose and add categories</span>
+                                <script>
+                                    $('#input-tags2').selectize({
                                         plugins: ['remove_button'],
                                         persist: false,
                                         create: true,

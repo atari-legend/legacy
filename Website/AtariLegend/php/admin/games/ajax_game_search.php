@@ -48,9 +48,8 @@ $RESULTGAME = "SELECT game.game_id,
         LEFT JOIN game_development ON (game.game_id = game_development.game_id)
         LEFT JOIN game_unreleased ON (game.game_id = game_unreleased.game_id)
         LEFT JOIN game_unfinished ON (game.game_id = game_unfinished.game_id)
-        LEFT JOIN game_seuck ON (game.game_id = game_seuck.game_id)
-        LEFT JOIN game_stos ON (game.game_id = game_stos.game_id)
-        LEFT JOIN game_stac ON (game.game_id = game_stac.game_id)
+        LEFT JOIN game_programming_language ON (game.game_id = game_programming_language.game_id)
+        LEFT JOIN programming_language ON (game_programming_language.programming_language_id = programming_language.id)
         LEFT JOIN game_wanted ON (game.game_id = game_wanted.game_id)
         LEFT JOIN game_developer ON (game_developer.game_id = game.game_id)
         LEFT JOIN pub_dev pd2 ON (pd2.pub_dev_id = game_developer.dev_pub_id)
@@ -80,9 +79,8 @@ $RESULTAKA = "SELECT
       LEFT JOIN game_development ON (game.game_id = game_development.game_id)
       LEFT JOIN game_unreleased ON (game.game_id = game_unreleased.game_id)
       LEFT JOIN game_unfinished ON (game.game_id = game_unfinished.game_id)
-      LEFT JOIN game_seuck ON (game.game_id = game_seuck.game_id)
-      LEFT JOIN game_stos ON (game.game_id = game_stos.game_id)
-      LEFT JOIN game_stac ON (game.game_id = game_stac.game_id)
+      LEFT JOIN game_programming_language ON (game.game_id = game_programming_language.game_id)
+      LEFT JOIN programming_language ON (game_programming_language.programming_language_id = programming_language.id)
       LEFT JOIN game_wanted ON (game.game_id = game_wanted.game_id)
       LEFT JOIN game_developer ON (game.game_id = game_developer.game_id)
       LEFT JOIN pub_dev pd2 on (pd2.pub_dev_id = game_developer.dev_pub_id)
@@ -165,7 +163,7 @@ if (isset($action) and $action == "search") {
     }
 
     if (isset($stos) and $stos == "1") {
-        $stos_select = " AND game_stos.stos =$stos";
+        $stos_select = " AND programming_language.name ='stos''";
     }
 
     if (isset($unfinished) and $unfinished == "1") {
@@ -173,11 +171,11 @@ if (isset($action) and $action == "search") {
     }
 
     if (isset($seuck) and $seuck == "1") {
-        $seuck_select = " AND game_seuck.seuck =$seuck";
+        $seuck_select = " AND programming_language.name ='seuck'";
     }
 
     if (isset($stac) and $stac == "1") {
-        $stac_select = " AND game_stac.stac =$stac";
+        $stac_select = " AND programming_language.name ='stac";
     }
     if (isset($no_boxscan) and $no_boxscan == "1") {
         $no_boxscan_select = " AND game_boxscan.game_id IS NULL";
