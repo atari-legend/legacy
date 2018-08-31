@@ -29,12 +29,14 @@ require_once __DIR__."/../../common/DAO/GameDAO.php";
 require_once __DIR__."/../../common/DAO/IndividualDAO.php";
 require_once __DIR__."/../../common/DAO/PubDevDAO.php";
 require_once __DIR__."/../../common/DAO/ProgrammingLanguageDAO.php";
+require_once __DIR__."/../../common/DAO/GameGenreDAO.php";
 
 $gameReleaseDao = new \AL\Common\DAO\GameReleaseDAO($mysqli);
 $gameDao = new \AL\Common\DAO\GameDAO($mysqli);
 $individualDao = new \Al\Common\DAO\IndividualDAO($mysqli);
 $pubDevDao = new \AL\Common\DAO\PubDevDAO($mysqli);
 $ProgrammingLanguageDao = new \AL\Common\DAO\ProgrammingLanguageDAO($mysqli);
+$GameGenreDao = new \AL\Common\DAO\GameGenreDAO($mysqli);
 
 //***********************************************************************************
 //Let's get the general game info first.
@@ -78,24 +80,9 @@ $smarty->assign('game_releases', $gameReleaseDao->getReleasesForGame($game_id));
 //***********************************************************************************
 //get the game categories & the categories already selected for this game
 //***********************************************************************************
-$sql_categories = $mysqli->query("SELECT * FROM game_cat ORDER BY game_cat_name") or die("Error loading categories");
+$smarty->assign('game_genres', $GameGenreDao->getAllGameGenres());
+$smarty->assign('game_genres_cross', $GameGenreDao->getGameGenresForGame($game_id));
 
-while ($categories = $sql_categories->fetch_array(MYSQLI_BOTH)) {
-    $sql_game_cat = $mysqli->query("SELECT * FROM game_cat_cross WHERE game_id='$game_id' AND game_cat_id=$categories[game_cat_id]") or die("Error loading categorie cross table");
-
-    $selected = $sql_game_cat->num_rows;
-    if ($selected == 1) {
-        $selected = 'selected';
-    } else {
-        $selected = '';
-    }
-
-    $smarty->append('cat', array(
-        'cat_id' => $categories['game_cat_id'],
-        'cat_name' => $categories['game_cat_name'],
-        'cat_selected' => $selected
-    ));
-}
 
 //*******************************************************************************************
 //get the programming languages and the programming languages already selected for this game
@@ -203,34 +190,6 @@ while ($developer_role = $sql_developer_role->fetch_array(MYSQLI_BOTH)) {
         'developer_role' => $developer_role['role']
     ));
 }
-
-//***********************************************************************************
-//The game categories
-//***********************************************************************************
-
-$sql_categories = $mysqli->query("SELECT * FROM game_cat ORDER BY game_cat_name") or die("Error loading categories");
-
-while ($categories = $sql_categories->fetch_array(MYSQLI_BOTH)) {
-    $smarty->append('categories', array(
-        'game_cat_id' => $categories['game_cat_id'],
-        'game_cat_name' => $categories['game_cat_name']
-    ));
-}
-
-$sql_catcross = $mysqli->query("SELECT * FROM game_cat_cross WHERE game_id='$game_id'") or die("Error loading categorie cross table");
-
-$nr_catcross = 0;
-
-while ($catcross = $sql_catcross->fetch_array(MYSQLI_BOTH)) {
-    $smarty->append('catcross', array(
-        'game_id' => $catcross['game_id'],
-        'game_cat_id' => $catcross['game_cat_id']
-    ));
-
-    $nr_catcross++;
-}
-
-$smarty->assign("nr_catcross", $nr_catcross);
 
 //***********************************************************************************
 // Game facts
