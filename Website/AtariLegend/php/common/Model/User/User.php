@@ -25,7 +25,7 @@ class User {
         $karma,
         $show_email,
         $avatar_ext,
-        $news_count
+        $news_count = 0
     ) {
         $this->id = $id;
         $this->name = $name;
@@ -62,7 +62,7 @@ class User {
     public function getKarma() {
         return $this->karma;
     }
-    
+
     public function getShowEmail() {
         return $this->show_email;
     }

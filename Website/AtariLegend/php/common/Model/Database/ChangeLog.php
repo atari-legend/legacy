@@ -5,7 +5,6 @@ namespace AL\Common\Model\Database;
  * Maps to the `change_log` table
  */
 class ChangeLog {
-
     const ACTION_UPDATE = "Update";
     const ACTION_INSERT = "Insert";
     const ACTION_DELETE = "Delete";
@@ -52,6 +51,7 @@ class ChangeLog {
     private $user_id;
     private $action;
     private $timestamp;
+    private $user;
 
     public function __construct(
         $id,
@@ -62,9 +62,9 @@ class ChangeLog {
         $sub_section_id,
         $sub_section_value,
         $user_id,
-        $action
+        $action,
+        $timestamp = null
     ) {
-
         $this->id = $id;
 
         // Check if the section is valid
@@ -93,7 +93,11 @@ class ChangeLog {
         }
         $this->action = $action;
 
-        $this->timestamp = time();
+        if ($timestamp == null) {
+            $this->timestamp = time();
+        } else {
+            $this->timestamp = $timestamp;
+        }
     }
 
     public function getId() {
@@ -134,5 +138,84 @@ class ChangeLog {
 
     public function getTimestamp() {
         return $this->timestamp;
+    }
+
+    public function getUser() {
+        return $this->user;
+    }
+
+    public function setUser($user) {
+        $this->user = $user;
+    }
+
+    public function getShortLogMessage() {
+        $section_name = $this->section_value;
+        $sub_section_name = $this->sub_section_value;
+        $messages = array(
+            "Games" => array(
+                "AKA" => array(
+                    "Update" => "Updated $section_name",
+                    "Insert" => "Added $sub_section_name to $section_name",
+                    "Delete" => "Removed $sub_section_name from $section_name"),
+                "Box back" => array(
+                    "Update" => "Updated the boxscan of $section_name",
+                    "Insert" => "Added boxscan to $section_name",
+                    "Delete" =>"Removed a boxscan from $section_name"),
+                "Box front" => array(
+                    "Update" => "Updated the boxscan of $section_name",
+                    "Insert" => "Added boxscan to $section_name",
+                    "Delete" => "Removed a boxscan from $section_name"),
+                "Creator" => array(
+                    "Update" => "Updated $section_name",
+                    "Insert" => "Added $sub_section_name to $section_name",
+                    "Delete" => "Removed $sub_section_name from $section_name"),
+                "Developer" => array(
+                    "Update" => "Updated the developer of $section_name",
+                    "Insert" => "Added $sub_section_name to $section_name",
+                    "Delete" => "Removed $sub_section_name from $section_name"),
+                "Fact" => array(
+                    "Update" => "Updated $section_name",
+                    "Insert" => "Added fact to $section_name",
+                    "Delete" =>"Removed a fact from $section_name"),
+                "File" => array(
+                    "Update" => "Updated $section_name",
+                    "Insert" => "Added a file to $section_name",
+                    "Delete" =>"Removed a file from $section_name"),
+                "Mag score" => array(
+                    "Update" => "Updated $section_name",
+                    "Insert" => "Added a mag score to $section_name",
+                    "Delete" =>"Removed a mag score from $section_name"),
+                "Music" => array(
+                    "Update" => "Updated $section_name",
+                    "Insert" => "Added music to $section_name",
+                    "Delete" =>"Removed music from $section_name"),
+                "Game" => array(
+                    "Update" => "Updated $section_name",
+                    "Insert" => "Added a new game: $section_name",
+                    "Delete" => "Removed $section_name"),
+                "Publisher" => array(
+                    "Update" => "Updated the publisher of $section_name",
+                    "Insert" => "Added $sub_section_name to $section_name",
+                    "Delete" => "Removed $sub_section_name from $section_name"),
+                "Review" => array(
+                    "Update" => "Updated a review of $sub_section_name",
+                    "Insert" => "Added a review to $section_name",
+                    "Delete" => "Removed a review from $section_name"),
+                "Release" => array(
+                    "Update" => "Updated a release of $section_name",
+                    "Insert" => "Added a release to $section_name",
+                    "Delete" => "Removed a release from $section_name"),
+                "Screenshot" => array(
+                    "Update" => "Updated the screenshots of $section_name",
+                    "Insert" => "Added a screenshot to $section_name",
+                    "Delete" => "Removed a screenshot from $section_name"),
+                "Similar" => array(
+                    "Update" => "Updated $section_name",
+                    "Insert" => "Added $sub_section_name as similar to $section_name",
+                    "Delete" => "Updated $section_name"),
+            )
+        );
+
+        return $messages[$this->section][$this->sub_section][$this->action];
     }
 }
