@@ -36,7 +36,7 @@ $GameGenreDao = new \AL\Common\DAO\GameGenreDAO($mysqli);
  * @param $game_name Name of the game
  * @param $game_akas Optional names the game is known as
  * @param $game_releases Game releases
- * @param $game_categories Categorie(s) the game belong to
+ * @param $game_genres Genre(s) the game belong to
  * @param $game_developers Developer(s) of the game
  * @param $screenshots Number of screenshots available
  * @param $boxscans Number of boxscans available
@@ -54,11 +54,15 @@ function generate_game_description(
     $reviews
 ) {
     $desc = "$game_name is a ";
-    
+
     if ($game_genres) {
-        foreach ($game_genres as $genre) {  
-            $desc .= strtolower(join($genre, ", "))." ";
+        for ($i = 0; $i < count($game_genres); $i++) {
+            $desc .= strtolower($game_genres[$i]->getName());
+            if ($i+1 < count($game_genres)) {
+                $desc .= ", ";
+            }
         }
+        $desc .= " ";
     }
 
     $desc .= "Atari ST game ";
@@ -188,12 +192,8 @@ $smarty->assign('release_location', $release_location);
 //***********************************************************************************
 //get the game genres & the genres already selected for this game
 //***********************************************************************************
-$smarty->assign('game_genres', $GameGenreDao->getGameGenresForGame($game_id));
 $game_genres = $GameGenreDao->getGameGenresForGame($game_id);
-
-foreach ($game_genres as $genre) {  
-    $genre_name = $genre->getName();
-}
+$smarty->assign('game_genres', $game_genres);
 
 //**********************************************************************************
 //Get the author info
@@ -395,7 +395,7 @@ while ($developers = $sql_developer->fetch_array(MYSQLI_BOTH)) {
 //***********************************************************************************
 //AKA's
 //***********************************************************************************
-$sql_aka = $mysqli->query("SELECT * FROM game_aka 
+$sql_aka = $mysqli->query("SELECT * FROM game_aka
                            LEFT JOIN language ON (language.id = game_aka.language_id)
                            WHERE game_id='$game_id'") or die("Couldn't query aka games");
 $nr_aka = 0;
@@ -693,7 +693,7 @@ $smarty->assign("game_description", generate_game_description(
     $game_info['game_name'],
     $game_akas,
     $releases,
-    $genre_name,
+    $game_genres,
     $game_developers,
     $game_screenshots_count,
     $game_boxscans_count,
