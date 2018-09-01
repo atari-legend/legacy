@@ -54,20 +54,22 @@ class GameGenreDAO {
         $stmt = \AL\Db\execute_query(
             "GameGenreDAO: getGameGenresForGame",
             $this->mysqli,
-            "SELECT game_genre_id FROM game_genre_cross WHERE game_id = ?",
+            "SELECT game_genre_id, name
+            FROM game_genre_cross LEFT JOIN game_genre ON (game_genre_cross.game_genre_id = game_genre.id)
+            WHERE game_id = ?",
             "i", $game_id
         );
 
         \AL\Db\bind_result(
             "GameGenreDAO: getGameGenresForGame",
             $stmt,
-            $game_genre_id
+            $game_genre_id, $name
         );
 
         $game_genres = [];
         while ($stmt->fetch()) {
             $game_genres[] = new \AL\Common\Model\Game\GameGenre(
-                $game_genre_id, null
+                $game_genre_id, $name
             );
         }
 
