@@ -21,7 +21,7 @@
 //load all common functions
 include("../../config/common.php");
 include("../../config/admin.php");
-
+include("../../admin/tiles/tile_shortlog.php");
 //load the search fields of the quick search side menu
 include("../../admin/games/quick_search_games.php");
 
