@@ -17,13 +17,13 @@ class GameGenreDAO {
     /**
      * Get all Game Genres
      *
-     * @return \AL\Common\Model\Game\GameGenres[] An array of languages
+     * @return \AL\Common\Model\Game\GameGenres[] An array of genres
      */
     public function getAllGameGenres() {
         $stmt = \AL\Db\execute_query(
             "GameGenreDAO: getAllGameGenres",
             $this->mysqli,
-            "SELECT id, name FROM game_genre ORDER BY id",
+            "SELECT id, name FROM game_genre ORDER BY name",
             null, null
         );
 

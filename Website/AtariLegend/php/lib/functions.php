@@ -397,9 +397,9 @@ function statistics_stack() {
     mysqli_free_result($query);
 
     // START - COUNT HOW MANY GAMES HAS CATEGORIES SET
-    $query         = $mysqli->query("SELECT COUNT(DISTINCT game_id) AS count FROM game_cat_cross");
-    $game_category = $query->fetch_array(MYSQLI_BOTH);
-    $stack[]       = "$game_category[count] games have category set";
+    $query         = $mysqli->query("SELECT COUNT(DISTINCT game_id) AS count FROM game_genre_cross");
+    $game_genre    = $query->fetch_array(MYSQLI_BOTH);
+    $stack[]       = "$game_genre[count] games have a genre set";
 
     // END - COUNT HOW MANY GAMES HAS CATEGORIES SET
 
