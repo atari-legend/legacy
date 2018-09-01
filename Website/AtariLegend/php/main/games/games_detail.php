@@ -47,16 +47,18 @@ function generate_game_description(
     $game_name,
     $game_akas,
     $game_releases,
-    $game_categories,
+    $game_genres,
     $game_developers,
     $screenshots,
     $boxscans,
     $reviews
 ) {
     $desc = "$game_name is a ";
-
-    if ($game_categories) {
-        $desc .= strtolower(join($game_categories, ", "))." ";
+    
+    if ($game_genres) {
+        foreach ($game_genres as $genre) {  
+            $desc .= strtolower(join($genre->getName(), ", "))." ";
+        }
     }
 
     $desc .= "Atari ST game ";
@@ -189,15 +191,15 @@ $smarty->assign('release_location', $release_location);
 $smarty->assign('game_genres', $GameGenreDao->getAllGameGenres());
 $smarty->assign('game_genres_cross', $GameGenreDao->getGameGenresForGame($game_id));
 
-/* $game_genres = $GameGenreDao->getGameGenresForGame($game_id);
+$linked_genres = $GameGenreDao->getGameGenresForGame($game_id);
 $all_genres = $GameGenreDao->getAllGameGenres();
-foreach ($game_genres as $linked_genre) {
-    foreach ($all_genres as $genres_all) {
-        if ($linked_genre['id'] == $genres_all['id']) {
-            $game_categories = $genres_all['name'];
+foreach ($linked_genres as $linked) {
+    foreach ($all_genres as $all) {
+        if ($linked->getId() == $all->getId()){
+            $game_genres = $all;
         }
     }
-} */
+}
 
 //**********************************************************************************
 //Get the author info
@@ -697,7 +699,7 @@ $smarty->assign("game_description", generate_game_description(
     $game_info['game_name'],
     $game_akas,
     $releases,
-    $game_categories,
+    $game_genres,
     $game_developers,
     $game_screenshots_count,
     $game_boxscans_count,
