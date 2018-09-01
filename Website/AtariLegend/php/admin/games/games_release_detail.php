@@ -2,7 +2,7 @@
 
 include("../../config/common.php");
 include("../../config/admin.php");
-include("../../admin/games/quick_search_games.php");
+include("../../admin/tiles/tile_shortlog.php");
 
 require_once __DIR__."/../../common/DAO/GameDAO.php";
 require_once __DIR__."/../../common/DAO/GameReleaseDAO.php";
@@ -60,7 +60,6 @@ if ($_SERVER['REQUEST_METHOD'] == "GET") {
         $smarty->assign('pub_dev_id', isset($pub_dev_id) ? $pub_dev_id : null);
         $smarty->assign('location_id', isset($location_id) ? $location_id : null);
         $smarty->assign('type', isset($type) ? $type : null);
-
     }
 } else if ($_SERVER['REQUEST_METHOD'] == "POST") {
     require_once __DIR__.'/../../config/admin_rights.php';
@@ -86,7 +85,8 @@ if ($_SERVER['REQUEST_METHOD'] == "GET") {
             $date,
             $license,
             ($type != '') ? $type : null,
-            ($pub_dev_id != '') ? $pub_dev_id : null);
+            ($pub_dev_id != '') ? $pub_dev_id : null
+        );
 
         $changeLogDao->insertChangeLog(
             new \AL\Common\Model\Database\ChangeLog(
@@ -124,7 +124,7 @@ if ($_SERVER['REQUEST_METHOD'] == "GET") {
                 \AL\Common\Model\Database\ChangeLog::ACTION_INSERT
             )
         );
-}
+    }
 
     $systemDao->setIncompatibleSystemsForRelease($release_id, isset($system_incompatible) ? $system_incompatible : []);
     $systemDao->setEnhancedSystemsForRelease($release_id, isset($system_enhanced) ? $system_enhanced : []);
