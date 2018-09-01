@@ -57,7 +57,7 @@ function generate_game_description(
     
     if ($game_genres) {
         foreach ($game_genres as $genre) {  
-            $desc .= strtolower(join($genre->getName(), ", "))." ";
+            $desc .= strtolower(join($genre, ", "))." ";
         }
     }
 
@@ -188,17 +188,11 @@ $smarty->assign('release_location', $release_location);
 //***********************************************************************************
 //get the game genres & the genres already selected for this game
 //***********************************************************************************
-$smarty->assign('game_genres', $GameGenreDao->getAllGameGenres());
-$smarty->assign('game_genres_cross', $GameGenreDao->getGameGenresForGame($game_id));
+$smarty->assign('game_genres', $GameGenreDao->getGameGenresForGame($game_id));
+$game_genres = $GameGenreDao->getGameGenresForGame($game_id);
 
-$linked_genres = $GameGenreDao->getGameGenresForGame($game_id);
-$all_genres = $GameGenreDao->getAllGameGenres();
-foreach ($linked_genres as $linked) {
-    foreach ($all_genres as $all) {
-        if ($linked->getId() == $all->getId()){
-            $game_genres = $all;
-        }
-    }
+foreach ($game_genres as $genre) {  
+    $genre_name = $genre->getName();
 }
 
 //**********************************************************************************
@@ -699,7 +693,7 @@ $smarty->assign("game_description", generate_game_description(
     $game_info['game_name'],
     $game_akas,
     $releases,
-    $game_genres,
+    $genre_name,
     $game_developers,
     $game_screenshots_count,
     $game_boxscans_count,
