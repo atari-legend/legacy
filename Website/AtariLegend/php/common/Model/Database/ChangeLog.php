@@ -157,10 +157,6 @@ class ChangeLog {
                     "Update" => "Updated $section_name",
                     "Insert" => "Added $sub_section_name to $section_name",
                     "Delete" => "Removed $sub_section_name from $section_name"),
-                "Author" => array(
-                    "Update" => "Updated $section_name",
-                    "Insert" => "Added $sub_section_name to $section_name",
-                    "Delete" => "Removed $sub_section_name from $section_name"),
                 "Box back" => array(
                     "Update" => "Updated the boxscan of $section_name",
                     "Insert" => "Added boxscan to $section_name",
