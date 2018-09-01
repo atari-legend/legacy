@@ -398,12 +398,19 @@ function statistics_stack() {
 
     // START - COUNT HOW MANY GAMES HAS CATEGORIES SET
     $query         = $mysqli->query("SELECT COUNT(DISTINCT game_id) AS count FROM game_genre_cross");
-    $game_genre    = $query->fetch_array(MYSQLI_BOTH);
-    $stack[]       = "$game_genre[count] games have a genre set";
-
+    // Special case here due to the migration from game_categories to game_genre
+    // This fails until the DB update script is run because the game_genre_cross
+    // table doesn't exist. It prevents accessing the site and CPANEL, preventing
+    // to run the DB update script... So just handle the error and skip this line
+    // of stats until the DB update script is run and the table exists.
+    if ($query) {
+        $game_genre    = $query->fetch_array(MYSQLI_BOTH);
+        $stack[]       = "$game_genre[count] games have a genre set";
+        mysqli_free_result($query);
+    }
     // END - COUNT HOW MANY GAMES HAS CATEGORIES SET
 
-    mysqli_free_result($query);
+
 
     // START - COUNT NUMBER OF DOWNLOADABLE FILES
     $query      = $mysqli->query("SELECT COUNT(game_id) AS count FROM game_download");
@@ -1266,7 +1273,7 @@ function create_log_entry($section, $section_id, $subsection, $subsection_id, $a
         if ($subsection == 'Article' or $subsection == 'Screenshots') {
             $subsection_name = $section_name;
         }
-        
+
         if ($subsection == 'Comment') {
             //we need to get the title
             $query_user_comment = "SELECT article_user_comments.article_id,
