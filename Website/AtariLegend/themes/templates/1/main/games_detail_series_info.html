@@ -1,0 +1,20 @@
+{if isset($series)}
+    <br>
+    <div class="standard_tile series">
+        <h1>SERIES</h1>
+        <div class="standard_tile_line"></div>
+
+        <div class="standard_tile_padding">
+            <h6>This game is part of the <em>{$series->getName()}</em> series, with:</h6>
+            <ul>
+                {foreach from=$series_games item=series_game}
+                    {if $series_game->getId() != $game_id}
+                        <li><a class="standard_tile_link" href="games_detail.php?game_id={$series_game->getId()}">{$series_game->getName()}</a></li>
+                    {else}
+                        <li class="active"><i class="fa fa-chevron-right" aria-hidden="true"></i> {$series_game->getName()}</li>
+                    {/if}
+                {/foreach}
+            </ul>
+        </div>
+    </div>
+{/if}

@@ -16,6 +16,7 @@
 //load all common functions
 include("../../config/common.php");
 require_once __DIR__."/../../common/DAO/GameReleaseDAO.php";
+require_once __DIR__."/../../common/DAO/GameSeriesDAO.php";
 require_once __DIR__."/../../common/DAO/ResolutionDAO.php";
 require_once __DIR__."/../../common/DAO/SystemDAO.php";
 require_once __DIR__."/../../common/DAO/PubDevDAO.php";
@@ -24,6 +25,7 @@ require_once __DIR__."/../../common/DAO/ProgrammingLanguageDAO.php";
 require_once __DIR__."/../../common/DAO/GameGenreDAO.php";
 
 $gameReleaseDao = new \AL\Common\DAO\GameReleaseDAO($mysqli);
+$gameSeriesDao = new \AL\Common\DAO\GameSeriesDAO($mysqli);
 $resolutionDao = new \AL\Common\DAO\ResolutionDao($mysqli);
 $systemDao = new \AL\Common\DAO\SystemDao($mysqli);
 $pubDevDao = new \AL\Common\DAO\PubDevDAO($mysqli);
@@ -137,6 +139,7 @@ function generate_game_description(
 //***********************************************************************************
 $sql_game = $mysqli->query("SELECT game_name,
                game.game_id,
+               game.game_series_id,
                game_development.development,
                game_unreleased.unreleased,
                game_unfinished.unfinished,
@@ -173,6 +176,11 @@ $smarty->assign('locations', $locationDao->getAllLocationsAsMap());
 // Get all releases
 $releases = $gameReleaseDao->getReleasesForGame($game_id);
 $smarty->assign('releases', $releases);
+
+if ($game_info["game_series_id"] != null) {
+    $smarty->assign('series', $gameSeriesDao->getGameSeries($game_info["game_series_id"]));
+    $smarty->assign('series_games', $gameSeriesDao->getGamesForSeries($game_info["game_series_id"]));
+}
 
 $system_incompatible = [];
 $system_enhanced = [];

@@ -25,22 +25,46 @@ include("../../config/common.php");
 include("../../config/admin.php");
 include("../../config/admin_rights.php");
 
+require_once __DIR__."/../../common/DAO/GameDAO.php";
+require_once __DIR__."/../../common/DAO/GameSeriesDAO.php";
+require_once __DIR__."/../../common/DAO/ChangeLogDAO.php";
+
+$gameDao = new \AL\Common\DAO\GameDAO($mysqli);
+$gameSeriesDao = new \AL\Common\DAO\GameSeriesDAO($mysqli);
+$changeLogDao = new \AL\Common\DAO\ChangeLogDAO($mysqli);
+
+if (isset($game_series_id)) {
+    $gameSeries = $gameSeriesDao->getGameSeries($game_series_id);
+}
+
 //****************************************************************************************
 // This is delete from series place
 //****************************************************************************************
 if ($action == "delete_from_series") {
-    if (isset($game_series_cross_id)) {
-        foreach ($game_series_cross_id as $game_series_cross_id_sql) {
-            create_log_entry('Game series', $game_series_cross_id_sql, 'Game', $game_series_cross_id_sql, 'Delete', $_SESSION['user_id']);
+    if (isset($game_ids)) {
+        foreach ($game_ids as $game_id) {
+            $gameSeriesDao->removeGameFromSeries($game_id);
 
-            $mysqli->query("DELETE FROM game_series_cross WHERE game_series_cross_id='$game_series_cross_id_sql'");
+            $game = $gameDao->getGame($game_id);
+            $changeLogDao->insertChangeLog(
+                new \AL\Common\Model\Database\ChangeLog(
+                    -1,
+                    "Game series",
+                    $gameSeries->getId(),
+                    $gameSeries->getName(),
+                    "Game",
+                    $game->getId(),
+                    $game->getName(),
+                    $_SESSION["user_id"],
+                    \AL\Common\Model\Database\ChangeLog::ACTION_DELETE
+                )
+            );
         }
-//        mysqli_free_result();
+
+        $_SESSION['edit_message'] = "Game(s) removed from series";
     }
 
-    $_SESSION['edit_message'] = "game removed to series";
-
-    header("Location: ../games/games_series_editor.php?series_page=$series_page&game_series_id=$game_series_id");
+    header("Location: ../games/games_series_editor.php?game_series_id=$game_series_id");
 }
 
 //****************************************************************************************
@@ -49,17 +73,26 @@ if ($action == "delete_from_series") {
 
 if ($action == "addnew_series") {
     if (isset($new_series)) {
-        $sql = $mysqli->query("INSERT INTO game_series (game_series_name) VALUES ('$new_series')");
-//        mysqli_free_result();
+        $new_series_id = $gameSeriesDao->addGameSeries(new \AL\Common\Model\Game\GameSeries(-1, $new_series));
+
+        $_SESSION['edit_message'] = "New series added";
+
+        $changeLogDao->insertChangeLog(
+            new \AL\Common\Model\Database\ChangeLog(
+                -1,
+                "Game series",
+                $new_series_id,
+                $new_series,
+                "Series",
+                $new_series_id,
+                $new_series,
+                $_SESSION["user_id"],
+                \AL\Common\Model\Database\ChangeLog::ACTION_INSERT
+            )
+        );
     }
 
-    $new_series_id = $mysqli->insert_id;
-
-    create_log_entry('Game series', $new_series_id, 'Series', $new_series_id, 'Insert', $_SESSION['user_id']);
-
-    $_SESSION['edit_message'] = "new series added";
-
-    header("Location: ../games/games_series_main.php");
+    header("Location: ../games/games_series_editor.php?game_series_id=$new_series_id");
 }
 
 //****************************************************************************************
@@ -68,14 +101,24 @@ if ($action == "addnew_series") {
 
 if ($action == "edit_series") {
     if (isset($game_series_name)) {
-        $sql = $mysqli->query("UPDATE game_series SET game_series_name='$game_series_name'
-                        WHERE game_series_id='$game_series_id'");
-//        mysqli_free_result();
+        $gameSeriesDao->updateGameSeries($game_series_id, $game_series_name);
+
+        $_SESSION['edit_message'] = "Series updated";
+
+        $changeLogDao->insertChangeLog(
+            new \AL\Common\Model\Database\ChangeLog(
+                -1,
+                "Game series",
+                $gameSeries->getId(),
+                $gameSeries->getName(),
+                "Series",
+                $gameSeries->getId(),
+                $game_series_name,
+                $_SESSION["user_id"],
+                \AL\Common\Model\Database\ChangeLog::ACTION_UPDATE
+            )
+        );
     }
-
-    $_SESSION['edit_message'] = "series updated";
-
-    create_log_entry('Game series', $game_series_id, 'Series', $game_series_id, 'Update', $_SESSION['user_id']);
 
     header("Location: ../games/games_series_editor.php?series_page=series_editor&game_series_id=$game_series_id");
 }
@@ -85,15 +128,23 @@ if ($action == "edit_series") {
 //****************************************************************************************
 
 if ($action == "delete_gameseries") {
-    if (isset($game_series_id)) {
-        create_log_entry('Game series', $game_series_id, 'Series', $game_series_id, 'Delete', $_SESSION['user_id']);
+    $gameSeriesDao->deleteGameSeries($game_series_id);
 
-        $mysqli->query("DELETE FROM game_series WHERE game_series_id='$game_series_id'");
-        $mysqli->query("DELETE FROM game_series_cross WHERE game_series_id='$game_series_id'");
+    $_SESSION['edit_message'] = "Series deleted";
 
-        $_SESSION['edit_message'] = "series deleted";
-//        mysqli_free_result();
-    }
+    $changeLogDao->insertChangeLog(
+        new \AL\Common\Model\Database\ChangeLog(
+            -1,
+            "Game series",
+            $gameSeries->getId(),
+            $gameSeries->getName(),
+            "Series",
+            $gameSeries->getId(),
+            $gameSeries->getName(),
+            $_SESSION["user_id"],
+            \AL\Common\Model\Database\ChangeLog::ACTION_DELETE
+        )
+    );
 
     header("Location: ../games/games_series_main.php");
 }
@@ -103,15 +154,28 @@ if ($action == "delete_gameseries") {
 //****************************************************************************************
 
 if ($action == "add_to_series") {
-    if (isset($game_id)) {
-        foreach ($game_id as $game) {
-            create_log_entry('Game series', $game_series_id, 'Game', $game, 'Insert', $_SESSION['user_id']);
+    if (isset($game_ids)) {
+        foreach($game_ids as $game_id) {
+            $gameSeriesDao->addGameToSeries($game_series_id, $game_id);
 
-            $mysqli->query("INSERT INTO game_series_cross (game_id,game_series_id) VALUES ('$game','$game_series_id')");
-            $_SESSION['edit_message'] = "game added to series";
+            $_SESSION['edit_message'] = "Game added to series";
+
+            $game = $gameDao->getGame($game_id);
+            $changeLogDao->insertChangeLog(
+                new \AL\Common\Model\Database\ChangeLog(
+                    -1,
+                    "Game series",
+                    $gameSeries->getId(),
+                    $gameSeries->getName(),
+                    "Game",
+                    $game->getId(),
+                    $game->getName(),
+                    $_SESSION["user_id"],
+                    \AL\Common\Model\Database\ChangeLog::ACTION_INSERT
+                )
+            );
         }
-//        mysqli_free_result();
     }
 
-    header("Location: ../games/games_series_editor.php?game_series_id=$game_series_id&series_page=$series_page");
+    header("Location: ../games/games_series_editor.php?game_series_id=$game_series_id");
 }
