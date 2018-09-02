@@ -31,6 +31,7 @@ require_once __DIR__."/../../common/DAO/IndividualDAO.php";
 require_once __DIR__."/../../common/DAO/PubDevDAO.php";
 require_once __DIR__."/../../common/DAO/ProgrammingLanguageDAO.php";
 require_once __DIR__."/../../common/DAO/GameGenreDAO.php";
+require_once __DIR__."/../../common/DAO/IndividualRoleDAO.php";
 
 $gameReleaseDao = new \AL\Common\DAO\GameReleaseDAO($mysqli);
 $gameDao = new \AL\Common\DAO\GameDAO($mysqli);
@@ -38,6 +39,7 @@ $individualDao = new \Al\Common\DAO\IndividualDAO($mysqli);
 $pubDevDao = new \AL\Common\DAO\PubDevDAO($mysqli);
 $ProgrammingLanguageDao = new \AL\Common\DAO\ProgrammingLanguageDAO($mysqli);
 $GameGenreDao = new \AL\Common\DAO\GameGenreDAO($mysqli);
+$individualRoleDao = new \Al\Common\DAO\IndividualRoleDAO($mysqli);
 
 //***********************************************************************************
 //Let's get the general game info first.
@@ -93,19 +95,21 @@ $smarty->assign('game_programming_languages', $ProgrammingLanguageDao->getProgra
 
 
 //**********************************************************************************
-//Get the author info
+//Get the individuals info
 //**********************************************************************************
 $smarty->assign('individuals', $individualDao->getAllIndividuals());
 
-// Get the author types
-$sql_author = $mysqli->query("SELECT * FROM author_type ORDER BY author_type_info ASC") or die("Couldn't query author_types");
+// Get the indivual roles
+$smarty->assign('individual_roles', $individualRoleDao->getAllIndividualRoles());
+
+/* $sql_author = $mysqli->query("SELECT * FROM author_type ORDER BY author_type_info ASC") or die("Couldn't query author_types");
 
 while ($author = $sql_author->fetch_array(MYSQLI_BOTH)) {
     $smarty->append('author_types', array(
         'author_type' => $author['author_type_info'],
         'author_type_id' => $author['author_type_id']
     ));
-}
+} */
 
 //Starting off with displaying the authors that are linked to the game and having a delete option for them */
 $sql_gameauthors = $mysqli->query("SELECT * FROM game_author
