@@ -47,13 +47,13 @@ if (empty($game_author)) {
             game_download.game_download_id,
             pd2.pub_dev_name as 'developer_name',
             pd2.pub_dev_id as 'developer_id',
-            game_cat_cross.game_cat_id,
-            game_cat.game_cat_name
+            game_genre_cross.game_genre_id,
+            game_genre.name
             FROM game
             LEFT JOIN review_game ON (review_game.game_id = game.game_id)
             LEFT JOIN game_boxscan ON (game_boxscan.game_id = game.game_id)
-            LEFT JOIN game_cat_cross ON (game_cat_cross.game_id = game.game_id)
-            LEFT JOIN game_cat ON (game_cat_cross.game_cat_id = game_cat.game_cat_id)
+            LEFT JOIN game_genre_cross ON (game_genre_cross.game_id = game.game_id)
+            LEFT JOIN game_genre ON (game_genre_cross.game_genre_id = game_genre.id)
             LEFT JOIN screenshot_game ON (screenshot_game.game_id = game.game_id)
             LEFT JOIN game_music ON (game_music.game_id = game.game_id)
             LEFT JOIN game_download ON (game_download.game_id = game.game_id)
@@ -78,14 +78,14 @@ if (empty($game_author)) {
             game_download.game_download_id,
             pd2.pub_dev_name as 'developer_name',
             pd2.pub_dev_id as 'developer_id',
-            game_cat_cross.game_cat_id,
-            game_cat.game_cat_name
+            game_genre_cross.game_genre_id,
+            game_genre.name
             FROM game
             LEFT JOIN game_author ON (game_author.game_id = game.game_id)
             LEFT JOIN review_game ON (review_game.game_id = game.game_id)
             LEFT JOIN game_boxscan ON (game_boxscan.game_id = game.game_id)
-            LEFT JOIN game_cat_cross ON (game_cat_cross.game_id = game.game_id)
-            LEFT JOIN game_cat ON (game_cat_cross.game_cat_id = game_cat.game_cat_id)
+            LEFT JOIN game_genre_cross ON (game_genre_cross.game_id = game.game_id)
+            LEFT JOIN game_genre ON (game_genre_cross.game_genre_id = game_genre.id)
             LEFT JOIN screenshot_game ON (screenshot_game.game_id = game.game_id)
             LEFT JOIN game_music ON (game_music.game_id = game.game_id)
             LEFT JOIN game_download ON (game_download.game_id = game.game_id)
@@ -113,13 +113,13 @@ if (empty($game_author)) {
              game_download.game_download_id,
              pd2.pub_dev_name as 'developer_name',
              pd2.pub_dev_id as 'developer_id',
-             game_cat_cross.game_cat_id,
-             game_cat.game_cat_name
+             game_genre_cross.game_genre_id,
+             game_genre.name
           FROM game_aka
           LEFT JOIN game ON (game_aka.game_id = game.game_id)
           LEFT JOIN review_game ON (review_game.game_id = game.game_id)
-          LEFT JOIN game_cat_cross ON (game_cat_cross.game_id = game.game_id)
-          LEFT JOIN game_cat ON (game_cat_cross.game_cat_id = game_cat.game_cat_id)
+          LEFT JOIN game_genre_cross ON (game_genre_cross.game_id = game.game_id)
+          LEFT JOIN game_genre ON (game_genre_cross.game_genre_id = game_genre.id)
           LEFT JOIN game_boxscan ON (game_boxscan.game_id = game_aka.game_id)
           LEFT JOIN screenshot_game ON (screenshot_game.game_id = game.game_id)
           LEFT JOIN game_music ON (game_music.game_id = game.game_id)
@@ -146,14 +146,14 @@ if (empty($game_author)) {
              game_download.game_download_id,
              pd2.pub_dev_name as 'developer_name',
              pd2.pub_dev_id as 'developer_id',
-             game_cat_cross.game_cat_id,
-             game_cat.game_cat_name
+             game_genre_cross.game_genre_id,
+             game_genre.name
           FROM game_aka
           LEFT JOIN game ON (game_aka.game_id = game.game_id)
           LEFT JOIN game_author ON (game_author.game_id = game.game_id)
           LEFT JOIN review_game ON (review_game.game_id = game.game_id)
-          LEFT JOIN game_cat_cross ON (game_cat_cross.game_id = game.game_id)
-          LEFT JOIN game_cat ON (game_cat_cross.game_cat_id = game_cat.game_cat_id)
+          LEFT JOIN game_genre_cross ON (game_genre_cross.game_id = game.game_id)
+          LEFT JOIN game_genre ON (game_genre_cross.game_genre_id = game_genre.id)
           LEFT JOIN game_boxscan ON (game_boxscan.game_id = game_aka.game_id)
           LEFT JOIN screenshot_game ON (screenshot_game.game_id = game.game_id)
           LEFT JOIN game_music ON (game_music.game_id = game.game_id)
@@ -260,9 +260,9 @@ if (isset($action) and $action == "search") {
     if (empty($category) or $category == '-') {
         $category_select = "";
     } elseif ($category == "null") {
-        $category_select = " AND game_cat_cross.game_cat_id IS NULL";
+        $category_select = " AND game_genre_cross.game_genre_id IS NULL";
     } else {
-        $category_select = " AND game_cat_cross.game_cat_id = $category";
+        $category_select = " AND game_genre_cross.game_genre_id = $category";
     }
 
     //
@@ -369,7 +369,7 @@ if (isset($action) and $action == "search") {
         }
 
         if (!empty($cat_input)) {
-            $RESULTGAME .= " AND game_cat.game_cat_name LIKE '%$cat_input%'";
+            $RESULTGAME .= " AND game_genre.name LIKE '%$cat_input%'";
         } else {
         }
 
@@ -472,9 +472,9 @@ if (isset($action) and $action == "search") {
                 }
 
                 if (!empty($cat_input)) {
-                    $RESULTAKA .= " AND game_cat.game_cat_name LIKE '%$cat_input%'";
+                    $RESULTAKA .= " AND game_genre.name LIKE '%$cat_input%'";
                 } else {
-                    //    $RESULTAKA .= " AND game_cat.game_cat_name LIKE '%'";
+                    //    $RESULTAKA .= " AND game_genre.game_genre_name LIKE '%'";
                 }
 
                 $RESULTAKA .= $akabrowse_select;

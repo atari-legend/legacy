@@ -221,12 +221,20 @@ $('#input-tags3').selectize({
                                 </div>
                             </div>
                             <div id="gd_basic_game_info_2">
-                                <b>Categories</b>&nbsp;&nbsp;
+                                <b>Game genres</b>&nbsp;&nbsp;
                                 <div class="control-group">
                                     <label for="input-tags"></label>
-                                    <select name="category[]" multiple id="input-tags" class="standard_select input_full">
-                                    {foreach from=$cat item=line}
-                                        <option value="{$line.cat_id}" {$line.cat_selected}>{$line.cat_name}</option>
+                                    <select name="game_genre[]" multiple id="input-tags" class="standard_select input_full">
+                                    {foreach from=$game_genres item=all_game_genres}
+                                        <option value="{$all_game_genres->getId()}"
+                                            {foreach from=$game_genres_cross item=linked_game_genres name=genres}
+                                                {if $linked_game_genres->getId() == $all_game_genres->getId()}
+                                                    selected
+                                                {/if}
+                                            {/foreach}
+                                            >
+                                            {$all_game_genres->getName()}
+                                        </option>
                                     {/foreach}
                                     </select>
                                 </div>
