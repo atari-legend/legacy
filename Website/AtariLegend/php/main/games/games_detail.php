@@ -65,7 +65,7 @@ function generate_game_description(
         $desc .= " ";
     }
 
-    $desc .= "Atari ST game ";
+    $desc .= "game for the Atari ST ";
 
     if ($game_developers) {
         $desc .= "developed by ".join($game_developers, ", ")." ";
