@@ -163,7 +163,7 @@ if (isset($action) and $action == "search") {
     }
 
     if (isset($stos) and $stos == "1") {
-        $stos_select = " AND programming_language.name ='stos''";
+        $stos_select = " AND programming_language.name ='stos'";
     }
 
     if (isset($unfinished) and $unfinished == "1") {
@@ -175,7 +175,7 @@ if (isset($action) and $action == "search") {
     }
 
     if (isset($stac) and $stac == "1") {
-        $stac_select = " AND programming_language.name ='stac";
+        $stac_select = " AND programming_language.name ='stac'";
     }
     if (isset($no_boxscan) and $no_boxscan == "1") {
         $no_boxscan_select = " AND game_boxscan.game_id IS NULL";
