@@ -20,9 +20,7 @@ This is the sub template file to generate the news edit page
             <div id="jsNewsId{$article->getId()}" class="infinite-item">
                 <div class="news_post_box" id="{$article->getDate()}">
                     <div class="news_userinfo">
-                        {if $article->getUser()->getAvatar() != null}
-                            <img src="../../includes/show_image.php?file={$article->getUser()->getAvatar()}&amp;resize=100,null,null,null" alt="{$article->getUser()->getName()}" width="100px">
-                        {/if}
+                        <img src="{$article->getUser()->getAvatar()}" alt="{$article->getUser()->getName()}" width="100px">
                         <a href="../user/user_detail.php?user_id_selected={$article->getUser()->getId()}" class="standard_tile_link">{$article->getUser()->getName()}</a>
                         <br><br><br>
                         <span class="text-nowrap">
@@ -35,11 +33,7 @@ This is the sub template file to generate the news edit page
                     </div>
                     <div class="news_post_detail" id="jsNewsEditBox{$article->getId()}">
                         <div class="news_userinfo_phoneview">
-                            {if $article->getUser()->getAvatar() != null}
-                                <img src="../../includes/show_image.php?file={$article->getUser()->getAvatar()}&amp;resize=100,null,null,null" alt="{$article->getUser()->getName()}" width="100px">
-                            {else}
-                                <img src="../../includes/show_image.php?file={$style_dir} {$article->getUser()->getAvatar()}&amp;resize=100,null,null,null" alt="{$article->getUser()->getName()}" width="100px">
-                            {/if}
+                            <img src="{$article->getUser()->getAvatar()}" alt="{$article->getUser()->getName()}" width="100px">
                             <h6>
                                 <a href="../user/user_detail.php?user_id_selected={$article->getUser()->getId()}">{$article->getUser()->getName()}</a>
                             </h6>
