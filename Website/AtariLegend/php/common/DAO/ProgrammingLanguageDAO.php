@@ -48,7 +48,7 @@ class ProgrammingLanguageDAO {
     /**
      * Get list of programming_language IDs for a game
      *
-     * @param integer Release ID
+     * @param integer Game ID
      */
     public function getProgrammingLanguagesForGame($game_id) {
         $stmt = \AL\Db\execute_query(

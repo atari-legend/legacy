@@ -27,10 +27,12 @@ include("../../config/admin_rights.php");
 require_once __DIR__."/../../common/DAO/GameReleaseDAO.php";
 require_once __DIR__."/../../common/DAO/ChangeLogDAO.php";
 require_once __DIR__."/../../common/DAO/ProgrammingLanguageDAO.php";
+require_once __DIR__."/../../common/DAO/GameGenreDAO.php";
 
 $changeLogDao = new \AL\Common\DAO\ChangeLogDAO($mysqli);
 $gameReleaseDao = new \AL\Common\DAO\GameReleaseDAO($mysqli);
 $programmingLanguageDao = new \AL\Common\DAO\ProgrammingLanguageDAO($mysqli);
+$gameGenreDao = new \AL\Common\DAO\GameGenreDAO($mysqli);
 
 if (isset($game_id)){
     $stmt = $mysqli->prepare("SELECT game_name FROM game WHERE game_id = ?") or die($mysqli->error);
@@ -174,15 +176,8 @@ if (isset($action) and $action == 'modify_game') {
 
     $sdbquery = $mysqli->query("UPDATE game SET game_name='$game_name' WHERE game_id=$game_id") or die("trouble updating game");
 
-    // Delete the category crosses currently in the database for this game
-    $sdbquery = $mysqli->query("DELETE FROM game_cat_cross WHERE game_id=$game_id");
-
-    // Insert the values from the passed category array
-    if (isset($category)) {
-        foreach ($category as $cat) {
-            $sdbquery = $mysqli->query("INSERT INTO game_cat_cross (game_id,game_cat_id) VALUES ($game_id,$cat)");
-        }
-    }
+    //Update the game genre
+    $gameGenreDao->setGameGenreForGame($game_id, isset($game_genre) ? $game_genre : []);
     
     //Update the programming language
     $programmingLanguageDao->setProgrammingLanguageForGame($game_id, isset($programming_language) ? $programming_language : []);
@@ -322,13 +317,12 @@ if (isset($action) and $action == 'delete_game') {
                                         $sdbquery = $mysqli->query("DELETE FROM game WHERE game_id = '$game_id' ");
                                         $sdbquery = $mysqli->query("DELETE FROM game_publisher WHERE game_id = '$game_id'");
                                         $sdbquery = $mysqli->query("DELETE FROM game_developer WHERE game_id = '$game_id' ");
-                                        $sdbquery = $mysqli->query("DELETE FROM game_cat_cross WHERE game_id = '$game_id' ");
+                                        $sdbquery = $mysqli->query("DELETE FROM game_genre_cross WHERE game_id = '$game_id' ");
                                         $sdbquery = $mysqli->query("DELETE FROM game_development WHERE game_id='$game_id'");
                                         $sdbquery = $mysqli->query("DELETE FROM game_unreleased WHERE game_id='$game_id'");
                                         $sdbquery = $mysqli->query("DELETE FROM game_free WHERE game_id='$game_id'");
+                                        $sdbquery = $mysqli->query("DELETE FROM game_programming_language WHERE game_id='$game_id'");
                                         $sdbquery = $mysqli->query("DELETE FROM game_arcade WHERE game_id='$game_id'");
-                                        $sdbquery = $mysqli->query("DELETE FROM game_seuck WHERE game_id='$game_id'");
-                                        $sdbquery = $mysqli->query("DELETE FROM game_stos WHERE game_id='$game_id'");
                                         $sdbquery = $mysqli->query("DELETE FROM game_wanted WHERE game_id='$game_id'");
                                         $sdbquery = $mysqli->query("DELETE FROM game_mono WHERE game_id='$game_id'");
                                         $sdbquery = $mysqli->query("DELETE FROM game_unfinished WHERE game_id='$game_id'");

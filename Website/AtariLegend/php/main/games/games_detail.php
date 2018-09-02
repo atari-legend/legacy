@@ -21,6 +21,7 @@ require_once __DIR__."/../../common/DAO/SystemDAO.php";
 require_once __DIR__."/../../common/DAO/PubDevDAO.php";
 require_once __DIR__."/../../common/DAO/LocationDAO.php";
 require_once __DIR__."/../../common/DAO/ProgrammingLanguageDAO.php";
+require_once __DIR__."/../../common/DAO/GameGenreDAO.php";
 
 $gameReleaseDao = new \AL\Common\DAO\GameReleaseDAO($mysqli);
 $resolutionDao = new \AL\Common\DAO\ResolutionDao($mysqli);
@@ -28,13 +29,14 @@ $systemDao = new \AL\Common\DAO\SystemDao($mysqli);
 $pubDevDao = new \AL\Common\DAO\PubDevDAO($mysqli);
 $locationDao = new \AL\Common\DAO\LocationDAO($mysqli);
 $ProgrammingLanguageDao = new \AL\Common\DAO\ProgrammingLanguageDAO($mysqli);
+$GameGenreDao = new \AL\Common\DAO\GameGenreDAO($mysqli);
 
 /**
  * Generates an SEO-friendly description of a game, depending on the data available
  * @param $game_name Name of the game
  * @param $game_akas Optional names the game is known as
  * @param $game_releases Game releases
- * @param $game_categories Categorie(s) the game belong to
+ * @param $game_genres Genre(s) the game belong to
  * @param $game_developers Developer(s) of the game
  * @param $screenshots Number of screenshots available
  * @param $boxscans Number of boxscans available
@@ -45,7 +47,7 @@ function generate_game_description(
     $game_name,
     $game_akas,
     $game_releases,
-    $game_categories,
+    $game_genres,
     $game_developers,
     $screenshots,
     $boxscans,
@@ -53,11 +55,17 @@ function generate_game_description(
 ) {
     $desc = "$game_name is a ";
 
-    if ($game_categories) {
-        $desc .= strtolower(join($game_categories, ", "))." ";
+    if ($game_genres) {
+        for ($i = 0; $i < count($game_genres); $i++) {
+            $desc .= strtolower($game_genres[$i]->getName());
+            if ($i+1 < count($game_genres)) {
+                $desc .= ", ";
+            }
+        }
+        $desc .= " ";
     }
 
-    $desc .= "Atari ST game ";
+    $desc .= "game for the Atari ST ";
 
     if ($game_developers) {
         $desc .= "developed by ".join($game_developers, ", ")." ";
@@ -182,21 +190,10 @@ $smarty->assign('release_resolution', $release_resolution);
 $smarty->assign('release_location', $release_location);
 
 //***********************************************************************************
-//get the game categories & the categories already selected for this game
+//get the game genres & the genres already selected for this game
 //***********************************************************************************
-$sql_categories = $mysqli->query("SELECT * FROM game_cat
-                                           LEFT JOIN game_cat_cross ON (game_cat.game_cat_id = game_cat_cross.game_cat_id)
-                                           WHERE game_id='$game_id' ORDER BY game_cat_name") or die("Error loading categories");
-
-$game_categories = [];
-while ($categories = $sql_categories->fetch_array(MYSQLI_BOTH)) {
-    $game_categories[] = $categories['game_cat_name'];
-
-    $smarty->append('cat', array(
-        'cat_id' => $categories['game_cat_id'],
-        'cat_name' => $categories['game_cat_name']
-    ));
-}
+$game_genres = $GameGenreDao->getGameGenresForGame($game_id);
+$smarty->assign('game_genres', $game_genres);
 
 //**********************************************************************************
 //Get the author info
@@ -398,7 +395,7 @@ while ($developers = $sql_developer->fetch_array(MYSQLI_BOTH)) {
 //***********************************************************************************
 //AKA's
 //***********************************************************************************
-$sql_aka = $mysqli->query("SELECT * FROM game_aka 
+$sql_aka = $mysqli->query("SELECT * FROM game_aka
                            LEFT JOIN language ON (language.id = game_aka.language_id)
                            WHERE game_id='$game_id'") or die("Couldn't query aka games");
 $nr_aka = 0;
@@ -696,7 +693,7 @@ $smarty->assign("game_description", generate_game_description(
     $game_info['game_name'],
     $game_akas,
     $releases,
-    $game_categories,
+    $game_genres,
     $game_developers,
     $game_screenshots_count,
     $game_boxscans_count,

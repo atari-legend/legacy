@@ -94,11 +94,11 @@ if ($extraVar == 'year') {
 
 if ($extraVar == 'cat') {
     //Get the results
-    $result = $mysqli->query("SELECT * from game_cat WHERE game_cat_name LIKE '%$upperString%' ORDER BY game_cat_name")
-                     or die("problems getting data from game_cat table");
+    $result = $mysqli->query("SELECT * from game_genre WHERE name LIKE '%$upperString%' ORDER BY name")
+                     or die("problems getting data from game_genre table");
 
     while ($row = $result->fetch_assoc()) {
-        $json[] = $row['game_cat_name'];
+        $json[] = $row['name'];
     }
 }
 
