@@ -44,4 +44,37 @@ class IndividualRoleDAO {
 
         return $individual_roles;
     }
+    
+    /**
+     * Get role for a role id
+     *
+     * @param integer role ID
+     */
+    public function getRoleForId($id) {
+        $stmt = \AL\Db\execute_query(
+            "IndividualRoleDAO: getRoleForId",
+            $this->mysqli,
+            "SELECT id, role
+            FROM individual_role 
+            WHERE id = ?",
+            "i", $id
+        );
+
+        \AL\Db\bind_result(
+            "IndividualRoleDAO: getRoleForId",
+            $stmt,
+            $id, $role
+        );
+
+        $individual_roles = [];
+        while ($stmt->fetch()) {
+            $individual_roles[] = new \AL\Common\Model\Individual\IndividualRole(
+                $id, $role
+            );
+        }
+
+        $stmt->close();
+
+        return $individual_roles;
+    }
 }
