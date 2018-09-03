@@ -178,18 +178,18 @@
                     {/if}
                 {/foreach}
             {/if}
-            {if isset($game_author)}
-                {foreach from=$game_author item=line name=game_author}
+            {if isset($game_individual)}
+                {foreach from=$game_individual item=line name=game_individual}
                     <tr>
                         <td class="w-30">
-                            {if $smarty.foreach.game_author.index == 0}
+                            {if $smarty.foreach.game_individual.index == 0}
                                 <span class="games_main_detail_info_right">Author</span>
                             {/if}
-                            {if $line.auhthor_type_info != ''}
+                            {if $line.individual_role != ''}
                                 <br><br>
                             {/if}
                             {if $line.ind_nick != ''}
-                                {if $line.auhthor_type_info == ''}
+                                {if $line.individual_role == ''}
                                     <br><br>
                                 {else}
                                     <br>
@@ -198,11 +198,11 @@
                         </td>
                         <td class="w-5">
                             <span class="games_main_detail_info_left text-center">-</span>
-                            {if $line.auhthor_type_info != ''}
+                            {if $line.individual_role != ''}
                                 <br><br>
                             {/if}
                             {if $line.ind_nick != ''}
-                                {if $line.auhthor_type_info == ''}
+                                {if $line.individual_role == ''}
                                     <br><br>
                                 {else}
                                     <br>
@@ -230,8 +230,8 @@
                             {if $line.ind_nick != ''}
                                 <br><span class="standard_tile_subtext">AKA {$line.ind_nick}</span>
                             {/if}
-                            {if $line.auhthor_type_info != ''}
-                                <br><span class="standard_tile_subtext">{$line.auhthor_type_info}</span>
+                            {if $line.individual_role != ''}
+                                <br><span class="standard_tile_subtext">{$line.individual_role}</span>
                             {/if}
                         </td>
                     </tr>

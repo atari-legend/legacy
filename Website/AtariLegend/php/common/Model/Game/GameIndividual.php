@@ -10,7 +10,7 @@ class GameIndividual {
     private $individual_id;
     private $individual_role_id;
 
-    public function __construct($id,$game_id,$individual_id,$individual_role_id) {
+    public function __construct($id, $game_id, $individual_id, $individual_role_id) {
         $this->id = $id;
         $this->gameId = $game_id;
         $this->individualId = $individual_id;

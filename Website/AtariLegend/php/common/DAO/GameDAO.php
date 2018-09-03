@@ -95,8 +95,8 @@ class GameDAO {
         $stmt = \AL\Db\execute_query(
             "GameDAO: removeAuthor",
             $this->mysqli,
-            "DELETE FROM game_author
-            WHERE game_id = ? AND ind_id = ? AND author_type_id = ?",
+            "DELETE FROM game_individual
+            WHERE game_id = ? AND individual_id = ? AND individual_role_id = ?",
             "iii", $game_id, $individual_id, $author_type_id
         );
 
@@ -113,7 +113,7 @@ class GameDAO {
         $stmt = \AL\Db\execute_query(
             "GameDAO: addAuthor",
             $this->mysqli,
-            "INSERT INTO game_author (game_id, ind_id, author_type_id) VALUES (?, ?, ?)",
+            "INSERT INTO game_individual (game_id, individual_id, individual_role_id) VALUES (?, ?, ?)",
             "iii", $game_id, $individual_id, $author_type_id
         );
 
@@ -128,17 +128,17 @@ class GameDAO {
      * @param number $new_author_type_id New author type ID
      */
     public function updateAuthorType($game_id, $individual_id, $author_type_id, $new_author_type_id) {
-        $query = "UPDATE game_author SET author_type_id = ?
-            WHERE game_id = ? AND ind_id = ? ";
+        $query = "UPDATE game_individual SET individual_role_id = ?
+            WHERE game_id = ? AND individual_id = ? ";
         $bind_string = "iii";
         $bind_params = array($new_author_type_id, $game_id, $individual_id);
 
         if ($author_type_id != null) {
-            $query .= "AND author_type_id = ?";
+            $query .= "AND individual_role_id = ?";
             $bind_string .= "i";
             $bind_params[] = $author_type_id;
         } else {
-            $query .= "AND author_type_id IS NULL";
+            $query .= "AND individual_role_id IS NULL";
         }
 
         $stmt = \AL\Db\execute_query(
