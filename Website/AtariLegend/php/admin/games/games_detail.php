@@ -106,15 +106,6 @@ $smarty->assign('individuals', $individualDao->getAllIndividuals());
 // Get the indivual roles
 $smarty->assign('individual_roles', $individualRoleDao->getAllIndividualRoles());
 
-/* $sql_author = $mysqli->query("SELECT * FROM author_type ORDER BY author_type_info ASC") or die("Couldn't query author_types");
-
-while ($author = $sql_author->fetch_array(MYSQLI_BOTH)) {
-    $smarty->append('author_types', array(
-        'author_type' => $author['author_type_info'],
-        'author_type_id' => $author['author_type_id']
-    ));
-} */
-
 //Starting off with displaying the authors that are linked to the game and having a delete option for them */
 
 //get the game_individual entries
@@ -124,35 +115,14 @@ foreach ($game_individuals as $linked_data) {
     $individual = $individualDao->getIndividual($linked_data->getIndividualId());
     $role = $individualRoleDao->getRoleForId($linked_data->getIndividualRoleId());
     
-    echo $linked_data->getId();
-    echo $individual->getName();
-    echo $individual->getId();
-    
-    $smarty->append('game_author', array(
-        'game_author_id' => $linked_data->getId(),
-        'ind_name' => $individual->getName(),
-        'ind_id' => $individual->getId(),
-        'author_type_info' => $role->getRole(),
-        'author_type_id' => $role->getId()
+    $smarty->append('game_individual', array(
+        'id' => $linked_data->getId(),
+        'name' => $individual->getName(),
+        'individual_id' => $individual->getId(),
+        'role' => $role->getRole(),
+        'role_id' => $role->getId()
     ));
 }    
-
-/* $sql_gameauthors = $mysqli->query("SELECT * FROM game_author
-                  LEFT JOIN individuals ON (game_author.ind_id = individuals.ind_id)
-                  LEFT JOIN author_type ON (game_author.author_type_id = author_type.author_type_id)
-                  WHERE game_author.game_id='$game_id' ORDER BY author_type.author_type_id, individuals.ind_name") or die("Error loading authors");
-
-while ($game_author = $sql_gameauthors->fetch_array(MYSQLI_BOTH)) {
-    $smarty->append('game_author', array(
-        'game_author_id' => $game_author['game_author_id'],
-        'ind_name' => $game_author['ind_name'],
-        'ind_id' => $game_author['ind_id'],
-        'author_type_info' => $game_author['author_type_info'],
-        'author_type_id' => $game_author['author_type_id']
-    ));
-} */
-
-
 
 //**********************************************************************************
 //Get the companies info

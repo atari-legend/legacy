@@ -118,10 +118,10 @@ while ($sql_screenshots = $query_screenshots->fetch_array(MYSQLI_BOTH)) {
 //get the games from this author
 $sql_games = $mysqli->query("
 SELECT *
-FROM game_author
-LEFT JOIN author_type ON (game_author.author_type_id = author_type.author_type_id)
-LEFT JOIN game ON (game_author.game_id = game.game_id)
-WHERE game_author.ind_id = '$query_interview[ind_id]'
+FROM game_individual
+LEFT JOIN individual_role ON (game_individual.individual_role_id = individual_role.id)
+LEFT JOIN game ON (game_individual.game_id = game.game_id)
+WHERE game_individual.individual_id = '$query_interview[ind_id]'
 GROUP BY game.game_id, game.game_name HAVING COUNT(DISTINCT game.game_id, game.game_name) = 1
 ORDER BY game.game_name ASC")
 or die("problem with query");
@@ -137,7 +137,7 @@ while ($query_games = $sql_games->fetch_array(MYSQLI_BOTH)) {
         'game_id' => $query_games['game_id'],
         'game_name' => $query_games['game_name'],
         'game_releases' => $releases,
-        'auhthor_type_info' => $query_games['author_type_info'],
+        'individual_role' => $query_games['role'],
         'count' => $count
     ));
 }

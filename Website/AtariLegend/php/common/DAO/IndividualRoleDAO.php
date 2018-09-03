@@ -66,9 +66,9 @@ class IndividualRoleDAO {
             $id, $role
         );
 
-        $individual_roles = [];
+        $individual_roles = null;
         while ($stmt->fetch()) {
-            $individual_roles[] = new \AL\Common\Model\Individual\IndividualRole(
+            $individual_roles = new \AL\Common\Model\Individual\IndividualRole(
                 $id, $role
             );
         }
