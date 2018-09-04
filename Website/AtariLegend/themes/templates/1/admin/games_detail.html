@@ -213,7 +213,7 @@ $('#input-tags3').selectize({
                                 <br>
                                 <b>Port</b>
                                 <br>
-                                <select name="port_id" class="standard_select select_medium">
+                                <select name="port_id" class="standard_select select_large">
                                 <option value="">-</option>
                                 {foreach from=$ports item=all_ports}
                                     <option value="{$all_ports->getId()}" {if $all_ports->getId() eq $game_port->getId()} selected{/if}>{$all_ports->getPort()}</option>

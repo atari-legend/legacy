@@ -50,9 +50,9 @@ class PortDAO {
      *
      * @param integer Game ID
      */
-    public function getGamePortForGame($game_id) {
+    public function getPortForGame($game_id) {
         $stmt = \AL\Db\execute_query(
-            "PortDAO: getGamePortForGame",
+            "PortDAO: getPortForGame",
             $this->mysqli,
             "SELECT port_id, port
             FROM game LEFT JOIN port ON (game.port_id = port.id)
@@ -61,7 +61,7 @@ class PortDAO {
         );
 
         \AL\Db\bind_result(
-            "PortDAO: getGamePortForGame",
+            "PortDAO: getPortForGame",
             $stmt,
             $port_id, $port
         );

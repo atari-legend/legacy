@@ -99,7 +99,7 @@ $smarty->assign('game_programming_languages', $ProgrammingLanguageDao->getProgra
 //get the game ports & the port for this game
 //***********************************************************************************
 $smarty->assign('ports', $portDao->getAllPorts());
-$smarty->assign('game_port', $portDao->getGamePortForGame($game_id));
+$smarty->assign('game_port', $portDao->getPortForGame($game_id));
 
 //**********************************************************************************
 //Get the individuals info
