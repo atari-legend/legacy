@@ -30,6 +30,7 @@ require_once __DIR__."/../../common/DAO/GameDAO.php";
 require_once __DIR__."/../../common/DAO/IndividualDAO.php";
 require_once __DIR__."/../../common/DAO/PubDevDAO.php";
 require_once __DIR__."/../../common/DAO/ProgrammingLanguageDAO.php";
+require_once __DIR__."/../../common/DAO/PortDAO.php";
 require_once __DIR__."/../../common/DAO/GameGenreDAO.php";
 require_once __DIR__."/../../common/DAO/IndividualRoleDAO.php";
 require_once __DIR__."/../../common/DAO/GameIndividualDAO.php";
@@ -40,6 +41,7 @@ $gameDao = new \AL\Common\DAO\GameDAO($mysqli);
 $individualDao = new \Al\Common\DAO\IndividualDAO($mysqli);
 $pubDevDao = new \AL\Common\DAO\PubDevDAO($mysqli);
 $ProgrammingLanguageDao = new \AL\Common\DAO\ProgrammingLanguageDAO($mysqli);
+$portDao = new \AL\Common\DAO\PortDAO($mysqli);
 $GameGenreDao = new \AL\Common\DAO\GameGenreDAO($mysqli);
 $individualRoleDao = new \Al\Common\DAO\IndividualRoleDAO($mysqli);
 $gameIndividualDao = new \Al\Common\DAO\GameIndividualDAO($mysqli);
@@ -53,12 +55,10 @@ $sql_game = $mysqli->query("SELECT game_name,
                game_development.development,
                game_unreleased.unreleased,
                game_unfinished.unfinished,
-               game_wanted.game_wanted_id,
-               game_arcade.arcade
+               game_wanted.game_wanted_id
                FROM game
                LEFT JOIN game_unreleased ON (game.game_id = game_unreleased.game_id)
                LEFT JOIN game_development ON (game.game_id = game_development.game_id)
-               LEFT JOIN game_arcade ON (game.game_id = game_arcade.game_id)
                LEFT JOIN game_unfinished ON (game.game_id = game_unfinished.game_id)
                LEFT JOIN game_wanted ON (game.game_id = game_wanted.game_id)
                  WHERE game.game_id='$game_id'") or die("Error getting game info: " . $mysqli->error);
@@ -71,8 +71,7 @@ while ($game_info = $sql_game->fetch_array(MYSQLI_BOTH)) {
         'game_development' => $game_info['development'],
         'game_unreleased' => $game_info['unreleased'],
         'game_unfinished' => $game_info['unfinished'],
-        'game_wanted' => $game_info['game_wanted_id'],
-        'game_arcade' => $game_info['arcade']
+        'game_wanted' => $game_info['game_wanted_id']
     ));
 }
 
@@ -90,13 +89,17 @@ $smarty->assign('game_releases', $gameReleaseDao->getReleasesForGame($game_id));
 $smarty->assign('game_genres', $GameGenreDao->getAllGameGenres());
 $smarty->assign('game_genres_cross', $GameGenreDao->getGameGenresForGame($game_id));
 
-
 //*******************************************************************************************
 //get the programming languages and the programming languages already selected for this game
 //*******************************************************************************************
 $smarty->assign('programming_languages', $ProgrammingLanguageDao->getAllProgrammingLanguages());
 $smarty->assign('game_programming_languages', $ProgrammingLanguageDao->getProgrammingLanguagesForGame($game_id));
 
+//***********************************************************************************
+//get the game ports & the port for this game
+//***********************************************************************************
+$smarty->assign('ports', $portDao->getAllPorts());
+$smarty->assign('game_port', $portDao->getGamePortForGame($game_id));
 
 //**********************************************************************************
 //Get the individuals info
