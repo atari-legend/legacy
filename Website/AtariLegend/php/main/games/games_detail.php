@@ -22,6 +22,7 @@ require_once __DIR__."/../../common/DAO/PubDevDAO.php";
 require_once __DIR__."/../../common/DAO/LocationDAO.php";
 require_once __DIR__."/../../common/DAO/ProgrammingLanguageDAO.php";
 require_once __DIR__."/../../common/DAO/GameGenreDAO.php";
+require_once __DIR__."/../../common/DAO/PortDAO.php";
 
 $gameReleaseDao = new \AL\Common\DAO\GameReleaseDAO($mysqli);
 $resolutionDao = new \AL\Common\DAO\ResolutionDao($mysqli);
@@ -30,6 +31,7 @@ $pubDevDao = new \AL\Common\DAO\PubDevDAO($mysqli);
 $locationDao = new \AL\Common\DAO\LocationDAO($mysqli);
 $ProgrammingLanguageDao = new \AL\Common\DAO\ProgrammingLanguageDAO($mysqli);
 $GameGenreDao = new \AL\Common\DAO\GameGenreDAO($mysqli);
+$PortDao = new \AL\Common\DAO\portDAO($mysqli);
 
 /**
  * Generates an SEO-friendly description of a game, depending on the data available
@@ -140,12 +142,10 @@ $sql_game = $mysqli->query("SELECT game_name,
                game_development.development,
                game_unreleased.unreleased,
                game_unfinished.unfinished,
-               game_wanted.game_wanted_id,
-               game_arcade.arcade
+               game_wanted.game_wanted_id
                FROM game
                LEFT JOIN game_unreleased ON (game.game_id = game_unreleased.game_id)
                LEFT JOIN game_development ON (game.game_id = game_development.game_id)
-               LEFT JOIN game_arcade ON (game.game_id = game_arcade.game_id)
                LEFT JOIN game_unfinished ON (game.game_id = game_unfinished.game_id)
                LEFT JOIN game_wanted ON (game.game_id = game_wanted.game_id)
                     WHERE game.game_id='$game_id'") or die("Error getting game info");
@@ -157,8 +157,7 @@ if ($game_info = $sql_game->fetch_array(MYSQLI_BOTH)) {
         'game_development' => $game_info['development'],
         'game_unreleased' => $game_info['unreleased'],
         'game_unfinished' => $game_info['unfinished'],
-        'game_wanted' => $game_info['game_wanted_id'],
-        'game_arcade' => $game_info['arcade']
+        'game_wanted' => $game_info['game_wanted_id']
     ));
 }
 
@@ -194,6 +193,12 @@ $smarty->assign('release_location', $release_location);
 //***********************************************************************************
 $game_genres = $GameGenreDao->getGameGenresForGame($game_id);
 $smarty->assign('game_genres', $game_genres);
+
+//***********************************************************************************
+//get the game port info
+//***********************************************************************************
+$port = $PortDao->getPortForGame($game_id);
+$smarty->assign('port', $port);
 
 //**********************************************************************************
 //Get the author info

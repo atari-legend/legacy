@@ -57,7 +57,6 @@ if (empty($game_author)) {
             LEFT JOIN screenshot_game ON (screenshot_game.game_id = game.game_id)
             LEFT JOIN game_music ON (game_music.game_id = game.game_id)
             LEFT JOIN game_download ON (game_download.game_id = game.game_id)
-            LEFT JOIN game_arcade ON (game.game_id = game_arcade.game_id)
             LEFT JOIN game_development ON (game.game_id = game_development.game_id)
           LEFT JOIN game_unreleased ON (game.game_id = game_unreleased.game_id)
           LEFT JOIN game_unfinished ON (game.game_id = game_unfinished.game_id)
@@ -89,7 +88,6 @@ if (empty($game_author)) {
             LEFT JOIN screenshot_game ON (screenshot_game.game_id = game.game_id)
             LEFT JOIN game_music ON (game_music.game_id = game.game_id)
             LEFT JOIN game_download ON (game_download.game_id = game.game_id)
-            LEFT JOIN game_arcade ON (game.game_id = game_arcade.game_id)
             LEFT JOIN game_development ON (game.game_id = game_development.game_id)
           LEFT JOIN game_unreleased ON (game.game_id = game_unreleased.game_id)
           LEFT JOIN game_unfinished ON (game.game_id = game_unfinished.game_id)
@@ -124,7 +122,6 @@ if (empty($game_author)) {
           LEFT JOIN screenshot_game ON (screenshot_game.game_id = game.game_id)
           LEFT JOIN game_music ON (game_music.game_id = game.game_id)
           LEFT JOIN game_download ON (game_download.game_id = game.game_id)
-          LEFT JOIN game_arcade ON (game.game_id = game_arcade.game_id)
           LEFT JOIN game_development ON (game.game_id = game_development.game_id)
           LEFT JOIN game_unreleased ON (game.game_id = game_unreleased.game_id)
           LEFT JOIN game_unfinished ON (game.game_id = game_unfinished.game_id)
@@ -158,7 +155,6 @@ if (empty($game_author)) {
           LEFT JOIN screenshot_game ON (screenshot_game.game_id = game.game_id)
           LEFT JOIN game_music ON (game_music.game_id = game.game_id)
           LEFT JOIN game_download ON (game_download.game_id = game.game_id)
-          LEFT JOIN game_arcade ON (game.game_id = game_arcade.game_id)
           LEFT JOIN game_development ON (game.game_id = game_development.game_id)
           LEFT JOIN game_unreleased ON (game.game_id = game_unreleased.game_id)
           LEFT JOIN game_unfinished ON (game.game_id = game_unfinished.game_id)          
@@ -287,7 +283,7 @@ if (isset($action) and $action == "search") {
     }
 
     if (isset($arcade) and $arcade == "1") {
-        $arcade_select = " AND game_arcade.arcade =$arcade";
+        $arcade_select = " AND game.port_id ='1'";
         $smarty->assign('games_arcade', '1');
     }
 
