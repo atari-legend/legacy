@@ -28,11 +28,14 @@ require_once __DIR__."/../../common/DAO/GameReleaseDAO.php";
 require_once __DIR__."/../../common/DAO/ChangeLogDAO.php";
 require_once __DIR__."/../../common/DAO/ProgrammingLanguageDAO.php";
 require_once __DIR__."/../../common/DAO/GameGenreDAO.php";
+require_once __DIR__."/../../common/DAO/PortDAO.php";
+
 
 $changeLogDao = new \AL\Common\DAO\ChangeLogDAO($mysqli);
 $gameReleaseDao = new \AL\Common\DAO\GameReleaseDAO($mysqli);
 $programmingLanguageDao = new \AL\Common\DAO\ProgrammingLanguageDAO($mysqli);
 $gameGenreDao = new \AL\Common\DAO\GameGenreDAO($mysqli);
+$portDao = new \AL\Common\DAO\PortDAO($mysqli);
 
 if (isset($game_id)){
     $stmt = $mysqli->prepare("SELECT game_name FROM game WHERE game_id = ?") or die($mysqli->error);
@@ -181,6 +184,9 @@ if (isset($action) and $action == 'modify_game') {
     
     //Update the programming language
     $programmingLanguageDao->setProgrammingLanguageForGame($game_id, isset($programming_language) ? $programming_language : []);
+    
+    //Update the port
+    $portDao->setPortForGame($game_id, isset($port_id) ? $port_id : []);
 
     // Update the Unreleased tick box info
     // Start off by deleting previos value
