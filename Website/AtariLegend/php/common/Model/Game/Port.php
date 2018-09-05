@@ -2,7 +2,7 @@
 namespace AL\Common\Model\Game;
 
 /**
- * Maps to the `programming language` table
+ * Maps to the `game` table (port info)
  */
 class Port {
     private $id;

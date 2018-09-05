@@ -186,7 +186,7 @@ if (isset($action) and $action == 'modify_game') {
     $programmingLanguageDao->setProgrammingLanguageForGame($game_id, isset($programming_language) ? $programming_language : []);
     
     //Update the port
-    $portDao->setPortForGame($game_id, isset($port_id) ? $port_id : []);
+    $portDao->setPortForGame($game_id, isset($port_id) ? $port_id : null);
 
     // Update the Unreleased tick box info
     // Start off by deleting previos value

@@ -29,9 +29,9 @@ $resolutionDao = new \AL\Common\DAO\ResolutionDao($mysqli);
 $systemDao = new \AL\Common\DAO\SystemDao($mysqli);
 $pubDevDao = new \AL\Common\DAO\PubDevDAO($mysqli);
 $locationDao = new \AL\Common\DAO\LocationDAO($mysqli);
-$ProgrammingLanguageDao = new \AL\Common\DAO\ProgrammingLanguageDAO($mysqli);
-$GameGenreDao = new \AL\Common\DAO\GameGenreDAO($mysqli);
-$PortDao = new \AL\Common\DAO\portDAO($mysqli);
+$programmingLanguageDao = new \AL\Common\DAO\ProgrammingLanguageDAO($mysqli);
+$gameGenreDao = new \AL\Common\DAO\GameGenreDAO($mysqli);
+$portDao = new \AL\Common\DAO\portDAO($mysqli);
 
 /**
  * Generates an SEO-friendly description of a game, depending on the data available
@@ -162,8 +162,8 @@ if ($game_info = $sql_game->fetch_array(MYSQLI_BOTH)) {
 }
 
 // Get the programming languages
-$smarty->assign('programming_languages', $ProgrammingLanguageDao->getAllProgrammingLanguages());
-$smarty->assign('game_programming_languages', $ProgrammingLanguageDao->getProgrammingLanguagesForGame($game_id));
+$smarty->assign('programming_languages', $programmingLanguageDao->getAllProgrammingLanguages());
+$smarty->assign('game_programming_languages', $programmingLanguageDao->getProgrammingLanguagesForGame($game_id));
 
 $smarty->assign('resolutions', $resolutionDao->getAllResolutionsAsMap());
 $smarty->assign('systems', $systemDao->getAllSystemsAsMap());
@@ -191,13 +191,13 @@ $smarty->assign('release_location', $release_location);
 //***********************************************************************************
 //get the game genres & the genres already selected for this game
 //***********************************************************************************
-$game_genres = $GameGenreDao->getGameGenresForGame($game_id);
+$game_genres = $gameGenreDao->getGameGenresForGame($game_id);
 $smarty->assign('game_genres', $game_genres);
 
 //***********************************************************************************
 //get the game port info
 //***********************************************************************************
-$port = $PortDao->getPortForGame($game_id);
+$port = $portDao->getPortForGame($game_id);
 $smarty->assign('port', $port);
 
 //**********************************************************************************
