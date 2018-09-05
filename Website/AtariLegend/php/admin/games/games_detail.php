@@ -40,9 +40,9 @@ $gameReleaseDao = new \AL\Common\DAO\GameReleaseDAO($mysqli);
 $gameDao = new \AL\Common\DAO\GameDAO($mysqli);
 $individualDao = new \Al\Common\DAO\IndividualDAO($mysqli);
 $pubDevDao = new \AL\Common\DAO\PubDevDAO($mysqli);
-$ProgrammingLanguageDao = new \AL\Common\DAO\ProgrammingLanguageDAO($mysqli);
+$programmingLanguageDao = new \AL\Common\DAO\ProgrammingLanguageDAO($mysqli);
 $portDao = new \AL\Common\DAO\PortDAO($mysqli);
-$GameGenreDao = new \AL\Common\DAO\GameGenreDAO($mysqli);
+$gameGenreDao = new \AL\Common\DAO\GameGenreDAO($mysqli);
 $individualRoleDao = new \Al\Common\DAO\IndividualRoleDAO($mysqli);
 $gameIndividualDao = new \Al\Common\DAO\GameIndividualDAO($mysqli);
 $individualDao = new \Al\Common\DAO\IndividualDAO($mysqli);
@@ -86,14 +86,14 @@ $smarty->assign('game_releases', $gameReleaseDao->getReleasesForGame($game_id));
 //***********************************************************************************
 //get the game categories & the categories already selected for this game
 //***********************************************************************************
-$smarty->assign('game_genres', $GameGenreDao->getAllGameGenres());
-$smarty->assign('game_genres_cross', $GameGenreDao->getGameGenresForGame($game_id));
+$smarty->assign('game_genres', $gameGenreDao->getAllGameGenres());
+$smarty->assign('game_genres_cross', $gameGenreDao->getGameGenresForGame($game_id));
 
 //*******************************************************************************************
 //get the programming languages and the programming languages already selected for this game
 //*******************************************************************************************
-$smarty->assign('programming_languages', $ProgrammingLanguageDao->getAllProgrammingLanguages());
-$smarty->assign('game_programming_languages', $ProgrammingLanguageDao->getProgrammingLanguagesForGame($game_id));
+$smarty->assign('programming_languages', $programmingLanguageDao->getAllProgrammingLanguages());
+$smarty->assign('game_programming_languages', $programmingLanguageDao->getProgrammingLanguagesForGame($game_id));
 
 //***********************************************************************************
 //get the game ports & the port for this game

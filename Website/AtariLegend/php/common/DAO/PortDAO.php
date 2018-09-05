@@ -23,7 +23,7 @@ class PortDAO {
         $stmt = \AL\Db\execute_query(
             "PortDAO: getAllPorts",
             $this->mysqli,
-            "SELECT id, port FROM port ORDER BY port",
+            "SELECT id, name FROM port ORDER BY name",
             null, null
         );
 
@@ -49,12 +49,14 @@ class PortDAO {
      * Get the game port for a game
      *
      * @param integer Game ID
+     *
+     * @return Port system of the game
      */
     public function getPortForGame($game_id) {
         $stmt = \AL\Db\execute_query(
             "PortDAO: getPortForGame",
             $this->mysqli,
-            "SELECT port_id, port
+            "SELECT port_id, name
             FROM game LEFT JOIN port ON (game.port_id = port.id)
             WHERE game_id = ?",
             "i", $game_id
