@@ -303,6 +303,10 @@ $('#input-tags3').selectize({
                 <a id="gd_authors"><b>Authors &amp; Creators</b></a>
                 <br>
 
+                {foreach from=$game_individuals item=$individual_role}
+                    <b>{$individual_role->getIndividual()->getName()}</b> did <b>{$individual_role->getRole()->getRole()}</b><br>
+                {/foreach}
+
                 {if isset($game_individual)}
                     {foreach from=$game_individual item=$linked_individual}
                         <form action="db_games_authors.php" method="post">
