@@ -107,7 +107,6 @@ $smarty->assign('individuals', $individualDao->getAllIndividuals());
 $smarty->assign('individual_roles', $individualRoleDao->getAllIndividualRoles());
 
 //Starting off with displaying the authors that are linked to the game and having a delete option for them */
-
 //get the game_individual entries
 $smarty->assign('game_individuals', $gameIndividualDao->getGameIndividualsForGame($game_id));
 
