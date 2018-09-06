@@ -33,7 +33,7 @@ require_once __DIR__."/../../common/DAO/ProgrammingLanguageDAO.php";
 require_once __DIR__."/../../common/DAO/GameGenreDAO.php";
 require_once __DIR__."/../../common/DAO/IndividualRoleDAO.php";
 require_once __DIR__."/../../common/DAO/GameIndividualDAO.php";
-require_once __DIR__."/../../common/DAO/individualDAO.php";
+require_once __DIR__."/../../common/DAO/IndividualDAO.php";
 
 $gameReleaseDao = new \AL\Common\DAO\GameReleaseDAO($mysqli);
 $gameDao = new \AL\Common\DAO\GameDAO($mysqli);
@@ -64,7 +64,7 @@ $sql_game = $mysqli->query("SELECT game_name,
                  WHERE game.game_id='$game_id'") or die("Error getting game info: " . $mysqli->error);
 
 while ($game_info = $sql_game->fetch_array(MYSQLI_BOTH)) {
-        
+
     $smarty->assign('game_info', array(
         'game_name' => $game_info['game_name'],
         'game_id' => $game_info['game_id'],
@@ -107,22 +107,8 @@ $smarty->assign('individuals', $individualDao->getAllIndividuals());
 $smarty->assign('individual_roles', $individualRoleDao->getAllIndividualRoles());
 
 //Starting off with displaying the authors that are linked to the game and having a delete option for them */
-
 //get the game_individual entries
-$game_individuals = $gameIndividualDao->getGameIndividualsForGame($game_id);
-
-foreach ($game_individuals as $linked_data) {
-    $individual = $individualDao->getIndividual($linked_data->getIndividualId());
-    $role = $individualRoleDao->getRoleForId($linked_data->getIndividualRoleId());
-    
-    $smarty->append('game_individual', array(
-        'id' => $linked_data->getId(),
-        'name' => $individual->getName(),
-        'individual_id' => $individual->getId(),
-        'role' => $role->getRole(),
-        'role_id' => $role->getId()
-    ));
-}    
+$smarty->assign('game_individuals', $gameIndividualDao->getGameIndividualsForGame($game_id));
 
 //**********************************************************************************
 //Get the companies info

@@ -23,7 +23,7 @@ class IndividualRoleDAO {
         $stmt = \AL\Db\execute_query(
             "IndividualRoleDAO: getAllIndividualRoles",
             $this->mysqli,
-            "SELECT id, role FROM individual_role ORDER BY role",
+            "SELECT id, name FROM individual_role ORDER BY name",
             null, null
         );
 
@@ -54,7 +54,7 @@ class IndividualRoleDAO {
         $stmt = \AL\Db\execute_query(
             "IndividualRoleDAO: getRoleForId",
             $this->mysqli,
-            "SELECT id, role
+            "SELECT id, name
             FROM individual_role 
             WHERE id = ?",
             "i", $id
