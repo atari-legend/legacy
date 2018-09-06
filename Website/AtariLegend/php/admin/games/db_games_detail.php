@@ -328,7 +328,6 @@ if (isset($action) and $action == 'delete_game') {
                                         $sdbquery = $mysqli->query("DELETE FROM game_unreleased WHERE game_id='$game_id'");
                                         $sdbquery = $mysqli->query("DELETE FROM game_free WHERE game_id='$game_id'");
                                         $sdbquery = $mysqli->query("DELETE FROM game_programming_language WHERE game_id='$game_id'");
-                                        $sdbquery = $mysqli->query("DELETE FROM game_arcade WHERE game_id='$game_id'");
                                         $sdbquery = $mysqli->query("DELETE FROM game_wanted WHERE game_id='$game_id'");
                                         $sdbquery = $mysqli->query("DELETE FROM game_mono WHERE game_id='$game_id'");
                                         $sdbquery = $mysqli->query("DELETE FROM game_unfinished WHERE game_id='$game_id'");
