@@ -34,7 +34,7 @@ class GameIndividualDAO {
                 individuals.ind_id,
                 individuals.ind_name,
                 individual_role.id,
-                individual_role.role
+                individual_role.name
             FROM game_individual
             LEFT JOIN game ON (game_individual.game_id = game.game_id)
             LEFT JOIN individuals ON (game_individual.individual_id = individuals.ind_id)

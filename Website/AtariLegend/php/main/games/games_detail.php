@@ -288,7 +288,7 @@ while ($game_individual = $sql_game_individuals->fetch_array(MYSQLI_BOTH)) {
         'ind_profile' => $profile,
         'ind_img' => $v_ind_image,
         'interview_id' => $interview_id,
-        'individual_role' => $game_individual['role']
+        'individual_role' => $game_individual['name']
     ));
 }
 

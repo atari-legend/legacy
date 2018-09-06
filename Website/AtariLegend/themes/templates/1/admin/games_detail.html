@@ -303,37 +303,33 @@ $('#input-tags3').selectize({
                 <a id="gd_authors"><b>Authors &amp; Creators</b></a>
                 <br>
 
-                {foreach from=$game_individuals item=$individual_role}
-                    <b>{$individual_role->getIndividual()->getName()}</b> did <b>{$individual_role->getRole()->getRole()}</b><br>
-                {/foreach}
-
-                {if isset($game_individual)}
-                    {foreach from=$game_individual item=$linked_individual}
+                {if isset($game_individuals)}
+                    {foreach from=$game_individuals item=$linked_individual}
                         <form action="db_games_authors.php" method="post">
 
                             <input type="hidden" name="action" value="update">
                             <input type="hidden" name="game_id" value="{$game->getId()}">
-                            <input type="hidden" name="individual_id" value="{$linked_individual.individual_id}">
-                            <input type="hidden" name="author_type_id" value="{$linked_individual.role_id}">
+                            <input type="hidden" name="individual_id" value="{$linked_individual->getIndividual()->getId()}">
+                            <input type="hidden" name="author_type_id" value="{$linked_individual->getRole()->getId()}">
 
-                            <a title="Remove {$linked_individual.name|escape:"html"} from this game"
-                                href="db_games_authors.php?game_id={$game->getId()}&amp;individual_id={$linked_individual.individual_id}&amp;author_type_id={$linked_individual.role_id}&amp;action=remove"
+                            <a title="Remove {$linked_individual->getIndividual()->getName()|escape:"html"} from this game"
+                                href="db_games_authors.php?game_id={$game->getId()}&amp;individual_id={$linked_individual->getIndividual()->getId()}&amp;author_type_id={$linked_individual->getRole()->getId()}&amp;action=remove"
                                 onclick="javascript:return confirm('This author will be removed from the game')">
                                 <span class="fa fa-fw fa-trash"></span>
                             </a>
 
-                            <input type="text" value="{$linked_individual.name}" class="standard_input input_large" disabled id="gd_game_author">
-                            <a href="../individuals/individuals_edit.php?ind_id={$linked_individual.individual_id}" title="Edit individual" class="standard_tile_link"><i class="fa fa-fw fa-pencil edit_author" aria-hidden="true"></i></a>
+                            <input type="text" value="{$linked_individual->getIndividual()->getName()}" class="standard_input input_large" disabled id="gd_game_author">
+                            <a href="../individuals/individuals_edit.php?ind_id={$linked_individual->getIndividual()->getId()}" title="Edit individual" class="standard_tile_link"><i class="fa fa-fw fa-pencil edit_author" aria-hidden="true"></i></a>
 
                             <select name="new_author_type_id"
-                                onchange="jQuery('#update-author-{$linked_individual.id}').show()"
+                                onchange="jQuery('#update-author-{$linked_individual->getId()}').show()"
                                 class="standard_select select_medium">
                                 <option value="">-</option>
                                 {foreach from=$individual_roles item=linked_role}
-                                    <option value="{$linked_role->getId()}" {if $linked_role->getId() eq $linked_individual.role_id} selected{/if}>{$linked_role->getRole()}</option>
+                                    <option value="{$linked_role->getId()}" {if $linked_role->getId() eq $linked_individual->getRole()->getId()} selected{/if}>{$linked_role->getRole()}</option>
                                 {/foreach}
                             </select>
-                            <input type="submit" id="update-author-{$linked_individual.id}" style="display: none;" class="secondary_button" value="Update">
+                            <input type="submit" id="update-author-{$linked_individual->getId()}" style="display: none;" class="secondary_button" value="Update">
 
                         </form>
                     {/foreach}
