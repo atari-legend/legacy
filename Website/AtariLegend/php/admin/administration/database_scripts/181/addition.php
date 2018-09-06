@@ -33,7 +33,7 @@ while ($game_stos = $result1->fetch_array(MYSQLI_BOTH)) {
 // Next do STAC
 //
 
-$result2 = $mysqli->query("SELECT * FROM game_stac")
+/* $result2 = $mysqli->query("SELECT * FROM game_stac")
                             or die("Unable to retrieve the list of game_stac titles: ".$mysqli->error);
 
 while ($game_stac = $result2->fetch_array(MYSQLI_BOTH)) {
@@ -65,4 +65,4 @@ while ($game_seauck = $result4->fetch_array(MYSQLI_BOTH)) {
         VALUES
             ($game_id, 2)")
         or die("Error error inserting STAC: ".$mysqli->error);
-}
+} */
