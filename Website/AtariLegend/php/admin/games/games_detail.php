@@ -31,6 +31,7 @@ require_once __DIR__."/../../common/DAO/IndividualDAO.php";
 require_once __DIR__."/../../common/DAO/PubDevDAO.php";
 require_once __DIR__."/../../common/DAO/ProgrammingLanguageDAO.php";
 require_once __DIR__."/../../common/DAO/GameGenreDAO.php";
+require_once __DIR__."/../../common/DAO/EngineDAO.php";
 
 $gameReleaseDao = new \AL\Common\DAO\GameReleaseDAO($mysqli);
 $gameDao = new \AL\Common\DAO\GameDAO($mysqli);
@@ -38,6 +39,7 @@ $individualDao = new \Al\Common\DAO\IndividualDAO($mysqli);
 $pubDevDao = new \AL\Common\DAO\PubDevDAO($mysqli);
 $ProgrammingLanguageDao = new \AL\Common\DAO\ProgrammingLanguageDAO($mysqli);
 $GameGenreDao = new \AL\Common\DAO\GameGenreDAO($mysqli);
+$engineDao = new \AL\Common\DAO\EngineDAO($mysqli);
 
 //***********************************************************************************
 //Let's get the general game info first.
@@ -89,6 +91,11 @@ $smarty->assign('game_releases', $gameReleaseDao->getReleasesForGame($game_id));
 $smarty->assign('game_genres', $GameGenreDao->getAllGameGenres());
 $smarty->assign('game_genres_cross', $GameGenreDao->getGameGenresForGame($game_id));
 
+//***********************************************************************************
+//get the engines & the engines already selected for this game
+//***********************************************************************************
+$smarty->assign('engines', $engineDao->getAllEngines());
+$smarty->assign('game_engines', $engineDao->getGameEnginesForGame($game_id));
 
 //*******************************************************************************************
 //get the programming languages and the programming languages already selected for this game

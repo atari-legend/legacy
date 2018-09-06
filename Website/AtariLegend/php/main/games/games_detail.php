@@ -23,6 +23,7 @@ require_once __DIR__."/../../common/DAO/PubDevDAO.php";
 require_once __DIR__."/../../common/DAO/LocationDAO.php";
 require_once __DIR__."/../../common/DAO/ProgrammingLanguageDAO.php";
 require_once __DIR__."/../../common/DAO/GameGenreDAO.php";
+require_once __DIR__."/../../common/DAO/EngineDAO.php";
 
 $gameReleaseDao = new \AL\Common\DAO\GameReleaseDAO($mysqli);
 $gameSeriesDao = new \AL\Common\DAO\GameSeriesDAO($mysqli);
@@ -32,6 +33,7 @@ $pubDevDao = new \AL\Common\DAO\PubDevDAO($mysqli);
 $locationDao = new \AL\Common\DAO\LocationDAO($mysqli);
 $ProgrammingLanguageDao = new \AL\Common\DAO\ProgrammingLanguageDAO($mysqli);
 $GameGenreDao = new \AL\Common\DAO\GameGenreDAO($mysqli);
+$engineDao = new \AL\Common\DAO\engineDAO($mysqli);
 
 /**
  * Generates an SEO-friendly description of a game, depending on the data available
@@ -202,6 +204,12 @@ $smarty->assign('release_location', $release_location);
 //***********************************************************************************
 $game_genres = $GameGenreDao->getGameGenresForGame($game_id);
 $smarty->assign('game_genres', $game_genres);
+
+//***********************************************************************************
+//get the engines & the engines already selected for this game
+//***********************************************************************************
+$game_engines = $engineDao->getGameEnginesForGame($game_id);
+$smarty->assign('game_engines', $game_engines);
 
 //**********************************************************************************
 //Get the author info
