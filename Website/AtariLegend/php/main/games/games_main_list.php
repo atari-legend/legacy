@@ -62,6 +62,7 @@ if (empty($game_author)) {
           LEFT JOIN game_unfinished ON (game.game_id = game_unfinished.game_id)
           LEFT JOIN game_wanted ON (game.game_id = game_wanted.game_id)
           LEFT JOIN game_programming_language ON (game.game_id = game_programming_language.game_id)
+          LEFT JOIN game_engine ON (game.game_id = game_engine.game_id)
           LEFT JOIN game_developer ON (game_developer.game_id = game.game_id)
           LEFT JOIN pub_dev pd2 on (pd2.pub_dev_id = game_developer.dev_pub_id)
           LEFT JOIN game_release on (game_release.game_id = game.game_id)
@@ -93,6 +94,7 @@ if (empty($game_author)) {
           LEFT JOIN game_unfinished ON (game.game_id = game_unfinished.game_id)
           LEFT JOIN game_wanted ON (game.game_id = game_wanted.game_id)
           LEFT JOIN game_programming_language ON (game.game_id = game_programming_language.game_id)
+          LEFT JOIN game_engine ON (game.game_id = game_engine.game_id)
           LEFT JOIN game_developer ON (game_developer.game_id = game.game_id)
           LEFT JOIN pub_dev pd2 on (pd2.pub_dev_id = game_developer.dev_pub_id)
           LEFT JOIN game_release on (game_release.game_id = game.game_id)
@@ -127,6 +129,7 @@ if (empty($game_author)) {
           LEFT JOIN game_unfinished ON (game.game_id = game_unfinished.game_id)
           LEFT JOIN game_wanted ON (game.game_id = game_wanted.game_id)
           LEFT JOIN game_programming_language ON (game.game_id = game_programming_language.game_id)
+          LEFT JOIN game_engine ON (game.game_id = game_engine.game_id)
           LEFT JOIN game_developer ON (game.game_id = game_developer.game_id)
           LEFT JOIN pub_dev pd2 on (pd2.pub_dev_id = game_developer.dev_pub_id)
           LEFT JOIN game_release on (game_release.game_id = game.game_id)
@@ -160,6 +163,7 @@ if (empty($game_author)) {
           LEFT JOIN game_unfinished ON (game.game_id = game_unfinished.game_id)          
           LEFT JOIN game_wanted ON (game.game_id = game_wanted.game_id)
           LEFT JOIN game_programming_language ON (game.game_id = game_programming_language.game_id)
+          LEFT JOIN game_engine ON (game.game_id = game_engine.game_id)
           LEFT JOIN game_developer ON (game.game_id = game_developer.game_id)
           LEFT JOIN pub_dev pd2 on (pd2.pub_dev_id = game_developer.dev_pub_id)
           LEFT JOIN game_release on (game_release.game_id = game.game_id)
@@ -309,11 +313,11 @@ if (isset($action) and $action == "search") {
     }
 
     if (isset($seuck) and $seuck == "1") {
-        $seuck_select = " AND game_programming_language.programming_language_id = 2";
+        $seuck_select = " AND game_engine.engine_id ='1'";
     }
 
     if (isset($stac) and $stac == "1") {
-        $stac_select = " AND game_programming_language.programming_language_id = 3";
+        $stac_select = " AND game_engine.engine_id ='2'";
     }
 
     //Before we start the build the query, we check if there is at least
@@ -408,13 +412,13 @@ if (isset($action) and $action == "search") {
             $RESULTGAME .= " AND game_unfinished.unfinished =$unfinished";
         }
         if (isset($seuck) and $seuck == "1") {
-            $RESULTGAME .= " AND game_programming_language.programming_language_id = 2";
+            $RESULTGAME .= " AND game_engine.engine_id ='1'";
         }
         if (isset($stos) and $stos == "1") {
             $RESULTGAME .= " AND game_programming_language.programming_language_id = 1";
         }
         if (isset($stac) and $stac == "1") {
-            $RESULTGAME .= " AND game_programming_language.programming_language_id = 3";
+            $RESULTGAME .= " AND game_engine.engine_id ='2'";
         }
         if (isset($wanted) and $wanted == "1") {
             $RESULTGAME .= " AND game_wanted.game_id IS NOT NULL";
@@ -511,13 +515,13 @@ if (isset($action) and $action == "search") {
                     $RESULTAKA .= " AND game_unfinished.unfinished =$unfinished";
                 }
                 if (isset($seuck) and $seuck == "1") {
-                    $RESULTAKA .= " AND game_programming_language.programming_language_id = 2";
+                    $RESULTAKA .= " AND game_engine.engine_id ='1'";
                 }
                 if (isset($stos) and $stos == "1") {
                     $RESULTAKA .= " AND game_programming_language.programming_language_id = 1";
                 }
                 if (isset($stac) and $stac == "1") {
-                    $RESULTAKA .= " AND game_programming_language.programming_language_id = 3";
+                    $RESULTAKA .= " AND game_engine.engine_id ='2'";
                 }
                 if (isset($wanted) and $wanted == "1") {
                     $RESULTAKA .= " AND game_wanted.game_id IS NOT NULL";

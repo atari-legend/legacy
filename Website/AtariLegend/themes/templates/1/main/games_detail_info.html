@@ -348,6 +348,23 @@
                     </tr>
                 {/foreach}
             {/if}
+            {foreach from=$game_engines item=engines name=engine}
+                <tr>
+                    <td class="w-30">
+                        {if $smarty.foreach.engine.first}<span class="games_main_detail_info_right">Engine</span>{/if}
+                        <br>
+                    </td>
+                    <td class="w-5">
+                        <span class="games_main_detail_info_left text-center">-</span>
+                        <br>
+                    </td>
+                    <td class="w-60">
+                        <span class="standard_tile_subtext">
+                            {$engines->getName()}
+                        </span>
+                    </td>
+                </tr>
+            {/foreach}
             {foreach from=$game_genres item=genres name=genre}
                 <tr>
                     <td class="w-30">

@@ -7,10 +7,12 @@ namespace AL\Common\Model\Game;
 class Game {
     private $id;
     private $name;
+    private $series_id;
 
-    public function __construct($id, $name, $programming_language_id = null) {
+    public function __construct($id, $name, $series_id = null) {
         $this->id = $id;
         $this->name = $name;
+        $this->series_id = $series_id;
     }
 
     public function getId() {
@@ -20,8 +22,8 @@ class Game {
     public function getName() {
         return $this->name;
     }
-    
-    public function getProgrammingLanguageId() {
-        return $this->ProgrammingLanguage;
+
+    public function getSeriesId() {
+        return $this->series;
     }
 }

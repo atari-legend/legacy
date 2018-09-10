@@ -23,20 +23,20 @@ class GameDAO {
         $stmt = \AL\Db\execute_query(
             "GameDAO: getGame: $game_id",
             $this->mysqli,
-            "SELECT game_id, game_name FROM game WHERE game_id = ?",
+            "SELECT game_id, game_name, game_series_id FROM game WHERE game_id = ?",
             "i", $game_id
         );
 
         \AL\Db\bind_result(
             "GameDAO: getGame: $game_id",
             $stmt,
-            $game_id, $game_name
+            $game_id, $game_name, $game_series_id
         );
 
         $game = null;
         if ($stmt->fetch()) {
             $game = new \AL\Common\Model\Game\Game(
-                $game_id, $game_name
+                $game_id, $game_name, $game_series_id
             );
         }
 
@@ -75,9 +75,9 @@ class GameDAO {
                 $screenshot = $screenshot_id.".".$imgext;
             }
         }
-        
+
         $stmt->close();
-        
+
         if ($screenshot == null) {
             return $screenshot;
         } else {

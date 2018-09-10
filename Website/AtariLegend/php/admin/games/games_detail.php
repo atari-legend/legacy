@@ -35,6 +35,7 @@ require_once __DIR__."/../../common/DAO/GameGenreDAO.php";
 require_once __DIR__."/../../common/DAO/IndividualRoleDAO.php";
 require_once __DIR__."/../../common/DAO/GameIndividualDAO.php";
 require_once __DIR__."/../../common/DAO/IndividualDAO.php";
+require_once __DIR__."/../../common/DAO/EngineDAO.php";
 
 $gameReleaseDao = new \AL\Common\DAO\GameReleaseDAO($mysqli);
 $gameDao = new \AL\Common\DAO\GameDAO($mysqli);
@@ -46,17 +47,21 @@ $gameGenreDao = new \AL\Common\DAO\GameGenreDAO($mysqli);
 $individualRoleDao = new \Al\Common\DAO\IndividualRoleDAO($mysqli);
 $gameIndividualDao = new \Al\Common\DAO\GameIndividualDAO($mysqli);
 $individualDao = new \Al\Common\DAO\IndividualDAO($mysqli);
+$engineDao = new \AL\Common\DAO\EngineDAO($mysqli);
 
 //***********************************************************************************
 //Let's get the general game info first.
 //***********************************************************************************
 $sql_game = $mysqli->query("SELECT game_name,
                game.game_id,
+               game.game_series_id,
+               game_series.name as game_series_name,
                game_development.development,
                game_unreleased.unreleased,
                game_unfinished.unfinished,
                game_wanted.game_wanted_id
                FROM game
+               LEFT JOIN game_series ON (game.game_series_id = game_series.id)
                LEFT JOIN game_unreleased ON (game.game_id = game_unreleased.game_id)
                LEFT JOIN game_development ON (game.game_id = game_development.game_id)
                LEFT JOIN game_unfinished ON (game.game_id = game_unfinished.game_id)
@@ -68,6 +73,8 @@ while ($game_info = $sql_game->fetch_array(MYSQLI_BOTH)) {
     $smarty->assign('game_info', array(
         'game_name' => $game_info['game_name'],
         'game_id' => $game_info['game_id'],
+        'game_series_id' => $game_info['game_series_id'],
+        'game_series_name' => $game_info['game_series_name'],
         'game_development' => $game_info['development'],
         'game_unreleased' => $game_info['unreleased'],
         'game_unfinished' => $game_info['unfinished'],
@@ -88,6 +95,13 @@ $smarty->assign('game_releases', $gameReleaseDao->getReleasesForGame($game_id));
 //***********************************************************************************
 $smarty->assign('game_genres', $gameGenreDao->getAllGameGenres());
 $smarty->assign('game_genres_cross', $gameGenreDao->getGameGenresForGame($game_id));
+
+//***********************************************************************************
+//get the engines & the engines already selected for this game
+//***********************************************************************************
+$smarty->assign('engines', $engineDao->getAllEngines());
+$smarty->assign('game_engines', $engineDao->getGameEnginesForGame($game_id));
+
 
 //*******************************************************************************************
 //get the programming languages and the programming languages already selected for this game
