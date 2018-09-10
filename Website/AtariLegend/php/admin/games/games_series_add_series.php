@@ -23,7 +23,8 @@ include("../../config/common.php");
 include("../../config/admin.php");
 
 // SERIES LIST DROPDOWN
-$sql_series = $mysqli->query("SELECT * FROM game_series ORDER BY game_series_name ASC") or die("Couldn't query Game Series Database1");
+$sql_series = $mysqli->query("SELECT * FROM game_series ORDER BY game_series_name ASC")
+    or die("Couldn't query Game Series Database1");
 
 while ($query_series = $sql_series->fetch_array(MYSQLI_BOTH)) {
     $smarty->append('game_series', array(

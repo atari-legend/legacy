@@ -48,8 +48,8 @@ The Main game series page
         <br>
         <fieldset class="secondary_fieldset centered_fieldset">
             <legend class="primary_legend">Current series</legend>
-            {foreach from=$game_series item=line}
-                <a href="../games/games_series_editor.php?series_page=series_editor&amp;game_series_id={$line.game_series_id}">{$line.game_series_name}</a><br>
+            {foreach from=$game_series item=$series}
+                <a href="../games/games_series_editor.php?series_page=series_editor&amp;game_series_id={$series->getId()}">{$series->getName()}</a><br>
             {/foreach}
         </fieldset>
     </div>

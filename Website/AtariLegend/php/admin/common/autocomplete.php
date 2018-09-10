@@ -90,6 +90,30 @@ switch ($extraParams) {
         $stmt->close();
         break;
 
+    case "game_not_in_series":
+        $stmt = $mysqli->prepare("
+        SELECT game_id, game_name
+        FROM game
+        WHERE game_series_id IS NULL
+        AND LOWER(game_name) LIKE CONCAT('%',LOWER(?),'%')")
+        or
+        die("Error querying games: ".$mysqli->error);
+
+        $stmt->bind_param("s", $term);
+        $stmt->execute();
+        $stmt->bind_result($game_id, $game_name);
+
+        while ($stmt->fetch()) {
+            array_push(
+                $json,
+                array(
+                "value" => $game_id,
+                "label" => $game_name)
+            );
+        }
+        $stmt->close();
+        break;
+
     case "pub_dev":
         $stmt = $mysqli->prepare("
             SELECT pub_dev_id, pub_dev_name

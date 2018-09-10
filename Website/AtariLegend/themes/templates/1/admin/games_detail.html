@@ -38,6 +38,11 @@
                 <a href="../games/games_box.php?game_id={$game->getId()}" class="primary_button">Boxscans <span class="help-hint">({$nr_boxscans})</span></a>
                 <a href="../games/games_similar.php?game_id={$game->getId()}" class="primary_button">Similar Games <span class="help-hint">({$nr_similar})</span></a>
                 <a href="../games/games_review.php?game_id={$game->getId()}" class="primary_button">Reviews <span class="help-hint">({$nr_reviews})</span></a>
+                {if isset($game_info.game_series_id)}
+                    <a href="../games/games_series_editor.php?game_series_id={$game_info.game_series_id}" class="primary_button"><span class="help-hint">Series:</span> {$game_info.game_series_name}</a>
+                {else}
+                    <a href="../games/games_series_main.php" class="primary_button">Add to a series</a>
+                {/if}
                 {if $nr_comments > 0}
                     <a href="../games/games_comment.php?game_id={$game->getId()}" class="primary_button">Moderate comments</a>
                 {/if}
@@ -83,6 +88,11 @@
                 <a href="../games/games_box.php?game_id={$game->getId()}" class="primary_button">Boxscans <span class="help-hint">({$nr_boxscans})</span></a>
                 <a href="../games/games_similar.php?game_id={$game->getId()}" class="primary_button">Similar Games <span class="help-hint">({$nr_similar})</span></a>
                 <a href="../games/games_review.php?game_id={$game->getId()}" class="primary_button">Reviews <span class="help-hint">({$nr_reviews})</span></a>
+                {if isset($game_info.game_series_id)}
+                    <a href="../games/games_series_editor.php?game_series_id={$game_info.game_series_id}" class="primary_button"><span class="help-hint">Series:</span> {$game_info.game_series_name}</a>
+                {else}
+                    <a href="../games/games_series_main.php" class="primary_button">Add to a series</a>
+                {/if}
                 {if $nr_comments > 0}
                     <a href="../games/games_comment.php?game_id={$game->getId()}" class="primary_button">Moderate comments</a>
                 {/if}
@@ -238,8 +248,6 @@ $('#input-tags3').selectize({
                                     {/foreach}
                                     </select>
                                 </div>
-                                <br>
-                                <br>
                                 <script>
                                     $('#input-tags').selectize({
                                         plugins: ['remove_button'],
@@ -269,8 +277,6 @@ $('#input-tags3').selectize({
                                     {/foreach}
                                     </select>
                                 </div>
-                                <br>
-                                <span class="help-hint">Click to choose and add categories</span>
                                 <script>
                                     $('#input-tags2').selectize({
                                         plugins: ['remove_button'],
@@ -283,6 +289,38 @@ $('#input-tags3').selectize({
                                         },
                                     });
                                 </script>
+                                <br>
+                                <b>Game engines</b>&nbsp;&nbsp;
+                                <div class="control-group">
+                                    <label for="input-tags3"></label>
+                                    <select name="game_engine[]" multiple id="input-tags3" class="standard_select input_full">
+                                    {foreach from=$engines item=all_engines}
+                                        <option value="{$all_engines->getId()}"
+                                            {foreach from=$game_engines item=linked_game_engines name=engines}
+                                                {if $linked_game_engines->getId() == $all_engines->getId()}
+                                                    selected
+                                                {/if}
+                                            {/foreach}
+                                            >
+                                            {$all_engines->getName()}
+                                        </option>
+                                    {/foreach}
+                                    </select>
+                                </div>
+                                <br>
+                                <script>
+                                    $('#input-tags3').selectize({
+                                        plugins: ['remove_button'],
+                                        persist: false,
+                                        create: true,
+                                        render: {
+                                            item: function(data, escape) {
+                                                return '<div class="primary_button" style="border-radius:3px;">' + escape(data.text) + '</div>';
+                                            }
+                                        },
+                                    });
+                                </script>
+                                <span class="help-hint">Click to choose and add categories</span>
                             </div>
                         </div>
                         <br>

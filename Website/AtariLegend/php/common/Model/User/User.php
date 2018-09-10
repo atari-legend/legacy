@@ -37,7 +37,7 @@ class User {
         if ($avatar_ext != null && $avatar_ext != '') {
             $this->avatar = $GLOBALS['user_avatar_path'].$id.'.'.$avatar_ext;
         } else {
-            $this->avatar = $GLOBALS['style_folder']."/images/default_avatar_image.png";
+            $this->avatar = "/themes/styles/1/images/default_avatar_image.png";
         }
 
         $this->news_count = $news_count;
