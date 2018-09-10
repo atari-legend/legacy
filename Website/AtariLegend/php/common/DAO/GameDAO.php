@@ -133,7 +133,7 @@ class GameDAO {
         $bind_string = "iii";
         $bind_params = array($new_author_type_id, $game_id, $individual_id);
 
-        if ($author_type_id != null) {
+        if ($author_type_id != null && $author_type_id != '') {
             $query .= "AND individual_role_id = ?";
             $bind_string .= "i";
             $bind_params[] = $author_type_id;
