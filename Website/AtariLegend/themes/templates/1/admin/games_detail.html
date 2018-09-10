@@ -210,15 +210,15 @@ $('#input-tags3').selectize({
                                     </div>
                                     <div class="gd_basic_game_info_row_checktxt">Wanted&nbsp;</div>
                                 </div>
-                                <div class="gd_basic_game_info_row">
-                                    <div class="gd_basic_game_info_row_check">
-                                        <div class="links_mod_checkbox">
-                                            <input type="checkbox" id="arcade" name="arcade" value="1" {if $game_info.game_arcade == 1} checked{/if}>
-                                            <label for="arcade"></label>
-                                        </div>
-                                    </div>
-                                    <div class="gd_basic_game_info_row_checktxt">Arcade conversion&nbsp;</div>
-                                </div>
+                                <br>
+                                <b>Port</b>
+                                <br>
+                                <select name="port_id" class="standard_select select_large">
+                                <option value="">-</option>
+                                {foreach from=$ports item=all_ports}
+                                    <option value="{$all_ports->getId()}" {if $all_ports->getId() eq $game_port->getId()} selected{/if}>{$all_ports->getPort()}</option>
+                                {/foreach}
+                            </select>
                             </div>
                             <div id="gd_basic_game_info_2">
                                 <b>Game genres</b>&nbsp;&nbsp;
@@ -239,6 +239,7 @@ $('#input-tags3').selectize({
                                     </select>
                                 </div>
                                 <br>
+                                <br>
                                 <script>
                                     $('#input-tags').selectize({
                                         plugins: ['remove_button'],
@@ -251,7 +252,6 @@ $('#input-tags3').selectize({
                                         },
                                     });
                                 </script>
-                                <br>
                                 <b>Programming Language</b>&nbsp;&nbsp;
                                 <div class="control-group">
                                     <label for="input-tags2"></label>
