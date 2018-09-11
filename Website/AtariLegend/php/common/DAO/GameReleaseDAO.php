@@ -17,6 +17,9 @@ class GameReleaseDAO {
     const TYPE_BUDGET = 'Budget';
     const TYPE_RERELEASE = 'Re-release';
     const TYPE_BUDGET_RERELEASE = 'Budget re-release';
+    const TYPE_PLAYABLE_DEMO = 'Playable demo';
+    const TYPE_NON_PLAYABLE_DEMO = 'Non-playable demo';
+    const TYPE_SLIDESHOW = 'Slideshow';
 
     public function __construct($mysqli) {
         $this->mysqli = $mysqli;
@@ -41,7 +44,10 @@ class GameReleaseDAO {
         return array(
             GameReleaseDAO::TYPE_BUDGET,
             GameReleaseDAO::TYPE_RERELEASE,
-            GameReleaseDAO::TYPE_BUDGET_RERELEASE
+            GameReleaseDAO::TYPE_BUDGET_RERELEASE,
+            GameReleaseDAO::TYPE_PLAYABLE_DEMO,
+            GameReleaseDAO::TYPE_NON_PLAYABLE_DEMO,
+            GameReleaseDAO::TYPE_SLIDESHOW
         );
     }
 
