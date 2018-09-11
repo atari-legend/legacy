@@ -644,10 +644,15 @@ while ($query_similar = $sql_similar->fetch_array(MYSQLI_BOTH)) {
     or die("Error - Couldn't get similar game data");
 
     while ($sql_game_similar_data = $query_game_similar_data->fetch_array(MYSQLI_BOTH)) {
-        $new_path = $game_screenshot_path;
-        $new_path .= $sql_game_similar_data['screenshot_id'];
-        $new_path .= ".";
-        $new_path .= $sql_game_similar_data['imgext'];
+        if ($sql_game_similar_data['screenshot_id'] != '')
+        {
+            $new_path = $game_screenshot_path;
+            $new_path .= $sql_game_similar_data['screenshot_id'];
+            $new_path .= ".";
+            $new_path .= $sql_game_similar_data['imgext'];
+        } else {
+            $new_path = 'none';
+        }            
 
         $smarty->assign('similar', array(
             'game_id' => $query_similar['game_similar_cross'],
