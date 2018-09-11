@@ -260,6 +260,7 @@ $('#input-tags3').selectize({
                                         },
                                     });
                                 </script>
+                                <br>
                                 <b>Programming Language</b>&nbsp;&nbsp;
                                 <div class="control-group">
                                     <label for="input-tags2"></label>
@@ -348,10 +349,10 @@ $('#input-tags3').selectize({
                             <input type="hidden" name="action" value="update">
                             <input type="hidden" name="game_id" value="{$game->getId()}">
                             <input type="hidden" name="individual_id" value="{$linked_individual->getIndividual()->getId()}">
-                            <input type="hidden" name="author_type_id" value="{$linked_individual->getRole()->getId()}">
+                            <input type="hidden" name="individual_role_id" value="{$linked_individual->getRole()->getId()}">
 
                             <a title="Remove {$linked_individual->getIndividual()->getName()|escape:"html"} from this game"
-                                href="db_games_authors.php?game_id={$game->getId()}&amp;individual_id={$linked_individual->getIndividual()->getId()}&amp;author_type_id={$linked_individual->getRole()->getId()}&amp;action=remove"
+                                href="db_games_authors.php?game_id={$game->getId()}&amp;individual_id={$linked_individual->getIndividual()->getId()}&amp;individual_role_id={$linked_individual->getRole()->getId()}&amp;action=remove"
                                 onclick="javascript:return confirm('This author will be removed from the game')">
                                 <span class="fa fa-fw fa-trash"></span>
                             </a>
@@ -359,7 +360,7 @@ $('#input-tags3').selectize({
                             <input type="text" value="{$linked_individual->getIndividual()->getName()}" class="standard_input input_large" disabled id="gd_game_author">
                             <a href="../individuals/individuals_edit.php?ind_id={$linked_individual->getIndividual()->getId()}" title="Edit individual" class="standard_tile_link"><i class="fa fa-fw fa-pencil edit_author" aria-hidden="true"></i></a>
 
-                            <select name="new_author_type_id"
+                            <select name="new_individual_role_id"
                                 onchange="jQuery('#update-author-{$linked_individual->getId()}').show()"
                                 class="standard_select select_medium">
                                 <option value="">-</option>
@@ -399,7 +400,7 @@ $('#input-tags3').selectize({
                     </select>
                     <span class="fa fa-fw edit_author"></span>
 
-                    <select name="author_type_id" class="standard_select select_medium">
+                    <select name="individual_role_id" class="standard_select select_medium">
                         <option value="" selected="selected">-</option>
                         {foreach from=$individual_roles item=roles}
                             <option value="{$roles->getId()}">{$roles->getRole()}</option>

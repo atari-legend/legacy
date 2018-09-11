@@ -20,7 +20,7 @@ $individual = $individualDao->getIndividual($individual_id);
 
 switch ($action) {
     case "remove":
-        $gameDao->removeAuthor($game_id, $individual_id, $author_type_id);
+        $gameDao->removeIndividual($game_id, $individual_id, $individual_role_id);
 
         $changeLogDao->insertChangeLog(
             new \AL\Common\Model\Database\ChangeLog(
@@ -40,7 +40,7 @@ switch ($action) {
         break;
 
     case "add":
-        $gameDao->addAuthor($game_id, $individual_id, $author_type_id);
+        $gameDao->addIndividual($game_id, $individual_id, $individual_role_id);
 
         $changeLogDao->insertChangeLog(
             new \AL\Common\Model\Database\ChangeLog(
@@ -60,7 +60,7 @@ switch ($action) {
         break;
 
     case "update":
-        $gameDao->updateAuthorType($game_id, $individual_id, $author_type_id, $new_author_type_id);
+        $gameDao->updateIndividual($game_id, $individual_id, $individual_role_id, $new_individual_role_id);
 
         $changeLogDao->insertChangeLog(
             new \AL\Common\Model\Database\ChangeLog(
