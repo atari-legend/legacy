@@ -220,15 +220,15 @@ $('#input-tags3').selectize({
                                     </div>
                                     <div class="gd_basic_game_info_row_checktxt">Wanted&nbsp;</div>
                                 </div>
-                                <div class="gd_basic_game_info_row">
-                                    <div class="gd_basic_game_info_row_check">
-                                        <div class="links_mod_checkbox">
-                                            <input type="checkbox" id="arcade" name="arcade" value="1" {if $game_info.game_arcade == 1} checked{/if}>
-                                            <label for="arcade"></label>
-                                        </div>
-                                    </div>
-                                    <div class="gd_basic_game_info_row_checktxt">Arcade conversion&nbsp;</div>
-                                </div>
+                                <br>
+                                <b>Port</b>
+                                <br>
+                                <select name="port_id" class="standard_select select_large">
+                                <option value="">-</option>
+                                {foreach from=$ports item=all_ports}
+                                    <option value="{$all_ports->getId()}" {if $all_ports->getId() eq $game_port->getId()} selected{/if}>{$all_ports->getPort()}</option>
+                                {/foreach}
+                            </select>
                             </div>
                             <div id="gd_basic_game_info_2">
                                 <b>Game genres</b>&nbsp;&nbsp;
@@ -342,33 +342,33 @@ $('#input-tags3').selectize({
                 <a id="gd_authors"><b>Authors &amp; Creators</b></a>
                 <br>
 
-                {if isset($game_author)}
-                    {foreach from=$game_author item=author}
+                {if isset($game_individuals)}
+                    {foreach from=$game_individuals item=$linked_individual}
                         <form action="db_games_authors.php" method="post">
 
                             <input type="hidden" name="action" value="update">
                             <input type="hidden" name="game_id" value="{$game->getId()}">
-                            <input type="hidden" name="individual_id" value="{$author.ind_id}">
-                            <input type="hidden" name="author_type_id" value="{$author.author_type_id}">
+                            <input type="hidden" name="individual_id" value="{$linked_individual->getIndividual()->getId()}">
+                            <input type="hidden" name="individual_role_id" value="{$linked_individual->getRole()->getId()}">
 
-                            <a title="Remove {$author.ind_name|escape:"html"} from this game"
-                                href="db_games_authors.php?game_id={$game->getId()}&amp;individual_id={$author.ind_id}&amp;author_type_id={$author.author_type_id}&amp;action=remove"
+                            <a title="Remove {$linked_individual->getIndividual()->getName()|escape:"html"} from this game"
+                                href="db_games_authors.php?game_id={$game->getId()}&amp;individual_id={$linked_individual->getIndividual()->getId()}&amp;individual_role_id={$linked_individual->getRole()->getId()}&amp;action=remove"
                                 onclick="javascript:return confirm('This author will be removed from the game')">
                                 <span class="fa fa-fw fa-trash"></span>
                             </a>
 
-                            <input type="text" value="{$author.ind_name}" class="standard_input input_large" disabled id="gd_game_author">
-                            <a href="../individuals/individuals_edit.php?ind_id={$author.ind_id}" title="Edit individual" class="standard_tile_link"><i class="fa fa-fw fa-pencil edit_author" aria-hidden="true"></i></a>
+                            <input type="text" value="{$linked_individual->getIndividual()->getName()}" class="standard_input input_large" disabled id="gd_game_author">
+                            <a href="../individuals/individuals_edit.php?ind_id={$linked_individual->getIndividual()->getId()}" title="Edit individual" class="standard_tile_link"><i class="fa fa-fw fa-pencil edit_author" aria-hidden="true"></i></a>
 
-                            <select name="new_author_type_id"
-                                onchange="jQuery('#update-author-{$author.game_author_id}').show()"
+                            <select name="new_individual_role_id"
+                                onchange="jQuery('#update-author-{$linked_individual->getId()}').show()"
                                 class="standard_select select_medium">
                                 <option value="">-</option>
-                                {foreach from=$author_types item=author_type}
-                                    <option value="{$author_type.author_type_id}" {if $author_type.author_type eq $author.author_type_info} selected{/if}>{$author_type.author_type}</option>
+                                {foreach from=$individual_roles item=linked_role}
+                                    <option value="{$linked_role->getId()}" {if $linked_role->getId() eq $linked_individual->getRole()->getId()} selected{/if}>{$linked_role->getRole()}</option>
                                 {/foreach}
                             </select>
-                            <input type="submit" id="update-author-{$author.game_author_id}" style="display: none;" class="secondary_button" value="Update">
+                            <input type="submit" id="update-author-{$linked_individual->getId()}" style="display: none;" class="secondary_button" value="Update">
 
                         </form>
                     {/foreach}
@@ -400,10 +400,10 @@ $('#input-tags3').selectize({
                     </select>
                     <span class="fa fa-fw edit_author"></span>
 
-                    <select name="author_type_id" class="standard_select select_medium">
+                    <select name="individual_role_id" class="standard_select select_medium">
                         <option value="" selected="selected">-</option>
-                        {foreach from=$author_types item=author_type}
-                            <option value="{$author_type.author_type_id}">{$author_type.author_type}</option>
+                        {foreach from=$individual_roles item=roles}
+                            <option value="{$roles->getId()}">{$roles->getRole()}</option>
                         {/foreach}
                     </select>
 

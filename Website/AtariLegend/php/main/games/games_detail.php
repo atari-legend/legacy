@@ -23,6 +23,7 @@ require_once __DIR__."/../../common/DAO/PubDevDAO.php";
 require_once __DIR__."/../../common/DAO/LocationDAO.php";
 require_once __DIR__."/../../common/DAO/ProgrammingLanguageDAO.php";
 require_once __DIR__."/../../common/DAO/GameGenreDAO.php";
+require_once __DIR__."/../../common/DAO/PortDAO.php";
 require_once __DIR__."/../../common/DAO/EngineDAO.php";
 
 $gameReleaseDao = new \AL\Common\DAO\GameReleaseDAO($mysqli);
@@ -31,8 +32,9 @@ $resolutionDao = new \AL\Common\DAO\ResolutionDao($mysqli);
 $systemDao = new \AL\Common\DAO\SystemDao($mysqli);
 $pubDevDao = new \AL\Common\DAO\PubDevDAO($mysqli);
 $locationDao = new \AL\Common\DAO\LocationDAO($mysqli);
-$ProgrammingLanguageDao = new \AL\Common\DAO\ProgrammingLanguageDAO($mysqli);
-$GameGenreDao = new \AL\Common\DAO\GameGenreDAO($mysqli);
+$programmingLanguageDao = new \AL\Common\DAO\ProgrammingLanguageDAO($mysqli);
+$gameGenreDao = new \AL\Common\DAO\GameGenreDAO($mysqli);
+$portDao = new \AL\Common\DAO\portDAO($mysqli);
 $engineDao = new \AL\Common\DAO\engineDAO($mysqli);
 
 /**
@@ -145,12 +147,10 @@ $sql_game = $mysqli->query("SELECT game_name,
                game_development.development,
                game_unreleased.unreleased,
                game_unfinished.unfinished,
-               game_wanted.game_wanted_id,
-               game_arcade.arcade
+               game_wanted.game_wanted_id
                FROM game
                LEFT JOIN game_unreleased ON (game.game_id = game_unreleased.game_id)
                LEFT JOIN game_development ON (game.game_id = game_development.game_id)
-               LEFT JOIN game_arcade ON (game.game_id = game_arcade.game_id)
                LEFT JOIN game_unfinished ON (game.game_id = game_unfinished.game_id)
                LEFT JOIN game_wanted ON (game.game_id = game_wanted.game_id)
                     WHERE game.game_id='$game_id'") or die("Error getting game info");
@@ -162,14 +162,13 @@ if ($game_info = $sql_game->fetch_array(MYSQLI_BOTH)) {
         'game_development' => $game_info['development'],
         'game_unreleased' => $game_info['unreleased'],
         'game_unfinished' => $game_info['unfinished'],
-        'game_wanted' => $game_info['game_wanted_id'],
-        'game_arcade' => $game_info['arcade']
+        'game_wanted' => $game_info['game_wanted_id']
     ));
 }
 
 // Get the programming languages
-$smarty->assign('programming_languages', $ProgrammingLanguageDao->getAllProgrammingLanguages());
-$smarty->assign('game_programming_languages', $ProgrammingLanguageDao->getProgrammingLanguagesForGame($game_id));
+$smarty->assign('programming_languages', $programmingLanguageDao->getAllProgrammingLanguages());
+$smarty->assign('game_programming_languages', $programmingLanguageDao->getProgrammingLanguagesForGame($game_id));
 
 $smarty->assign('resolutions', $resolutionDao->getAllResolutionsAsMap());
 $smarty->assign('systems', $systemDao->getAllSystemsAsMap());
@@ -202,10 +201,15 @@ $smarty->assign('release_location', $release_location);
 //***********************************************************************************
 //get the game genres & the genres already selected for this game
 //***********************************************************************************
-$game_genres = $GameGenreDao->getGameGenresForGame($game_id);
+$game_genres = $gameGenreDao->getGameGenresForGame($game_id);
 $smarty->assign('game_genres', $game_genres);
 
 //***********************************************************************************
+//get the game port info
+//***********************************************************************************
+$port = $portDao->getPortForGame($game_id);
+$smarty->assign('port', $port);
+
 //get the engines & the engines already selected for this game
 //***********************************************************************************
 $game_engines = $engineDao->getGameEnginesForGame($game_id);
@@ -215,37 +219,37 @@ $smarty->assign('game_engines', $game_engines);
 //Get the author info
 //**********************************************************************************
 //Starting off with displaying the authors that are linked to the game and having a delete option for them */
-$sql_gameauthors = $mysqli->query("SELECT * FROM individuals
-                  LEFT JOIN individual_text ON (individual_text.ind_id = individuals.ind_id)
-                  LEFT JOIN game_author ON (game_author.ind_id = individuals.ind_id)
-                  LEFT JOIN author_type ON (game_author.author_type_id = author_type.author_type_id)
-                  WHERE game_author.game_id='$game_id' ORDER BY author_type.author_type_id, individuals.ind_name") or die("Error loading authors");
+$sql_game_individuals = $mysqli->query("SELECT * FROM individuals
+                        LEFT JOIN individual_text ON (individual_text.ind_id = individuals.ind_id)
+                        LEFT JOIN game_individual ON (game_individual.individual_id = individuals.ind_id)
+                        LEFT JOIN individual_role ON (game_individual.individual_role_id = individual_role.id)
+                        WHERE game_individual.game_id='$game_id' ORDER BY individual_role.id, individuals.ind_name") or die("Error loading authors");
 
 $nr_interviews = 0;
 
-while ($game_author = $sql_gameauthors->fetch_array(MYSQLI_BOTH)) {
+while ($game_individual = $sql_game_individuals->fetch_array(MYSQLI_BOTH)) {
     $nickname = '';
     $nick_id = '';
     $interview_id = '';
 
-    if ($game_author['ind_imgext'] == 'png' or $game_author['ind_imgext'] == 'jpg' or $game_author['ind_imgext']) {
+    if ($game_individual['ind_imgext'] == 'png' or $game_individual['ind_imgext'] == 'jpg' or $game_individual['ind_imgext']) {
         $v_ind_image  = $individual_screenshot_path;
-        $v_ind_image .= $game_author['ind_id'];
+        $v_ind_image .= $game_individual['ind_id'];
         $v_ind_image .= '.';
-        $v_ind_image .= $game_author['ind_imgext'];
+        $v_ind_image .= $game_individual['ind_imgext'];
     } else {
         $v_ind_image = "none";
     }
 
-    if (preg_match("/[a-z]/i", $game_author['ind_profile'])) {
-        $profile = $game_author['ind_profile'];
+    if (preg_match("/[a-z]/i", $game_individual['ind_profile'])) {
+        $profile = $game_individual['ind_profile'];
     } else {
         $profile = 'none';
     }
 
-    if (isset($game_author['ind_id'])) {
+    if (isset($game_individual['individual_id'])) {
         // Get nickname information
-        $sql_nick = $mysqli->query("SELECT * FROM individual_nicks where ind_id=$game_author[ind_id]") or die("problem getting nickname");
+        $sql_nick = $mysqli->query("SELECT * FROM individual_nicks where ind_id=$game_individual[individual_id]") or die("problem getting nickname");
 
         while ($ind_nicks = $sql_nick->fetch_array(MYSQLI_BOTH)) {
             $ind_id = $ind_nicks['nick_id'];
@@ -261,7 +265,7 @@ while ($game_author = $sql_gameauthors->fetch_array(MYSQLI_BOTH)) {
         $sql_interview = $mysqli->query("SELECT * FROM interview_main
                                                   LEFT JOIN interview_text ON (interview_main.interview_id = interview_text.interview_id)
                                                   LEFT JOIN users ON (interview_main.user_id = users.user_id)
-                                                  WHERE ind_id=$game_author[ind_id]") or die("problem getting interview");
+                                                  WHERE ind_id=$game_individual[individual_id]") or die("problem getting interview");
         while ($interview = $sql_interview->fetch_array(MYSQLI_BOTH)) {
             $nr_interviews++;
 
@@ -281,8 +285,8 @@ while ($game_author = $sql_gameauthors->fetch_array(MYSQLI_BOTH)) {
             if ($v_ind_image != 'none') {
                 $smarty->append(
                     'interviews',
-                    array( 'ind_id' => $game_author['game_author_id'],
-                           'ind_name' => $game_author['ind_name'],
+                    array( 'ind_id' => $game_individual['id'],
+                           'ind_name' => $game_individual['ind_name'],
                            'ind_img' => $v_ind_image,
                            'int_id' => $interview['interview_id'],
                            'int_text' => $int_text,
@@ -295,16 +299,16 @@ while ($game_author = $sql_gameauthors->fetch_array(MYSQLI_BOTH)) {
         }
     }
 
-    $smarty->append('game_author', array(
-        'game_author_id' => $game_author['game_author_id'],
-        'ind_name' => $game_author['ind_name'],
-        'ind_id' => $game_author['ind_id'],
+    $smarty->append('game_individual', array(
+        'id' => $game_individual['id'],
+        'ind_name' => $game_individual['ind_name'],
+        'ind_id' => $game_individual['ind_id'],
         'ind_nick' => $nickname,
         'ind_nick_id' => $nick_id,
         'ind_profile' => $profile,
         'ind_img' => $v_ind_image,
         'interview_id' => $interview_id,
-        'auhthor_type_info' => $game_author['author_type_info']
+        'individual_role' => $game_individual['name']
     ));
 }
 

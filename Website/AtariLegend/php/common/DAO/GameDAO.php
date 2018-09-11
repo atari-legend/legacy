@@ -86,63 +86,89 @@ class GameDAO {
     }
 
     /**
-     * Remove an author from a game
-     * @param number $game_id ID of the game to remove the author from
+     * Remove an individual from a game
+     * @param number $game_id ID of the game to remove the individual from
      * @param number $individual_id ID of the individual to remove
-     * @param number $author_type_id ID of the type of author to remove
+     * @param number $individual_role_id ID of the type of individual to remove
      */
-    public function removeAuthor($game_id, $individual_id, $author_type_id) {
-        $stmt = \AL\Db\execute_query(
-            "GameDAO: removeAuthor",
-            $this->mysqli,
-            "DELETE FROM game_author
-            WHERE game_id = ? AND ind_id = ? AND author_type_id = ?",
-            "iii", $game_id, $individual_id, $author_type_id
-        );
-
-        $stmt->close();
-    }
-
-    /**
-     * Add a new author to a game
-     * @param number $game_id ID of the game to add the author to
-     * @param number $individual_id ID of the individual to add
-     * @param number $author_type_id ID of the type of author to add
-     */
-    public function addAuthor($game_id, $individual_id, $author_type_id) {
-        $stmt = \AL\Db\execute_query(
-            "GameDAO: addAuthor",
-            $this->mysqli,
-            "INSERT INTO game_author (game_id, ind_id, author_type_id) VALUES (?, ?, ?)",
-            "iii", $game_id, $individual_id, $author_type_id
-        );
-
-        $stmt->close();
-    }
-
-    /**
-     * Update the type of author on a game
-     * @param number $game_id ID of the game to update the author for
-     * @param number $individual_id ID of the individual to update the type for
-     * @param number $author_type_id Previous author type ID
-     * @param number $new_author_type_id New author type ID
-     */
-    public function updateAuthorType($game_id, $individual_id, $author_type_id, $new_author_type_id) {
-        $query = "UPDATE game_author SET author_type_id = ?
-            WHERE game_id = ? AND ind_id = ? ";
-        $bind_string = "iii";
-        $bind_params = array($new_author_type_id, $game_id, $individual_id);
-
-        if ($author_type_id != null) {
-            $query .= "AND author_type_id = ?";
-            $bind_string .= "i";
-            $bind_params[] = $author_type_id;
+    public function removeIndividual($game_id, $individual_id, $individual_role_id) {
+        if ($individual_role_id != null && $individual_role_id != '') {
+            $stmt = \AL\Db\execute_query(
+                "GameDAO: removeIndividual",
+                $this->mysqli,
+                "DELETE FROM game_individual
+                WHERE game_id = ? AND individual_id = ? AND individual_role_id = ?",
+                "iii", $game_id, $individual_id, $individual_role_id
+            );
         } else {
-            $query .= "AND author_type_id IS NULL";
+            $stmt = \AL\Db\execute_query(
+                "GameDAO: removeIndividual",
+                $this->mysqli,
+                "DELETE FROM game_individual
+                WHERE game_id = ? AND individual_id = ?",
+                "ii", $game_id, $individual_id
+            );
+        }
+
+        $stmt->close();
+    }
+
+    /**
+     * Add a new individual to a game
+     * @param number $game_id ID of the game to add the individual to
+     * @param number $individual_id ID of the individual to add
+     * @param number individual_role_id ID of the type of individual to add
+     */
+    public function addIndividual($game_id, $individual_id, $individual_role_id) {
+        if ($individual_role_id == null && $individual_role_id == '') {
+            $stmt = \AL\Db\execute_query(
+                "GameDAO: addIndividual",
+                $this->mysqli,
+                "INSERT INTO game_individual (game_id, individual_id, individual_role_id) VALUES (?, ?, null)",
+                "ii", $game_id, $individual_id
+            );
+        } else {
+            $stmt = \AL\Db\execute_query(
+                "GameDAO: addIndividual",
+                $this->mysqli,
+                "INSERT INTO game_individual (game_id, individual_id, individual_role_id) VALUES (?, ?, ?)",
+                "iii", $game_id, $individual_id, $individual_role_id
+            );
+        }
+
+        $stmt->close();
+    }
+
+    /**
+     * Update the individual role on a game
+     * @param number $game_id ID of the game to update the individual for
+     * @param number $individual_id ID of the individual to update the type for
+     * @param number individual_role_id Previous individual role ID
+     * @param number $new_individual_role_id New individual role ID
+     */
+    public function updateIndividual($game_id, $individual_id, $individual_role_id, $new_individual_role_id) {
+        if ($new_individual_role_id == null && $new_individual_role_id == '') {
+            $query = "UPDATE game_individual SET individual_role_id = null
+                WHERE game_id = ? AND individual_id = ? ";
+            $bind_string = "ii";
+            $bind_params = array($game_id, $individual_id);
+        } else {
+            $query = "UPDATE game_individual SET individual_role_id = ?
+                WHERE game_id = ? AND individual_id = ? ";
+            $bind_string = "iii";
+            $bind_params = array($new_individual_role_id, $game_id, $individual_id);
+        }
+
+        if ($individual_role_id != null && $individual_role_id != '') {
+            $query .= "AND individual_role_id = ?";
+            $bind_string .= "i";
+            $bind_params[] = $individual_role_id;
+        } else {
+            $query .= "AND individual_role_id IS NULL";
         }
 
         $stmt = \AL\Db\execute_query(
-            "GameDAO: updateAuthorType",
+            "GameDAO: updateIndividual",
             $this->mysqli,
             $query,
             $bind_string, ...$bind_params
