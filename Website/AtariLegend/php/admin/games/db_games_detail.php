@@ -30,6 +30,7 @@ require_once __DIR__."/../../common/DAO/ProgrammingLanguageDAO.php";
 require_once __DIR__."/../../common/DAO/GameGenreDAO.php";
 require_once __DIR__."/../../common/DAO/PortDAO.php";
 require_once __DIR__."/../../common/DAO/EngineDAO.php";
+require_once __DIR__."/../../common/DAO/ControlDAO.php";
 
 $changeLogDao = new \AL\Common\DAO\ChangeLogDAO($mysqli);
 $gameReleaseDao = new \AL\Common\DAO\GameReleaseDAO($mysqli);
@@ -37,6 +38,7 @@ $programmingLanguageDao = new \AL\Common\DAO\ProgrammingLanguageDAO($mysqli);
 $gameGenreDao = new \AL\Common\DAO\GameGenreDAO($mysqli);
 $portDao = new \AL\Common\DAO\PortDAO($mysqli);
 $engineDao = new \AL\Common\DAO\engineDAO($mysqli);
+$controlDao = new \AL\Common\DAO\controlDAO($mysqli);
 
 if (isset($game_id)){
     $stmt = $mysqli->prepare("SELECT game_name FROM game WHERE game_id = ?") or die($mysqli->error);
@@ -191,6 +193,9 @@ if (isset($action) and $action == 'modify_game') {
     
     //Update the port
     $portDao->setPortForGame($game_id, isset($port_id) ? $port_id : null);
+    
+    //Update the game controls
+    $controlDao->setGameControlForGame($game_id, isset($game_control) ? $game_control : []);
 
     // Update the Unreleased tick box info
     // Start off by deleting previos value
@@ -333,6 +338,7 @@ if (isset($action) and $action == 'delete_game') {
                                         $sdbquery = $mysqli->query("DELETE FROM game_free WHERE game_id='$game_id'");
                                         $sdbquery = $mysqli->query("DELETE FROM game_programming_language WHERE game_id='$game_id'");
                                         $sdbquery = $mysqli->query("DELETE FROM game_engine WHERE game_id='$game_id'");
+                                        $sdbquery = $mysqli->query("DELETE FROM game_control WHERE game_id='$game_id'");
                                         $sdbquery = $mysqli->query("DELETE FROM game_arcade WHERE game_id='$game_id'");
                                         $sdbquery = $mysqli->query("DELETE FROM game_wanted WHERE game_id='$game_id'");
                                         $sdbquery = $mysqli->query("DELETE FROM game_mono WHERE game_id='$game_id'");

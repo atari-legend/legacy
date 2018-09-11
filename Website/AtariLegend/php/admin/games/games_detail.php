@@ -36,6 +36,7 @@ require_once __DIR__."/../../common/DAO/IndividualRoleDAO.php";
 require_once __DIR__."/../../common/DAO/GameIndividualDAO.php";
 require_once __DIR__."/../../common/DAO/IndividualDAO.php";
 require_once __DIR__."/../../common/DAO/EngineDAO.php";
+require_once __DIR__."/../../common/DAO/ControlDAO.php";
 
 $gameReleaseDao = new \AL\Common\DAO\GameReleaseDAO($mysqli);
 $gameDao = new \AL\Common\DAO\GameDAO($mysqli);
@@ -48,6 +49,7 @@ $individualRoleDao = new \Al\Common\DAO\IndividualRoleDAO($mysqli);
 $gameIndividualDao = new \Al\Common\DAO\GameIndividualDAO($mysqli);
 $individualDao = new \Al\Common\DAO\IndividualDAO($mysqli);
 $engineDao = new \AL\Common\DAO\EngineDAO($mysqli);
+$controlDao = new \AL\Common\DAO\ControlDAO($mysqli);
 
 //***********************************************************************************
 //Let's get the general game info first.
@@ -102,7 +104,6 @@ $smarty->assign('game_genres_cross', $gameGenreDao->getGameGenresForGame($game_i
 $smarty->assign('engines', $engineDao->getAllEngines());
 $smarty->assign('game_engines', $engineDao->getGameEnginesForGame($game_id));
 
-
 //*******************************************************************************************
 //get the programming languages and the programming languages already selected for this game
 //*******************************************************************************************
@@ -114,6 +115,12 @@ $smarty->assign('game_programming_languages', $programmingLanguageDao->getProgra
 //***********************************************************************************
 $smarty->assign('ports', $portDao->getAllPorts());
 $smarty->assign('game_port', $portDao->getPortForGame($game_id));
+
+//***********************************************************************************
+//get the game controls & the controls already selected for this game
+//***********************************************************************************
+$smarty->assign('game_controls', $controlDao->getAllControls());
+$smarty->assign('game_control_cross', $controlDao->getGameControlsForGame($game_id));
 
 //**********************************************************************************
 //Get the individuals info
