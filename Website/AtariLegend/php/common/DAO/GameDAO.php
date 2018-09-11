@@ -107,14 +107,26 @@ class GameDAO {
      * Add a new author to a game
      * @param number $game_id ID of the game to add the author to
      * @param number $individual_id ID of the individual to add
-     * @param number $author_type_id ID of the type of author to add
+     * @param number $individual_role_id ID of the type of author to add
      */
-    public function addAuthor($game_id, $individual_id, $author_type_id) {
+    public function addAuthor($game_id, $individual_id, $individual_role_id) {
+        $columns = ["game_id", "individual_id"];
+        $bind_variables = ["?", "?"];
+        $bind_params = [$game_id, $individual_id];
+        $bind_string = "ii";
+
+        if ($individual_role_id != null) {
+            $columns[] = "individual_role_id";
+            $bind_variables[] = "?";
+            $bind_params[] = $individual_role_id;
+            $bind_string = "iii";
+        }
+
         $stmt = \AL\Db\execute_query(
             "GameDAO: addAuthor",
             $this->mysqli,
-            "INSERT INTO game_individual (game_id, individual_id, individual_role_id) VALUES (?, ?, ?)",
-            "iii", $game_id, $individual_id, $author_type_id
+            "INSERT INTO game_individual (".join(", ", $columns).") VALUES (".join(", ", $bind_variables).")",
+            $bind_string, ...$bind_params
         );
 
         $stmt->close();
