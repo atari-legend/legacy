@@ -5,7 +5,8 @@
         <div class="standard_tile_line"></div>
 
         <div class="standard_tile_padding">
-            <h6>This game is part of the <em>{$series->getName()}</em> series, with:</h6>
+            <h6>The <em>{$series->getName()}</em> series contains:</h6>
+            <br>
             <ul>
                 {foreach from=$series_games item=series_game}
                     {if $series_game->getId() != $game_id}
