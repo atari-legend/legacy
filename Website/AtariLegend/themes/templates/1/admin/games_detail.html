@@ -321,6 +321,36 @@ $('#input-tags3').selectize({
                                         },
                                     });
                                 </script>
+                                <b>Game controls</b>&nbsp;&nbsp;
+                                <div class="control-group">
+                                    <label for="input-tags4"></label>
+                                    <select name="game_control[]" multiple id="input-tags4" class="standard_select input_full">
+                                    {foreach from=$game_controls item=all_controls}
+                                        <option value="{$all_controls->getId()}"
+                                            {foreach from=$game_control_cross item=linked_game_controls name=controls}
+                                                {if $linked_game_controls->getId() == $all_controls->getId()}
+                                                    selected
+                                                {/if}
+                                            {/foreach}
+                                            >
+                                            {$all_controls->getName()}
+                                        </option>
+                                    {/foreach}
+                                    </select>
+                                </div>
+                                <script>
+                                    $('#input-tags4').selectize({
+                                        plugins: ['remove_button'],
+                                        persist: false,
+                                        create: true,
+                                        render: {
+                                            item: function(data, escape) {
+                                                return '<div class="primary_button" style="border-radius:3px;">' + escape(data.text) + '</div>';
+                                            }
+                                        },
+                                    });
+                                </script>
+                                <br>
                                 <span class="help-hint">Click to choose and add categories</span>
                             </div>
                         </div>

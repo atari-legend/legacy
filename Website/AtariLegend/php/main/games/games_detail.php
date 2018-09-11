@@ -25,6 +25,7 @@ require_once __DIR__."/../../common/DAO/ProgrammingLanguageDAO.php";
 require_once __DIR__."/../../common/DAO/GameGenreDAO.php";
 require_once __DIR__."/../../common/DAO/PortDAO.php";
 require_once __DIR__."/../../common/DAO/EngineDAO.php";
+require_once __DIR__."/../../common/DAO/ControlDAO.php";
 
 $gameReleaseDao = new \AL\Common\DAO\GameReleaseDAO($mysqli);
 $gameSeriesDao = new \AL\Common\DAO\GameSeriesDAO($mysqli);
@@ -36,6 +37,7 @@ $programmingLanguageDao = new \AL\Common\DAO\ProgrammingLanguageDAO($mysqli);
 $gameGenreDao = new \AL\Common\DAO\GameGenreDAO($mysqli);
 $portDao = new \AL\Common\DAO\portDAO($mysqli);
 $engineDao = new \AL\Common\DAO\engineDAO($mysqli);
+$controlDao = new \AL\Common\DAO\controlDAO($mysqli);
 
 /**
  * Generates an SEO-friendly description of a game, depending on the data available
@@ -210,10 +212,17 @@ $smarty->assign('game_genres', $game_genres);
 $port = $portDao->getPortForGame($game_id);
 $smarty->assign('port', $port);
 
+//***********************************************************************************
 //get the engines & the engines already selected for this game
 //***********************************************************************************
 $game_engines = $engineDao->getGameEnginesForGame($game_id);
 $smarty->assign('game_engines', $game_engines);
+
+//***********************************************************************************
+//get the controls & the controls already selected for this game
+//***********************************************************************************
+$game_controls = $controlDao->getGameControlsForGame($game_id);
+$smarty->assign('game_controls', $game_controls);
 
 //**********************************************************************************
 //Get the author info
