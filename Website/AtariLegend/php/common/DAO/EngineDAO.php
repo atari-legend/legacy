@@ -79,28 +79,51 @@ class EngineDAO {
     }
     
     /**
-     * Set the list of game engines for this game
+     * add a game engine type to the database
      *
-     * @param integer Game ID
-     * @param integer[] List of game genre IDs
+     * @param varchar Engine
      */
-    public function setGameEngineForGame($game_id, $game_engine_id) {
+    public function addGameEngine($engine) {
         $stmt = \AL\Db\execute_query(
-            "EngineDAO: setGameEngineForGame",
+            "EngineDAO: addGameEngine",
             $this->mysqli,
-            "DELETE FROM game_engine WHERE game_id = ?",
-            "i", $game_id
+            "INSERT INTO engine (`name`) VALUES (?)",
+            "s", $engine
         );
 
-        foreach ($game_engine_id as $id) {
-            $stmt = \AL\Db\execute_query(
-                "EngineDAO: setGameEngineForGame",
-                $this->mysqli,
-                "INSERT INTO game_engine (game_id, engine_id) VALUES (?, ?)",
-                "ii", $game_id, $id
-            );
-        }
+        $stmt->close();
+    }
+    
+    /**
+     * delete a game engine type
+     *
+     * @param int Engine_id
+     */
+    public function deleteGameEngine($engine_id) {
+        $stmt = \AL\Db\execute_query(
+            "EngineDAO: deleteGameEngine",
+            $this->mysqli,
+            "DELETE FROM engine WHERE id = ?",
+            "i", $engine_id
+        );
 
+        $stmt->close();
+    }
+    
+        /**
+     * update a game engine type
+     *
+     * @param int Engine_id
+     * @param varchar Engine_name
+     */
+    public function updateGameEngine($engine_id, $engine_name) {
+        $stmt = \AL\Db\execute_query(
+            "EngineDAO: updateGameEngine",
+            $this->mysqli,
+            "UPDATE engine SET name = ? WHERE id = ?",
+            "si", $engine_name, $engine_id
+        );
+        
         $stmt->close();
     }
 }

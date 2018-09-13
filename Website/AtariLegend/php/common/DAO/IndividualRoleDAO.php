@@ -77,4 +77,53 @@ class IndividualRoleDAO {
 
         return $individual_roles;
     }
+    
+    /**
+     * add a role to the database
+     *
+     * @param varchar role
+     */
+    public function addIndividualRole($role) {
+        $stmt = \AL\Db\execute_query(
+            "IndividualRoleDAO: addIndividualRole",
+            $this->mysqli,
+            "INSERT INTO individual_role (`name`) VALUES (?)",
+            "s", $role
+        );
+
+        $stmt->close();
+    }
+    
+    /**
+     * delete a role
+     *
+     * @param int role_id
+     */
+    public function deleteIndividualRole($role_id) {
+        $stmt = \AL\Db\execute_query(
+            "IndividualRoleDAO: deleteIndividualRole",
+            $this->mysqli,
+            "DELETE FROM individual_role WHERE id = ?",
+            "i", $role_id
+        );
+
+        $stmt->close();
+    }
+    
+        /**
+     * update a role
+     *
+     * @param int role_id
+     * @param varchar role_name
+     */
+    public function updateIndividualRole($role_id, $role_name) {
+        $stmt = \AL\Db\execute_query(
+            "IndividualRoleDAO: updateIndividualRole",
+            $this->mysqli,
+            "UPDATE individual_role SET name = ? WHERE id = ?",
+            "si", $role_name, $role_id
+        );
+        
+        $stmt->close();
+    }
 }
