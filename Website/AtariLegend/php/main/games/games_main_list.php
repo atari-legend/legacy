@@ -81,7 +81,7 @@ if (empty($game_author)) {
             game_genre_cross.game_genre_id,
             game_genre.name
             FROM game
-            LEFT JOIN game_author ON (game_author.game_id = game.game_id)
+            LEFT JOIN game_individual ON (game_individual.game_id = game.game_id)
             LEFT JOIN review_game ON (review_game.game_id = game.game_id)
             LEFT JOIN game_boxscan ON (game_boxscan.game_id = game.game_id)
             LEFT JOIN game_genre_cross ON (game_genre_cross.game_id = game.game_id)
@@ -150,7 +150,7 @@ if (empty($game_author)) {
              game_genre.name
           FROM game_aka
           LEFT JOIN game ON (game_aka.game_id = game.game_id)
-          LEFT JOIN game_author ON (game_author.game_id = game.game_id)
+          LEFT JOIN game_individual ON (game_individual.game_id = game.game_id)
           LEFT JOIN review_game ON (review_game.game_id = game.game_id)
           LEFT JOIN game_genre_cross ON (game_genre_cross.game_id = game.game_id)
           LEFT JOIN game_genre ON (game_genre_cross.game_genre_id = game_genre.id)
@@ -253,7 +253,7 @@ if (isset($action) and $action == "search") {
     if (empty($game_author)) {
         $game_author_select = "";
     } else {
-        $game_author_select = " AND game_author.ind_id = '$game_author'";
+        $game_author_select = " AND game_individual.individual_id = '$game_author'";
     }
 
     //check the category select
