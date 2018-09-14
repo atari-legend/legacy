@@ -22,12 +22,16 @@ require_once __DIR__."/../../common/DAO/ProgrammingLanguageDAO.php";
 require_once __DIR__."/../../common/DAO/GameGenreDAO.php";
 require_once __DIR__."/../../common/DAO/PortDAO.php";
 require_once __DIR__."/../../common/DAO/IndividualRoleDAO.php";
+require_once __DIR__."/../../common/DAO/DeveloperRoleDAO.php";
+require_once __DIR__."/../../common/DAO/LanguageDAO.php";
 
 $engineDao = new \AL\Common\DAO\EngineDAO($mysqli);
 $programmingLanguageDao = new \AL\Common\DAO\ProgrammingLanguageDAO($mysqli);
 $gameGenreDao = new \AL\Common\DAO\GameGenreDAO($mysqli);
 $portDao = new \AL\Common\DAO\PortDAO($mysqli);
 $individualRoleDao = new \Al\Common\DAO\IndividualRoleDAO($mysqli);
+$developerRoleDao = new \Al\Common\DAO\DeveloperRoleDAO($mysqli);
+$languageDao = new \Al\Common\DAO\LanguageDAO($mysqli);
 
 //***********************************************************************************
 //get the engines & the engines already selected for this game
@@ -49,8 +53,16 @@ $smarty->assign('game_genres', $gameGenreDao->getAllGameGenres());
 //***********************************************************************************
 $smarty->assign('ports', $portDao->getAllPorts());
 
+//***********************************************************************************
+//get the languages & the languages already selected for this game
+//***********************************************************************************
+$smarty->assign('languages', $languageDao->getAllLanguages());
+
 // Get the indivual roles
 $smarty->assign('individual_roles', $individualRoleDao->getAllIndividualRoles());
+
+// Get the developer roles
+$smarty->assign('developer_roles', $developerRoleDao->getAllDeveloperRoles());
 
 //Send all smarty variables to the templates
 $smarty->display("file:" . $cpanel_template_folder . "games_config.html");

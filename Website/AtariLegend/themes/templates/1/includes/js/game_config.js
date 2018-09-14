@@ -2,8 +2,9 @@
  * game_config.js
  */
 $(document).ready(function () {
+    $('.tabs').tabs();
     $('select[name=engine_select]').change(function () {
-        if ($('#engine_select').val() === false) {
+        if ($('#engine_select').val() === '') {
             $('#engine_edit').hide();
             $('#engine_mod').hide();
             $('#engine_del').hide();
@@ -17,7 +18,7 @@ $(document).ready(function () {
     });
 
     $('select[name=programming_language_select]').change(function () {
-        if ($('#programming_language_select').val() === false) {
+        if ($('#programming_language_select').val() === '') {
             $('#programming_language_edit').hide();
             $('#programming_language_mod').hide();
             $('#programming_language_del').hide();
@@ -31,7 +32,7 @@ $(document).ready(function () {
     });
 
     $('select[name=genre_select]').change(function () {
-        if ($('#genre_select').val() === false) {
+        if ($('#genre_select').val() === '') {
             $('#genre_edit').hide();
             $('#genre_mod').hide();
             $('#genre_del').hide();
@@ -45,7 +46,7 @@ $(document).ready(function () {
     });
 
     $('select[name=port_select]').change(function () {
-        if ($('#port_select').val() === false) {
+        if ($('#port_select').val() === '') {
             $('#port_edit').hide();
             $('#port_mod').hide();
             $('#port_del').hide();
@@ -59,7 +60,7 @@ $(document).ready(function () {
     });
 
     $('select[name=individual_role_select]').change(function () {
-        if ($('#individual_role_select').val() === false) {
+        if ($('#individual_role_select').val() === '') {
             $('#individual_role_edit').hide();
             $('#individual_role_mod').hide();
             $('#individual_role_del').hide();
@@ -70,6 +71,34 @@ $(document).ready(function () {
         }
         $('input[name=individual_role_edit]').val($('#individual_role_select option:selected').text());
         $('input[name=individual_role_id_edit]').val($('#individual_role_select option:selected').val());
+    });
+
+    $('select[name=developer_role_select]').change(function () {
+        if ($('#developer_role_select').val() === '') {
+            $('#developer_role_edit').hide();
+            $('#developer_role_mod').hide();
+            $('#developer_role_del').hide();
+        } else {
+            $('#developer_role_edit').show();
+            $('#developer_role_mod').show();
+            $('#developer_role_del').show();
+        }
+        $('input[name=developer_role_edit]').val($('#developer_role_select option:selected').text());
+        $('input[name=developer_role_id_edit]').val($('#developer_role_select option:selected').val());
+    });
+
+    $('select[name=language_select]').change(function () {
+        if ($('#language_select').val() === '') {
+            $('#language_edit').hide();
+            $('#language_mod').hide();
+            $('#language_del').hide();
+        } else {
+            $('#language_edit').show();
+            $('#language_mod').show();
+            $('#language_del').show();
+        }
+        $('input[name=language_edit]').val($('#language_select option:selected').text());
+        $('input[name=language_id_edit]').val($('#language_select option:selected').val());
     });
 });
 
@@ -126,4 +155,26 @@ window.ModifyIndividualRole = function () {
     var id = document.getElementById('individual_role_id_edit').value;
     var name = document.getElementById('individual_role_edit').value;
     location.href = '../games/db_games_config.php?action=modify_individual_role&individual_role_id=' + id + '&individual_role_name=' + name;
+}
+
+window.DeleteDeveloperRole = function () {
+    var id = document.getElementById('developer_role_id_edit').value;
+    location.href = '../games/db_games_config.php?action=delete_developer_role&developer_role_id=' + id;
+}
+
+window.ModifyDeveloperRole = function () {
+    var id = document.getElementById('developer_role_id_edit').value;
+    var name = document.getElementById('developer_role_edit').value;
+    location.href = '../games/db_games_config.php?action=modify_developer_role&developer_role_id=' + id + '&developer_role_name=' + name;
+}
+
+window.DeleteLanguage = function () {
+    var id = document.getElementById('language_id_edit').value;
+    location.href = '../games/db_games_config.php?action=delete_language&language_id=' + id;
+}
+
+window.ModifyLanguage = function () {
+    var id = document.getElementById('language_id_edit').value;
+    var name = document.getElementById('language_edit').value;
+    location.href = '../games/db_games_config.php?action=modify_language&language_id=' + id + '&language_name=' + name;
 }

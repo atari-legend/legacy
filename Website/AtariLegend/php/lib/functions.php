@@ -1515,6 +1515,18 @@ function create_log_entry($section, $section_id, $subsection, $subsection_id, $a
             $result = $mysqli->query($query) or die("getting role name failed");
             $query_data   = $result->fetch_array(MYSQLI_BOTH);
             $section_name = $query_data['name'];
+        } elseif ($subsection == 'Developer Role') {
+            // Get the role name
+            $query = "SELECT role FROM developer_role WHERE id = '$section_id'";
+            $result = $mysqli->query($query) or die("getting role name failed");
+            $query_data   = $result->fetch_array(MYSQLI_BOTH);
+            $section_name = $query_data['role'];
+        } elseif ($subsection == 'Language') {
+            // Get the language name
+            $query = "SELECT name FROM language WHERE id = '$section_id'";
+            $result = $mysqli->query($query) or die("getting language name failed");
+            $query_data   = $result->fetch_array(MYSQLI_BOTH);
+            $section_name = $query_data['name'];
         }
         $subsection_name = $section_name;
     }
