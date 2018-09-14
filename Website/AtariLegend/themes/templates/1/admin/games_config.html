@@ -18,8 +18,8 @@
 {block name=title}Games configuration{/block}
 
 {block name=additional_scripts}
-    <script src="{$template_dir}includes/js/ui.widgets.js"></script><!-- The autocomplete and dropdown switcher -->
     <script src="{$template_dir}includes/js/game_config.js"></script><!-- game config scripts -->
+    <script src="{$template_dir}includes/js/ui.tabs.js"></script>
 {/block}
 
 {block name=main_tile}
@@ -151,6 +151,70 @@
                     <input type="text" name="individual_role_new" class="standard_input input_medium" placeholder="Enter new role" required>
                     <input type="submit" value="Add role" class="secondary_button">
                 </form>
+                <br>
+                <br>
+                <b>Developer roles</b>&nbsp;&nbsp;
+                <br>
+                <select name="developer_role_select" class="standard_select input_medium grayed_out" id="developer_role_select">
+                    <option value="" selected="selected">-</option>
+                    {foreach from=$developer_roles item=all_developer_roles}
+                        <option value="{$all_developer_roles->getId()}">{$all_developer_roles->getRole()}</option>
+                    {/foreach}
+                </select>
+                <input type="text" name="developer_role_edit" class="standard_input input_medium" style="display:none;" id="developer_role_edit">
+                <input type="text" name="developer_role_id_edit" class="standard_input input_medium" style="display:none;" id="developer_role_id_edit">
+                <br>
+                <input type="button" value="Modify" class="secondary_button" style="display:none;" id="developer_role_mod" onClick="ModifyDeveloperRole()">
+                <input type="button" value="Delete" class="secondary_button" style="display:none;" id="developer_role_del" onClick="DeleteDeveloperRole()">
+                <hr class="separator_add">
+                <form action="../games/db_games_config.php" method="post" name="developer_role">
+                    <input type="hidden" name="action" value="add_developer_role">
+                    <input type="text" name="developer_role_new" class="standard_input input_medium" placeholder="Enter new role" required>
+                    <input type="submit" value="Add role" class="secondary_button">
+                </form>
+            </fieldset>
+            <br>
+            <fieldset class="secondary_fieldset">
+                <legend class="primary_legend">Languages</legend>
+                <div class="help-hint">
+                    Modify or delete the language table used for eg. AKA's ...
+                </div>
+                <br>
+                <br>
+                <b>Game AKA languages</b>&nbsp;&nbsp;
+                <br>
+                <select name="language_select" class="standard_select input_medium grayed_out" id="language_select">
+                    <option value="" selected="selected">-</option>
+                    {foreach from=$languages item=all_languages}
+                        <option value="{$all_languages->getId()}">{$all_languages->getName()}</option>
+                    {/foreach}
+                </select>
+                <input type="text" name="language_edit" class="standard_input input_medium" style="display:none;" id="language_edit">
+                <input type="text" name="language_id_edit" class="standard_input input_medium" id="language_id_edit">
+                <br>
+                <input type="button" value="Modify" class="secondary_button" style="display:none;" id="language_mod" onClick="ModifyLanguage()">
+                <input type="button" value="Delete" class="secondary_button" style="display:none;" id="language_del" onClick="DeleteLanguage()">
+            </fieldset>
+        </div>
+        <div id="tab-game_release" class="tabcontent tabpane">
+            <fieldset class="secondary_fieldset">
+                <legend class="primary_legend">General</legend>
+                <div class="help-hint">
+                    Overhere you can add, modify or delete all data related to a game release. Use the drop down to select an entry. A text field, modify and delete button appear. Fill in the new name in the text field and press
+                    modify to change the existing entry. Press delete to remove the entry from the list.
+                </div>
+                <br>
+                <br>
+                <b>Type</b>&nbsp;&nbsp;
+                <div class="help-hint">
+                    Please contact the admin if you want to have additional data added or changed.
+                </div>
+                <br>
+                <br>
+                <b>License</b>&nbsp;&nbsp;
+                <div class="help-hint">
+                    Please contact the admin if you want to have additional data added or changed.
+                </div>
             </fieldset>
         </div>
     </div>

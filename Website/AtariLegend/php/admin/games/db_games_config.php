@@ -13,6 +13,8 @@ require_once __DIR__."/../../common/DAO/ProgrammingLanguageDAO.php";
 require_once __DIR__."/../../common/DAO/GameGenreDAO.php";
 require_once __DIR__."/../../common/DAO/PortDAO.php";
 require_once __DIR__."/../../common/DAO/IndividualRoleDAO.php";
+require_once __DIR__."/../../common/DAO/DeveloperRoleDAO.php";
+require_once __DIR__."/../../common/DAO/LanguageDAO.php";
 
 $changeLogDao = new \AL\Common\DAO\ChangeLogDAO($mysqli);
 $engineDao = new \AL\Common\DAO\EngineDAO($mysqli);
@@ -20,6 +22,8 @@ $programmingLanguageDao = new \AL\Common\DAO\ProgrammingLanguageDAO($mysqli);
 $gameGenreDao = new \AL\Common\DAO\GameGenreDAO($mysqli);
 $portDao = new \AL\Common\DAO\PortDAO($mysqli);
 $individualRoleDao = new \Al\Common\DAO\IndividualRoleDAO($mysqli);
+$developerRoleDao = new \Al\Common\DAO\DeveloperRoleDAO($mysqli);
+$languageDao = new \Al\Common\DAO\LanguageDAO($mysqli);
 
 switch ($action) {
 	case "add_engine":
@@ -147,9 +151,51 @@ switch ($action) {
     case "modify_individual_role":       
         $individualRoleDao->updateIndividualRole($individual_role_id, $individual_role_name);       
         
-        create_log_entry('Games Config', $individual_role_id, 'Individual role', $individual_role_id, 'Update', $_SESSION['user_id']);
+        create_log_entry('Games Config', $individual_role_id, 'Individual Role', $individual_role_id, 'Update', $_SESSION['user_id']);
 
         $_SESSION['edit_message'] = "Individual role has been updated" ;
+        break;
+        
+    case "add_developer_role":
+        $developerRoleDao->addDeveloperRole($developer_role_new);
+        
+        $new_developer_role_id = $mysqli->insert_id;
+        
+        create_log_entry('Games Config', $new_developer_role_id, 'Developer Role',$new_developer_role_id, 'Insert', $_SESSION['user_id']);
+        
+        $_SESSION['edit_message'] = "$developer_role_new has been added" ;
+        break;
+        
+    case "delete_developer_role":
+        create_log_entry('Games Config', $developer_role_id, 'Developer Role', $developer_role_id, 'Delete', $_SESSION['user_id']);
+        
+        $developerRoleDao->deleteDeveloperRole($developer_role_id);       
+
+        $_SESSION['edit_message'] = "Developer role has been deleted" ;
+        break;
+        
+    case "modify_developer_role":       
+        $developerRoleDao->updateDeveloperRole($developer_role_id, $developer_role_name);       
+        
+        create_log_entry('Games Config', $developer_role_id, 'Developer Role', $developer_role_id, 'Update', $_SESSION['user_id']);
+
+        $_SESSION['edit_message'] = "Developer role has been updated" ;
+        break;
+               
+    case "delete_language":
+        create_log_entry('Games Config', $language_id, 'Language', $language_id, 'Delete', $_SESSION['user_id']);
+        
+        $languageDao->deleteLanguage($language_id);       
+
+        $_SESSION['edit_message'] = "Language has been deleted" ;
+        break;
+        
+    case "modify_language":       
+        $languageDao->updateLanguage($language_id, $language_name);       
+        
+        create_log_entry('Games Config', $language_id, 'Language', $language_id, 'Update', $_SESSION['user_id']);
+
+        $_SESSION['edit_message'] = "Language has been updated" ;
         break;
 }
 
