@@ -84,7 +84,7 @@ class ControlDAO {
      * @param integer Game ID
      * @param integer[] List of game control IDs
      */
-    public function setGameControlForGame($game_id, $game_control_id) {
+    public function setGameControlForGame($game_id, $game_control_ids) {
         $stmt = \AL\Db\execute_query(
             "ControlDAO: setGameControlForGame",
             $this->mysqli,
@@ -92,7 +92,7 @@ class ControlDAO {
             "i", $game_id
         );
 
-        foreach ($game_control_id as $id) {
+        foreach ($game_control_ids as $id) {
             $stmt = \AL\Db\execute_query(
                 "ControlDAO: setGameControlForGame",
                 $this->mysqli,
