@@ -51,9 +51,8 @@
                 </select>
                 <input type="text" name="engine_edit" class="standard_input input_medium" style="display:none;" id="engine_edit">
                 <input type="text" name="engine_id_edit" class="standard_input input_medium" style="display:none;" id="engine_id_edit">
-                <br>
                 <input type="button" value="Modify" class="secondary_button" style="display:none;" id="engine_mod" onClick="ModifyEngine()">
-                <input type="button" value="Delete" class="secondary_button" style="display:none;" id="engine_del" onClick="DeleteEngine()">
+                <input type="button" value="Delete" class="primary_button button_danger" style="display:none;" id="engine_del" onClick="DeleteEngine()">
                 <hr class="separator_add">
                 <form action="../games/db_games_config.php" method="post" name="engine">
                     <input type="hidden" name="action" value="add_engine">
@@ -72,9 +71,8 @@
                 </select>
                 <input type="text" name="programming_language_edit" class="standard_input input_medium" style="display:none;" id="programming_language_edit">
                 <input type="text" name="programming_language_id_edit" class="standard_input input_medium" style="display:none;" id="programming_language_id_edit">
-                <br>
                 <input type="button" value="Modify" class="secondary_button" style="display:none;" id="programming_language_mod" onClick="ModifyProgrammingLanguage()">
-                <input type="button" value="Delete" class="secondary_button" style="display:none;" id="programming_language_del" onClick="DeleteProgrammingLanguage()">
+                <input type="button" value="Delete" class="primary_button button_danger" style="display:none;" id="programming_language_del" onClick="DeleteProgrammingLanguage()">
                 <hr class="separator_add">
                 <form action="../games/db_games_config.php" method="post" name="programming_language">
                     <input type="hidden" name="action" value="add_programming_language">
@@ -93,9 +91,8 @@
                 </select>
                 <input type="text" name="genre_edit" class="standard_input input_medium" style="display:none;" id="genre_edit">
                 <input type="text" name="genre_id_edit" class="standard_input input_medium" style="display:none;" id="genre_id_edit">
-                <br>
                 <input type="button" value="Modify" class="secondary_button" style="display:none;" id="genre_mod" onClick="ModifyGenre()">
-                <input type="button" value="Delete" class="secondary_button" style="display:none;" id="genre_del" onClick="DeleteGenre()">
+                <input type="button" value="Delete" class="primary_button button_danger" style="display:none;" id="genre_del" onClick="DeleteGenre()">
                 <hr class="separator_add">
                 <form action="../games/db_games_config.php" method="post" name="genre">
                     <input type="hidden" name="action" value="add_genre">
@@ -114,9 +111,8 @@
                 </select>
                 <input type="text" name="port_edit" class="standard_input input_medium" style="display:none;" id="port_edit">
                 <input type="text" name="port_id_edit" class="standard_input input_medium" style="display:none;" id="port_id_edit">
-                <br>
                 <input type="button" value="Modify" class="secondary_button" style="display:none;" id="port_mod" onClick="ModifyPort()">
-                <input type="button" value="Delete" class="secondary_button" style="display:none;" id="port_del" onClick="DeletePort()">
+                <input type="button" value="Delete" class="primary_button button_danger" style="display:none;" id="port_del" onClick="DeletePort()">
                 <hr class="separator_add">
                 <form action="../games/db_games_config.php" method="post" name="port">
                     <input type="hidden" name="action" value="add_port">
@@ -142,9 +138,8 @@
                 </select>
                 <input type="text" name="individual_role_edit" class="standard_input input_medium" style="display:none;" id="individual_role_edit">
                 <input type="text" name="individual_role_id_edit" class="standard_input input_medium" style="display:none;" id="individual_role_id_edit">
-                <br>
                 <input type="button" value="Modify" class="secondary_button" style="display:none;" id="individual_role_mod" onClick="ModifyIndividualRole()">
-                <input type="button" value="Delete" class="secondary_button" style="display:none;" id="individual_role_del" onClick="DeleteIndividualRole()">
+                <input type="button" value="Delete" class="primary_button button_danger" style="display:none;" id="individual_role_del" onClick="DeleteIndividualRole()">
                 <hr class="separator_add">
                 <form action="../games/db_games_config.php" method="post" name="individual_role">
                     <input type="hidden" name="action" value="add_individual_role">
@@ -163,37 +158,14 @@
                 </select>
                 <input type="text" name="developer_role_edit" class="standard_input input_medium" style="display:none;" id="developer_role_edit">
                 <input type="text" name="developer_role_id_edit" class="standard_input input_medium" style="display:none;" id="developer_role_id_edit">
-                <br>
                 <input type="button" value="Modify" class="secondary_button" style="display:none;" id="developer_role_mod" onClick="ModifyDeveloperRole()">
-                <input type="button" value="Delete" class="secondary_button" style="display:none;" id="developer_role_del" onClick="DeleteDeveloperRole()">
+                <input type="button" value="Delete" class="primary_button button_danger" style="display:none;" id="developer_role_del" onClick="DeleteDeveloperRole()">
                 <hr class="separator_add">
                 <form action="../games/db_games_config.php" method="post" name="developer_role">
                     <input type="hidden" name="action" value="add_developer_role">
                     <input type="text" name="developer_role_new" class="standard_input input_medium" placeholder="Enter new role" required>
                     <input type="submit" value="Add role" class="secondary_button">
                 </form>
-            </fieldset>
-            <br>
-            <fieldset class="secondary_fieldset">
-                <legend class="primary_legend">Languages</legend>
-                <div class="help-hint">
-                    Modify or delete the language table used for eg. AKA's ...
-                </div>
-                <br>
-                <br>
-                <b>Game AKA languages</b>&nbsp;&nbsp;
-                <br>
-                <select name="language_select" class="standard_select input_medium grayed_out" id="language_select">
-                    <option value="" selected="selected">-</option>
-                    {foreach from=$languages item=all_languages}
-                        <option value="{$all_languages->getId()}">{$all_languages->getName()}</option>
-                    {/foreach}
-                </select>
-                <input type="text" name="language_edit" class="standard_input input_medium" style="display:none;" id="language_edit">
-                <input type="text" name="language_id_edit" class="standard_input input_medium" id="language_id_edit">
-                <br>
-                <input type="button" value="Modify" class="secondary_button" style="display:none;" id="language_mod" onClick="ModifyLanguage()">
-                <input type="button" value="Delete" class="secondary_button" style="display:none;" id="language_del" onClick="DeleteLanguage()">
             </fieldset>
         </div>
         <div id="tab-game_release" class="tabcontent tabpane">
