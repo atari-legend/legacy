@@ -14,7 +14,6 @@ require_once __DIR__."/../../common/DAO/GameGenreDAO.php";
 require_once __DIR__."/../../common/DAO/PortDAO.php";
 require_once __DIR__."/../../common/DAO/IndividualRoleDAO.php";
 require_once __DIR__."/../../common/DAO/DeveloperRoleDAO.php";
-require_once __DIR__."/../../common/DAO/LanguageDAO.php";
 
 $changeLogDao = new \AL\Common\DAO\ChangeLogDAO($mysqli);
 $engineDao = new \AL\Common\DAO\EngineDAO($mysqli);
@@ -23,7 +22,6 @@ $gameGenreDao = new \AL\Common\DAO\GameGenreDAO($mysqli);
 $portDao = new \AL\Common\DAO\PortDAO($mysqli);
 $individualRoleDao = new \Al\Common\DAO\IndividualRoleDAO($mysqli);
 $developerRoleDao = new \Al\Common\DAO\DeveloperRoleDAO($mysqli);
-$languageDao = new \Al\Common\DAO\LanguageDAO($mysqli);
 
 switch ($action) {
 	case "add_engine":
@@ -180,22 +178,6 @@ switch ($action) {
         create_log_entry('Games Config', $developer_role_id, 'Developer Role', $developer_role_id, 'Update', $_SESSION['user_id']);
 
         $_SESSION['edit_message'] = "Developer role has been updated" ;
-        break;
-               
-    case "delete_language":
-        create_log_entry('Games Config', $language_id, 'Language', $language_id, 'Delete', $_SESSION['user_id']);
-        
-        $languageDao->deleteLanguage($language_id);       
-
-        $_SESSION['edit_message'] = "Language has been deleted" ;
-        break;
-        
-    case "modify_language":       
-        $languageDao->updateLanguage($language_id, $language_name);       
-        
-        create_log_entry('Games Config', $language_id, 'Language', $language_id, 'Update', $_SESSION['user_id']);
-
-        $_SESSION['edit_message'] = "Language has been updated" ;
         break;
 }
 
