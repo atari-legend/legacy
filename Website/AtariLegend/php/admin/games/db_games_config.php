@@ -23,8 +23,8 @@ $portDao = new \AL\Common\DAO\PortDAO($mysqli);
 $individualRoleDao = new \Al\Common\DAO\IndividualRoleDAO($mysqli);
 $developerRoleDao = new \Al\Common\DAO\DeveloperRoleDAO($mysqli);
 
-switch ($action) {
-	case "add_engine":
+switch ($_POST['action']) {
+	case "Add engine":
         $engineDao->addGameEngine($engine_new);
         
         $new_engine_id = $mysqli->insert_id;
@@ -34,23 +34,23 @@ switch ($action) {
         $_SESSION['edit_message'] = "$engine_new has been added" ;
         break;
         
-    case "delete_engine":
-        create_log_entry('Games Config', $engine_id, 'Games Engine', $engine_id, 'Delete', $_SESSION['user_id']);
+    case "Delete engine":
+        create_log_entry('Games Config', $engine_id_edit, 'Games Engine', $engine_id_edit, 'Delete', $_SESSION['user_id']);
         
-        $engineDao->deleteGameEngine($engine_id);       
+        $engineDao->deleteGameEngine($engine_id_edit);       
 
         $_SESSION['edit_message'] = "Engine has been deleted" ;
         break;
         
-    case "modify_engine":
-        $engineDao->updateGameEngine($engine_id, $engine_name);
+    case "Modify engine":
+        $engineDao->updateGameEngine($engine_id_edit, $engine_edit);
 
-        create_log_entry('Games Config', $engine_id, 'Games Engine', $engine_id, 'Update', $_SESSION['user_id']);
+        create_log_entry('Games Config', $engine_id_edit, 'Games Engine', $engine_id_edit, 'Update', $_SESSION['user_id']);
 
         $_SESSION['edit_message'] = "Engine has been updated" ;
         break;
         
-    case "add_programming_language":
+    case "Add language":
         $programmingLanguageDao->addProgrammingLanguage($programming_language_new);
         
         $new_programming_language_id = $mysqli->insert_id;
@@ -60,23 +60,23 @@ switch ($action) {
         $_SESSION['edit_message'] = "$programming_language_new has been added" ;
         break;
         
-    case "delete_programming_language":
-        create_log_entry('Games Config', $programming_language_id, 'Programming Language', $programming_language_id, 'Delete', $_SESSION['user_id']);
+    case "Delete language":
+        create_log_entry('Games Config', $programming_language_id_edit, 'Programming Language', $programming_language_id_edit, 'Delete', $_SESSION['user_id']);
         
-        $programmingLanguageDao->deleteProgrammingLanguage($programming_language_id);       
+        $programmingLanguageDao->deleteProgrammingLanguage($programming_language_id_edit);       
 
         $_SESSION['edit_message'] = "Programming language has been deleted" ;
         break;
         
-    case "modify_programming_language":
-        $programmingLanguageDao->updateProgrammingLanguage($programming_language_id, $programming_language_name); 
+    case "Modify language":
+        $programmingLanguageDao->updateProgrammingLanguage($programming_language_id_edit, $programming_language_edit); 
 
-        create_log_entry('Games Config', $programming_language_id, 'Programming Language', $programming_language_id, 'Update', $_SESSION['user_id']);
+        create_log_entry('Games Config', $programming_language_id_edit, 'Programming Language', $programming_language_id_edit, 'Update', $_SESSION['user_id']);
 
         $_SESSION['edit_message'] = "Programming language has been updated" ;
         break;
     
-    case "add_genre":
+    case "Add genre":
         $gameGenreDao->addGenre($genre_new);
         
         $new_genre_id = $mysqli->insert_id;
@@ -86,23 +86,23 @@ switch ($action) {
         $_SESSION['edit_message'] = "$genre_new has been added" ;
         break;
         
-    case "delete_genre":
-        create_log_entry('Games Config', $genre_id, 'Genre', $genre_id, 'Delete', $_SESSION['user_id']);
+    case "Delete genre":
+        create_log_entry('Games Config', $genre_id_edit, 'Genre', $genre_id_edit, 'Delete', $_SESSION['user_id']);
         
-        $gameGenreDao->deleteGenre($genre_id);       
+        $gameGenreDao->deleteGenre($genre_id_edit);       
 
         $_SESSION['edit_message'] = "Genre has been deleted" ;
         break;
         
-    case "modify_genre":
-        $gameGenreDao->updateGenre($genre_id, $genre_name);
+    case "Modify genre":
+        $gameGenreDao->updateGenre($genre_id_edit, $genre_edit);
 
-        create_log_entry('Games Config', $genre_id, 'Genre', $genre_id, 'Update', $_SESSION['user_id']);
+        create_log_entry('Games Config', $genre_id_edit, 'Genre', $genre_id_edit, 'Update', $_SESSION['user_id']);
 
         $_SESSION['edit_message'] = "Genre has been updated" ;
         break;
         
-    case "add_port":
+    case "Add port":
         $portDao->addPort($port_new);
         
         $new_port_id = $mysqli->insert_id;
@@ -112,23 +112,23 @@ switch ($action) {
         $_SESSION['edit_message'] = "$port_new has been added" ;
         break;
         
-    case "delete_port":
-        create_log_entry('Games Config', $port_id, 'Port', $port_id, 'Delete', $_SESSION['user_id']);
+    case "Delete port":
+        create_log_entry('Games Config', $port_id_edit, 'Port', $port_id_edit, 'Delete', $_SESSION['user_id']);
         
-        $portDao->deletePort($port_id);       
+        $portDao->deletePort($port_id_edit);       
 
         $_SESSION['edit_message'] = "Port has been deleted" ;
         break;
         
-    case "modify_port":        
-        $portDao->updatePort($port_id, $port_name);      
+    case "Modify port":        
+        $portDao->updatePort($port_id_edit, $port_edit);      
 
-        create_log_entry('Games Config', $port_id, 'Port', $port_id, 'Update', $_SESSION['user_id']);
+        create_log_entry('Games Config', $port_id_edit, 'Port', $port_id_edit, 'Update', $_SESSION['user_id']);
 
         $_SESSION['edit_message'] = "Port has been updated" ;
         break;
         
-    case "add_individual_role":
+    case "Add ind role":
         $individualRoleDao->addIndividualRole($individual_role_new);
         
         $new_individual_role_id = $mysqli->insert_id;
@@ -138,23 +138,23 @@ switch ($action) {
         $_SESSION['edit_message'] = "$individual_role_new has been added" ;
         break;
         
-    case "delete_individual_role":
-        create_log_entry('Games Config', $individual_role_id, 'Individual Role', $individual_role_id, 'Delete', $_SESSION['user_id']);
+    case "Delete ind role":
+        create_log_entry('Games Config', $individual_role_id_edit, 'Individual Role', $individual_role_id_edit, 'Delete', $_SESSION['user_id']);
         
-        $individualRoleDao->deleteIndividualRole($individual_role_id);       
+        $individualRoleDao->deleteIndividualRole($individual_role_id_edit);       
 
         $_SESSION['edit_message'] = "Individual role has been deleted" ;
         break;
         
-    case "modify_individual_role":       
-        $individualRoleDao->updateIndividualRole($individual_role_id, $individual_role_name);       
+    case "Modify ind role":       
+        $individualRoleDao->updateIndividualRole($individual_role_id_edit, $individual_role_edit);       
         
-        create_log_entry('Games Config', $individual_role_id, 'Individual Role', $individual_role_id, 'Update', $_SESSION['user_id']);
+        create_log_entry('Games Config', $individual_role_id_edit, 'Individual Role', $individual_role_id_edit, 'Update', $_SESSION['user_id']);
 
         $_SESSION['edit_message'] = "Individual role has been updated" ;
         break;
         
-    case "add_developer_role":
+    case "Add dev role":
         $developerRoleDao->addDeveloperRole($developer_role_new);
         
         $new_developer_role_id = $mysqli->insert_id;
@@ -164,18 +164,18 @@ switch ($action) {
         $_SESSION['edit_message'] = "$developer_role_new has been added" ;
         break;
         
-    case "delete_developer_role":
-        create_log_entry('Games Config', $developer_role_id, 'Developer Role', $developer_role_id, 'Delete', $_SESSION['user_id']);
+    case "Delete dev role":
+        create_log_entry('Games Config', $developer_role_id_edit, 'Developer Role', $developer_role_id_edit, 'Delete', $_SESSION['user_id']);
         
-        $developerRoleDao->deleteDeveloperRole($developer_role_id);       
+        $developerRoleDao->deleteDeveloperRole($developer_role_id_edit);       
 
         $_SESSION['edit_message'] = "Developer role has been deleted" ;
         break;
         
-    case "modify_developer_role":       
-        $developerRoleDao->updateDeveloperRole($developer_role_id, $developer_role_name);       
+    case "Modify dev role":       
+        $developerRoleDao->updateDeveloperRole($developer_role_id_edit, $developer_role_edit);       
         
-        create_log_entry('Games Config', $developer_role_id, 'Developer Role', $developer_role_id, 'Update', $_SESSION['user_id']);
+        create_log_entry('Games Config', $developer_role_id_edit, 'Developer Role', $developer_role_id_edit, 'Update', $_SESSION['user_id']);
 
         $_SESSION['edit_message'] = "Developer role has been updated" ;
         break;

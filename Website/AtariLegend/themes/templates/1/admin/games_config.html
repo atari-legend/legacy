@@ -43,81 +43,85 @@
                 <br>
                 <b>Game engines</b>&nbsp;&nbsp;
                 <br>
-                <select name="engine_select" class="standard_select input_medium grayed_out" id="engine_select">
-                    <option value="" selected="selected">-</option>
-                    {foreach from=$engines item=all_engines}
-                        <option value="{$all_engines->getId()}">{$all_engines->getName()}</option>
-                    {/foreach}
-                </select>
-                <input type="text" name="engine_edit" class="standard_input input_medium" style="display:none;" id="engine_edit">
-                <input type="text" name="engine_id_edit" class="standard_input input_medium" style="display:none;" id="engine_id_edit">
-                <input type="button" value="Modify" class="secondary_button" style="display:none;" id="engine_mod" onClick="ModifyEngine()">
-                <input type="button" value="Delete" class="primary_button button_danger" style="display:none;" id="engine_del" onClick="DeleteEngine()">
+                <form action="../games/db_games_config.php" method="post" name="engine">
+                    <select name="engine_select" class="standard_select input_medium grayed_out" id="engine_select">
+                        <option value="" selected="selected">-</option>
+                        {foreach from=$engines item=all_engines}
+                            <option value="{$all_engines->getId()}">{$all_engines->getName()}</option>
+                        {/foreach}
+                    </select>
+                    <input type="text" name="engine_edit" class="standard_input input_medium" style="display:none;" id="engine_edit">
+                    <input type="text" name="engine_id_edit" class="standard_input input_medium" style="display:none;" id="engine_id_edit">
+                    <input type="submit" value="Modify engine" name="action" class="secondary_button" style="display:none;" id="engine_mod">
+                    <input type="submit" value="Delete engine" name="action" class="primary_button button_danger" style="display:none;" id="engine_del">
+                </form>
                 <hr class="separator_add">
                 <form action="../games/db_games_config.php" method="post" name="engine">
-                    <input type="hidden" name="action" value="add_engine">
                     <input type="text" name="engine_new" class="standard_input input_medium" placeholder="Enter new engine" required>
-                    <input type="submit" value="Add engine" class="secondary_button">
+                    <input type="submit" value="Add engine" name="action" class="secondary_button">
                 </form>
                 <br>
                 <br>
                 <b>Programming Languages</b>&nbsp;&nbsp;
                 <br>
-                <select name="programming_language_select" class="standard_select input_medium grayed_out" id="programming_language_select">
-                    <option value="" selected="selected">-</option>
-                    {foreach from=$programming_languages item=all_programming_languages}
-                        <option value="{$all_programming_languages->getId()}">{$all_programming_languages->getName()}</option>
-                    {/foreach}
-                </select>
-                <input type="text" name="programming_language_edit" class="standard_input input_medium" style="display:none;" id="programming_language_edit">
-                <input type="text" name="programming_language_id_edit" class="standard_input input_medium" style="display:none;" id="programming_language_id_edit">
-                <input type="button" value="Modify" class="secondary_button" style="display:none;" id="programming_language_mod" onClick="ModifyProgrammingLanguage()">
-                <input type="button" value="Delete" class="primary_button button_danger" style="display:none;" id="programming_language_del" onClick="DeleteProgrammingLanguage()">
+                <form action="../games/db_games_config.php" method="post" name="programming_language">
+                    <select name="programming_language_select" class="standard_select input_medium grayed_out" id="programming_language_select">
+                        <option value="" selected="selected">-</option>
+                        {foreach from=$programming_languages item=all_programming_languages}
+                            <option value="{$all_programming_languages->getId()}">{$all_programming_languages->getName()}</option>
+                        {/foreach}
+                    </select>
+                    <input type="text" name="programming_language_edit" class="standard_input input_medium" style="display:none;" id="programming_language_edit">
+                    <input type="text" name="programming_language_id_edit" class="standard_input input_medium" style="display:none;" id="programming_language_id_edit">
+                    <input type="submit" value="Modify language" name="action" class="secondary_button" style="display:none;" id="programming_language_mod">
+                    <input type="submit" value="Delete language" name="action" class="primary_button button_danger" style="display:none;" id="programming_language_del">
+                </form>
                 <hr class="separator_add">
                 <form action="../games/db_games_config.php" method="post" name="programming_language">
-                    <input type="hidden" name="action" value="add_programming_language">
                     <input type="text" name="programming_language_new" class="standard_input input_medium" placeholder="Enter new language" required>
-                    <input type="submit" value="Add Language" class="secondary_button">
+                    <input type="submit" value="Add language" name="action" class="secondary_button">
                 </form>
                 <br>
                 <br>
                 <b>Genres</b>&nbsp;&nbsp;
                 <br>
-                <select name="genre_select" class="standard_select input_medium grayed_out" id="genre_select">
-                    <option value="" selected="selected">-</option>
-                    {foreach from=$game_genres item=all_game_genres}
-                        <option value="{$all_game_genres->getId()}">{$all_game_genres->getName()}</option>
-                    {/foreach}
-                </select>
-                <input type="text" name="genre_edit" class="standard_input input_medium" style="display:none;" id="genre_edit">
-                <input type="text" name="genre_id_edit" class="standard_input input_medium" style="display:none;" id="genre_id_edit">
-                <input type="button" value="Modify" class="secondary_button" style="display:none;" id="genre_mod" onClick="ModifyGenre()">
-                <input type="button" value="Delete" class="primary_button button_danger" style="display:none;" id="genre_del" onClick="DeleteGenre()">
+                <form action="../games/db_games_config.php" method="post" name="genre">
+                    <select name="genre_select" class="standard_select input_medium grayed_out" id="genre_select">
+                        <option value="" selected="selected">-</option>
+                        {foreach from=$game_genres item=all_game_genres}
+                            <option value="{$all_game_genres->getId()}">{$all_game_genres->getName()}</option>
+                        {/foreach}
+                    </select>
+                    <input type="text" name="genre_edit" class="standard_input input_medium" style="display:none;" id="genre_edit">
+                    <input type="text" name="genre_id_edit" class="standard_input input_medium" style="display:none;" id="genre_id_edit">
+                    <input type="submit" value="Modify genre" name="action" class="secondary_button" style="display:none;" id="genre_mod">
+                    <input type="submit" value="Delete genre" name="action" class="primary_button button_danger" style="display:none;" id="genre_del">
+                </form>
                 <hr class="separator_add">
                 <form action="../games/db_games_config.php" method="post" name="genre">
-                    <input type="hidden" name="action" value="add_genre">
                     <input type="text" name="genre_new" class="standard_input input_medium" placeholder="Enter new genre" required>
-                    <input type="submit" value="Add Genre" class="secondary_button">
+                    <input type="submit" value="Add genre" name="action" class="secondary_button">
                 </form>
                 <br>
                 <br>
                 <b>Ports</b>&nbsp;&nbsp;
                 <br>
-                <select name="port_select" class="standard_select input_medium grayed_out" id="port_select">
-                    <option value="" selected="selected">-</option>
-                    {foreach from=$ports item=all_ports}
-                        <option value="{$all_ports->getId()}">{$all_ports->getPort()}</option>
-                    {/foreach}
-                </select>
-                <input type="text" name="port_edit" class="standard_input input_medium" style="display:none;" id="port_edit">
-                <input type="text" name="port_id_edit" class="standard_input input_medium" style="display:none;" id="port_id_edit">
-                <input type="button" value="Modify" class="secondary_button" style="display:none;" id="port_mod" onClick="ModifyPort()">
-                <input type="button" value="Delete" class="primary_button button_danger" style="display:none;" id="port_del" onClick="DeletePort()">
+                <form action="../games/db_games_config.php" method="post" name="port">
+                    <select name="port_select" class="standard_select input_medium grayed_out" id="port_select">
+                        <option value="" selected="selected">-</option>
+                        {foreach from=$ports item=all_ports}
+                            <option value="{$all_ports->getId()}">{$all_ports->getPort()}</option>
+                        {/foreach}
+                    </select>
+                    <input type="text" name="port_edit" class="standard_input input_medium" style="display:none;" id="port_edit">
+                    <input type="text" name="port_id_edit" class="standard_input input_medium" style="display:none;" id="port_id_edit">
+                    <input type="submit" value="Modify port" name="action" class="secondary_button" style="display:none;" id="port_mod">
+                    <input type="submit" value="Delete port" name="action" class="primary_button button_danger" style="display:none;" id="port_del">
+                </form>
                 <hr class="separator_add">
                 <form action="../games/db_games_config.php" method="post" name="port">
-                    <input type="hidden" name="action" value="add_port">
                     <input type="text" name="port_new" class="standard_input input_medium" placeholder="Enter new port" required>
-                    <input type="submit" value="Add Port" class="secondary_button">
+                    <input type="submit" value="Add port" name="action" class="secondary_button">
                 </form>
             </fieldset>
             <br>
@@ -130,41 +134,43 @@
                 <br>
                 <b>Individual roles</b>&nbsp;&nbsp;
                 <br>
-                <select name="individual_role_select" class="standard_select input_medium grayed_out" id="individual_role_select">
-                    <option value="" selected="selected">-</option>
-                    {foreach from=$individual_roles item=all_individual_roles}
-                        <option value="{$all_individual_roles->getId()}">{$all_individual_roles->getRole()}</option>
-                    {/foreach}
-                </select>
-                <input type="text" name="individual_role_edit" class="standard_input input_medium" style="display:none;" id="individual_role_edit">
-                <input type="text" name="individual_role_id_edit" class="standard_input input_medium" style="display:none;" id="individual_role_id_edit">
-                <input type="button" value="Modify" class="secondary_button" style="display:none;" id="individual_role_mod" onClick="ModifyIndividualRole()">
-                <input type="button" value="Delete" class="primary_button button_danger" style="display:none;" id="individual_role_del" onClick="DeleteIndividualRole()">
+                <form action="../games/db_games_config.php" method="post" name="individual_role">
+                    <select name="individual_role_select" class="standard_select input_medium grayed_out" id="individual_role_select">
+                        <option value="" selected="selected">-</option>
+                        {foreach from=$individual_roles item=all_individual_roles}
+                            <option value="{$all_individual_roles->getId()}">{$all_individual_roles->getRole()}</option>
+                        {/foreach}
+                    </select>
+                    <input type="text" name="individual_role_edit" class="standard_input input_medium" style="display:none;" id="individual_role_edit">
+                    <input type="text" name="individual_role_id_edit" class="standard_input input_medium" id="individual_role_id_edit">
+                    <input type="submit" name="action" value="Modify ind role" class="secondary_button" style="display:none;" id="individual_role_mod">
+                    <input type="submit" name="action" value="Delete ind role" class="primary_button button_danger" style="display:none;" id="individual_role_del">
+                </form>
                 <hr class="separator_add">
                 <form action="../games/db_games_config.php" method="post" name="individual_role">
-                    <input type="hidden" name="action" value="add_individual_role">
                     <input type="text" name="individual_role_new" class="standard_input input_medium" placeholder="Enter new role" required>
-                    <input type="submit" value="Add role" class="secondary_button">
+                    <input type="submit" value="Add ind role" name="action" class="secondary_button">
                 </form>
                 <br>
                 <br>
                 <b>Developer roles</b>&nbsp;&nbsp;
                 <br>
-                <select name="developer_role_select" class="standard_select input_medium grayed_out" id="developer_role_select">
-                    <option value="" selected="selected">-</option>
-                    {foreach from=$developer_roles item=all_developer_roles}
-                        <option value="{$all_developer_roles->getId()}">{$all_developer_roles->getRole()}</option>
-                    {/foreach}
-                </select>
-                <input type="text" name="developer_role_edit" class="standard_input input_medium" style="display:none;" id="developer_role_edit">
-                <input type="text" name="developer_role_id_edit" class="standard_input input_medium" style="display:none;" id="developer_role_id_edit">
-                <input type="button" value="Modify" class="secondary_button" style="display:none;" id="developer_role_mod" onClick="ModifyDeveloperRole()">
-                <input type="button" value="Delete" class="primary_button button_danger" style="display:none;" id="developer_role_del" onClick="DeleteDeveloperRole()">
+                <form action="../games/db_games_config.php" method="post" name="developer_role">
+                    <select name="developer_role_select" class="standard_select input_medium grayed_out" id="developer_role_select">
+                        <option value="" selected="selected">-</option>
+                        {foreach from=$developer_roles item=all_developer_roles}
+                            <option value="{$all_developer_roles->getId()}">{$all_developer_roles->getRole()}</option>
+                        {/foreach}
+                    </select>
+                    <input type="text" name="developer_role_edit" class="standard_input input_medium" style="display:none;" id="developer_role_edit">
+                    <input type="text" name="developer_role_id_edit" class="standard_input input_medium" style="display:none;" id="developer_role_id_edit">
+                    <input type="submit" name="action" value="Modify dev role" class="secondary_button" style="display:none;" id="developer_role_mod">
+                    <input type="submit" name="action" value="Delete dev role" class="primary_button button_danger" style="display:none;" id="developer_role_del">
+                </form>
                 <hr class="separator_add">
                 <form action="../games/db_games_config.php" method="post" name="developer_role">
-                    <input type="hidden" name="action" value="add_developer_role">
                     <input type="text" name="developer_role_new" class="standard_input input_medium" placeholder="Enter new role" required>
-                    <input type="submit" value="Add role" class="secondary_button">
+                    <input type="submit" name="action" value="Add dev role" class="secondary_button">
                 </form>
             </fieldset>
         </div>
