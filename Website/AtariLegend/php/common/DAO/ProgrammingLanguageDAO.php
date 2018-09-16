@@ -101,4 +101,53 @@ class ProgrammingLanguageDAO {
 
         $stmt->close();
     }
+    
+    /**
+     * add a programming language to the database
+     *
+     * @param varchar name
+     */
+    public function addProgrammingLanguage($name) {
+        $stmt = \AL\Db\execute_query(
+            "ProgrammingLanguageDAO: addProgrammingLanguage",
+            $this->mysqli,
+            "INSERT INTO programming_language (`name`) VALUES (?)",
+            "s", $name
+        );
+
+        $stmt->close();
+    }
+    
+    /**
+     * delete a programming language
+     *
+     * @param int id
+     */
+    public function deleteProgrammingLanguage($id) {
+        $stmt = \AL\Db\execute_query(
+            "ProgrammingLanguageDAO: deleteProgrammingLanguage",
+            $this->mysqli,
+            "DELETE FROM programming_language WHERE id = ?",
+            "i", $id
+        );
+
+        $stmt->close();
+    }
+    
+    /**
+     * update a programming language
+     *
+     * @param int id
+     * @param varchar name
+     */
+    public function updateProgrammingLanguage($id, $name) {
+        $stmt = \AL\Db\execute_query(
+            "ProgrammingLanguageDAO: updateProgrammingLanguage",
+            $this->mysqli,
+            "UPDATE programming_language SET name = ? WHERE id = ?",
+            "si", $name, $id
+        );
+        
+        $stmt->close();
+    }
 }

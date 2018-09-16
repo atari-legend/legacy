@@ -1482,6 +1482,54 @@ function create_log_entry($section, $section_id, $subsection, $subsection_id, $a
         $subsection_name = ("Bug report ID " . $subsection_id);
         $section_name    = ("Bug report ID " . $subsection_id);
     }
+    
+    //  Everything we do for the GAMES CONFIG section
+    if ($section == 'Games Config') {
+        if ($subsection == 'Games Engine') {
+            // Get the engine name
+            $query = "SELECT name FROM engine WHERE id = '$section_id'";
+            $result = $mysqli->query($query) or die("getting engine name failed");
+            $query_data   = $result->fetch_array(MYSQLI_BOTH);
+            $section_name = $query_data['name'];
+        } elseif ($subsection == 'Programming Language') {
+            // Get the programming language name
+            $query = "SELECT name FROM programming_language WHERE id = '$section_id'";
+            $result = $mysqli->query($query) or die("getting language name failed");
+            $query_data   = $result->fetch_array(MYSQLI_BOTH);
+            $section_name = $query_data['name'];
+        } elseif ($subsection == 'Genre') {
+            // Get the genre name
+            $query = "SELECT name FROM game_genre WHERE id = '$section_id'";
+            $result = $mysqli->query($query) or die("getting genre name failed");
+            $query_data   = $result->fetch_array(MYSQLI_BOTH);
+            $section_name = $query_data['name'];
+        } elseif ($subsection == 'Port') {
+            // Get the port name
+            $query = "SELECT name FROM port WHERE id = '$section_id'";
+            $result = $mysqli->query($query) or die("getting port name failed");
+            $query_data   = $result->fetch_array(MYSQLI_BOTH);
+            $section_name = $query_data['name'];
+        } elseif ($subsection == 'Individual Role') {
+            // Get the role name
+            $query = "SELECT name FROM individual_role WHERE id = '$section_id'";
+            $result = $mysqli->query($query) or die("getting role name failed");
+            $query_data   = $result->fetch_array(MYSQLI_BOTH);
+            $section_name = $query_data['name'];
+        } elseif ($subsection == 'Developer Role') {
+            // Get the role name
+            $query = "SELECT role FROM developer_role WHERE id = '$section_id'";
+            $result = $mysqli->query($query) or die("getting role name failed");
+            $query_data   = $result->fetch_array(MYSQLI_BOTH);
+            $section_name = $query_data['role'];
+        } elseif ($subsection == 'Language') {
+            // Get the language name
+            $query = "SELECT name FROM language WHERE id = '$section_id'";
+            $result = $mysqli->query($query) or die("getting language name failed");
+            $query_data   = $result->fetch_array(MYSQLI_BOTH);
+            $section_name = $query_data['name'];
+        }
+        $subsection_name = $section_name;
+    }
 
     $section_name    = $mysqli->real_escape_string($section_name);
     $subsection_name = $mysqli->real_escape_string($subsection_name);

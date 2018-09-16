@@ -2,12 +2,12 @@
 namespace AL\Common\DAO;
 
 require_once __DIR__."/../../lib/Db.php" ;
-require_once __DIR__."/../Model/Individual/IndividualRole.php" ;
+require_once __DIR__."/../Model/PubDev/DeveloperRole.php" ;
 
 /**
- * DAO for Individual Roles
+ * DAO for Developer Roles
  */
-class IndividualRoleDAO {
+class DeveloperRoleDAO {
     private $mysqli;
 
     public function __construct($mysqli) {
@@ -17,32 +17,32 @@ class IndividualRoleDAO {
     /**
      * Get all Roles
      *
-     * @return \AL\Common\Model\Individual\IndividualRole[] An array of genres
+     * @return \AL\Common\Model\PubDev\DeveloperRole[] An array of roles
      */
-    public function getAllIndividualRoles() {
+    public function getAllDeveloperRoles() {
         $stmt = \AL\Db\execute_query(
-            "IndividualRoleDAO: getAllIndividualRoles",
+            "DeveloperRoleDAO: getAllDeveloperRoles",
             $this->mysqli,
-            "SELECT id, name FROM individual_role ORDER BY name",
+            "SELECT id, role FROM developer_role ORDER BY role",
             null, null
         );
 
         \AL\Db\bind_result(
-            "IndividualRoleDAO: getAllIndividualRoles",
+            "DeveloperRoleDAO: getAllDeveloperRoles",
             $stmt,
             $id, $role
         );
 
-        $individual_roles = [];
+        $developer_roles = [];
         while ($stmt->fetch()) {
-            $individual_roles[] = new \AL\Common\Model\Individual\IndividualRole(
+            $developer_roles[] = new \AL\Common\Model\PubDev\DeveloperRole(
                 $id, $role
             );
         }
 
         $stmt->close();
 
-        return $individual_roles;
+        return $developer_roles;
     }
     
     /**
@@ -52,30 +52,30 @@ class IndividualRoleDAO {
      */
     public function getRoleForId($id) {
         $stmt = \AL\Db\execute_query(
-            "IndividualRoleDAO: getRoleForId",
+            "DeveloperRoleDAO: getRoleForId",
             $this->mysqli,
-            "SELECT id, name
-            FROM individual_role 
+            "SELECT id, role
+            FROM developer_role 
             WHERE id = ?",
             "i", $id
         );
 
         \AL\Db\bind_result(
-            "IndividualRoleDAO: getRoleForId",
+            "DeveloperRoleDAO: getRoleForId",
             $stmt,
             $id, $role
         );
 
-        $individual_roles = null;
+        $developer_roles = null;
         while ($stmt->fetch()) {
-            $individual_roles = new \AL\Common\Model\Individual\IndividualRole(
+            $developer_roles = new \AL\Common\Model\PubDev\DeveloperRole(
                 $id, $role
             );
         }
 
         $stmt->close();
 
-        return $individual_roles;
+        return $developer_roles;
     }
     
     /**
@@ -83,11 +83,11 @@ class IndividualRoleDAO {
      *
      * @param varchar role
      */
-    public function addIndividualRole($role) {
+    public function addDeveloperRole($role) {
         $stmt = \AL\Db\execute_query(
-            "IndividualRoleDAO: addIndividualRole",
+            "DeveloperRoleDAO: addDeveloperRole",
             $this->mysqli,
-            "INSERT INTO individual_role (`name`) VALUES (?)",
+            "INSERT INTO developer_role (`role`) VALUES (?)",
             "s", $role
         );
 
@@ -99,11 +99,11 @@ class IndividualRoleDAO {
      *
      * @param int role_id
      */
-    public function deleteIndividualRole($role_id) {
+    public function deleteDeveloperRole($role_id) {
         $stmt = \AL\Db\execute_query(
-            "IndividualRoleDAO: deleteIndividualRole",
+            "DeveloperRoleDAO: deleteDeveloperRole",
             $this->mysqli,
-            "DELETE FROM individual_role WHERE id = ?",
+            "DELETE FROM developer_role WHERE id = ?",
             "i", $role_id
         );
 
@@ -116,11 +116,11 @@ class IndividualRoleDAO {
      * @param int role_id
      * @param varchar role_name
      */
-    public function updateIndividualRole($role_id, $role_name) {
+    public function updateDeveloperRole($role_id, $role_name) {
         $stmt = \AL\Db\execute_query(
-            "IndividualRoleDAO: updateIndividualRole",
+            "DeveloperRoleDAO: updateDeveloperRole",
             $this->mysqli,
-            "UPDATE individual_role SET name = ? WHERE id = ?",
+            "UPDATE developer_role SET role = ? WHERE id = ?",
             "si", $role_name, $role_id
         );
         

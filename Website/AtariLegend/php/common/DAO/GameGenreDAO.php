@@ -103,4 +103,53 @@ class GameGenreDAO {
 
         $stmt->close();
     }
+     
+     /**
+     * add a genre to the database
+     *
+     * @param varchar Genre
+     */
+    public function addGenre($genre) {
+        $stmt = \AL\Db\execute_query(
+            "GameGenreDAO: addGenre",
+            $this->mysqli,
+            "INSERT INTO game_genre (`name`) VALUES (?)",
+            "s", $genre
+        );
+
+        $stmt->close();
+    }
+    
+    /**
+     * delete a genre
+     *
+     * @param int genre_id
+     */
+    public function deleteGenre($genre_id) {
+        $stmt = \AL\Db\execute_query(
+            "GameGenreDAO: deleteGenre",
+            $this->mysqli,
+            "DELETE FROM game_genre WHERE id = ?",
+            "i", $genre_id
+        );
+
+        $stmt->close();
+    }
+    
+        /**
+     * update a genre
+     *
+     * @param int genre_id
+     * @param varchar genre_name
+     */
+    public function updateGenre($genre_id, $genre_name) {
+        $stmt = \AL\Db\execute_query(
+            "GameGenreDAO: updateGenre",
+            $this->mysqli,
+            "UPDATE game_genre SET name = ? WHERE id = ?",
+            "si", $genre_name, $genre_id
+        );
+        
+        $stmt->close();
+    }
 }
