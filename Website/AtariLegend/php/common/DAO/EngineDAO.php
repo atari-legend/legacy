@@ -78,6 +78,32 @@ class EngineDAO {
         return $game_engines;
     }
     
+     /**
+     * Set the list of game engines for this game
+     *
+     * @param integer Game ID
+     * @param integer[] List of game genre IDs
+     */
+    public function setGameEngineForGame($game_id, $game_engine_id) {
+        $stmt = \AL\Db\execute_query(
+            "EngineDAO: setGameEngineForGame",
+            $this->mysqli,
+            "DELETE FROM game_engine WHERE game_id = ?",
+            "i", $game_id
+        );
+
+        foreach ($game_engine_id as $id) {
+            $stmt = \AL\Db\execute_query(
+                "EngineDAO: setGameEngineForGame",
+                $this->mysqli,
+                "INSERT INTO game_engine (game_id, engine_id) VALUES (?, ?)",
+                "ii", $game_id, $id
+            );
+        }
+
+        $stmt->close();
+    }
+    
     /**
      * add a game engine type to the database
      *

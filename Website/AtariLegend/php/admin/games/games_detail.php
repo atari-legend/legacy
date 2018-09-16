@@ -140,28 +140,6 @@ $smarty->assign('game_individuals', $gameIndividualDao->getGameIndividualsForGam
 
 $smarty->assign('pubdevs', $pubDevDao->getPubDevsStartingWith("^[0-9]"));
 
-//let's get the publishers for this game
-$sql_publisher = $mysqli->query("SELECT * FROM pub_dev
-                 LEFT JOIN game_publisher ON ( pub_dev.pub_dev_id = game_publisher.pub_dev_id )
-                 -- Developer role is still needed here as it's the old game_extra_info tables
-                 -- It's still used by publishers that are linked directly to a game, which
-                 -- need to be cleaned up. That will be removed once all game publishers have
-                 -- been merged into releases
-                 LEFT JOIN developer_role ON ( game_publisher.game_extra_info_id = developer_role.id )
-                 LEFT JOIN continent ON ( game_publisher.continent_id = continent.continent_id )
-                 WHERE game_publisher.game_id = '$game_id' ORDER BY pub_dev_name ASC") or die("Couldn't query publishers: ".$mysqli->error);
-
-while ($publishers = $sql_publisher->fetch_array(MYSQLI_BOTH)) {
-    $smarty->append('publishers', array(
-        'pub_dev_id' => $publishers['pub_dev_id'],
-        'pub_dev_name' => $publishers['pub_dev_name'],
-        'game_extra_info' => $publishers['role'],
-        'game_extra_info_id' => $publishers['id'],
-        'continent_id' => $publishers['continent_id'],
-        'continent_name' => $publishers['continent_name']
-    ));
-}
-
 //let's get the developers for this game
 $sql_developer = $mysqli->query("SELECT * FROM pub_dev
                   LEFT JOIN game_developer ON ( pub_dev.pub_dev_id = game_developer.dev_pub_id )
@@ -174,19 +152,6 @@ while ($developers = $sql_developer->fetch_array(MYSQLI_BOTH)) {
         'pub_dev_name' => $developers['pub_dev_name'],
         'developer_role' => $developers['role'],
         'developer_role_id' => $developers['id']
-    ));
-}
-
-//**********************************************************************************
-//Get all the continents
-//**********************************************************************************
-
-$sql_continent = $mysqli->query("SELECT * FROM continent ORDER BY continent_name ASC") or die("Couldn't query continent database");
-
-while ($continent = $sql_continent->fetch_array(MYSQLI_BOTH)) {
-    $smarty->append('continents', array(
-        'continent_id' => $continent['continent_id'],
-        'continent_name' => $continent['continent_name']
     ));
 }
 

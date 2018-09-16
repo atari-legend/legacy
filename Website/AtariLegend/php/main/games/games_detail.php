@@ -330,54 +330,6 @@ if ($nr_interviews > 0) {
 //**********************************************************************************
 //Get the companies info
 //**********************************************************************************
-//let's get the publishers for this game
-$sql_publisher = $mysqli->query("SELECT * FROM pub_dev
-                 LEFT JOIN pub_dev_text ON (pub_dev.pub_dev_id = pub_dev_text.pub_dev_id )
-                 LEFT JOIN game_publisher ON ( pub_dev.pub_dev_id = game_publisher.pub_dev_id )
-                 -- Developer role is still needed here as it's the old game_extra_info tables
-                 -- It's still used by publishers that are linked directly to a game, which
-                 -- need to be cleaned up. That will be removed once all game publishers have
-                 -- been merged into releases
-                 LEFT JOIN developer_role ON ( game_publisher.game_extra_info_id = developer_role.id )
-                 LEFT JOIN continent ON ( game_publisher.continent_id = continent.continent_id )
-                 WHERE game_publisher.game_id = '$game_id' ORDER BY pub_dev_name ASC") or die("Couldn't query publishers");
-
-while ($publishers = $sql_publisher->fetch_array(MYSQLI_BOTH)) {
-    if ($publishers['pub_dev_imgext'] == 'png' or $publishers['pub_dev_imgext'] == 'jpg' or $publishers['pub_dev_imgext'] == 'gif') {
-        //$v_comp_image  = $company_screenshot_path;
-        $v_comp_image  = $company_screenshot_save_path;
-        $v_comp_image .= $publishers['pub_dev_id'];
-        $v_comp_image .= '.';
-        $v_comp_image .= $publishers['pub_dev_imgext'];
-
-        $v_comp_image_pop  = $company_screenshot_path;
-        $v_comp_image_pop .= $publishers['pub_dev_id'];
-        $v_comp_image_pop .= '.';
-        $v_comp_image_pop .= $publishers['pub_dev_imgext'];
-    } else {
-        $v_comp_image = "none";
-        $v_comp_image_pop = "none";
-    }
-
-    if (preg_match("/[a-z]/i", $publishers['pub_dev_profile'])) {
-        $profile = $publishers['pub_dev_profile'];
-    } else {
-        $profile = 'none';
-    }
-
-    $smarty->append('publisher', array(
-        'pub_id' => $publishers['pub_dev_id'],
-        'pub_name' => $publishers['pub_dev_name'],
-        'pub_profile' => $profile,
-        'continent_id' => $publishers['continent_id'],
-        'extra_info' => $publishers['role'],
-        'logo' => $v_comp_image,
-        'logo_pop' => $v_comp_image_pop,
-        'logo_path' => $company_screenshot_path,
-        'continent' => $publishers['continent_name']
-    ));
-}
-
 //let's get the developers for this game
 $sql_developer = $mysqli->query("SELECT * FROM game_developer
                   LEFT JOIN pub_dev ON ( pub_dev.pub_dev_id = game_developer.dev_pub_id )
