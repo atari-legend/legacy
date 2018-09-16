@@ -26,6 +26,8 @@ require_once __DIR__."/../../common/DAO/GameGenreDAO.php";
 require_once __DIR__."/../../common/DAO/PortDAO.php";
 require_once __DIR__."/../../common/DAO/EngineDAO.php";
 require_once __DIR__."/../../common/DAO/ControlDAO.php";
+require_once __DIR__."/../../common/DAO/GameReleaseAkaDAO.php";
+require_once __DIR__."/../../common/DAO/LanguageDAO.php";
 
 $gameReleaseDao = new \AL\Common\DAO\GameReleaseDAO($mysqli);
 $gameSeriesDao = new \AL\Common\DAO\GameSeriesDAO($mysqli);
@@ -38,6 +40,8 @@ $gameGenreDao = new \AL\Common\DAO\GameGenreDAO($mysqli);
 $portDao = new \AL\Common\DAO\portDAO($mysqli);
 $engineDao = new \AL\Common\DAO\engineDAO($mysqli);
 $controlDao = new \AL\Common\DAO\controlDAO($mysqli);
+$gameReleaseAkaDao = new \AL\Common\DAO\GameReleaseAkaDAO($mysqli);
+$languageDao = new \AL\Common\DAO\LanguageDAO($mysqli);
 
 /**
  * Generates an SEO-friendly description of a game, depending on the data available
@@ -194,11 +198,13 @@ foreach ($releases as $release) {
     $system_enhanced[$release->getId()] = $systemDao->getEnhancedSystemsForRelease($release->getId());
     $release_resolution[$release->getId()] = $resolutionDao->getResolutionsForRelease($release->getId());
     $release_location[$release->getId()] = $locationDao->getLocationsForRelease($release->getId());
+    $release_akas[$release->getId()] = $gameReleaseAkaDao->getAllGameReleaseAkas($release->getId());
 }
 $smarty->assign('system_incompatible', $system_incompatible);
 $smarty->assign('system_enhanced', $system_enhanced);
 $smarty->assign('release_resolution', $release_resolution);
 $smarty->assign('release_location', $release_location);
+$smarty->assign('release_akas', $release_akas);
 
 //***********************************************************************************
 //get the game genres & the genres already selected for this game
