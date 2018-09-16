@@ -11,6 +11,8 @@ require_once __DIR__."/../../common/DAO/SystemDAO.php";
 require_once __DIR__."/../../common/DAO/PubDevDAO.php";
 require_once __DIR__."/../../common/DAO/LocationDAO.php";
 require_once __DIR__."/../../common/DAO/ChangeLogDAO.php";
+require_once __DIR__."/../../common/DAO/GameReleaseAkaDAO.php";
+require_once __DIR__."/../../common/DAO/LanguageDAO.php";
 
 $gameReleaseDao = new \AL\Common\DAO\GameReleaseDAO($mysqli);
 $gameDao = new \AL\Common\DAO\GameDao($mysqli);
@@ -19,6 +21,8 @@ $systemDao = new \AL\Common\DAO\SystemDao($mysqli);
 $pubDevDao = new \AL\Common\DAO\PubDevDAO($mysqli);
 $locationDao = new \AL\Common\DAO\LocationDAO($mysqli);
 $changeLogDao = new \AL\Common\DAO\ChangeLogDAO($mysqli);
+$gameReleaseAkaDao = new \AL\Common\DAO\GameReleaseAkaDAO($mysqli);
+$languageDao = new \AL\Common\DAO\LanguageDAO($mysqli);
 
 if ($_SERVER['REQUEST_METHOD'] == "GET") {
     $smarty->assign('license_types', $gameReleaseDao->getLicenseTypes());
@@ -27,6 +31,7 @@ if ($_SERVER['REQUEST_METHOD'] == "GET") {
     $smarty->assign('resolutions', $resolutionDao->getAllResolutions());
     $smarty->assign('systems', $systemDao->getAllSystems());
     $smarty->assign('publishers', $pubDevDao->getAllPubDevs());
+    $smarty->assign('languages', $languageDao->getAllLanguages());
 
     // Edit existing release
     if (isset($release_id)) {
@@ -43,6 +48,7 @@ if ($_SERVER['REQUEST_METHOD'] == "GET") {
         $smarty->assign('system_enhanced', $systemDao->getEnhancedSystemsForRelease($release->getId()));
         $smarty->assign('release_resolutions', $resolutionDao->getResolutionsForRelease($release->getId()));
         $smarty->assign('release_locations', $locationDao->getLocationsForRelease($release->getId()));
+        $smarty->assign('release_akas', $gameReleaseAkaDao->getAllGameReleaseAkas($release->getId()));
     } else {
         // Creating a new release
         $game = $gameDao->getGame($game_id);
@@ -79,28 +85,33 @@ if ($_SERVER['REQUEST_METHOD'] == "GET") {
     }
 
     if ($release_id > -1) {
-        $gameReleaseDao->updateRelease(
-            $release_id,
-            $name,
-            $date,
-            $license,
-            ($type != '') ? $type : null,
-            ($pub_dev_id != '') ? $pub_dev_id : null
-        );
-
-        $changeLogDao->insertChangeLog(
-            new \AL\Common\Model\Database\ChangeLog(
-                -1,
-                "Games",
-                $game_id,
-                $game->getName(),
-                "Release",
+        if (isset($action) && ($action == 'general')) 
+        {     
+            $gameReleaseDao->updateRelease(
                 $release_id,
-                ($name == '') ? $game->getName() : $name,
-                $_SESSION["user_id"],
-                \AL\Common\Model\Database\ChangeLog::ACTION_UPDATE
-            )
-        );
+                $name,
+                $date,
+                $license,
+                ($type != '') ? $type : null,
+                ($pub_dev_id != '') ? $pub_dev_id : null
+            );
+            
+            $locationDao->setLocationsForRelease($release_id, isset($location) ? $location : []);
+
+            $changeLogDao->insertChangeLog(
+                new \AL\Common\Model\Database\ChangeLog(
+                    -1,
+                    "Games",
+                    $game_id,
+                    $game->getName(),
+                    "Release",
+                    $release_id,
+                    ($name == '') ? $game->getName() : $name,
+                    $_SESSION["user_id"],
+                    \AL\Common\Model\Database\ChangeLog::ACTION_UPDATE
+                )
+            );
+        }
     } else {
         $release_id = $gameReleaseDao->addReleaseForGame(
             $game_id,
@@ -125,11 +136,27 @@ if ($_SERVER['REQUEST_METHOD'] == "GET") {
             )
         );
     }
-
-    $systemDao->setIncompatibleSystemsForRelease($release_id, isset($system_incompatible) ? $system_incompatible : []);
-    $systemDao->setEnhancedSystemsForRelease($release_id, isset($system_enhanced) ? $system_enhanced : []);
-    $resolutionDao->setResolutionsForRelease($release_id, isset($resolution) ? $resolution : []);
-    $locationDao->setLocationsForRelease($release_id, isset($location) ? $location : []);
+    
+    if (isset($action) && ($action == 'features')) 
+    {  
+        $systemDao->setIncompatibleSystemsForRelease($release_id, isset($system_incompatible) ? $system_incompatible : []);
+        $systemDao->setEnhancedSystemsForRelease($release_id, isset($system_enhanced) ? $system_enhanced : []);
+        $resolutionDao->setResolutionsForRelease($release_id, isset($resolution) ? $resolution : []);
+        
+        $changeLogDao->insertChangeLog(
+            new \AL\Common\Model\Database\ChangeLog(
+                -1,
+                "Games",
+                $game_id,
+                $game->getName(),
+                "Release",
+                $release_id,
+                ($name == '') ? $game->getName() : $name,
+                $_SESSION["user_id"],
+                \AL\Common\Model\Database\ChangeLog::ACTION_UPDATE
+            )
+        );
+    }
 
     if ($submit_type == "save_and_back") {
         header("Location: games_detail.php?game_id=".$game_id);
