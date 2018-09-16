@@ -370,13 +370,13 @@ function statistics_stack() {
     mysqli_free_result($query);
 
     // START - COUNT HOW MANY GAMES HAS PUBLISHER ASSIGNED
-    $query     = $mysqli->query("SELECT COUNT(DISTINCT game_id) AS count FROM game_publisher");
-    $publisher = $query->fetch_array(MYSQLI_BOTH);
-    $stack[]   = "$publisher[count] games have a publisher assigned";
+    //$query     = $mysqli->query("SELECT COUNT(DISTINCT game_id) AS count FROM game_publisher");
+    //$publisher = $query->fetch_array(MYSQLI_BOTH);
+    //$stack[]   = "$publisher[count] games have a publisher assigned";
 
     // END - COUNT HOW MANY GAMES HAS PUBLISHER ASSIGNED
 
-    mysqli_free_result($query);
+    //mysqli_free_result($query);
 
     // START - COUNT HOW MANY GAMES HAS DEVELOPER ASSIGNED
     $query     = $mysqli->query("SELECT COUNT(DISTINCT game_id) AS count FROM game_developer");

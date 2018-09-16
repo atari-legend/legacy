@@ -137,7 +137,7 @@ while ($query_games = $sql_games->fetch_array(MYSQLI_BOTH)) {
         'game_id' => $query_games['game_id'],
         'game_name' => $query_games['game_name'],
         'game_releases' => $releases,
-        'individual_role' => $query_games['role'],
+        'individual_role' => $query_games['name'],
         'count' => $count
     ));
 }
