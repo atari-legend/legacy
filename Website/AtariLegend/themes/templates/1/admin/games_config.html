@@ -123,6 +123,27 @@
                     <input type="text" name="port_new" class="standard_input input_medium" placeholder="Enter new port" required>
                     <input type="submit" value="Add port" name="action" class="secondary_button">
                 </form>
+                <br>
+                <br>
+                <b>Controls</b>&nbsp;&nbsp;
+                <br>
+                <form action="../games/db_games_config.php" method="post" name="control">
+                    <select name="control_select" class="standard_select input_medium grayed_out" id="control_select">
+                        <option value="" selected="selected">-</option>
+                        {foreach from=$controls item=all_controls}
+                            <option value="{$all_controls->getId()}">{$all_controls->getName()}</option>
+                        {/foreach}
+                    </select>
+                    <input type="text" name="control_edit" class="standard_input input_medium" style="display:none;" id="control_edit">
+                    <input type="text" name="control_id_edit" class="standard_input input_medium" style="display:none;" id="control_id_edit">
+                    <input type="submit" value="Modify control" name="action" class="secondary_button" style="display:none;" id="control_mod">
+                    <input type="submit" value="Delete control" name="action" class="primary_button button_danger" style="display:none;" id="control_del">
+                </form>
+                <hr class="separator_add">
+                <form action="../games/db_games_config.php" method="post" name="control">
+                    <input type="text" name="control_new" class="standard_input input_medium" placeholder="Enter new control" required>
+                    <input type="submit" value="Add control" name="action" class="secondary_button">
+                </form>
             </fieldset>
             <br>
             <fieldset class="secondary_fieldset">

@@ -27,6 +27,10 @@ $(document).ready(function () {
     $('select[name=developer_role_select]').change(function () {
         hideShow('developer_role');
     });
+
+    $('select[name=control_select]').change(function () {
+        hideShow('control');
+    });
 });
 
 function hideShow (type) {

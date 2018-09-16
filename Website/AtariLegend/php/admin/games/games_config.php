@@ -23,6 +23,7 @@ require_once __DIR__."/../../common/DAO/GameGenreDAO.php";
 require_once __DIR__."/../../common/DAO/PortDAO.php";
 require_once __DIR__."/../../common/DAO/IndividualRoleDAO.php";
 require_once __DIR__."/../../common/DAO/DeveloperRoleDAO.php";
+require_once __DIR__."/../../common/DAO/ControlDAO.php";
 
 $engineDao = new \AL\Common\DAO\EngineDAO($mysqli);
 $programmingLanguageDao = new \AL\Common\DAO\ProgrammingLanguageDAO($mysqli);
@@ -30,6 +31,7 @@ $gameGenreDao = new \AL\Common\DAO\GameGenreDAO($mysqli);
 $portDao = new \AL\Common\DAO\PortDAO($mysqli);
 $individualRoleDao = new \Al\Common\DAO\IndividualRoleDAO($mysqli);
 $developerRoleDao = new \Al\Common\DAO\DeveloperRoleDAO($mysqli);
+$controlDao = new \AL\Common\DAO\ControlDAO($mysqli);
 
 //***********************************************************************************
 //get the engines & the engines already selected for this game
@@ -50,6 +52,11 @@ $smarty->assign('game_genres', $gameGenreDao->getAllGameGenres());
 //get the game ports & the port for this game
 //***********************************************************************************
 $smarty->assign('ports', $portDao->getAllPorts());
+
+//***********************************************************************************
+//get the game controls & the controls already selected for this game
+//***********************************************************************************
+$smarty->assign('controls', $controlDao->getAllControls());
 
 // Get the indivual roles
 $smarty->assign('individual_roles', $individualRoleDao->getAllIndividualRoles());
