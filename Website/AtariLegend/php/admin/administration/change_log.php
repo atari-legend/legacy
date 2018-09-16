@@ -496,6 +496,12 @@ while ($log = $sql_log->fetch_array(MYSQLI_BOTH)) {
         $section_link    = ("../administration/bug_report.php");
         $subsection_link = ("../administration/bug_report.php");
     }
+    
+    //  the GAMES CONFIG SECTION
+    if ($log['section'] == 'Games Config') {
+        $section_link    = ("../games/games_config.php");
+        $subsection_link = ("../games/games_config.php");
+    }
 
     $smarty->append('log', array(
         'log_user_name' => $user_name,

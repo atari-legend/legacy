@@ -99,4 +99,53 @@ class PortDAO {
 
         $stmt->close();
     }
+    
+        /**
+     * add a port to the database
+     *
+     * @param varchar port
+     */
+    public function addPort($port) {
+        $stmt = \AL\Db\execute_query(
+            "PortDAO: addPort",
+            $this->mysqli,
+            "INSERT INTO port (`name`) VALUES (?)",
+            "s", $port
+        );
+
+        $stmt->close();
+    }
+    
+    /**
+     * delete a port
+     *
+     * @param int port_id
+     */
+    public function deletePort($port_id) {
+        $stmt = \AL\Db\execute_query(
+            "PortDAO: deletePort",
+            $this->mysqli,
+            "DELETE FROM port WHERE id = ?",
+            "i", $port_id
+        );
+
+        $stmt->close();
+    }
+    
+        /**
+     * update a port
+     *
+     * @param int port_id
+     * @param varchar port_name
+     */
+    public function updatePort($port_id, $port_name) {
+        $stmt = \AL\Db\execute_query(
+            "PortDAO: updatePort",
+            $this->mysqli,
+            "UPDATE port SET name = ? WHERE id = ?",
+            "si", $port_name, $port_id
+        );
+        
+        $stmt->close();
+    }
 }
