@@ -103,4 +103,53 @@ class ControlDAO {
 
         $stmt->close();
     }
+    
+     /**
+     * add a control to the database
+     *
+     * @param varchar control
+     */
+    public function addControl($control) {
+        $stmt = \AL\Db\execute_query(
+            "ControlDAO: addControl",
+            $this->mysqli,
+            "INSERT INTO control (`name`) VALUES (?)",
+            "s", $control
+        );
+
+        $stmt->close();
+    }
+    
+    /**
+     * delete a control
+     *
+     * @param int control_id
+     */
+    public function deleteControl($control_id) {
+        $stmt = \AL\Db\execute_query(
+            "ControlDAO: deleteControl",
+            $this->mysqli,
+            "DELETE FROM control WHERE id = ?",
+            "i", $control_id
+        );
+
+        $stmt->close();
+    }
+    
+     /**
+     * update a control
+     *
+     * @param int control_id
+     * @param varchar control_name
+     */
+    public function updateControl($control_id, $control_name) {
+        $stmt = \AL\Db\execute_query(
+            "ControlDAO: updateControl",
+            $this->mysqli,
+            "UPDATE control SET name = ? WHERE id = ?",
+            "si", $control_name, $control_id
+        );
+        
+        $stmt->close();
+    }
 }

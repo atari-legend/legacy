@@ -14,6 +14,7 @@ require_once __DIR__."/../../common/DAO/GameGenreDAO.php";
 require_once __DIR__."/../../common/DAO/PortDAO.php";
 require_once __DIR__."/../../common/DAO/IndividualRoleDAO.php";
 require_once __DIR__."/../../common/DAO/DeveloperRoleDAO.php";
+require_once __DIR__."/../../common/DAO/ControlDAO.php";
 
 $changeLogDao = new \AL\Common\DAO\ChangeLogDAO($mysqli);
 $engineDao = new \AL\Common\DAO\EngineDAO($mysqli);
@@ -22,6 +23,7 @@ $gameGenreDao = new \AL\Common\DAO\GameGenreDAO($mysqli);
 $portDao = new \AL\Common\DAO\PortDAO($mysqli);
 $individualRoleDao = new \Al\Common\DAO\IndividualRoleDAO($mysqli);
 $developerRoleDao = new \Al\Common\DAO\DeveloperRoleDAO($mysqli);
+$controlDao = new \AL\Common\DAO\ControlDAO($mysqli);
 
 switch ($_POST['action']) {
 	case "Add engine":
@@ -178,6 +180,32 @@ switch ($_POST['action']) {
         create_log_entry('Games Config', $developer_role_id_edit, 'Developer Role', $developer_role_id_edit, 'Update', $_SESSION['user_id']);
 
         $_SESSION['edit_message'] = "Developer role has been updated" ;
+        break;
+    
+    case "Add control":
+        $controlDao->addControl($control_new);
+        
+        $new_control_id = $mysqli->insert_id;
+        
+        create_log_entry('Games Config', $new_control_id, 'Control',$new_control_id, 'Insert', $_SESSION['user_id']);
+        
+        $_SESSION['edit_message'] = "$control_new has been added" ;
+        break;
+        
+    case "Delete control":
+        create_log_entry('Games Config', $control_id_edit, 'Control', $control_id_edit, 'Delete', $_SESSION['user_id']);
+        
+        $controlDao->deleteControl($control_id_edit);       
+
+        $_SESSION['edit_message'] = "Control has been deleted" ;
+        break;
+        
+    case "Modify control":        
+        $controlDao->updateControl($control_id_edit, $control_edit);      
+
+        create_log_entry('Games Config', $control_id_edit, 'Control', $control_id_edit, 'Update', $_SESSION['user_id']);
+
+        $_SESSION['edit_message'] = "Control has been updated" ;
         break;
 }
 
