@@ -502,6 +502,14 @@ while ($log = $sql_log->fetch_array(MYSQLI_BOTH)) {
         $section_link    = ("../games/games_config.php");
         $subsection_link = ("../games/games_config.php");
     }
+    
+    //  the GAMES RELEASE SECTION
+    if ($log['section'] == 'Game Release') {
+        $section_link    = ("../games/games_release_detail.php" . '?game_id=' . $log['section_id'] . '&release_id=' . $log['sub_section_id']);
+        if ($log['sub_section'] == 'Game Release' OR $log['sub_section'] == 'Release Info' OR $log['sub_section'] == 'Release AKA' OR $log['sub_section'] == 'Release Features') {
+            $subsection_link = ("../games/games_release_detail.php" . '?game_id=' . $log['section_id'] . '&release_id=' . $log['sub_section_id']);
+        }
+    }
 
     $smarty->append('log', array(
         'log_user_name' => $user_name,

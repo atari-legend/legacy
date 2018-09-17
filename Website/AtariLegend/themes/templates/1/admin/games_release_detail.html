@@ -59,7 +59,7 @@
                     </div>
                     <br>
 
-                    <form method="POST" class="release_editor">
+                    <form action="../games/db_games_release_detail.php" method="post" class="release_editor">
 
                         <input type="hidden" name="game_id" value="{$game->getId()}">
                         <input type="hidden" name="release_id" value="{$release->getId()}">
@@ -194,7 +194,7 @@
             </div>
 
             <div id="tab-compatibility" class="tabcontent tabpane">
-                <form method="POST" class="release_editor">
+                <form action="../games/db_games_release_detail.php" method="post" class="release_editor">
                     <input type="hidden" name="game_id" value="{$game->getId()}">
                     <input type="hidden" name="release_id" value="{$release->getId()}">
                     <input type="hidden" name="action" value="features">

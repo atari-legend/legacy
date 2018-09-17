@@ -123,6 +123,19 @@
                                 </td>
                         </tr>
                     {/if}
+
+                    {if $release_akas[$release->getId()]}
+                        <tr>
+                                <td class="w-30"><span class="games_main_detail_info_right">AKA</span></td>
+                                <td class="w-5">-</td>
+                                <td class="w-60">
+                                    {foreach from=$release_akas[$release->getId()] item=aka_id name=aka}
+                                        {$aka_id->getName()} <span class="standard_tile_subtext">({$aka_id->getLanguage()->getName()})</span>
+                                        <br>
+                                    {/foreach}
+                                </td>
+                        </tr>
+                    {/if}
                     {/foreach}
             </table>
         </div>
