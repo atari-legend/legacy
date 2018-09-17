@@ -1536,6 +1536,20 @@ function create_log_entry($section, $section_id, $subsection, $subsection_id, $a
         }
         $subsection_name = $section_name;
     }
+    
+    //Everything we do for GAME RELEASES
+    if ($section == 'Game Release') {
+
+        //  get the release name
+        $query_game = "SELECT game_name FROM game WHERE game_id = '$section_id'";
+        $result = $mysqli->query($query_game) or die("getting name failed");
+        $query_data   = $result->fetch_array(MYSQLI_BOTH);
+        $section_name = $query_data['game_name'];    
+        
+        if ($subsection == 'Game Release' OR $subsection == 'Release Info' OR $subsection == 'Release AKA' OR $subsection == 'Release Features') {
+            $subsection_name = $section_name;
+        }
+    }   
 
     $section_name    = $mysqli->real_escape_string($section_name);
     $subsection_name = $mysqli->real_escape_string($subsection_name);
