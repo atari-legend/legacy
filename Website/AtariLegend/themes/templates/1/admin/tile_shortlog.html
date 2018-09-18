@@ -1,0 +1,37 @@
+{*
+/***************************************************************************
+*                              tile_bug_report.html
+*                            --------------------------
+*   begin                : September 12, 2017
+*   copyright            : (C) 2017 Atari Legend
+*   email                : admin@atarilegend.com
+*
+*   Id: tile_bug_report.html,v 0.10 2017/09/12 ST Graveyard
+*
+***************************************************************************/
+
+//****************************************************************************************
+// This is the bug report tile
+//****************************************************************************************
+*}
+
+<script>
+    setInterval(function(){
+        $('#jsShortLog').load('../tiles/ajax_shortlog.php');
+    }, 2000) /* time in milliseconds (ie 2 seconds)*/
+</script>
+
+<div class="standard_tile text-center">
+    <h1>ACTIVITY LOG</h1>
+    <div class="standard_tile_line"></div>
+    <div class="standard_tile_padding">
+        <h6 style="text-align:center;">
+            Recent changes and updates<br><br>
+        </h6>
+
+        <hr class="separator_add_secondary">
+        <div class="help-hint" style="text-align:justify;" id="jsShortLog">
+            {include file='1/admin/ajax_shortlog.html'}
+        </div>
+    </div>
+</div>

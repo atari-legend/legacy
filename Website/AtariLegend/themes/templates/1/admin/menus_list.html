@@ -24,7 +24,7 @@ The main game page
     <h1>MENU SET</h1>
     <div class="standard_tile_line"></div>
         <div class="standard_tile_text_center">
-            <form action="../menus/db_menu_disk.php" method="post" name="post" id="menu_edit">
+            <form action="../menus/db_menu_set.php" method="post" name="post" id="menu_edit">
                 <br>
                 Add new Menu Set:
                 <br>
@@ -63,13 +63,13 @@ The main game page
                         <th class="mw-10">type</th>
                         <th class="mw-10">Nr</th>
                     </tr>
-                    {foreach from=$menus item=line}
+                    {foreach from=$menus_list item=line}
                         <tr>
-                            <td>{if $line.menu_sets_name != ''}<a href="../menus/menus_disk_list.php?menu_sets_id={$line.menu_sets_id}" class="standard_tile_text_left">{$line.menu_sets_name}</a>{else}<i>n/a</i>{/if}</td>
-                            <td>{if $line.crew_name != ''}{$line.crew_name}{else}<i>n/a</i>{/if}</td>
-                            <td>{if $line.ind_name != ''}{$line.ind_name}{else}<i>n/a</i>{/if}</td>
-                            <td>{if $line.menu_type != ''}{$line.menu_type}{else}<i>n/a</i>{/if}</td>
-                            <td>{if $line.numbermenus != ''}{$line.numbermenus}{else}<i>0</i>{/if}</td>
+                            <td>{if null !== $line->getMenuSetsName()}<a href="../menus/menus_disk_list.php?menu_sets_id={$line->getMenuSetsId()}" class="standard_tile_text_left">{$line->getMenuSetsName()}</a>{else}<i>n/a</i>{/if}</td>
+                            <td>{if null !== $line->getCrew()}{$line->getCrew()->getName()}{else}<i>n/a</i>{/if}</td>
+                            <td>{if null !== $line->getIndividual()}{$line->getIndividual()->getName()}{else}<i>n/a</i>{/if}</td>
+                            <td>{if null !== $line->getMenuTypesText()}{$line->getMenuTypesText()}{else}<i>n/a</i>{/if}</td>
+                            <td>{if null !== $line->getMenuDiskCount()}{$line->getMenuDiskCount()}{else}<i>0</i>{/if}</td>
                         </tr>
                     {/foreach}
                     <tr>

@@ -47,24 +47,22 @@ if (empty($game_author)) {
             game_download.game_download_id,
             pd2.pub_dev_name as 'developer_name',
             pd2.pub_dev_id as 'developer_id',
-            game_cat_cross.game_cat_id,
-            game_cat.game_cat_name
+            game_genre_cross.game_genre_id,
+            game_genre.name
             FROM game
             LEFT JOIN review_game ON (review_game.game_id = game.game_id)
             LEFT JOIN game_boxscan ON (game_boxscan.game_id = game.game_id)
-            LEFT JOIN game_cat_cross ON (game_cat_cross.game_id = game.game_id)
-            LEFT JOIN game_cat ON (game_cat_cross.game_cat_id = game_cat.game_cat_id)
+            LEFT JOIN game_genre_cross ON (game_genre_cross.game_id = game.game_id)
+            LEFT JOIN game_genre ON (game_genre_cross.game_genre_id = game_genre.id)
             LEFT JOIN screenshot_game ON (screenshot_game.game_id = game.game_id)
             LEFT JOIN game_music ON (game_music.game_id = game.game_id)
             LEFT JOIN game_download ON (game_download.game_id = game.game_id)
-            LEFT JOIN game_arcade ON (game.game_id = game_arcade.game_id)
             LEFT JOIN game_development ON (game.game_id = game_development.game_id)
           LEFT JOIN game_unreleased ON (game.game_id = game_unreleased.game_id)
           LEFT JOIN game_unfinished ON (game.game_id = game_unfinished.game_id)
-          LEFT JOIN game_seuck ON (game.game_id = game_seuck.game_id)
-          LEFT JOIN game_stos ON (game.game_id = game_stos.game_id)
-          LEFT JOIN game_stac ON (game.game_id = game_stac.game_id)
           LEFT JOIN game_wanted ON (game.game_id = game_wanted.game_id)
+          LEFT JOIN game_programming_language ON (game.game_id = game_programming_language.game_id)
+          LEFT JOIN game_engine ON (game.game_id = game_engine.game_id)
           LEFT JOIN game_developer ON (game_developer.game_id = game.game_id)
           LEFT JOIN pub_dev pd2 on (pd2.pub_dev_id = game_developer.dev_pub_id)
           LEFT JOIN game_release on (game_release.game_id = game.game_id)
@@ -80,25 +78,23 @@ if (empty($game_author)) {
             game_download.game_download_id,
             pd2.pub_dev_name as 'developer_name',
             pd2.pub_dev_id as 'developer_id',
-            game_cat_cross.game_cat_id,
-            game_cat.game_cat_name
+            game_genre_cross.game_genre_id,
+            game_genre.name
             FROM game
-            LEFT JOIN game_author ON (game_author.game_id = game.game_id)
+            LEFT JOIN game_individual ON (game_individual.game_id = game.game_id)
             LEFT JOIN review_game ON (review_game.game_id = game.game_id)
             LEFT JOIN game_boxscan ON (game_boxscan.game_id = game.game_id)
-            LEFT JOIN game_cat_cross ON (game_cat_cross.game_id = game.game_id)
-            LEFT JOIN game_cat ON (game_cat_cross.game_cat_id = game_cat.game_cat_id)
+            LEFT JOIN game_genre_cross ON (game_genre_cross.game_id = game.game_id)
+            LEFT JOIN game_genre ON (game_genre_cross.game_genre_id = game_genre.id)
             LEFT JOIN screenshot_game ON (screenshot_game.game_id = game.game_id)
             LEFT JOIN game_music ON (game_music.game_id = game.game_id)
             LEFT JOIN game_download ON (game_download.game_id = game.game_id)
-            LEFT JOIN game_arcade ON (game.game_id = game_arcade.game_id)
             LEFT JOIN game_development ON (game.game_id = game_development.game_id)
           LEFT JOIN game_unreleased ON (game.game_id = game_unreleased.game_id)
           LEFT JOIN game_unfinished ON (game.game_id = game_unfinished.game_id)
-          LEFT JOIN game_seuck ON (game.game_id = game_seuck.game_id)
-          LEFT JOIN game_stos ON (game.game_id = game_stos.game_id)
-          LEFT JOIN game_stac ON (game.game_id = game_stac.game_id)
           LEFT JOIN game_wanted ON (game.game_id = game_wanted.game_id)
+          LEFT JOIN game_programming_language ON (game.game_id = game_programming_language.game_id)
+          LEFT JOIN game_engine ON (game.game_id = game_engine.game_id)
           LEFT JOIN game_developer ON (game_developer.game_id = game.game_id)
           LEFT JOIN pub_dev pd2 on (pd2.pub_dev_id = game_developer.dev_pub_id)
           LEFT JOIN game_release on (game_release.game_id = game.game_id)
@@ -117,25 +113,23 @@ if (empty($game_author)) {
              game_download.game_download_id,
              pd2.pub_dev_name as 'developer_name',
              pd2.pub_dev_id as 'developer_id',
-             game_cat_cross.game_cat_id,
-             game_cat.game_cat_name
+             game_genre_cross.game_genre_id,
+             game_genre.name
           FROM game_aka
           LEFT JOIN game ON (game_aka.game_id = game.game_id)
           LEFT JOIN review_game ON (review_game.game_id = game.game_id)
-          LEFT JOIN game_cat_cross ON (game_cat_cross.game_id = game.game_id)
-          LEFT JOIN game_cat ON (game_cat_cross.game_cat_id = game_cat.game_cat_id)
+          LEFT JOIN game_genre_cross ON (game_genre_cross.game_id = game.game_id)
+          LEFT JOIN game_genre ON (game_genre_cross.game_genre_id = game_genre.id)
           LEFT JOIN game_boxscan ON (game_boxscan.game_id = game_aka.game_id)
           LEFT JOIN screenshot_game ON (screenshot_game.game_id = game.game_id)
           LEFT JOIN game_music ON (game_music.game_id = game.game_id)
           LEFT JOIN game_download ON (game_download.game_id = game.game_id)
-          LEFT JOIN game_arcade ON (game.game_id = game_arcade.game_id)
           LEFT JOIN game_development ON (game.game_id = game_development.game_id)
           LEFT JOIN game_unreleased ON (game.game_id = game_unreleased.game_id)
           LEFT JOIN game_unfinished ON (game.game_id = game_unfinished.game_id)
-          LEFT JOIN game_seuck ON (game.game_id = game_seuck.game_id)
-          LEFT JOIN game_stos ON (game.game_id = game_stos.game_id)
-          LEFT JOIN game_stac ON (game.game_id = game_stac.game_id)
           LEFT JOIN game_wanted ON (game.game_id = game_wanted.game_id)
+          LEFT JOIN game_programming_language ON (game.game_id = game_programming_language.game_id)
+          LEFT JOIN game_engine ON (game.game_id = game_engine.game_id)
           LEFT JOIN game_developer ON (game.game_id = game_developer.game_id)
           LEFT JOIN pub_dev pd2 on (pd2.pub_dev_id = game_developer.dev_pub_id)
           LEFT JOIN game_release on (game_release.game_id = game.game_id)
@@ -152,26 +146,24 @@ if (empty($game_author)) {
              game_download.game_download_id,
              pd2.pub_dev_name as 'developer_name',
              pd2.pub_dev_id as 'developer_id',
-             game_cat_cross.game_cat_id,
-             game_cat.game_cat_name
+             game_genre_cross.game_genre_id,
+             game_genre.name
           FROM game_aka
           LEFT JOIN game ON (game_aka.game_id = game.game_id)
-          LEFT JOIN game_author ON (game_author.game_id = game.game_id)
+          LEFT JOIN game_individual ON (game_individual.game_id = game.game_id)
           LEFT JOIN review_game ON (review_game.game_id = game.game_id)
-          LEFT JOIN game_cat_cross ON (game_cat_cross.game_id = game.game_id)
-          LEFT JOIN game_cat ON (game_cat_cross.game_cat_id = game_cat.game_cat_id)
+          LEFT JOIN game_genre_cross ON (game_genre_cross.game_id = game.game_id)
+          LEFT JOIN game_genre ON (game_genre_cross.game_genre_id = game_genre.id)
           LEFT JOIN game_boxscan ON (game_boxscan.game_id = game_aka.game_id)
           LEFT JOIN screenshot_game ON (screenshot_game.game_id = game.game_id)
           LEFT JOIN game_music ON (game_music.game_id = game.game_id)
           LEFT JOIN game_download ON (game_download.game_id = game.game_id)
-          LEFT JOIN game_arcade ON (game.game_id = game_arcade.game_id)
           LEFT JOIN game_development ON (game.game_id = game_development.game_id)
           LEFT JOIN game_unreleased ON (game.game_id = game_unreleased.game_id)
-          LEFT JOIN game_unfinished ON (game.game_id = game_unfinished.game_id)
-          LEFT JOIN game_seuck ON (game.game_id = game_seuck.game_id)
-          LEFT JOIN game_stos ON (game.game_id = game_stos.game_id)
-          LEFT JOIN game_stac ON (game.game_id = game_stac.game_id)
+          LEFT JOIN game_unfinished ON (game.game_id = game_unfinished.game_id)          
           LEFT JOIN game_wanted ON (game.game_id = game_wanted.game_id)
+          LEFT JOIN game_programming_language ON (game.game_id = game_programming_language.game_id)
+          LEFT JOIN game_engine ON (game.game_id = game_engine.game_id)
           LEFT JOIN game_developer ON (game.game_id = game_developer.game_id)
           LEFT JOIN pub_dev pd2 on (pd2.pub_dev_id = game_developer.dev_pub_id)
           LEFT JOIN game_release on (game_release.game_id = game.game_id)
@@ -261,16 +253,16 @@ if (isset($action) and $action == "search") {
     if (empty($game_author)) {
         $game_author_select = "";
     } else {
-        $game_author_select = " AND game_author.ind_id = '$game_author'";
+        $game_author_select = " AND game_individual.individual_id = '$game_author'";
     }
 
     //check the category select
     if (empty($category) or $category == '-') {
         $category_select = "";
     } elseif ($category == "null") {
-        $category_select = " AND game_cat_cross.game_cat_id IS NULL";
+        $category_select = " AND game_genre_cross.game_genre_id IS NULL";
     } else {
-        $category_select = " AND game_cat_cross.game_cat_id = $category";
+        $category_select = " AND game_genre_cross.game_genre_id = $category";
     }
 
     //
@@ -295,7 +287,7 @@ if (isset($action) and $action == "search") {
     }
 
     if (isset($arcade) and $arcade == "1") {
-        $arcade_select = " AND game_arcade.arcade =$arcade";
+        $arcade_select = " AND game.port_id ='1'";
         $smarty->assign('games_arcade', '1');
     }
 
@@ -313,7 +305,7 @@ if (isset($action) and $action == "search") {
     }
 
     if (isset($stos) and $stos == "1") {
-        $stos_select = " AND game_stos.stos =$stos";
+        $stos_select = " AND game_programming_language.programming_language_id = 1";
     }
 
     if (isset($unfinished) and $unfinished == "1") {
@@ -321,11 +313,11 @@ if (isset($action) and $action == "search") {
     }
 
     if (isset($seuck) and $seuck == "1") {
-        $seuck_select = " AND game_seuck.seuck =$seuck";
+        $seuck_select = " AND game_engine.engine_id ='1'";
     }
 
     if (isset($stac) and $stac == "1") {
-        $stac_select = " AND game_stac.stac =$stac";
+        $stac_select = " AND game_engine.engine_id ='2'";
     }
 
     //Before we start the build the query, we check if there is at least
@@ -377,7 +369,7 @@ if (isset($action) and $action == "search") {
         }
 
         if (!empty($cat_input)) {
-            $RESULTGAME .= " AND game_cat.game_cat_name LIKE '%$cat_input%'";
+            $RESULTGAME .= " AND game_genre.name LIKE '%$cat_input%'";
         } else {
         }
 
@@ -420,13 +412,13 @@ if (isset($action) and $action == "search") {
             $RESULTGAME .= " AND game_unfinished.unfinished =$unfinished";
         }
         if (isset($seuck) and $seuck == "1") {
-            $RESULTGAME .= " AND game_seuck.seuck = $seuck";
+            $RESULTGAME .= " AND game_engine.engine_id ='1'";
         }
         if (isset($stos) and $stos == "1") {
-            $RESULTGAME .= " AND game_stos.stos = $stos";
+            $RESULTGAME .= " AND game_programming_language.programming_language_id = 1";
         }
         if (isset($stac) and $stac == "1") {
-            $RESULTGAME .= " AND game_stac.stac = $stac";
+            $RESULTGAME .= " AND game_engine.engine_id ='2'";
         }
         if (isset($wanted) and $wanted == "1") {
             $RESULTGAME .= " AND game_wanted.game_id IS NOT NULL";
@@ -480,9 +472,9 @@ if (isset($action) and $action == "search") {
                 }
 
                 if (!empty($cat_input)) {
-                    $RESULTAKA .= " AND game_cat.game_cat_name LIKE '%$cat_input%'";
+                    $RESULTAKA .= " AND game_genre.name LIKE '%$cat_input%'";
                 } else {
-                    //    $RESULTAKA .= " AND game_cat.game_cat_name LIKE '%'";
+                    //    $RESULTAKA .= " AND game_genre.game_genre_name LIKE '%'";
                 }
 
                 $RESULTAKA .= $akabrowse_select;
@@ -523,13 +515,13 @@ if (isset($action) and $action == "search") {
                     $RESULTAKA .= " AND game_unfinished.unfinished =$unfinished";
                 }
                 if (isset($seuck) and $seuck == "1") {
-                    $RESULTAKA .= " AND game_seuck.seuck = $seuck";
+                    $RESULTAKA .= " AND game_engine.engine_id ='1'";
                 }
                 if (isset($stos) and $stos == "1") {
-                    $RESULTAKA .= " AND game_stos.stos = $stos";
+                    $RESULTAKA .= " AND game_programming_language.programming_language_id = 1";
                 }
                 if (isset($stac) and $stac == "1") {
-                    $RESULTAKA .= " AND game_stac.stac = $stac";
+                    $RESULTAKA .= " AND game_engine.engine_id ='2'";
                 }
                 if (isset($wanted) and $wanted == "1") {
                     $RESULTAKA .= " AND game_wanted.game_id IS NOT NULL";

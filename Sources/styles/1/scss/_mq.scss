@@ -5,7 +5,6 @@
 //*----------------------------------------------------------
 // media queries
 //------------------------------------------------------------ */
-
 @media screen and (min-width: 451px) {
     #games_main_list_4,
     #games_main_list_3,
@@ -58,11 +57,14 @@
     #gd_game_dev,
     #gd_game_dev_select,
     #gd_aka,
-    #gd_aka_input{width: 140px;}
+    #gd_aka_input{width: 95px;}
 
     #gd_dev_browse{width: 25px;}
     #gd_dev_name{
-        width: 110px;
+        width: 65px;
+    }
+    #games_detail .edit_author {
+        margin-right: 0px;
     }
 }
 
@@ -638,6 +640,9 @@
         display: block;
         float: right;
         width: 20%;
+    }
+    #gd_more_data_left{
+        display: none;
     }
 }
 @media screen and (min-width: 601px) and (max-width: 1279px) {

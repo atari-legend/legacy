@@ -1,0 +1,26 @@
+{*
+/***************************************************************************
+*                              ajax_shortlog.html
+*                            --------------------------
+*   begin                : August 15, 2018
+*   copyright            : (C) 2018 Atari Legend
+*   email                : admin@atarilegend.com
+*
+***************************************************************************/
+
+//****************************************************************************************
+// This is the return data for the ajax shortlog
+//****************************************************************************************
+*}
+
+{foreach from=$changelog item=log}
+    <div class="shortlog">
+        <img src="{$log->getUser()->getAvatar()}">
+        <span class="username">
+            <a class="standard_link_color" href="../user/user_detail.php?user_id_selected={$log->getUser()->getId()}">{$log->getUser()->getName()}</a>
+        </span>
+        <span class="timestamp">{$log->getTimestamp()|timeago}</span>
+
+        <div class="log">{$log->getShortLogMessage()}</div>
+    </div>
+{/foreach}

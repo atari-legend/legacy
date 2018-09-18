@@ -178,18 +178,18 @@
                     {/if}
                 {/foreach}
             {/if}
-            {if isset($game_author)}
-                {foreach from=$game_author item=line name=game_author}
+            {if isset($game_individual)}
+                {foreach from=$game_individual item=line name=game_individual}
                     <tr>
                         <td class="w-30">
-                            {if $smarty.foreach.game_author.index == 0}
+                            {if $smarty.foreach.game_individual.index == 0}
                                 <span class="games_main_detail_info_right">Author</span>
                             {/if}
-                            {if $line.auhthor_type_info != ''}
+                            {if $line.individual_role != ''}
                                 <br><br>
                             {/if}
                             {if $line.ind_nick != ''}
-                                {if $line.auhthor_type_info == ''}
+                                {if $line.individual_role == ''}
                                     <br><br>
                                 {else}
                                     <br>
@@ -198,11 +198,11 @@
                         </td>
                         <td class="w-5">
                             <span class="games_main_detail_info_left text-center">-</span>
-                            {if $line.auhthor_type_info != ''}
+                            {if $line.individual_role != ''}
                                 <br><br>
                             {/if}
                             {if $line.ind_nick != ''}
-                                {if $line.auhthor_type_info == ''}
+                                {if $line.individual_role == ''}
                                     <br><br>
                                 {else}
                                     <br>
@@ -230,8 +230,8 @@
                             {if $line.ind_nick != ''}
                                 <br><span class="standard_tile_subtext">AKA {$line.ind_nick}</span>
                             {/if}
-                            {if $line.auhthor_type_info != ''}
-                                <br><span class="standard_tile_subtext">{$line.auhthor_type_info}</span>
+                            {if $line.individual_role != ''}
+                                <br><span class="standard_tile_subtext">{$line.individual_role}</span>
                             {/if}
                         </td>
                     </tr>
@@ -249,7 +249,7 @@
             {/if}
 
             {if $game_info.game_unreleased == 1 || $game_info.game_development == 1
-                || $game_info.game_wanted <> '' || $game_info.game_arcade == 1 || $game_info.game_seuck == 1 || $game_info.game_stos == 1 || $game_info.game_stac == 1}
+                || $game_info.game_wanted <> '' }
                 <tr>
                     <td class="w-30">
                         <span class="games_main_detail_info_right">Specifics</span>
@@ -263,18 +263,6 @@
                                 <br>
                             {/if}
                             {if $game_info.game_wanted <> ''}
-                                <br>
-                            {/if}
-                            {if $game_info.game_arcade == 1}
-                                <br>
-                            {/if}
-                            {if $game_info.game_seuck == 1}
-                                <br>
-                            {/if}
-                            {if $game_info.game_stos == 1}
-                                <br>
-                            {/if}
-                            {if $game_info.game_stac == 1}
                                 <br>
                             {/if}
                     </td>
@@ -292,18 +280,6 @@
                             {if $game_info.game_wanted <> ''}
                                 <br>
                             {/if}
-                            {if $game_info.game_arcade == 1}
-                                <br>
-                            {/if}
-                            {if $game_info.game_seuck == 1}
-                                <br>
-                            {/if}
-                            {if $game_info.game_stos == 1}
-                                <br>
-                            {/if}
-                            {if $game_info.game_stac == 1}
-                                <br>
-                            {/if}
                     </td>
                     <td class="w-60">
                         <span class="standard_tile_subtext">
@@ -319,23 +295,31 @@
                             {if $game_info.game_wanted <> ''}
                                 Wanted <br>
                             {/if}
-                            {if $game_info.game_arcade == 1}
-                                Arcade <br>
-                            {/if}
-                            {if $game_info.game_seuck == 1}
-                                SUECK <br>
-                            {/if}
-                            {if $game_info.game_stos == 1}
-                                STOS <br>
-                            {/if}
-                            {if $game_info.game_stac == 1}
-                                STAC <br>
-                            {/if}
                         </span>
                     </td>
                 </tr>
             {/if}
-
+            {foreach from=$game_programming_languages item=linked_programming_languages name=language}
+                {foreach from=$programming_languages item=all_programming_languages}
+                    {if $linked_programming_languages->getId() == $all_programming_languages->getId()}
+                    <tr>
+                        <td class="w-30">
+                            {if $smarty.foreach.language.first}<span class="games_main_detail_info_right">Code</span>{/if}
+                            <br>
+                        </td>
+                        <td class="w-5">
+                            <span class="games_main_detail_info_left text-center">-</span>
+                            <br>
+                        </td>
+                        <td class="w-60">
+                            <span class="standard_tile_subtext">
+                                {$all_programming_languages->getName()}
+                            </span>
+                        </td>
+                    </tr>
+                    {/if}
+                {/foreach}
+            {/foreach}
             {if isset($aka)}
                 {foreach from=$aka item=line name=aka}
                     <tr>
@@ -364,25 +348,74 @@
                     </tr>
                 {/foreach}
             {/if}
-            {if isset($cat)}
-                {foreach from=$cat item=line name=cat}
-                    <tr>
-                        <td class="w-30">
-                        {if $smarty.foreach.cat.index == 0}
-                            <span class="games_main_detail_info_right">Category</span>
-                        {/if}
-                        </td>
-                        <td class="w-5">
-                            <span class="games_main_detail_info_left text-center">-</span>
-                        </td>
-                        <td class="w-60">
-                            <span class="games_main_detail_info_left">
-                                <a href="games_main_list.php?category={$line.cat_id}&amp;action=search" class="standard_tile_link">{$line.cat_name}</a>
-                            </span>
-                        </td>
-                    </tr>
-                {/foreach}
+            {foreach from=$game_engines item=engines name=engine}
+                <tr>
+                    <td class="w-30">
+                        {if $smarty.foreach.engine.first}<span class="games_main_detail_info_right">Engine</span>{/if}
+                        <br>
+                    </td>
+                    <td class="w-5">
+                        <span class="games_main_detail_info_left text-center">-</span>
+                        <br>
+                    </td>
+                    <td class="w-60">
+                        <span class="standard_tile_subtext">
+                            {$engines->getName()}
+                        </span>
+                    </td>
+                </tr>
+            {/foreach}
+            {foreach from=$game_genres item=genres name=genre}
+                <tr>
+                    <td class="w-30">
+                        {if $smarty.foreach.genre.first}<span class="games_main_detail_info_right">Genre</span>{/if}
+                        <br>
+                    </td>
+                    <td class="w-5">
+                        <span class="games_main_detail_info_left text-center">-</span>
+                        <br>
+                    </td>
+                    <td class="w-60">
+                        <span class="standard_tile_subtext">
+                            {$genres->getName()}
+                        </span>
+                    </td>
+                </tr>
+            {/foreach}
+            {if isset($port) AND $port->getPort() != ''}
+                <tr>
+                    <td class="w-30">
+                        <span class="games_main_detail_info_right">Conversion</span>
+                        <br>
+                    </td>
+                    <td class="w-5">
+                        <span class="games_main_detail_info_left text-center">-</span>
+                        <br>
+                    </td>
+                    <td class="w-60">
+                        <span class="standard_tile_subtext">
+                            {$port->getPort()}
+                        </span>
+                    </td>
+                </tr>
             {/if}
+            {foreach from=$game_controls item=controls name=control}
+                <tr>
+                    <td class="w-30">
+                        {if $smarty.foreach.control.first}<span class="games_main_detail_info_right">Controls</span>{/if}
+                        <br>
+                    </td>
+                    <td class="w-5">
+                        <span class="games_main_detail_info_left text-center">-</span>
+                        <br>
+                    </td>
+                    <td class="w-60">
+                        <span class="standard_tile_subtext">
+                            {$controls->getName()}
+                        </span>
+                    </td>
+                </tr>
+            {/foreach}
             {if isset($game_vs)}
                 {foreach from=$game_vs item=line name=game_vs}
                     <tr>

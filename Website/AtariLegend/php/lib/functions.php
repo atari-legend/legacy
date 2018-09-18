@@ -370,13 +370,13 @@ function statistics_stack() {
     mysqli_free_result($query);
 
     // START - COUNT HOW MANY GAMES HAS PUBLISHER ASSIGNED
-    $query     = $mysqli->query("SELECT COUNT(DISTINCT game_id) AS count FROM game_publisher");
+    $query     = $mysqli->query("SELECT COUNT(distinct id) AS count FROM game_release WHERE pub_dev_id != 0");
     $publisher = $query->fetch_array(MYSQLI_BOTH);
     $stack[]   = "$publisher[count] games have a publisher assigned";
 
     // END - COUNT HOW MANY GAMES HAS PUBLISHER ASSIGNED
 
-    mysqli_free_result($query);
+    //mysqli_free_result($query);
 
     // START - COUNT HOW MANY GAMES HAS DEVELOPER ASSIGNED
     $query     = $mysqli->query("SELECT COUNT(DISTINCT game_id) AS count FROM game_developer");
@@ -397,13 +397,20 @@ function statistics_stack() {
     mysqli_free_result($query);
 
     // START - COUNT HOW MANY GAMES HAS CATEGORIES SET
-    $query         = $mysqli->query("SELECT COUNT(DISTINCT game_id) AS count FROM game_cat_cross");
-    $game_category = $query->fetch_array(MYSQLI_BOTH);
-    $stack[]       = "$game_category[count] games have category set";
-
+    $query         = $mysqli->query("SELECT COUNT(DISTINCT game_id) AS count FROM game_genre_cross");
+    // Special case here due to the migration from game_categories to game_genre
+    // This fails until the DB update script is run because the game_genre_cross
+    // table doesn't exist. It prevents accessing the site and CPANEL, preventing
+    // to run the DB update script... So just handle the error and skip this line
+    // of stats until the DB update script is run and the table exists.
+    if ($query) {
+        $game_genre    = $query->fetch_array(MYSQLI_BOTH);
+        $stack[]       = "$game_genre[count] games have a genre set";
+        mysqli_free_result($query);
+    }
     // END - COUNT HOW MANY GAMES HAS CATEGORIES SET
 
-    mysqli_free_result($query);
+
 
     // START - COUNT NUMBER OF DOWNLOADABLE FILES
     $query      = $mysqli->query("SELECT COUNT(game_id) AS count FROM game_download");
@@ -1266,7 +1273,7 @@ function create_log_entry($section, $section_id, $subsection, $subsection_id, $a
         if ($subsection == 'Article' or $subsection == 'Screenshots') {
             $subsection_name = $section_name;
         }
-        
+
         if ($subsection == 'Comment') {
             //we need to get the title
             $query_user_comment = "SELECT article_user_comments.article_id,
@@ -1475,6 +1482,74 @@ function create_log_entry($section, $section_id, $subsection, $subsection_id, $a
         $subsection_name = ("Bug report ID " . $subsection_id);
         $section_name    = ("Bug report ID " . $subsection_id);
     }
+    
+    //  Everything we do for the GAMES CONFIG section
+    if ($section == 'Games Config') {
+        if ($subsection == 'Games Engine') {
+            // Get the engine name
+            $query = "SELECT name FROM engine WHERE id = '$section_id'";
+            $result = $mysqli->query($query) or die("getting engine name failed");
+            $query_data   = $result->fetch_array(MYSQLI_BOTH);
+            $section_name = $query_data['name'];
+        } elseif ($subsection == 'Programming Language') {
+            // Get the programming language name
+            $query = "SELECT name FROM programming_language WHERE id = '$section_id'";
+            $result = $mysqli->query($query) or die("getting language name failed");
+            $query_data   = $result->fetch_array(MYSQLI_BOTH);
+            $section_name = $query_data['name'];
+        } elseif ($subsection == 'Genre') {
+            // Get the genre name
+            $query = "SELECT name FROM game_genre WHERE id = '$section_id'";
+            $result = $mysqli->query($query) or die("getting genre name failed");
+            $query_data   = $result->fetch_array(MYSQLI_BOTH);
+            $section_name = $query_data['name'];
+        } elseif ($subsection == 'Port') {
+            // Get the port name
+            $query = "SELECT name FROM port WHERE id = '$section_id'";
+            $result = $mysqli->query($query) or die("getting port name failed");
+            $query_data   = $result->fetch_array(MYSQLI_BOTH);
+            $section_name = $query_data['name'];
+        } elseif ($subsection == 'Individual Role') {
+            // Get the role name
+            $query = "SELECT name FROM individual_role WHERE id = '$section_id'";
+            $result = $mysqli->query($query) or die("getting role name failed");
+            $query_data   = $result->fetch_array(MYSQLI_BOTH);
+            $section_name = $query_data['name'];
+        } elseif ($subsection == 'Developer Role') {
+            // Get the role name
+            $query = "SELECT role FROM developer_role WHERE id = '$section_id'";
+            $result = $mysqli->query($query) or die("getting role name failed");
+            $query_data   = $result->fetch_array(MYSQLI_BOTH);
+            $section_name = $query_data['role'];
+        } elseif ($subsection == 'Language') {
+            // Get the language name
+            $query = "SELECT name FROM language WHERE id = '$section_id'";
+            $result = $mysqli->query($query) or die("getting language name failed");
+            $query_data   = $result->fetch_array(MYSQLI_BOTH);
+            $section_name = $query_data['name'];
+        } elseif ($subsection == 'Control') {
+            // Get the language name
+            $query = "SELECT name FROM control WHERE id = '$section_id'";
+            $result = $mysqli->query($query) or die("getting control type failed");
+            $query_data   = $result->fetch_array(MYSQLI_BOTH);
+            $section_name = $query_data['name'];
+        }
+        $subsection_name = $section_name;
+    }
+    
+    //Everything we do for GAME RELEASES
+    if ($section == 'Game Release') {
+
+        //  get the release name
+        $query_game = "SELECT game_name FROM game WHERE game_id = '$section_id'";
+        $result = $mysqli->query($query_game) or die("getting name failed");
+        $query_data   = $result->fetch_array(MYSQLI_BOTH);
+        $section_name = $query_data['game_name'];    
+        
+        if ($subsection == 'Game Release' OR $subsection == 'Release Info' OR $subsection == 'Release AKA' OR $subsection == 'Release Features') {
+            $subsection_name = $section_name;
+        }
+    }   
 
     $section_name    = $mysqli->real_escape_string($section_name);
     $subsection_name = $mysqli->real_escape_string($subsection_name);

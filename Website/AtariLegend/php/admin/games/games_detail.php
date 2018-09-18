@@ -23,53 +23,64 @@
 include("../../config/common.php");
 include("../../config/admin.php");
 include("../../admin/games/quick_search_games.php");
+include("../../admin/tiles/tile_shortlog.php");
 
 require_once __DIR__."/../../common/DAO/GameReleaseDAO.php";
 require_once __DIR__."/../../common/DAO/GameDAO.php";
 require_once __DIR__."/../../common/DAO/IndividualDAO.php";
 require_once __DIR__."/../../common/DAO/PubDevDAO.php";
+require_once __DIR__."/../../common/DAO/ProgrammingLanguageDAO.php";
+require_once __DIR__."/../../common/DAO/PortDAO.php";
+require_once __DIR__."/../../common/DAO/GameGenreDAO.php";
+require_once __DIR__."/../../common/DAO/IndividualRoleDAO.php";
+require_once __DIR__."/../../common/DAO/GameIndividualDAO.php";
+require_once __DIR__."/../../common/DAO/IndividualDAO.php";
+require_once __DIR__."/../../common/DAO/EngineDAO.php";
+require_once __DIR__."/../../common/DAO/ControlDAO.php";
 
 $gameReleaseDao = new \AL\Common\DAO\GameReleaseDAO($mysqli);
 $gameDao = new \AL\Common\DAO\GameDAO($mysqli);
 $individualDao = new \Al\Common\DAO\IndividualDAO($mysqli);
 $pubDevDao = new \AL\Common\DAO\PubDevDAO($mysqli);
+$programmingLanguageDao = new \AL\Common\DAO\ProgrammingLanguageDAO($mysqli);
+$portDao = new \AL\Common\DAO\PortDAO($mysqli);
+$gameGenreDao = new \AL\Common\DAO\GameGenreDAO($mysqli);
+$individualRoleDao = new \Al\Common\DAO\IndividualRoleDAO($mysqli);
+$gameIndividualDao = new \Al\Common\DAO\GameIndividualDAO($mysqli);
+$individualDao = new \Al\Common\DAO\IndividualDAO($mysqli);
+$engineDao = new \AL\Common\DAO\EngineDAO($mysqli);
+$controlDao = new \AL\Common\DAO\ControlDAO($mysqli);
 
 //***********************************************************************************
 //Let's get the general game info first.
 //***********************************************************************************
 $sql_game = $mysqli->query("SELECT game_name,
                game.game_id,
+               game.game_series_id,
+               game_series.name as game_series_name,
                game_development.development,
                game_unreleased.unreleased,
                game_unfinished.unfinished,
-               game_wanted.game_wanted_id,
-               game_arcade.arcade,
-               game_seuck.seuck,
-               game_stos.stos,
-               game_stac.stac
+               game_wanted.game_wanted_id
                FROM game
+               LEFT JOIN game_series ON (game.game_series_id = game_series.id)
                LEFT JOIN game_unreleased ON (game.game_id = game_unreleased.game_id)
                LEFT JOIN game_development ON (game.game_id = game_development.game_id)
-               LEFT JOIN game_arcade ON (game.game_id = game_arcade.game_id)
-               LEFT JOIN game_seuck ON (game.game_id = game_seuck.game_id)
-               LEFT JOIN game_stos ON (game.game_id = game_stos.game_id)
-               LEFT JOIN game_stac ON (game.game_id = game_stac.game_id)
                LEFT JOIN game_unfinished ON (game.game_id = game_unfinished.game_id)
                LEFT JOIN game_wanted ON (game.game_id = game_wanted.game_id)
                  WHERE game.game_id='$game_id'") or die("Error getting game info: " . $mysqli->error);
 
 while ($game_info = $sql_game->fetch_array(MYSQLI_BOTH)) {
+
     $smarty->assign('game_info', array(
         'game_name' => $game_info['game_name'],
         'game_id' => $game_info['game_id'],
+        'game_series_id' => $game_info['game_series_id'],
+        'game_series_name' => $game_info['game_series_name'],
         'game_development' => $game_info['development'],
         'game_unreleased' => $game_info['unreleased'],
         'game_unfinished' => $game_info['unfinished'],
-        'game_wanted' => $game_info['game_wanted_id'],
-        'game_arcade' => $game_info['arcade'],
-        'game_seuck' => $game_info['seuck'],
-        'game_stos' => $game_info['stos'],
-        'game_stac' => $game_info['stac']
+        'game_wanted' => $game_info['game_wanted_id']
     ));
 }
 
@@ -84,84 +95,50 @@ $smarty->assign('game_releases', $gameReleaseDao->getReleasesForGame($game_id));
 //***********************************************************************************
 //get the game categories & the categories already selected for this game
 //***********************************************************************************
+$smarty->assign('game_genres', $gameGenreDao->getAllGameGenres());
+$smarty->assign('game_genres_cross', $gameGenreDao->getGameGenresForGame($game_id));
 
-$sql_categories = $mysqli->query("SELECT * FROM game_cat ORDER BY game_cat_name") or die("Error loading categories");
+//***********************************************************************************
+//get the engines & the engines already selected for this game
+//***********************************************************************************
+$smarty->assign('engines', $engineDao->getAllEngines());
+$smarty->assign('game_engines', $engineDao->getGameEnginesForGame($game_id));
 
-while ($categories = $sql_categories->fetch_array(MYSQLI_BOTH)) {
-    $sql_game_cat = $mysqli->query("SELECT * FROM game_cat_cross WHERE game_id='$game_id' AND game_cat_id=$categories[game_cat_id]") or die("Error loading categorie cross table");
+//*******************************************************************************************
+//get the programming languages and the programming languages already selected for this game
+//*******************************************************************************************
+$smarty->assign('programming_languages', $programmingLanguageDao->getAllProgrammingLanguages());
+$smarty->assign('game_programming_languages', $programmingLanguageDao->getProgrammingLanguagesForGame($game_id));
 
-    $selected = $sql_game_cat->num_rows;
-    if ($selected == 1) {
-        $selected = 'selected';
-    } else {
-        $selected = '';
-    }
+//***********************************************************************************
+//get the game ports & the port for this game
+//***********************************************************************************
+$smarty->assign('ports', $portDao->getAllPorts());
+$smarty->assign('game_port', $portDao->getPortForGame($game_id));
 
-    $smarty->append('cat', array(
-        'cat_id' => $categories['game_cat_id'],
-        'cat_name' => $categories['game_cat_name'],
-        'cat_selected' => $selected
-    ));
-}
+//***********************************************************************************
+//get the game controls & the controls already selected for this game
+//***********************************************************************************
+$smarty->assign('game_controls', $controlDao->getAllControls());
+$smarty->assign('game_control_cross', $controlDao->getGameControlsForGame($game_id));
 
 //**********************************************************************************
-//Get the author info
+//Get the individuals info
 //**********************************************************************************
 $smarty->assign('individuals', $individualDao->getAllIndividuals());
 
-// Get the author types
-$sql_author = $mysqli->query("SELECT * FROM author_type ORDER BY author_type_info ASC") or die("Couldn't query author_types");
-
-while ($author = $sql_author->fetch_array(MYSQLI_BOTH)) {
-    $smarty->append('author_types', array(
-        'author_type' => $author['author_type_info'],
-        'author_type_id' => $author['author_type_id']
-    ));
-}
+// Get the indivual roles
+$smarty->assign('individual_roles', $individualRoleDao->getAllIndividualRoles());
 
 //Starting off with displaying the authors that are linked to the game and having a delete option for them */
-$sql_gameauthors = $mysqli->query("SELECT * FROM game_author
-                  LEFT JOIN individuals ON (game_author.ind_id = individuals.ind_id)
-                  LEFT JOIN author_type ON (game_author.author_type_id = author_type.author_type_id)
-                  WHERE game_author.game_id='$game_id' ORDER BY author_type.author_type_id, individuals.ind_name") or die("Error loading authors");
-
-while ($game_author = $sql_gameauthors->fetch_array(MYSQLI_BOTH)) {
-    $smarty->append('game_author', array(
-        'game_author_id' => $game_author['game_author_id'],
-        'ind_name' => $game_author['ind_name'],
-        'ind_id' => $game_author['ind_id'],
-        'author_type_info' => $game_author['author_type_info'],
-        'author_type_id' => $game_author['author_type_id']
-    ));
-}
+//get the game_individual entries
+$smarty->assign('game_individuals', $gameIndividualDao->getGameIndividualsForGame($game_id));
 
 //**********************************************************************************
 //Get the companies info
 //**********************************************************************************
 
 $smarty->assign('pubdevs', $pubDevDao->getPubDevsStartingWith("^[0-9]"));
-
-//let's get the publishers for this game
-$sql_publisher = $mysqli->query("SELECT * FROM pub_dev
-                 LEFT JOIN game_publisher ON ( pub_dev.pub_dev_id = game_publisher.pub_dev_id )
-                 -- Developer role is still needed here as it's the old game_extra_info tables
-                 -- It's still used by publishers that are linked directly to a game, which
-                 -- need to be cleaned up. That will be removed once all game publishers have
-                 -- been merged into releases
-                 LEFT JOIN developer_role ON ( game_publisher.game_extra_info_id = developer_role.id )
-                 LEFT JOIN continent ON ( game_publisher.continent_id = continent.continent_id )
-                 WHERE game_publisher.game_id = '$game_id' ORDER BY pub_dev_name ASC") or die("Couldn't query publishers: ".$mysqli->error);
-
-while ($publishers = $sql_publisher->fetch_array(MYSQLI_BOTH)) {
-    $smarty->append('publishers', array(
-        'pub_dev_id' => $publishers['pub_dev_id'],
-        'pub_dev_name' => $publishers['pub_dev_name'],
-        'game_extra_info' => $publishers['role'],
-        'game_extra_info_id' => $publishers['id'],
-        'continent_id' => $publishers['continent_id'],
-        'continent_name' => $publishers['continent_name']
-    ));
-}
 
 //let's get the developers for this game
 $sql_developer = $mysqli->query("SELECT * FROM pub_dev
@@ -179,19 +156,6 @@ while ($developers = $sql_developer->fetch_array(MYSQLI_BOTH)) {
 }
 
 //**********************************************************************************
-//Get all the continents
-//**********************************************************************************
-
-$sql_continent = $mysqli->query("SELECT * FROM continent ORDER BY continent_name ASC") or die("Couldn't query continent database");
-
-while ($continent = $sql_continent->fetch_array(MYSQLI_BOTH)) {
-    $smarty->append('continents', array(
-        'continent_id' => $continent['continent_id'],
-        'continent_name' => $continent['continent_name']
-    ));
-}
-
-//**********************************************************************************
 //Get the developer roles
 //**********************************************************************************
 
@@ -203,34 +167,6 @@ while ($developer_role = $sql_developer_role->fetch_array(MYSQLI_BOTH)) {
         'developer_role' => $developer_role['role']
     ));
 }
-
-//***********************************************************************************
-//The game categories
-//***********************************************************************************
-
-$sql_categories = $mysqli->query("SELECT * FROM game_cat ORDER BY game_cat_name") or die("Error loading categories");
-
-while ($categories = $sql_categories->fetch_array(MYSQLI_BOTH)) {
-    $smarty->append('categories', array(
-        'game_cat_id' => $categories['game_cat_id'],
-        'game_cat_name' => $categories['game_cat_name']
-    ));
-}
-
-$sql_catcross = $mysqli->query("SELECT * FROM game_cat_cross WHERE game_id='$game_id'") or die("Error loading categorie cross table");
-
-$nr_catcross = 0;
-
-while ($catcross = $sql_catcross->fetch_array(MYSQLI_BOTH)) {
-    $smarty->append('catcross', array(
-        'game_id' => $catcross['game_id'],
-        'game_cat_id' => $catcross['game_cat_id']
-    ));
-
-    $nr_catcross++;
-}
-
-$smarty->assign("nr_catcross", $nr_catcross);
 
 //***********************************************************************************
 // Game facts
@@ -252,7 +188,7 @@ $smarty->assign('nr_similar', $similar['C']);
 //AKA's
 //***********************************************************************************
 
-$sql_aka = $mysqli->query("SELECT * FROM game_aka 
+$sql_aka = $mysqli->query("SELECT * FROM game_aka
                            LEFT JOIN language ON (game_aka.language_id = language.id)
                            WHERE game_id='$game_id'") or die("Couldn't query aka games");
 
