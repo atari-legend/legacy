@@ -53,8 +53,8 @@ $RESULTGAME = "SELECT
                     review_main.review_date,
                     review_main.review_id
                     FROM game
-                    LEFT JOIN game_publisher ON ( game.game_id = game_publisher.game_id )
-                    LEFT JOIN pub_dev ON ( game_publisher.pub_dev_id = pub_dev.pub_dev_id )
+                    LEFT JOIN game_developer ON ( game.game_id = game_developer.game_id )
+                    LEFT JOIN pub_dev ON ( game_developer.dev_pub_id = pub_dev.pub_dev_id )
                     LEFT JOIN review_game ON ( review_game.game_id = game.game_id )
                     LEFT JOIN review_main ON ( review_main.review_id = review_game.review_id)
                     LEFT JOIN users ON ( review_main.user_id = users.user_id)
@@ -77,7 +77,7 @@ if ($rows > 0) {
         $smarty->append('review', array(
             'game_id' => $row['game_id'],
             'game_name' => $row['game_name'],
-            'game_publisher' => $row['pub_dev_name'],
+            'game_developer' => $row['pub_dev_name'],
             'review_date' => $review_date,
             'review_id' => $row['review_id'],
             'username' => $row['userid']

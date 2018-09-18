@@ -23,11 +23,11 @@ This is the include to fill the quick search games side menu
 //Get publisher values to fill the searchfield
 $sql_publisher = $mysqli->query("SELECT pub_dev.pub_dev_id,
                    pub_dev.pub_dev_name
-                   FROM game_publisher
-                   LEFT JOIN pub_dev ON (game_publisher.pub_dev_id = pub_dev.pub_dev_id)
+                   FROM game_release
+                   LEFT JOIN pub_dev ON (pub_dev.pub_dev_id = game_release.pub_dev_id)
                    GROUP BY pub_dev.pub_dev_id HAVING COUNT(DISTINCT pub_dev.pub_dev_id) = 1
                    ORDER BY pub_dev.pub_dev_name ASC")
-                or die("Problems retriving values from publishers.");
+                or die("Problems retreiving values from publishers.");
 
 while ($company_publisher = $sql_publisher->fetch_array(MYSQLI_BOTH)) {
     $smarty->append('company_publisher', array(
@@ -42,7 +42,7 @@ $sql_developer = $mysqli->query("SELECT pub_dev.pub_dev_id,
                    LEFT JOIN pub_dev ON (game_developer.dev_pub_id = pub_dev.pub_dev_id)
                    GROUP BY pub_dev.pub_dev_id HAVING COUNT(DISTINCT pub_dev.pub_dev_id) = 1
                    ORDER BY pub_dev.pub_dev_name ASC")
-                or die("Problems retriving values from developers.");
+                or die("Problems retreiving values from developers.");
 
 while ($company_developer = $sql_developer->fetch_array(MYSQLI_BOTH)) {
     $smarty->append('company_developer', array(
