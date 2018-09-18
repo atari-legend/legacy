@@ -26,10 +26,10 @@ $sql_build = "SELECT game.game_id AS 'software_id',
                            pd1.pub_dev_name as 'publisher_name',
                            game_developer.dev_pub_id as 'developer_id',
                            pd2.pub_dev_name as 'developer_name',
-                           game_year.game_year AS 'year',
+                           YEAR(game_release.date) AS 'year',
                            'Game' AS software_type
                            FROM game
-                           LEFT JOIN game_year on (game_year.game_id = game.game_id)
+                           LEFT JOIN game_release ON (game_release.game_id = game.game_id)
                            LEFT JOIN game_publisher ON (game_publisher.game_id = game.game_id)
                            LEFT JOIN pub_dev pd1 ON (pd1.pub_dev_id = game_publisher.pub_dev_id)
                            LEFT JOIN game_developer ON (game_developer.game_id = game.game_id)
@@ -41,11 +41,11 @@ $sql_build_aka = "SELECT game.game_id AS 'software_id',
                            pd1.pub_dev_name as 'publisher_name',
                            game_developer.dev_pub_id as 'developer_id',
                            pd2.pub_dev_name as 'developer_name',
-                           game_year.game_year AS 'year',
+                           YEAR(game_release.date) AS 'year',
                            'Game' AS software_type
                            FROM game_aka
                            LEFT JOIN game ON (game_aka.game_id = game.game_id)
-                           LEFT JOIN game_year on (game_year.game_id = game.game_id)
+                           LEFT JOIN game_release ON (game_release.game_id = game.game_id)
                            LEFT JOIN game_publisher ON (game_publisher.game_id = game.game_id)
                            LEFT JOIN pub_dev pd1 ON (pd1.pub_dev_id = game_publisher.pub_dev_id)
                            LEFT JOIN game_developer ON (game_developer.game_id = game.game_id)

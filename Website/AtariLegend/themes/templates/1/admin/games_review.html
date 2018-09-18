@@ -65,7 +65,7 @@ The main game review
             <table class="secondary_table_list table_md table_hover text-nowrap">
                 <tr>
                     <th class="mw-35">Game Name</th>
-                    <th class="mw-20">Publisher</th>
+                    <th class="mw-20">Developer</th>
                     <th class="mw-20">Username</th>
                     <th class="mw-20">Review date</th>
                     <th class="mw-5"></th>
@@ -74,7 +74,7 @@ The main game review
                 {foreach from=$review item=line}
                     <tr>
                         <td>{if $line.game_name != ''}<a href="games_review_edit.php?game_id={$line.game_id}&reviewid={$line.review_id}" class="standard_tile_text_center">{$line.game_name}</a>{else}<i>n/a</i>{/if}</td>
-                        <td><span class="standard_tile_text_left">{if $line.game_publisher != ''}{$line.game_publisher}{else}<i>n/a</i>{/if}</span></td>
+                        <td><span class="standard_tile_text_left">{if $line.game_developer != ''}{$line.game_developer}{else}<i>n/a</i>{/if}</span></td>
                         <td><span class="standard_tile_text_left">{$line.username}</span></td>
                         <td><span class="standard_tile_text_left">{$line.review_date}</span></td>
                         <td>

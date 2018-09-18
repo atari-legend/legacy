@@ -25,7 +25,7 @@ class User {
         $karma,
         $show_email,
         $avatar_ext,
-        $news_count
+        $news_count = 0
     ) {
         $this->id = $id;
         $this->name = $name;
@@ -37,7 +37,7 @@ class User {
         if ($avatar_ext != null && $avatar_ext != '') {
             $this->avatar = $GLOBALS['user_avatar_path'].$id.'.'.$avatar_ext;
         } else {
-            $this->avatar = $GLOBALS['style_folder']."/images/default_avatar_image.png";
+            $this->avatar = "/themes/styles/1/images/default_avatar_image.png";
         }
 
         $this->news_count = $news_count;
@@ -62,7 +62,7 @@ class User {
     public function getKarma() {
         return $this->karma;
     }
-    
+
     public function getShowEmail() {
         return $this->show_email;
     }

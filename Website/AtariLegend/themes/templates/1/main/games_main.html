@@ -289,13 +289,13 @@ The main game page
                         </div>
                     </div>
                     <div class="games_main_row_site">
-                        <div class="games_main_text_site"><h6>Category <a style="cursor: pointer;" onClick="dropdown_cat()" class="latest_comments_link"><i class="fa fa-chevron-circle-down" aria-hidden="true" id="input_cat" title="Click for drop down mode"></i></a><a style="cursor: pointer;" onClick="input_cat()" class="latest_comments_link"><i class="fa fa-chevron-circle-down" aria-hidden="true" id="drop_cat" title="Click for input field mode" style="display:none;"></i></a></h6></div>
+                        <div class="games_main_text_site"><h6>Genre <a style="cursor: pointer;" onClick="dropdown_cat()" class="latest_comments_link"><i class="fa fa-chevron-circle-down" aria-hidden="true" id="input_cat" title="Click for drop down mode"></i></a><a style="cursor: pointer;" onClick="input_cat()" class="latest_comments_link"><i class="fa fa-chevron-circle-down" aria-hidden="true" id="drop_cat" title="Click for input field mode" style="display:none;"></i></a></h6></div>
                         <div class="games_main_text_short"><h6>:</h6></div>
                         <div class="games_main_input_site">
                             <select name="category" id="games_main_cat_drop" style="display:none;" class="standard_select">
                                 <option value="-" SELECTED>-</option>
-                                {foreach from=$game_cat item=line}
-                                    <option value="{$line.game_cat_id}">{$line.game_cat_name}</option>
+                                {foreach from=$game_genre item=genre}
+                                    <option value="{$genre->getId()}">{$genre->getName()}</option>
                                 {/foreach}
                             </select>
                             <input type="text" name="cat_input" value="" class="standard_input input_full autocompleted" id="games_main_cat_input" data-autocomplete-param="cat">

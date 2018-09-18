@@ -19,10 +19,10 @@
     <td colspan="4" style="padding:0px;">
         <table class="primary_table_list no_border table_hover" id="menu_list_table">
             <tr>
-                <td class="w-30"><a onclick="closeeditDisk({$menus.menu_disk_id})" style="cursor: pointer;">{$menus.menu_disk_name}</a></td>
-                <td class="w-30">{if isset($menus.crew_id)}{$menus.crew_name}{else}<i>n/a</i>{/if}</td>
-                <td class="w-20">{if isset($menus.ind_id)}{$menus.ind_name}{else}<i>n/a</i>{/if}</td>
-                <td class="text-right w-20">{if isset($menus.menu_state)}{$menus.menu_state}{else}<i>n/a</i>{/if}</td>
+                <td class="w-30"><a onclick="closeeditDisk({$menus->getMenuDisk()->getId()})" style="cursor: pointer;">{$menus->getMenuDisk()->getName()}</a></td>
+                <td class="w-30">{if null !== $menus->getCrew()}{$menus->getCrew()->getName()}{else}<i>n/a</i>{/if}</td>
+                <td class="w-20">{if null !== $menus->getIndividual()}{$menus->getIndividual()->getName()}{else}<i>n/a</i>{/if}</td>
+                <td class="text-right w-20">{if null !== $menus->getMenuState()}{$menus->getMenuState()}{else}<i>n/a</i>{/if}</td>
             </tr>
             <tr>
                 <td colspan="4">
@@ -44,7 +44,7 @@
                         <div class="main_company_container">
                             <div class="child_edit_company text-center">
                                 <b>Set state:</b><br>
-                                <select name="state_id" class="standard_select select_large" onchange="changeState(this.value,{$menus.menu_disk_id})">
+                                <select name="state_id" class="standard_select select_large" onchange="changeState(this.value,{$menus->getMenuDisk()->getId()})">
                                     <option value="">Set State</option>
                                     {if isset($state_id)}
                                         {html_options values=$state_id output=$menu_state selected=$menu_state_id}
@@ -53,7 +53,7 @@
                                 <br>
                                 <br>
                                 <b>Set parent menu:</b><br>
-                                <select name="parent_id" class="standard_select select_large" onchange="changeParent(this.value,{$menus.menu_disk_id})">
+                                <select name="parent_id" class="standard_select select_large" onchange="changeParent(this.value,{$menus->getMenuDisk()->getId()})">
                                     <option value="">Set parent</option>
                                     {foreach from=$parent item=line}
                                         {html_options values=$line.parent_id output=$line.parent_name selected=$menu_parent_id}
@@ -62,18 +62,18 @@
                                 <br>
                                 <br>
                                 <b>Menu disk options :</b><br>
-                                <a onclick="deleteMenuDiskModal({$menus.menu_disk_id})" style="cursor: pointer;" class="standard_tile_link">Delete menu disk</a><br>
-                                <div id="intro_credit_link"><a onclick="popAddIntroCred({$menus.menu_disk_id})" style="cursor: pointer;" class="standard_tile_link">Add intro credits</a><br></div>
-                                <div id="gameto_menu_link"><a onclick="popAddGames({$menus.menu_disk_id})" style="cursor: pointer;" class="standard_tile_link">Add Game/Tool/Demo to menu</a><br></div>
-                                <div id="docto_menu_link"><a onclick="popAddDocs({$menus.menu_disk_id})" style="cursor: pointer;" class="standard_tile_link">Add Doc to menu</a><br></div>
-                                <div id="screenshot_link"><a onclick="popAddScreenshots({$menus.menu_disk_id})" style="cursor: pointer;" class="standard_tile_link">Add Screenshots to menu</a><br></div>
-                                <div id="file_link"><a onclick="popAddFile({$menus.menu_disk_id})" style="cursor: pointer;" class="standard_tile_link">Add File to menu</a><br></div>
+                                <a onclick="deleteMenuDiskModal({$menus->getMenuDisk()->getId()})" style="cursor: pointer;" class="standard_tile_link">Delete menu disk</a><br>
+                                <div id="intro_credit_link"><a onclick="popAddIntroCred({$menus->getMenuDisk()->getId()})" style="cursor: pointer;" class="standard_tile_link">Add intro credits</a><br></div>
+                                <div id="gameto_menu_link"><a onclick="popAddGames({$menus->getMenuDisk()->getId()})" style="cursor: pointer;" class="standard_tile_link">Add Game/Tool/Demo to menu</a><br></div>
+                                <div id="docto_menu_link"><a onclick="popAddDocs({$menus->getMenuDisk()->getId()})" style="cursor: pointer;" class="standard_tile_link">Add Doc to menu</a><br></div>
+                                <div id="screenshot_link"><a onclick="popAddScreenshots({$menus->getMenuDisk()->getId()})" style="cursor: pointer;" class="standard_tile_link">Add Screenshots to menu</a><br></div>
+                                <div id="file_link"><a onclick="popAddFile({$menus->getMenuDisk()->getId()})" style="cursor: pointer;" class="standard_tile_link">Add File to menu</a><br></div>
                             </div>
                             <div class="child_add_company text-center">
                                 <b>Release Year:</b><br>
-                                {html_select_date start_year="1984" end_year="+1" display_days=false display_months=false prefix="" field_name="" class="standard_select select_medium" name="year_id" time="{$menus.menu_year}-01-01" onchange="changeYear(this.value,$menu_disk_id)"}
+                                {html_select_date start_year="1984" end_year="+1" display_days=false display_months=false prefix="" field_name="" class="standard_select select_medium" name="year_id" time="{$menus->getMenuYear()}-01-01" onchange="changeYear(this.value,{$menus->getMenuDisk()->getId()})"}
                                 <br><img src="../../../themes/templates/1/includes/img/arrow_ltr.gif" alt="" width="38" height="22" style="display:inline;">
-                                <h3 style="text-align:center;display:inline;">{if (isset($menus.menu_year))} {$menus.menu_year} set {else} Not set{/if}</h3>
+                                <h3 style="text-align:center;display:inline;">{if null !== $menus->getMenuYear()} {$menus->getMenuYear()} set {else} Not set{/if}</h3>
                                 <br>
                                 <br>
                                 <div id="menu_detail_expand"></div>
@@ -82,7 +82,7 @@
                     </div>
 
                     <div id="menu_credit_list">
-                        {if isset($individuals)}
+                        {if null !== $individuals}
                             <br>
                             <br>
                             <table class="primary_table_list w-95">
@@ -95,12 +95,12 @@
                                     </div>
                                 </th>
                             </tr>
-                            {foreach name=outer item=individual from=$individuals}
+                            {foreach from=$individuals item=line}
                                 <tr>
-                                    <td class="w-45">{$individual.author_type_info}</td>
-                                    <td class="w-45"><a href="../individuals/individuals_edit.php?ind_id={$individual.ind_id}" class="standard_tile_text_left">{$individual.ind_name}</a></td>
+                                    <td class="w-45">{$line->getAuthorTypeInfo()}</td>
+                                    <td class="w-45"><a href="../individuals/individuals_edit.php?ind_id={$line->getIndividual()->getId()}" class="standard_tile_text_left">{$line->getIndividual()->getName()}</a></td>
                                     <td class="text-right w-10">
-                                        <input type="button" onclick="deleteCredits({$individual.menu_disk_credits_id},{$individual.menu_disk_id})" class="primary_button" value="delete" style="margin-right:5px;">
+                                        <input type="button" onclick="deleteCredits({$line->getCreditsId()},{$menus->getMenuDisk()->getId()})" class="primary_button" value="delete" style="margin-right:5px;">
                                     </td>
                                 </tr>
                             {/foreach}
@@ -130,13 +130,16 @@
                                     <td class="w-5">
                                         <form name="MenuDiskContent" id="MenuDiskContent">
                                         <div class="links_mod_checkbox">
-                                            <input type="checkbox" id="menu_disk_title_id{$line.menu_disk_title_id}" name="menu_disk_title_id[]" value="{$line.menu_disk_title_id}" onchange="deleteGamefromMenuButton({$line.menu_disk_title_id},{$menu_disk_id})">
+                                            <input type="checkbox" id="menu_disk_title_id{$line.menu_disk_title_id}" name="menu_disk_title_id[]" value="{$line.menu_disk_title_id}" onchange="deleteGamefromMenuButton({$line.menu_disk_title_id},{$menus->getMenuDisk()->getId()})">
                                             <label for="menu_disk_title_id{$line.menu_disk_title_id}"></label>&nbsp;
                                         </div>
                                     </td>
                                     <td class="w-40">
                                         {if $line.game_name != ''}
-                                            <div id="author_to_menu_title{$line.game_id}" style="display:inline;"><a onclick="popAddAuthorMenutitle({$line.menu_disk_title_id},{$line.game_id},'{$line.game_name|escape:'quotes'}')" style="cursor: pointer;" class="standard_tile_link">{$line.game_name}</a></div><div style="display:inline;">{if $line.set_chain != ''} - <b><i>Part {$line.set_chain}</i></b></div>{/if}{if $line.menu_disk_title_author_id != ''}<div class="help-tip" id="help-tip2"><p>This title contains authors</p></div>{/if}</div>
+                                            <div id="author_to_menu_title{$line.game_id}" style="display:inline;">
+                                                <a onclick="popAddAuthorMenutitle({$line.menu_disk_title_id},{$line.game_id},'{$line.game_name|escape:'quotes'}')" style="cursor: pointer;" class="standard_tile_link">{$line.game_name}</a>
+                                            </div>
+                                            <div style="display:inline;">{if $line.set_chain != ''} - <b><i>Part {$line.set_chain}</i></b></div>{/if}{if $line.menu_disk_title_author_id != ''}<div class="help-tip" id="help-tip2"><p>This title contains authors</p></div>{/if}</div>
                                         {else}
                                             <i>n/a</i>
                                         {/if}
@@ -171,7 +174,7 @@
                                         {$line.menu_types_text}
                                     </td>
                                     <td>
-                                        <div id="{$line.menu_disk_title_id}"><a onclick="popAddSet({$line.menu_disk_title_id},{$menus.menu_disk_id},'{$line.game_name|escape:'quotes'}')" style="cursor: pointer;" class="standard_tile_link">Add</a></div>
+                                        <div id="{$line.menu_disk_title_id}"><a onclick="popAddSet({$line.menu_disk_title_id},{$menus->getMenuDisk()->getId()},'{$line.game_name|escape:'quotes'}')" style="cursor: pointer;" class="standard_tile_link">Add</a></div>
                                     </td>
                                 </tr>
                             {/foreach}
@@ -213,7 +216,7 @@
                                     <td class="w-5">
                                         <form name="MenuDiskContent" id="MenuDiskContent">
                                         <div class="links_mod_checkbox">
-                                            <input type="checkbox" id="menu_disk_title_id{$line.menu_disk_title_id}" name="menu_disk_title_id[]" value="{$line.menu_disk_title_id}" onchange="deleteDocfromMenu({$line.menu_disk_title_id},{$menu_disk_id})">
+                                            <input type="checkbox" id="menu_disk_title_id{$line.menu_disk_title_id}" name="menu_disk_title_id[]" value="{$line.menu_disk_title_id}" onchange="deleteDocfromMenu({$line.menu_disk_title_id},{$menus->getMenuDisk()->getId()})">
                                             <label for="menu_disk_title_id{$line.menu_disk_title_id}"></label>&nbsp;
                                             <!--<input type="checkbox" id="menu_disk_title_id{$line.menu_disk_title_id}" name="menu_disk_title_id[]" value="{$line.menu_disk_title_id}" onchange="deleteDocfromMenu({$line.menu_disk_title_id},{$menu_disk_id})">-->
                                         </div>
@@ -227,7 +230,7 @@
                                     </td>
                                     <td>
                                         <form action="#" method="post" name="doc_type_edit{$line.doc_id}" id="doc_type_edit{$line.doc_id}">
-                                            <select name="doc_type_id" class="standard_select select_medium" onchange="changeDoctype(this.value,{$line.doc_id},{$menus.menu_disk_id})">
+                                            <select name="doc_type_id" class="standard_select select_medium" onchange="changeDoctype(this.value,{$line.doc_id},{$menus->getMenuDisk()->getId()})">
                                             <option value="" selected>-</option>
                                             {if isset($doc_type)}
                                                 {foreach from=$doc_type item=doc_types}
@@ -275,7 +278,7 @@
                                             Image {$line.count}<br>
                                             <a href="../../includes/show_image.php?file={$line.screenshot_image}" data-lightbox="image-1" data-title="image - {$line.count}">
                                             <img src="../../includes/show_image.php?file={$line.screenshot_image}&amp;resize=75,null,null,null" width="75" alt="Click to enlarge!" class="user_stats_img" id="user_details_img_dark"></a>
-                                            <a href="javascript:deleteScreenshotfromMenu({$line.id},{$menu_disk_id})" class="standard_tile_link_black">Delete</a>
+                                            <a href="javascript:deleteScreenshotfromMenu({$line.id},{$menus->getMenuDisk()->getId()})" class="standard_tile_link_black">Delete</a>
                                             <br>
                                             <br>
                                         </div>
@@ -295,8 +298,8 @@
                                 <legend class="primary_legend">File</legend>
                                 {if $download_nr <> ''}
                                     {foreach from=$downloads item=line}
-                                        <a href="{$line.filepath}{$line.filename}.zip" class="left_nav_link"><b>{$menu_disk_name}</b></a> -
-                                        <a href="javascript:deleteDownload({$line.menu_disk_download_id},{$menu_disk_id});" class="standard_tile_link_black">Delete</a>
+                                        <a href="{$line.filepath}{$line.filename}.zip" class="left_nav_link"><b>{$menus->getMenuDisk()->getName()}</b></a> -
+                                        <a href="javascript:deleteDownload({$line.menu_disk_download_id},{$menus->getMenuDisk()->getId()});" class="standard_tile_link_black">Delete</a>
                                         <br>
                                     {/foreach}
                                 {else}
@@ -320,10 +323,10 @@
 
 {* CLOSE EDIT BOX FOR MENU DISKS *}
 {if isset($smarty_action) and $smarty_action == "close_edit_disk_box"}
-    <td class="w-30"><a onclick="editDisk({$menus.menu_disk_id})" style="cursor: pointer;">{$menus.menu_disk_name}</a></td>
-    <td class="w-30">{if isset($menus.crew_id)}{$menus.crew_name}{else}<i>n/a</i>{/if}</td>
-    <td class="w-20">{if isset($menus.ind_id)}{$menus.ind_name}{else}<i>n/a</i>{/if}</td>
-    <td class="text-right w-20">{if isset($menus.menu_state)}{$menus.menu_state}{else}<i>n/a</i>{/if}</td>
+    <td class="w-30"><a onclick="editDisk({$menus->getMenuDisk()->getId()})" style="cursor: pointer;">{$menus->getMenuDisk()->getName()}</a></td>
+    <td class="w-30">{if null !== $menus->getCrew()}{$menus->getCrew()->getName()}{else}<i>n/a</i>{/if}</td>
+    <td class="w-20">{if null !== $menus->getIndividual()}{$menus->getIndividual()->getName()}{else}<i>n/a</i>{/if}</td>
+    <td class="text-right w-20">{if null !== $menus->getMenuState()}{$menus->getMenuState()}{else}<i>n/a</i>{/if}</td>
 {/if}
 
 {* POP FOR ADD INTRO CRED *}
@@ -333,15 +336,15 @@
     <br>
     <form action="" method="post" id="menu_credits_form">
         <b>Add intro credits:</b><br>
-        <select class="standard_select select_small" id="m1" name="m1" onchange="browseInd(this.value)">
+        <select class="standard_select" id="m1" name="m1" onchange="browseInd(this.value)">
             {html_options values=$az_value output=$az_output}
         </select>
         <input type="text" onkeyup="searchInd(this.value)" class="standard_input input_large" value="search">
         <br>
         <div id="ind_member" style="display:inline;">
             <select id="ind_id" name="ind_id" class="standard_select select_medium">
-                {foreach from=$ind item=line}
-                    <option value="{$line.ind_id}">{$line.ind_name}</option>
+                {foreach from=$individuals item=line}
+                    <option value="{$line->getId()}">{$line->getName()}</option>
                 {/foreach}
             </select>
         </div>
@@ -575,8 +578,8 @@
 {* This is the Ind browse *}
 {if isset($smarty_action) and $smarty_action == "ind_gen_browse"}
     <select id="ind_id" name="ind_id" class="standard_select select_medium">
-        {foreach from=$author_type item=line}
-            <option value="{$line.ind_id}">{$line.ind_name}</option>
+        {foreach from=$individuals item=line}
+            <option value="{$line->getId()}">{$line->getName()}</option>
         {/foreach}
     </select>
 {/if}

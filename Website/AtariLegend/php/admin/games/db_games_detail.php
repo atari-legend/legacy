@@ -26,9 +26,19 @@ include("../../config/admin_rights.php");
 
 require_once __DIR__."/../../common/DAO/GameReleaseDAO.php";
 require_once __DIR__."/../../common/DAO/ChangeLogDAO.php";
+require_once __DIR__."/../../common/DAO/ProgrammingLanguageDAO.php";
+require_once __DIR__."/../../common/DAO/GameGenreDAO.php";
+require_once __DIR__."/../../common/DAO/PortDAO.php";
+require_once __DIR__."/../../common/DAO/EngineDAO.php";
+require_once __DIR__."/../../common/DAO/ControlDAO.php";
 
 $changeLogDao = new \AL\Common\DAO\ChangeLogDAO($mysqli);
 $gameReleaseDao = new \AL\Common\DAO\GameReleaseDAO($mysqli);
+$programmingLanguageDao = new \AL\Common\DAO\ProgrammingLanguageDAO($mysqli);
+$gameGenreDao = new \AL\Common\DAO\GameGenreDAO($mysqli);
+$portDao = new \AL\Common\DAO\PortDAO($mysqli);
+$engineDao = new \AL\Common\DAO\engineDAO($mysqli);
+$controlDao = new \AL\Common\DAO\controlDAO($mysqli);
 
 if (isset($game_id)){
     $stmt = $mysqli->prepare("SELECT game_name FROM game WHERE game_id = ?") or die($mysqli->error);
@@ -172,15 +182,20 @@ if (isset($action) and $action == 'modify_game') {
 
     $sdbquery = $mysqli->query("UPDATE game SET game_name='$game_name' WHERE game_id=$game_id") or die("trouble updating game");
 
-    // Delete the category crosses currently in the database for this game
-    $sdbquery = $mysqli->query("DELETE FROM game_cat_cross WHERE game_id=$game_id");
-
-    // Insert the values from the passed category array
-    if (isset($category)) {
-        foreach ($category as $cat) {
-            $sdbquery = $mysqli->query("INSERT INTO game_cat_cross (game_id,game_cat_id) VALUES ($game_id,$cat)");
-        }
-    }
+    //Update the game genre
+    $gameGenreDao->setGameGenreForGame($game_id, isset($game_genre) ? $game_genre : []);
+    
+    //Update the game engine
+    $engineDao->setGameEngineForGame($game_id, isset($game_engine) ? $game_engine : []);
+    
+    //Update the programming language
+    $programmingLanguageDao->setProgrammingLanguageForGame($game_id, isset($programming_language) ? $programming_language : []);
+    
+    //Update the port
+    $portDao->setPortForGame($game_id, isset($port_id) ? $port_id : null);
+    
+    //Update the game controls
+    $controlDao->setGameControlForGame($game_id, isset($game_control) ? $game_control : []);
 
     // Update the Unreleased tick box info
     // Start off by deleting previos value
@@ -225,34 +240,6 @@ if (isset($action) and $action == 'modify_game') {
     // then insert the new value if it has been passed.
     if (isset($arcade)) {
         $sdbquery = $mysqli->query("INSERT INTO game_arcade (game_id,arcade) VALUES ('$game_id','$arcade')") or die("Couldn't insert arcade tick box info");
-    }
-
-    // UPDATE THE SEUCK TICK BOX INFO
-    // Start off by deleting previos value
-    $sdbquery = $mysqli->query("DELETE FROM game_seuck WHERE game_id='$game_id'");
-
-    // then insert the new value if it has been passed.
-    if (isset($seuck)) {
-        $sdbquery = $mysqli->query("INSERT INTO game_seuck (game_id,seuck) VALUES ('$game_id','$seuck')") or die("Couldn't insert seuck tick box info");
-    }
-
-    // UPDATE THE STOS TICK BOX INFO
-    // Start off by deleting previos value
-    $sdbquery = $mysqli->query("DELETE FROM game_stos WHERE game_id='$game_id'") or die("STOS Deletion failed");
-    ;
-
-    // then insert the new value if it has been passed.
-    if (isset($stos)) {
-        $sdbquery = $mysqli->query("INSERT INTO game_stos (game_id,stos) VALUES ('$game_id','$stos')");
-    }
-
-    // UPDATE THE STAC TICK BOX INFO
-    // Start off by deleting previos value
-    $sdbquery = $mysqli->query("DELETE FROM game_stac WHERE game_id='$game_id'");
-
-    // then insert the new value if it has been passed.
-    if (isset($stac)) {
-        $sdbquery = $mysqli->query("INSERT INTO game_stac (game_id,stac) VALUES ('$game_id','$stac')") or die("Couldn't insert stac tick box info");
     }
 
     $_SESSION['edit_message'] = "Game has been modified";
@@ -345,13 +332,14 @@ if (isset($action) and $action == 'delete_game') {
                                         $sdbquery = $mysqli->query("DELETE FROM game WHERE game_id = '$game_id' ");
                                         $sdbquery = $mysqli->query("DELETE FROM game_publisher WHERE game_id = '$game_id'");
                                         $sdbquery = $mysqli->query("DELETE FROM game_developer WHERE game_id = '$game_id' ");
-                                        $sdbquery = $mysqli->query("DELETE FROM game_cat_cross WHERE game_id = '$game_id' ");
+                                        $sdbquery = $mysqli->query("DELETE FROM game_genre_cross WHERE game_id = '$game_id' ");
                                         $sdbquery = $mysqli->query("DELETE FROM game_development WHERE game_id='$game_id'");
                                         $sdbquery = $mysqli->query("DELETE FROM game_unreleased WHERE game_id='$game_id'");
                                         $sdbquery = $mysqli->query("DELETE FROM game_free WHERE game_id='$game_id'");
+                                        $sdbquery = $mysqli->query("DELETE FROM game_programming_language WHERE game_id='$game_id'");
+                                        $sdbquery = $mysqli->query("DELETE FROM game_engine WHERE game_id='$game_id'");
+                                        $sdbquery = $mysqli->query("DELETE FROM game_control WHERE game_id='$game_id'");
                                         $sdbquery = $mysqli->query("DELETE FROM game_arcade WHERE game_id='$game_id'");
-                                        $sdbquery = $mysqli->query("DELETE FROM game_seuck WHERE game_id='$game_id'");
-                                        $sdbquery = $mysqli->query("DELETE FROM game_stos WHERE game_id='$game_id'");
                                         $sdbquery = $mysqli->query("DELETE FROM game_wanted WHERE game_id='$game_id'");
                                         $sdbquery = $mysqli->query("DELETE FROM game_mono WHERE game_id='$game_id'");
                                         $sdbquery = $mysqli->query("DELETE FROM game_unfinished WHERE game_id='$game_id'");

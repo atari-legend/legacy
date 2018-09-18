@@ -120,6 +120,10 @@
     width: 100%;
 }
 
+.grayed_out {
+    background-color : #282828;
+}
+
 #file_upload_game_detail {
     width: 60%;
 }
@@ -148,7 +152,7 @@
 
     &.button_danger {
         background-color: $danger;
-        color: darken($danger, 40%);
+        color: darken($danger, 40%) !important;
         border: solid 1px darken($danger, 20%);
 
         &:hover {

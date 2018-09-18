@@ -30,8 +30,10 @@ include("../../common/tiles/latest_comments_tile.php");
 include("../../common/tiles/changes_per_month_tile.php");
 
 require_once __DIR__."/../../common/DAO/GameReleaseDAO.php";
+require_once __DIR__."/../../common/DAO/GameGenreDAO.php";
 
 $gameReleaseDao = new \AL\Common\DAO\GameReleaseDAO($mysqli);
+$GameGenreDao = new \AL\Common\DAO\GameGenreDAO($mysqli);
 
 //no special position necesarry for the tiles (compared to the front page)
 //but I just declare the smarty var to avoid error
@@ -41,15 +43,8 @@ $smarty->assign('statistics_tile', '');
 // Get all releases years
 $smarty->assign('releases_year', $gameReleaseDao->getAllReleasesYears());
 
-// get the categories for the genre dropdown
-$sql_cat = $mysqli->query("SELECT * from game_cat order by game_cat_name")
-                     or die("problems getting data from game_cat table");
-
-while ($game_cat = $sql_cat->fetch_array(MYSQLI_BOTH)) {
-    $smarty->append('game_cat', array(
-            'game_cat_name' => $game_cat['game_cat_name'],
-            'game_cat_id' => $game_cat['game_cat_id']));
-}
+// get the genres for the genre dropdown
+$smarty->assign('game_genre', $GameGenreDao->getAllGameGenres());
 
 if (isset($mode) and ($mode ==! '')) {
     $smarty->assign("mode", $mode);

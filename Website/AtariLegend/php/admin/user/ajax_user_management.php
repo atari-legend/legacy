@@ -109,6 +109,7 @@ if (isset($no_submissions) and $no_submissions == "1") {
 $sql_query .= " GROUP BY users.user_id HAVING COUNT(DISTINCT users.user_id) = 1";
 $sql_query .= " ORDER BY users.userid";
 //echo $sql_query;
+$nr_users = 0;
 $sql_users = $mysqli->query($sql_query) or die("Couldn't query users Database");
 while ($query_users = $sql_users->fetch_array(MYSQLI_BOTH)) {
     if (empty($nr_users)) {

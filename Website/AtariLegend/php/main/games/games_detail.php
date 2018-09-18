@@ -16,23 +16,39 @@
 //load all common functions
 include("../../config/common.php");
 require_once __DIR__."/../../common/DAO/GameReleaseDAO.php";
+require_once __DIR__."/../../common/DAO/GameSeriesDAO.php";
 require_once __DIR__."/../../common/DAO/ResolutionDAO.php";
 require_once __DIR__."/../../common/DAO/SystemDAO.php";
 require_once __DIR__."/../../common/DAO/PubDevDAO.php";
 require_once __DIR__."/../../common/DAO/LocationDAO.php";
+require_once __DIR__."/../../common/DAO/ProgrammingLanguageDAO.php";
+require_once __DIR__."/../../common/DAO/GameGenreDAO.php";
+require_once __DIR__."/../../common/DAO/PortDAO.php";
+require_once __DIR__."/../../common/DAO/EngineDAO.php";
+require_once __DIR__."/../../common/DAO/ControlDAO.php";
+require_once __DIR__."/../../common/DAO/GameReleaseAkaDAO.php";
+require_once __DIR__."/../../common/DAO/LanguageDAO.php";
 
 $gameReleaseDao = new \AL\Common\DAO\GameReleaseDAO($mysqli);
+$gameSeriesDao = new \AL\Common\DAO\GameSeriesDAO($mysqli);
 $resolutionDao = new \AL\Common\DAO\ResolutionDao($mysqli);
 $systemDao = new \AL\Common\DAO\SystemDao($mysqli);
 $pubDevDao = new \AL\Common\DAO\PubDevDAO($mysqli);
 $locationDao = new \AL\Common\DAO\LocationDAO($mysqli);
+$programmingLanguageDao = new \AL\Common\DAO\ProgrammingLanguageDAO($mysqli);
+$gameGenreDao = new \AL\Common\DAO\GameGenreDAO($mysqli);
+$portDao = new \AL\Common\DAO\portDAO($mysqli);
+$engineDao = new \AL\Common\DAO\engineDAO($mysqli);
+$controlDao = new \AL\Common\DAO\controlDAO($mysqli);
+$gameReleaseAkaDao = new \AL\Common\DAO\GameReleaseAkaDAO($mysqli);
+$languageDao = new \AL\Common\DAO\LanguageDAO($mysqli);
 
 /**
  * Generates an SEO-friendly description of a game, depending on the data available
  * @param $game_name Name of the game
  * @param $game_akas Optional names the game is known as
  * @param $game_releases Game releases
- * @param $game_categories Categorie(s) the game belong to
+ * @param $game_genres Genre(s) the game belong to
  * @param $game_developers Developer(s) of the game
  * @param $screenshots Number of screenshots available
  * @param $boxscans Number of boxscans available
@@ -43,7 +59,7 @@ function generate_game_description(
     $game_name,
     $game_akas,
     $game_releases,
-    $game_categories,
+    $game_genres,
     $game_developers,
     $screenshots,
     $boxscans,
@@ -51,11 +67,17 @@ function generate_game_description(
 ) {
     $desc = "$game_name is a ";
 
-    if ($game_categories) {
-        $desc .= strtolower(join($game_categories, ", "))." ";
+    if ($game_genres) {
+        for ($i = 0; $i < count($game_genres); $i++) {
+            $desc .= strtolower($game_genres[$i]->getName());
+            if ($i+1 < count($game_genres)) {
+                $desc .= ", ";
+            }
+        }
+        $desc .= " ";
     }
 
-    $desc .= "Atari ST game ";
+    $desc .= "game for the Atari ST ";
 
     if ($game_developers) {
         $desc .= "developed by ".join($game_developers, ", ")." ";
@@ -127,21 +149,14 @@ function generate_game_description(
 //***********************************************************************************
 $sql_game = $mysqli->query("SELECT game_name,
                game.game_id,
+               game.game_series_id,
                game_development.development,
                game_unreleased.unreleased,
                game_unfinished.unfinished,
-               game_wanted.game_wanted_id,
-               game_arcade.arcade,
-               game_seuck.seuck,
-               game_stos.stos,
-               game_stac.stac
+               game_wanted.game_wanted_id
                FROM game
                LEFT JOIN game_unreleased ON (game.game_id = game_unreleased.game_id)
                LEFT JOIN game_development ON (game.game_id = game_development.game_id)
-               LEFT JOIN game_arcade ON (game.game_id = game_arcade.game_id)
-               LEFT JOIN game_seuck ON (game.game_id = game_seuck.game_id)
-               LEFT JOIN game_stos ON (game.game_id = game_stos.game_id)
-               LEFT JOIN game_stac ON (game.game_id = game_stac.game_id)
                LEFT JOIN game_unfinished ON (game.game_id = game_unfinished.game_id)
                LEFT JOIN game_wanted ON (game.game_id = game_wanted.game_id)
                     WHERE game.game_id='$game_id'") or die("Error getting game info");
@@ -153,13 +168,13 @@ if ($game_info = $sql_game->fetch_array(MYSQLI_BOTH)) {
         'game_development' => $game_info['development'],
         'game_unreleased' => $game_info['unreleased'],
         'game_unfinished' => $game_info['unfinished'],
-        'game_wanted' => $game_info['game_wanted_id'],
-        'game_arcade' => $game_info['arcade'],
-        'game_seuck' => $game_info['seuck'],
-        'game_stos' => $game_info['stos'],
-        'game_stac' => $game_info['stac']
+        'game_wanted' => $game_info['game_wanted_id']
     ));
 }
+
+// Get the programming languages
+$smarty->assign('programming_languages', $programmingLanguageDao->getAllProgrammingLanguages());
+$smarty->assign('game_programming_languages', $programmingLanguageDao->getProgrammingLanguagesForGame($game_id));
 
 $smarty->assign('resolutions', $resolutionDao->getAllResolutionsAsMap());
 $smarty->assign('systems', $systemDao->getAllSystemsAsMap());
@@ -168,6 +183,11 @@ $smarty->assign('locations', $locationDao->getAllLocationsAsMap());
 // Get all releases
 $releases = $gameReleaseDao->getReleasesForGame($game_id);
 $smarty->assign('releases', $releases);
+
+if ($game_info["game_series_id"] != null) {
+    $smarty->assign('series', $gameSeriesDao->getGameSeries($game_info["game_series_id"]));
+    $smarty->assign('series_games', $gameSeriesDao->getGamesForSeries($game_info["game_series_id"]));
+}
 
 $system_incompatible = [];
 $system_enhanced = [];
@@ -178,64 +198,73 @@ foreach ($releases as $release) {
     $system_enhanced[$release->getId()] = $systemDao->getEnhancedSystemsForRelease($release->getId());
     $release_resolution[$release->getId()] = $resolutionDao->getResolutionsForRelease($release->getId());
     $release_location[$release->getId()] = $locationDao->getLocationsForRelease($release->getId());
+    $release_akas[$release->getId()] = $gameReleaseAkaDao->getAllGameReleaseAkas($release->getId());
 }
 $smarty->assign('system_incompatible', $system_incompatible);
 $smarty->assign('system_enhanced', $system_enhanced);
 $smarty->assign('release_resolution', $release_resolution);
 $smarty->assign('release_location', $release_location);
+$smarty->assign('release_akas', $release_akas);
 
 //***********************************************************************************
-//get the game categories & the categories already selected for this game
+//get the game genres & the genres already selected for this game
 //***********************************************************************************
-$sql_categories = $mysqli->query("SELECT * FROM game_cat
-                                           LEFT JOIN game_cat_cross ON (game_cat.game_cat_id = game_cat_cross.game_cat_id)
-                                           WHERE game_id='$game_id' ORDER BY game_cat_name") or die("Error loading categories");
+$game_genres = $gameGenreDao->getGameGenresForGame($game_id);
+$smarty->assign('game_genres', $game_genres);
 
-$game_categories = [];
-while ($categories = $sql_categories->fetch_array(MYSQLI_BOTH)) {
-    $game_categories[] = $categories['game_cat_name'];
+//***********************************************************************************
+//get the game port info
+//***********************************************************************************
+$port = $portDao->getPortForGame($game_id);
+$smarty->assign('port', $port);
 
-    $smarty->append('cat', array(
-        'cat_id' => $categories['game_cat_id'],
-        'cat_name' => $categories['game_cat_name']
-    ));
-}
+//***********************************************************************************
+//get the engines & the engines already selected for this game
+//***********************************************************************************
+$game_engines = $engineDao->getGameEnginesForGame($game_id);
+$smarty->assign('game_engines', $game_engines);
+
+//***********************************************************************************
+//get the controls & the controls already selected for this game
+//***********************************************************************************
+$game_controls = $controlDao->getGameControlsForGame($game_id);
+$smarty->assign('game_controls', $game_controls);
 
 //**********************************************************************************
 //Get the author info
 //**********************************************************************************
 //Starting off with displaying the authors that are linked to the game and having a delete option for them */
-$sql_gameauthors = $mysqli->query("SELECT * FROM individuals
-                  LEFT JOIN individual_text ON (individual_text.ind_id = individuals.ind_id)
-                  LEFT JOIN game_author ON (game_author.ind_id = individuals.ind_id)
-                  LEFT JOIN author_type ON (game_author.author_type_id = author_type.author_type_id)
-                  WHERE game_author.game_id='$game_id' ORDER BY author_type.author_type_id, individuals.ind_name") or die("Error loading authors");
+$sql_game_individuals = $mysqli->query("SELECT * FROM individuals
+                        LEFT JOIN individual_text ON (individual_text.ind_id = individuals.ind_id)
+                        LEFT JOIN game_individual ON (game_individual.individual_id = individuals.ind_id)
+                        LEFT JOIN individual_role ON (game_individual.individual_role_id = individual_role.id)
+                        WHERE game_individual.game_id='$game_id' ORDER BY individual_role.id, individuals.ind_name") or die("Error loading authors");
 
 $nr_interviews = 0;
 
-while ($game_author = $sql_gameauthors->fetch_array(MYSQLI_BOTH)) {
+while ($game_individual = $sql_game_individuals->fetch_array(MYSQLI_BOTH)) {
     $nickname = '';
     $nick_id = '';
     $interview_id = '';
 
-    if ($game_author['ind_imgext'] == 'png' or $game_author['ind_imgext'] == 'jpg' or $game_author['ind_imgext']) {
+    if ($game_individual['ind_imgext'] == 'png' or $game_individual['ind_imgext'] == 'jpg' or $game_individual['ind_imgext']) {
         $v_ind_image  = $individual_screenshot_path;
-        $v_ind_image .= $game_author['ind_id'];
+        $v_ind_image .= $game_individual['ind_id'];
         $v_ind_image .= '.';
-        $v_ind_image .= $game_author['ind_imgext'];
+        $v_ind_image .= $game_individual['ind_imgext'];
     } else {
         $v_ind_image = "none";
     }
 
-    if (preg_match("/[a-z]/i", $game_author['ind_profile'])) {
-        $profile = $game_author['ind_profile'];
+    if (preg_match("/[a-z]/i", $game_individual['ind_profile'])) {
+        $profile = $game_individual['ind_profile'];
     } else {
         $profile = 'none';
     }
 
-    if (isset($game_author['ind_id'])) {
+    if (isset($game_individual['individual_id'])) {
         // Get nickname information
-        $sql_nick = $mysqli->query("SELECT * FROM individual_nicks where ind_id=$game_author[ind_id]") or die("problem getting nickname");
+        $sql_nick = $mysqli->query("SELECT * FROM individual_nicks where ind_id=$game_individual[individual_id]") or die("problem getting nickname");
 
         while ($ind_nicks = $sql_nick->fetch_array(MYSQLI_BOTH)) {
             $ind_id = $ind_nicks['nick_id'];
@@ -251,7 +280,7 @@ while ($game_author = $sql_gameauthors->fetch_array(MYSQLI_BOTH)) {
         $sql_interview = $mysqli->query("SELECT * FROM interview_main
                                                   LEFT JOIN interview_text ON (interview_main.interview_id = interview_text.interview_id)
                                                   LEFT JOIN users ON (interview_main.user_id = users.user_id)
-                                                  WHERE ind_id=$game_author[ind_id]") or die("problem getting interview");
+                                                  WHERE ind_id=$game_individual[individual_id]") or die("problem getting interview");
         while ($interview = $sql_interview->fetch_array(MYSQLI_BOTH)) {
             $nr_interviews++;
 
@@ -271,8 +300,8 @@ while ($game_author = $sql_gameauthors->fetch_array(MYSQLI_BOTH)) {
             if ($v_ind_image != 'none') {
                 $smarty->append(
                     'interviews',
-                    array( 'ind_id' => $game_author['game_author_id'],
-                           'ind_name' => $game_author['ind_name'],
+                    array( 'ind_id' => $game_individual['id'],
+                           'ind_name' => $game_individual['ind_name'],
                            'ind_img' => $v_ind_image,
                            'int_id' => $interview['interview_id'],
                            'int_text' => $int_text,
@@ -285,16 +314,16 @@ while ($game_author = $sql_gameauthors->fetch_array(MYSQLI_BOTH)) {
         }
     }
 
-    $smarty->append('game_author', array(
-        'game_author_id' => $game_author['game_author_id'],
-        'ind_name' => $game_author['ind_name'],
-        'ind_id' => $game_author['ind_id'],
+    $smarty->append('game_individual', array(
+        'id' => $game_individual['id'],
+        'ind_name' => $game_individual['ind_name'],
+        'ind_id' => $game_individual['ind_id'],
         'ind_nick' => $nickname,
         'ind_nick_id' => $nick_id,
         'ind_profile' => $profile,
         'ind_img' => $v_ind_image,
         'interview_id' => $interview_id,
-        'auhthor_type_info' => $game_author['author_type_info']
+        'individual_role' => $game_individual['name']
     ));
 }
 
@@ -307,54 +336,6 @@ if ($nr_interviews > 0) {
 //**********************************************************************************
 //Get the companies info
 //**********************************************************************************
-//let's get the publishers for this game
-$sql_publisher = $mysqli->query("SELECT * FROM pub_dev
-                 LEFT JOIN pub_dev_text ON (pub_dev.pub_dev_id = pub_dev_text.pub_dev_id )
-                 LEFT JOIN game_publisher ON ( pub_dev.pub_dev_id = game_publisher.pub_dev_id )
-                 -- Developer role is still needed here as it's the old game_extra_info tables
-                 -- It's still used by publishers that are linked directly to a game, which
-                 -- need to be cleaned up. That will be removed once all game publishers have
-                 -- been merged into releases
-                 LEFT JOIN developer_role ON ( game_publisher.game_extra_info_id = developer_role.id )
-                 LEFT JOIN continent ON ( game_publisher.continent_id = continent.continent_id )
-                 WHERE game_publisher.game_id = '$game_id' ORDER BY pub_dev_name ASC") or die("Couldn't query publishers");
-
-while ($publishers = $sql_publisher->fetch_array(MYSQLI_BOTH)) {
-    if ($publishers['pub_dev_imgext'] == 'png' or $publishers['pub_dev_imgext'] == 'jpg' or $publishers['pub_dev_imgext'] == 'gif') {
-        //$v_comp_image  = $company_screenshot_path;
-        $v_comp_image  = $company_screenshot_save_path;
-        $v_comp_image .= $publishers['pub_dev_id'];
-        $v_comp_image .= '.';
-        $v_comp_image .= $publishers['pub_dev_imgext'];
-
-        $v_comp_image_pop  = $company_screenshot_path;
-        $v_comp_image_pop .= $publishers['pub_dev_id'];
-        $v_comp_image_pop .= '.';
-        $v_comp_image_pop .= $publishers['pub_dev_imgext'];
-    } else {
-        $v_comp_image = "none";
-        $v_comp_image_pop = "none";
-    }
-
-    if (preg_match("/[a-z]/i", $publishers['pub_dev_profile'])) {
-        $profile = $publishers['pub_dev_profile'];
-    } else {
-        $profile = 'none';
-    }
-
-    $smarty->append('publisher', array(
-        'pub_id' => $publishers['pub_dev_id'],
-        'pub_name' => $publishers['pub_dev_name'],
-        'pub_profile' => $profile,
-        'continent_id' => $publishers['continent_id'],
-        'extra_info' => $publishers['role'],
-        'logo' => $v_comp_image,
-        'logo_pop' => $v_comp_image_pop,
-        'logo_path' => $company_screenshot_path,
-        'continent' => $publishers['continent_name']
-    ));
-}
-
 //let's get the developers for this game
 $sql_developer = $mysqli->query("SELECT * FROM game_developer
                   LEFT JOIN pub_dev ON ( pub_dev.pub_dev_id = game_developer.dev_pub_id )
@@ -401,7 +382,7 @@ while ($developers = $sql_developer->fetch_array(MYSQLI_BOTH)) {
 //***********************************************************************************
 //AKA's
 //***********************************************************************************
-$sql_aka = $mysqli->query("SELECT * FROM game_aka 
+$sql_aka = $mysqli->query("SELECT * FROM game_aka
                            LEFT JOIN language ON (language.id = game_aka.language_id)
                            WHERE game_id='$game_id'") or die("Couldn't query aka games");
 $nr_aka = 0;
@@ -630,10 +611,15 @@ while ($query_similar = $sql_similar->fetch_array(MYSQLI_BOTH)) {
     or die("Error - Couldn't get similar game data");
 
     while ($sql_game_similar_data = $query_game_similar_data->fetch_array(MYSQLI_BOTH)) {
-        $new_path = $game_screenshot_path;
-        $new_path .= $sql_game_similar_data['screenshot_id'];
-        $new_path .= ".";
-        $new_path .= $sql_game_similar_data['imgext'];
+        if ($sql_game_similar_data['screenshot_id'] != '')
+        {
+            $new_path = $game_screenshot_path;
+            $new_path .= $sql_game_similar_data['screenshot_id'];
+            $new_path .= ".";
+            $new_path .= $sql_game_similar_data['imgext'];
+        } else {
+            $new_path = 'none';
+        }            
 
         $smarty->assign('similar', array(
             'game_id' => $query_similar['game_similar_cross'],
@@ -699,7 +685,7 @@ $smarty->assign("game_description", generate_game_description(
     $game_info['game_name'],
     $game_akas,
     $releases,
-    $game_categories,
+    $game_genres,
     $game_developers,
     $game_screenshots_count,
     $game_boxscans_count,

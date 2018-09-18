@@ -14,7 +14,7 @@
                             <i class="fa fa-fw fa-trash" aria-hidden="true"></i>
                         </a>
 
-                        <a href="games_release_detail.php?release_id={$release->getId()}">
+                        <a href="games_release_detail.php?release_id={$release->getId()}&game_id={$game->getId()}">
                             {if $release->getDate()}
                                 {$release->getDate()|date_format:"%Y"}
                             {else}
@@ -29,7 +29,7 @@
             </ul>
         {/if}
         <br>
-        <a class="primary_button" href="games_release_detail.php?game_id={$game->getId()}">
+        <a class="primary_button" href="db_games_release_detail.php?game_id={$game->getId()}&action=add_release">
             Add a new release
         </a>
     </div>
