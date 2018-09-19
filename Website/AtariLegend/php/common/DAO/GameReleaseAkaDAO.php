@@ -25,7 +25,8 @@ class GameReleaseAkaDAO {
         $stmt = \AL\Db\execute_query(
             "GameReleaseAkaDAO: getAllGameReleaseAkas",
             $this->mysqli,
-            "SELECT game_release_aka_id, game_release_id, aka_name, language_id, name FROM game_release_aka
+            "SELECT game_release_aka.id, game_release_aka.game_release_id, game_release_aka.name, 
+            game_release_aka.language_id, language.name FROM game_release_aka
             LEFT JOIN language ON ( game_release_aka.language_id = language.id )
 			 WHERE game_release_id = ?",
             "i", $game_release_id
@@ -60,7 +61,7 @@ class GameReleaseAkaDAO {
         $stmt = \AL\Db\execute_query(
             "GameReleaseAkaDAO: UpdateLanguageForReleaseAka",
             $this->mysqli,
-            "UPDATE game_release_aka SET language_id = ? WHERE game_release_aka_id = ?",
+            "UPDATE game_release_aka SET language_id = ? WHERE id = ?",
             "si", $language_id, $game_release_aka_id
         );
 
@@ -79,7 +80,7 @@ class GameReleaseAkaDAO {
         $stmt = \AL\Db\execute_query(
             "GameReleaseAkaDAO: AddAkaForRelease",
             $this->mysqli,
-            "INSERT INTO game_release_aka (game_release_id, aka_name, language_id) VALUES (?,?,?)",
+            "INSERT INTO game_release_aka (game_release_id, name, language_id) VALUES (?,?,?)",
             "iss", $game_release_id, $name, $language_id
         );
 
@@ -97,7 +98,7 @@ class GameReleaseAkaDAO {
         $stmt = \AL\Db\execute_query(
             "GameReleaseAkaDAO: DeleteAkaForRelease",
             $this->mysqli,
-            "DELETE FROM game_release_aka WHERE game_release_aka_id = ? AND game_release_id = ?",
+            "DELETE FROM game_release_aka WHERE id = ? AND game_release_id = ?",
             "ii", $game_release_aka_id, $game_release_id
         );
 
