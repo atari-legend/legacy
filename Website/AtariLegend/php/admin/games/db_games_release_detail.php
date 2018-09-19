@@ -36,19 +36,31 @@ if (isset($action) && ($action == 'add_release'))
     $game = $gameDao->getGame($game_id);
     
     // Do not store an alternative title if it's identical to the game
-    if (strtolower($name) == strtolower($game->getName())) {
-        $name = null;
+    if (isset($name)) {
+        if (strtolower($name) == strtolower($game->getName())) {
+            $name = null;
+        }
+    } else {
+       $name = null; 
     }
-
-    $date = $Date_Year."-01-01";
-    if ($Date_Year == "") {
+    
+    if (isset($Date_Year)) {
+        $date = $Date_Year."-01-01";
+        if ($Date_Year == "") {
+            $date = null;
+        }
+    } else {
         $date = null;
     }
+    
+    if (isset ($license)) {} else {$license = null;}
+    if (isset ($$type)) {} else {$type = null;}
+    if (isset ($pub_dev_id)) {} else {$pub_dev_id = null;}
     
     $release_id = $gameReleaseDao->addReleaseForGame(
         $game_id,
         $name,
-        $Date_Year."-01-01",
+        $date,
         $license,
         ($type != '') ? $type : null,
         ($pub_dev_id != '') ? $pub_dev_id : null
