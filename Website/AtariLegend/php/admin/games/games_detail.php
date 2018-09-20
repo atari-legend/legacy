@@ -138,7 +138,7 @@ $smarty->assign('game_individuals', $gameIndividualDao->getGameIndividualsForGam
 //Get the companies info
 //**********************************************************************************
 
-$smarty->assign('pubdevs', $pubDevDao->getPubDevsStartingWith("^[0-9]"));
+$smarty->assign('pubdevs', $pubDevDao->getAllPubDevs());
 
 //let's get the developers for this game
 $sql_developer = $mysqli->query("SELECT * FROM pub_dev

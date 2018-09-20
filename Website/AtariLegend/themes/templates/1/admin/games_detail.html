@@ -72,6 +72,7 @@
     <script>
         $(document).ready(function () {
             $('select[name=individual_id]').altAutocomplete();
+            $('select[name=pub_dev_id]').altAutocomplete();
         });
     </script>
 {/block}
@@ -124,25 +125,6 @@
 {/block}
 {block name=java_script}
 <script>
-
-function browseDeveloper(str) {
-    if (str == "") {
-        $('#ajax_developer_browse').html('');
-    } else {
-        $.ajaxQueue({
-            // The URL for the request
-            url: '../games/ajax_games_detail.php',
-            data: 'action=company_developer_browse&query='+str,
-            type: 'GET',
-            dataType: 'html',
-            // Code to run if the request succeeds;
-            success: function (html) {
-                $('#ajax_developer_browse').html(html);
-            }
-        });
-    }
-}
-
 $('#input-tags3').selectize({
     plugins: ['remove_button'],
     delimiter: ',',
@@ -483,20 +465,25 @@ $('#input-tags3').selectize({
                     <input type="hidden" name="game_id" value="{$game_id}">
                     <input type="hidden" name="action" value="add">
 
-                    <span class="fa fa-fw"></span>
+                    <a href="javascript:;"
+                        class="left_nav_link"
+                        id="pub_dev_select_toggle"
+                        title="Click for dropdown mode">
+                        <i class="fa fa-fw fa-chevron-circle-down" aria-hidden="true"></i>
+                    </a>
 
-                    <select name="developerbrowse" onchange="browseDeveloper(this.value)" class="standard_select select_small" id="gd_dev_browse">
-                        <option value="" SELECTED>-</option>
-                        {html_options values=$az_value output=$az_output}
+                    <select name="pub_dev_id"
+                        class="standard_select select_large" id="gd_dev_name"
+                        data-alt-autocomplete-endpoint="../common/autocomplete.php?extraParams=pub_dev"
+                        data-alt-autocomplete-toggle="#pub_dev_select_toggle"
+                        data-alt-autocomplete-placeholder="Start typing a name…"
+                        required>
+                        <option value="" selected="selected" disabled></option>
+                        {foreach from=$pubdevs item=pubdev}
+                            <option value="{$pubdev->getId()}">{$pubdev->getName()}</option>
+                        {/foreach}
                     </select>
-                    <span id="ajax_developer_browse">
-                        <select id="gd_dev_name" name="pub_dev_id" class="standard_select" required>
-                            <option value="" selected="selected" disabled>0-9 &hellip;</option>
-                            {foreach from=$pubdevs item=pubdev}
-                                <option value="{$pubdev->getId()}">{$pubdev->getName()}</option>
-                            {/foreach}
-                        </select>
-                    </span>
+
                     <span class="fa fa-fw edit_author"></span>
 
                     <select name="developer_role_id" class="standard_select select_medium">
