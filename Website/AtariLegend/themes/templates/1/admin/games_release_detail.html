@@ -150,7 +150,7 @@
                     </div>
                     <br>
                     <hr class="separator_add">
-                    <label class="input">Release AKA</label><br><br>
+                    <label class="input"><b>Release AKA</b></label><br><br>
                     {foreach from=$release_akas item=all_akas}
                         <form action="../games/db_games_release_detail.php" method="post" name="aka" id="aka">
                             <input type="hidden" name="action" value="update_release_aka">
@@ -180,7 +180,6 @@
                         <input type="hidden" name="action" value="game_release_aka">
                         <input type="hidden" name="game_release_id" value="{$release->getId()}">
                         <input type="hidden" name="game_id" value="{$game->getId()}">
-                        <span class="fa fa-fw"></span>
                         <input type="text" name="game_release_aka" class="standard_input input_large" placeholder="Enter new AKA" required id="gd_aka_input">
                         <select name="language_id" class="standard_select select_medium">
                             <option value="">-</option>
