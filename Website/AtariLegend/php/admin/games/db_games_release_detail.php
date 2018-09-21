@@ -166,7 +166,7 @@ if (isset($action) && ($action == 'features')) {
     $systemDao->setEnhancedSystemsForRelease($release_id, isset($system_enhanced) ? $system_enhanced : []);
     $resolutionDao->setResolutionsForRelease($release_id, isset($resolution) ? $resolution : []);
     
-    create_log_entry('Game Release', $game_id, 'Release Features', $release_id, 'Update', $_SESSION['user_id']);
+    create_log_entry('Game Release', $game_id, 'Compatibility', $release_id, 'Update', $_SESSION['user_id']);
     
     if ($submit_type == "save_and_back") {
         header("Location: games_detail.php?game_id=".$game_id);
