@@ -13,6 +13,7 @@ require_once __DIR__."/../../common/DAO/LocationDAO.php";
 require_once __DIR__."/../../common/DAO/ChangeLogDAO.php";
 require_once __DIR__."/../../common/DAO/GameReleaseAkaDAO.php";
 require_once __DIR__."/../../common/DAO/LanguageDAO.php";
+require_once __DIR__."/../../common/DAO/EmulatorDAO.php";
 
 $gameReleaseDao = new \AL\Common\DAO\GameReleaseDAO($mysqli);
 $gameDao = new \AL\Common\DAO\GameDao($mysqli);
@@ -23,6 +24,7 @@ $locationDao = new \AL\Common\DAO\LocationDAO($mysqli);
 $changeLogDao = new \AL\Common\DAO\ChangeLogDAO($mysqli);
 $gameReleaseAkaDao = new \AL\Common\DAO\GameReleaseAkaDAO($mysqli);
 $languageDao = new \AL\Common\DAO\LanguageDAO($mysqli);
+$emulatorDao = new \AL\Common\DAO\EmulatorDAO($mysqli);
 
 if ($_SERVER['REQUEST_METHOD'] == "GET") {
     $smarty->assign('license_types', $gameReleaseDao->getLicenseTypes());
@@ -32,6 +34,7 @@ if ($_SERVER['REQUEST_METHOD'] == "GET") {
     $smarty->assign('systems', $systemDao->getAllSystems());
     $smarty->assign('publishers', $pubDevDao->getAllPubDevs());
     $smarty->assign('languages', $languageDao->getAllLanguages());
+    $smarty->assign('emulators', $emulatorDao->getAllEmulators());
 
     // Edit existing release
     if (isset($release_id)) {
@@ -45,10 +48,13 @@ if ($_SERVER['REQUEST_METHOD'] == "GET") {
         $smarty->assign('game_releases', $gameReleaseDao->getReleasesForGame($game->getId()));
 
         $smarty->assign('system_incompatible', $systemDao->getIncompatibleSystemsForRelease($release->getId()));
+        $smarty->assign('emulator_incompatible', $emulatorDao->getIncompatibleEmulatorsForRelease($release->getId()));
         $smarty->assign('system_enhanced', $systemDao->getEnhancedSystemsForRelease($release->getId()));
         $smarty->assign('release_resolutions', $resolutionDao->getResolutionsForRelease($release->getId()));
         $smarty->assign('release_locations', $locationDao->getLocationsForRelease($release->getId()));
         $smarty->assign('release_akas', $gameReleaseAkaDao->getAllGameReleaseAkas($release->getId()));
+        $smarty->assign('distributors', $pubDevDao->getAllPubDevs());
+        $smarty->assign('release_distributors', $pubDevDao->getDistributorsForRelease($release->getId()));   
     } else {
         // Creating a new release
         $game = $gameDao->getGame($game_id);
@@ -58,6 +64,7 @@ if ($_SERVER['REQUEST_METHOD'] == "GET") {
         $smarty->assign('release', new AL\Common\Model\Game\GameRelease(-1, $game->getId(), '', '', '', '', null, null));
 
         $smarty->assign('system_incompatible', []);
+        $smarty->assign('emulator_incompatible', []);
         $smarty->assign('system_enhanced', []);
         $smarty->assign('release_resolutions', []);
         $smarty->assign('release_locations', []);

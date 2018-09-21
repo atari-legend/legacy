@@ -55,6 +55,42 @@
                             </tr>
                         {/if}
                     {/if}
+                    {if $distributors[$release->getId()]}
+                        {foreach from=$distributors[$release->getId()] item=distributor_id name=distributor}
+                            <tr>
+                                <td class="w-30">{if $smarty.foreach.distributor.index == 0}<span class="games_main_detail_info_right">Distributor</span>{/if}</td>
+                                <td class="w-5">-</td>
+                                <td class="w-60">
+                                    {$distributor_id->getName()}
+                                    {if $distributor_id->getProfile() != null}
+                                        <a style="cursor: pointer;"
+                                            onclick="javascript:jQuery('#release_{$release->getId()}_publisher_profile_{$distributor_id->getId()}').toggle()"
+                                            title="Click to view profile"
+                                            class="latest_comments_link">
+                                            <i class="fa fa-info-circle" aria-hidden="true"></i>
+                                        </a>
+                                    {/if}
+
+                                    {if $distributor_id->getImage() != null}
+                                        <a href="../../includes/show_image.php?file={$distributor_id->getImage()}"
+                                            data-lightbox="image-1"
+                                            data-title="{$distributor_id->getName()}"
+                                            class="latest_comments_link">
+                                            <i class="fa fa-picture-o" aria-hidden="true"></i>
+                                        </a>
+                                    {/if}
+                                </td>
+                            </tr>
+                            {if $distributor_id->getProfile() != null}
+                                <tr style="display: none;"><td colspan="3"></td></tr>
+                                <tr style="display:none;" id="release_{$release->getId()}_publisher_profile_{$distributor_id->getId()}">
+                                    <td colspan="3">
+                                        <textarea id="profile{$distributor_id->getId()}" class="primary_textarea" rows="6" style="margin-top:5px;margin-bottom:5px;font-size:10pt;margin-left:auto;margin-right:auto;" readonly>{$distributor_id->getProfile()}</textarea>
+                                    </td>
+                                </tr>
+                            {/if}
+                        {/foreach}
+                    {/if}
                     {if $release->getType() != null}
                         <tr>
                             <td class="w-30"><span class="games_main_detail_info_right">Type</span></td>
@@ -70,11 +106,11 @@
                         </tr>
                     {/if}
                     {if $release_location[$release->getId()]}
-                        <tr>
-                            <td class="w-30"><span class="games_main_detail_info_right">Locations</span></td>
-                            <td class="w-5">-</td>
-                            <td class="w-60">
-                                {foreach from=$release_location[$release->getId()] item=location_id name=location}
+                        {foreach from=$release_location[$release->getId()] item=location_id name=location}
+                            <tr>
+                                <td class="w-30">{if $smarty.foreach.location.index == 0}<span class="games_main_detail_info_right">Locations</span>{/if}</td>
+                                <td class="w-5">-</td>
+                                <td class="w-60">
                                     <div>
                                         {if $locations[$location_id]->getCountryISO2() != null}
                                             <img src="../../themes/templates/1/includes/img/vendor/country-flags-1.0/{$locations[$location_id]->getCountryISO2()|lower}.svg"
@@ -83,60 +119,72 @@
                                         {/if}
                                         {$locations[$location_id]->getName()}
                                     </div>
-                                {/foreach}
-                            </td>
-                        </tr>
+                                </td>
+                            </tr>
+                        {/foreach}
                     {/if}
 
                     {if $release_resolution[$release->getId()]}
-                        <tr>
-                            <td class="w-30"><span class="games_main_detail_info_right">Resolutions</span></td>
-                            <td class="w-5">-</td>
-                            <td class="w-60">
-                                {foreach from=$release_resolution[$release->getId()] item=resolution_id name=resolution}
+                        {foreach from=$release_resolution[$release->getId()] item=resolution_id name=resolution}
+                            <tr>
+                                <td class="w-30">{if $smarty.foreach.resolution.index == 0}<span class="games_main_detail_info_right">Resolutions</span>{/if}</td>
+                                <td class="w-5">-</td>
+                                <td class="w-60">
                                     {$resolutions[$resolution_id]->getName()}<br>
-                                {/foreach}
-                            </td>
-                        </tr>
+                                </td>
+                            </tr>
+                        {/foreach}
                     {/if}
 
                     {if $system_enhanced[$release->getId()]}
-                        <tr>
-                                <td class="w-30"><span class="games_main_detail_info_right">Enhanced</span></td>
+                        {foreach from=$system_enhanced[$release->getId()] item=system_id name=system}
+                            <tr>
+                                <td class="w-30">{if $smarty.foreach.system.index == 0}<span class="games_main_detail_info_right">Enhanced</span>{/if}</td>
                                 <td class="w-5">-</td>
                                 <td class="w-60">
-                                    {foreach from=$system_enhanced[$release->getId()] item=system_id name=system}
-                                        {$systems[$system_id]->getName()}<br>
-                                    {/foreach}
+                                    {$systems[$system_id]->getName()}<br>
                                 </td>
-                        </tr>
+                            </tr>
+                        {/foreach}
                     {/if}
 
                     {if $system_incompatible[$release->getId()]}
-                        <tr>
-                                <td class="w-30"><span class="games_main_detail_info_right">Incompatible</span></td>
+                        {foreach from=$system_incompatible[$release->getId()] item=system_id name=system}
+                            <tr>
+                                <td class="w-30">{if $smarty.foreach.system.index == 0}<span class="games_main_detail_info_right">Incompatible</span>{/if}</td>
                                 <td class="w-5">-</td>
                                 <td class="w-60">
-                                    {foreach from=$system_incompatible[$release->getId()] item=system_id name=system}
-                                        {$systems[$system_id]->getName()}<br>
-                                    {/foreach}
+                                    {$systems[$system_id]->getName()}<br>
                                 </td>
-                        </tr>
+                            </tr>
+                        {/foreach}
+                    {/if}
+
+                    {if $emulator_incompatible[$release->getId()]}
+                        {foreach from=$emulator_incompatible[$release->getId()] item=emulator_id name=emulator}
+                            <tr>
+                                <td class="w-30">{if $system_incompatible[$release->getId()]}{else}{if $smarty.foreach.emulator.index == 0}<span class="games_main_detail_info_right">Incompatible</span>{/if}{/if}</td>
+                                <td class="w-5">-</td>
+                                <td class="w-60">
+                                    {$emulator_id->getName()} <span class="standard_tile_subtext">(Emulator)</span><br>
+                                </td>
+                            </tr>
+                        {/foreach}
                     {/if}
 
                     {if $release_akas[$release->getId()]}
-                        <tr>
-                                <td class="w-30"><span class="games_main_detail_info_right">AKA</span></td>
+                        {foreach from=$release_akas[$release->getId()] item=aka_id name=aka}
+                            <tr>
+                                <td class="w-30">{if $smarty.foreach.aka.index == 0}<span class="games_main_detail_info_right">AKA</span>{/if}</td>
                                 <td class="w-5">-</td>
                                 <td class="w-60">
-                                    {foreach from=$release_akas[$release->getId()] item=aka_id name=aka}
-                                        {$aka_id->getName()} <span class="standard_tile_subtext">({$aka_id->getLanguage()->getName()})</span>
-                                        <br>
-                                    {/foreach}
+                                    {$aka_id->getName()} <span class="standard_tile_subtext">({$aka_id->getLanguage()->getName()})</span>
+                                    <br>
                                 </td>
-                        </tr>
+                            </tr>
+                        {/foreach}
                     {/if}
-                    {/foreach}
+                {/foreach}
             </table>
         </div>
     </div>

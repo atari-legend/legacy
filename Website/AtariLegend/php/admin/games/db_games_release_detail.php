@@ -17,6 +17,7 @@ require_once __DIR__."/../../common/DAO/LocationDAO.php";
 require_once __DIR__."/../../common/DAO/ChangeLogDAO.php";
 require_once __DIR__."/../../common/DAO/GameReleaseAkaDAO.php";
 require_once __DIR__."/../../common/DAO/LanguageDAO.php";
+require_once __DIR__."/../../common/DAO/EmulatorDAO.php";
 
 $gameReleaseDao = new \AL\Common\DAO\GameReleaseDAO($mysqli);
 $gameDao = new \AL\Common\DAO\GameDao($mysqli);
@@ -27,6 +28,8 @@ $locationDao = new \AL\Common\DAO\LocationDAO($mysqli);
 $changeLogDao = new \AL\Common\DAO\ChangeLogDAO($mysqli);
 $gameReleaseAkaDao = new \AL\Common\DAO\GameReleaseAkaDAO($mysqli);
 $languageDao = new \AL\Common\DAO\LanguageDAO($mysqli);
+$languageDao = new \AL\Common\DAO\LanguageDAO($mysqli);
+$emulatorDao = new \AL\Common\DAO\EmulatorDAO($mysqli);
 
 //***********************************************************************************
 // Add a new release
@@ -165,6 +168,7 @@ if (isset($action) && ($action == 'features')) {
     $systemDao->setIncompatibleSystemsForRelease($release_id, isset($system_incompatible) ? $system_incompatible : []);
     $systemDao->setEnhancedSystemsForRelease($release_id, isset($system_enhanced) ? $system_enhanced : []);
     $resolutionDao->setResolutionsForRelease($release_id, isset($resolution) ? $resolution : []);
+    $emulatorDao->setIncompatibleEmulatorsForRelease($release_id, isset($emulator_incompatible) ? $emulator_incompatible : []);
     
     create_log_entry('Game Release', $game_id, 'Compatibility', $release_id, 'Update', $_SESSION['user_id']);
     
@@ -173,6 +177,36 @@ if (isset($action) && ($action == 'features')) {
     } else {
         header("Location: ../games/games_release_detail.php?game_id=$game_id&release_id=$release_id");
     }
+}
+
+
+//***********************************************************************************
+//add a distributor to a release
+//***********************************************************************************
+if (isset($action) && ($action == 'add_distributor')) {  
+    
+    $pubDevDao->addDistributorToRelease($release_id, $distributor_id);
+    
+    $new_distributor_id = $mysqli->insert_id;
+    
+    create_log_entry('Game Release', $game_id, 'Distributor', $distributor_id, 'Insert', $_SESSION['user_id']);
+    
+    $_SESSION['edit_message'] = "Distributor has been added";
+    header("Location: ../games/games_release_detail.php?game_id=$game_id&release_id=$release_id");
+}
+
+//***********************************************************************************
+//add a distributor to a release
+//***********************************************************************************
+if (isset($action) && ($action == 'remove_distributor')) {  
+    
+    create_log_entry('Game Release', $game_id, 'Distributor', $pub_dev_id, 'Delete', $_SESSION['user_id']);
+    
+    $pubDevDao->deleteDistributorFromRelease($release_id, $pub_dev_id);
+    
+    $_SESSION['edit_message'] = "Distributor has been removed";
+    header("Location: ../games/games_release_detail.php?game_id=$game_id&release_id=$release_id");
+
 }
     
 //close the connection

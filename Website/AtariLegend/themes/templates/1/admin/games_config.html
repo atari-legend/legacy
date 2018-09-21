@@ -215,6 +215,77 @@
                     Please contact the admin if you want to have additional data added or changed.
                 </div>
             </fieldset>
+            <br>
+            <fieldset class="secondary_fieldset">
+                <legend class="primary_legend">System info</legend>
+                <div class="help-hint">
+                    Overhere you can add, modify or delete all data related to the System info of the game release. Use the drop down to select an entry. A text field, modify and delete button appear. Fill in the new name in the text field and press
+                    modify to change the existing entry. Press delete to remove the entry from the list.
+                </div>
+                <br>
+                <br>
+                <b>Resolutions</b>&nbsp;&nbsp;
+                <br>
+                <form action="../games/db_games_config.php" method="post" name="resolution">
+                    <select name="resolution_select" class="standard_select input_medium grayed_out" id="resolution_select">
+                        <option value="" selected="selected">-</option>
+                        {foreach from=$resolutions item=all_resolutions}
+                            <option value="{$all_resolutions->getId()}">{$all_resolutions->getName()}</option>
+                        {/foreach}
+                    </select>
+                    <input type="text" name="resolution_edit" class="standard_input input_medium" style="display:none;" id="resolution_edit">
+                    <input type="text" name="resolution_id_edit" class="standard_input input_medium" style="display:none;" id="resolution_id_edit">
+                    <input type="submit" value="Modify resolution" name="action" class="secondary_button" style="display:none;" id="resolution_mod">
+                    <input type="submit" value="Delete resolution" name="action" class="primary_button button_danger" style="display:none;" id="resolution_del">
+                </form>
+                <hr class="separator_add">
+                <form action="../games/db_games_config.php" method="post" name="resolution">
+                    <input type="text" name="resolution_new" class="standard_input input_medium" placeholder="Enter new resolution" required>
+                    <input type="submit" value="Add resolution" name="action" class="secondary_button">
+                </form>
+                <br>
+                <br>
+                <b>Systems</b>&nbsp;&nbsp;
+                <br>
+                <form action="../games/db_games_config.php" method="post" name="system">
+                    <select name="system_select" class="standard_select input_medium grayed_out" id="system_select">
+                        <option value="" selected="selected">-</option>
+                        {foreach from=$systems item=all_systems}
+                            <option value="{$all_systems->getId()}">{$all_systems->getName()}</option>
+                        {/foreach}
+                    </select>
+                    <input type="text" name="system_edit" class="standard_input input_medium" style="display:none;" id="system_edit">
+                    <input type="text" name="system_id_edit" class="standard_input input_medium" style="display:none;" id="system_id_edit">
+                    <input type="submit" value="Modify system" name="action" class="secondary_button" style="display:none;" id="system_mod">
+                    <input type="submit" value="Delete system" name="action" class="primary_button button_danger" style="display:none;" id="system_del">
+                </form>
+                <hr class="separator_add">
+                <form action="../games/db_games_config.php" method="post" name="system">
+                    <input type="text" name="system_new" class="standard_input input_medium" placeholder="Enter new system" required>
+                    <input type="submit" value="Add system" name="action" class="secondary_button">
+                </form>
+                <br>
+                <br>
+                <b>Emulators</b>&nbsp;&nbsp;
+                <br>
+                <form action="../games/db_games_config.php" method="post" name="emulator">
+                    <select name="emulator_select" class="standard_select input_medium grayed_out" id="emulator_select">
+                        <option value="" selected="selected">-</option>
+                        {foreach from=$emulators item=all_emulators}
+                            <option value="{$all_emulators->getId()}">{$all_emulators->getName()}</option>
+                        {/foreach}
+                    </select>
+                    <input type="text" name="emulator_edit" class="standard_input input_medium" style="display:none;" id="emulator_edit">
+                    <input type="text" name="emulator_id_edit" class="standard_input input_medium" style="display:none;" id="emulator_id_edit">
+                    <input type="submit" value="Modify emulator" name="action" class="secondary_button" style="display:none;" id="emulator_mod">
+                    <input type="submit" value="Delete emulator" name="action" class="primary_button button_danger" style="display:none;" id="emulator_del">
+                </form>
+                <hr class="separator_add">
+                <form action="../games/db_games_config.php" method="post" name="emulator">
+                    <input type="text" name="emulator_new" class="standard_input input_medium" placeholder="Enter new emulator" required>
+                    <input type="submit" value="Add emulator" name="action" class="secondary_button">
+                </form>
+            </fieldset>
         </div>
     </div>
 </div>

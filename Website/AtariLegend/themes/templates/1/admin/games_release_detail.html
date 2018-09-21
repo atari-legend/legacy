@@ -12,6 +12,7 @@
     <script>
         $(document).ready(function () {
             $('select[name=pub_dev_id]').altAutocomplete();
+            $('select[name=distributor_id]').altAutocomplete();
             $('.tabs').tabs();
         });
     </script>
@@ -143,6 +144,68 @@
                     </form>
                 </fieldset>
                 <br>
+
+                <fieldset class="secondary_fieldset">
+                    <legend class="primary_legend">Distribution</legend>
+                    <div class="help-hint">
+                        You can add as many distributors as you like to a game release.
+                    </div>
+                    <br>
+                    <a id="gd_developers"><b>Distributors</b></a>
+                    <br>
+
+                    {if isset($release_distributors)}
+                        {foreach from=$release_distributors item=release_distributor}
+                            <form action="../games/db_games_release_detail.php" method="get">
+                                <a title="Remove {$release_distributor->getName()|escape:"html"} from this release"
+                                    href="../games/db_games_release_detail.php?game_id={$game->getId()}&amp;release_id={$release->getId()}&amp;pub_dev_id={$release_distributor->getId()}&amp;action=remove_distributor"
+                                    onclick="javascript:return confirm('This distributor will be removed from the release')">
+                                    <span class="fa fa-fw fa-trash"></span>
+                                </a>
+
+                                <input type="hidden" name="action" value="update_distributor">
+                                <input type="hidden" name="release_id" value="{$release->getId()}">
+                                <input type="hidden" name="pub_dev_id" value="{$release_distributor->getid()}">
+                                <input type="text" value="{$release_distributor->getName()}" class="standard_input input_large" disabled id="gd_game_dev">
+                                <a href="../company/company_edit.php?comp_id={$release_distributor->getid()}" title="Edit distributor" class="standard_tile_link"><i class="fa fa-fw fa-pencil edit_author" aria-hidden="true"></i></a>
+                            </form>
+                        {/foreach}
+                    {/if}
+
+                    <hr class="separator_add">
+
+                    <form action="../games/db_games_release_detail.php" method="post">
+                        <input type="hidden" name="release_id" value="{$release->getId()}">
+                        <input type="hidden" name="game_id" value="{$game->getId()}">
+                        <input type="hidden" name="action" value="add_distributor">
+
+                        <a href="javascript:;"
+                            class="left_nav_link"
+                            id="distributor_select_toggle"
+                            title="Click for dropdown mode">
+                            <i class="fa fa-fw fa-chevron-circle-down" aria-hidden="true"></i>
+                        </a>
+
+                        <select name="distributor_id"
+                            class="standard_select select_large" id="gd_dev_name"
+                            data-alt-autocomplete-endpoint="../common/autocomplete.php?extraParams=pub_dev"
+                            data-alt-autocomplete-toggle="#distributor_select_toggle"
+                            data-alt-autocomplete-placeholder="Start typing a name…"
+                            required>
+                            <option value="" selected="selected" disabled></option>
+                            {foreach from=$distributors item=distributor}
+                                <option value="{$distributor->getId()}">{$distributor->getName()}</option>
+                            {/foreach}
+                        </select>
+
+                        <span class="fa fa-fw edit_author"></span>
+
+                        <input type="submit" value="Add distributor" class="secondary_button">
+                    </form>
+                    <br>
+                </fieldset>
+                <br>
+
                 <fieldset class="secondary_fieldset">
                     <legend class="primary_legend">Add Release AKA</legend>
                     <div class="help-hint">
@@ -180,6 +243,7 @@
                         <input type="hidden" name="action" value="game_release_aka">
                         <input type="hidden" name="game_release_id" value="{$release->getId()}">
                         <input type="hidden" name="game_id" value="{$game->getId()}">
+                        <span class="fa fa-fw"></span>
                         <input type="text" name="game_release_aka" class="standard_input input_large" placeholder="Enter new AKA" required id="gd_aka_input">
                         <select name="language_id" class="standard_select select_medium">
                             <option value="">-</option>
@@ -199,49 +263,67 @@
                     <input type="hidden" name="action" value="features">
                     <fieldset class="secondary_fieldset">
                         <legend class="primary_legend">Compatibility</legend>
-                        <label class="input">Screen resolution</label>
-                        {foreach from=$resolutions item=resolution}
-                            <div class="checkbox links_mod_checkbox">
-                                <input type="checkbox"
-                                    id="resolution_{$resolution->getId()}"
-                                    name="resolution[]"
-                                    {if in_array($resolution->getId(), $release_resolutions)}checked{/if}
-                                    value="{$resolution->getId()}">
-                                <label for="resolution_{$resolution->getId()}"></label>
-                                &nbsp;{$resolution->getName()}<br>
-                            </div>
-                        {/foreach}
-                        <br>
+                        <div class="gd_basic_game_info_container">
+                            <div id="gd_basic_game_info_1">
+                                <label class="input">Screen resolution</label>
+                                {foreach from=$resolutions item=resolution}
+                                    <div class="checkbox links_mod_checkbox">
+                                        <input type="checkbox"
+                                            id="resolution_{$resolution->getId()}"
+                                            name="resolution[]"
+                                            {if in_array($resolution->getId(), $release_resolutions)}checked{/if}
+                                            value="{$resolution->getId()}">
+                                        <label for="resolution_{$resolution->getId()}"></label>
+                                        &nbsp;{$resolution->getName()}<br>
+                                    </div>
+                                {/foreach}
+                                <br>
 
-                        <label class="input">Enhanced for</label>
-                        {foreach from=$systems item=system}
-                            {* Nothing is ever enhanced for the base ST *}
-                            {if $system->getName() != 'ST'}
-                                <div class="checkbox links_mod_checkbox">
-                                    <input type="checkbox"
-                                        id="system_enhanced_{$system->getId()}"
-                                        name="system_enhanced[]"
-                                        {if in_array($system->getId(), $system_enhanced)}checked{/if}
-                                        value="{$system->getId()}">
-                                    <label for="system_enhanced_{$system->getId()}"></label>
-                                    &nbsp;{$system->getName()}<br>
-                                </div>
-                            {/if}
-                        {/foreach}
-                        <br>
-
-                        <label class="input">Incompatible with</label>
-                        {foreach from=$systems item=system}
-                            <div class="checkbox links_mod_checkbox">
-                                <input type="checkbox"
-                                    id="system_incompatible_{$system->getId()}"
-                                    name="system_incompatible[]"
-                                    {if in_array($system->getId(), $system_incompatible)}checked{/if}
-                                    value="{$system->getId()}">
-                                <label for="system_incompatible_{$system->getId()}"></label>
-                                &nbsp;{$system->getName()}<br>
+                                <label class="input">Enhanced for</label>
+                                {foreach from=$systems item=system}
+                                    {* Nothing is ever enhanced for the base ST *}
+                                    {if $system->getName() != 'ST'}
+                                        <div class="checkbox links_mod_checkbox">
+                                            <input type="checkbox"
+                                                id="system_enhanced_{$system->getId()}"
+                                                name="system_enhanced[]"
+                                                {if in_array($system->getId(), $system_enhanced)}checked{/if}
+                                                value="{$system->getId()}">
+                                            <label for="system_enhanced_{$system->getId()}"></label>
+                                            &nbsp;{$system->getName()}<br>
+                                        </div>
+                                    {/if}
+                                {/foreach}
                             </div>
-                        {/foreach}
+                            <div id="gd_basic_game_info_2">
+                                <label class="input">Incompatible systems</label>
+                                {foreach from=$systems item=system}
+                                    <div class="checkbox links_mod_checkbox">
+                                        <input type="checkbox"
+                                            id="system_incompatible_{$system->getId()}"
+                                            name="system_incompatible[]"
+                                            {if in_array($system->getId(), $system_incompatible)}checked{/if}
+                                            value="{$system->getId()}">
+                                        <label for="system_incompatible_{$system->getId()}"></label>
+                                        &nbsp;{$system->getName()}<br>
+                                    </div>
+                                {/foreach}
+                                <br>
+
+                                <label class="input">Incompatible emulators</label>
+                                {foreach from=$emulators item=emulator}
+                                    <div class="checkbox links_mod_checkbox">
+                                        <input type="checkbox"
+                                            id="emulator_incompatible_{$emulator->getId()}"
+                                            name="emulator_incompatible[]"
+                                            {if in_array($emulator->getId(), $emulator_incompatible)}checked{/if}
+                                            value="{$emulator->getId()}">
+                                        <label for="emulator_incompatible_{$emulator->getId()}"></label>
+                                        &nbsp;{$emulator->getName()}<br>
+                                    </div>
+                                {/foreach}
+                            </div>
+                        </div>
                         <br>
                         <br>
                         <button type="submit" name="submit_type" value="save_and_back" class="primary_button">Save and close</button>
