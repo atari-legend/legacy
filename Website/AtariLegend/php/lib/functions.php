@@ -1546,7 +1546,7 @@ function create_log_entry($section, $section_id, $subsection, $subsection_id, $a
         $query_data   = $result->fetch_array(MYSQLI_BOTH);
         $section_name = $query_data['game_name'];    
         
-        if ($subsection == 'Game Release' OR $subsection == 'Release Info' OR $subsection == 'Release AKA' OR $subsection == 'Release Features') {
+        if ($subsection == 'Game Release' OR $subsection == 'Release Info' OR $subsection == 'Release AKA' OR $subsection == 'Compatibility') {
             $subsection_name = $section_name;
         }
     }   
