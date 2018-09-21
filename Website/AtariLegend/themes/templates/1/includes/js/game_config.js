@@ -31,6 +31,18 @@ $(document).ready(function () {
     $('select[name=control_select]').change(function () {
         hideShow('control');
     });
+
+    $('select[name=resolution_select]').change(function () {
+        hideShow('resolution');
+    });
+
+    $('select[name=system_select]').change(function () {
+        hideShow('system');
+    });
+
+    $('select[name=emulator_select]').change(function () {
+        hideShow('emulator');
+    });
 });
 
 function hideShow (type) {

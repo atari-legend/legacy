@@ -312,9 +312,7 @@
                             <br>
                         </td>
                         <td class="w-60">
-                            <span class="standard_tile_subtext">
-                                {$all_programming_languages->getName()}
-                            </span>
+                            {$all_programming_languages->getName()}
                         </td>
                     </tr>
                     {/if}
@@ -342,7 +340,7 @@
                                 <a href="games_detail.php?game_id={$line.game_id}" class="standard_tile_link">{$line.game_aka_name}</a>
                             </span>
                             {if $line.language != ''}
-                                <br><span class="standard_tile_subtext">{$line.language}</span>
+                                <br>{$line.language}
                             {/if}
                         </td>
                     </tr>
@@ -359,9 +357,7 @@
                         <br>
                     </td>
                     <td class="w-60">
-                        <span class="standard_tile_subtext">
-                            {$engines->getName()}
-                        </span>
+                        {$engines->getName()}
                     </td>
                 </tr>
             {/foreach}
@@ -376,9 +372,7 @@
                         <br>
                     </td>
                     <td class="w-60">
-                        <span class="standard_tile_subtext">
-                            {$genres->getName()}
-                        </span>
+                        {$genres->getName()}
                     </td>
                 </tr>
             {/foreach}
@@ -393,9 +387,7 @@
                         <br>
                     </td>
                     <td class="w-60">
-                        <span class="standard_tile_subtext">
-                            {$port->getPort()}
-                        </span>
+                        {$port->getPort()}
                     </td>
                 </tr>
             {/if}
@@ -410,9 +402,7 @@
                         <br>
                     </td>
                     <td class="w-60">
-                        <span class="standard_tile_subtext">
-                            {$controls->getName()}
-                        </span>
+                        {$controls->getName()}
                     </td>
                 </tr>
             {/foreach}

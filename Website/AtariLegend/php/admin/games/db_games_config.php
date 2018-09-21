@@ -15,6 +15,9 @@ require_once __DIR__."/../../common/DAO/PortDAO.php";
 require_once __DIR__."/../../common/DAO/IndividualRoleDAO.php";
 require_once __DIR__."/../../common/DAO/DeveloperRoleDAO.php";
 require_once __DIR__."/../../common/DAO/ControlDAO.php";
+require_once __DIR__."/../../common/DAO/ResolutionDAO.php";
+require_once __DIR__."/../../common/DAO/systemDAO.php";
+require_once __DIR__."/../../common/DAO/emulatorDAO.php";
 
 $changeLogDao = new \AL\Common\DAO\ChangeLogDAO($mysqli);
 $engineDao = new \AL\Common\DAO\EngineDAO($mysqli);
@@ -24,6 +27,9 @@ $portDao = new \AL\Common\DAO\PortDAO($mysqli);
 $individualRoleDao = new \Al\Common\DAO\IndividualRoleDAO($mysqli);
 $developerRoleDao = new \Al\Common\DAO\DeveloperRoleDAO($mysqli);
 $controlDao = new \AL\Common\DAO\ControlDAO($mysqli);
+$resolutionDao = new \AL\Common\DAO\ResolutionDAO($mysqli);
+$systemDao = new \AL\Common\DAO\SystemDAO($mysqli);
+$emulatorDao = new \AL\Common\DAO\EmulatorDAO($mysqli);
 
 switch ($_POST['action']) {
 	case "Add engine":
@@ -206,6 +212,84 @@ switch ($_POST['action']) {
         create_log_entry('Games Config', $control_id_edit, 'Control', $control_id_edit, 'Update', $_SESSION['user_id']);
 
         $_SESSION['edit_message'] = "Control has been updated" ;
+        break;
+        
+    case "Add resolution":
+        $resolutionDao->addResolution($resolution_new);
+        
+        $new_resolution_id = $mysqli->insert_id;
+        
+        create_log_entry('Games Config', $new_resolution_id, 'Resolution', $new_resolution_id, 'Insert', $_SESSION['user_id']);
+        
+        $_SESSION['edit_message'] = "$resolution_new has been added" ;
+        break;
+        
+    case "Delete resolution":
+        create_log_entry('Games Config', $resolution_id_edit, 'Resolution', $resolution_id_edit, 'Delete', $_SESSION['user_id']);
+        
+        $resolutionDao->deleteResolution($resolution_id_edit);       
+
+        $_SESSION['edit_message'] = "Resolution has been deleted" ;
+        break;
+        
+    case "Modify resolution":
+        $resolutionDao->updateResolution($resolution_id_edit, $resolution_edit);
+
+        create_log_entry('Games Config', $resolution_id_edit, 'Resolution', $resolution_id_edit, 'Update', $_SESSION['user_id']);
+
+        $_SESSION['edit_message'] = "Resolution has been updated" ;
+        break;
+        
+    case "Add system":
+        $systemDao->addSystem($system_new);
+        
+        $new_system_id = $mysqli->insert_id;
+        
+        create_log_entry('Games Config', $new_system_id, 'System', $new_system_id, 'Insert', $_SESSION['user_id']);
+        
+        $_SESSION['edit_message'] = "$system_new has been added" ;
+        break;
+        
+    case "Delete system":
+        create_log_entry('Games Config', $system_id_edit, 'System', $system_id_edit, 'Delete', $_SESSION['user_id']);
+        
+        $systemDao->deleteSystem($system_id_edit);       
+
+        $_SESSION['edit_message'] = "System has been deleted" ;
+        break;
+        
+    case "Modify system":
+        $systemDao->updateSystem($system_id_edit, $system_edit);
+
+        create_log_entry('Games Config', $system_id_edit, 'System', $system_id_edit, 'Update', $_SESSION['user_id']);
+
+        $_SESSION['edit_message'] = "System has been updated" ;
+        break;
+        
+    case "Add emulator":
+        $emulatorDao->addEmulator($emulator_new);
+        
+        $new_emulator_id = $mysqli->insert_id;
+        
+        create_log_entry('Games Config', $new_emulator_id, 'Emulator', $new_emulator_id, 'Insert', $_SESSION['user_id']);
+        
+        $_SESSION['edit_message'] = "$emulator_new has been added" ;
+        break;
+        
+    case "Delete emulator":
+        create_log_entry('Games Config', $emulator_id_edit, 'Emulator', $emulator_id_edit, 'Delete', $_SESSION['user_id']);
+        
+        $emulatorDao->deleteEmulator($emulator_id_edit);       
+
+        $_SESSION['edit_message'] = "Emulator has been deleted" ;
+        break;
+        
+    case "Modify emulator":
+        $emulatorDao->updateEmulator($emulator_id_edit, $emulator_edit);
+
+        create_log_entry('Games Config', $emulator_id_edit, 'Emulator', $emulator_id_edit, 'Update', $_SESSION['user_id']);
+
+        $_SESSION['edit_message'] = "Emulator has been updated" ;
         break;
 }
 
