@@ -29,6 +29,7 @@ require_once __DIR__."/../../common/DAO/ControlDAO.php";
 require_once __DIR__."/../../common/DAO/GameReleaseAkaDAO.php";
 require_once __DIR__."/../../common/DAO/LanguageDAO.php";
 require_once __DIR__."/../../common/DAO/EmulatorDAO.php";
+require_once __DIR__."/../../common/DAO/TrainerOptionDAO.php";
 
 $gameReleaseDao = new \AL\Common\DAO\GameReleaseDAO($mysqli);
 $gameSeriesDao = new \AL\Common\DAO\GameSeriesDAO($mysqli);
@@ -44,6 +45,7 @@ $controlDao = new \AL\Common\DAO\controlDAO($mysqli);
 $gameReleaseAkaDao = new \AL\Common\DAO\GameReleaseAkaDAO($mysqli);
 $languageDao = new \AL\Common\DAO\LanguageDAO($mysqli);
 $emulatorDao = new \AL\Common\DAO\EmulatorDAO($mysqli);
+$trainerOptionDao = new \AL\Common\DAO\TrainerOptionDAO($mysqli);
 
 /**
  * Generates an SEO-friendly description of a game, depending on the data available
@@ -196,6 +198,8 @@ $emulator_incompatible = [];
 $system_enhanced = [];
 $release_resolution = [];
 $release_location = [];
+$trainerOptions = [];
+
 foreach ($releases as $release) {
     $system_incompatible[$release->getId()] = $systemDao->getIncompatibleSystemsForRelease($release->getId());
     $system_enhanced[$release->getId()] = $systemDao->getEnhancedSystemsForRelease($release->getId());
@@ -204,6 +208,7 @@ foreach ($releases as $release) {
     $release_akas[$release->getId()] = $gameReleaseAkaDao->getAllGameReleaseAkas($release->getId());
     $emulator_incompatible[$release->getId()] = $emulatorDao->getIncompatibleEmulatorsWithNameForRelease($release->getId());
     $distributors[$release->getId()] = $pubDevDao->getDistributorsForRelease($release->getId());
+    $trainerOptions[$release->getId()] = $trainerOptionDao->getTrainerOptionsForRelease($release->getId());
 }
 $smarty->assign('system_incompatible', $system_incompatible);
 $smarty->assign('emulator_incompatible', $emulator_incompatible);
@@ -212,6 +217,7 @@ $smarty->assign('release_resolution', $release_resolution);
 $smarty->assign('release_location', $release_location);
 $smarty->assign('release_akas', $release_akas);
 $smarty->assign('distributors', $distributors);
+$smarty->assign('trainerOptions', $trainerOptions);
 
 //***********************************************************************************
 //get the game genres & the genres already selected for this game

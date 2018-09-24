@@ -48,6 +48,7 @@
             <ul class="tabs">
                 <li class="active"><a href="#tab-general">GENERAL</a></li>
                 <li><a href="#tab-compatibility">SYSTEM INFO</a></li>
+                <li><a href="#tab-scene">SCENE</a></li>
             </ul>
 
             <div id="tab-general" class="tabcontent tabpane active">
@@ -198,8 +199,6 @@
                             {/foreach}
                         </select>
 
-                        <span class="fa fa-fw edit_author"></span>
-
                         <input type="submit" value="Add distributor" class="secondary_button">
                     </form>
                     <br>
@@ -331,6 +330,61 @@
                         <a href="games_detail.php?game_id={$game->getId()}">Cancel</a>
                     </fieldset>
                 </form>
+            </div>
+
+            <div id="tab-scene" class="tabcontent tabpane">
+                <fieldset class="secondary_fieldset">
+                    <legend class="primary_legend">Release information</legend>
+
+                    <div class="help-hint">
+                        These are all the scene related features of a release like trainers, crackthro information ...
+                    </div>
+                    <br>
+                    <form action="../games/db_games_release_detail.php" method="post" name="scene">
+                        <input type="hidden" name="game_id" value="{$game->getId()}">
+                        <input type="hidden" name="release_id" value="{$release->getId()}">
+                        <input type="hidden" name="action" value="scene">
+                        <div class="gd_basic_game_info_container">
+                            <div id="gd_basic_game_info_1">
+                                <b>Trainer Options</b>&nbsp;&nbsp;
+                                <div class="control-group">
+                                    <label for="input-tags1"></label>
+                                    <select name="trainer_option[]" multiple id="input-tags1" class="standard_select input_full">
+                                    {foreach from=$trainer_options item=all_trainer_options}
+                                        <option value="{$all_trainer_options->getId()}"
+                                            {foreach from=$release_trainer_options item=linked_trainer_options name=trainer_options}
+                                                {if $linked_trainer_options->getId() == $all_trainer_options->getId()}
+                                                    selected
+                                                {/if}
+                                            {/foreach}
+                                            >
+                                            {$all_trainer_options->getName()}
+                                        </option>
+                                    {/foreach}
+                                    </select>
+                                </div>
+                                <script>
+                                    $('#input-tags1').selectize({
+                                        plugins: ['remove_button'],
+                                        persist: false,
+                                        create: true,
+                                        render: {
+                                            item: function(data, escape) {
+                                                return '<div class="primary_button" style="border-radius:3px;">' + escape(data.text) + '</div>';
+                                            }
+                                        },
+                                    });
+                                </script>
+                                <br>
+                                <span class="help-hint">Click to choose and add categories</span>
+                            </div>
+                        </div>
+                        <br>
+                        <button type="submit" name="submit_type" value="save_and_back" class="primary_button">Save and close</button>
+                        <button type="submit" name="submit_type" value="save" class="secondary_button">Save changes</button>
+                        <a href="games_detail.php?game_id={$game->getId()}">Cancel</a>
+                    </form>
+                </fieldset>
             </div>
         <br>
     </div>
