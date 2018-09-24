@@ -43,6 +43,10 @@ $(document).ready(function () {
     $('select[name=emulator_select]').change(function () {
         hideShow('emulator');
     });
+
+    $('select[name=trainer_option_select]').change(function () {
+        hideShow('trainer_option');
+    });
 });
 
 function hideShow (type) {

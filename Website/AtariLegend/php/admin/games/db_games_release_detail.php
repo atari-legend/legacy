@@ -18,6 +18,7 @@ require_once __DIR__."/../../common/DAO/ChangeLogDAO.php";
 require_once __DIR__."/../../common/DAO/GameReleaseAkaDAO.php";
 require_once __DIR__."/../../common/DAO/LanguageDAO.php";
 require_once __DIR__."/../../common/DAO/EmulatorDAO.php";
+require_once __DIR__."/../../common/DAO/TrainerOptionDAO.php";
 
 $gameReleaseDao = new \AL\Common\DAO\GameReleaseDAO($mysqli);
 $gameDao = new \AL\Common\DAO\GameDao($mysqli);
@@ -30,6 +31,8 @@ $gameReleaseAkaDao = new \AL\Common\DAO\GameReleaseAkaDAO($mysqli);
 $languageDao = new \AL\Common\DAO\LanguageDAO($mysqli);
 $languageDao = new \AL\Common\DAO\LanguageDAO($mysqli);
 $emulatorDao = new \AL\Common\DAO\EmulatorDAO($mysqli);
+$trainerOptionDao = new \AL\Common\DAO\TrainerOptionDAO($mysqli);
+
 
 //***********************************************************************************
 // Add a new release
@@ -207,6 +210,24 @@ if (isset($action) && ($action == 'remove_distributor')) {
     $_SESSION['edit_message'] = "Distributor has been removed";
     header("Location: ../games/games_release_detail.php?game_id=$game_id&release_id=$release_id");
 
+}
+
+//***********************************************************************************
+//update the release options at the scene tab
+//***********************************************************************************
+if (isset($action) && ($action == 'scene')) {  
+    
+    //Update the game engine
+    $trainerOptionDao->setTrainerOptionsForRelease($release_id, isset($trainer_option) ? $trainer_option : []);
+    
+    create_log_entry('Game Release', $game_id, 'Scene', $release_id, 'Update', $_SESSION['user_id']);
+    $_SESSION['edit_message'] = "Scene info updated";
+    
+    if ($submit_type == "save_and_back") {
+        header("Location: games_detail.php?game_id=".$game_id);
+    } else {
+        header("Location: ../games/games_release_detail.php?game_id=$game_id&release_id=$release_id");
+    }
 }
     
 //close the connection

@@ -18,6 +18,7 @@ require_once __DIR__."/../../common/DAO/ControlDAO.php";
 require_once __DIR__."/../../common/DAO/ResolutionDAO.php";
 require_once __DIR__."/../../common/DAO/systemDAO.php";
 require_once __DIR__."/../../common/DAO/emulatorDAO.php";
+require_once __DIR__."/../../common/DAO/TrainerOptionDAO.php";
 
 $changeLogDao = new \AL\Common\DAO\ChangeLogDAO($mysqli);
 $engineDao = new \AL\Common\DAO\EngineDAO($mysqli);
@@ -30,6 +31,7 @@ $controlDao = new \AL\Common\DAO\ControlDAO($mysqli);
 $resolutionDao = new \AL\Common\DAO\ResolutionDAO($mysqli);
 $systemDao = new \AL\Common\DAO\SystemDAO($mysqli);
 $emulatorDao = new \AL\Common\DAO\EmulatorDAO($mysqli);
+$trainerOptionDao = new \AL\Common\DAO\TrainerOptionDAO($mysqli);
 
 switch ($_POST['action']) {
 	case "Add engine":
@@ -291,6 +293,32 @@ switch ($_POST['action']) {
 
         $_SESSION['edit_message'] = "Emulator has been updated" ;
         break;
+
+    case "Add trainer":
+        $trainerOptionDao->addTrainerOption($trainer_option_new);
+        
+        $new_trainer_option_id = $mysqli->insert_id;
+        
+        create_log_entry('Games Config', $new_trainer_option_id, 'Trainer', $new_trainer_option_id, 'Insert', $_SESSION['user_id']);
+        
+        $_SESSION['edit_message'] = "$trainer_option_new has been added" ;
+        break;
+        
+    case "Delete trainer":
+        create_log_entry('Games Config', $trainer_option_id_edit, 'Trainer', $trainer_option_id_edit, 'Delete', $_SESSION['user_id']);
+        
+        $trainerOptionDao->deleteTrainerOption($trainer_option_id_edit);       
+
+        $_SESSION['edit_message'] = "Trainer has been deleted" ;
+        break;
+        
+    case "Modify trainer":
+        $trainerOptionDao->updateTrainerOption($trainer_option_id_edit, $trainer_option_edit);
+
+        create_log_entry('Games Config', $trainer_option_id_edit, 'Trainer', $trainer_option_id_edit, 'Update', $_SESSION['user_id']);
+
+        $_SESSION['edit_message'] = "Trainer has been updated" ;
+        break;    
 }
 
 header("Location: games_config.php");

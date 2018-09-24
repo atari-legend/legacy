@@ -14,6 +14,7 @@ require_once __DIR__."/../../common/DAO/ChangeLogDAO.php";
 require_once __DIR__."/../../common/DAO/GameReleaseAkaDAO.php";
 require_once __DIR__."/../../common/DAO/LanguageDAO.php";
 require_once __DIR__."/../../common/DAO/EmulatorDAO.php";
+require_once __DIR__."/../../common/DAO/TrainerOptionDAO.php";
 
 $gameReleaseDao = new \AL\Common\DAO\GameReleaseDAO($mysqli);
 $gameDao = new \AL\Common\DAO\GameDao($mysqli);
@@ -25,6 +26,7 @@ $changeLogDao = new \AL\Common\DAO\ChangeLogDAO($mysqli);
 $gameReleaseAkaDao = new \AL\Common\DAO\GameReleaseAkaDAO($mysqli);
 $languageDao = new \AL\Common\DAO\LanguageDAO($mysqli);
 $emulatorDao = new \AL\Common\DAO\EmulatorDAO($mysqli);
+$trainerOptionDao = new \AL\Common\DAO\TrainerOptionDAO($mysqli);
 
 if ($_SERVER['REQUEST_METHOD'] == "GET") {
     $smarty->assign('license_types', $gameReleaseDao->getLicenseTypes());
@@ -35,6 +37,7 @@ if ($_SERVER['REQUEST_METHOD'] == "GET") {
     $smarty->assign('publishers', $pubDevDao->getAllPubDevs());
     $smarty->assign('languages', $languageDao->getAllLanguages());
     $smarty->assign('emulators', $emulatorDao->getAllEmulators());
+    $smarty->assign('trainer_options', $trainerOptionDao->getAllTrainerOptions());
 
     // Edit existing release
     if (isset($release_id)) {
@@ -53,6 +56,7 @@ if ($_SERVER['REQUEST_METHOD'] == "GET") {
         $smarty->assign('release_resolutions', $resolutionDao->getResolutionsForRelease($release->getId()));
         $smarty->assign('release_locations', $locationDao->getLocationsForRelease($release->getId()));
         $smarty->assign('release_akas', $gameReleaseAkaDao->getAllGameReleaseAkas($release->getId()));
+        $smarty->assign('release_trainer_options', $trainerOptionDao->getTrainerOptionsForRelease($release->getId()));
         $smarty->assign('distributors', $pubDevDao->getAllPubDevs());
         $smarty->assign('release_distributors', $pubDevDao->getDistributorsForRelease($release->getId()));   
     } else {
@@ -68,6 +72,7 @@ if ($_SERVER['REQUEST_METHOD'] == "GET") {
         $smarty->assign('system_enhanced', []);
         $smarty->assign('release_resolutions', []);
         $smarty->assign('release_locations', []);
+        $smarty->assign('release_trainer_options', []);
 
         // Pass through a pub_dev_id, location_id and release type that may be in URL parameters
         $smarty->assign('pub_dev_id', isset($pub_dev_id) ? $pub_dev_id : null);

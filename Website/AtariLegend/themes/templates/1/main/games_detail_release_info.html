@@ -184,6 +184,19 @@
                             </tr>
                         {/foreach}
                     {/if}
+
+                    {if $trainerOptions[$release->getId()]}
+                        {foreach from=$trainerOptions[$release->getId()] item=trainerOption_id name=trainerOption}
+                            <tr>
+                                <td class="w-30">{if $smarty.foreach.trainerOption.index == 0}<span class="games_main_detail_info_right">Trainer</span>{/if}</td>
+                                <td class="w-5">-</td>
+                                <td class="w-60">
+                                    {$trainerOption_id->getName()}
+                                    <br>
+                                </td>
+                            </tr>
+                        {/foreach}
+                    {/if}
                 {/foreach}
             </table>
         </div>

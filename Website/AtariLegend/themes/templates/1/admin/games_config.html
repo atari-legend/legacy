@@ -286,6 +286,34 @@
                     <input type="submit" value="Add emulator" name="action" class="secondary_button">
                 </form>
             </fieldset>
+            <br>
+            <fieldset class="secondary_fieldset">
+                <legend class="primary_legend">System info</legend>
+                <div class="help-hint">
+                    Overhere you can add, modify or delete all data related to the Scene features of the game release.
+                </div>
+                <br>
+                <br>
+                <b>Trainer Options</b>&nbsp;&nbsp;
+                <br>
+                <form action="../games/db_games_config.php" method="post" name="trainer_option">
+                    <select name="trainer_option_select" class="standard_select input_medium grayed_out" id="trainer_option_select">
+                        <option value="" selected="selected">-</option>
+                        {foreach from=$trainer_options item=all_trainer_options}
+                            <option value="{$all_trainer_options->getId()}">{$all_trainer_options->getName()}</option>
+                        {/foreach}
+                    </select>
+                    <input type="text" name="trainer_option_edit" class="standard_input input_medium" style="display:none;" id="trainer_option_edit">
+                    <input type="text" name="trainer_option_id_edit" class="standard_input input_medium" style="display:none;" id="trainer_option_id_edit">
+                    <input type="submit" value="Modify trainer" name="action" class="secondary_button" style="display:none;" id="trainer_option_mod">
+                    <input type="submit" value="Delete trainer" name="action" class="primary_button button_danger" style="display:none;" id="trainer_option_del">
+                </form>
+                <hr class="separator_add">
+                <form action="../games/db_games_config.php" method="post" name="trainer_option">
+                    <input type="text" name="trainer_option_new" class="standard_input input_medium" placeholder="Enter new trainer" required>
+                    <input type="submit" value="Add trainer" name="action" class="secondary_button">
+                </form>
+            </fieldset>
         </div>
     </div>
 </div>
