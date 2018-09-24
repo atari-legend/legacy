@@ -20,6 +20,7 @@ class GameReleaseDAO {
     const TYPE_PLAYABLE_DEMO = 'Playable demo';
     const TYPE_NON_PLAYABLE_DEMO = 'Non-playable demo';
     const TYPE_SLIDESHOW = 'Slideshow';
+    const TYPE_UNOFFICIAL = 'Unofficial';
 
     public function __construct($mysqli) {
         $this->mysqli = $mysqli;
@@ -47,7 +48,8 @@ class GameReleaseDAO {
             GameReleaseDAO::TYPE_BUDGET_RERELEASE,
             GameReleaseDAO::TYPE_PLAYABLE_DEMO,
             GameReleaseDAO::TYPE_NON_PLAYABLE_DEMO,
-            GameReleaseDAO::TYPE_SLIDESHOW
+            GameReleaseDAO::TYPE_SLIDESHOW,
+            GameReleaseDAO::TYPE_UNOFFICIAL
         );
     }
 
