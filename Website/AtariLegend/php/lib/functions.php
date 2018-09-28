@@ -1560,6 +1560,13 @@ function create_log_entry($section, $section_id, $subsection, $subsection_id, $a
             $query_data   = $result->fetch_array(MYSQLI_BOTH);
             $section_name = $query_data['name'];
         }
+        elseif ($subsection == 'Memory') {
+            // Get the memory amount
+            $query = "SELECT memory FROM memory WHERE id = '$section_id'";
+            $result = $mysqli->query($query) or die("getting memory amount failed");
+            $query_data   = $result->fetch_array(MYSQLI_BOTH);
+            $section_name = $query_data['memory'];
+        }
         $subsection_name = $section_name;
     }
     
@@ -1573,7 +1580,7 @@ function create_log_entry($section, $section_id, $subsection, $subsection_id, $a
         $section_name = $query_data['game_name'];    
         
         if ($subsection == 'Game Release' OR $subsection == 'Release Info' OR $subsection == 'Release AKA' OR $subsection == 'Compatibility' OR $subsection == 'Distributor'
-            OR $subsection == 'Scene') {
+            OR $subsection == 'Scene' or $subsection == 'Memory Enhancement' or $subsection == 'Minimum Memory') {
             $subsection_name = $section_name;
         }
         

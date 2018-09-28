@@ -19,6 +19,7 @@ require_once __DIR__."/../../common/DAO/ResolutionDAO.php";
 require_once __DIR__."/../../common/DAO/systemDAO.php";
 require_once __DIR__."/../../common/DAO/emulatorDAO.php";
 require_once __DIR__."/../../common/DAO/TrainerOptionDAO.php";
+require_once __DIR__."/../../common/DAO/MemoryDAO.php";
 
 $changeLogDao = new \AL\Common\DAO\ChangeLogDAO($mysqli);
 $engineDao = new \AL\Common\DAO\EngineDAO($mysqli);
@@ -32,6 +33,7 @@ $resolutionDao = new \AL\Common\DAO\ResolutionDAO($mysqli);
 $systemDao = new \AL\Common\DAO\SystemDAO($mysqli);
 $emulatorDao = new \AL\Common\DAO\EmulatorDAO($mysqli);
 $trainerOptionDao = new \AL\Common\DAO\TrainerOptionDAO($mysqli);
+$memoryDao = new \AL\Common\DAO\MemoryDAO($mysqli);
 
 switch ($_POST['action']) {
 	case "Add engine":
@@ -318,6 +320,32 @@ switch ($_POST['action']) {
         create_log_entry('Games Config', $trainer_option_id_edit, 'Trainer', $trainer_option_id_edit, 'Update', $_SESSION['user_id']);
 
         $_SESSION['edit_message'] = "Trainer has been updated" ;
+        break;
+    
+    case "Add memory":
+        $memoryDao->addMemory($memory_new);
+        
+        $new_memory_id = $mysqli->insert_id;
+        
+        create_log_entry('Games Config', $new_memory_id, 'Memory', $new_memory_id, 'Insert', $_SESSION['user_id']);
+        
+        $_SESSION['edit_message'] = "$memory_new has been added" ;
+        break;
+        
+    case "Delete memory":
+        create_log_entry('Games Config', $memory_id_edit, 'Memory', $memory_id_edit, 'Delete', $_SESSION['user_id']);
+        
+        $memoryDao->deleteMemory($memory_id_edit);       
+
+        $_SESSION['edit_message'] = "Memory has been deleted" ;
+        break;
+        
+    case "Modify memory":
+        $memoryDao->updateMemory($memory_id_edit, $memory_edit);
+
+        create_log_entry('Games Config', $memory_id_edit, 'Memory', $memory_id_edit, 'Update', $_SESSION['user_id']);
+
+        $_SESSION['edit_message'] = "Memory has been updated" ;
         break;    
 }
 
