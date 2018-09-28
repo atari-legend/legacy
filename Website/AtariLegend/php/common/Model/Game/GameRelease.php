@@ -11,15 +11,17 @@ class GameRelease {
     private $date;
     private $license;
     private $type;
+    private $memory;
     private $publisher;
 
-    public function __construct($id, $game_id, $name, $date, $license, $type, $publisher) {
+    public function __construct($id, $game_id, $name, $date, $license, $type, $memory, $publisher) {
         $this->id = $id;
         $this->game_id = $game_id;
         $this->name = $name;
         $this->date = $date;
         $this->license = $license;
         $this->type = $type;
+        $this->memory = $memory;
         $this->publisher = $publisher;
     }
 
@@ -45,6 +47,10 @@ class GameRelease {
 
     public function getType() {
         return $this->type;
+    }
+    
+    public function getMemory() {
+        return $this->memory;
     }
 
     public function getPublisher() {

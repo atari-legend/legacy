@@ -19,6 +19,7 @@ require_once __DIR__."/../../common/DAO/GameReleaseAkaDAO.php";
 require_once __DIR__."/../../common/DAO/LanguageDAO.php";
 require_once __DIR__."/../../common/DAO/EmulatorDAO.php";
 require_once __DIR__."/../../common/DAO/TrainerOptionDAO.php";
+require_once __DIR__."/../../common/DAO/MemoryDAO.php";
 
 $gameReleaseDao = new \AL\Common\DAO\GameReleaseDAO($mysqli);
 $gameDao = new \AL\Common\DAO\GameDao($mysqli);
@@ -32,6 +33,7 @@ $languageDao = new \AL\Common\DAO\LanguageDAO($mysqli);
 $languageDao = new \AL\Common\DAO\LanguageDAO($mysqli);
 $emulatorDao = new \AL\Common\DAO\EmulatorDAO($mysqli);
 $trainerOptionDao = new \AL\Common\DAO\TrainerOptionDAO($mysqli);
+$memoryDao = new \AL\Common\DAO\MemoryDAO($mysqli);
 
 
 //***********************************************************************************
@@ -199,7 +201,7 @@ if (isset($action) && ($action == 'add_distributor')) {
 }
 
 //***********************************************************************************
-//add a distributor to a release
+//remove a distributor to a release
 //***********************************************************************************
 if (isset($action) && ($action == 'remove_distributor')) {  
     
@@ -229,6 +231,64 @@ if (isset($action) && ($action == 'scene')) {
         header("Location: ../games/games_release_detail.php?game_id=$game_id&release_id=$release_id");
     }
 }
+
+//***********************************************************************************
+//add a memory enhancement to a release
+//***********************************************************************************
+if (isset($action) && ($action == 'add_memory_enhancement')) {  
+    
+    $memoryDao->setMemoryForRelease($release_id, $memory_id, $memory_enhancement);
+    
+    create_log_entry('Game Release', $game_id, 'Memory Enhancement', $release_id, 'Insert', $_SESSION['user_id']);
+    
+    $_SESSION['edit_message'] = "Memory enhancement has been added";
+    header("Location: ../games/games_release_detail.php?game_id=$game_id&release_id=$release_id");
+}
+
+
+//***********************************************************************************
+//Update a memory enhancement to a release
+//***********************************************************************************
+if (isset($action) && ($action == 'update_memory_enhancement')) {  
+    
+    $memoryDao->UpdateMemoryForRelease($release_id, $memory_id, $new_enhancement);
+    
+    create_log_entry('Game Release', $game_id, 'Memory Enhancement', $release_id, 'Update', $_SESSION['user_id']);
+    
+    $_SESSION['edit_message'] = "Memory enhancement has been updated";
+    header("Location: ../games/games_release_detail.php?game_id=$game_id&release_id=$release_id");
+}
+
+
+//***********************************************************************************
+//Delete a memory enhancement to a release
+//***********************************************************************************
+if (isset($action) && ($action == 'remove_memory_enhancement')) {  
+    
+    $memoryDao->DeleteMemoryForRelease($release_id, $memory_id);
+    
+    create_log_entry('Game Release', $game_id, 'Memory Enhancement', $release_id, 'Delete', $_SESSION['user_id']);
+    
+    $_SESSION['edit_message'] = "Memory enhancement has been deleted";
+    header("Location: ../games/games_release_detail.php?game_id=$game_id&release_id=$release_id");
+}
+
+//***********************************************************************************
+//Update minimum memory for a release
+//***********************************************************************************
+if (isset($action) && ($action == 'update_minimum_memory')) {  
+    
+    if ($memory_id == ''){
+        $memory_id = null;
+    }
+    $memoryDao->UpdateMinimumMemoryForRelease($release_id, $memory_id);
+    
+    create_log_entry('Game Release', $game_id, 'Minimum Memory', $release_id, 'Update', $_SESSION['user_id']);
+    
+    $_SESSION['edit_message'] = "Minimum memory was updated";
+    header("Location: ../games/games_release_detail.php?game_id=$game_id&release_id=$release_id");
+}
+
     
 //close the connection
 mysqli_close($mysqli);

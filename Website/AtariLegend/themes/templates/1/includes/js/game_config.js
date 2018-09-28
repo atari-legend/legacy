@@ -47,6 +47,9 @@ $(document).ready(function () {
     $('select[name=trainer_option_select]').change(function () {
         hideShow('trainer_option');
     });
+    $('select[name=memory_select]').change(function () {
+        hideShow('memory');
+    });
 });
 
 function hideShow (type) {

@@ -80,6 +80,7 @@
 
                         <label class="input">License</label>
                         <select name="license" class="standard_select select_large">
+                            <option value="">-</option>
                             {foreach from=$license_types item=type}
                                 <option {if $type == $release->getLicense()}selected{/if}>{$type}</option>
                             {/foreach}
@@ -330,6 +331,79 @@
                         <a href="games_detail.php?game_id={$game->getId()}">Cancel</a>
                     </fieldset>
                 </form>
+                <br>
+                <fieldset class="secondary_fieldset">
+                    <legend class="primary_legend">Memory</legend>
+
+                    <form action="../games/db_games_release_detail.php" method="get">
+                        <input type="hidden" name="action" value="update_minimum_memory">
+                        <input type="hidden" name="game_id" value="{$game->getId()}">
+                        <input type="hidden" name="release_id" value="{$release->getId()}">
+                        <label class="input"><b>Minimum required memory</b></label><br>
+                        <select name="memory_id" class="standard_select select_large">
+                            <option value="">-</option>
+                            {foreach from=$memory_enhanced item=all_memory_enhanced}
+                                <option value="{$all_memory_enhanced->getId()}" {if $release->getMemory() != null and ( $all_memory_enhanced->getId() == $release->getMemory()->getId() )}selected{/if}>{$all_memory_enhanced->getMemory()}</option>
+                            {/foreach}
+                        </select>
+                        <button type="submit" name="submit_type" value="Update" class="secondary_button">Update</button>
+                    </form>
+                    <br>
+                    <br>
+                    <br>
+                    <a id="gd_developers"><b>Memory Enhancements</b></a>
+                    <br>
+
+                    {if isset($release_memory_enhancements)}
+                        {foreach from=$release_memory_enhancements item=release_memory_enhancement}
+                            <form action="../games/db_games_release_detail.php" method="get">
+                                <a title="Remove {$release_memory_enhancement->getMemory()|escape:"html"} from this release"
+                                    href="../games/db_games_release_detail.php?game_id={$game->getId()}&amp;release_id={$release->getId()}&amp;memory_id={$release_memory_enhancement->getId()}&amp;action=remove_memory_enhancement"
+                                    onclick="javascript:return confirm('This memory enhancement will be removed from the release')">
+                                    <span class="fa fa-fw fa-trash"></span>
+                                </a>
+
+                                <input type="hidden" name="action" value="update_memory_enhancement">
+                                <input type="hidden" name="game_id" value="{$game->getId()}">
+                                <input type="hidden" name="release_id" value="{$release->getId()}">
+                                <input type="hidden" name="memory_id" value="{$release_memory_enhancement->getId()}">
+                                <input type="text" value="{$release_memory_enhancement->getMemory()}" class="standard_input input_medium" disabled id="gd_game_dev">
+                                <select name="new_enhancement"
+                                onchange="jQuery('#update-enhancement-{$release_memory_enhancement->getEnhancement()}').show()"
+                                class="standard_select select_medium">
+                                <option value="">-</option>
+                                {foreach from=$memory_enhancement_types item=enhancement_type}
+                                    <option {if $release_memory_enhancement->getEnhancement() eq $enhancement_type} selected{/if}>{$enhancement_type}</option>
+                                {/foreach}
+                                </select>
+                                <input type="submit" id="update-enhancement-{$release_memory_enhancement->getEnhancement()}" style="display: none;" class="secondary_button" value="Update">
+                            </form>
+                        {/foreach}
+                    {/if}
+
+                    <hr class="separator_add">
+
+                    <form action="../games/db_games_release_detail.php" method="post">
+                        <input type="hidden" name="release_id" value="{$release->getId()}">
+                        <input type="hidden" name="game_id" value="{$game->getId()}">
+                        <input type="hidden" name="action" value="add_memory_enhancement">
+                        <span class="fa fa-fw"></span>
+                        <select name="memory_id"
+                            class="standard_select select_large" id="gd_dev_name" required>
+                            <option value="" selected="selected" disabled>-</option>
+                            {foreach from=$memory_enhanced item=all_memory_enhanced}
+                                <option value="{$all_memory_enhanced->getId()}">{$all_memory_enhanced->getMemory()}</option>
+                            {/foreach}
+                        </select>
+                        <select name="memory_enhancement" class="standard_select">
+                            <option value="">-</option>
+                            {foreach from=$memory_enhancement_types item=enhancement_type}
+                                <option>{$enhancement_type}</option>
+                            {/foreach}
+                        </select>
+                        <input type="submit" value="Add enhancement" class="secondary_button">
+                    </form>
+                </fieldset>
             </div>
 
             <div id="tab-scene" class="tabcontent tabpane">
