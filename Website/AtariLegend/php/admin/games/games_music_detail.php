@@ -111,12 +111,12 @@ while ($MUSIC = $sql_music->fetch_array(MYSQLI_BOTH)) {
 $smarty->assign('nr_of_zaks', $i);
 
 $SQL_MUSICIAN = $mysqli->query("SELECT *
-                           FROM game_author
-                           LEFT JOIN author_type ON ( game_author.author_type_id = author_type.author_type_id )
-                           LEFT JOIN game ON ( game_author.game_id = game.game_id )
-                           LEFT JOIN individuals ON ( game_author.ind_id = individuals.ind_id )
+                           FROM game_individual
+                           LEFT JOIN individual_role ON ( game_individual.individual_role_id = individual_role.id )
+                           LEFT JOIN game ON ( game_individual.game_id = game.game_id )
+                           LEFT JOIN individuals ON ( game_individual.individual_id = individuals.ind_id )
                            WHERE game.game_id='$game_id'
-                           AND author_type.author_type_info = 'music'") or die("Error getting game musician");
+                           AND individual_role.name = 'Music'") or die("Error getting game musician");
 $i = 0;
 
 while ($MUSICIAN = $SQL_MUSICIAN->fetch_array(MYSQLI_BOTH)) {
