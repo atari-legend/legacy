@@ -56,12 +56,11 @@ if (isset($action) and $action == 'search') {
                             game.game_id,
                             game.game_name,
                             pub_dev.pub_dev_name,
-                            pub_dev.pub_dev_id,
-                            game_year.game_year
+                            pub_dev.pub_dev_id
                        FROM game
-                       LEFT JOIN game_publisher ON ( game.game_id = game_publisher.game_id )
-                       LEFT JOIN pub_dev ON ( game_publisher.pub_dev_id = pub_dev.pub_dev_id )
-                       LEFT JOIN game_year ON ( game_year.game_id = game.game_id ) WHERE ";
+                       LEFT JOIN game_developer ON ( game.game_id = game_developer.game_id )
+                       LEFT JOIN pub_dev ON ( game_developer.dev_pub_id = pub_dev.pub_dev_id )
+                       WHERE ";
 
         $RESULTGAME .= $gamebrowse_select;
         $gamesearch = $mysqli->real_escape_string($gamesearch);
@@ -87,8 +86,7 @@ if (isset($action) and $action == 'search') {
                     $smarty->append('music', array(
                         'game_id' => $row['game_id'],
                         'game_name' => $row['game_name'],
-                        'game_publisher' => $row['pub_dev_name'],
-                        'game_year' => $row['game_year'],
+                        'game_developer' => $row['pub_dev_name'],
                         'number_zaks' => $array['count']
                     ));
                 }
