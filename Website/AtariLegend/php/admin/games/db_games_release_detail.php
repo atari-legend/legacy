@@ -20,6 +20,7 @@ require_once __DIR__."/../../common/DAO/LanguageDAO.php";
 require_once __DIR__."/../../common/DAO/EmulatorDAO.php";
 require_once __DIR__."/../../common/DAO/TrainerOptionDAO.php";
 require_once __DIR__."/../../common/DAO/MemoryDAO.php";
+require_once __DIR__."/../../common/DAO/TosDAO.php";
 
 $gameReleaseDao = new \AL\Common\DAO\GameReleaseDAO($mysqli);
 $gameDao = new \AL\Common\DAO\GameDao($mysqli);
@@ -34,6 +35,7 @@ $languageDao = new \AL\Common\DAO\LanguageDAO($mysqli);
 $emulatorDao = new \AL\Common\DAO\EmulatorDAO($mysqli);
 $trainerOptionDao = new \AL\Common\DAO\TrainerOptionDAO($mysqli);
 $memoryDao = new \AL\Common\DAO\MemoryDAO($mysqli);
+$tosDao = new \AL\Common\DAO\TosDAO($mysqli);
 
 
 //***********************************************************************************
@@ -174,6 +176,7 @@ if (isset($action) && ($action == 'features')) {
     $systemDao->setEnhancedSystemsForRelease($release_id, isset($system_enhanced) ? $system_enhanced : []);
     $resolutionDao->setResolutionsForRelease($release_id, isset($resolution) ? $resolution : []);
     $emulatorDao->setIncompatibleEmulatorsForRelease($release_id, isset($emulator_incompatible) ? $emulator_incompatible : []);
+    $tosDao->setIncompatibleTosForRelease($release_id, isset($tos_incompatible) ? $tos_incompatible : []);
     
     create_log_entry('Game Release', $game_id, 'Compatibility', $release_id, 'Update', $_SESSION['user_id']);
     

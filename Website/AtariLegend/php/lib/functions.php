@@ -1567,6 +1567,13 @@ function create_log_entry($section, $section_id, $subsection, $subsection_id, $a
             $query_data   = $result->fetch_array(MYSQLI_BOTH);
             $section_name = $query_data['memory'];
         }
+        elseif ($subsection == 'Tos') {
+            // Get the tos amount
+            $query = "SELECT name FROM tos WHERE id = '$section_id'";
+            $result = $mysqli->query($query) or die("getting tos version failed");
+            $query_data   = $result->fetch_array(MYSQLI_BOTH);
+            $section_name = $query_data['name'];
+        }
         $subsection_name = $section_name;
     }
     

@@ -50,6 +50,9 @@ $(document).ready(function () {
     $('select[name=memory_select]').change(function () {
         hideShow('memory');
     });
+    $('select[name=tos_select]').change(function () {
+        hideShow('tos');
+    });
 });
 
 function hideShow (type) {

@@ -287,6 +287,27 @@
                 </form>
                 <br>
                 <br>
+                <b>Tos version</b>&nbsp;&nbsp;
+                <br>
+                <form action="../games/db_games_config.php" method="post" name="tos">
+                    <select name="tos_select" class="standard_select input_medium grayed_out" id="tos_select">
+                        <option value="" selected="selected">-</option>
+                        {foreach from=$tos item=all_tos}
+                            <option value="{$all_tos->getId()}">{$all_tos->getName()}</option>
+                        {/foreach}
+                    </select>
+                    <input type="text" name="tos_edit" class="standard_input input_medium" style="display:none;" id="tos_edit">
+                    <input type="text" name="tos_id_edit" class="standard_input input_medium" style="display:none;" id="tos_id_edit">
+                    <input type="submit" value="Modify TOS" name="action" class="secondary_button" style="display:none;" id="tos_mod">
+                    <input type="submit" value="Delete TOS" name="action" class="primary_button button_danger" style="display:none;" id="tos_del">
+                </form>
+                <hr class="separator_add">
+                <form action="../games/db_games_config.php" method="post" name="tos">
+                    <input type="text" name="tos_new" class="standard_input input_medium" placeholder="Enter new tos" required>
+                    <input type="submit" value="Add TOS" name="action" class="secondary_button">
+                </form>
+                <br>
+                <br>
                 <b>Memory</b>&nbsp;&nbsp;
                 <br>
                 <form action="../games/db_games_config.php" method="post" name="memory">
