@@ -16,6 +16,7 @@ require_once __DIR__."/../../common/DAO/LanguageDAO.php";
 require_once __DIR__."/../../common/DAO/EmulatorDAO.php";
 require_once __DIR__."/../../common/DAO/TrainerOptionDAO.php";
 require_once __DIR__."/../../common/DAO/MemoryDAO.php";
+require_once __DIR__."/../../common/DAO/TosDAO.php";
 
 $gameReleaseDao = new \AL\Common\DAO\GameReleaseDAO($mysqli);
 $gameDao = new \AL\Common\DAO\GameDao($mysqli);
@@ -29,6 +30,7 @@ $languageDao = new \AL\Common\DAO\LanguageDAO($mysqli);
 $emulatorDao = new \AL\Common\DAO\EmulatorDAO($mysqli);
 $trainerOptionDao = new \AL\Common\DAO\TrainerOptionDAO($mysqli);
 $memoryDao = new \AL\Common\DAO\MemoryDAO($mysqli);
+$tosDao = new \AL\Common\DAO\TosDAO($mysqli);
 
 if ($_SERVER['REQUEST_METHOD'] == "GET") {
     $smarty->assign('license_types', $gameReleaseDao->getLicenseTypes());
@@ -42,6 +44,7 @@ if ($_SERVER['REQUEST_METHOD'] == "GET") {
     $smarty->assign('trainer_options', $trainerOptionDao->getAllTrainerOptions());
     $smarty->assign('memory_enhanced', $memoryDao->getAllMemory());
     $smarty->assign('memory_enhancement_types', $memoryDao->getEnhancementTypes());
+    $smarty->assign('tos', $tosDao->getAllTos());
     
     // Edit existing release
     if (isset($release_id)) {
@@ -56,6 +59,7 @@ if ($_SERVER['REQUEST_METHOD'] == "GET") {
 
         $smarty->assign('system_incompatible', $systemDao->getIncompatibleSystemsForRelease($release->getId()));
         $smarty->assign('emulator_incompatible', $emulatorDao->getIncompatibleEmulatorsForRelease($release->getId()));
+        $smarty->assign('tos_incompatible', $tosDao->getIncompatibleTosForRelease($release->getId()));
         $smarty->assign('system_enhanced', $systemDao->getEnhancedSystemsForRelease($release->getId()));
         $smarty->assign('release_resolutions', $resolutionDao->getResolutionsForRelease($release->getId()));
         $smarty->assign('release_locations', $locationDao->getLocationsForRelease($release->getId()));
@@ -74,6 +78,7 @@ if ($_SERVER['REQUEST_METHOD'] == "GET") {
 
         $smarty->assign('system_incompatible', []);
         $smarty->assign('emulator_incompatible', []);
+        $smarty->assign('tos_incompatible', []);
         $smarty->assign('system_enhanced', []);
         $smarty->assign('release_resolutions', []);
         $smarty->assign('release_locations', []);

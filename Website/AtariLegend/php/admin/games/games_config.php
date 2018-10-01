@@ -29,6 +29,7 @@ require_once __DIR__."/../../common/DAO/systemDAO.php";
 require_once __DIR__."/../../common/DAO/emulatorDAO.php";
 require_once __DIR__."/../../common/DAO/TrainerOptionDAO.php";
 require_once __DIR__."/../../common/DAO/MemoryDAO.php";
+require_once __DIR__."/../../common/DAO/TosDAO.php";
 
 $engineDao = new \AL\Common\DAO\EngineDAO($mysqli);
 $programmingLanguageDao = new \AL\Common\DAO\ProgrammingLanguageDAO($mysqli);
@@ -42,6 +43,7 @@ $systemDao = new \AL\Common\DAO\SystemDAO($mysqli);
 $emulatorDao = new \AL\Common\DAO\EmulatorDAO($mysqli);
 $trainerOptionDao = new \AL\Common\DAO\TrainerOptionDAO($mysqli);
 $memoryDao = new \AL\Common\DAO\MemoryDAO($mysqli);
+$tosDao = new \AL\Common\DAO\TosDAO($mysqli);
 
 
 //***********************************************************************************
@@ -99,6 +101,11 @@ $smarty->assign('trainer_options', $trainerOptionDao->getAllTrainerOptions());
 //get the memory amounts
 //***********************************************************************************
 $smarty->assign('memory', $memoryDao->getAllMemory());
+
+//***********************************************************************************
+//get the game release tos versions
+//***********************************************************************************
+$smarty->assign('tos', $tosDao->getAllTos());
 
 //Send all smarty variables to the templates
 $smarty->display("file:" . $cpanel_template_folder . "games_config.html");

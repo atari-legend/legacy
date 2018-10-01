@@ -294,6 +294,20 @@
                                         </div>
                                     {/if}
                                 {/foreach}
+                                <br>
+
+                                <label class="input">Incompatible TOS versions</label>
+                                {foreach from=$tos item=tos_version}
+                                    <div class="checkbox links_mod_checkbox">
+                                        <input type="checkbox"
+                                            id="tos_incompatible_{$tos_version->getId()}"
+                                            name="tos_incompatible[]"
+                                            {if in_array($tos_version->getId(), $tos_incompatible)}checked{/if}
+                                            value="{$tos_version->getId()}">
+                                        <label for="tos_incompatible_{$tos_version->getId()}"></label>
+                                        &nbsp;{$tos_version->getName()}<br>
+                                    </div>
+                                {/foreach}
                             </div>
                             <div id="gd_basic_game_info_2">
                                 <label class="input">Incompatible systems</label>
