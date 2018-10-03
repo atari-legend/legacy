@@ -201,7 +201,7 @@
                                 <td class="w-30">{if $system_incompatible[$release->getId()]}{else}{if $emulator_incompatible[$release->getId()]}{else}{if $smarty.foreach.tos.index == 0}<span class="games_main_detail_info_right">Incompatible</span>{/if}{/if}{/if}</td>
                                 <td class="w-5">-</td>
                                 <td class="w-60">
-                                    {$tos_id->getName()} <span class="standard_tile_subtext">(Tos)</span><br>
+                                    {$tos_id->getName()}<span class="standard_tile_subtext"> ({$tos_id->getLanguage()->getName()})</span><br>
                                 </td>
                             </tr>
                         {/foreach}

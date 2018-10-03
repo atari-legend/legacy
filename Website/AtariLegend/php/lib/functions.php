@@ -1587,7 +1587,7 @@ function create_log_entry($section, $section_id, $subsection, $subsection_id, $a
         $section_name = $query_data['game_name'];    
         
         if ($subsection == 'Game Release' OR $subsection == 'Release Info' OR $subsection == 'Release AKA' OR $subsection == 'Compatibility' OR $subsection == 'Distributor'
-            OR $subsection == 'Scene' or $subsection == 'Memory Enhancement' or $subsection == 'Minimum Memory') {
+            OR $subsection == 'Scene' or $subsection == 'Memory Enhancement' or $subsection == 'Minimum Memory' or $subsection == 'Incompatible TOS') {
             $subsection_name = $section_name;
         }
         

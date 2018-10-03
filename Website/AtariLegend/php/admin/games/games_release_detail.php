@@ -59,7 +59,7 @@ if ($_SERVER['REQUEST_METHOD'] == "GET") {
 
         $smarty->assign('system_incompatible', $systemDao->getIncompatibleSystemsForRelease($release->getId()));
         $smarty->assign('emulator_incompatible', $emulatorDao->getIncompatibleEmulatorsForRelease($release->getId()));
-        $smarty->assign('tos_incompatible', $tosDao->getIncompatibleTosForRelease($release->getId()));
+        $smarty->assign('tos_incompatible', $tosDao->getIncompatibleTosWithNameForRelease($release->getId()));
         $smarty->assign('system_enhanced', $systemDao->getEnhancedSystemsForRelease($release->getId()));
         $smarty->assign('release_resolutions', $resolutionDao->getResolutionsForRelease($release->getId()));
         $smarty->assign('release_locations', $locationDao->getLocationsForRelease($release->getId()));

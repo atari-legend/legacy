@@ -176,7 +176,6 @@ if (isset($action) && ($action == 'features')) {
     $systemDao->setEnhancedSystemsForRelease($release_id, isset($system_enhanced) ? $system_enhanced : []);
     $resolutionDao->setResolutionsForRelease($release_id, isset($resolution) ? $resolution : []);
     $emulatorDao->setIncompatibleEmulatorsForRelease($release_id, isset($emulator_incompatible) ? $emulator_incompatible : []);
-    $tosDao->setIncompatibleTosForRelease($release_id, isset($tos_incompatible) ? $tos_incompatible : []);
     
     create_log_entry('Game Release', $game_id, 'Compatibility', $release_id, 'Update', $_SESSION['user_id']);
     
@@ -291,6 +290,50 @@ if (isset($action) && ($action == 'update_minimum_memory')) {
     $_SESSION['edit_message'] = "Minimum memory was updated";
     header("Location: ../games/games_release_detail.php?game_id=$game_id&release_id=$release_id");
 }
+
+//***********************************************************************************
+//add a incompatible TOS to a release
+//***********************************************************************************
+if (isset($action) && ($action == 'add_tos_incompatible')) {  
+
+    if ($language_id == ''){
+        $language_id = null;
+    }
+    
+    $tosDao->setIncompatibleTosForRelease($release_id, $tos_id, $language_id);
+    
+    create_log_entry('Game Release', $game_id, 'Incompatible TOS', $release_id, 'Insert', $_SESSION['user_id']);
+    
+    $_SESSION['edit_message'] = "Incompatible TOS has been added";
+    header("Location: ../games/games_release_detail.php?game_id=$game_id&release_id=$release_id");
+}
+
+//***********************************************************************************
+//Update incompatible TOS language for a release
+//***********************************************************************************
+if (isset($action) && ($action == 'update_tos_incompatible')) {  
+    
+    $tosDao->updateTosLanguageForRelease($release_id, $tos_id, $new_language_id);
+    
+    create_log_entry('Game Release', $game_id, 'Incompatible TOS', $release_id, 'Update', $_SESSION['user_id']);
+    
+    $_SESSION['edit_message'] = "Incompatible TOS was updated";
+    header("Location: ../games/games_release_detail.php?game_id=$game_id&release_id=$release_id");
+}
+
+//***********************************************************************************
+//Delete incompatible TOS language for a release
+//***********************************************************************************
+if (isset($action) && ($action == 'remove_tos_incompatible')) {  
+    
+    $tosDao->deleteTosForRelease($release_id, $tos_id);
+    
+    create_log_entry('Game Release', $game_id, 'Incompatible TOS', $release_id, 'Delete', $_SESSION['user_id']);
+    
+    $_SESSION['edit_message'] = "Incompatible TOS was deleted";
+    header("Location: ../games/games_release_detail.php?game_id=$game_id&release_id=$release_id");
+}
+
 
     
 //close the connection
