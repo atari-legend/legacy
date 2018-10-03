@@ -36,28 +36,13 @@ class TosDAO {
         $tos_versions = [];
         while ($stmt->fetch()) {
             $tos_versions[] = new \AL\Common\Model\Game\Tos(
-                $id, $name
+                $id, $name, null
             );
         }
 
         $stmt->close();
 
         return $tos_versions;
-    }
-
-    /**
-     * Get a map containing all tos versions, indexed by ID
-     *
-     * @return \AL\Common\Model\Game\Tos[] A map of tos versions
-     */
-    public function getAllTosAsMap() {
-        $tos = $this->getAllTos();
-        $tosMap = array();
-        foreach ($tos as $tos_version) {
-            $tosMap[$tos->getId()] = $tos_version;
-        }
-
-        return $tosMap;
     }
 
     /**
@@ -70,19 +55,27 @@ class TosDAO {
         $stmt = \AL\Db\execute_query(
             "TosDAO: getIncompatibleTosForRelease",
             $this->mysqli,
-            "SELECT tos_id FROM game_release_tos_version_incompatibility WHERE release_id = ?",
+            "SELECT game_release_tos_version_incompatibility.id, 
+                    game_release_tos_version_incompatibility.language_id, 
+                    language.name 
+            FROM game_release_tos_version_incompatibility LEFT JOIN language 
+            ON (Language.id = game_release_tos_version_incompatibility.language_id) 
+            WHERE release_id = ?",
             "i", $release_id
         );
 
         \AL\Db\bind_result(
             "TosDAO: getIncompatibleTosForRelease",
             $stmt,
-            $tos_id
+            $tos_id, $language_id, $language_name
         );
 
         $tos_versions = [];
         while ($stmt->fetch()) {
-            $tos_versions[] = $tos_id;
+            $tos_versions[] = new \AL\Common\Model\Game\Tos(
+                $tos_id, null,
+                new \AL\Common\Model\Language\Language($language_id, $language_name)
+            );
         }
 
         $stmt->close();
@@ -102,8 +95,10 @@ class TosDAO {
             "TosDAO: getIncompatibleTosWithNameForRelease",
             $this->mysqli,
             "SELECT game_release_tos_version_incompatibility.tos_id,
-                    tos.name FROM game_release_tos_version_incompatibility 
+                    tos.name, game_release_tos_version_incompatibility.language_id, language.name 
+                    FROM game_release_tos_version_incompatibility 
                     LEFT JOIN tos ON (game_release_tos_version_incompatibility.tos_id = tos.id)
+                    LEFT JOIN language ON (Language.id = game_release_tos_version_incompatibility.language_id) 
                     WHERE release_id = ?",
             "i", $release_id
         );
@@ -111,12 +106,15 @@ class TosDAO {
         \AL\Db\bind_result(
             "TosDAO: getIncompatibleTosWithNameForRelease",
             $stmt,
-            $tos_id, $tos_name
+            $tos_id, $tos_name, $language_id, $language_name
         );
 
         $tos_versions = [];
         while ($stmt->fetch()) {
-            $tos_versions[] = new \AL\Common\Model\Game\Tos($tos_id, $tos_name);
+            $tos_versions[] = new \AL\Common\Model\Game\Tos(
+                $tos_id, $tos_name,
+                new \AL\Common\Model\Language\Language($language_id, $language_name)
+            );
         }
 
         $stmt->close();
@@ -130,25 +128,58 @@ class TosDAO {
      * @param integer Release ID
      * @param integer[] List of TOS IDs
      */
-    public function setIncompatibleTosForRelease($release_id, $tos) {
+    public function setIncompatibleTosForRelease($release_id, $tos, $language) {
+
         $stmt = \AL\Db\execute_query(
             "TosDAO: setIncompatibleTosForRelease",
             $this->mysqli,
-            "DELETE FROM game_release_tos_version_incompatibility WHERE release_id = ?",
-            "i", $release_id
+            "INSERT INTO game_release_tos_version_incompatibility (release_id, tos_id, language_id) VALUES (?, ?, ?)",
+            "iis", $release_id, $tos, $language
         );
-
-        foreach ($tos as $id) {
-            $stmt = \AL\Db\execute_query(
-                "TosDAO: setIncompatibleTosForRelease",
-                $this->mysqli,
-                "INSERT INTO game_release_tos_version_incompatibility (release_id, tos_id) VALUES (?, ?)",
-                "ii", $release_id, $id
-            );
-        }
 
         $stmt->close();
     }
+    
+    
+    /**
+     * Update language for incompatible TOS
+     *
+     * @param integer Game Release ID
+     * @param integer TOS ID
+     */
+    public function updateTosLanguageForRelease($game_release_id, $tos_id, $new_language_id) {
+        $stmt = \AL\Db\execute_query(
+            "TosDAO: updateTosLanguageForRelease",
+            $this->mysqli,
+            "UPDATE game_release_tos_version_incompatibility
+            SET
+                `language_id` = ?
+            WHERE release_id = ? AND tos_id = ?",
+            "sii", $new_language_id, $game_release_id, $tos_id
+        );
+
+        $stmt->close();
+    }
+    
+    
+    /**
+     * Delete incompatible TOS for release
+     *
+     * @param integer Game Release ID
+     * @param integer tos ID
+     */
+    public function deleteTosForRelease($game_release_id, $tos_id) {
+        $stmt = \AL\Db\execute_query(
+            "TosDAO: deleteTosForRelease",
+            $this->mysqli,
+            "DELETE FROM game_release_tos_version_incompatibility
+            WHERE release_id = ? AND tos_id = ?",
+            "ii", $game_release_id, $tos_id
+        );
+
+        $stmt->close();
+    }
+    
     
      /**
      * add a tos to the database

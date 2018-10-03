@@ -295,19 +295,6 @@
                                     {/if}
                                 {/foreach}
                                 <br>
-
-                                <label class="input">Incompatible TOS versions</label>
-                                {foreach from=$tos item=tos_version}
-                                    <div class="checkbox links_mod_checkbox">
-                                        <input type="checkbox"
-                                            id="tos_incompatible_{$tos_version->getId()}"
-                                            name="tos_incompatible[]"
-                                            {if in_array($tos_version->getId(), $tos_incompatible)}checked{/if}
-                                            value="{$tos_version->getId()}">
-                                        <label for="tos_incompatible_{$tos_version->getId()}"></label>
-                                        &nbsp;{$tos_version->getName()}<br>
-                                    </div>
-                                {/foreach}
                             </div>
                             <div id="gd_basic_game_info_2">
                                 <label class="input">Incompatible systems</label>
@@ -338,11 +325,63 @@
                                 {/foreach}
                             </div>
                         </div>
-                        <br>
-                        <br>
                         <button type="submit" name="submit_type" value="save_and_back" class="primary_button">Save and close</button>
                         <button type="submit" name="submit_type" value="save" class="secondary_button">Save changes</button>
                         <a href="games_detail.php?game_id={$game->getId()}">Cancel</a>
+                        <br>
+                        <br>
+                        <br>
+                        <br>
+                        <label class="input">Incompatible TOS</label>
+                        <br>
+                        {if isset($tos_incompatible)}
+                            {foreach from=$tos_incompatible item=tos_incompatible_linked}
+                                <form action="../games/db_games_release_detail.php" method="get">
+                                    <a title="Remove {$tos_incompatible_linked->getName()|escape:"html"} from this release"
+                                        href="../games/db_games_release_detail.php?game_id={$game->getId()}&amp;release_id={$release->getId()}&amp;tos_id={$tos_incompatible_linked->getId()}&amp;action=remove_tos_incompatible"
+                                        onclick="javascript:return confirm('This TOS will be removed from the release')">
+                                        <span class="fa fa-fw fa-trash"></span>
+                                    </a>
+
+                                    <input type="hidden" name="action" value="update_tos_incompatible">
+                                    <input type="hidden" name="game_id" value="{$game->getId()}">
+                                    <input type="hidden" name="release_id" value="{$release->getId()}">
+                                    <input type="hidden" name="tos_id" value="{$tos_incompatible_linked->getId()}">
+                                    <input type="text" value="{$tos_incompatible_linked->getName()}" class="standard_input input_medium" disabled id="gd_game_dev">
+                                    <select name="new_language_id"
+                                    onchange="jQuery('#update-toslanguage-{$tos_incompatible_linked->getLanguage()->getId()}').show()"
+                                    class="standard_select select_medium">
+                                    <option value="">-</option>
+                                    {foreach from=$languages item=all_languages}
+                                        <option value="{$all_languages->getId()}" {if $tos_incompatible_linked->getLanguage()->getId() eq $all_languages->getId()} selected{/if}>{$all_languages->getName()}</option>
+                                    {/foreach}
+                                    </select>
+                                    <input type="submit" id="update-toslanguage-{$tos_incompatible_linked->getLanguage()->getId()}" style="display: none;" class="secondary_button" value="Update">
+                                </form>
+                            {/foreach}
+                        {/if}
+                        <hr class="separator_add">
+
+                        <form action="../games/db_games_release_detail.php" method="post">
+                            <input type="hidden" name="release_id" value="{$release->getId()}">
+                            <input type="hidden" name="game_id" value="{$game->getId()}">
+                            <input type="hidden" name="action" value="add_tos_incompatible">
+                            <span class="fa fa-fw"></span>
+                            <select name="tos_id"
+                                class="standard_select select_large" id="gd_dev_name" required>
+                                <option value="" selected="selected" disabled>-</option>
+                                {foreach from=$tos item=all_tos}
+                                    <option value="{$all_tos->getId()}">{$all_tos->getName()}</option>
+                                {/foreach}
+                            </select>
+                            <select name="language_id" class="standard_select select_medium">
+                                <option value="">-</option>
+                                {foreach from=$languages item=language}
+                                    <option value="{$language->getId()}">{$language->getName()}</option>
+                                {/foreach}
+                            </select>
+                            <input type="submit" value="Add TOS" class="secondary_button">
+                        </form>
                     </fieldset>
                 </form>
                 <br>
