@@ -457,6 +457,55 @@
                         <input type="submit" value="Add enhancement" class="secondary_button">
                     </form>
                 </fieldset>
+
+                <br>
+                <fieldset class="secondary_fieldset">
+                    <legend class="primary_legend">Protection</legend>
+                    <form action="../games/db_games_release_detail.php" method="post" name="scene">
+                        <input type="hidden" name="game_id" value="{$game->getId()}">
+                        <input type="hidden" name="release_id" value="{$release->getId()}">
+                        <input type="hidden" name="action" value="copy_protection">
+                        <div class="gd_basic_game_info_container">
+                            <div id="gd_basic_game_info_1">
+                                <b>Copy Protection</b>&nbsp;&nbsp;
+                                <div class="control-group">
+                                    <label for="input-tags2"></label>
+                                    <select name="copy_protection[]" multiple id="input-tags2" class="standard_select input_full">
+                                    {foreach from=$copy_protections item=all_copy_protections}
+                                        <option value="{$all_copy_protections->getId()}"
+                                            {foreach from=$release_copy_protections item=linked_copy_protections name=copy_protections}
+                                                {if $linked_copy_protections->getId() == $all_copy_protections->getId()}
+                                                    selected
+                                                {/if}
+                                            {/foreach}
+                                            >
+                                            {$all_copy_protections->getName()}
+                                        </option>
+                                    {/foreach}
+                                    </select>
+                                </div>
+                                <script>
+                                    $('#input-tags2').selectize({
+                                        plugins: ['remove_button'],
+                                        persist: false,
+                                        create: true,
+                                        render: {
+                                            item: function(data, escape) {
+                                                return '<div class="primary_button" style="border-radius:3px;">' + escape(data.text) + '</div>';
+                                            }
+                                        },
+                                    });
+                                </script>
+                                <br>
+                                <span class="help-hint">Click to choose and add a protection type</span>
+                            </div>
+                        </div>
+                        <br>
+                        <button type="submit" name="submit_type" value="save_and_back" class="primary_button">Save and close</button>
+                        <button type="submit" name="submit_type" value="save" class="secondary_button">Save changes</button>
+                        <a href="games_detail.php?game_id={$game->getId()}">Cancel</a>
+                    </form>
+                </fieldset>
             </div>
 
             <div id="tab-scene" class="tabcontent tabpane">

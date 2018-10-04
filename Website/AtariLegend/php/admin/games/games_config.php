@@ -30,6 +30,7 @@ require_once __DIR__."/../../common/DAO/emulatorDAO.php";
 require_once __DIR__."/../../common/DAO/TrainerOptionDAO.php";
 require_once __DIR__."/../../common/DAO/MemoryDAO.php";
 require_once __DIR__."/../../common/DAO/TosDAO.php";
+require_once __DIR__."/../../common/DAO/CopyProtectionDAO.php";
 
 $engineDao = new \AL\Common\DAO\EngineDAO($mysqli);
 $programmingLanguageDao = new \AL\Common\DAO\ProgrammingLanguageDAO($mysqli);
@@ -44,6 +45,7 @@ $emulatorDao = new \AL\Common\DAO\EmulatorDAO($mysqli);
 $trainerOptionDao = new \AL\Common\DAO\TrainerOptionDAO($mysqli);
 $memoryDao = new \AL\Common\DAO\MemoryDAO($mysqli);
 $tosDao = new \AL\Common\DAO\TosDAO($mysqli);
+$copyProtectionDao = new \AL\Common\DAO\CopyProtectionDAO($mysqli);
 
 
 //***********************************************************************************
@@ -101,6 +103,11 @@ $smarty->assign('trainer_options', $trainerOptionDao->getAllTrainerOptions());
 //get the memory amounts
 //***********************************************************************************
 $smarty->assign('memory', $memoryDao->getAllMemory());
+
+//***********************************************************************************
+//get the copy protection type
+//***********************************************************************************
+$smarty->assign('copy_protections', $copyProtectionDao->getAllCopyProtections());
 
 //***********************************************************************************
 //get the game release tos versions

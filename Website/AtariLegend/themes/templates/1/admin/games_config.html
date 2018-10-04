@@ -333,6 +333,27 @@
                 <div class="help-hint">
                     Please contact the admin if you want to have additional data added or changed.
                 </div>
+                <br>
+                <br>
+                <b>Copy Protection</b>&nbsp;&nbsp;
+                <br>
+                <form action="../games/db_games_config.php" method="post" name="copy_protection">
+                    <select name="copy_protection_select" class="standard_select input_medium grayed_out" id="copy_protection_select">
+                        <option value="" selected="selected">-</option>
+                        {foreach from=$copy_protections item=all_copy_protections}
+                            <option value="{$all_copy_protections->getId()}">{$all_copy_protections->getName()}</option>
+                        {/foreach}
+                    </select>
+                    <input type="text" name="copy_protection_edit" class="standard_input input_medium" style="display:none;" id="copy_protection_edit">
+                    <input type="text" name="copy_protection_id_edit" class="standard_input input_medium" style="display:none;" id="copy_protection_id_edit">
+                    <input type="submit" value="Modify protection" name="action" class="secondary_button" style="display:none;" id="copy_protection_mod">
+                    <input type="submit" value="Delete protection" name="action" class="primary_button button_danger" style="display:none;" id="copy_protection_del">
+                </form>
+                <hr class="separator_add">
+                <form action="../games/db_games_config.php" method="post" name="copy_protection">
+                    <input type="text" name="copy_protection_new" class="standard_input input_medium" placeholder="Enter new protection" required>
+                    <input type="submit" value="Add protection" name="action" class="secondary_button">
+                </form>
             </fieldset>
             <br>
             <fieldset class="secondary_fieldset">
