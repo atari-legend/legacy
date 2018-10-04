@@ -21,6 +21,7 @@ require_once __DIR__."/../../common/DAO/EmulatorDAO.php";
 require_once __DIR__."/../../common/DAO/TrainerOptionDAO.php";
 require_once __DIR__."/../../common/DAO/MemoryDAO.php";
 require_once __DIR__."/../../common/DAO/TosDAO.php";
+require_once __DIR__."/../../common/DAO/CopyProtectionDAO.php";
 
 $gameReleaseDao = new \AL\Common\DAO\GameReleaseDAO($mysqli);
 $gameDao = new \AL\Common\DAO\GameDao($mysqli);
@@ -36,7 +37,7 @@ $emulatorDao = new \AL\Common\DAO\EmulatorDAO($mysqli);
 $trainerOptionDao = new \AL\Common\DAO\TrainerOptionDAO($mysqli);
 $memoryDao = new \AL\Common\DAO\MemoryDAO($mysqli);
 $tosDao = new \AL\Common\DAO\TosDAO($mysqli);
-
+$copyProtectionDao = new \AL\Common\DAO\CopyProtectionDAO($mysqli);
 
 //***********************************************************************************
 // Add a new release
@@ -334,7 +335,23 @@ if (isset($action) && ($action == 'remove_tos_incompatible')) {
     header("Location: ../games/games_release_detail.php?game_id=$game_id&release_id=$release_id");
 }
 
-
+//***********************************************************************************
+//update the the copy protection section of the game release
+//***********************************************************************************
+if (isset($action) && ($action == 'copy_protection')) {  
+    
+    //Update the game engine
+    $copyProtectionDao->setCopyProtectionsForRelease($release_id, isset($copy_protection) ? $copy_protection : []);
+    
+    create_log_entry('Game Release', $game_id, 'Protection', $release_id, 'Update', $_SESSION['user_id']);
+    $_SESSION['edit_message'] = "Protection info updated";
+    
+    if ($submit_type == "save_and_back") {
+        header("Location: games_detail.php?game_id=".$game_id);
+    } else {
+        header("Location: ../games/games_release_detail.php?game_id=$game_id&release_id=$release_id");
+    }
+}
     
 //close the connection
 mysqli_close($mysqli);

@@ -32,6 +32,7 @@ require_once __DIR__."/../../common/DAO/EmulatorDAO.php";
 require_once __DIR__."/../../common/DAO/TrainerOptionDAO.php";
 require_once __DIR__."/../../common/DAO/MemoryDAO.php";
 require_once __DIR__."/../../common/DAO/TosDAO.php";
+require_once __DIR__."/../../common/DAO/CopyProtectionDAO.php";
 
 $gameReleaseDao = new \AL\Common\DAO\GameReleaseDAO($mysqli);
 $gameSeriesDao = new \AL\Common\DAO\GameSeriesDAO($mysqli);
@@ -50,6 +51,7 @@ $emulatorDao = new \AL\Common\DAO\EmulatorDAO($mysqli);
 $trainerOptionDao = new \AL\Common\DAO\TrainerOptionDAO($mysqli);
 $memoryDao = new \AL\Common\DAO\MemoryDAO($mysqli);
 $tosDao = new \AL\Common\DAO\TosDAO($mysqli);
+$copyProtectionDao = new \AL\Common\DAO\CopyProtectionDAO($mysqli);
 
 /**
  * Generates an SEO-friendly description of a game, depending on the data available
@@ -205,6 +207,7 @@ $release_location = [];
 $trainerOptions = [];
 $memoryEnhancements = [];
 $tos_incompatible = [];
+$copyProtections = [];
 
 foreach ($releases as $release) {
     $system_incompatible[$release->getId()] = $systemDao->getIncompatibleSystemsForRelease($release->getId());
@@ -217,6 +220,7 @@ foreach ($releases as $release) {
     $trainerOptions[$release->getId()] = $trainerOptionDao->getTrainerOptionsForRelease($release->getId());
     $memoryEnhancements[$release->getId()] = $memoryDao->getMemoryForRelease($release->getId());
     $tos_incompatible[$release->getId()] = $tosDao->getIncompatibleTosWithNameForRelease($release->getId());
+    $copyProtections[$release->getId()] = $copyProtectionDao->getCopyProtectionsForRelease($release->getId());
 }
 $smarty->assign('system_incompatible', $system_incompatible);
 $smarty->assign('emulator_incompatible', $emulator_incompatible);
@@ -228,6 +232,7 @@ $smarty->assign('distributors', $distributors);
 $smarty->assign('trainerOptions', $trainerOptions);
 $smarty->assign('memoryEnhancements', $memoryEnhancements);
 $smarty->assign('tos_incompatible', $tos_incompatible);
+$smarty->assign('copyProtections', $copyProtections);
 
 //***********************************************************************************
 //get the game genres & the genres already selected for this game

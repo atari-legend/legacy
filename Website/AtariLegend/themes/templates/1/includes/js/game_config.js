@@ -53,6 +53,9 @@ $(document).ready(function () {
     $('select[name=tos_select]').change(function () {
         hideShow('tos');
     });
+    $('select[name=copy_protection_select]').change(function () {
+        hideShow('copy_protection');
+    });
 });
 
 function hideShow (type) {

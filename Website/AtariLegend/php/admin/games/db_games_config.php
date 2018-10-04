@@ -21,6 +21,7 @@ require_once __DIR__."/../../common/DAO/emulatorDAO.php";
 require_once __DIR__."/../../common/DAO/TrainerOptionDAO.php";
 require_once __DIR__."/../../common/DAO/MemoryDAO.php";
 require_once __DIR__."/../../common/DAO/TosDAO.php";
+require_once __DIR__."/../../common/DAO/CopyProtectionDAO.php";
 
 $changeLogDao = new \AL\Common\DAO\ChangeLogDAO($mysqli);
 $engineDao = new \AL\Common\DAO\EngineDAO($mysqli);
@@ -36,6 +37,7 @@ $emulatorDao = new \AL\Common\DAO\EmulatorDAO($mysqli);
 $trainerOptionDao = new \AL\Common\DAO\TrainerOptionDAO($mysqli);
 $memoryDao = new \AL\Common\DAO\MemoryDAO($mysqli);
 $tosDao = new \AL\Common\DAO\TosDAO($mysqli);
+$copyProtectionDao = new \AL\Common\DAO\CopyProtectionDAO($mysqli);
 
 switch ($_POST['action']) {
 	case "Add engine":
@@ -375,6 +377,32 @@ switch ($_POST['action']) {
 
         $_SESSION['edit_message'] = "Tos has been updated" ;
         break;  
+        
+    case "Add protection":
+        $copyProtectionDao->addCopyProtection($copy_protection_new);
+        
+        $new_copy_protection_id = $mysqli->insert_id;
+        
+        create_log_entry('Games Config', $new_copy_protection_id, 'Protection', $new_copy_protection_id, 'Insert', $_SESSION['user_id']);
+        
+        $_SESSION['edit_message'] = "$copy_protection_new has been added" ;
+        break;
+        
+    case "Delete protection":
+        create_log_entry('Games Config', $copy_protection_id_edit, 'Protection', $copy_protection_id_edit, 'Delete', $_SESSION['user_id']);
+        
+        $copyProtectionDao->deleteCopyProtection($copy_protection_id_edit);       
+
+        $_SESSION['edit_message'] = "Protection has been deleted" ;
+        break;
+        
+    case "Modify protection":
+        $copyProtectionDao->updateCopyProtection($copy_protection_id_edit, $copy_protection_edit);
+
+        create_log_entry('Games Config', $copy_protection_id_edit, 'Protection', $copy_protection_id_edit, 'Update', $_SESSION['user_id']);
+
+        $_SESSION['edit_message'] = "Protection has been updated" ;
+        break;
 }
 
 header("Location: games_config.php");

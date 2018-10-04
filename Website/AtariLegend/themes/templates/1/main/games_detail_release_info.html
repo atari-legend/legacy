@@ -233,6 +233,19 @@
                         {/foreach}
                     {/if}
 
+                    {if $copyProtections[$release->getId()]}
+                        {foreach from=$copyProtections[$release->getId()] item=copyProtection_id name=copyProtection}
+                            <tr>
+                                <td class="w-30">{if $smarty.foreach.copyProtection.index == 0}<span class="games_main_detail_info_right">Protection</span>{/if}</td>
+                                <td class="w-5">-</td>
+                                <td class="w-60">
+                                    {$copyProtection_id->getName()} <span class="standard_tile_subtext">(copy)</span>
+                                    <br>
+                                </td>
+                            </tr>
+                        {/foreach}
+                    {/if}
+
                 {/foreach}
             </table>
         </div>
