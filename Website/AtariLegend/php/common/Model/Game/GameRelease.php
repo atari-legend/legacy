@@ -13,8 +13,21 @@ class GameRelease {
     private $type;
     private $memory;
     private $publisher;
+    private $status;
+    private $hd_installable;
 
-    public function __construct($id, $game_id, $name, $date, $license, $type, $memory, $publisher) {
+    public function __construct(
+        $id,
+        $game_id,
+        $name,
+        $date,
+        $license,
+        $type,
+        $memory,
+        $publisher,
+        $status,
+        $hd_installable
+    ) {
         $this->id = $id;
         $this->game_id = $game_id;
         $this->name = $name;
@@ -23,6 +36,8 @@ class GameRelease {
         $this->type = $type;
         $this->memory = $memory;
         $this->publisher = $publisher;
+        $this->status = $status;
+        $this->hd_installable = $hd_installable;
     }
 
     public function getId() {
@@ -55,5 +70,13 @@ class GameRelease {
 
     public function getPublisher() {
         return $this->publisher;
+    }
+    
+    public function getStatus() {
+        return $this->status;
+    }
+    
+    public function getHdInstallable() {
+        return $this->hd_installable;
     }
 }

@@ -37,6 +37,7 @@ $copyProtectionDao = new \AL\Common\DAO\CopyProtectionDAO($mysqli);
 if ($_SERVER['REQUEST_METHOD'] == "GET") {
     $smarty->assign('license_types', $gameReleaseDao->getLicenseTypes());
     $smarty->assign('release_types', $gameReleaseDao->getTypes());
+    $smarty->assign('release_status', $gameReleaseDao->getStatus());
     $smarty->assign('locations', $locationDao->getAllLocations());
     $smarty->assign('resolutions', $resolutionDao->getAllResolutions());
     $smarty->assign('systems', $systemDao->getAllSystems());
