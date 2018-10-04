@@ -1575,7 +1575,7 @@ function create_log_entry($section, $section_id, $subsection, $subsection_id, $a
             $section_name = $query_data['name'];
         }
         elseif ($subsection == 'Protection') {
-            // Get the tos amount
+            // Get the protection type
             $query = "SELECT name FROM copy_protection WHERE id = '$section_id'";
             $result = $mysqli->query($query) or die("getting copy protection failed");
             $query_data   = $result->fetch_array(MYSQLI_BOTH);
@@ -1594,7 +1594,7 @@ function create_log_entry($section, $section_id, $subsection, $subsection_id, $a
         $section_name = $query_data['game_name'];    
         
         if ($subsection == 'Game Release' OR $subsection == 'Release Info' OR $subsection == 'Release AKA' OR $subsection == 'Compatibility' OR $subsection == 'Distributor'
-            OR $subsection == 'Scene' or $subsection == 'Memory Enhancement' or $subsection == 'Minimum Memory' or $subsection == 'Incompatible TOS' or $subsection == 'Protection') {
+            OR $subsection == 'Scene' or $subsection == 'Memory Enhancement' or $subsection == 'Minimum Memory' or $subsection == 'Incompatible TOS' or $subsection == 'Protection' or $subsection == 'Language') {
             $subsection_name = $section_name;
         }
         

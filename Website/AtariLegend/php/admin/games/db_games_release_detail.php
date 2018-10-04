@@ -352,6 +352,35 @@ if (isset($action) && ($action == 'copy_protection')) {
         header("Location: ../games/games_release_detail.php?game_id=$game_id&release_id=$release_id");
     }
 }
+
+//***********************************************************************************
+//add a language to a release
+//***********************************************************************************
+if (isset($action) && ($action == 'add_release_language')) {  
+    
+    $languageDao->addLanguageForRelease($release_id, $language_id);
+    
+    $new_language_id = $mysqli->insert_id;
+    
+    create_log_entry('Game Release', $game_id, 'Language', $release_id, 'Insert', $_SESSION['user_id']);
+    
+    $_SESSION['edit_message'] = "Language has been added";
+    header("Location: ../games/games_release_detail.php?game_id=$game_id&release_id=$release_id");
+}
+
+//***********************************************************************************
+//remove a language from a release
+//***********************************************************************************
+if (isset($action) && ($action == 'remove_release_language')) {  
+    
+    create_log_entry('Game Release', $game_id, 'Language', $release_id, 'Delete', $_SESSION['user_id']);
+    
+    $languageDao->deleteLanguageFromRelease($release_id, $language_id);
+    
+    $_SESSION['edit_message'] = "Language has been removed";
+    header("Location: ../games/games_release_detail.php?game_id=$game_id&release_id=$release_id");
+
+}
     
 //close the connection
 mysqli_close($mysqli);
