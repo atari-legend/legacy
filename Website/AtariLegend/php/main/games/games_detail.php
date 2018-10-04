@@ -208,6 +208,7 @@ $trainerOptions = [];
 $memoryEnhancements = [];
 $tos_incompatible = [];
 $copyProtections = [];
+$release_language = [];
 
 foreach ($releases as $release) {
     $system_incompatible[$release->getId()] = $systemDao->getIncompatibleSystemsForRelease($release->getId());
@@ -221,6 +222,7 @@ foreach ($releases as $release) {
     $memoryEnhancements[$release->getId()] = $memoryDao->getMemoryForRelease($release->getId());
     $tos_incompatible[$release->getId()] = $tosDao->getIncompatibleTosWithNameForRelease($release->getId());
     $copyProtections[$release->getId()] = $copyProtectionDao->getCopyProtectionsForRelease($release->getId());
+    $release_language[$release->getId()] = $languageDao->getAllGameReleaseLanguages($release->getId());
 }
 $smarty->assign('system_incompatible', $system_incompatible);
 $smarty->assign('emulator_incompatible', $emulator_incompatible);
@@ -233,6 +235,7 @@ $smarty->assign('trainerOptions', $trainerOptions);
 $smarty->assign('memoryEnhancements', $memoryEnhancements);
 $smarty->assign('tos_incompatible', $tos_incompatible);
 $smarty->assign('copyProtections', $copyProtections);
+$smarty->assign('releaseLanguages', $release_language);
 
 //***********************************************************************************
 //get the game genres & the genres already selected for this game

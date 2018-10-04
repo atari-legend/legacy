@@ -148,6 +148,51 @@
                 <br>
 
                 <fieldset class="secondary_fieldset">
+                    <legend class="primary_legend">Language</legend>
+                    <div class="help-hint">
+                        Add the language(s) used in this release. You can add as many as you like.
+                    </div>
+                    <br>
+
+                    {if isset($release_languages)}
+                        {foreach from=$release_languages item=release_language}
+                            <form action="../games/db_games_release_detail.php" method="get">
+                                <a title="Remove {$release_language->getName()|escape:"html"} from this release"
+                                    href="../games/db_games_release_detail.php?game_id={$game->getId()}&amp;release_id={$release->getId()}&amp;language_id={$release_language->getId()}&amp;action=remove_release_language"
+                                    onclick="javascript:return confirm('This language will be removed from the release')">
+                                    <span class="fa fa-fw fa-trash"></span>
+                                </a>
+
+                                <input type="hidden" name="action" value="update_release_language">
+                                <input type="hidden" name="release_id" value="{$release->getId()}">
+                                <input type="hidden" name="language_id" value="{$release_language->getid()}">
+                                <input type="text" value="{$release_language->getName()}" class="standard_input input_large" disabled id="gd_game_dev">
+                            </form>
+                        {/foreach}
+                    {/if}
+
+                    <hr class="separator_add">
+
+                    <form action="../games/db_games_release_detail.php" method="post">
+                        <input type="hidden" name="release_id" value="{$release->getId()}">
+                        <input type="hidden" name="game_id" value="{$game->getId()}">
+                        <input type="hidden" name="action" value="add_release_language">
+
+                        <select name="language_id"
+                            class="standard_select select_large" id="gd_dev_name" required>
+                            <option value="">-</option>
+                            {foreach from=$languages item=language}
+                                <option value="{$language->getId()}">{$language->getName()}</option>
+                            {/foreach}
+                        </select>
+
+                        <input type="submit" value="Add language" class="secondary_button">
+                    </form>
+                    <br>
+                </fieldset>
+                <br>
+
+                <fieldset class="secondary_fieldset">
                     <legend class="primary_legend">Distribution</legend>
                     <div class="help-hint">
                         You can add as many distributors as you like to a game release.

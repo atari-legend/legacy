@@ -246,6 +246,19 @@
                         {/foreach}
                     {/if}
 
+                    {if $releaseLanguages[$release->getId()]}
+                        {foreach from=$releaseLanguages[$release->getId()] item=releaseLanguages_id name=releaseLanguage}
+                            <tr>
+                                <td class="w-30">{if $smarty.foreach.releaseLanguage.index == 0}<span class="games_main_detail_info_right">Language</span>{/if}</td>
+                                <td class="w-5">-</td>
+                                <td class="w-60">
+                                    {$releaseLanguages_id->getName()}
+                                    <br>
+                                </td>
+                            </tr>
+                        {/foreach}
+                    {/if}
+
                 {/foreach}
             </table>
         </div>

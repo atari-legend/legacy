@@ -72,6 +72,7 @@ if ($_SERVER['REQUEST_METHOD'] == "GET") {
         $smarty->assign('release_distributors', $pubDevDao->getDistributorsForRelease($release->getId()));   
         $smarty->assign('release_memory_enhancements', $memoryDao->getMemoryForRelease($release->getId()));
         $smarty->assign('release_copy_protections', $copyProtectionDao->getCopyProtectionsForRelease($release->getId()));
+        $smarty->assign('release_languages', $languageDao->getAllGameReleaseLanguages($release->getId()));
     } else {
         // Creating a new release
         $game = $gameDao->getGame($game_id);
