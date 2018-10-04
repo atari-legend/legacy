@@ -106,7 +106,8 @@ if (isset($action) && ($action == 'general'))
         $date,
         $license,
         ($type != '') ? $type : null,
-        ($pub_dev_id != '') ? $pub_dev_id : null
+        ($pub_dev_id != '') ? $pub_dev_id : null,
+        ($status != '') ? $status : null
     );
     
     $locationDao->setLocationsForRelease($release_id, isset($location) ? $location : []);
@@ -173,12 +174,20 @@ if (isset($action) and $action == 'delete_release_aka') {
 if (isset($action) && ($action == 'features')) {  
     $game = $gameDao->getGame($game_id);
     
+    if (isset($hd_installable)) {
+        $hd_installable = 1;
+    }else{
+        $hd_installable = 0;
+    } 
+    
     $systemDao->setIncompatibleSystemsForRelease($release_id, isset($system_incompatible) ? $system_incompatible : []);
     $systemDao->setEnhancedSystemsForRelease($release_id, isset($system_enhanced) ? $system_enhanced : []);
     $resolutionDao->setResolutionsForRelease($release_id, isset($resolution) ? $resolution : []);
     $emulatorDao->setIncompatibleEmulatorsForRelease($release_id, isset($emulator_incompatible) ? $emulator_incompatible : []);
+    $gameReleaseDao->updateHdRelease($release_id, $hd_installable);
     
     create_log_entry('Game Release', $game_id, 'Compatibility', $release_id, 'Update', $_SESSION['user_id']);
+    $_SESSION['edit_message'] = "Compatibility options updated";
     
     if ($submit_type == "save_and_back") {
         header("Location: games_detail.php?game_id=".$game_id);

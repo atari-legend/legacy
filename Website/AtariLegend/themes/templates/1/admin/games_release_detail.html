@@ -96,6 +96,15 @@
                         </select>
                         <br>
 
+                        <label class="input">Status</label>
+                        <select name="status" class="standard_select select_large">
+                            <option value="">-</option>
+                            {foreach from=$release_status item=release_stat}
+                                <option {if $release_stat == $release->getStatus() or (isset($status) and $status == $release_stat)}selected{/if}>{$release_stat}</option>
+                            {/foreach}
+                        </select>
+                        <br>
+
                         <label class="input">Location</label>
                         <select name="location[]" class="standard_select select_large" multiple size="15">
                             {foreach from=$locations item=location}
@@ -302,12 +311,12 @@
             </div>
 
             <div id="tab-compatibility" class="tabcontent tabpane">
-                <form action="../games/db_games_release_detail.php" method="post" class="release_editor">
-                    <input type="hidden" name="game_id" value="{$game->getId()}">
-                    <input type="hidden" name="release_id" value="{$release->getId()}">
-                    <input type="hidden" name="action" value="features">
-                    <fieldset class="secondary_fieldset">
-                        <legend class="primary_legend">Compatibility</legend>
+                <fieldset class="secondary_fieldset">
+                    <legend class="primary_legend">Compatibility</legend>
+                    <form action="../games/db_games_release_detail.php" method="post" class="release_editor">
+                        <input type="hidden" name="game_id" value="{$game->getId()}">
+                        <input type="hidden" name="release_id" value="{$release->getId()}">
+                        <input type="hidden" name="action" value="features">
                         <div class="gd_basic_game_info_container">
                             <div id="gd_basic_game_info_1">
                                 <label class="input">Screen resolution</label>
@@ -340,6 +349,16 @@
                                     {/if}
                                 {/foreach}
                                 <br>
+
+                                <label class="input">HD installable</label>
+                                <div class="checkbox links_mod_checkbox">
+                                    <input type="checkbox"
+                                        id="hd_installable"
+                                        name="hd_installable"
+                                        {if $release->getHdInstallable() == '1'}checked{/if}
+                                        value="{$release->getHdInstallable()}">
+                                    <label for="hd_installable"></label>
+                                </div>
                             </div>
                             <div id="gd_basic_game_info_2">
                                 <label class="input">Incompatible systems</label>
@@ -373,62 +392,63 @@
                         <button type="submit" name="submit_type" value="save_and_back" class="primary_button">Save and close</button>
                         <button type="submit" name="submit_type" value="save" class="secondary_button">Save changes</button>
                         <a href="games_detail.php?game_id={$game->getId()}">Cancel</a>
-                        <br>
-                        <br>
-                        <br>
-                        <br>
-                        <label class="input">Incompatible TOS</label>
-                        <br>
-                        {if isset($tos_incompatible)}
-                            {foreach from=$tos_incompatible item=tos_incompatible_linked}
-                                <form action="../games/db_games_release_detail.php" method="get">
-                                    <a title="Remove {$tos_incompatible_linked->getName()|escape:"html"} from this release"
-                                        href="../games/db_games_release_detail.php?game_id={$game->getId()}&amp;release_id={$release->getId()}&amp;tos_id={$tos_incompatible_linked->getId()}&amp;action=remove_tos_incompatible"
-                                        onclick="javascript:return confirm('This TOS will be removed from the release')">
-                                        <span class="fa fa-fw fa-trash"></span>
-                                    </a>
+                    </form>
+                    <br>
+                    <br>
+                    <br>
+                    <br>
+                    <label class="input">Incompatible TOS</label>
+                    <br>
+                    {if isset($tos_incompatible)}
+                        {foreach from=$tos_incompatible item=tos_incompatible_linked}
+                            <form action="../games/db_games_release_detail.php" method="get">
+                                <a title="Remove {$tos_incompatible_linked->getName()|escape:"html"} from this release"
+                                    href="../games/db_games_release_detail.php?game_id={$game->getId()}&amp;release_id={$release->getId()}&amp;tos_id={$tos_incompatible_linked->getId()}&amp;action=remove_tos_incompatible"
+                                    onclick="javascript:return confirm('This TOS will be removed from the release')">
+                                    <span class="fa fa-fw fa-trash"></span>
+                                </a>
 
-                                    <input type="hidden" name="action" value="update_tos_incompatible">
-                                    <input type="hidden" name="game_id" value="{$game->getId()}">
-                                    <input type="hidden" name="release_id" value="{$release->getId()}">
-                                    <input type="hidden" name="tos_id" value="{$tos_incompatible_linked->getId()}">
-                                    <input type="text" value="{$tos_incompatible_linked->getName()}" class="standard_input input_medium" disabled id="gd_game_dev">
-                                    <select name="new_language_id"
-                                    onchange="jQuery('#update-toslanguage-{$tos_incompatible_linked->getLanguage()->getId()}').show()"
-                                    class="standard_select select_medium">
-                                    <option value="">-</option>
-                                    {foreach from=$languages item=all_languages}
-                                        <option value="{$all_languages->getId()}" {if $tos_incompatible_linked->getLanguage()->getId() eq $all_languages->getId()} selected{/if}>{$all_languages->getName()}</option>
-                                    {/foreach}
-                                    </select>
-                                    <input type="submit" id="update-toslanguage-{$tos_incompatible_linked->getLanguage()->getId()}" style="display: none;" class="secondary_button" value="Update">
-                                </form>
-                            {/foreach}
-                        {/if}
-                        <hr class="separator_add">
-
-                        <form action="../games/db_games_release_detail.php" method="post">
-                            <input type="hidden" name="release_id" value="{$release->getId()}">
-                            <input type="hidden" name="game_id" value="{$game->getId()}">
-                            <input type="hidden" name="action" value="add_tos_incompatible">
-                            <span class="fa fa-fw"></span>
-                            <select name="tos_id"
-                                class="standard_select select_large" id="gd_dev_name" required>
-                                <option value="" selected="selected" disabled>-</option>
-                                {foreach from=$tos item=all_tos}
-                                    <option value="{$all_tos->getId()}">{$all_tos->getName()}</option>
-                                {/foreach}
-                            </select>
-                            <select name="language_id" class="standard_select select_medium">
+                                <input type="hidden" name="action" value="update_tos_incompatible">
+                                <input type="hidden" name="game_id" value="{$game->getId()}">
+                                <input type="hidden" name="release_id" value="{$release->getId()}">
+                                <input type="hidden" name="tos_id" value="{$tos_incompatible_linked->getId()}">
+                                <input type="text" value="{$tos_incompatible_linked->getName()}" class="standard_input input_medium" disabled id="gd_game_dev">
+                                <select name="new_language_id"
+                                onchange="jQuery('#update-toslanguage-{$tos_incompatible_linked->getLanguage()->getId()}').show()"
+                                class="standard_select select_medium">
                                 <option value="">-</option>
-                                {foreach from=$languages item=language}
-                                    <option value="{$language->getId()}">{$language->getName()}</option>
+                                {foreach from=$languages item=all_languages}
+                                    <option value="{$all_languages->getId()}" {if $tos_incompatible_linked->getLanguage()->getId() eq $all_languages->getId()} selected{/if}>{$all_languages->getName()}</option>
                                 {/foreach}
-                            </select>
-                            <input type="submit" value="Add TOS" class="secondary_button">
-                        </form>
-                    </fieldset>
-                </form>
+                                </select>
+                                <input type="submit" id="update-toslanguage-{$tos_incompatible_linked->getLanguage()->getId()}" style="display: none;" class="secondary_button" value="Update">
+                            </form>
+                        {/foreach}
+                    {/if}
+                    <hr class="separator_add">
+
+                    <form action="../games/db_games_release_detail.php" method="post">
+                        <input type="hidden" name="release_id" value="{$release->getId()}">
+                        <input type="hidden" name="game_id" value="{$game->getId()}">
+                        <input type="hidden" name="action" value="add_tos_incompatible">
+                        <span class="fa fa-fw"></span>
+                        <select name="tos_id"
+                            class="standard_select select_large" id="gd_dev_name" required>
+                            <option value="" selected="selected" disabled>-</option>
+                            {foreach from=$tos item=all_tos}
+                                <option value="{$all_tos->getId()}">{$all_tos->getName()}</option>
+                            {/foreach}
+                        </select>
+                        <select name="language_id" class="standard_select select_medium">
+                            <option value="">-</option>
+                            {foreach from=$languages item=language}
+                                <option value="{$language->getId()}">{$language->getName()}</option>
+                            {/foreach}
+                        </select>
+                        <input type="submit" value="Add TOS" class="secondary_button">
+                    </form>
+                </fieldset>
+
                 <br>
                 <fieldset class="secondary_fieldset">
                     <legend class="primary_legend">Memory</legend>
@@ -555,7 +575,7 @@
 
             <div id="tab-scene" class="tabcontent tabpane">
                 <fieldset class="secondary_fieldset">
-                    <legend class="primary_legend">Release information</legend>
+                    <legend class="primary_legend">Trainer</legend>
 
                     <div class="help-hint">
                         These are all the scene related features of a release like trainers, crackthro information ...
