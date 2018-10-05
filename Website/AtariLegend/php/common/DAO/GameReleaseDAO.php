@@ -89,17 +89,18 @@ class GameReleaseDAO {
         $type = null,
         $status = null,
         $publisher_id = null,
-        $hd_installable = null
+        $hd_installable = null,
+        $notes = null
     ) {
 
         $stmt = \AL\Db\execute_query(
             "GameReleaseDAO: addReleaseForGame",
             $this->mysqli,
             "INSERT INTO game_release
-                (game_id, `name`, `date`, license, type, pub_dev_id, status, hd_installable)
+                (game_id, `name`, `date`, license, type, pub_dev_id, status, hd_installable, notes)
             VALUES
-                (?, ?, ?, ?, ?, ?, ?, ?)",
-            "issssii", $game_id, $name, $date, $license, $type, $publisher_id, $status, $hd_installable
+                (?, ?, ?, ?, ?, ?, ?, ?, ?)",
+            "issssiis", $game_id, $name, $date, $license, $type, $publisher_id, $status, $hd_installable, $notes
         );
 
         $id = $stmt->insert_id;
@@ -121,7 +122,7 @@ class GameReleaseDAO {
             "SELECT
                 game_release.id, game_release.name, `date`, license, game_release.type, game_release.memory_id, 
                 memory.memory, pub_dev.pub_dev_id, pub_dev.pub_dev_name, pub_dev_text.pub_dev_profile, 
-                pub_dev_text.pub_dev_imgext, game_release.status, game_release.hd_installable
+                pub_dev_text.pub_dev_imgext, game_release.status, game_release.hd_installable, game_release.notes
             FROM game_release
             LEFT JOIN pub_dev ON game_release.pub_dev_id = pub_dev.pub_dev_id
             LEFT JOIN pub_dev_text ON pub_dev.pub_dev_id = pub_dev_text.pub_dev_id
@@ -136,7 +137,7 @@ class GameReleaseDAO {
             $stmt,
             $id, $name, $date, $license, $type, $memory_id, $memory,
             $pub_dev_id, $pub_dev_name, $pub_dev_profile, $pub_dev_imgext,
-            $status, $hd_installable
+            $status, $hd_installable, $notes
         );
 
         $releases = [];
@@ -149,7 +150,7 @@ class GameReleaseDAO {
                 ($pub_dev_id != null)
                     ? new \AL\Common\Model\PubDev\PubDev($pub_dev_id, $pub_dev_name, $pub_dev_profile, $pub_dev_imgext)
                     : null,
-                $status, $hd_installable
+                $status, $hd_installable, $notes
             );
         }
 
@@ -171,7 +172,8 @@ class GameReleaseDAO {
             "SELECT
                 game_release.id, game_id, game_release.name, `date`, license, game_release.type, memory_id, 
                 memory.memory, pub_dev.pub_dev_id, pub_dev.pub_dev_name, pub_dev_text.pub_dev_profile, 
-                pub_dev_text.pub_dev_imgext, game_release.status, game_release.hd_installable
+                pub_dev_text.pub_dev_imgext, game_release.status, game_release.hd_installable,
+                game_release.notes
             FROM game_release
             LEFT JOIN pub_dev ON game_release.pub_dev_id = pub_dev.pub_dev_id
             LEFT JOIN pub_dev_text ON pub_dev.pub_dev_id = pub_dev_text.pub_dev_id
@@ -185,7 +187,7 @@ class GameReleaseDAO {
             $stmt,
             $id, $game_id, $name, $date, $license, $type, $memory_id, $memory,
             $pub_dev_id, $pub_dev_name, $pub_dev_profile, $pub_dev_imgext,
-            $status, $hd_installable
+            $status, $hd_installable, $notes
         );
 
         $release = null;
@@ -198,7 +200,7 @@ class GameReleaseDAO {
                 ($pub_dev_id != null)
                     ? new \AL\Common\Model\PubDev\PubDev($pub_dev_id, $pub_dev_name, $pub_dev_profile, $pub_dev_imgext)
                     : null,
-                $status, $hd_installable
+                $status, $hd_installable, $notes
             );
         }
 
@@ -283,6 +285,12 @@ class GameReleaseDAO {
         $stmt = \AL\Db\execute_query(
             "GameRelaseDAO: deleteRelease",
             $this->mysqli,
+            "DELETE FROM game_release_disk_protection WHERE release_id = ?",
+            "i", $release_id
+        );
+        $stmt = \AL\Db\execute_query(
+            "GameRelaseDAO: deleteRelease",
+            $this->mysqli,
             "DELETE FROM game_release_language WHERE release_id = ?",
             "i", $release_id
         );
@@ -306,7 +314,7 @@ class GameReleaseDAO {
      * @param string $type New type of release
      * @param string $publisher_id New ID of the publisher of the release
      */
-    public function updateRelease($release_id, $name, $date, $license, $type, $publisher_id, $status) {
+    public function updateRelease($release_id, $name, $date, $license, $type, $publisher_id, $status, $notes) {
         $stmt = \AL\Db\execute_query(
             "GameReleaseDAO: updateRelease",
             $this->mysqli,
@@ -318,8 +326,9 @@ class GameReleaseDAO {
                 `type` = ?,
                 `pub_dev_id` = ?,
                 `status` = ?,
+                `notes` = ?
             WHERE id = ?",
-            "ssssisi", $name, $date, $license, $type, $publisher_id, $status, $release_id
+            "ssssissi", $name, $date, $license, $type, $publisher_id, $status, $notes, $release_id
         );
 
         $stmt->close();

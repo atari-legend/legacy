@@ -33,6 +33,7 @@ require_once __DIR__."/../../common/DAO/TrainerOptionDAO.php";
 require_once __DIR__."/../../common/DAO/MemoryDAO.php";
 require_once __DIR__."/../../common/DAO/TosDAO.php";
 require_once __DIR__."/../../common/DAO/CopyProtectionDAO.php";
+require_once __DIR__."/../../common/DAO/DiskProtectionDAO.php";
 
 $gameReleaseDao = new \AL\Common\DAO\GameReleaseDAO($mysqli);
 $gameSeriesDao = new \AL\Common\DAO\GameSeriesDAO($mysqli);
@@ -52,6 +53,7 @@ $trainerOptionDao = new \AL\Common\DAO\TrainerOptionDAO($mysqli);
 $memoryDao = new \AL\Common\DAO\MemoryDAO($mysqli);
 $tosDao = new \AL\Common\DAO\TosDAO($mysqli);
 $copyProtectionDao = new \AL\Common\DAO\CopyProtectionDAO($mysqli);
+$diskProtectionDao = new \AL\Common\DAO\DiskProtectionDAO($mysqli);
 
 /**
  * Generates an SEO-friendly description of a game, depending on the data available
@@ -160,14 +162,8 @@ function generate_game_description(
 $sql_game = $mysqli->query("SELECT game_name,
                game.game_id,
                game.game_series_id,
-               game_development.development,
-               game_unreleased.unreleased,
-               game_unfinished.unfinished,
                game_wanted.game_wanted_id
-               FROM game
-               LEFT JOIN game_unreleased ON (game.game_id = game_unreleased.game_id)
-               LEFT JOIN game_development ON (game.game_id = game_development.game_id)
-               LEFT JOIN game_unfinished ON (game.game_id = game_unfinished.game_id)
+               FROM game               
                LEFT JOIN game_wanted ON (game.game_id = game_wanted.game_id)
                     WHERE game.game_id='$game_id'") or die("Error getting game info");
 
@@ -175,9 +171,6 @@ if ($game_info = $sql_game->fetch_array(MYSQLI_BOTH)) {
     $smarty->assign('game_info', array(
         'game_name' => $game_info['game_name'],
         'game_id' => $game_info['game_id'],
-        'game_development' => $game_info['development'],
-        'game_unreleased' => $game_info['unreleased'],
-        'game_unfinished' => $game_info['unfinished'],
         'game_wanted' => $game_info['game_wanted_id']
     ));
 }
@@ -208,6 +201,7 @@ $trainerOptions = [];
 $memoryEnhancements = [];
 $tos_incompatible = [];
 $copyProtections = [];
+$diskProtections = [];
 $release_language = [];
 
 foreach ($releases as $release) {
@@ -222,6 +216,7 @@ foreach ($releases as $release) {
     $memoryEnhancements[$release->getId()] = $memoryDao->getMemoryForRelease($release->getId());
     $tos_incompatible[$release->getId()] = $tosDao->getIncompatibleTosWithNameForRelease($release->getId());
     $copyProtections[$release->getId()] = $copyProtectionDao->getCopyProtectionsForRelease($release->getId());
+    $diskProtections[$release->getId()] = $diskProtectionDao->getDiskProtectionsForRelease($release->getId());
     $release_language[$release->getId()] = $languageDao->getAllGameReleaseLanguages($release->getId());
 }
 $smarty->assign('system_incompatible', $system_incompatible);
@@ -236,6 +231,7 @@ $smarty->assign('memoryEnhancements', $memoryEnhancements);
 $smarty->assign('tos_incompatible', $tos_incompatible);
 $smarty->assign('copyProtections', $copyProtections);
 $smarty->assign('releaseLanguages', $release_language);
+$smarty->assign('diskProtections', $diskProtections);
 
 //***********************************************************************************
 //get the game genres & the genres already selected for this game

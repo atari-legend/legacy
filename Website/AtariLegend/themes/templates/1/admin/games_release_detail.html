@@ -148,6 +148,12 @@
                         </a>
                         <br>
                         <br>
+                        <label class="input">Note</label>
+                        <input type="text" name="notes" class="standard_input" style="width:75%" value="{$release->getNotes()}">
+                        <br>
+                        <span class="help-hint">If you think of something that isn't yet available in the database, add a note/reminder here. This info will not be published on the main site.</span>
+                        <br>
+                        <br>
                         <br>
                         <button type="submit" name="submit_type" value="save_and_back" class="primary_button">Save and close</button>
                         <button type="submit" name="submit_type" value="save" class="secondary_button">Save changes</button>
@@ -389,6 +395,7 @@
                                 {/foreach}
                             </div>
                         </div>
+                        <br>
                         <button type="submit" name="submit_type" value="save_and_back" class="primary_button">Save and close</button>
                         <button type="submit" name="submit_type" value="save" class="secondary_button">Save changes</button>
                         <a href="games_detail.php?game_id={$game->getId()}">Cancel</a>
@@ -529,7 +536,7 @@
                     <form action="../games/db_games_release_detail.php" method="post" name="scene">
                         <input type="hidden" name="game_id" value="{$game->getId()}">
                         <input type="hidden" name="release_id" value="{$release->getId()}">
-                        <input type="hidden" name="action" value="copy_protection">
+                        <input type="hidden" name="action" value="protection">
                         <div class="gd_basic_game_info_container">
                             <div id="gd_basic_game_info_1">
                                 <b>Copy Protection</b>&nbsp;&nbsp;
@@ -551,6 +558,41 @@
                                 </div>
                                 <script>
                                     $('#input-tags2').selectize({
+                                        plugins: ['remove_button'],
+                                        persist: false,
+                                        create: true,
+                                        render: {
+                                            item: function(data, escape) {
+                                                return '<div class="primary_button" style="border-radius:3px;">' + escape(data.text) + '</div>';
+                                            }
+                                        },
+                                    });
+                                </script>
+                            </div>
+                        </div>
+                        <br>
+                        <br>
+                        <div class="gd_basic_game_info_container">
+                            <div id="gd_basic_game_info_1">
+                                <b>Disk Protection</b>&nbsp;&nbsp;
+                                <div class="control-group">
+                                    <label for="input-tags3"></label>
+                                    <select name="disk_protection[]" multiple id="input-tags3" class="standard_select input_full">
+                                    {foreach from=$disk_protections item=all_disk_protections}
+                                        <option value="{$all_disk_protections->getId()}"
+                                            {foreach from=$release_disk_protections item=linked_disk_protections name=disk_protections}
+                                                {if $linked_disk_protections->getId() == $all_disk_protections->getId()}
+                                                    selected
+                                                {/if}
+                                            {/foreach}
+                                            >
+                                            {$all_disk_protections->getName()}
+                                        </option>
+                                    {/foreach}
+                                    </select>
+                                </div>
+                                <script>
+                                    $('#input-tags3').selectize({
                                         plugins: ['remove_button'],
                                         persist: false,
                                         create: true,

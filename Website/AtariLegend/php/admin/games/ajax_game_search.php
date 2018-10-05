@@ -44,9 +44,6 @@ $RESULTGAME = "SELECT game.game_id,
         LEFT JOIN screenshot_game ON (screenshot_game.game_id = game.game_id)
         LEFT JOIN game_music ON (game_music.game_id = game.game_id)
         LEFT JOIN game_download ON (game_download.game_id = game.game_id)
-        LEFT JOIN game_development ON (game.game_id = game_development.game_id)
-        LEFT JOIN game_unreleased ON (game.game_id = game_unreleased.game_id)
-        LEFT JOIN game_unfinished ON (game.game_id = game_unfinished.game_id)
         LEFT JOIN game_programming_language ON (game.game_id = game_programming_language.game_id)
         LEFT JOIN game_engine ON (game.game_id = game_engine.game_id)
         LEFT JOIN game_wanted ON (game.game_id = game_wanted.game_id)
@@ -73,10 +70,7 @@ $RESULTAKA = "SELECT
       LEFT JOIN game_boxscan ON (game_boxscan.game_id = game_aka.game_id)
       LEFT JOIN screenshot_game ON (screenshot_game.game_id = game.game_id)
       LEFT JOIN game_music ON (game_music.game_id = game.game_id)
-      LEFT JOIN game_download ON (game_download.game_id = game.game_id)
-      LEFT JOIN game_development ON (game.game_id = game_development.game_id)
-      LEFT JOIN game_unreleased ON (game.game_id = game_unreleased.game_id)
-      LEFT JOIN game_unfinished ON (game.game_id = game_unfinished.game_id)
+      LEFT JOIN game_download ON (game_download.game_id = game.game_id)      
       LEFT JOIN game_programming_language ON (game.game_id = game_programming_language.game_id)
       LEFT JOIN game_engine ON (game.game_id = game_engine.game_id)
       LEFT JOIN game_wanted ON (game.game_id = game_wanted.game_id)
@@ -149,11 +143,11 @@ if (isset($action) and $action == "search") {
     }
 
     if (isset($development) and $development == "1") {
-        $development_select = " AND game_development.development =$development";
+        $development_select = " AND game_release.status ='Development'";
     }
 
     if (isset($unreleased) and $unreleased == "1") {
-        $unreleased_select = " AND game_unreleased.unreleased =$unreleased";
+        $unreleased_select = " AND game_release.status ='Unreleased'";
     }
 
     if (isset($wanted) and $wanted == "1") {
@@ -165,7 +159,7 @@ if (isset($action) and $action == "search") {
     }
 
     if (isset($unfinished) and $unfinished == "1") {
-        $unfinished_select = " AND game_unfinished.unfinished =$unfinished";
+        $unfinished_select = " AND game_release.status ='Unfinished'";
     }
 
     if (isset($seuck) and $seuck == "1") {

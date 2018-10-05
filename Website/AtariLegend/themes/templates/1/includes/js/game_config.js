@@ -56,6 +56,9 @@ $(document).ready(function () {
     $('select[name=copy_protection_select]').change(function () {
         hideShow('copy_protection');
     });
+    $('select[name=disk_protection_select]').change(function () {
+        hideShow('disk_protection');
+    });
 });
 
 function hideShow (type) {

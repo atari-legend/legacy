@@ -22,6 +22,7 @@ require_once __DIR__."/../../common/DAO/TrainerOptionDAO.php";
 require_once __DIR__."/../../common/DAO/MemoryDAO.php";
 require_once __DIR__."/../../common/DAO/TosDAO.php";
 require_once __DIR__."/../../common/DAO/CopyProtectionDAO.php";
+require_once __DIR__."/../../common/DAO/DiskProtectionDAO.php";
 
 $changeLogDao = new \AL\Common\DAO\ChangeLogDAO($mysqli);
 $engineDao = new \AL\Common\DAO\EngineDAO($mysqli);
@@ -38,6 +39,7 @@ $trainerOptionDao = new \AL\Common\DAO\TrainerOptionDAO($mysqli);
 $memoryDao = new \AL\Common\DAO\MemoryDAO($mysqli);
 $tosDao = new \AL\Common\DAO\TosDAO($mysqli);
 $copyProtectionDao = new \AL\Common\DAO\CopyProtectionDAO($mysqli);
+$diskProtectionDao = new \AL\Common\DAO\DiskProtectionDAO($mysqli);
 
 switch ($_POST['action']) {
 	case "Add engine":
@@ -400,6 +402,32 @@ switch ($_POST['action']) {
         $copyProtectionDao->updateCopyProtection($copy_protection_id_edit, $copy_protection_edit);
 
         create_log_entry('Games Config', $copy_protection_id_edit, 'Protection', $copy_protection_id_edit, 'Update', $_SESSION['user_id']);
+
+        $_SESSION['edit_message'] = "Protection has been updated" ;
+        break;
+        
+    case "Add disk protection":
+        $diskProtectionDao->addDiskProtection($disk_protection_new);
+        
+        $new_disk_protection_id = $mysqli->insert_id;
+        
+        create_log_entry('Games Config', $new_disk_protection_id, 'Disk Protection', $new_disk_protection_id, 'Insert', $_SESSION['user_id']);
+        
+        $_SESSION['edit_message'] = "$disk_protection_new has been added" ;
+        break;
+        
+    case "Delete disk protection":
+        create_log_entry('Games Config', $disk_protection_id_edit, 'Disk Protection', $disk_protection_id_edit, 'Delete', $_SESSION['user_id']);
+        
+        $diskProtectionDao->deleteDiskProtection($disk_protection_id_edit);       
+
+        $_SESSION['edit_message'] = "Protection has been deleted" ;
+        break;
+        
+    case "Modify disk protection":
+        $diskProtectionDao->updateDiskProtection($disk_protection_id_edit, $disk_protection_edit);
+
+        create_log_entry('Games Config', $disk_protection_id_edit, 'Disk Protection', $disk_protection_id_edit, 'Update', $_SESSION['user_id']);
 
         $_SESSION['edit_message'] = "Protection has been updated" ;
         break;
