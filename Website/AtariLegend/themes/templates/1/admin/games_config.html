@@ -354,6 +354,27 @@
                     <input type="text" name="copy_protection_new" class="standard_input input_medium" placeholder="Enter new protection" required>
                     <input type="submit" value="Add protection" name="action" class="secondary_button">
                 </form>
+                <br>
+                <br>
+                <b>Disk Protection</b>&nbsp;&nbsp;
+                <br>
+                <form action="../games/db_games_config.php" method="post" name="disk_protection">
+                    <select name="disk_protection_select" class="standard_select input_medium grayed_out" id="disk_protection_select">
+                        <option value="" selected="selected">-</option>
+                        {foreach from=$disk_protections item=all_disk_protections}
+                            <option value="{$all_disk_protections->getId()}">{$all_disk_protections->getName()}</option>
+                        {/foreach}
+                    </select>
+                    <input type="text" name="disk_protection_edit" class="standard_input input_medium" style="display:none;" id="disk_protection_edit">
+                    <input type="text" name="disk_protection_id_edit" class="standard_input input_medium" style="display:none;" id="disk_protection_id_edit">
+                    <input type="submit" value="Modify disk protection" name="action" class="secondary_button" style="display:none;" id="disk_protection_mod">
+                    <input type="submit" value="Delete disk protection" name="action" class="primary_button button_danger" style="display:none;" id="disk_protection_del">
+                </form>
+                <hr class="separator_add">
+                <form action="../games/db_games_config.php" method="post" name="disk_protection">
+                    <input type="text" name="disk_protection_new" class="standard_input input_medium" placeholder="Enter new protection" required>
+                    <input type="submit" value="Add disk protection" name="action" class="secondary_button">
+                </form>
             </fieldset>
             <br>
             <fieldset class="secondary_fieldset">

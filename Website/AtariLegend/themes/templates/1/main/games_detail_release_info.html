@@ -260,6 +260,19 @@
                         {/foreach}
                     {/if}
 
+                    {if $diskProtections[$release->getId()]}
+                        {foreach from=$diskProtections[$release->getId()] item=diskProtection_id name=diskProtection}
+                            <tr>
+                                <td class="w-30">{if $copyProtections[$release->getId()]}{else}{if $smarty.foreach.diskProtection.index == 0}<span class="games_main_detail_info_right">Protection</span>{/if}{/if}</td>
+                                <td class="w-5">-</td>
+                                <td class="w-60">
+                                    {$diskProtection_id->getName()} <span class="standard_tile_subtext">(disk)</span>
+                                    <br>
+                                </td>
+                            </tr>
+                        {/foreach}
+                    {/if}
+
                     {if $releaseLanguages[$release->getId()]}
                         {foreach from=$releaseLanguages[$release->getId()] item=releaseLanguages_id name=releaseLanguage}
                             <tr>

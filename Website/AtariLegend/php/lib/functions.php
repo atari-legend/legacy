@@ -1581,6 +1581,13 @@ function create_log_entry($section, $section_id, $subsection, $subsection_id, $a
             $query_data   = $result->fetch_array(MYSQLI_BOTH);
             $section_name = $query_data['name'];
         }
+        elseif ($subsection == 'Disk Protection') {
+            // Get the protection type
+            $query = "SELECT name FROM disk_protection WHERE id = '$section_id'";
+            $result = $mysqli->query($query) or die("getting disk protection failed");
+            $query_data   = $result->fetch_array(MYSQLI_BOTH);
+            $section_name = $query_data['name'];
+        }
         $subsection_name = $section_name;
     }
     

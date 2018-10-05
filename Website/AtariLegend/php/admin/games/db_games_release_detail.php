@@ -22,6 +22,7 @@ require_once __DIR__."/../../common/DAO/TrainerOptionDAO.php";
 require_once __DIR__."/../../common/DAO/MemoryDAO.php";
 require_once __DIR__."/../../common/DAO/TosDAO.php";
 require_once __DIR__."/../../common/DAO/CopyProtectionDAO.php";
+require_once __DIR__."/../../common/DAO/DiskProtectionDAO.php";
 
 $gameReleaseDao = new \AL\Common\DAO\GameReleaseDAO($mysqli);
 $gameDao = new \AL\Common\DAO\GameDao($mysqli);
@@ -38,6 +39,7 @@ $trainerOptionDao = new \AL\Common\DAO\TrainerOptionDAO($mysqli);
 $memoryDao = new \AL\Common\DAO\MemoryDAO($mysqli);
 $tosDao = new \AL\Common\DAO\TosDAO($mysqli);
 $copyProtectionDao = new \AL\Common\DAO\CopyProtectionDAO($mysqli);
+$diskProtectionDao = new \AL\Common\DAO\DiskProtectionDAO($mysqli);
 
 //***********************************************************************************
 // Add a new release
@@ -107,7 +109,8 @@ if (isset($action) && ($action == 'general'))
         $license,
         ($type != '') ? $type : null,
         ($pub_dev_id != '') ? $pub_dev_id : null,
-        ($status != '') ? $status : null
+        ($status != '') ? $status : null,
+        ($notes != '') ? $notes : null
     );
     
     $locationDao->setLocationsForRelease($release_id, isset($location) ? $location : []);
@@ -347,10 +350,11 @@ if (isset($action) && ($action == 'remove_tos_incompatible')) {
 //***********************************************************************************
 //update the the copy protection section of the game release
 //***********************************************************************************
-if (isset($action) && ($action == 'copy_protection')) {  
+if (isset($action) && ($action == 'protection')) {  
     
-    //Update the game engine
+    //Update the protection options
     $copyProtectionDao->setCopyProtectionsForRelease($release_id, isset($copy_protection) ? $copy_protection : []);
+    $diskProtectionDao->setDiskProtectionsForRelease($release_id, isset($disk_protection) ? $disk_protection : []);
     
     create_log_entry('Game Release', $game_id, 'Protection', $release_id, 'Update', $_SESSION['user_id']);
     $_SESSION['edit_message'] = "Protection info updated";

@@ -15,6 +15,7 @@ class GameRelease {
     private $publisher;
     private $status;
     private $hd_installable;
+    private $notes;
 
     public function __construct(
         $id,
@@ -26,7 +27,8 @@ class GameRelease {
         $memory,
         $publisher,
         $status,
-        $hd_installable
+        $hd_installable,
+        $notes
     ) {
         $this->id = $id;
         $this->game_id = $game_id;
@@ -38,6 +40,7 @@ class GameRelease {
         $this->publisher = $publisher;
         $this->status = $status;
         $this->hd_installable = $hd_installable;
+        $this->notes = $notes;
     }
 
     public function getId() {
@@ -78,5 +81,9 @@ class GameRelease {
     
     public function getHdInstallable() {
         return $this->hd_installable;
+    }
+    
+    public function getNotes() {
+        return $this->notes;
     }
 }

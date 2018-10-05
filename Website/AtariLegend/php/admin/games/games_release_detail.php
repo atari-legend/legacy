@@ -18,6 +18,7 @@ require_once __DIR__."/../../common/DAO/TrainerOptionDAO.php";
 require_once __DIR__."/../../common/DAO/MemoryDAO.php";
 require_once __DIR__."/../../common/DAO/TosDAO.php";
 require_once __DIR__."/../../common/DAO/CopyProtectionDAO.php";
+require_once __DIR__."/../../common/DAO/DiskProtectionDAO.php";
 
 $gameReleaseDao = new \AL\Common\DAO\GameReleaseDAO($mysqli);
 $gameDao = new \AL\Common\DAO\GameDao($mysqli);
@@ -33,6 +34,7 @@ $trainerOptionDao = new \AL\Common\DAO\TrainerOptionDAO($mysqli);
 $memoryDao = new \AL\Common\DAO\MemoryDAO($mysqli);
 $tosDao = new \AL\Common\DAO\TosDAO($mysqli);
 $copyProtectionDao = new \AL\Common\DAO\CopyProtectionDAO($mysqli);
+$diskProtectionDao = new \AL\Common\DAO\DiskProtectionDAO($mysqli);
 
 if ($_SERVER['REQUEST_METHOD'] == "GET") {
     $smarty->assign('license_types', $gameReleaseDao->getLicenseTypes());
@@ -49,6 +51,7 @@ if ($_SERVER['REQUEST_METHOD'] == "GET") {
     $smarty->assign('memory_enhancement_types', $memoryDao->getEnhancementTypes());
     $smarty->assign('tos', $tosDao->getAllTos());
     $smarty->assign('copy_protections', $copyProtectionDao->getAllCopyProtections());
+    $smarty->assign('disk_protections', $diskProtectionDao->getAllDiskProtections());
     
     // Edit existing release
     if (isset($release_id)) {
@@ -73,6 +76,7 @@ if ($_SERVER['REQUEST_METHOD'] == "GET") {
         $smarty->assign('release_distributors', $pubDevDao->getDistributorsForRelease($release->getId()));   
         $smarty->assign('release_memory_enhancements', $memoryDao->getMemoryForRelease($release->getId()));
         $smarty->assign('release_copy_protections', $copyProtectionDao->getCopyProtectionsForRelease($release->getId()));
+        $smarty->assign('release_disk_protections', $diskProtectionDao->getDiskProtectionsForRelease($release->getId()));
         $smarty->assign('release_languages', $languageDao->getAllGameReleaseLanguages($release->getId()));
     } else {
         // Creating a new release
@@ -91,6 +95,7 @@ if ($_SERVER['REQUEST_METHOD'] == "GET") {
         $smarty->assign('release_trainer_options', []);
         $smarty->assign('release_copy_protections', []);
         $smarty->assign('release_memory_enhancements', []);
+        $smarty->assign('release_disk_protections', []);
 
         // Pass through a pub_dev_id, location_id and release type that may be in URL parameters
         $smarty->assign('pub_dev_id', isset($pub_dev_id) ? $pub_dev_id : null);
