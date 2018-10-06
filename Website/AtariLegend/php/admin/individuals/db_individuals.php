@@ -157,7 +157,7 @@ if (isset($ind_id) and isset($action) and $action == 'delete_ind') {
         $_SESSION['edit_message'] = "Deletion failed - This individual is interviewed - Delete it in the appropriate section";
         header("Location: ../individuals/individuals_main.php");
     } else {
-        $sdbquery = $mysqli->query("SELECT * FROM game_author WHERE ind_id='$ind_id'") or die("Error getting interview info");
+        $sdbquery = $mysqli->query("SELECT * FROM game_individual WHERE individual_id='$ind_id'") or die("Error getting interview info");
         if ($sdbquery->num_rows > 0) {
             $_SESSION['edit_message'] = "Deletion failed - This individual is linked to a game - Delete it in the appropriate section";
             header("Location: ../individuals/individuals_main.php");

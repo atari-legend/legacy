@@ -171,4 +171,53 @@ class SystemDAO {
 
         $stmt->close();
     }
+    
+        /**
+     * add a system to the database
+     *
+     * @param varchar system
+     */
+    public function addSystem($system) {
+        $stmt = \AL\Db\execute_query(
+            "SystemDAO: addSystem",
+            $this->mysqli,
+            "INSERT INTO system (`name`) VALUES (?)",
+            "s", $system
+        );
+
+        $stmt->close();
+    }
+    
+    /**
+     * delete a system
+     *
+     * @param int system_id
+     */
+    public function deleteSystem($system_id) {
+        $stmt = \AL\Db\execute_query(
+            "SystemDAO: deleteSystem",
+            $this->mysqli,
+            "DELETE FROM system WHERE id = ?",
+            "i", $system_id
+        );
+
+        $stmt->close();
+    }
+    
+        /**
+     * update a system
+     *
+     * @param int system_id
+     * @param varchar system_name
+     */
+    public function updateSystem($system_id, $system_name) {
+        $stmt = \AL\Db\execute_query(
+            "SystemDAO: updateSystem",
+            $this->mysqli,
+            "UPDATE system SET name = ? WHERE id = ?",
+            "si", $system_name, $system_id
+        );
+        
+        $stmt->close();
+    }
 }

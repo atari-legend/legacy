@@ -3,6 +3,7 @@ namespace AL\Common\DAO;
 
 require_once __DIR__."/../../lib/Db.php" ;
 require_once __DIR__."/../Model/Game/GameRelease.php" ;
+require_once __DIR__."/../Model/Game/Memory.php" ;
 require_once __DIR__."/../Model/PubDev/PubDev.php" ;
 
 /**
@@ -20,6 +21,11 @@ class GameReleaseDAO {
     const TYPE_PLAYABLE_DEMO = 'Playable demo';
     const TYPE_NON_PLAYABLE_DEMO = 'Non-playable demo';
     const TYPE_SLIDESHOW = 'Slideshow';
+    const TYPE_UNOFFICIAL = 'Unofficial';
+    
+    const STATUS_DEVELOPMENT = 'Development';
+    const STATUS_UNFINISHED = 'Unfinished';
+    const STATUS_UNRELEASED = 'Unreleased';
 
     public function __construct($mysqli) {
         $this->mysqli = $mysqli;
@@ -47,7 +53,20 @@ class GameReleaseDAO {
             GameReleaseDAO::TYPE_BUDGET_RERELEASE,
             GameReleaseDAO::TYPE_PLAYABLE_DEMO,
             GameReleaseDAO::TYPE_NON_PLAYABLE_DEMO,
-            GameReleaseDAO::TYPE_SLIDESHOW
+            GameReleaseDAO::TYPE_SLIDESHOW,
+            GameReleaseDAO::TYPE_UNOFFICIAL
+        );
+    }
+    
+    /**
+     * Get all the game release status
+     * @return String[] A list of game release status
+     */
+    public function getStatus() {
+        return array(
+            GameReleaseDAO::STATUS_DEVELOPMENT,
+            GameReleaseDAO::STATUS_UNFINISHED,
+            GameReleaseDAO::STATUS_UNRELEASED
         );
     }
 
@@ -68,17 +87,20 @@ class GameReleaseDAO {
         $date = null,
         $license = null,
         $type = null,
-        $publisher_id = null
+        $status = null,
+        $publisher_id = null,
+        $hd_installable = null,
+        $notes = null
     ) {
 
         $stmt = \AL\Db\execute_query(
             "GameReleaseDAO: addReleaseForGame",
             $this->mysqli,
             "INSERT INTO game_release
-                (game_id, `name`, `date`, license, type, pub_dev_id)
+                (game_id, `name`, `date`, license, type, pub_dev_id, status, hd_installable, notes)
             VALUES
-                (?, ?, ?, ?, ?, ?)",
-            "issssi", $game_id, $name, $date, $license, $type, $publisher_id
+                (?, ?, ?, ?, ?, ?, ?, ?, ?)",
+            "issssiis", $game_id, $name, $date, $license, $type, $publisher_id, $status, $hd_installable, $notes
         );
 
         $id = $stmt->insert_id;
@@ -98,11 +120,13 @@ class GameReleaseDAO {
             "GameRelaseDAO: getReleasesForGame",
             $this->mysqli,
             "SELECT
-                game_release.id, game_release.name, `date`, license, game_release.type,
-                pub_dev.pub_dev_id, pub_dev.pub_dev_name, pub_dev_text.pub_dev_profile, pub_dev_text.pub_dev_imgext
+                game_release.id, game_release.name, `date`, license, game_release.type, game_release.memory_id, 
+                memory.memory, pub_dev.pub_dev_id, pub_dev.pub_dev_name, pub_dev_text.pub_dev_profile, 
+                pub_dev_text.pub_dev_imgext, game_release.status, game_release.hd_installable, game_release.notes
             FROM game_release
             LEFT JOIN pub_dev ON game_release.pub_dev_id = pub_dev.pub_dev_id
             LEFT JOIN pub_dev_text ON pub_dev.pub_dev_id = pub_dev_text.pub_dev_id
+            LEFT JOIN memory ON memory.id = game_release.memory_id
             WHERE game_id = ?
             ORDER BY date ASC",
             "i", $game_id
@@ -111,17 +135,22 @@ class GameReleaseDAO {
         \AL\Db\bind_result(
             "GameRelaseDAO: getReleasesForGame",
             $stmt,
-            $id, $name, $date, $license, $type,
-            $pub_dev_id, $pub_dev_name, $pub_dev_profile, $pub_dev_imgext
+            $id, $name, $date, $license, $type, $memory_id, $memory,
+            $pub_dev_id, $pub_dev_name, $pub_dev_profile, $pub_dev_imgext,
+            $status, $hd_installable, $notes
         );
 
         $releases = [];
         while ($stmt->fetch()) {
             $releases[] = new \AL\Common\Model\Game\GameRelease(
                 $id, $game_id, $name, $date, $license, $type,
+                ($memory_id != null)
+                    ? new \AL\Common\Model\Game\Memory($memory_id, $memory, null)
+                    : null,
                 ($pub_dev_id != null)
                     ? new \AL\Common\Model\PubDev\PubDev($pub_dev_id, $pub_dev_name, $pub_dev_profile, $pub_dev_imgext)
-                    : null
+                    : null,
+                $status, $hd_installable, $notes
             );
         }
 
@@ -141,11 +170,14 @@ class GameReleaseDAO {
             "GameReleaseDAO: getRelease: $release_id",
             $this->mysqli,
             "SELECT
-                game_release.id, game_id, game_release.name, `date`, license, game_release.type,
-                pub_dev.pub_dev_id, pub_dev.pub_dev_name, pub_dev_text.pub_dev_profile, pub_dev_text.pub_dev_imgext
+                game_release.id, game_id, game_release.name, `date`, license, game_release.type, memory_id, 
+                memory.memory, pub_dev.pub_dev_id, pub_dev.pub_dev_name, pub_dev_text.pub_dev_profile, 
+                pub_dev_text.pub_dev_imgext, game_release.status, game_release.hd_installable,
+                game_release.notes
             FROM game_release
             LEFT JOIN pub_dev ON game_release.pub_dev_id = pub_dev.pub_dev_id
             LEFT JOIN pub_dev_text ON pub_dev.pub_dev_id = pub_dev_text.pub_dev_id
+            LEFT JOIN memory ON memory.id = game_release.memory_id
             WHERE game_release.id = ?",
             "i", $release_id
         );
@@ -153,17 +185,22 @@ class GameReleaseDAO {
         \AL\Db\bind_result(
             "GameReleaseDAO: getRelease: $release_id",
             $stmt,
-            $id, $game_id, $name, $date, $license, $type,
-            $pub_dev_id, $pub_dev_name, $pub_dev_profile, $pub_dev_imgext
+            $id, $game_id, $name, $date, $license, $type, $memory_id, $memory,
+            $pub_dev_id, $pub_dev_name, $pub_dev_profile, $pub_dev_imgext,
+            $status, $hd_installable, $notes
         );
 
         $release = null;
         if ($stmt->fetch()) {
             $release = new \AL\Common\Model\Game\GameRelease(
                 $id, $game_id, $name, $date, $license, $type,
+                ($memory_id != null)
+                    ? new \AL\Common\Model\Game\Memory($memory_id, $memory, null)
+                    : null,
                 ($pub_dev_id != null)
                     ? new \AL\Common\Model\PubDev\PubDev($pub_dev_id, $pub_dev_name, $pub_dev_profile, $pub_dev_imgext)
-                    : null
+                    : null,
+                $status, $hd_installable, $notes
             );
         }
 
@@ -206,6 +243,60 @@ class GameReleaseDAO {
         $stmt = \AL\Db\execute_query(
             "GameRelaseDAO: deleteRelease",
             $this->mysqli,
+            "DELETE FROM game_release_aka WHERE game_release_id = ?",
+            "i", $release_id
+        );
+        $stmt = \AL\Db\execute_query(
+            "GameRelaseDAO: deleteRelease",
+            $this->mysqli,
+            "DELETE FROM game_release_trainer_option WHERE release_id = ?",
+            "i", $release_id
+        );
+        $stmt = \AL\Db\execute_query(
+            "GameRelaseDAO: deleteRelease",
+            $this->mysqli,
+            "DELETE FROM game_release_distributor WHERE game_release_id = ?",
+            "i", $release_id
+        );
+        $stmt = \AL\Db\execute_query(
+            "GameRelaseDAO: deleteRelease",
+            $this->mysqli,
+            "DELETE FROM game_release_emulator_incompatibility WHERE release_id = ?",
+            "i", $release_id
+        );
+        $stmt = \AL\Db\execute_query(
+            "GameRelaseDAO: deleteRelease",
+            $this->mysqli,
+            "DELETE FROM game_release_memory_enhanced WHERE release_id = ?",
+            "i", $release_id
+        );
+        $stmt = \AL\Db\execute_query(
+            "GameRelaseDAO: deleteRelease",
+            $this->mysqli,
+            "DELETE FROM game_release_tos_version_incompatibility WHERE release_id = ?",
+            "i", $release_id
+        );
+        $stmt = \AL\Db\execute_query(
+            "GameRelaseDAO: deleteRelease",
+            $this->mysqli,
+            "DELETE FROM game_release_copy_protection WHERE release_id = ?",
+            "i", $release_id
+        );
+        $stmt = \AL\Db\execute_query(
+            "GameRelaseDAO: deleteRelease",
+            $this->mysqli,
+            "DELETE FROM game_release_disk_protection WHERE release_id = ?",
+            "i", $release_id
+        );
+        $stmt = \AL\Db\execute_query(
+            "GameRelaseDAO: deleteRelease",
+            $this->mysqli,
+            "DELETE FROM game_release_language WHERE release_id = ?",
+            "i", $release_id
+        );
+        $stmt = \AL\Db\execute_query(
+            "GameRelaseDAO: deleteRelease",
+            $this->mysqli,
             "DELETE FROM game_release WHERE id = ?",
             "i", $release_id
         );
@@ -223,7 +314,7 @@ class GameReleaseDAO {
      * @param string $type New type of release
      * @param string $publisher_id New ID of the publisher of the release
      */
-    public function updateRelease($release_id, $name, $date, $license, $type, $publisher_id) {
+    public function updateRelease($release_id, $name, $date, $license, $type, $publisher_id, $status, $notes) {
         $stmt = \AL\Db\execute_query(
             "GameReleaseDAO: updateRelease",
             $this->mysqli,
@@ -233,9 +324,32 @@ class GameReleaseDAO {
                 `date` = ?,
                 `license` = ?,
                 `type` = ?,
-                `pub_dev_id` = ?
+                `pub_dev_id` = ?,
+                `status` = ?,
+                `notes` = ?
             WHERE id = ?",
-            "ssssii", $name, $date, $license, $type, $publisher_id, $release_id
+            "ssssissi", $name, $date, $license, $type, $publisher_id, $status, $notes, $release_id
+        );
+
+        $stmt->close();
+    }
+    
+    
+    /**
+     * Update the hd_installable attribute of a release
+     *
+     * @param integer $release_id ID of the release to update
+     * @param bool $hd_installable
+     */
+    public function updateHdRelease($release_id, $hd_installable) {
+        $stmt = \AL\Db\execute_query(
+            "GameReleaseDAO: updateHdRelease",
+            $this->mysqli,
+            "UPDATE game_release
+            SET
+                `hd_installable` = ?
+            WHERE id = ?",
+            "ii", $hd_installable, $release_id
         );
 
         $stmt->close();

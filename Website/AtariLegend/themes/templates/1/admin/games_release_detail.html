@@ -12,6 +12,7 @@
     <script>
         $(document).ready(function () {
             $('select[name=pub_dev_id]').altAutocomplete();
+            $('select[name=distributor_id]').altAutocomplete();
             $('.tabs').tabs();
         });
     </script>
@@ -46,7 +47,8 @@
 
             <ul class="tabs">
                 <li class="active"><a href="#tab-general">GENERAL</a></li>
-                <li><a href="#tab-compatibility">FEATURES</a></li>
+                <li><a href="#tab-compatibility">SYSTEM INFO</a></li>
+                <li><a href="#tab-scene">SCENE</a></li>
             </ul>
 
             <div id="tab-general" class="tabcontent tabpane active">
@@ -78,6 +80,7 @@
 
                         <label class="input">License</label>
                         <select name="license" class="standard_select select_large">
+                            <option value="">-</option>
                             {foreach from=$license_types item=type}
                                 <option {if $type == $release->getLicense()}selected{/if}>{$type}</option>
                             {/foreach}
@@ -89,6 +92,15 @@
                             <option value="">-</option>
                             {foreach from=$release_types item=release_type}
                                 <option {if $release_type == $release->getType() or (isset($type) and $type == $release_type)}selected{/if}>{$release_type}</option>
+                            {/foreach}
+                        </select>
+                        <br>
+
+                        <label class="input">Status</label>
+                        <select name="status" class="standard_select select_large">
+                            <option value="">-</option>
+                            {foreach from=$release_status item=release_stat}
+                                <option {if $release_stat == $release->getStatus() or (isset($status) and $status == $release_stat)}selected{/if}>{$release_stat}</option>
                             {/foreach}
                         </select>
                         <br>
@@ -136,6 +148,12 @@
                         </a>
                         <br>
                         <br>
+                        <label class="input">Note</label>
+                        <input type="text" name="notes" class="standard_input" style="width:75%" value="{$release->getNotes()}">
+                        <br>
+                        <span class="help-hint">If you think of something that isn't yet available in the database, add a note/reminder here. This info will not be published on the main site.</span>
+                        <br>
+                        <br>
                         <br>
                         <button type="submit" name="submit_type" value="save_and_back" class="primary_button">Save and close</button>
                         <button type="submit" name="submit_type" value="save" class="secondary_button">Save changes</button>
@@ -143,6 +161,111 @@
                     </form>
                 </fieldset>
                 <br>
+
+                <fieldset class="secondary_fieldset">
+                    <legend class="primary_legend">Language</legend>
+                    <div class="help-hint">
+                        Add the language(s) used in this release. You can add as many as you like.
+                    </div>
+                    <br>
+
+                    {if isset($release_languages)}
+                        {foreach from=$release_languages item=release_language}
+                            <form action="../games/db_games_release_detail.php" method="get">
+                                <a title="Remove {$release_language->getName()|escape:"html"} from this release"
+                                    href="../games/db_games_release_detail.php?game_id={$game->getId()}&amp;release_id={$release->getId()}&amp;language_id={$release_language->getId()}&amp;action=remove_release_language"
+                                    onclick="javascript:return confirm('This language will be removed from the release')">
+                                    <span class="fa fa-fw fa-trash"></span>
+                                </a>
+
+                                <input type="hidden" name="action" value="update_release_language">
+                                <input type="hidden" name="release_id" value="{$release->getId()}">
+                                <input type="hidden" name="language_id" value="{$release_language->getid()}">
+                                <input type="text" value="{$release_language->getName()}" class="standard_input input_large" disabled id="gd_game_dev">
+                            </form>
+                        {/foreach}
+                    {/if}
+
+                    <hr class="separator_add">
+
+                    <form action="../games/db_games_release_detail.php" method="post">
+                        <input type="hidden" name="release_id" value="{$release->getId()}">
+                        <input type="hidden" name="game_id" value="{$game->getId()}">
+                        <input type="hidden" name="action" value="add_release_language">
+
+                        <select name="language_id"
+                            class="standard_select select_large" id="gd_dev_name" required>
+                            <option value="">-</option>
+                            {foreach from=$languages item=language}
+                                <option value="{$language->getId()}">{$language->getName()}</option>
+                            {/foreach}
+                        </select>
+
+                        <input type="submit" value="Add language" class="secondary_button">
+                    </form>
+                    <br>
+                </fieldset>
+                <br>
+
+                <fieldset class="secondary_fieldset">
+                    <legend class="primary_legend">Distribution</legend>
+                    <div class="help-hint">
+                        You can add as many distributors as you like to a game release.
+                    </div>
+                    <br>
+                    <a id="gd_developers"><b>Distributors</b></a>
+                    <br>
+
+                    {if isset($release_distributors)}
+                        {foreach from=$release_distributors item=release_distributor}
+                            <form action="../games/db_games_release_detail.php" method="get">
+                                <a title="Remove {$release_distributor->getName()|escape:"html"} from this release"
+                                    href="../games/db_games_release_detail.php?game_id={$game->getId()}&amp;release_id={$release->getId()}&amp;pub_dev_id={$release_distributor->getId()}&amp;action=remove_distributor"
+                                    onclick="javascript:return confirm('This distributor will be removed from the release')">
+                                    <span class="fa fa-fw fa-trash"></span>
+                                </a>
+
+                                <input type="hidden" name="action" value="update_distributor">
+                                <input type="hidden" name="release_id" value="{$release->getId()}">
+                                <input type="hidden" name="pub_dev_id" value="{$release_distributor->getid()}">
+                                <input type="text" value="{$release_distributor->getName()}" class="standard_input input_large" disabled id="gd_game_dev">
+                                <a href="../company/company_edit.php?comp_id={$release_distributor->getid()}" title="Edit distributor" class="standard_tile_link"><i class="fa fa-fw fa-pencil edit_author" aria-hidden="true"></i></a>
+                            </form>
+                        {/foreach}
+                    {/if}
+
+                    <hr class="separator_add">
+
+                    <form action="../games/db_games_release_detail.php" method="post">
+                        <input type="hidden" name="release_id" value="{$release->getId()}">
+                        <input type="hidden" name="game_id" value="{$game->getId()}">
+                        <input type="hidden" name="action" value="add_distributor">
+
+                        <a href="javascript:;"
+                            class="left_nav_link"
+                            id="distributor_select_toggle"
+                            title="Click for dropdown mode">
+                            <i class="fa fa-fw fa-chevron-circle-down" aria-hidden="true"></i>
+                        </a>
+
+                        <select name="distributor_id"
+                            class="standard_select select_large" id="gd_dev_name"
+                            data-alt-autocomplete-endpoint="../common/autocomplete.php?extraParams=pub_dev"
+                            data-alt-autocomplete-toggle="#distributor_select_toggle"
+                            data-alt-autocomplete-placeholder="Start typing a name…"
+                            required>
+                            <option value="" selected="selected" disabled></option>
+                            {foreach from=$distributors item=distributor}
+                                <option value="{$distributor->getId()}">{$distributor->getName()}</option>
+                            {/foreach}
+                        </select>
+
+                        <input type="submit" value="Add distributor" class="secondary_button">
+                    </form>
+                    <br>
+                </fieldset>
+                <br>
+
                 <fieldset class="secondary_fieldset">
                     <legend class="primary_legend">Add Release AKA</legend>
                     <div class="help-hint">
@@ -150,7 +273,7 @@
                     </div>
                     <br>
                     <hr class="separator_add">
-                    <label class="input">Release AKA</label><br><br>
+                    <label class="input"><b>Release AKA</b></label><br><br>
                     {foreach from=$release_akas item=all_akas}
                         <form action="../games/db_games_release_detail.php" method="post" name="aka" id="aka">
                             <input type="hidden" name="action" value="update_release_aka">
@@ -194,62 +317,357 @@
             </div>
 
             <div id="tab-compatibility" class="tabcontent tabpane">
-                <form action="../games/db_games_release_detail.php" method="post" class="release_editor">
-                    <input type="hidden" name="game_id" value="{$game->getId()}">
-                    <input type="hidden" name="release_id" value="{$release->getId()}">
-                    <input type="hidden" name="action" value="features">
-                    <fieldset class="secondary_fieldset">
-                        <legend class="primary_legend">Compatibility</legend>
-                        <label class="input">Screen resolution</label>
-                        {foreach from=$resolutions item=resolution}
-                            <div class="checkbox links_mod_checkbox">
-                                <input type="checkbox"
-                                    id="resolution_{$resolution->getId()}"
-                                    name="resolution[]"
-                                    {if in_array($resolution->getId(), $release_resolutions)}checked{/if}
-                                    value="{$resolution->getId()}">
-                                <label for="resolution_{$resolution->getId()}"></label>
-                                &nbsp;{$resolution->getName()}<br>
-                            </div>
-                        {/foreach}
-                        <br>
+                <fieldset class="secondary_fieldset">
+                    <legend class="primary_legend">Compatibility</legend>
+                    <form action="../games/db_games_release_detail.php" method="post" class="release_editor">
+                        <input type="hidden" name="game_id" value="{$game->getId()}">
+                        <input type="hidden" name="release_id" value="{$release->getId()}">
+                        <input type="hidden" name="action" value="features">
+                        <div class="gd_basic_game_info_container">
+                            <div id="gd_basic_game_info_1">
+                                <label class="input">Screen resolution</label>
+                                {foreach from=$resolutions item=resolution}
+                                    <div class="checkbox links_mod_checkbox">
+                                        <input type="checkbox"
+                                            id="resolution_{$resolution->getId()}"
+                                            name="resolution[]"
+                                            {if in_array($resolution->getId(), $release_resolutions)}checked{/if}
+                                            value="{$resolution->getId()}">
+                                        <label for="resolution_{$resolution->getId()}"></label>
+                                        &nbsp;{$resolution->getName()}<br>
+                                    </div>
+                                {/foreach}
+                                <br>
 
-                        <label class="input">Enhanced for</label>
-                        {foreach from=$systems item=system}
-                            {* Nothing is ever enhanced for the base ST *}
-                            {if $system->getName() != 'ST'}
+                                <label class="input">Enhanced for</label>
+                                {foreach from=$systems item=system}
+                                    {* Nothing is ever enhanced for the base ST *}
+                                    {if $system->getName() != 'ST'}
+                                        <div class="checkbox links_mod_checkbox">
+                                            <input type="checkbox"
+                                                id="system_enhanced_{$system->getId()}"
+                                                name="system_enhanced[]"
+                                                {if in_array($system->getId(), $system_enhanced)}checked{/if}
+                                                value="{$system->getId()}">
+                                            <label for="system_enhanced_{$system->getId()}"></label>
+                                            &nbsp;{$system->getName()}<br>
+                                        </div>
+                                    {/if}
+                                {/foreach}
+                                <br>
+
+                                <label class="input">HD installable</label>
                                 <div class="checkbox links_mod_checkbox">
                                     <input type="checkbox"
-                                        id="system_enhanced_{$system->getId()}"
-                                        name="system_enhanced[]"
-                                        {if in_array($system->getId(), $system_enhanced)}checked{/if}
-                                        value="{$system->getId()}">
-                                    <label for="system_enhanced_{$system->getId()}"></label>
-                                    &nbsp;{$system->getName()}<br>
+                                        id="hd_installable"
+                                        name="hd_installable"
+                                        {if $release->getHdInstallable() == '1'}checked{/if}
+                                        value="{$release->getHdInstallable()}">
+                                    <label for="hd_installable"></label>
                                 </div>
-                            {/if}
-                        {/foreach}
-                        <br>
-
-                        <label class="input">Incompatible with</label>
-                        {foreach from=$systems item=system}
-                            <div class="checkbox links_mod_checkbox">
-                                <input type="checkbox"
-                                    id="system_incompatible_{$system->getId()}"
-                                    name="system_incompatible[]"
-                                    {if in_array($system->getId(), $system_incompatible)}checked{/if}
-                                    value="{$system->getId()}">
-                                <label for="system_incompatible_{$system->getId()}"></label>
-                                &nbsp;{$system->getName()}<br>
                             </div>
-                        {/foreach}
-                        <br>
+                            <div id="gd_basic_game_info_2">
+                                <label class="input">Incompatible systems</label>
+                                {foreach from=$systems item=system}
+                                    <div class="checkbox links_mod_checkbox">
+                                        <input type="checkbox"
+                                            id="system_incompatible_{$system->getId()}"
+                                            name="system_incompatible[]"
+                                            {if in_array($system->getId(), $system_incompatible)}checked{/if}
+                                            value="{$system->getId()}">
+                                        <label for="system_incompatible_{$system->getId()}"></label>
+                                        &nbsp;{$system->getName()}<br>
+                                    </div>
+                                {/foreach}
+                                <br>
+
+                                <label class="input">Incompatible emulators</label>
+                                {foreach from=$emulators item=emulator}
+                                    <div class="checkbox links_mod_checkbox">
+                                        <input type="checkbox"
+                                            id="emulator_incompatible_{$emulator->getId()}"
+                                            name="emulator_incompatible[]"
+                                            {if in_array($emulator->getId(), $emulator_incompatible)}checked{/if}
+                                            value="{$emulator->getId()}">
+                                        <label for="emulator_incompatible_{$emulator->getId()}"></label>
+                                        &nbsp;{$emulator->getName()}<br>
+                                    </div>
+                                {/foreach}
+                            </div>
+                        </div>
                         <br>
                         <button type="submit" name="submit_type" value="save_and_back" class="primary_button">Save and close</button>
                         <button type="submit" name="submit_type" value="save" class="secondary_button">Save changes</button>
                         <a href="games_detail.php?game_id={$game->getId()}">Cancel</a>
-                    </fieldset>
-                </form>
+                    </form>
+                    <br>
+                    <br>
+                    <br>
+                    <br>
+                    <label class="input">Incompatible TOS</label>
+                    <br>
+                    {if isset($tos_incompatible)}
+                        {foreach from=$tos_incompatible item=tos_incompatible_linked}
+                            <form action="../games/db_games_release_detail.php" method="get">
+                                <a title="Remove {$tos_incompatible_linked->getName()|escape:"html"} from this release"
+                                    href="../games/db_games_release_detail.php?game_id={$game->getId()}&amp;release_id={$release->getId()}&amp;tos_id={$tos_incompatible_linked->getId()}&amp;action=remove_tos_incompatible"
+                                    onclick="javascript:return confirm('This TOS will be removed from the release')">
+                                    <span class="fa fa-fw fa-trash"></span>
+                                </a>
+
+                                <input type="hidden" name="action" value="update_tos_incompatible">
+                                <input type="hidden" name="game_id" value="{$game->getId()}">
+                                <input type="hidden" name="release_id" value="{$release->getId()}">
+                                <input type="hidden" name="tos_id" value="{$tos_incompatible_linked->getId()}">
+                                <input type="text" value="{$tos_incompatible_linked->getName()}" class="standard_input input_medium" disabled id="gd_game_dev">
+                                <select name="new_language_id"
+                                onchange="jQuery('#update-toslanguage-{$tos_incompatible_linked->getLanguage()->getId()}').show()"
+                                class="standard_select select_medium">
+                                <option value="">-</option>
+                                {foreach from=$languages item=all_languages}
+                                    <option value="{$all_languages->getId()}" {if $tos_incompatible_linked->getLanguage()->getId() eq $all_languages->getId()} selected{/if}>{$all_languages->getName()}</option>
+                                {/foreach}
+                                </select>
+                                <input type="submit" id="update-toslanguage-{$tos_incompatible_linked->getLanguage()->getId()}" style="display: none;" class="secondary_button" value="Update">
+                            </form>
+                        {/foreach}
+                    {/if}
+                    <hr class="separator_add">
+
+                    <form action="../games/db_games_release_detail.php" method="post">
+                        <input type="hidden" name="release_id" value="{$release->getId()}">
+                        <input type="hidden" name="game_id" value="{$game->getId()}">
+                        <input type="hidden" name="action" value="add_tos_incompatible">
+                        <span class="fa fa-fw"></span>
+                        <select name="tos_id"
+                            class="standard_select select_large" id="gd_dev_name" required>
+                            <option value="" selected="selected" disabled>-</option>
+                            {foreach from=$tos item=all_tos}
+                                <option value="{$all_tos->getId()}">{$all_tos->getName()}</option>
+                            {/foreach}
+                        </select>
+                        <select name="language_id" class="standard_select select_medium">
+                            <option value="">-</option>
+                            {foreach from=$languages item=language}
+                                <option value="{$language->getId()}">{$language->getName()}</option>
+                            {/foreach}
+                        </select>
+                        <input type="submit" value="Add TOS" class="secondary_button">
+                    </form>
+                </fieldset>
+
+                <br>
+                <fieldset class="secondary_fieldset">
+                    <legend class="primary_legend">Memory</legend>
+
+                    <form action="../games/db_games_release_detail.php" method="get">
+                        <input type="hidden" name="action" value="update_minimum_memory">
+                        <input type="hidden" name="game_id" value="{$game->getId()}">
+                        <input type="hidden" name="release_id" value="{$release->getId()}">
+                        <label class="input"><b>Minimum required memory</b></label><br>
+                        <select name="memory_id" class="standard_select select_large">
+                            <option value="">-</option>
+                            {foreach from=$memory_enhanced item=all_memory_enhanced}
+                                <option value="{$all_memory_enhanced->getId()}" {if $release->getMemory() != null and ( $all_memory_enhanced->getId() == $release->getMemory()->getId() )}selected{/if}>{$all_memory_enhanced->getMemory()}</option>
+                            {/foreach}
+                        </select>
+                        <button type="submit" name="submit_type" value="Update" class="secondary_button">Update</button>
+                    </form>
+                    <br>
+                    <br>
+                    <br>
+                    <a id="gd_developers"><b>Memory Enhancements</b></a>
+                    <br>
+
+                    {if isset($release_memory_enhancements)}
+                        {foreach from=$release_memory_enhancements item=release_memory_enhancement}
+                            <form action="../games/db_games_release_detail.php" method="get">
+                                <a title="Remove {$release_memory_enhancement->getMemory()|escape:"html"} from this release"
+                                    href="../games/db_games_release_detail.php?game_id={$game->getId()}&amp;release_id={$release->getId()}&amp;memory_id={$release_memory_enhancement->getId()}&amp;action=remove_memory_enhancement"
+                                    onclick="javascript:return confirm('This memory enhancement will be removed from the release')">
+                                    <span class="fa fa-fw fa-trash"></span>
+                                </a>
+
+                                <input type="hidden" name="action" value="update_memory_enhancement">
+                                <input type="hidden" name="game_id" value="{$game->getId()}">
+                                <input type="hidden" name="release_id" value="{$release->getId()}">
+                                <input type="hidden" name="memory_id" value="{$release_memory_enhancement->getId()}">
+                                <input type="text" value="{$release_memory_enhancement->getMemory()}" class="standard_input input_medium" disabled id="gd_game_dev">
+                                <select name="new_enhancement"
+                                onchange="jQuery('#update-enhancement-{$release_memory_enhancement->getEnhancement()}').show()"
+                                class="standard_select select_medium">
+                                <option value="">-</option>
+                                {foreach from=$memory_enhancement_types item=enhancement_type}
+                                    <option {if $release_memory_enhancement->getEnhancement() eq $enhancement_type} selected{/if}>{$enhancement_type}</option>
+                                {/foreach}
+                                </select>
+                                <input type="submit" id="update-enhancement-{$release_memory_enhancement->getEnhancement()}" style="display: none;" class="secondary_button" value="Update">
+                            </form>
+                        {/foreach}
+                    {/if}
+
+                    <hr class="separator_add">
+
+                    <form action="../games/db_games_release_detail.php" method="post">
+                        <input type="hidden" name="release_id" value="{$release->getId()}">
+                        <input type="hidden" name="game_id" value="{$game->getId()}">
+                        <input type="hidden" name="action" value="add_memory_enhancement">
+                        <span class="fa fa-fw"></span>
+                        <select name="memory_id"
+                            class="standard_select select_large" id="gd_dev_name" required>
+                            <option value="" selected="selected" disabled>-</option>
+                            {foreach from=$memory_enhanced item=all_memory_enhanced}
+                                <option value="{$all_memory_enhanced->getId()}">{$all_memory_enhanced->getMemory()}</option>
+                            {/foreach}
+                        </select>
+                        <select name="memory_enhancement" class="standard_select">
+                            <option value="">-</option>
+                            {foreach from=$memory_enhancement_types item=enhancement_type}
+                                <option>{$enhancement_type}</option>
+                            {/foreach}
+                        </select>
+                        <input type="submit" value="Add enhancement" class="secondary_button">
+                    </form>
+                </fieldset>
+
+                <br>
+                <fieldset class="secondary_fieldset">
+                    <legend class="primary_legend">Protection</legend>
+                    <form action="../games/db_games_release_detail.php" method="post" name="scene">
+                        <input type="hidden" name="game_id" value="{$game->getId()}">
+                        <input type="hidden" name="release_id" value="{$release->getId()}">
+                        <input type="hidden" name="action" value="protection">
+                        <div class="gd_basic_game_info_container">
+                            <div id="gd_basic_game_info_1">
+                                <b>Copy Protection</b>&nbsp;&nbsp;
+                                <div class="control-group">
+                                    <label for="input-tags2"></label>
+                                    <select name="copy_protection[]" multiple id="input-tags2" class="standard_select input_full">
+                                    {foreach from=$copy_protections item=all_copy_protections}
+                                        <option value="{$all_copy_protections->getId()}"
+                                            {foreach from=$release_copy_protections item=linked_copy_protections name=copy_protections}
+                                                {if $linked_copy_protections->getId() == $all_copy_protections->getId()}
+                                                    selected
+                                                {/if}
+                                            {/foreach}
+                                            >
+                                            {$all_copy_protections->getName()}
+                                        </option>
+                                    {/foreach}
+                                    </select>
+                                </div>
+                                <script>
+                                    $('#input-tags2').selectize({
+                                        plugins: ['remove_button'],
+                                        persist: false,
+                                        create: true,
+                                        render: {
+                                            item: function(data, escape) {
+                                                return '<div class="primary_button" style="border-radius:3px;">' + escape(data.text) + '</div>';
+                                            }
+                                        },
+                                    });
+                                </script>
+                            </div>
+                        </div>
+                        <br>
+                        <br>
+                        <div class="gd_basic_game_info_container">
+                            <div id="gd_basic_game_info_1">
+                                <b>Disk Protection</b>&nbsp;&nbsp;
+                                <div class="control-group">
+                                    <label for="input-tags3"></label>
+                                    <select name="disk_protection[]" multiple id="input-tags3" class="standard_select input_full">
+                                    {foreach from=$disk_protections item=all_disk_protections}
+                                        <option value="{$all_disk_protections->getId()}"
+                                            {foreach from=$release_disk_protections item=linked_disk_protections name=disk_protections}
+                                                {if $linked_disk_protections->getId() == $all_disk_protections->getId()}
+                                                    selected
+                                                {/if}
+                                            {/foreach}
+                                            >
+                                            {$all_disk_protections->getName()}
+                                        </option>
+                                    {/foreach}
+                                    </select>
+                                </div>
+                                <script>
+                                    $('#input-tags3').selectize({
+                                        plugins: ['remove_button'],
+                                        persist: false,
+                                        create: true,
+                                        render: {
+                                            item: function(data, escape) {
+                                                return '<div class="primary_button" style="border-radius:3px;">' + escape(data.text) + '</div>';
+                                            }
+                                        },
+                                    });
+                                </script>
+                                <br>
+                                <span class="help-hint">Click to choose and add a protection type</span>
+                            </div>
+                        </div>
+                        <br>
+                        <button type="submit" name="submit_type" value="save_and_back" class="primary_button">Save and close</button>
+                        <button type="submit" name="submit_type" value="save" class="secondary_button">Save changes</button>
+                        <a href="games_detail.php?game_id={$game->getId()}">Cancel</a>
+                    </form>
+                </fieldset>
+            </div>
+
+            <div id="tab-scene" class="tabcontent tabpane">
+                <fieldset class="secondary_fieldset">
+                    <legend class="primary_legend">Trainer</legend>
+
+                    <div class="help-hint">
+                        These are all the scene related features of a release like trainers, crackthro information ...
+                    </div>
+                    <br>
+                    <form action="../games/db_games_release_detail.php" method="post" name="scene">
+                        <input type="hidden" name="game_id" value="{$game->getId()}">
+                        <input type="hidden" name="release_id" value="{$release->getId()}">
+                        <input type="hidden" name="action" value="scene">
+                        <div class="gd_basic_game_info_container">
+                            <div id="gd_basic_game_info_1">
+                                <b>Trainer Options</b>&nbsp;&nbsp;
+                                <div class="control-group">
+                                    <label for="input-tags1"></label>
+                                    <select name="trainer_option[]" multiple id="input-tags1" class="standard_select input_full">
+                                    {foreach from=$trainer_options item=all_trainer_options}
+                                        <option value="{$all_trainer_options->getId()}"
+                                            {foreach from=$release_trainer_options item=linked_trainer_options name=trainer_options}
+                                                {if $linked_trainer_options->getId() == $all_trainer_options->getId()}
+                                                    selected
+                                                {/if}
+                                            {/foreach}
+                                            >
+                                            {$all_trainer_options->getName()}
+                                        </option>
+                                    {/foreach}
+                                    </select>
+                                </div>
+                                <script>
+                                    $('#input-tags1').selectize({
+                                        plugins: ['remove_button'],
+                                        persist: false,
+                                        create: true,
+                                        render: {
+                                            item: function(data, escape) {
+                                                return '<div class="primary_button" style="border-radius:3px;">' + escape(data.text) + '</div>';
+                                            }
+                                        },
+                                    });
+                                </script>
+                                <br>
+                                <span class="help-hint">Click to choose and add categories</span>
+                            </div>
+                        </div>
+                        <br>
+                        <button type="submit" name="submit_type" value="save_and_back" class="primary_button">Save and close</button>
+                        <button type="submit" name="submit_type" value="save" class="secondary_button">Save changes</button>
+                        <a href="games_detail.php?game_id={$game->getId()}">Cancel</a>
+                    </form>
+                </fieldset>
             </div>
         <br>
     </div>
