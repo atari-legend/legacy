@@ -1533,6 +1533,60 @@ function create_log_entry($section, $section_id, $subsection, $subsection_id, $a
             $result = $mysqli->query($query) or die("getting control type failed");
             $query_data   = $result->fetch_array(MYSQLI_BOTH);
             $section_name = $query_data['name'];
+        } elseif ($subsection == 'Resolution') {
+            // Get the resolution name
+            $query = "SELECT name FROM resolution WHERE id = '$section_id'";
+            $result = $mysqli->query($query) or die("getting resolution failed");
+            $query_data   = $result->fetch_array(MYSQLI_BOTH);
+            $section_name = $query_data['name'];
+        } elseif ($subsection == 'System') {
+            // Get the system name
+            $query = "SELECT name FROM system WHERE id = '$section_id'";
+            $result = $mysqli->query($query) or die("getting system failed");
+            $query_data   = $result->fetch_array(MYSQLI_BOTH);
+            $section_name = $query_data['name'];
+        }
+        elseif ($subsection == 'Emulator') {
+            // Get the emulator name
+            $query = "SELECT name FROM emulator WHERE id = '$section_id'";
+            $result = $mysqli->query($query) or die("getting emulator failed");
+            $query_data   = $result->fetch_array(MYSQLI_BOTH);
+            $section_name = $query_data['name'];
+        }
+        elseif ($subsection == 'Trainer') {
+            // Get the trainer option name
+            $query = "SELECT name FROM trainer_option WHERE id = '$section_id'";
+            $result = $mysqli->query($query) or die("getting trainer option failed");
+            $query_data   = $result->fetch_array(MYSQLI_BOTH);
+            $section_name = $query_data['name'];
+        }
+        elseif ($subsection == 'Memory') {
+            // Get the memory amount
+            $query = "SELECT memory FROM memory WHERE id = '$section_id'";
+            $result = $mysqli->query($query) or die("getting memory amount failed");
+            $query_data   = $result->fetch_array(MYSQLI_BOTH);
+            $section_name = $query_data['memory'];
+        }
+        elseif ($subsection == 'Tos') {
+            // Get the tos amount
+            $query = "SELECT name FROM tos WHERE id = '$section_id'";
+            $result = $mysqli->query($query) or die("getting tos version failed");
+            $query_data   = $result->fetch_array(MYSQLI_BOTH);
+            $section_name = $query_data['name'];
+        }
+        elseif ($subsection == 'Protection') {
+            // Get the protection type
+            $query = "SELECT name FROM copy_protection WHERE id = '$section_id'";
+            $result = $mysqli->query($query) or die("getting copy protection failed");
+            $query_data   = $result->fetch_array(MYSQLI_BOTH);
+            $section_name = $query_data['name'];
+        }
+        elseif ($subsection == 'Disk Protection') {
+            // Get the protection type
+            $query = "SELECT name FROM disk_protection WHERE id = '$section_id'";
+            $result = $mysqli->query($query) or die("getting disk protection failed");
+            $query_data   = $result->fetch_array(MYSQLI_BOTH);
+            $section_name = $query_data['name'];
         }
         $subsection_name = $section_name;
     }
@@ -1546,8 +1600,20 @@ function create_log_entry($section, $section_id, $subsection, $subsection_id, $a
         $query_data   = $result->fetch_array(MYSQLI_BOTH);
         $section_name = $query_data['game_name'];    
         
-        if ($subsection == 'Game Release' OR $subsection == 'Release Info' OR $subsection == 'Release AKA' OR $subsection == 'Release Features') {
+        if ($subsection == 'Game Release' OR $subsection == 'Release Info' OR $subsection == 'Release AKA' OR $subsection == 'Compatibility' OR $subsection == 'Distributor'
+            OR $subsection == 'Scene' or $subsection == 'Memory Enhancement' or $subsection == 'Minimum Memory' or $subsection == 'Incompatible TOS' or $subsection == 'Protection' or $subsection == 'Language') {
             $subsection_name = $section_name;
+        }
+        
+        if ($subsection == 'Distributor') {
+            // get the distributor name
+            $query_distributor = "SELECT * FROM pub_dev 
+                                  LEFT JOIN game_release_distributor ON (pub_dev.pub_dev_id = game_release_distributor.pub_dev_id)  
+                                  WHERE pub_dev.pub_dev_id = '$subsection_id'";
+            $result = $mysqli->query($query_distributor) or die("getting name failed");
+            $query_data   = $result->fetch_array(MYSQLI_BOTH);
+            $subsection_name = $query_data['pub_dev_name']; 
+            $subsection_id = $query_data['game_release_id'];            
         }
     }   
 

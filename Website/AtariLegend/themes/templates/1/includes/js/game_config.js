@@ -31,6 +31,34 @@ $(document).ready(function () {
     $('select[name=control_select]').change(function () {
         hideShow('control');
     });
+
+    $('select[name=resolution_select]').change(function () {
+        hideShow('resolution');
+    });
+
+    $('select[name=system_select]').change(function () {
+        hideShow('system');
+    });
+
+    $('select[name=emulator_select]').change(function () {
+        hideShow('emulator');
+    });
+
+    $('select[name=trainer_option_select]').change(function () {
+        hideShow('trainer_option');
+    });
+    $('select[name=memory_select]').change(function () {
+        hideShow('memory');
+    });
+    $('select[name=tos_select]').change(function () {
+        hideShow('tos');
+    });
+    $('select[name=copy_protection_select]').change(function () {
+        hideShow('copy_protection');
+    });
+    $('select[name=disk_protection_select]').change(function () {
+        hideShow('disk_protection');
+    });
 });
 
 function hideShow (type) {

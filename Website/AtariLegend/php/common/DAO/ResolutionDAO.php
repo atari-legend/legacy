@@ -115,4 +115,53 @@ class ResolutionDAO {
 
         $stmt->close();
     }
+    
+     /**
+     * add a resolution to the database
+     *
+     * @param varchar resolution
+     */
+    public function addResolution($resolution) {
+        $stmt = \AL\Db\execute_query(
+            "ResolutionDAO: addResolution",
+            $this->mysqli,
+            "INSERT INTO resolution (`name`) VALUES (?)",
+            "s", $resolution
+        );
+
+        $stmt->close();
+    }
+    
+    /**
+     * delete a resolution
+     *
+     * @param int resolution_id
+     */
+    public function deleteResolution($resolution_id) {
+        $stmt = \AL\Db\execute_query(
+            "ResolutionDAO: deleteResolution",
+            $this->mysqli,
+            "DELETE FROM resolution WHERE id = ?",
+            "i", $resolution_id
+        );
+
+        $stmt->close();
+    }
+    
+        /**
+     * update a resolution
+     *
+     * @param int resolution_id
+     * @param varchar resolution_name
+     */
+    public function updateResolution($resolution_id, $resolution_name) {
+        $stmt = \AL\Db\execute_query(
+            "ResolutionDAO: updateResolution",
+            $this->mysqli,
+            "UPDATE resolution SET name = ? WHERE id = ?",
+            "si", $resolution_name, $resolution_id
+        );
+        
+        $stmt->close();
+    }
 }
