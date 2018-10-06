@@ -59,7 +59,7 @@ class TosDAO {
                     game_release_tos_version_incompatibility.language_id, 
                     language.name 
             FROM game_release_tos_version_incompatibility LEFT JOIN language 
-            ON (Language.id = game_release_tos_version_incompatibility.language_id) 
+            ON (language.id = game_release_tos_version_incompatibility.language_id) 
             WHERE release_id = ?",
             "i", $release_id
         );
@@ -98,7 +98,7 @@ class TosDAO {
                     tos.name, game_release_tos_version_incompatibility.language_id, language.name 
                     FROM game_release_tos_version_incompatibility 
                     LEFT JOIN tos ON (game_release_tos_version_incompatibility.tos_id = tos.id)
-                    LEFT JOIN language ON (Language.id = game_release_tos_version_incompatibility.language_id) 
+                    LEFT JOIN language ON (language.id = game_release_tos_version_incompatibility.language_id) 
                     WHERE release_id = ?",
             "i", $release_id
         );
