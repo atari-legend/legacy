@@ -100,7 +100,7 @@ class GameReleaseDAO {
                 (game_id, `name`, `date`, license, type, pub_dev_id, status, hd_installable, notes)
             VALUES
                 (?, ?, ?, ?, ?, ?, ?, ?, ?)",
-            "issssiis", $game_id, $name, $date, $license, $type, $publisher_id, $status, $hd_installable, $notes
+            "issssiiss", $game_id, $name, $date, $license, $type, $publisher_id, $status, $hd_installable, $notes
         );
 
         $id = $stmt->insert_id;
@@ -268,6 +268,12 @@ class GameReleaseDAO {
             "GameRelaseDAO: deleteRelease",
             $this->mysqli,
             "DELETE FROM game_release_memory_enhanced WHERE release_id = ?",
+            "i", $release_id
+        );
+        $stmt = \AL\Db\execute_query(
+            "GameRelaseDAO: deleteRelease",
+            $this->mysqli,
+            "DELETE FROM game_release_memory_minimum WHERE release_id = ?",
             "i", $release_id
         );
         $stmt = \AL\Db\execute_query(

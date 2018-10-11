@@ -460,19 +460,46 @@
                 <fieldset class="secondary_fieldset">
                     <legend class="primary_legend">Memory</legend>
 
-                    <form action="../games/db_games_release_detail.php" method="get">
-                        <input type="hidden" name="action" value="update_minimum_memory">
-                        <input type="hidden" name="game_id" value="{$game->getId()}">
+                    <br>
+                    <a id="gd_developers"><b>Minimum memory</b></a>
+                    <br>
+
+                    {if isset($release_minimum_memory)}
+                        {foreach from=$release_minimum_memory item=release_min_memory}
+                            <form action="../games/db_games_release_detail.php" method="get">
+                                <a title="Remove {$release_min_memory->getMemory()|escape:"html"} from this release"
+                                    href="../games/db_games_release_detail.php?game_id={$game->getId()}&amp;release_id={$release->getId()}&amp;memory_id={$release_min_memory->getId()}&amp;action=remove_minimum_memory"
+                                    onclick="javascript:return confirm('This minimum memory record will be removed from the release')">
+                                    <span class="fa fa-fw fa-trash"></span>
+                                </a>
+
+                                <input type="hidden" name="action" value="update_minimum_memory">
+                                <input type="hidden" name="game_id" value="{$game->getId()}">
+                                <input type="hidden" name="release_id" value="{$release->getId()}">
+                                <input type="hidden" name="memory_id" value="{$release_min_memory->getId()}">
+                                <input type="text" value="{$release_min_memory->getMemory()}" class="standard_input input_medium" disabled id="gd_game_dev">
+                            </form>
+                        {/foreach}
+                    {/if}
+
+                    <hr class="separator_add">
+
+                    <form action="../games/db_games_release_detail.php" method="post">
                         <input type="hidden" name="release_id" value="{$release->getId()}">
-                        <label class="input"><b>Minimum required memory</b></label><br>
-                        <select name="memory_id" class="standard_select select_large">
-                            <option value="">-</option>
-                            {foreach from=$memory_enhanced item=all_memory_enhanced}
-                                <option value="{$all_memory_enhanced->getId()}" {if $release->getMemory() != null and ( $all_memory_enhanced->getId() == $release->getMemory()->getId() )}selected{/if}>{$all_memory_enhanced->getMemory()}</option>
+                        <input type="hidden" name="game_id" value="{$game->getId()}">
+                        <input type="hidden" name="action" value="add_minimum_memory">
+                        <span class="fa fa-fw"></span>
+                        <select name="memory_id"
+                            class="standard_select select_large" id="gd_dev_name" required>
+                            <option value="" selected="selected">-</option>
+                            {foreach from=$memory_enhanced item=all_min_memory}
+                                <option value="{$all_min_memory->getId()}">{$all_min_memory->getMemory()}</option>
                             {/foreach}
                         </select>
-                        <button type="submit" name="submit_type" value="Update" class="secondary_button">Update</button>
+                        <input type="submit" value="Add minimum" class="secondary_button">
                     </form>
+
+
                     <br>
                     <br>
                     <br>
