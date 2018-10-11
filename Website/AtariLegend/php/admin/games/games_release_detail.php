@@ -75,6 +75,7 @@ if ($_SERVER['REQUEST_METHOD'] == "GET") {
         $smarty->assign('distributors', $pubDevDao->getAllPubDevs());
         $smarty->assign('release_distributors', $pubDevDao->getDistributorsForRelease($release->getId()));   
         $smarty->assign('release_memory_enhancements', $memoryDao->getMemoryForRelease($release->getId()));
+        $smarty->assign('release_minimum_memory', $memoryDao->getMinimumMemoryForRelease($release->getId()));
         $smarty->assign('release_copy_protections', $copyProtectionDao->getCopyProtectionsForRelease($release->getId()));
         $smarty->assign('release_disk_protections', $diskProtectionDao->getDiskProtectionsForRelease($release->getId()));
         $smarty->assign('release_languages', $languageDao->getAllGameReleaseLanguages($release->getId()));
@@ -95,6 +96,7 @@ if ($_SERVER['REQUEST_METHOD'] == "GET") {
         $smarty->assign('release_trainer_options', []);
         $smarty->assign('release_copy_protections', []);
         $smarty->assign('release_memory_enhancements', []);
+        $smarty->assign('release_minimum_memory', []);
         $smarty->assign('release_disk_protections', []);
 
         // Pass through a pub_dev_id, location_id and release type that may be in URL parameters

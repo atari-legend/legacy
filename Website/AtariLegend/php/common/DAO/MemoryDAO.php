@@ -151,29 +151,77 @@ class MemoryDAO {
 
         $stmt->close();
     }
-    
-    
-     /**
-     * Update minimum memorty for release
+
+    /**
+     * Get list of minimum memory IDs for a game release
      *
-     * @param integer Game Release ID
-     * @param integer memory ID
+     * @param integer release ID
      */
-    public function updateMinimumMemoryForRelease($game_release_id, $memory_id) {
+    public function getMinimumMemoryForRelease($release_id) {
         $stmt = \AL\Db\execute_query(
-            "MemoryDAO: UpdateMinimumMemoryForRelease",
+            "MemoryDAO: getMinimumMemoryForRelease",
             $this->mysqli,
-            "UPDATE game_release
-            SET
-                `memory_id` = ?
-            WHERE id = ?",
-            "ii", $memory_id, $game_release_id
+            "SELECT memory_id, memory
+            FROM game_release_memory_minimum LEFT JOIN 
+            memory ON (game_release_memory_minimum.memory_id = memory.id)
+            WHERE release_id = ?",
+            "i", $release_id
+        );
+
+        \AL\Db\bind_result(
+            "MemoryDAO: getMinimumMemoryForRelease",
+            $stmt,
+            $memory_id, $memory
+        );
+
+        $memory_linked = [];
+        while ($stmt->fetch()) {
+            $memory_linked[] = new \AL\Common\Model\Game\Memory(
+                $memory_id, $memory, null
+            );
+        }
+
+        $stmt->close();
+
+        return $memory_linked;
+    }
+    
+    /**
+     * Set the list of minimum memory for this release
+     *
+     * @param integer release ID
+     * @param integer[] List of memory IDs
+     */
+    public function setMinimumMemoryForRelease($release_id, $memory_id) {
+       
+        $stmt = \AL\Db\execute_query(
+            "MemoryDAO: setMinimumMemoryForRelease",
+            $this->mysqli,
+            "INSERT INTO game_release_memory_minimum (release_id, memory_id) VALUES (?, ?)",
+            "ii", $release_id, $memory_id
         );
 
         $stmt->close();
     }
     
-     
+         /**
+     * Delete minimum memory for release
+     *
+     * @param integer Game Release ID
+     * @param integer memory ID
+     */
+    public function deleteMinimumMemoryForRelease($game_release_id, $memory_id) {
+        $stmt = \AL\Db\execute_query(
+            "MemoryDAO: deleteMinimumMemoryForRelease",
+            $this->mysqli,
+            "DELETE FROM game_release_memory_minimum
+            WHERE release_id = ? and memory_id = ?",
+            "ii", $game_release_id, $memory_id
+        );
+
+        $stmt->close();
+    }
+         
      /**
      * add a memory amount to the database
      *
