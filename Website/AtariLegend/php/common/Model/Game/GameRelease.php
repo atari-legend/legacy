@@ -11,7 +11,6 @@ class GameRelease {
     private $date;
     private $license;
     private $type;
-    private $memory;
     private $publisher;
     private $status;
     private $hd_installable;
@@ -24,7 +23,6 @@ class GameRelease {
         $date,
         $license,
         $type,
-        $memory,
         $publisher,
         $status,
         $hd_installable,
@@ -36,7 +34,6 @@ class GameRelease {
         $this->date = $date;
         $this->license = $license;
         $this->type = $type;
-        $this->memory = $memory;
         $this->publisher = $publisher;
         $this->status = $status;
         $this->hd_installable = $hd_installable;
@@ -65,10 +62,6 @@ class GameRelease {
 
     public function getType() {
         return $this->type;
-    }
-    
-    public function getMemory() {
-        return $this->memory;
     }
 
     public function getPublisher() {

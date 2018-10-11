@@ -120,13 +120,12 @@ class GameReleaseDAO {
             "GameRelaseDAO: getReleasesForGame",
             $this->mysqli,
             "SELECT
-                game_release.id, game_release.name, `date`, license, game_release.type, game_release.memory_id, 
-                memory.memory, pub_dev.pub_dev_id, pub_dev.pub_dev_name, pub_dev_text.pub_dev_profile, 
+                game_release.id, game_release.name, `date`, license, game_release.type,
+                pub_dev.pub_dev_id, pub_dev.pub_dev_name, pub_dev_text.pub_dev_profile, 
                 pub_dev_text.pub_dev_imgext, game_release.status, game_release.hd_installable, game_release.notes
             FROM game_release
             LEFT JOIN pub_dev ON game_release.pub_dev_id = pub_dev.pub_dev_id
             LEFT JOIN pub_dev_text ON pub_dev.pub_dev_id = pub_dev_text.pub_dev_id
-            LEFT JOIN memory ON memory.id = game_release.memory_id
             WHERE game_id = ?
             ORDER BY date ASC",
             "i", $game_id
@@ -135,7 +134,7 @@ class GameReleaseDAO {
         \AL\Db\bind_result(
             "GameRelaseDAO: getReleasesForGame",
             $stmt,
-            $id, $name, $date, $license, $type, $memory_id, $memory,
+            $id, $name, $date, $license, $type,
             $pub_dev_id, $pub_dev_name, $pub_dev_profile, $pub_dev_imgext,
             $status, $hd_installable, $notes
         );
@@ -144,9 +143,6 @@ class GameReleaseDAO {
         while ($stmt->fetch()) {
             $releases[] = new \AL\Common\Model\Game\GameRelease(
                 $id, $game_id, $name, $date, $license, $type,
-                ($memory_id != null)
-                    ? new \AL\Common\Model\Game\Memory($memory_id, $memory, null)
-                    : null,
                 ($pub_dev_id != null)
                     ? new \AL\Common\Model\PubDev\PubDev($pub_dev_id, $pub_dev_name, $pub_dev_profile, $pub_dev_imgext)
                     : null,
@@ -170,14 +166,13 @@ class GameReleaseDAO {
             "GameReleaseDAO: getRelease: $release_id",
             $this->mysqli,
             "SELECT
-                game_release.id, game_id, game_release.name, `date`, license, game_release.type, memory_id, 
-                memory.memory, pub_dev.pub_dev_id, pub_dev.pub_dev_name, pub_dev_text.pub_dev_profile, 
+                game_release.id, game_id, game_release.name, `date`, license, game_release.type, 
+                pub_dev.pub_dev_id, pub_dev.pub_dev_name, pub_dev_text.pub_dev_profile, 
                 pub_dev_text.pub_dev_imgext, game_release.status, game_release.hd_installable,
                 game_release.notes
             FROM game_release
             LEFT JOIN pub_dev ON game_release.pub_dev_id = pub_dev.pub_dev_id
             LEFT JOIN pub_dev_text ON pub_dev.pub_dev_id = pub_dev_text.pub_dev_id
-            LEFT JOIN memory ON memory.id = game_release.memory_id
             WHERE game_release.id = ?",
             "i", $release_id
         );
@@ -185,7 +180,7 @@ class GameReleaseDAO {
         \AL\Db\bind_result(
             "GameReleaseDAO: getRelease: $release_id",
             $stmt,
-            $id, $game_id, $name, $date, $license, $type, $memory_id, $memory,
+            $id, $game_id, $name, $date, $license, $type,
             $pub_dev_id, $pub_dev_name, $pub_dev_profile, $pub_dev_imgext,
             $status, $hd_installable, $notes
         );
@@ -194,9 +189,6 @@ class GameReleaseDAO {
         if ($stmt->fetch()) {
             $release = new \AL\Common\Model\Game\GameRelease(
                 $id, $game_id, $name, $date, $license, $type,
-                ($memory_id != null)
-                    ? new \AL\Common\Model\Game\Memory($memory_id, $memory, null)
-                    : null,
                 ($pub_dev_id != null)
                     ? new \AL\Common\Model\PubDev\PubDev($pub_dev_id, $pub_dev_name, $pub_dev_profile, $pub_dev_imgext)
                     : null,
