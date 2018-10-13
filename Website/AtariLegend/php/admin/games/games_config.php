@@ -32,6 +32,7 @@ require_once __DIR__."/../../common/DAO/MemoryDAO.php";
 require_once __DIR__."/../../common/DAO/TosDAO.php";
 require_once __DIR__."/../../common/DAO/CopyProtectionDAO.php";
 require_once __DIR__."/../../common/DAO/DiskProtectionDAO.php";
+require_once __DIR__."/../../common/DAO/EnhancementDAO.php";
 
 $engineDao = new \AL\Common\DAO\EngineDAO($mysqli);
 $programmingLanguageDao = new \AL\Common\DAO\ProgrammingLanguageDAO($mysqli);
@@ -48,6 +49,7 @@ $memoryDao = new \AL\Common\DAO\MemoryDAO($mysqli);
 $tosDao = new \AL\Common\DAO\TosDAO($mysqli);
 $copyProtectionDao = new \AL\Common\DAO\CopyProtectionDAO($mysqli);
 $diskProtectionDao = new \AL\Common\DAO\DiskProtectionDAO($mysqli);
+$enhancementDao = new \AL\Common\DAO\enhancementDAO($mysqli);
 
 
 //***********************************************************************************
@@ -120,6 +122,12 @@ $smarty->assign('disk_protections', $diskProtectionDao->getAllDiskProtections())
 //get the game release tos versions
 //***********************************************************************************
 $smarty->assign('tos', $tosDao->getAllTos());
+
+//***********************************************************************************
+//get the enhancenments
+//***********************************************************************************
+$smarty->assign('enhancement', $enhancementDao->getAllEnhancements());
+
 
 //Send all smarty variables to the templates
 $smarty->display("file:" . $cpanel_template_folder . "games_config.html");

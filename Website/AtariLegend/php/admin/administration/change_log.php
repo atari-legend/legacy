@@ -508,7 +508,8 @@ while ($log = $sql_log->fetch_array(MYSQLI_BOTH)) {
         $section_link    = ("../games/games_release_detail.php" . '?game_id=' . $log['section_id'] . '&release_id=' . $log['sub_section_id']);
         if ($log['sub_section'] == 'Game Release' OR $log['sub_section'] == 'Release Info' OR $log['sub_section'] == 'Release AKA' OR $log['sub_section'] == 'Compatibility'
             OR $log['sub_section'] == 'Distributor' OR $log['sub_section'] == 'Scene' OR $log['sub_section'] == 'Memory Enhancement' OR $log['sub_section'] == 'Minimum Memory'
-            OR $log['sub_section'] == 'Tos' OR $log['sub_section'] == 'Incompatible TOS' OR $log['sub_section'] == 'Protection' OR $log['sub_section'] == 'Language' OR $log['sub_section'] == 'Disk Protection') {
+            OR $log['sub_section'] == 'Tos' OR $log['sub_section'] == 'Incompatible TOS' OR $log['sub_section'] == 'Protection' OR $log['sub_section'] == 'Language' 
+            OR $log['sub_section'] == 'Disk Protection' OR $log['sub_section'] == 'Enhancement' OR $log['sub_section'] == 'System Enhancement') {
             $subsection_link = ("../games/games_release_detail.php" . '?game_id=' . $log['section_id'] . '&release_id=' . $log['sub_section_id']);
         }
     }

@@ -3,31 +3,16 @@ namespace AL\Common\DAO;
 
 require_once __DIR__."/../../lib/Db.php" ;
 require_once __DIR__."/../Model/Game/Memory.php" ;
+require_once __DIR__."/../Model/Game/enhancement.php" ;
 
 /**
  * DAO for memory
  */
 class MemoryDAO {
     private $mysqli;
-    
-    const ENHANCEMENT_GRAPHICS = 'Graphics';
-    const ENHANCEMENT_SOUND = 'Sound';
-    const ENHANCEMENT_SCROLLING = 'Scrolling';
 
     public function __construct($mysqli) {
         $this->mysqli = $mysqli;
-    }
-    
-    /**
-     * Get all the enhancement types
-     * @return String[] A list of enhancement types
-     */
-    public function getEnhancementTypes() {
-        return array(
-            MemoryDAO::ENHANCEMENT_GRAPHICS,
-            MemoryDAO::ENHANCEMENT_SOUND,
-            MemoryDAO::ENHANCEMENT_SCROLLING
-        );
     }
 
     /**
@@ -70,9 +55,10 @@ class MemoryDAO {
         $stmt = \AL\Db\execute_query(
             "MemoryDAO: getMemoryForRelease",
             $this->mysqli,
-            "SELECT memory_id, memory, enhancement
+            "SELECT memory_id, memory, enhancement.id, enhancement.name
             FROM game_release_memory_enhanced LEFT JOIN 
             memory ON (game_release_memory_enhanced.memory_id = memory.id)
+            LEFT JOIN enhancement ON (game_release_memory_enhanced.enhancement_id = enhancement.id)
             WHERE release_id = ?",
             "i", $release_id
         );
@@ -80,13 +66,16 @@ class MemoryDAO {
         \AL\Db\bind_result(
             "MemoryDAO: getMemoryForRelease",
             $stmt,
-            $memory_id, $memory, $enhancement
+            $memory_id, $memory, $enhancement_id, $enhancement
         );
 
         $memory_linked = [];
         while ($stmt->fetch()) {
             $memory_linked[] = new \AL\Common\Model\Game\Memory(
-                $memory_id, $memory, $enhancement
+                $memory_id, $memory,
+                ($enhancement_id != null)
+                    ? new \AL\Common\Model\Game\Enhancement($enhancement_id, $enhancement)
+                    : null
             );
         }
 
@@ -101,13 +90,13 @@ class MemoryDAO {
      * @param integer release ID
      * @param integer[] List of memory IDs
      */
-    public function setMemoryForRelease($release_id, $memory_id, $enhancement) {
+    public function setMemoryForRelease($release_id, $memory_id, $enhancement_id) {
        
         $stmt = \AL\Db\execute_query(
             "MemoryDAO: setMemoryForRelease",
             $this->mysqli,
-            "INSERT INTO game_release_memory_enhanced (release_id, memory_id, enhancement) VALUES (?, ?, ?)",
-            "iis", $release_id, $memory_id, $enhancement
+            "INSERT INTO game_release_memory_enhanced (release_id, memory_id, enhancement_id) VALUES (?, ?, ?)",
+            "iis", $release_id, $memory_id, $enhancement_id
         );
 
         $stmt->close();
@@ -119,15 +108,15 @@ class MemoryDAO {
      * @param integer Game Release ID
      * @param integer memory ID
      */
-    public function updateMemoryForRelease($game_release_id, $memory_id, $enhancement) {
+    public function updateMemoryForRelease($game_release_id, $memory_id, $enhancement_id) {
         $stmt = \AL\Db\execute_query(
             "MemoryDAO: UpdateMemoryForRelease",
             $this->mysqli,
             "UPDATE game_release_memory_enhanced
             SET
-                `enhancement` = ?
+                `enhancement_id` = ?
             WHERE release_id = ? AND memory_id = ?",
-            "sii", $enhancement, $game_release_id, $memory_id
+            "sii", $enhancement_id, $game_release_id, $memory_id
         );
 
         $stmt->close();

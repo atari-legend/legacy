@@ -19,6 +19,7 @@ require_once __DIR__."/../../common/DAO/MemoryDAO.php";
 require_once __DIR__."/../../common/DAO/TosDAO.php";
 require_once __DIR__."/../../common/DAO/CopyProtectionDAO.php";
 require_once __DIR__."/../../common/DAO/DiskProtectionDAO.php";
+require_once __DIR__."/../../common/DAO/EnhancementDAO.php";
 
 $gameReleaseDao = new \AL\Common\DAO\GameReleaseDAO($mysqli);
 $gameDao = new \AL\Common\DAO\GameDao($mysqli);
@@ -35,6 +36,7 @@ $memoryDao = new \AL\Common\DAO\MemoryDAO($mysqli);
 $tosDao = new \AL\Common\DAO\TosDAO($mysqli);
 $copyProtectionDao = new \AL\Common\DAO\CopyProtectionDAO($mysqli);
 $diskProtectionDao = new \AL\Common\DAO\DiskProtectionDAO($mysqli);
+$enhancementDao = new \AL\Common\DAO\EnhancementDAO($mysqli);
 
 if ($_SERVER['REQUEST_METHOD'] == "GET") {
     $smarty->assign('license_types', $gameReleaseDao->getLicenseTypes());
@@ -48,10 +50,10 @@ if ($_SERVER['REQUEST_METHOD'] == "GET") {
     $smarty->assign('emulators', $emulatorDao->getAllEmulators());
     $smarty->assign('trainer_options', $trainerOptionDao->getAllTrainerOptions());
     $smarty->assign('memory_enhanced', $memoryDao->getAllMemory());
-    $smarty->assign('memory_enhancement_types', $memoryDao->getEnhancementTypes());
     $smarty->assign('tos', $tosDao->getAllTos());
     $smarty->assign('copy_protections', $copyProtectionDao->getAllCopyProtections());
     $smarty->assign('disk_protections', $diskProtectionDao->getAllDiskProtections());
+    $smarty->assign('enhancements', $enhancementDao->getAllEnhancements());
     
     // Edit existing release
     if (isset($release_id)) {

@@ -1588,6 +1588,13 @@ function create_log_entry($section, $section_id, $subsection, $subsection_id, $a
             $query_data   = $result->fetch_array(MYSQLI_BOTH);
             $section_name = $query_data['name'];
         }
+        elseif ($subsection == 'Enhancement') {
+            // Get the Enhancement
+            $query = "SELECT name FROM enhancement WHERE id = '$section_id'";
+            $result = $mysqli->query($query) or die("getting enhancement failed");
+            $query_data   = $result->fetch_array(MYSQLI_BOTH);
+            $section_name = $query_data['name'];
+        }
         $subsection_name = $section_name;
     }
     
@@ -1601,7 +1608,8 @@ function create_log_entry($section, $section_id, $subsection, $subsection_id, $a
         $section_name = $query_data['game_name'];    
         
         if ($subsection == 'Game Release' OR $subsection == 'Release Info' OR $subsection == 'Release AKA' OR $subsection == 'Compatibility' OR $subsection == 'Distributor'
-            OR $subsection == 'Scene' or $subsection == 'Memory Enhancement' or $subsection == 'Minimum Memory' or $subsection == 'Incompatible TOS' or $subsection == 'Protection' or $subsection == 'Language') {
+            OR $subsection == 'Scene' or $subsection == 'Memory Enhancement' or $subsection == 'Minimum Memory' or $subsection == 'Incompatible TOS' or $subsection == 'Protection' 
+            or $subsection == 'Language' or $subsection == 'System Enhancement') {
             $subsection_name = $section_name;
         }
         
