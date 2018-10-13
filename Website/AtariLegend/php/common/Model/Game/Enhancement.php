@@ -2,17 +2,15 @@
 namespace AL\Common\Model\Game;
 
 /**
- * Maps to the `system` table
+ * Maps to the enhancement table
  */
-class System {
+class Enhancement {
     private $id;
     private $name;
-    private $enhancement;
 
-    public function __construct($id, $name, $enhancement) {
+    public function __construct($id, $name) {
         $this->id = $id;
         $this->name = $name;
-        $this->enhancement = $enhancement;
     }
 
     public function getId() {
@@ -21,9 +19,5 @@ class System {
 
     public function getName() {
         return $this->name;
-    }
-    
-    public function getEnhancement() {
-        return $this->enhancement;
     }
 }

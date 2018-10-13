@@ -184,7 +184,7 @@ if (isset($action) && ($action == 'features')) {
     } 
     
     $systemDao->setIncompatibleSystemsForRelease($release_id, isset($system_incompatible) ? $system_incompatible : []);
-    $systemDao->setEnhancedSystemsForRelease($release_id, isset($system_enhanced) ? $system_enhanced : []);
+    //$systemDao->setEnhancedSystemsForRelease($release_id, isset($system_enhanced) ? $system_enhanced : []);
     $resolutionDao->setResolutionsForRelease($release_id, isset($resolution) ? $resolution : []);
     $emulatorDao->setIncompatibleEmulatorsForRelease($release_id, isset($emulator_incompatible) ? $emulator_incompatible : []);
     $gameReleaseDao->updateHdRelease($release_id, $hd_installable);
@@ -251,6 +251,8 @@ if (isset($action) && ($action == 'scene')) {
 //add a memory enhancement to a release
 //***********************************************************************************
 if (isset($action) && ($action == 'add_memory_enhancement')) {  
+
+    if ( $memory_enhancement == '') {$memory_enhancement=null;}
     
     $memoryDao->setMemoryForRelease($release_id, $memory_id, $memory_enhancement);
     
@@ -403,6 +405,49 @@ if (isset($action) && ($action == 'remove_release_language')) {
     $_SESSION['edit_message'] = "Language has been removed";
     header("Location: ../games/games_release_detail.php?game_id=$game_id&release_id=$release_id");
 
+}
+
+//***********************************************************************************
+//add a system enhancement to a release
+//***********************************************************************************
+if (isset($action) && ($action == 'add_system_enhanced')) {  
+
+    if ($enhancement_id == ''){
+        $enhancement_id = null;
+    }
+    
+    $systemDao->addEnhancedSystemForRelease($release_id, $system_id, $enhancement_id);
+    
+    create_log_entry('Game Release', $game_id, 'System Enhancement', $release_id, 'Insert', $_SESSION['user_id']);
+    
+    $_SESSION['edit_message'] = "System enhancement has been added";
+    header("Location: ../games/games_release_detail.php?game_id=$game_id&release_id=$release_id");
+}
+
+//***********************************************************************************
+//Update system enhancement for a release
+//***********************************************************************************
+if (isset($action) && ($action == 'update_system_enhanced')) {  
+    
+    $systemDao->updateEnhancedSystemForRelease($release_id, $system_id, $new_enhancement_id);
+    
+    create_log_entry('Game Release', $game_id, 'System Enhancement', $release_id, 'Update', $_SESSION['user_id']);
+    
+    $_SESSION['edit_message'] = "System enhancement was updated";
+    header("Location: ../games/games_release_detail.php?game_id=$game_id&release_id=$release_id");
+}
+
+//***********************************************************************************
+//Update system enhancement for a release
+//***********************************************************************************
+if (isset($action) && ($action == 'remove_system_enhanced')) {  
+    
+    $systemDao->deleteEnhancedSystemForRelease($release_id, $system_id);
+    
+    create_log_entry('Game Release', $game_id, 'System Enhancement', $release_id, 'Delete', $_SESSION['user_id']);
+    
+    $_SESSION['edit_message'] = "System enhancement was delete";
+    header("Location: ../games/games_release_detail.php?game_id=$game_id&release_id=$release_id");
 }
     
 //close the connection

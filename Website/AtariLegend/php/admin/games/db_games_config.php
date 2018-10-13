@@ -23,6 +23,7 @@ require_once __DIR__."/../../common/DAO/MemoryDAO.php";
 require_once __DIR__."/../../common/DAO/TosDAO.php";
 require_once __DIR__."/../../common/DAO/CopyProtectionDAO.php";
 require_once __DIR__."/../../common/DAO/DiskProtectionDAO.php";
+require_once __DIR__."/../../common/DAO/EnhancementDAO.php";
 
 $changeLogDao = new \AL\Common\DAO\ChangeLogDAO($mysqli);
 $engineDao = new \AL\Common\DAO\EngineDAO($mysqli);
@@ -40,6 +41,7 @@ $memoryDao = new \AL\Common\DAO\MemoryDAO($mysqli);
 $tosDao = new \AL\Common\DAO\TosDAO($mysqli);
 $copyProtectionDao = new \AL\Common\DAO\CopyProtectionDAO($mysqli);
 $diskProtectionDao = new \AL\Common\DAO\DiskProtectionDAO($mysqli);
+$enhancementDao = new \AL\Common\DAO\EnhancementDAO($mysqli);
 
 switch ($_POST['action']) {
 	case "Add engine":
@@ -431,6 +433,32 @@ switch ($_POST['action']) {
 
         $_SESSION['edit_message'] = "Protection has been updated" ;
         break;
+        
+    case "Add enhancement":
+        $enhancementDao->addEnhancement($enhancement_new);
+        
+        $new_enhancement_id = $mysqli->insert_id;
+        
+        create_log_entry('Games Config', $new_enhancement_id, 'Enhancement', $new_enhancement_id, 'Insert', $_SESSION['user_id']);
+        
+        $_SESSION['edit_message'] = "$enhancement_new has been added" ;
+        break;
+        
+    case "Delete enhancement":
+        create_log_entry('Games Config', $enhancement_id_edit, 'Enhancement', $enhancement_id_edit, 'Delete', $_SESSION['user_id']);
+        
+        $enhancementDao->deleteEnhancement($enhancement_id_edit);       
+
+        $_SESSION['edit_message'] = "Enhancement has been deleted" ;
+        break;
+        
+    case "Modify enhancement":
+        $enhancementDao->updateEnhancement($enhancement_id_edit, $enhancement_edit);
+
+        create_log_entry('Games Config', $enhancement_id_edit, 'Enhancement', $enhancement_id_edit, 'Update', $_SESSION['user_id']);
+
+        $_SESSION['edit_message'] = "Enhancement has been updated" ;
+        break;      
 }
 
 header("Location: games_config.php");

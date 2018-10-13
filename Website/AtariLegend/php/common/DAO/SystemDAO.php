@@ -3,6 +3,7 @@ namespace AL\Common\DAO;
 
 require_once __DIR__."/../../lib/Db.php" ;
 require_once __DIR__."/../Model/Game/System.php" ;
+require_once __DIR__."/../Model/Game/enhancement.php" ;
 
 /**
  * DAO for systems
@@ -36,7 +37,7 @@ class SystemDAO {
         $systems = [];
         while ($stmt->fetch()) {
             $systems[] = new \AL\Common\Model\Game\System(
-                $id, $name
+                $id, $name, null
             );
         }
 
@@ -126,19 +127,28 @@ class SystemDAO {
         $stmt = \AL\Db\execute_query(
             "SystemDAO: getEnhancedSystemsForRelease",
             $this->mysqli,
-            "SELECT system_id FROM game_release_system_enhanced WHERE game_release_id = ?",
+            "SELECT system_id, system.name, enhancement_id, enhancement.name 
+            FROM game_release_system_enhanced 
+            LEFT JOIN system ON (game_release_system_enhanced.system_id = system.id)
+            LEFT JOIN enhancement ON (game_release_system_enhanced.enhancement_id = enhancement.id)
+            WHERE game_release_id = ?",
             "i", $release_id
         );
 
         \AL\Db\bind_result(
             "SystemDAO: getEnhancedSystemsForRelease",
             $stmt,
-            $system_id
+            $system_id, $system, $enhancement_id, $enhancement
         );
 
         $systems = [];
         while ($stmt->fetch()) {
-            $systems[] = $system_id;
+            $systems[] = new \AL\Common\Model\Game\System(
+                $system_id, $system,
+                ($enhancement_id != null)
+                    ? new \AL\Common\Model\Game\Enhancement($enhancement_id, $enhancement)
+                    : null
+            );
         }
 
         $stmt->close();
@@ -170,6 +180,65 @@ class SystemDAO {
         }
 
         $stmt->close();
+    }
+    
+        /**
+     * Set the list of system enhancements for a release
+     *
+     * @param integer Release ID
+     * @param integer[] system ID
+     * @param integer[] enhancement IDs
+     */
+    public function addEnhancedSystemForRelease($release_id, $system_id, $enhancement_id) {
+
+        $stmt = \AL\Db\execute_query(
+            "SystemDAO: addEnhancedSystemForRelease",
+            $this->mysqli,
+            "INSERT INTO game_release_system_enhanced (game_release_id, system_id, enhancement_id) VALUES (?, ?, ?)",
+            "iii", $release_id, $system_id, $enhancement_id
+        );
+
+        $stmt->close();
+    }
+    
+    
+        /**
+     * update system enhancements for a release
+     *
+     * @param integer Release ID
+     * @param integer[] system ID
+     * @param integer[] enhancement IDs
+     */
+    public function updateEnhancedSystemForRelease($release_id, $system_id, $enhancement_id) {
+
+        $stmt = \AL\Db\execute_query(
+            "SystemDAO: updateEnhancedSystemForRelease",
+            $this->mysqli,
+            "UPDATE game_release_system_enhanced
+            SET
+                `enhancement_id` = ?
+            WHERE game_release_id = ? AND system_id = ?",
+            "iii", $enhancement_id, $release_id, $system_id
+        );
+
+        $stmt->close();
+    }
+
+        /**
+     * delete system enhancements for a release
+     *
+     * @param integer Release ID
+     * @param integer[] system ID
+     */
+    public function deleteEnhancedSystemForRelease($release_id, $system_id) {
+
+        $stmt = \AL\Db\execute_query(
+            "SystemDAO: deleteEnhancedSystemForRelease",
+            $this->mysqli,
+            "DELETE FROM game_release_system_enhanced
+            WHERE game_release_id = ? AND system_id = ?",
+            "ii", $release_id, $system_id
+        );
     }
     
         /**

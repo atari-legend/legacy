@@ -329,10 +329,25 @@
                 </form>
                 <br>
                 <br>
-                <b>Memory Enhancement types</b>&nbsp;&nbsp;
-                <div class="help-hint">
-                    Please contact the admin if you want to have additional data added or changed.
-                </div>
+                <b>Enhancements</b>&nbsp;&nbsp;
+                <br>
+                <form action="../games/db_games_config.php" method="post" name="Enhancement">
+                    <select name="enhancement_select" class="standard_select input_medium grayed_out" id="enhancement_select">
+                        <option value="" selected="selected">-</option>
+                        {foreach from=$enhancement item=all_enhancement}
+                            <option value="{$all_enhancement->getId()}">{$all_enhancement->getName()}</option>
+                        {/foreach}
+                    </select>
+                    <input type="text" name="enhancement_edit" class="standard_input input_medium" style="display:none;" id="enhancement_edit">
+                    <input type="text" name="enhancement_id_edit" class="standard_input input_medium" style="display:none;" id="enhancement_id_edit">
+                    <input type="submit" value="Modify enhancement" name="action" class="secondary_button" style="display:none;" id="enhancement_mod">
+                    <input type="submit" value="Delete enhancement" name="action" class="primary_button button_danger" style="display:none;" id="enhancement_del">
+                </form>
+                <hr class="separator_add">
+                <form action="../games/db_games_config.php" method="post" name="enhancement">
+                    <input type="text" name="enhancement_new" class="standard_input input_medium" placeholder="Enter new enhancement" required>
+                    <input type="submit" value="Add enhancement" name="action" class="secondary_button">
+                </form>
                 <br>
                 <br>
                 <b>Copy Protection</b>&nbsp;&nbsp;

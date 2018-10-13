@@ -157,7 +157,7 @@
                                 <td class="w-30">{if $smarty.foreach.system.index == 0}<span class="games_main_detail_info_right">Enhanced</span>{/if}</td>
                                 <td class="w-5">-</td>
                                 <td class="w-60">
-                                    {$systems[$system_id]->getName()} <span class="standard_tile_subtext">(system)</span>
+                                    {$system_id->getName()} <span class="standard_tile_subtext">(system) ({$system_id->getEnhancement()->getName()})</span>
                                     <br>
                                 </td>
                             </tr>
@@ -170,7 +170,7 @@
                                 <td class="w-30">{if $system_enhanced[$release->getId()]}{else}{if $smarty.foreach.memoryEnhancement.index == 0}<span class="games_main_detail_info_right">Enhanced</span>{/if}{/if}</td>
                                 <td class="w-5">-</td>
                                 <td class="w-60">
-                                    {$memoryEnhancement_id->getMemory()} <span class="standard_tile_subtext">(ram) ({$memoryEnhancement_id->getEnhancement()})</span>
+                                    {$memoryEnhancement_id->getMemory()} <span class="standard_tile_subtext">(ram) ({$memoryEnhancement_id->getEnhancement()->getName()})</span>
                                     <br>
                                 </td>
                             </tr>

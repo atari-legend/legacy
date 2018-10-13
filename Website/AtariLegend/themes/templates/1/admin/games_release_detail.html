@@ -339,23 +339,6 @@
                                 {/foreach}
                                 <br>
 
-                                <label class="input">Enhanced for</label>
-                                {foreach from=$systems item=system}
-                                    {* Nothing is ever enhanced for the base ST *}
-                                    {if $system->getName() != 'ST'}
-                                        <div class="checkbox links_mod_checkbox">
-                                            <input type="checkbox"
-                                                id="system_enhanced_{$system->getId()}"
-                                                name="system_enhanced[]"
-                                                {if in_array($system->getId(), $system_enhanced)}checked{/if}
-                                                value="{$system->getId()}">
-                                            <label for="system_enhanced_{$system->getId()}"></label>
-                                            &nbsp;{$system->getName()}<br>
-                                        </div>
-                                    {/if}
-                                {/foreach}
-                                <br>
-
                                 <label class="input">HD installable</label>
                                 <div class="checkbox links_mod_checkbox">
                                     <input type="checkbox"
@@ -402,6 +385,59 @@
                     </form>
                     <br>
                     <br>
+                    <br>
+                    <br>
+
+                    <label class="input">Enhanced for</label>
+                    <br>
+                    {if isset($system_enhanced)}
+                        {foreach from=$system_enhanced item=system_enhanced_linked}
+                            <form action="../games/db_games_release_detail.php" method="get">
+                                <a title="Remove {$system_enhanced_linked->getName()|escape:"html"} from this release"
+                                    href="../games/db_games_release_detail.php?game_id={$game->getId()}&amp;release_id={$release->getId()}&amp;system_id={$system_enhanced_linked->getId()}&amp;action=remove_system_enhanced"
+                                    onclick="javascript:return confirm('This system enhancement will be removed from the release')">
+                                    <span class="fa fa-fw fa-trash"></span>
+                                </a>
+
+                                <input type="hidden" name="action" value="update_system_enhanced">
+                                <input type="hidden" name="game_id" value="{$game->getId()}">
+                                <input type="hidden" name="release_id" value="{$release->getId()}">
+                                <input type="hidden" name="system_id" value="{$system_enhanced_linked->getId()}">
+                                <input type="text" value="{$system_enhanced_linked->getName()}" class="standard_input input_medium" disabled id="gd_game_dev">
+                                <select name="new_enhancement_id"
+                                onchange="jQuery('#update-enhancement-{$system_enhanced_linked->getId()}').show()"
+                                class="standard_select select_medium">
+                                <option value="">-</option>
+                                {foreach from=$enhancements item=all_enhancement}
+                                    <option value="{$all_enhancement->getId()}" {if $system_enhanced_linked->getEnhancement() !== null}{if $system_enhanced_linked->getEnhancement()->getId() eq $all_enhancement->getId()} selected{/if}{/if}>{$all_enhancement->getName()}</option>
+                                {/foreach}
+                                </select>
+                                <input type="submit" id="update-enhancement-{$system_enhanced_linked->getId()}" style="display: none;" class="secondary_button" value="Update">
+                            </form>
+                        {/foreach}
+                    {/if}
+                    <hr class="separator_add">
+
+                    <form action="../games/db_games_release_detail.php" method="post">
+                        <input type="hidden" name="release_id" value="{$release->getId()}">
+                        <input type="hidden" name="game_id" value="{$game->getId()}">
+                        <input type="hidden" name="action" value="add_system_enhanced">
+                        <span class="fa fa-fw"></span>
+                        <select name="system_id"
+                            class="standard_select select_large" id="gd_dev_name" required>
+                            <option value="" selected="selected" disabled>-</option>
+                            {foreach from=$systems item=all_systems}
+                                <option value="{$all_systems->getId()}">{$all_systems->getName()}</option>
+                            {/foreach}
+                        </select>
+                        <select name="enhancement_id" class="standard_select select_medium">
+                            <option value="">-</option>
+                            {foreach from=$enhancements item=enhancement}
+                                <option value="{$enhancement->getId()}">{$enhancement->getName()}</option>
+                            {/foreach}
+                        </select>
+                        <input type="submit" value="Add enhancement" class="secondary_button">
+                    </form>
                     <br>
                     <br>
                     <label class="input">Incompatible TOS</label>
@@ -521,14 +557,14 @@
                                 <input type="hidden" name="memory_id" value="{$release_memory_enhancement->getId()}">
                                 <input type="text" value="{$release_memory_enhancement->getMemory()}" class="standard_input input_medium" disabled id="gd_game_dev">
                                 <select name="new_enhancement"
-                                onchange="jQuery('#update-enhancement-{$release_memory_enhancement->getEnhancement()}').show()"
+                                onchange="jQuery('#update-enhancement-{$release_memory_enhancement->getId()}').show()"
                                 class="standard_select select_medium">
                                 <option value="">-</option>
-                                {foreach from=$memory_enhancement_types item=enhancement_type}
-                                    <option {if $release_memory_enhancement->getEnhancement() eq $enhancement_type} selected{/if}>{$enhancement_type}</option>
+                                {foreach from=$enhancements item=enhancement}
+                                    <option value={$enhancement->getId()} {if $release_memory_enhancement->getEnhancement() !== null}{if $release_memory_enhancement->getEnhancement()->getId() eq $enhancement->getId()} selected{/if}{/if}>{$enhancement->getName()}</option>
                                 {/foreach}
                                 </select>
-                                <input type="submit" id="update-enhancement-{$release_memory_enhancement->getEnhancement()}" style="display: none;" class="secondary_button" value="Update">
+                                <input type="submit" id="update-enhancement-{$release_memory_enhancement->getId()}" style="display: none;" class="secondary_button" value="Update">
                             </form>
                         {/foreach}
                     {/if}
@@ -549,8 +585,8 @@
                         </select>
                         <select name="memory_enhancement" class="standard_select">
                             <option value="">-</option>
-                            {foreach from=$memory_enhancement_types item=enhancement_type}
-                                <option>{$enhancement_type}</option>
+                            {foreach from=$enhancements item=enhancement}
+                                <option value={$enhancement->getId()}>{$enhancement->getName()}</option>
                             {/foreach}
                         </select>
                         <input type="submit" value="Add enhancement" class="secondary_button">

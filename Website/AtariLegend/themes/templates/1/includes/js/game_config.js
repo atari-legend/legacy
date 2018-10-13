@@ -59,6 +59,9 @@ $(document).ready(function () {
     $('select[name=disk_protection_select]').change(function () {
         hideShow('disk_protection');
     });
+    $('select[name=enhancement_select]').change(function () {
+        hideShow('enhancement');
+    });
 });
 
 function hideShow (type) {
