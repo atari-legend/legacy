@@ -157,7 +157,7 @@
                                 <td class="w-30">{if $smarty.foreach.system.index == 0}<span class="games_main_detail_info_right">Enhanced</span>{/if}</td>
                                 <td class="w-5">-</td>
                                 <td class="w-60">
-                                    {$system_id->getName()} <span class="standard_tile_subtext">(system) ({$system_id->getEnhancement()->getName()})</span>
+                                    {$system_id->getName()} <span class="standard_tile_subtext">(system){if $system_id->getEnhancement() !== null }({$system_id->getEnhancement()->getName()}){/if}</span>
                                     <br>
                                 </td>
                             </tr>
@@ -170,7 +170,7 @@
                                 <td class="w-30">{if $system_enhanced[$release->getId()]}{else}{if $smarty.foreach.memoryEnhancement.index == 0}<span class="games_main_detail_info_right">Enhanced</span>{/if}{/if}</td>
                                 <td class="w-5">-</td>
                                 <td class="w-60">
-                                    {$memoryEnhancement_id->getMemory()} <span class="standard_tile_subtext">(ram) ({$memoryEnhancement_id->getEnhancement()->getName()})</span>
+                                    {$memoryEnhancement_id->getMemory()} <span class="standard_tile_subtext">(ram){if $memoryEnhancement_id->getEnhancement() !== null }({$memoryEnhancement_id->getEnhancement()->getName()}){/if}</span>
                                     <br>
                                 </td>
                             </tr>
@@ -183,7 +183,20 @@
                                 <td class="w-30">{if $smarty.foreach.memoryMin.index == 0}<span class="games_main_detail_info_right">Memory</span>{/if}</td>
                                 <td class="w-5">-</td>
                                 <td class="w-60">
-                                    {$memoryMinimum_id->getMemory()} <span class="standard_tile_subtext">(ram)</span>
+                                    {$memoryMinimum_id->getMemory()} <span class="standard_tile_subtext">(ram)(minimum)</span>
+                                    <br>
+                                </td>
+                            </tr>
+                        {/foreach}
+                    {/if}
+
+                    {if $memoryIncompatible[$release->getId()]}
+                        {foreach from=$memoryIncompatible[$release->getId()] item=$memoryIncompatible_id name=memoryIncomp}
+                            <tr>
+                                <td class="w-30">{if $memoryMinimum[$release->getId()]}{else}{if $smarty.foreach.memoryIncomp.index == 0}<span class="games_main_detail_info_right">Memory</span>{/if}{/if}</td>
+                                <td class="w-5">-</td>
+                                <td class="w-60">
+                                    {$memoryIncompatible_id->getMemory()} <span class="standard_tile_subtext">(ram)(incompatible)</span>
                                     <br>
                                 </td>
                             </tr>
@@ -221,7 +234,7 @@
                                 <td class="w-30">{if $system_incompatible[$release->getId()]}{else}{if $emulator_incompatible[$release->getId()]}{else}{if $smarty.foreach.tos.index == 0}<span class="games_main_detail_info_right">Incompatible</span>{/if}{/if}{/if}</td>
                                 <td class="w-5">-</td>
                                 <td class="w-60">
-                                    {$tos_id->getName()}<span class="standard_tile_subtext"> ({$tos_id->getLanguage()->getName()})</span><br>
+                                    {$tos_id->getName()}<span class="standard_tile_subtext">(tos)({$tos_id->getLanguage()->getName()})</span><br>
                                 </td>
                             </tr>
                         {/foreach}

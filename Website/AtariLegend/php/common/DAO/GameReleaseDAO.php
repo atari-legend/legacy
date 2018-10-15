@@ -22,6 +22,7 @@ class GameReleaseDAO {
     const TYPE_NON_PLAYABLE_DEMO = 'Non-playable demo';
     const TYPE_SLIDESHOW = 'Slideshow';
     const TYPE_UNOFFICIAL = 'Unofficial';
+    const TYPE_DATADISK = 'Data Disk';
     
     const STATUS_DEVELOPMENT = 'Development';
     const STATUS_UNFINISHED = 'Unfinished';
@@ -54,7 +55,8 @@ class GameReleaseDAO {
             GameReleaseDAO::TYPE_PLAYABLE_DEMO,
             GameReleaseDAO::TYPE_NON_PLAYABLE_DEMO,
             GameReleaseDAO::TYPE_SLIDESHOW,
-            GameReleaseDAO::TYPE_UNOFFICIAL
+            GameReleaseDAO::TYPE_UNOFFICIAL,
+            GameReleaseDAO::TYPE_DATADISK
         );
     }
     

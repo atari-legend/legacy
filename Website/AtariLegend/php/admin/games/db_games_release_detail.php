@@ -304,7 +304,7 @@ if (isset($action) && ($action == 'add_minimum_memory')) {
 }
 
 //***********************************************************************************
-//Delete a memory enhancement to a release
+//Delete a memory minimum to a release
 //***********************************************************************************
 if (isset($action) && ($action == 'remove_minimum_memory')) {  
     
@@ -313,6 +313,32 @@ if (isset($action) && ($action == 'remove_minimum_memory')) {
     create_log_entry('Game Release', $game_id, 'Minimum Memory', $release_id, 'Delete', $_SESSION['user_id']);
     
     $_SESSION['edit_message'] = "Minimum memory has been deleted";
+    header("Location: ../games/games_release_detail.php?game_id=$game_id&release_id=$release_id");
+}
+
+//***********************************************************************************
+//Delete a memory incompatible to a release
+//***********************************************************************************
+if (isset($action) && ($action == 'remove_incompatible_memory')) {  
+    
+    $memoryDao->deleteMemoryIncompatibleForRelease($release_id, $memory_id);
+    
+    create_log_entry('Game Release', $game_id, 'Incompatible Memory', $release_id, 'Delete', $_SESSION['user_id']);
+    
+    $_SESSION['edit_message'] = "Incompatible memory has been deleted";
+    header("Location: ../games/games_release_detail.php?game_id=$game_id&release_id=$release_id");
+}
+
+//***********************************************************************************
+//add a memory incompatible to a release
+//***********************************************************************************
+if (isset($action) && ($action == 'add_incompatible_memory')) {  
+    
+    $memoryDao->setMemoryIncompatibleForRelease($release_id, $memory_id);
+    
+    create_log_entry('Game Release', $game_id, 'Incompatible Memory', $release_id, 'Insert', $_SESSION['user_id']);
+    
+    $_SESSION['edit_message'] = "Incompatible memory has been added";
     header("Location: ../games/games_release_detail.php?game_id=$game_id&release_id=$release_id");
 }
 
