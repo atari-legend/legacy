@@ -269,10 +269,10 @@
                     {if $copyProtections[$release->getId()]}
                         {foreach from=$copyProtections[$release->getId()] item=copyProtection_id name=copyProtection}
                             <tr>
-                                <td class="w-30">{if $smarty.foreach.copyProtection.index == 0}<span class="games_main_detail_info_right">Protection</span>{/if}</td>
+                                <td class="w-30">{if $smarty.foreach.copyProtection.index == 0}<span class="games_main_detail_info_right">Copy protect.</span>{/if}</td>
                                 <td class="w-5">-</td>
                                 <td class="w-60">
-                                    {$copyProtection_id->getName()} <span class="standard_tile_subtext">(copy)</span>
+                                    {$copyProtection_id->getName()}
                                     <br>
                                 </td>
                             </tr>
@@ -282,10 +282,10 @@
                     {if $diskProtections[$release->getId()]}
                         {foreach from=$diskProtections[$release->getId()] item=diskProtection_id name=diskProtection}
                             <tr>
-                                <td class="w-30">{if $copyProtections[$release->getId()]}{else}{if $smarty.foreach.diskProtection.index == 0}<span class="games_main_detail_info_right">Protection</span>{/if}{/if}</td>
+                                <td class="w-30">{if $smarty.foreach.diskProtection.index == 0}<span class="games_main_detail_info_right">Disk protect.</span>{/if}</td>
                                 <td class="w-5">-</td>
                                 <td class="w-60">
-                                    {$diskProtection_id->getName()} <span class="standard_tile_subtext">(disk)</span>
+                                    {$diskProtection_id->getName()} <span class="standard_tile_subtext">(type)</span>
                                     <br>
                                 </td>
                             </tr>
