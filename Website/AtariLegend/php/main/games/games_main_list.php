@@ -57,7 +57,6 @@ if (empty($game_author)) {
             LEFT JOIN screenshot_game ON (screenshot_game.game_id = game.game_id)
             LEFT JOIN game_music ON (game_music.game_id = game.game_id)
             LEFT JOIN game_download ON (game_download.game_id = game.game_id) 
-            LEFT JOIN game_wanted ON (game.game_id = game_wanted.game_id)
             LEFT JOIN game_programming_language ON (game.game_id = game_programming_language.game_id)
             LEFT JOIN game_engine ON (game.game_id = game_engine.game_id)
             LEFT JOIN game_developer ON (game_developer.game_id = game.game_id)
@@ -86,7 +85,6 @@ if (empty($game_author)) {
             LEFT JOIN screenshot_game ON (screenshot_game.game_id = game.game_id)
             LEFT JOIN game_music ON (game_music.game_id = game.game_id)
             LEFT JOIN game_download ON (game_download.game_id = game.game_id)           
-            LEFT JOIN game_wanted ON (game.game_id = game_wanted.game_id)
             LEFT JOIN game_programming_language ON (game.game_id = game_programming_language.game_id)
             LEFT JOIN game_engine ON (game.game_id = game_engine.game_id)
             LEFT JOIN game_developer ON (game_developer.game_id = game.game_id)
@@ -118,7 +116,6 @@ if (empty($game_author)) {
           LEFT JOIN screenshot_game ON (screenshot_game.game_id = game.game_id)
           LEFT JOIN game_music ON (game_music.game_id = game.game_id)
           LEFT JOIN game_download ON (game_download.game_id = game.game_id)
-          LEFT JOIN game_wanted ON (game.game_id = game_wanted.game_id)
           LEFT JOIN game_programming_language ON (game.game_id = game_programming_language.game_id)
           LEFT JOIN game_engine ON (game.game_id = game_engine.game_id)
           LEFT JOIN game_developer ON (game.game_id = game_developer.game_id)
@@ -149,7 +146,6 @@ if (empty($game_author)) {
           LEFT JOIN screenshot_game ON (screenshot_game.game_id = game.game_id)
           LEFT JOIN game_music ON (game_music.game_id = game.game_id)
           LEFT JOIN game_download ON (game_download.game_id = game.game_id)        
-          LEFT JOIN game_wanted ON (game.game_id = game_wanted.game_id)
           LEFT JOIN game_programming_language ON (game.game_id = game_programming_language.game_id)
           LEFT JOIN game_engine ON (game.game_id = game_engine.game_id)
           LEFT JOIN game_developer ON (game.game_id = game_developer.game_id)
@@ -288,10 +284,6 @@ if (isset($action) and $action == "search") {
         $unreleased_select = " AND game_release.status = 'Unreleased'";
     }
 
-    if (isset($wanted) and $wanted == "1") {
-        $wanted_select = " AND game_wanted.wanted =$wanted";
-    }
-
     if (isset($stos) and $stos == "1") {
         $stos_select = " AND game_programming_language.programming_language_id = 1";
     }
@@ -313,7 +305,7 @@ if (isset($action) and $action == "search") {
 
     if ($publisher_select == "" and $gamebrowse_select == "" and $publisher_input == "" and $developer_input == "" and $year_input == "" and $cat_input == ""
         and $gamesearch == "" and $developer_select == "" and $year_select == "" and $category_select == "" and empty($game_author_select)
-        and empty($unreleased_select) and empty($development_select) and empty($arcade_select) and empty($wanted_select) and empty($stos_select)
+        and empty($unreleased_select) and empty($development_select) and empty($arcade_select) and empty($stos_select)
         and empty($unfinished_select) and empty($seuck_select) and empty($stac_select) and empty($screenshot) and empty($download) and empty($boxscan) and empty($review_select)) {
         $edit_message             = "Please fill in one of the fields";
         $_SESSION['edit_message'] = $edit_message;
@@ -407,9 +399,6 @@ if (isset($action) and $action == "search") {
         }
         if (isset($stac) and $stac == "1") {
             $RESULTGAME .= " AND game_engine.engine_id ='2'";
-        }
-        if (isset($wanted) and $wanted == "1") {
-            $RESULTGAME .= " AND game_wanted.game_id IS NOT NULL";
         }
 
         $RESULTGAME .= ' GROUP BY game.game_id, game.game_name HAVING COUNT(DISTINCT game.game_id, game.game_name) = 1';
@@ -510,9 +499,6 @@ if (isset($action) and $action == "search") {
                 }
                 if (isset($stac) and $stac == "1") {
                     $RESULTAKA .= " AND game_engine.engine_id ='2'";
-                }
-                if (isset($wanted) and $wanted == "1") {
-                    $RESULTAKA .= " AND game_wanted.game_id IS NOT NULL";
                 }
                 $RESULTAKA .= ' GROUP BY game_aka.game_id, game_aka.aka_name HAVING COUNT(DISTINCT game_aka.game_id, game_aka.aka_name) = 1';
                 $RESULTAKA .= ' ORDER BY game_aka.aka_name ASC';
