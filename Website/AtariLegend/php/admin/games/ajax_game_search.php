@@ -46,7 +46,6 @@ $RESULTGAME = "SELECT game.game_id,
         LEFT JOIN game_download ON (game_download.game_id = game.game_id)
         LEFT JOIN game_programming_language ON (game.game_id = game_programming_language.game_id)
         LEFT JOIN game_engine ON (game.game_id = game_engine.game_id)
-        LEFT JOIN game_wanted ON (game.game_id = game_wanted.game_id)
         LEFT JOIN game_developer ON (game_developer.game_id = game.game_id)
         LEFT JOIN pub_dev pd2 ON (pd2.pub_dev_id = game_developer.dev_pub_id)
         LEFT JOIN game_release ON (game_release.game_id = game.game_id)
@@ -73,7 +72,6 @@ $RESULTAKA = "SELECT
       LEFT JOIN game_download ON (game_download.game_id = game.game_id)      
       LEFT JOIN game_programming_language ON (game.game_id = game_programming_language.game_id)
       LEFT JOIN game_engine ON (game.game_id = game_engine.game_id)
-      LEFT JOIN game_wanted ON (game.game_id = game_wanted.game_id)
       LEFT JOIN game_developer ON (game.game_id = game_developer.game_id)
       LEFT JOIN pub_dev pd2 on (pd2.pub_dev_id = game_developer.dev_pub_id)
       LEFT JOIN game_release on (game_release.game_id = game.game_id)
@@ -148,10 +146,6 @@ if (isset($action) and $action == "search") {
 
     if (isset($unreleased) and $unreleased == "1") {
         $unreleased_select = " AND game_release.status ='Unreleased'";
-    }
-
-    if (isset($wanted) and $wanted == "1") {
-        $wanted_select = " AND game_wanted.game_wanted_id IS NOT NULL";
     }
 
     if (isset($stos) and $stos == "1") {
@@ -268,10 +262,6 @@ if (isset($action) and $action == "search") {
     if (isset($no_screenshot) and $no_screenshot == "1") {
         $RESULTGAME .= $no_screenshot_select;
         $RESULTAKA .= $no_screenshot_select;
-    }
-    if (isset($wanted) and $wanted == "1") {
-        $RESULTGAME .= $wanted_select;
-        $RESULTAKA .= $wanted_select;
     }
 
     $RESULTGAME .= ' GROUP BY game.game_id, game.game_name HAVING COUNT(DISTINCT game.game_id, game.game_name) = 1';
