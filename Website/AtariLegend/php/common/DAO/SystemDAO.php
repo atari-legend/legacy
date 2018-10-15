@@ -3,7 +3,7 @@ namespace AL\Common\DAO;
 
 require_once __DIR__."/../../lib/Db.php" ;
 require_once __DIR__."/../Model/Game/System.php" ;
-require_once __DIR__."/../Model/Game/enhancement.php" ;
+require_once __DIR__."/../Model/Game/Enhancement.php" ;
 
 /**
  * DAO for systems

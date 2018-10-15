@@ -3,7 +3,7 @@ namespace AL\Common\DAO;
 
 require_once __DIR__."/../../lib/Db.php" ;
 require_once __DIR__."/../Model/Game/Memory.php" ;
-require_once __DIR__."/../Model/Game/enhancement.php" ;
+require_once __DIR__."/../Model/Game/Enhancement.php" ;
 
 /**
  * DAO for memory
@@ -210,7 +210,77 @@ class MemoryDAO {
 
         $stmt->close();
     }
-         
+
+     /**
+     * Get list of incompatible memory IDs for a game release
+     *
+     * @param integer release ID
+     */
+    public function getMemoryIncompatibleForRelease($release_id) {
+        $stmt = \AL\Db\execute_query(
+            "MemoryDAO: getMemoryIncompatibleForRelease",
+            $this->mysqli,
+            "SELECT memory_id, memory
+            FROM game_release_memory_incompatible LEFT JOIN 
+            memory ON (game_release_memory_incompatible.memory_id = memory.id)
+            WHERE release_id = ?",
+            "i", $release_id
+        );
+
+        \AL\Db\bind_result(
+            "MemoryDAO: getMemoryIncompatibleForRelease",
+            $stmt,
+            $memory_id, $memory
+        );
+
+        $memory_linked = [];
+        while ($stmt->fetch()) {
+            $memory_linked[] = new \AL\Common\Model\Game\Memory(
+                $memory_id, $memory, null
+            );
+        }
+
+        $stmt->close();
+
+        return $memory_linked;
+    }
+    
+    /**
+     * Set the list of incompatible memory for this release
+     *
+     * @param integer release ID
+     * @param integer[] List of memory IDs
+     */
+    public function setMemoryIncompatibleForRelease($release_id, $memory_id) {
+       
+        $stmt = \AL\Db\execute_query(
+            "MemoryDAO: setMemoryIncompatibleForRelease",
+            $this->mysqli,
+            "INSERT INTO game_release_memory_incompatible (release_id, memory_id) VALUES (?, ?)",
+            "ii", $release_id, $memory_id
+        );
+
+        $stmt->close();
+    }
+    
+         /**
+     * Delete incompatible memory for release
+     *
+     * @param integer Game Release ID
+     * @param integer memory ID
+     */
+    public function deleteMemoryIncompatibleForRelease($game_release_id, $memory_id) {
+        $stmt = \AL\Db\execute_query(
+            "MemoryDAO: deleteMemoryIncompatibleForRelease",
+            $this->mysqli,
+            "DELETE FROM game_release_memory_incompatible
+            WHERE release_id = ? and memory_id = ?",
+            "ii", $game_release_id, $memory_id
+        );
+
+        $stmt->close();
+    }
+        
      /**
      * add a memory amount to the database
      *

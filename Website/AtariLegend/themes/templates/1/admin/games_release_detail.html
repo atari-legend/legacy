@@ -508,8 +508,6 @@
                                     onclick="javascript:return confirm('This minimum memory record will be removed from the release')">
                                     <span class="fa fa-fw fa-trash"></span>
                                 </a>
-
-                                <input type="hidden" name="action" value="update_minimum_memory">
                                 <input type="hidden" name="game_id" value="{$game->getId()}">
                                 <input type="hidden" name="release_id" value="{$release->getId()}">
                                 <input type="hidden" name="memory_id" value="{$release_min_memory->getId()}">
@@ -533,6 +531,45 @@
                             {/foreach}
                         </select>
                         <input type="submit" value="Add minimum" class="secondary_button">
+                    </form>
+
+                    <br>
+                    <br>
+                    <br>
+                    <a id="gd_developers"><b>Incompatible memory</b></a>
+                    <br>
+
+                    {if isset($release_memory_incompatible)}
+                        {foreach from=$release_memory_incompatible item=release_memory_incomp}
+                            <form action="../games/db_games_release_detail.php" method="get">
+                                <a title="Remove {$release_memory_incomp->getMemory()|escape:"html"} from this release"
+                                    href="../games/db_games_release_detail.php?game_id={$game->getId()}&amp;release_id={$release->getId()}&amp;memory_id={$release_memory_incomp->getId()}&amp;action=remove_incompatible_memory"
+                                    onclick="javascript:return confirm('This incompatible memory record will be removed from the release')">
+                                    <span class="fa fa-fw fa-trash"></span>
+                                </a>
+                                <input type="hidden" name="game_id" value="{$game->getId()}">
+                                <input type="hidden" name="release_id" value="{$release->getId()}">
+                                <input type="hidden" name="memory_id" value="{$release_memory_incomp->getId()}">
+                                <input type="text" value="{$release_memory_incomp->getMemory()}" class="standard_input input_medium" disabled id="gd_game_dev">
+                            </form>
+                        {/foreach}
+                    {/if}
+
+                    <hr class="separator_add">
+
+                    <form action="../games/db_games_release_detail.php" method="post">
+                        <input type="hidden" name="release_id" value="{$release->getId()}">
+                        <input type="hidden" name="game_id" value="{$game->getId()}">
+                        <input type="hidden" name="action" value="add_incompatible_memory">
+                        <span class="fa fa-fw"></span>
+                        <select name="memory_id"
+                            class="standard_select select_large" id="gd_dev_name" required>
+                            <option value="" selected="selected">-</option>
+                            {foreach from=$memory_enhanced item=all_incomp_memory}
+                                <option value="{$all_incomp_memory->getId()}">{$all_incomp_memory->getMemory()}</option>
+                            {/foreach}
+                        </select>
+                        <input type="submit" value="Add memory" class="secondary_button">
                     </form>
 
 
