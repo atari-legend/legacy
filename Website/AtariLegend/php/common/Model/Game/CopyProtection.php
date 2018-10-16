@@ -7,10 +7,12 @@ namespace AL\Common\Model\Game;
 class CopyProtection {
     private $id;
     private $name;
+    private $note;
 
-    public function __construct($id, $name) {
+    public function __construct($id, $name, $note) {
         $this->id = $id;
         $this->name = $name;
+        $this->note = $note;
     }
 
     public function getId() {
@@ -19,5 +21,9 @@ class CopyProtection {
 
     public function getName() {
         return $this->name;
+    }
+    
+    public function getNote() {
+        return $this->note;
     }
 }

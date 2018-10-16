@@ -386,22 +386,55 @@ if (isset($action) && ($action == 'remove_tos_incompatible')) {
 }
 
 //***********************************************************************************
-//update the the copy protection section of the game release
+//Add the copy protection for a release
 //***********************************************************************************
-if (isset($action) && ($action == 'protection')) {  
+if (isset($action) && ($action == 'add_copy_protection')) {  
     
-    //Update the protection options
-    $copyProtectionDao->setCopyProtectionsForRelease($release_id, isset($copy_protection) ? $copy_protection : []);
-    $diskProtectionDao->setDiskProtectionsForRelease($release_id, isset($disk_protection) ? $disk_protection : []);
+    $copyProtectionDao->addCopyProtectionForRelease($release_id, isset($protection_id) ? $protection_id : [], $copy_protection_note);
     
-    create_log_entry('Game Release', $game_id, 'Protection', $release_id, 'Update', $_SESSION['user_id']);
-    $_SESSION['edit_message'] = "Protection info updated";
+    create_log_entry('Game Release', $game_id, 'Copy Protection', $release_id, 'Add', $_SESSION['user_id']);
+    $_SESSION['edit_message'] = "Copy Protection added";  
+  
+    header("Location: ../games/games_release_detail.php?game_id=$game_id&release_id=$release_id");
+}
+
+//***********************************************************************************
+//Delete the copy protection for a release
+//***********************************************************************************
+if (isset($action) && ($action == 'remove_copy_protection')) {  
     
-    if ($submit_type == "save_and_back") {
-        header("Location: games_detail.php?game_id=".$game_id);
-    } else {
-        header("Location: ../games/games_release_detail.php?game_id=$game_id&release_id=$release_id");
-    }
+    $copyProtectionDao->deleteCopyProtectionForRelease($release_id, isset($protection_id) ? $protection_id : []);
+    
+    create_log_entry('Game Release', $game_id, 'Copy Protection', $release_id, 'Delete', $_SESSION['user_id']);
+    $_SESSION['edit_message'] = "Copy Protection deleted";  
+  
+    header("Location: ../games/games_release_detail.php?game_id=$game_id&release_id=$release_id");
+}
+
+//***********************************************************************************
+//Add the disk protection for a release
+//***********************************************************************************
+if (isset($action) && ($action == 'add_disk_protection')) {  
+    
+    $diskProtectionDao->addDiskProtectionForRelease($release_id, isset($protection_id) ? $protection_id : [], $disk_protection_note);
+    
+    create_log_entry('Game Release', $game_id, 'Disk Protection', $release_id, 'Add', $_SESSION['user_id']);
+    $_SESSION['edit_message'] = "Disk Protection added";  
+  
+    header("Location: ../games/games_release_detail.php?game_id=$game_id&release_id=$release_id");
+}
+
+//***********************************************************************************
+//Delete the disk protection for a release
+//***********************************************************************************
+if (isset($action) && ($action == 'remove_disk_protection')) {  
+    
+    $diskProtectionDao->deleteDiskProtectionForRelease($release_id, isset($protection_id) ? $protection_id : []);
+    
+    create_log_entry('Game Release', $game_id, 'Disk Protection', $release_id, 'Delete', $_SESSION['user_id']);
+    $_SESSION['edit_message'] = "Disk Protection deleted";  
+  
+    header("Location: ../games/games_release_detail.php?game_id=$game_id&release_id=$release_id");
 }
 
 //***********************************************************************************

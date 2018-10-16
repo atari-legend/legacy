@@ -36,7 +36,7 @@ class CopyProtectionDAO {
         $copy_protection_types = [];
         while ($stmt->fetch()) {
             $copy_protection_types[] = new \AL\Common\Model\Game\CopyProtection(
-                $id, $name
+                $id, $name, null
             );
         }
 
@@ -54,7 +54,7 @@ class CopyProtectionDAO {
         $stmt = \AL\Db\execute_query(
             "CopyProtectionDAO: getCopyProtectionsForRelease",
             $this->mysqli,
-            "SELECT copy_protection_id, name
+            "SELECT copy_protection_id, name, notes
             FROM game_release_copy_protection LEFT JOIN 
             copy_protection ON (game_release_copy_protection.copy_protection_id = copy_protection.id)
             WHERE release_id = ?",
@@ -64,13 +64,13 @@ class CopyProtectionDAO {
         \AL\Db\bind_result(
             "CopyProtectionDAO: getCopyProtectionsForRelease",
             $stmt,
-            $copy_protection_id, $name
+            $copy_protection_id, $name, $notes
         );
 
         $copy_protection_types = [];
         while ($stmt->fetch()) {
             $copy_protection_types[] = new \AL\Common\Model\Game\CopyProtection(
-                $copy_protection_id, $name
+                $copy_protection_id, $name, $notes
             );
         }
 
@@ -79,28 +79,39 @@ class CopyProtectionDAO {
         return $copy_protection_types;
     }
     
-    /**
-     * Set the list of copy protection types for this release
+     /**
+     * Add copy Protection for release
      *
-     * @param integer release ID
-     * @param integer[] List of copy protection IDs
+     * @param integer Game Release ID
+     * @param integer protection ID
+     * $param text note
      */
-    public function setCopyProtectionsForRelease($release_id, $copy_protection_id) {
+    public function addCopyProtectionForRelease($game_release_id, $protection_id, $note) {
+       
         $stmt = \AL\Db\execute_query(
-            "CopyProtectionDAO: setCopyProtectionsForRelease",
+            "copyProtectionDAO: addCopyProtectionForRelease",
             $this->mysqli,
-            "DELETE FROM game_release_copy_protection WHERE release_id = ?",
-            "i", $release_id
+            "INSERT INTO game_release_copy_protection (release_id, copy_protection_id, notes) VALUES (?, ?, ?)",
+            "iis", $game_release_id, $protection_id, $note
         );
 
-        foreach ($copy_protection_id as $id) {
-            $stmt = \AL\Db\execute_query(
-                "CopyProtectionDAO: setCopyProtectionsForRelease",
-                $this->mysqli,
-                "INSERT INTO game_release_copy_protection (release_id, copy_protection_id) VALUES (?, ?)",
-                "ii", $release_id, $id
-            );
-        }
+        $stmt->close();
+    }
+    
+     /**
+     * Delete copy Protection for release
+     *
+     * @param integer Game Release ID
+     * @param integer protection ID
+     */
+    public function deleteCopyProtectionForRelease($game_release_id, $protection_id) {
+        $stmt = \AL\Db\execute_query(
+            "copyProtectionDAO: deleteCopyProtectionForRelease",
+            $this->mysqli,
+            "DELETE FROM game_release_copy_protection
+            WHERE release_id = ? AND copy_protection_id = ?",
+            "ii", $game_release_id, $protection_id
+        );
 
         $stmt->close();
     }
