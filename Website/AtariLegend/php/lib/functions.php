@@ -1595,6 +1595,20 @@ function create_log_entry($section, $section_id, $subsection, $subsection_id, $a
             $query_data   = $result->fetch_array(MYSQLI_BOTH);
             $section_name = $query_data['name'];
         }
+        elseif ($subsection == 'Media Type') {
+            // Get the Enhancement
+            $query = "SELECT name FROM media_type WHERE id = '$section_id'";
+            $result = $mysqli->query($query) or die("getting media type failed");
+            $query_data   = $result->fetch_array(MYSQLI_BOTH);
+            $section_name = $query_data['name'];
+        }
+        elseif ($subsection == 'Media Scan Type') {
+            // Get the Enhancement
+            $query = "SELECT name FROM media_scan_type WHERE id = '$section_id'";
+            $result = $mysqli->query($query) or die("getting media type failed");
+            $query_data   = $result->fetch_array(MYSQLI_BOTH);
+            $section_name = $query_data['name'];
+        }
         $subsection_name = $section_name;
     }
     

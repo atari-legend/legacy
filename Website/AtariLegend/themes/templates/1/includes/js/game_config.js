@@ -62,6 +62,12 @@ $(document).ready(function () {
     $('select[name=enhancement_select]').change(function () {
         hideShow('enhancement');
     });
+    $('select[name=media_type_select]').change(function () {
+        hideShow('media_type');
+    });
+    $('select[name=media_scan_type_select]').change(function () {
+        hideShow('media_scan_type');
+    });
 });
 
 function hideShow (type) {
