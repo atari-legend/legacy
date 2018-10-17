@@ -24,6 +24,8 @@ require_once __DIR__."/../../common/DAO/TosDAO.php";
 require_once __DIR__."/../../common/DAO/CopyProtectionDAO.php";
 require_once __DIR__."/../../common/DAO/DiskProtectionDAO.php";
 require_once __DIR__."/../../common/DAO/EnhancementDAO.php";
+require_once __DIR__."/../../common/DAO/MediaTypeDAO.php";
+require_once __DIR__."/../../common/DAO/MediaScanTypeDAO.php";
 
 $changeLogDao = new \AL\Common\DAO\ChangeLogDAO($mysqli);
 $engineDao = new \AL\Common\DAO\EngineDAO($mysqli);
@@ -42,6 +44,8 @@ $tosDao = new \AL\Common\DAO\TosDAO($mysqli);
 $copyProtectionDao = new \AL\Common\DAO\CopyProtectionDAO($mysqli);
 $diskProtectionDao = new \AL\Common\DAO\DiskProtectionDAO($mysqli);
 $enhancementDao = new \AL\Common\DAO\EnhancementDAO($mysqli);
+$mediaTypeDao = new \AL\Common\DAO\MediaTypeDAO($mysqli);
+$mediaScanTypeDao = new \AL\Common\DAO\MediaScanTypeDAO($mysqli);
 
 switch ($_POST['action']) {
 	case "Add engine":
@@ -458,7 +462,59 @@ switch ($_POST['action']) {
         create_log_entry('Games Config', $enhancement_id_edit, 'Enhancement', $enhancement_id_edit, 'Update', $_SESSION['user_id']);
 
         $_SESSION['edit_message'] = "Enhancement has been updated" ;
-        break;      
+        break;
+
+    case "Add type":
+        $mediaTypeDao->addMediaType($media_type_new);
+        
+        $media_type_id = $mysqli->insert_id;
+        
+        create_log_entry('Games Config', $media_type_id, 'Media Type', $media_type_id, 'Insert', $_SESSION['user_id']);
+        
+        $_SESSION['edit_message'] = "$media_type_new has been added" ;
+        break;
+        
+    case "Delete type":
+        create_log_entry('Games Config', $media_type_id_edit, 'Media Type', $media_type_id_edit, 'Delete', $_SESSION['user_id']);
+        
+        $mediaTypeDao->deleteMediaType($media_type_id_edit);       
+
+        $_SESSION['edit_message'] = "Media type has been deleted" ;
+        break;
+        
+    case "Modify type":
+        $mediaTypeDao->updateMediaType($media_type_id_edit, $media_type_edit);
+
+        create_log_entry('Games Config', $media_type_id_edit, 'Media Type', $media_type_id_edit, 'Update', $_SESSION['user_id']);
+
+        $_SESSION['edit_message'] = "Media Type has been updated" ;
+        break;
+        
+    case "Add scan type":
+        $mediaScanTypeDao->addMediaScanType($media_scan_type_new);
+        
+        $media_scan_type_id = $mysqli->insert_id;
+        
+        create_log_entry('Games Config', $media_scan_type_id, 'Media Scan Type', $media_scan_type_id, 'Insert', $_SESSION['user_id']);
+        
+        $_SESSION['edit_message'] = "$media_scan_type_new has been added" ;
+        break;
+        
+    case "Delete scan type":
+        create_log_entry('Games Config', $media_scan_type_id_edit, 'Media Scan Type', $media_scan_type_id_edit, 'Delete', $_SESSION['user_id']);
+        
+        $mediaScanTypeDao->deleteMediaScanType($media_scan_type_id_edit);       
+
+        $_SESSION['edit_message'] = "Media scan type has been deleted" ;
+        break;
+        
+    case "Modify scan type":
+        $mediaScanTypeDao->updateMediaScanType($media_scan_type_id_edit, $media_scan_type_edit);
+
+        create_log_entry('Games Config', $media_scan_type_id_edit, 'Media Scan Type', $media_Scan_type_id_edit, 'Update', $_SESSION['user_id']);
+
+        $_SESSION['edit_message'] = "Media Scan Type has been updated" ;
+        break;
 }
 
 header("Location: games_config.php");
