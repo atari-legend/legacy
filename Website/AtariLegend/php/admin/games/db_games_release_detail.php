@@ -23,6 +23,9 @@ require_once __DIR__."/../../common/DAO/MemoryDAO.php";
 require_once __DIR__."/../../common/DAO/TosDAO.php";
 require_once __DIR__."/../../common/DAO/CopyProtectionDAO.php";
 require_once __DIR__."/../../common/DAO/DiskProtectionDAO.php";
+require_once __DIR__."/../../common/DAO/MediaDAO.php";
+require_once __DIR__."/../../common/DAO/DumpDAO.php";
+
 
 $gameReleaseDao = new \AL\Common\DAO\GameReleaseDAO($mysqli);
 $gameDao = new \AL\Common\DAO\GameDao($mysqli);
@@ -40,6 +43,8 @@ $memoryDao = new \AL\Common\DAO\MemoryDAO($mysqli);
 $tosDao = new \AL\Common\DAO\TosDAO($mysqli);
 $copyProtectionDao = new \AL\Common\DAO\CopyProtectionDAO($mysqli);
 $diskProtectionDao = new \AL\Common\DAO\DiskProtectionDAO($mysqli);
+$mediaDao = new \AL\Common\DAO\MediaDAO($mysqli);
+$dumpDao = new \AL\Common\DAO\DumpDAO($mysqli);
 
 //***********************************************************************************
 // Add a new release
@@ -506,6 +511,49 @@ if (isset($action) && ($action == 'remove_system_enhanced')) {
     create_log_entry('Game Release', $game_id, 'System Enhancement', $release_id, 'Delete', $_SESSION['user_id']);
     
     $_SESSION['edit_message'] = "System enhancement was delete";
+    header("Location: ../games/games_release_detail.php?game_id=$game_id&release_id=$release_id");
+}
+
+//***********************************************************************************
+//add a media to a release
+//***********************************************************************************
+if (isset($action) && ($action == 'add_media')) {  
+    
+    $mediaDao->addMediaToRelease($release_id, $media_type_id);
+    
+    create_log_entry('Game Release', $game_id, 'Media', $release_id, 'Insert', $_SESSION['user_id']);
+    
+    $_SESSION['edit_message'] = "Media was added to a release";
+    header("Location: ../games/games_release_detail.php?game_id=$game_id&release_id=$release_id");
+}
+
+//***********************************************************************************
+//delete a media from a release
+//***********************************************************************************
+if (isset($action) && ($action == 'remove_media')) {  
+    
+    $mediaDao->deleteMediaFromRelease($$media_id);
+    
+    create_log_entry('Game Release', $game_id, 'Media', $release_id, 'Delete', $_SESSION['user_id']);
+    
+    $_SESSION['edit_message'] = "Media has been removed from a release";
+    header("Location: ../games/games_release_detail.php?game_id=$game_id&release_id=$release_id");
+}
+
+//***********************************************************************************
+//delete a media from a release
+//***********************************************************************************
+if (isset($action) && ($action == 'Add file')) { 
+
+    $game_download_name = $_FILES['game_download_name'];
+    $file_name = $_FILES['game_download_name']['name'];
+    $tempfilename = $_FILES['game_download_name']['tmp_name'];
+   
+    $dumpDao->AddDumpToMedia($media_id, $format, $file_name, $tempfilename, $info);
+    
+    create_log_entry('Game Release', $game_id, 'Dump', $release_id, 'Insert', $_SESSION['user_id']);
+    
+    $_SESSION['edit_message'] = "Media has been removed from a release";
     header("Location: ../games/games_release_detail.php?game_id=$game_id&release_id=$release_id");
 }
     
