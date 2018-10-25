@@ -9,21 +9,13 @@
 {block name=additional_scripts}
     <script src="{$template_dir}includes/js/ui.widgets.js"></script><!-- The autocomplete and dropdown switcher -->
     <script src="{$template_dir}includes/js/ui.tabs.js"></script>
-    <script>
-        $(document).ready(function () {
-            $('select[name=pub_dev_id]').altAutocomplete();
-            $('select[name=distributor_id]').altAutocomplete();
-            $('.tabs').tabs();
-        });
-    </script>
+    <script src="{$template_dir}includes/js/game_release.js"></script><!-- specific JS functions -->
 {/block}
 
 {block name=right_tile}
-
     {include file='1/admin/tile_shortlog.html'}
     <br>
     {include file='1/main/tile_bug_report.html'}
-
 {/block}
 
 
@@ -49,6 +41,7 @@
                 <li class="active"><a href="#tab-general">GENERAL</a></li>
                 <li><a href="#tab-compatibility">SYSTEM INFO</a></li>
                 <li><a href="#tab-scene">SCENE</a></li>
+                <li><a href="#tab-dump">DUMP</a></li>
             </ul>
 
             <div id="tab-general" class="tabcontent tabpane active">
@@ -773,6 +766,85 @@
                         <button type="submit" name="submit_type" value="save_and_back" class="primary_button">Save and close</button>
                         <button type="submit" name="submit_type" value="save" class="secondary_button">Save changes</button>
                         <a href="games_detail.php?game_id={$game->getId()}">Cancel</a>
+                    </form>
+                </fieldset>
+            </div>
+
+            <div id="tab-dump" class="tabcontent tabpane">
+                <fieldset class="secondary_fieldset">
+                    <legend class="primary_legend">Media</legend>
+
+                    <div class="help-hint">
+                        First you need to add a media to a release. A release can have multiple media, for example games spread across multiple disks, or games with SS and DS disk versions.
+                    </div>
+                    <br>
+                    <br>
+                    <a id="gd_developers"><b>Media types</b></a>
+                    <br>
+                    {if isset($release_media)}
+                        {foreach from=$release_media item=linked_media}
+                            <form action="../games/db_games_release_detail.php" enctype="multipart/form-data" method="post" name="add_file" class="release_editor">
+                                <a title="Remove {$linked_media->getMediaType()->getName()|escape:"html"} from this release"
+                                    href="../games/db_games_release_detail.php?game_id={$game->getId()}&amp;release_id={$release->getId()}&amp;media_id={$linked_media->getId()}&amp;action=remove_media"
+                                    onclick="javascript:return confirm('This media record will be removed from the release')">
+                                    <span class="fa fa-fw fa-trash"></span>
+                                </a>
+                                <input type="hidden" name="game_id" value="{$game->getId()}">
+                                <input type="hidden" name="release_id" value="{$release->getId()}">
+                                <input type="hidden" name="media_id" value="{$linked_media->getId()}">
+                                <input type="text" value="{$linked_media->getMediaType()->getName()}" class="standard_input input_medium" disabled id="gd_game_dev">
+                                <input type="button" onclick="jQuery('#file-options-{$linked_media->getId()}').show()" class="secondary_button" value="Add file">
+                                <input type="button" onclick="jQuery('#scan-options-{$linked_media->getId()}').show()" class="secondary_button" value="Add scan">
+                                <br>
+                                <br>
+                                <div id="file-options-{$linked_media->getId()}" style="display: none;">
+                                    <fieldset class="secondary_fieldset">
+                                        <a id="gd_developers"><b>File upload</b></a>
+                                        <div class="help-hint">
+                                            Overhere you can add the actual file download(s) for this media. Select a format and a matching file, and additionally you may add some info of this dump.
+                                        </div>
+                                        <br>
+                                        <label class="input">Format :</label>
+                                        <select name="format" class="standard_select select_large" required>
+                                            <option value="">-</option>
+                                            {foreach from=$dump_formats item=dump_format}
+                                                <option>{$dump_format}</option>
+                                            {/foreach}
+                                        </select>
+                                        <br>
+                                        <label class="input">File :</label>
+                                        <input type="text" class="standard_input input_small" id="file_upload_game_detail" style="width:50%" required>&nbsp;
+                                        <label for="file_upload" class="secondary_button">Select file</label>
+                                        <input type="file" id="file_upload" name="game_download_name">
+                                        <br>
+                                        <label class="input">Info</label>
+                                        <input type="text" name="info" class="standard_input" style="width:50%">
+                                        <br><br>
+                                        <input type="submit" value="Add file" name="action" class="secondary_button">
+                                    </fieldset>
+                                </div>
+                                <br>
+                                <div id="scan-options-{$linked_media->getId()}" style="display: none;">
+                                    This is a test for scans
+                                </div>
+                            </form>
+                        {/foreach}
+                    {/if}
+                    <hr class="separator_add">
+
+                    <form action="../games/db_games_release_detail.php" method="post">
+                        <input type="hidden" name="release_id" value="{$release->getId()}">
+                        <input type="hidden" name="game_id" value="{$game->getId()}">
+                        <input type="hidden" name="action" value="add_media">
+                        <span class="fa fa-fw"></span>
+                        <select name="media_type_id"
+                            class="standard_select select_large" id="gd_dev_name" required>
+                            <option value="" selected="selected">-</option>
+                            {foreach from=$media_types item=all_media_types}
+                                <option value="{$all_media_types->getId()}">{$all_media_types->getName()}</option>
+                            {/foreach}
+                        </select>
+                        <input type="submit" value="Add media" class="secondary_button">
                     </form>
                 </fieldset>
             </div>
