@@ -41,10 +41,19 @@ class DumpDAO {
      * @param varchar file name
      * @param text info
      */
-    public function addDumpToMedia($media_id, $format, $file_name, $tempfilename, $info) {
+    public function addDumpToMedia(
+        $media_id,
+        $format,
+        $file_name,
+        $tempfilename,
+        $info,
+        $game_file_temp_path,
+        $game_file_path,
+        $filesize
+    ) {
         
         // Time for zip magic
-        $zip = new PclZip("$tempfilename");
+        $zip = new \PclZip("$tempfilename");
 
         // Obtain the contentlist of the zip file.
         if (($list = $zip->listContent()) == 0) {
@@ -69,9 +78,14 @@ class DumpDAO {
             exit("Try uploading a diskimage type that is allowed, like stx or msa not $ext");
         }
         
+        //Compare the extension with the format
+        //if ($ext == $format) {
+        //} else {
+        //    exit("The selected format is not the same as the uploaded file");
+        //}
+        
         // create a timestamp for the date of upload
         $timestamp = time();
-        $filesize = $_FILES['game_download_name']["size"];
         
         $stmt = \AL\Db\execute_query(
             "DumpDAO: addDumptoMedia",
@@ -81,10 +95,10 @@ class DumpDAO {
         );
         
         //get the new dump id
-        $new_dump_id = $mysqli->insert_id;
+        $new_dump_id = $this->mysqli->insert_id;
         
         // Time to unzip the file to the temporary directory
-        $archive = new PclZip("$tempfilename");
+        $archive = new \PclZip("$tempfilename");
 
         if ($archive->extract(PCLZIP_OPT_PATH, "$game_file_temp_path") == 0) {
             die("Error : " . $archive->errorInfo(true));
@@ -95,7 +109,7 @@ class DumpDAO {
             or die("couldn't rename the file");
 
         //Time to rezip file and place it in the proper location.
-        $archive = new PclZip("$game_file_path$new_dump_id.zip");
+        $archive = new \PclZip("$game_file_path$new_dump_id.zip");
         $v_list  = $archive->create("$game_file_temp_path$new_dump_id.$ext", PCLZIP_OPT_REMOVE_ALL_PATH);
         if ($v_list == 0) {
             die("Error : " . $archive->errorInfo(true));
@@ -120,5 +134,37 @@ class DumpDAO {
         unlink("$game_file_temp_path$new_dump_id.$ext");
         
         $stmt->close();
+    }
+    
+    /**
+     * Get all dumps from media
+     *
+     * @return \AL\Common\Model\Dump\Dump[] An array of dumps
+     */
+    public function getAllDumpsFromMedia($media_id) {
+        $stmt = \AL\Db\execute_query(
+            "DumpDAO: getAllDumpsFromMedia",
+            $this->mysqli,
+            "SELECT id, format, date, size, info FROM dump
+            WHERE media_id = ?",
+            "i", $media_id
+        );
+
+        \AL\Db\bind_result(
+            "DumpDAO: getAllDumpsFromMedia",
+            $stmt,
+            $media_id
+        );
+
+        $dump = [];
+        while ($stmt->fetch()) {
+            $dump[] = new \AL\Common\Model\Dump\Dump(
+                $id, null, $format, null, $date, $size, $info
+            );
+        }
+
+        $stmt->close();
+
+        return $dump;
     }
 }

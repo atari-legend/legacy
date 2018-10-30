@@ -67,6 +67,7 @@ if ($_SERVER['REQUEST_METHOD'] == "GET") {
     if (isset($release_id)) {
         $release = $gameReleaseDao->getRelease($release_id);
         $game = $gameDao->getGame($release->getGameId());
+        
         $smarty->assign('game_screenshot', $gameDao->getRandomScreenshot($game->getId()));
 
         $smarty->assign('release', $release);
@@ -91,6 +92,7 @@ if ($_SERVER['REQUEST_METHOD'] == "GET") {
         $smarty->assign('release_disk_protections', $diskProtectionDao->getDiskProtectionsForRelease($release->getId()));
         $smarty->assign('release_languages', $languageDao->getAllGameReleaseLanguages($release->getId()));
         $smarty->assign('release_media', $mediaDao->getAllMediaFromRelease($release->getId()));
+        
     } else {
         // Creating a new release
         $game = $gameDao->getGame($game_id);
