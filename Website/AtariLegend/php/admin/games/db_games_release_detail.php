@@ -532,7 +532,7 @@ if (isset($action) && ($action == 'add_media')) {
 //***********************************************************************************
 if (isset($action) && ($action == 'remove_media')) {  
     
-    $mediaDao->deleteMediaFromRelease($$media_id);
+    $mediaDao->deleteMediaFromRelease($media_id);
     
     create_log_entry('Game Release', $game_id, 'Media', $release_id, 'Delete', $_SESSION['user_id']);
     
@@ -545,15 +545,19 @@ if (isset($action) && ($action == 'remove_media')) {
 //***********************************************************************************
 if (isset($action) && ($action == 'Add file')) { 
 
+    // adding this vars inhere as the $_FILES['game_download_name'] 
+    // is not recognized in the DumpDAO.php file
     $game_download_name = $_FILES['game_download_name'];
-    $file_name = $_FILES['game_download_name']['name'];
+    $filename = $_FILES['game_download_name']['name'];
     $tempfilename = $_FILES['game_download_name']['tmp_name'];
+    $filesize = $_FILES['game_download_name']["size"];
    
-    $dumpDao->AddDumpToMedia($media_id, $format, $file_name, $tempfilename, $info);
+    //Also adding the game_file_paths vars, not recognized in the DumpDAO.php file
+    $dumpDao->AddDumpToMedia($media_id, $format, $filename, $tempfilename, $info, $game_file_temp_path, $game_file_path, $filesize);
     
     create_log_entry('Game Release', $game_id, 'Dump', $release_id, 'Insert', $_SESSION['user_id']);
     
-    $_SESSION['edit_message'] = "Media has been removed from a release";
+    $_SESSION['edit_message'] = "File has been added to this media";
     header("Location: ../games/games_release_detail.php?game_id=$game_id&release_id=$release_id");
 }
     
