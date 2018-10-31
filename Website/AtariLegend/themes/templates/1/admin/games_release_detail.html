@@ -788,6 +788,7 @@
                                     href="../games/db_games_release_detail.php?game_id={$game->getId()}&amp;release_id={$release->getId()}&amp;media_id={$linked_media->getId()}&amp;action=remove_media"
                                     onclick="javascript:return confirm('This media record will be removed from the release')">
                                     <span class="fa fa-fw fa-trash"></span>
+
                                 </a>
                                 <input type="hidden" name="game_id" value="{$game->getId()}">
                                 <input type="hidden" name="release_id" value="{$release->getId()}">
@@ -828,6 +829,11 @@
                                     This is a test for scans
                                 </div>
                             </form>
+                            <ul>
+                                {foreach from=$dumps[$linked_media->getId()] item=dump}
+                                    <li>{$dump->getId()} {$dump->getFormat()} {$dump->getSha512()} {$dump->getSize()}</li>
+                                {/foreach}
+                            </ul>
                         {/foreach}
                     {/if}
                     <hr class="separator_add">
