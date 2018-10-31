@@ -62,12 +62,12 @@ if ($_SERVER['REQUEST_METHOD'] == "GET") {
     $smarty->assign('enhancements', $enhancementDao->getAllEnhancements());
     $smarty->assign('media_types', $mediaTypeDao->getAllMediaTypes());
     $smarty->assign('dump_formats', $dumpDao->getFormats());
-    
+
     // Edit existing release
     if (isset($release_id)) {
         $release = $gameReleaseDao->getRelease($release_id);
         $game = $gameDao->getGame($release->getGameId());
-        
+
         $smarty->assign('game_screenshot', $gameDao->getRandomScreenshot($game->getId()));
 
         $smarty->assign('release', $release);
@@ -84,15 +84,24 @@ if ($_SERVER['REQUEST_METHOD'] == "GET") {
         $smarty->assign('release_akas', $gameReleaseAkaDao->getAllGameReleaseAkas($release->getId()));
         $smarty->assign('release_trainer_options', $trainerOptionDao->getTrainerOptionsForRelease($release->getId()));
         $smarty->assign('distributors', $pubDevDao->getAllPubDevs());
-        $smarty->assign('release_distributors', $pubDevDao->getDistributorsForRelease($release->getId()));   
+        $smarty->assign('release_distributors', $pubDevDao->getDistributorsForRelease($release->getId()));
         $smarty->assign('release_memory_enhancements', $memoryDao->getMemoryForRelease($release->getId()));
         $smarty->assign('release_minimum_memory', $memoryDao->getMinimumMemoryForRelease($release->getId()));
         $smarty->assign('release_memory_incompatible', $memoryDao->getMemoryIncompatibleForRelease($release->getId()));
         $smarty->assign('release_copy_protections', $copyProtectionDao->getCopyProtectionsForRelease($release->getId()));
         $smarty->assign('release_disk_protections', $diskProtectionDao->getDiskProtectionsForRelease($release->getId()));
         $smarty->assign('release_languages', $languageDao->getAllGameReleaseLanguages($release->getId()));
-        $smarty->assign('release_media', $mediaDao->getAllMediaFromRelease($release->getId()));
-        
+
+        $media = $mediaDao->getAllMediaFromRelease($release->getId());
+        $smarty->assign('release_media', $media);
+
+        $dumps = [];
+        foreach ($media as $medium) {
+            $dumps[$medium->getId()] = $dumpDao->getAllDumpsFromMedia($medium->getId());
+        }
+        $smarty->assign('dumps', $dumps);
+
+
     } else {
         // Creating a new release
         $game = $gameDao->getGame($game_id);
