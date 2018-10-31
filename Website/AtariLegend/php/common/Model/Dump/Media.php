@@ -16,7 +16,7 @@ class Media {
     public function getId() {
         return $this->id;
     }
-   
+
     public function getMediaType() {
         return $this->media_type;
     }

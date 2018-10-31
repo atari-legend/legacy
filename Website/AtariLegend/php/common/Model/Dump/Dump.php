@@ -8,15 +8,15 @@ class Dump {
     private $id;
     private $media_id;
     private $format;
-    private $hash;
+    private $sha512;
     private $date;
     private $size;
     private $info;
 
-    public function __construct($id, $media_id, $format, $hash, $date, $size, $info) {
+    public function __construct($id, $media_id, $format, $sha512, $date, $size, $info) {
         $this->id = $id;
         $this->format = $format;
-        $this->hash = $hash;
+        $this->sha512 = $sha512;
         $this->date = $date;
         $this->size = $size;
         $this->info = $info;
@@ -25,27 +25,27 @@ class Dump {
     public function getId() {
         return $this->id;
     }
-    
+
     public function getMediaId() {
         return $this->media_id;
     }
-   
+
     public function getFormat() {
         return $this->format;
     }
-    
-    public function getHash() {
-        return $this->hash;
+
+    public function getSha512() {
+        return $this->sha512;
     }
-    
+
     public function getDate() {
         return $this->date;
     }
-    
+
     public function getSize() {
         return $this->size;
     }
-    
+
     public function getInfo() {
         return $this->info;
     }

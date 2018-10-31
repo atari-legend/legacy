@@ -89,8 +89,8 @@ class EmulatorDAO {
 
         return $emulators;
     }
-    
-        
+
+
      /**
      * Get all emulator IDs incompatible with a release
      *
@@ -102,7 +102,7 @@ class EmulatorDAO {
             "EmulatorDAO: getIncompatibleEmulatorsForRelease",
             $this->mysqli,
             "SELECT game_release_emulator_incompatibility.emulator_id,
-                    emulator.name FROM game_release_emulator_incompatibility 
+                    emulator.name FROM game_release_emulator_incompatibility
                     LEFT JOIN emulator ON (game_release_emulator_incompatibility.emulator_id = emulator.id)
                     WHERE release_id = ?",
             "i", $release_id
@@ -149,7 +149,7 @@ class EmulatorDAO {
 
         $stmt->close();
     }
-    
+
         /**
      * add a emulator to the database
      *
@@ -165,7 +165,7 @@ class EmulatorDAO {
 
         $stmt->close();
     }
-    
+
     /**
      * delete a emulator
      *
@@ -181,7 +181,7 @@ class EmulatorDAO {
 
         $stmt->close();
     }
-    
+
         /**
      * update a emulator
      *
@@ -195,7 +195,7 @@ class EmulatorDAO {
             "UPDATE emulator SET name = ? WHERE id = ?",
             "si", $emulator_name, $emulator_id
         );
-        
+
         $stmt->close();
     }
 }
