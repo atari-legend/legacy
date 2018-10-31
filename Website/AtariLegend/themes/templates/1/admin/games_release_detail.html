@@ -798,6 +798,24 @@
                                 <input type="button" onclick="jQuery('#scan-options-{$linked_media->getId()}').show()" class="secondary_button" value="Add scan">
                                 <br>
                                 <br>
+                                {if isset($dumps[$linked_media->getId()])}
+                                <fieldset class="secondary_fieldset">
+                                    <legend class="primary_legend">Linked file(s)</legend>
+                                    {foreach from=$dumps[$linked_media->getId()] item=dump}
+                                        {$dump->getFormat()} format added on {$dump->getDate()|date_format}
+                                        <div class="help-hint">
+                                            &nbsp; - Filesize : {math equation="floor(x/y)" x=$dump->getSize() y=1000} kb
+                                            {* START - THIS WON'T WORK *}
+                                            {*{if null !== $dump->getInfo()}*}
+                                            {*  <br>- Info : {$dump->getInfo()} *}
+                                            {*{/if}*}
+                                            {*{$dump->getUser()->getId()}*}
+                                            {* END - THIS WON'T WORK *}
+                                        </div>
+                                    {/foreach}
+                                </fieldset>
+                                {/if}
+                                <br>
                                 <div id="file-options-{$linked_media->getId()}" style="display: none;">
                                     <fieldset class="secondary_fieldset">
                                         <a id="gd_developers"><b>File upload</b></a>
@@ -829,11 +847,6 @@
                                     This is a test for scans
                                 </div>
                             </form>
-                            <ul>
-                                {foreach from=$dumps[$linked_media->getId()] item=dump}
-                                    <li>{$dump->getId()} {$dump->getFormat()} {$dump->getSha512()} {$dump->getSize()}</li>
-                                {/foreach}
-                            </ul>
                         {/foreach}
                     {/if}
                     <hr class="separator_add">
