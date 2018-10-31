@@ -12,14 +12,16 @@ class Dump {
     private $date;
     private $size;
     private $info;
+    private $user;
 
-    public function __construct($id, $media_id, $format, $sha512, $date, $size, $info) {
+    public function __construct($id, $media_id, $format, $sha512, $date, $size, $info, $user) {
         $this->id = $id;
         $this->format = $format;
         $this->sha512 = $sha512;
         $this->date = $date;
         $this->size = $size;
         $this->info = $info;
+        $this->info = $user;
     }
 
     public function getId() {
@@ -48,5 +50,9 @@ class Dump {
 
     public function getInfo() {
         return $this->info;
+    }
+    
+    public function getUser() {
+        return $this->user;
     }
 }

@@ -123,6 +123,7 @@ if ($_SERVER['REQUEST_METHOD'] == "GET") {
         $smarty->assign('release_minimum_memory', []);
         $smarty->assign('release_disk_protections', []);
         $smarty->assign('release_media', []);
+        $smarty->assign('dumps', []);
 
         // Pass through a pub_dev_id, location_id and release type that may be in URL parameters
         $smarty->assign('pub_dev_id', isset($pub_dev_id) ? $pub_dev_id : null);

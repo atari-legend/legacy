@@ -90,8 +90,8 @@ class DumpDAO {
         $stmt = \AL\Db\execute_query(
             "DumpDAO: addDumptoMedia",
             $this->mysqli,
-            "INSERT INTO dump (`media_id`, `format`, `info`, `date`, `size` ) VALUES (?, ?, ?, ?, ?)",
-            "issii", $media_id, $format, $info, $timestamp, $filesize
+            "INSERT INTO dump (`media_id`, `format`, `info`, `date`, `size`, user_id ) VALUES (?, ?, ?, ?, ?, ?)",
+            "issiii", $media_id, $format, $info, $timestamp, $filesize, $_SESSION['user_id']
         );
 
         //get the new dump id
@@ -145,7 +145,8 @@ class DumpDAO {
         $stmt = \AL\Db\execute_query(
             "DumpDAO: getAllDumpsFromMedia",
             $this->mysqli,
-            "SELECT id, format, sha512, date, size, info FROM dump
+            "SELECT id, format, sha512, date, size, info, dump.user_id, users.userid FROM dump
+            LEFT JOIN users ON (users.user_id = dump.user_id)
             WHERE media_id = ?",
             "i", $media_id
         );
@@ -153,13 +154,14 @@ class DumpDAO {
         \AL\Db\bind_result(
             "DumpDAO: getAllDumpsFromMedia",
             $stmt,
-            $id, $format, $sha512, $date, $size, $info
+            $id, $format, $sha512, $date, $size, $info, $user_id, $userid
         );
 
         $dump = [];
         while ($stmt->fetch()) {
             $dump[] = new \AL\Common\Model\Dump\Dump(
-                $id, $media_id, $format, $sha512, $date, $size, $info
+                $id, $media_id, $format, $sha512, $date, $size, $info,
+                new \AL\Common\Model\User\User($user_id, $userid, null, null, null, null, null)
             );
         }
 
