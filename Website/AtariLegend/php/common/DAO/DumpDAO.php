@@ -169,4 +169,22 @@ class DumpDAO {
 
         return $dump;
     }
+    
+      /**
+     * delete a dump from a media
+     *
+     * @param int dump_id
+     */
+    public function deleteDumpFromMedia($dump_id, $game_file_path) {
+        $stmt = \AL\Db\execute_query(
+            "DumpDAO: deleteDumpFromMedia",
+            $this->mysqli,
+            "DELETE FROM dump WHERE id = ?",
+            "i", $dump_id
+        );
+        
+        unlink("$game_file_path$dump_id.zip");
+        
+        $stmt->close();
+    }
 }

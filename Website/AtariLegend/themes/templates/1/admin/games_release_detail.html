@@ -10,6 +10,8 @@
     <script src="{$template_dir}includes/js/ui.widgets.js"></script><!-- The autocomplete and dropdown switcher -->
     <script src="{$template_dir}includes/js/ui.tabs.js"></script>
     <script src="{$template_dir}includes/js/game_release.js"></script><!-- specific JS functions -->
+    <script src="{$template_dir}includes/js/vendor/lightbox-2.9.0.min.js"></script><!-- lightbox popup functions -->
+    <link type="text/css" href="{$style_dir}css/vendor/lightbox-2.9.0.css" hreflang="en" rel="stylesheet">
 {/block}
 
 {block name=right_tile}
@@ -773,7 +775,6 @@
             <div id="tab-dump" class="tabcontent tabpane">
                 <fieldset class="secondary_fieldset">
                     <legend class="primary_legend">Media</legend>
-
                     <div class="help-hint">
                         First you need to add a media to a release. A release can have multiple media, for example games spread across multiple disks, or games with SS and DS disk versions.
                     </div>
@@ -783,44 +784,74 @@
                     <br>
                     {if isset($release_media)}
                         {foreach from=$release_media item=linked_media}
-                            <form action="../games/db_games_release_detail.php" enctype="multipart/form-data" method="post" name="add_file" class="release_editor">
-                                <a title="Remove {$linked_media->getMediaType()->getName()|escape:"html"} from this release"
-                                    href="../games/db_games_release_detail.php?game_id={$game->getId()}&amp;release_id={$release->getId()}&amp;media_id={$linked_media->getId()}&amp;action=remove_media"
-                                    onclick="javascript:return confirm('This media record will be removed from the release')">
-                                    <span class="fa fa-fw fa-trash"></span>
-
-                                </a>
-                                <input type="hidden" name="game_id" value="{$game->getId()}">
-                                <input type="hidden" name="release_id" value="{$release->getId()}">
-                                <input type="hidden" name="media_id" value="{$linked_media->getId()}">
-                                <input type="text" value="{$linked_media->getMediaType()->getName()}" class="standard_input input_medium" disabled id="gd_game_dev">
-                                <input type="button" onclick="jQuery('#file-options-{$linked_media->getId()}').show()" class="secondary_button" value="Add file">
-                                <input type="button" onclick="jQuery('#scan-options-{$linked_media->getId()}').show()" class="secondary_button" value="Add scan">
-                                <br>
-                                <br>
-                                {if isset($dumps[$linked_media->getId()])}
-                                <fieldset class="secondary_fieldset">
-                                    <legend class="primary_legend">Linked file(s)</legend>
-                                    {foreach from=$dumps[$linked_media->getId()] item=dump}
-                                        {$dump->getFormat()} format added on {$dump->getDate()|date_format}
+                            <a title="Remove {$linked_media->getMediaType()->getName()|escape:"html"} from this release"
+                                href="../games/db_games_release_detail.php?game_id={$game->getId()}&amp;release_id={$release->getId()}&amp;media_id={$linked_media->getId()}&amp;action=remove_media"
+                                onclick="javascript:return confirm('This media record will be removed from the release')">
+                                <span class="fa fa-fw fa-trash"></span>
+                            </a>
+                            <input type="text" value="{$linked_media->getMediaType()->getName()}" class="standard_input input_medium" disabled id="gd_game_dev">
+                            <input type="button" onclick="jQuery('#file-options-{$linked_media->getId()}').show()" class="secondary_button" value="Add file">
+                            <input type="button" onclick="jQuery('#scan-options-{$linked_media->getId()}').show()" class="secondary_button" value="Add scan">
+                            <br>
+                            <br>
+                            {if $dumps[$linked_media->getId()] == null}
+                            {else}
+                            <fieldset class="secondary_fieldset">
+                                <legend class="primary_legend">Linked file(s)</legend>
+                                {foreach from=$dumps[$linked_media->getId()] item=dump}
+                                    <a title="Remove dump from this media"
+                                        href="../games/db_games_release_detail.php?game_id={$game->getId()}&amp;release_id={$release->getId()}&amp;media_id={$linked_media->getId()}&amp;dump_id={$dump->getId()}&amp;action=remove_dump"
+                                        onclick="javascript:return confirm('This dump record will be removed from the media')">
+                                        <span class="fa fa-fw fa-trash"></span>
+                                    </a>
+                                    <a href="../../../data/zips/games/{$dump->getId()}.zip">{$dump->getFormat()} format</a> added on {$dump->getDate()|date_format} by <a href="../user/user_detail.php?user_id_selected={$dump->getUser()->getId()}">{$dump->getUser()->getName()}</a>
+                                    <div class="help-hint">
+                                        &nbsp; - Filesize : {math equation="floor(x/y)" x=$dump->getSize() y=1000} kb
+                                        {if null !== $dump->getInfo()}
+                                            <br> &nbsp; - Info : {$dump->getInfo()}
+                                        {/if}
+                                    </div>
+                                    <br>
+                                {/foreach}
+                            </fieldset>
+                            {/if}
+                            {if $mediaScans[$linked_media->getId()] == null}
+                            {else}
+                            <br>
+                            <fieldset class="secondary_fieldset">
+                                <legend class="primary_legend">Linked scan(s)</legend>
+                                {foreach from=$mediaScans[$linked_media->getId()] item=scan}
+                                    <div style="display:inline-block;text-align:center;">
                                         <div class="help-hint">
-                                            &nbsp; - Filesize : {math equation="floor(x/y)" x=$dump->getSize() y=1000} kb
-                                            {* START - THIS WON'T WORK *}
-                                            {*{if null !== $dump->getInfo()}*}
-                                            {*  <br>- Info : {$dump->getInfo()} *}
-                                            {*{/if}*}
-                                            {*{$dump->getUser()->getId()}*}
-                                            {* END - THIS WON'T WORK *}
+                                            {$scan->getMediaScanType()->getName()}
                                         </div>
-                                    {/foreach}
-                                </fieldset>
-                                {/if}
-                                <br>
-                                <div id="file-options-{$linked_media->getId()}" style="display: none;">
+                                        <div>
+                                        <a href="../../includes/show_image.php?file={$mediaScans_path}{$scan->getId()}.{$scan->getImage()}&amp;resize=410,null,null,null" data-lightbox="image-1" data-title="{$scan->getMediaScanType()->getName()}">
+                                            <img src="{$mediaScans_path}{$scan->getId()}.{$scan->getImage()}" alt="Click to enlarge!" class="media_scan_img"></a>
+                                        </a>
+                                        </div>
+                                        <div>
+                                        <a title="Remove scan from this media"
+                                            href="../games/db_games_release_detail.php?game_id={$game->getId()}&amp;release_id={$release->getId()}&amp;media_id={$linked_media->getId()}&amp;media_scan_id={$scan->getId()}&amp;ext={$scan->getImage()}&amp;action=remove_scan"
+                                            onclick="javascript:return confirm('This scan will be removed from the media')">
+                                            <span class="fa fa-fw fa-trash"></span>
+                                        </a>
+                                        </div>
+                                    </div>
+                                {/foreach}
+                            </fieldset>
+                            {/if}
+                            <br>
+                            <div id="file-options-{$linked_media->getId()}" style="display: none;">
+                                <form action="../games/db_games_release_detail.php" enctype="multipart/form-data" method="post" name="add_file" class="release_editor">
+                                    <input type="hidden" name="game_id" value="{$game->getId()}">
+                                    <input type="hidden" name="release_id" value="{$release->getId()}">
+                                    <input type="hidden" name="media_id" value="{$linked_media->getId()}">
                                     <fieldset class="secondary_fieldset">
                                         <a id="gd_developers"><b>File upload</b></a>
                                         <div class="help-hint">
                                             Overhere you can add the actual file download(s) for this media. Select a format and a matching file, and additionally you may add some info of this dump.
+                                            A media can have multiple dumps, for example a Pasti one and a MSA one.
                                         </div>
                                         <br>
                                         <label class="input">Format :</label>
@@ -832,21 +863,47 @@
                                         </select>
                                         <br>
                                         <label class="input">File :</label>
-                                        <input type="text" class="standard_input input_small" id="file_upload_game_detail" style="width:50%" required>&nbsp;
-                                        <label for="file_upload" class="secondary_button">Select file</label>
-                                        <input type="file" id="file_upload" name="game_download_name">
+                                        <input type="text" class="standard_input input_small" id="file_upload_game_detail{$linked_media->getId()}" style="width:50%" required>&nbsp;
+                                        <label for="file_upload{$linked_media->getId()}" class="secondary_button">Select file</label>
+                                        <input type="file" id="file_upload{$linked_media->getId()}" name="game_download_name" onchange="add_file_desc({$linked_media->getId()})" style="display:none;">
                                         <br>
                                         <label class="input">Info</label>
                                         <input type="text" name="info" class="standard_input" style="width:50%">
                                         <br><br>
                                         <input type="submit" value="Add file" name="action" class="secondary_button">
                                     </fieldset>
-                                </div>
-                                <br>
-                                <div id="scan-options-{$linked_media->getId()}" style="display: none;">
-                                    This is a test for scans
-                                </div>
-                            </form>
+                                </form>
+                            </div>
+                            <br>
+                            <div id="scan-options-{$linked_media->getId()}" style="display: none;">
+                                <form action="../games/db_games_release_detail.php" enctype="multipart/form-data" method="post" name="add_file" class="release_editor">
+                                    <input type="hidden" name="game_id" value="{$game->getId()}">
+                                    <input type="hidden" name="release_id" value="{$release->getId()}">
+                                    <input type="hidden" name="media_id" value="{$linked_media->getId()}">
+                                    <fieldset class="secondary_fieldset">
+                                        <a id="gd_developers"><b>Media scans</b></a>
+                                        <div class="help-hint">
+                                            Overhere you can add multiple scanned images of a media (e.g. front and back of the floppy, contents of the box, goodies, codewheel...)
+                                        </div>
+                                        <br>
+                                        <label class="input">Type :</label>
+                                        <select name="type" class="standard_select select_large" required>
+                                            <option value="">-</option>
+                                            {foreach from=$media_scan_types item=media_scan_type}
+                                                <option value={$media_scan_type->getId()}>{$media_scan_type->getName()}</option>
+                                            {/foreach}
+                                        </select>
+                                        <br>
+                                        <label class="input">File :</label>
+                                        <input type="text" class="standard_input" id="file_upload_game_scan{$linked_media->getId()}" style="width:50%" required>&nbsp;
+                                        <label for="file_upload2{$linked_media->getId()}" class="secondary_button">Select file</label>
+                                        <input type="file" id="file_upload2{$linked_media->getId()}" name="image[]" onchange="add_scan_desc({$linked_media->getId()})" style="display:none;">
+                                        <br><br>
+                                        <input type="submit" value="Add scan" name="action" class="secondary_button">
+                                    </fieldset>
+                                </form>
+                            </div>
+                            <br>
                         {/foreach}
                     {/if}
                     <hr class="separator_add">

@@ -25,6 +25,7 @@ require_once __DIR__."/../../common/DAO/CopyProtectionDAO.php";
 require_once __DIR__."/../../common/DAO/DiskProtectionDAO.php";
 require_once __DIR__."/../../common/DAO/MediaDAO.php";
 require_once __DIR__."/../../common/DAO/DumpDAO.php";
+require_once __DIR__."/../../common/DAO/MediaScanDAO.php";
 
 
 $gameReleaseDao = new \AL\Common\DAO\GameReleaseDAO($mysqli);
@@ -45,6 +46,7 @@ $copyProtectionDao = new \AL\Common\DAO\CopyProtectionDAO($mysqli);
 $diskProtectionDao = new \AL\Common\DAO\DiskProtectionDAO($mysqli);
 $mediaDao = new \AL\Common\DAO\MediaDAO($mysqli);
 $dumpDao = new \AL\Common\DAO\DumpDAO($mysqli);
+$mediaScanDao = new \AL\Common\DAO\MediaScanDAO($mysqli);
 
 //***********************************************************************************
 // Add a new release
@@ -558,6 +560,47 @@ if (isset($action) && ($action == 'Add file')) {
     create_log_entry('Game Release', $game_id, 'Dump', $release_id, 'Insert', $_SESSION['user_id']);
     
     $_SESSION['edit_message'] = "File has been added to this media";
+    header("Location: ../games/games_release_detail.php?game_id=$game_id&release_id=$release_id");
+}
+
+//***********************************************************************************
+//delete a file from a media
+//***********************************************************************************
+if (isset($action) && ($action == 'remove_dump')) {  
+    
+    $dumpDao->deleteDumpFromMedia($dump_id, $game_file_path);
+    
+    create_log_entry('Game Release', $game_id, 'Dump', $release_id, 'Delete', $_SESSION['user_id']);
+    
+    $_SESSION['edit_message'] = "File has been removed from this media";
+    header("Location: ../games/games_release_detail.php?game_id=$game_id&release_id=$release_id");
+}
+
+//***********************************************************************************
+//add a media scan
+//***********************************************************************************
+if (isset($action) && ($action == 'Add scan')) {  
+    
+    $image = $_FILES['image'];
+    
+    $mediaScanDao->addMediaScanToMedia($media_id, $type, $media_scan_save_path, $image);
+    
+    create_log_entry('Game Release', $game_id, 'Media Scan', $release_id, 'Insert', $_SESSION['user_id']);
+                
+    $_SESSION['edit_message'] = "Scan has been added to the media";    
+    header("Location: ../games/games_release_detail.php?game_id=$game_id&release_id=$release_id");
+}
+
+//***********************************************************************************
+//remove scan from media
+//***********************************************************************************
+if (isset($action) && ($action == 'remove_scan')) {  
+    
+    $mediaScanDao->deleteScanFromMedia($media_scan_id, $media_scan_save_path, $ext);
+    
+    create_log_entry('Game Release', $game_id, 'Media Scan', $release_id, 'Delete', $_SESSION['user_id']);
+    
+    $_SESSION['edit_message'] = "Scan has been removed from this media";
     header("Location: ../games/games_release_detail.php?game_id=$game_id&release_id=$release_id");
 }
     

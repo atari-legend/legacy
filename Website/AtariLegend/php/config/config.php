@@ -110,9 +110,8 @@ $individual_screenshot_save_path="../../../data/images/individual_screenshots/";
 //games
 $game_boxscan_path="../../data/images/game_boxscans/";
 $game_boxscan_save_path="../../../data/images/game_boxscans/";
-$game_file_path="../../data/zips/games/";
-$game_file_temp_path="../../../data/zips/temp/";
 $game_file_path="../../../data/zips/games/";
+$game_file_temp_path="../../../data/zips/temp/";
 $game_gallery_path="../../data/images/game_gallery/";
 $game_screenshot_path="../../data/images/game_screenshots/";
 $game_screenshot_save_path="../../../data/images/game_screenshots/";
@@ -163,3 +162,7 @@ $magazine_scan_path="../../data/images/magazine_scans/";
 //users
 $user_avatar_path="../../data/images/user_avatars/";
 $user_avatar_save_path="../../../data/images/user_avatars/";
+
+//Dump
+$media_scan_path="../../data/images/media_scans/";
+$media_scan_save_path="../../../data/images/media_scans/";
