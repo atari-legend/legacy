@@ -18,7 +18,7 @@ class MediaDAO {
     /**
      * Get all Media from Release
      *
-     * @return \AL\Common\Model\Dump\MediaType[] An array of media
+     * @return \AL\Common\Model\Dump\Media[] An array of media
      */
     public function getAllMediaFromRelease($release_id) {
         $stmt = \AL\Db\execute_query(

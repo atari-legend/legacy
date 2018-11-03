@@ -21,7 +21,7 @@ class Dump {
         $this->date = $date;
         $this->size = $size;
         $this->info = $info;
-        $this->info = $user;
+        $this->user = $user;
     }
 
     public function getId() {

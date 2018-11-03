@@ -23,6 +23,8 @@ require_once __DIR__."/../../common/DAO/EnhancementDAO.php";
 require_once __DIR__."/../../common/DAO/MediaTypeDAO.php";
 require_once __DIR__."/../../common/DAO/MediaDAO.php";
 require_once __DIR__."/../../common/DAO/DumpDAO.php";
+require_once __DIR__."/../../common/DAO/MediaScanTypeDAO.php";
+require_once __DIR__."/../../common/DAO/MediaScanDAO.php";
 
 $gameReleaseDao = new \AL\Common\DAO\GameReleaseDAO($mysqli);
 $gameDao = new \AL\Common\DAO\GameDao($mysqli);
@@ -43,6 +45,8 @@ $enhancementDao = new \AL\Common\DAO\EnhancementDAO($mysqli);
 $mediaTypeDao = new \AL\Common\DAO\MediaTypeDAO($mysqli);
 $mediaDao = new \AL\Common\DAO\MediaDAO($mysqli);
 $dumpDao = new \AL\Common\DAO\DumpDAO($mysqli);
+$mediaScanTypeDao = new \AL\Common\DAO\MediaScanTypeDAO($mysqli);
+$mediaScanDao = new \AL\Common\DAO\MediaScanDAO($mysqli);
 
 if ($_SERVER['REQUEST_METHOD'] == "GET") {
     $smarty->assign('license_types', $gameReleaseDao->getLicenseTypes());
@@ -62,6 +66,7 @@ if ($_SERVER['REQUEST_METHOD'] == "GET") {
     $smarty->assign('enhancements', $enhancementDao->getAllEnhancements());
     $smarty->assign('media_types', $mediaTypeDao->getAllMediaTypes());
     $smarty->assign('dump_formats', $dumpDao->getFormats());
+    $smarty->assign('media_scan_types', $mediaScanTypeDao->getAllMediaScanTypes());
 
     // Edit existing release
     if (isset($release_id)) {
@@ -96,10 +101,14 @@ if ($_SERVER['REQUEST_METHOD'] == "GET") {
         $smarty->assign('release_media', $media);
 
         $dumps = [];
+        $mediaScans = [];
         foreach ($media as $medium) {
             $dumps[$medium->getId()] = $dumpDao->getAllDumpsFromMedia($medium->getId());
+            $mediaScans[$medium->getId()] = $mediaScanDao->getAllMediaScansFromMedia($medium->getId());
         }
         $smarty->assign('dumps', $dumps);
+        $smarty->assign('mediaScans', $mediaScans);
+        $smarty->assign('mediaScans_path', $media_scan_path);
 
 
     } else {
@@ -124,6 +133,7 @@ if ($_SERVER['REQUEST_METHOD'] == "GET") {
         $smarty->assign('release_disk_protections', []);
         $smarty->assign('release_media', []);
         $smarty->assign('dumps', []);
+        $smarty->assign('mediaScans', []);
 
         // Pass through a pub_dev_id, location_id and release type that may be in URL parameters
         $smarty->assign('pub_dev_id', isset($pub_dev_id) ? $pub_dev_id : null);
