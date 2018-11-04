@@ -52,7 +52,7 @@ class MediaScanDAO {
                     
                     // Rename the uploaded file to its autoincrement number and move it to its proper place.
                     $file_data = rename($image['tmp_name'][$key], "$media_scan_save_path$last_id.$ext");
-                    chmod("$media_scan_save_path$last_id .$ext", 0777);
+                    chmod("$media_scan_save_path$last_id.$ext", 0777);
                     
                     $stmt->close();
                 } else {
