@@ -146,8 +146,11 @@ class DumpDAO {
         chmod("$game_file_path$new_dump_id.zip", 0777);
 
         // Delete the unzipped file in the temporary directory
-        unlink("$game_file_temp_path$new_dump_id.$ext");
-
+        if ($file_ext == 'zip') {
+            unlink("$game_file_temp_path$new_dump_id.$ext");
+        } else {
+            unlink("$game_file_temp_path$new_dump_id.$file_ext");
+        }
         $stmt->close();
     }
 
