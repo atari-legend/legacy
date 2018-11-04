@@ -807,7 +807,7 @@
                                     <a href="../../../data/zips/games/{$dump->getId()}.zip">{$dump->getFormat()} format</a> added on {$dump->getDate()|date_format} by <a href="../user/user_detail.php?user_id_selected={$dump->getUser()->getId()}">{$dump->getUser()->getName()}</a>
                                     <div class="help-hint">
                                         &nbsp; - Filesize : {math equation="floor(x/y)" x=$dump->getSize() y=1000} kb
-                                        {if null !== $dump->getInfo()}
+                                        {if $dump->getInfo() <> ''}
                                             <br> &nbsp; - Info : {$dump->getInfo()}
                                         {/if}
                                     </div>
@@ -851,7 +851,8 @@
                                         <a id="gd_developers"><b>File upload</b></a>
                                         <div class="help-hint">
                                             Overhere you can add the actual file download(s) for this media. Select a format and a matching file, and additionally you may add some info of this dump.
-                                            A media can have multiple dumps, for example a Pasti one and a MSA one.
+                                            A media can have multiple dumps, for example a Pasti one and a MSA one. The file you upload can have extension 'st', 'stx', 'msa' or 'scp' or a zip file
+                                            containing any of these. Once you upload the file, the system unzips it (if necesarry), checks the contents, rezips and renames the file.
                                         </div>
                                         <br>
                                         <label class="input">Format :</label>

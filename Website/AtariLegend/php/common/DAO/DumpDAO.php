@@ -51,39 +51,46 @@ class DumpDAO {
         $game_file_path,
         $filesize
     ) {
+        //check the extension of the file, is it zipped or not?
+        $file_ext = strrchr($file_name, ".");
+        $file_ext = explode(".", $file_ext);
+        $file_ext = strtolower($file_ext[1]);
+        
+        // If it is ZIP, do all the zippidy zip stuff
+        if ($file_ext == 'zip') {
+            // Time for zip magic
+            $zip = new \PclZip("$tempfilename");
 
-        // Time for zip magic
-        $zip = new \PclZip("$tempfilename");
+            // Obtain the contentlist of the zip file.
+            if (($list = $zip->listContent()) == 0) {
+                die("Error : " . $zip->errorInfo(true));
+            }
 
-        // Obtain the contentlist of the zip file.
-        if (($list = $zip->listContent()) == 0) {
-            die("Error : " . $zip->errorInfo(true));
-        }
+            // Get the filename from the returned array
+            $filename = $list[0]['filename'];
 
-        // Get the filename from the returned array
-        $filename = $list[0]['filename'];
+            // Split the filename to get the extention
+            $ext = strrchr($filename, ".");
 
-        // Split the filename to get the extention
-        $ext = strrchr($filename, ".");
+            // Get rid of the . in the extention
+            $ext = explode(".", $ext);
 
-        // Get rid of the . in the extention
-        $ext = explode(".", $ext);
+            // convert to lowercase just incase....
+            $ext = strtolower($ext[1]);
 
-        // convert to lowercase just incase....
-        $ext = strtolower($ext[1]);
-
-        // check if the extention is valid.
-        if ($ext == "stx" || $ext == "msa" || $ext == "st") { // pretty isn't it? ;)
+            // check if the extention is valid.
+            if ($ext == "stx" || $ext == "msa" || $ext == "st"  || $file_ext == "scp") { // pretty isn't it? ;)
+            } else {
+                exit("Try uploading a diskimage type that is allowed, like stx or msa not $ext");
+            }
         } else {
-            exit("Try uploading a diskimage type that is allowed, like stx or msa not $ext");
+            if ($file_ext == "stx" || $file_ext == "msa" ||
+                $file_ext == "st" || $file_ext == "scp") { // pretty isn't it? ;)
+            } else {
+                exit("Try uploading a diskimage type that is allowed $file_ext");
+            }
         }
-
-        //Compare the extension with the format
-        //if ($ext == $format) {
-        //} else {
-        //    exit("The selected format is not the same as the uploaded file");
-        //}
-
+        
         // create a timestamp for the date of upload
         $timestamp = time();
 
@@ -96,21 +103,29 @@ class DumpDAO {
 
         //get the new dump id
         $new_dump_id = $this->mysqli->insert_id;
+        
+        if ($file_ext == 'zip') {
+            // Time to unzip the file to the temporary directory
+            $archive = new \PclZip("$tempfilename");
 
-        // Time to unzip the file to the temporary directory
-        $archive = new \PclZip("$tempfilename");
+            if ($archive->extract(PCLZIP_OPT_PATH, "$game_file_temp_path") == 0) {
+                die("Error : " . $archive->errorInfo(true));
+            }
 
-        if ($archive->extract(PCLZIP_OPT_PATH, "$game_file_temp_path") == 0) {
-            die("Error : " . $archive->errorInfo(true));
+            // rename diskimage to increment number
+            rename("$game_file_temp_path$filename", "$game_file_temp_path$new_dump_id.$ext")
+                or die("couldn't rename the file");
+        } else {
+            $file_data = rename("$tempfilename", "$game_file_temp_path$new_dump_id.$file_ext");
         }
-
-        // rename diskimage to increment number
-        rename("$game_file_temp_path$filename", "$game_file_temp_path$new_dump_id.$ext")
-            or die("couldn't rename the file");
 
         //Time to rezip file and place it in the proper location.
         $archive = new \PclZip("$game_file_path$new_dump_id.zip");
-        $v_list  = $archive->create("$game_file_temp_path$new_dump_id.$ext", PCLZIP_OPT_REMOVE_ALL_PATH);
+        if ($file_ext == 'zip') {
+            $v_list  = $archive->create("$game_file_temp_path$new_dump_id.$ext", PCLZIP_OPT_REMOVE_ALL_PATH);
+        } else {
+            $v_list  = $archive->create("$game_file_temp_path$new_dump_id.$file_ext", PCLZIP_OPT_REMOVE_ALL_PATH);
+        }
         if ($v_list == 0) {
             die("Error : " . $archive->errorInfo(true));
         }
