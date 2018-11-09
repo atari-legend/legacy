@@ -120,4 +120,37 @@ class MediaScanDAO {
         
         $stmt->close();
     }
+    
+    /*
+     * check is scantype exist on media
+     *
+     * @param int media_id
+     * @param int scan_type_id
+     */
+    public function checkForScanType($media_id, $scan_type_id) {
+        $stmt = \AL\Db\execute_query(
+            "MediaScanDAO: checkForScanType",
+            $this->mysqli,
+            "SELECT id FROM media_scan
+            WHERE media_id = ? and media_scan_type_id = ?",
+            "ii", $media_id, $scan_type_id
+        );
+
+        \AL\Db\bind_result(
+            "MediaScanDAO: checkForScanType",
+            $stmt,
+            $media_scan_id
+        );
+        
+        $media_scan_id = null;
+        if ($stmt->fetch()) {
+            $media_scan_id  = new \AL\Common\Model\Dump\MediaScan(
+                $media_scan_id, null, null, null
+            );
+        }
+        
+        $stmt->close();
+        
+        return $media_scan_id;
+    }
 }
