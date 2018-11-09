@@ -583,11 +583,18 @@ if (isset($action) && ($action == 'Add scan')) {
     
     $image = $_FILES['image'];
     
-    $mediaScanDao->addMediaScanToMedia($media_id, $type, $media_scan_save_path, $image);
+    //first we need to check if this scan type already exists for this medium
+    $scan_check = $mediaScanDao->checkForScanType($media_id, $type);
+    if ($scan_check == null){
+        $mediaScanDao->addMediaScanToMedia($media_id, $type, $media_scan_save_path, $image);  
+      
+        create_log_entry('Game Release', $game_id, 'Media Scan', $release_id, 'Insert', $_SESSION['user_id']);        
+        $_SESSION['edit_message'] = "Scan has been added to the media";    
+    } else {
+        $_SESSION['edit_message'] = "This scan type is already used for this media"; 
+    }
     
-    create_log_entry('Game Release', $game_id, 'Media Scan', $release_id, 'Insert', $_SESSION['user_id']);
-                
-    $_SESSION['edit_message'] = "Scan has been added to the media";    
+    
     header("Location: ../games/games_release_detail.php?game_id=$game_id&release_id=$release_id");
 }
 
