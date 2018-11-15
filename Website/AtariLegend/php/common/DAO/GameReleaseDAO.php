@@ -22,7 +22,7 @@ class GameReleaseDAO {
     const TYPE_NON_PLAYABLE_DEMO = 'Non-playable demo';
     const TYPE_SLIDESHOW = 'Slideshow';
     const TYPE_UNOFFICIAL = 'Unofficial';
-    const TYPE_DATADISK = 'Data Disk';
+    const TYPE_DATADISK = 'Data disk';
     
     const STATUS_DEVELOPMENT = 'Development';
     const STATUS_UNFINISHED = 'Unfinished';
