@@ -594,14 +594,14 @@
                                 <input type="hidden" name="memory_id" value="{$release_memory_enhancement->getId()}">
                                 <input type="text" value="{$release_memory_enhancement->getMemory()}" class="standard_input input_medium" disabled id="gd_game_dev">
                                 <select name="new_enhancement"
-                                onchange="jQuery('#update-enhancement-{$release_memory_enhancement->getId()}').show()"
+                                onchange="jQuery('#update-memenhancement-{$release_memory_enhancement->getId()}').show()"
                                 class="standard_select">
                                 <option value="">-</option>
                                 {foreach from=$enhancements item=enhancement}
                                     <option value={$enhancement->getId()} {if $release_memory_enhancement->getEnhancement() !== null}{if $release_memory_enhancement->getEnhancement()->getId() eq $enhancement->getId()} selected{/if}{/if}>{$enhancement->getName()}</option>
                                 {/foreach}
                                 </select>
-                                <input type="submit" id="update-enhancement-{$release_memory_enhancement->getId()}" style="display: none;" class="secondary_button" value="Update">
+                                <input type="submit" id="update-memenhancement-{$release_memory_enhancement->getId()}" style="display: none;" class="secondary_button" value="Update">
                             </form>
                         {/foreach}
                     {/if}
@@ -777,6 +777,7 @@
                     <legend class="primary_legend">Media</legend>
                     <div class="help-hint">
                         First you need to add a media to a release. A release can have multiple media, for example games spread across multiple disks, or games with SS and DS disk versions.
+                        In those case you can use the label field to add a label like 'Disk 1', 'Disk 2' ...
                     </div>
                     <br>
                     <br>
@@ -790,6 +791,12 @@
                                 <span class="fa fa-fw fa-trash"></span>
                             </a>
                             <input type="text" value="{$linked_media->getMediaType()->getName()}" class="standard_input input_medium" disabled id="gd_game_dev">
+                            <input type="text" value="{$linked_media->getLabel()}" class="standard_input input_medium" id="gd_game_dev" name="media_label{$linked_media->getId()}">
+                            <a title="Edit Label from this media"
+                                href="../games/db_games_release_detail.php?game_id={$game->getId()}&amp;release_id={$release->getId()}&amp;media_id={$linked_media->getId()}&amp;label={$linked_media->getLabel()}&amp;action=edit_label">
+                                <span class="fa fa-floppy-o"></span>
+                            </a>
+                            &nbsp;
                             <input type="button" onclick="jQuery('#file-options-{$linked_media->getId()}').show()" class="secondary_button" value="Add file">
                             <input type="button" onclick="jQuery('#scan-options-{$linked_media->getId()}').show()" class="secondary_button" value="Add scan">
                             <br>
@@ -920,6 +927,7 @@
                             {foreach from=$media_types item=all_media_types}
                                 <option value="{$all_media_types->getId()}">{$all_media_types->getName()}</option>
                             {/foreach}
+                            <input type="text" name="media_label" class="standard_input input_large" placeholder="Enter optional label">
                         </select>
                         <input type="submit" value="Add media" class="secondary_button">
                     </form>
