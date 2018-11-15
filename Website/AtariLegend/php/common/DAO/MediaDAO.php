@@ -26,7 +26,7 @@ class MediaDAO {
             $this->mysqli,
             "SELECT media.id, media.label, media.media_type_id, media_type.name FROM media 
             LEFT JOIN media_type ON (media.media_type_id = media_type.id)
-            WHERE release_id = ?",
+            WHERE release_id = ? order by media.media_type_id, media.id",
             "i", $release_id
         );
 

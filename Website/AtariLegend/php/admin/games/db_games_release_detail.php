@@ -620,16 +620,11 @@ if (isset($action) && ($action == 'remove_scan')) {
 //***********************************************************************************
 if (isset($action) && ($action == 'edit_label')) {  
 
-    if ($label == null)
-    {
-        $_SESSION['edit_message'] = "Please fill in the label";
-    }
-    else
-    {
-        $mediaDao->editLabelFromMedia($media_id, $label);
+   
+        $mediaDao->editLabelFromMedia($media_id, $media_label);
         create_log_entry('Game Release', $game_id, 'Media', $release_id, 'Update', $_SESSION['user_id']);
         $_SESSION['edit_message'] = "label updated for this media";
-    }
+
     
     header("Location: ../games/games_release_detail.php?game_id=$game_id&release_id=$release_id");
 }
