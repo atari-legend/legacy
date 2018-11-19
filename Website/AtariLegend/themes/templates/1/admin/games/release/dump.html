@@ -1,0 +1,217 @@
+<div id="tab-dump" class="tabpane">
+    <fieldset class="secondary_fieldset">
+        <legend class="primary_legend">Media</legend>
+        <div class="help-hint">
+            First you need to add a media to a release. A release can have multiple media, for example games spread across multiple disks, or games with SS and DS disk versions.
+            In those case you can use the label field to add a label like 'Disk 1', 'Disk 2' ...
+        </div>
+        <br>
+
+        <span>Add a new media for this release:</span>
+        <form action="../games/db_games_release_detail.php" method="post">
+            <input type="hidden" name="release_id" value="{$release->getId()}">
+            <input type="hidden" name="game_id" value="{$game->getId()}">
+            <input type="hidden" name="action" value="add_media">
+            <select name="media_type_id"
+                class="standard_select select_large" id="gd_dev_name" required>
+                <option value="" selected="selected">-</option>
+                {foreach from=$media_types item=all_media_types}
+                    <option value="{$all_media_types->getId()}">{$all_media_types->getName()}</option>
+                {/foreach}
+
+            </select>
+            <input type="text" name="media_label" class="standard_input input_large" placeholder="Label (e.g. 'Disk A')">
+            <input type="submit" value="Add media" class="secondary_button">
+        </form>
+
+        <hr class="separator_add">
+        <br>
+
+        {if isset($release_media)}
+            <h3>{count($release_media)} media for this release</h3>
+            {foreach from=$release_media item=linked_media name=media}
+                <fieldset class="secondary_fieldset media_fieldset">
+                    <a title="Remove {$linked_media->getMediaType()->getName()|escape:"html"} from this release"
+                        class="primary_button button_danger pull-right"
+                        href="../games/db_games_release_detail.php?game_id={$game->getId()}&amp;release_id={$release->getId()}&amp;media_id={$linked_media->getId()}&amp;action=remove_media"
+                        onclick="javascript:return confirm('This media will be permanently deleted')">
+                        <i class="fa fa-trash" aria-hidden="true"></i>
+                        Delete media
+                    </a>
+
+                    <legend class="primary_legend">Media #{$smarty.foreach.media.index + 1}</legend>
+
+                    <form action="../games/db_games_release_detail.php" method="post">
+                        <input type="hidden" name="game_id" value="{$game->getId()}">
+                        <input type="hidden" name="action" value="edit_label">
+                        <input type="hidden" name="release_id" value="{$release->getId()}">
+                        <input type="hidden" name="media_id" value="{$linked_media->getId()}">
+
+                        <label class="input">Type</label>
+                        <input type="text" value="{$linked_media->getMediaType()->getName()}" class="standard_input input_medium" disabled id="gd_game_dev">
+                        <br>
+
+                        <label class="input">Label</label>
+                        <input type="text" onkeydown="jQuery('#update-label-{$linked_media->getId()}').show()" value="{$linked_media->getLabel()}" class="standard_input input_medium" id="gd_game_dev" name="media_label" placeholder="Label (e.g. 'Disk A')">
+                        <input id="update-label-{$linked_media->getId()}" class="secondary_button" type="submit" value="Update" style="display: none;">
+                    </form>
+                    <br>
+                    {if $dumps[$linked_media->getId()] != null}
+                        <br>
+                        <table class="table_hover table_md text-nowrap table_border table_full_width">
+                            <caption><h4>Dumps of this media</h4></caption>
+                            <thead>
+                                <tr>
+                                    <th></th>
+                                    <th>Format</th>
+                                    <th>Date added</th>
+                                    <th>By</th>
+                                    <th>Notes</th>
+                                    <th>Size</th>
+                                    <th></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {foreach from=$dumps[$linked_media->getId()] item=dump}
+                                <tr>
+                                    <td>
+                                        <a title="Delete dump"
+                                            href="../games/db_games_release_detail.php?game_id={$game->getId()}&amp;release_id={$release->getId()}&amp;media_id={$linked_media->getId()}&amp;dump_id={$dump->getId()}&amp;action=remove_dump"
+                                            onclick="javascript:return confirm('This dump will be permanently deleted')">
+                                            <span class="fa fa-fw fa-trash"></span>
+                                        </a>
+                                    </td>
+                                    <td>{$dump->getFormat()}</td>
+                                    <td>{$dump->getDate()|date_format}</td>
+                                    <td><a href="../user/user_detail.php?user_id_selected={$dump->getUser()->getId()}">{$dump->getUser()->getName()}</a></td>
+                                    <td>{$dump->getInfo()|default:"-"}</td>
+                                    <td>{math equation="floor(x/y)" x=$dump->getSize() y=1024} KB</td>
+                                    <td><a href="../../../data/zips/games/{$dump->getId()}.zip"><span class="fa fa-download"></span></a></td>
+                                </tr>
+                                {/foreach}
+                            </tbody>
+                        </table>
+                        <div class="missing">
+                            <a href="javascript:;" onclick="jQuery('#file-options-{$linked_media->getId()}').toggle()"><span class="fa fa-plus"></span> Add a dump</a>
+                        </div>
+                    {else}
+                        <br>
+                        <div class="text-center missing">
+                            <span class="fa fa-warning"></span> No dump for this media. Consider <a href="javascript:;" onclick="jQuery('#file-options-{$linked_media->getId()}').toggle()">adding one</a>.</span>
+                        </div>
+                    {/if}
+
+                    <div id="file-options-{$linked_media->getId()}" style="display: none;">
+                        <br>
+                        <form action="../games/db_games_release_detail.php" enctype="multipart/form-data" method="post" name="add_file">
+                            <input type="hidden" name="game_id" value="{$game->getId()}">
+                            <input type="hidden" name="release_id" value="{$release->getId()}">
+                            <input type="hidden" name="media_id" value="{$linked_media->getId()}">
+                            <fieldset class="tertiary_fieldset">
+                                <a id="gd_developers"><b>File upload</b></a>
+                                <div class="help-hint">
+                                    Overhere you can add the actual file download(s) for this media. Select a format and a matching file, and additionally you may add some info of this dump.
+                                    A media can have multiple dumps, for example a Pasti one and a MSA one. The file you upload can have extension 'st', 'stx', 'msa' or 'scp' or a zip file
+                                    containing any of these. Once you upload the file, the system unzips it (if necesarry), checks the contents, rezips and renames the file.
+                                </div>
+                                <br>
+                                <label class="input">Format</label>
+                                <select name="format" class="standard_select select_large" required>
+                                    <option value="">-</option>
+                                    {foreach from=$dump_formats item=dump_format}
+                                        <option>{$dump_format}</option>
+                                    {/foreach}
+                                </select>
+                                <br>
+                                <label class="input">File</label>
+                                <input type="text" class="standard_input input_small" id="file_upload_game_detail{$linked_media->getId()}" style="width:50%" required>&nbsp;
+                                <label for="file_upload{$linked_media->getId()}" class="secondary_button">Select file</label>
+                                <input type="file" id="file_upload{$linked_media->getId()}" name="game_download_name" onchange="add_file_desc({$linked_media->getId()})" style="display:none;">
+                                <br>
+                                <label class="input">Info</label>
+                                <input type="text" name="info" class="standard_input" style="width:50%">
+                                <br><br>
+                                <input type="submit" value="Add file" name="action" class="secondary_button">
+                            </fieldset>
+                        </form>
+                    </div>
+
+                    {if $mediaScans[$linked_media->getId()] != null}
+                        <br><br>
+                        <h4>Scans of this media</h4>
+                        <br>
+
+                        {foreach from=$mediaScans[$linked_media->getId()] item=scan}
+                            <div class="media_scan">
+                                <div class="help-hint">
+                                    {$scan->getMediaScanType()->getName()}
+                                </div>
+                                <div>
+                                    <a href="../../includes/show_image.php?file={$mediaScans_path}{$scan->getId()}.{$scan->getImage()}&amp;resize=410,null,null,null" data-lightbox="image-1" data-title="{$scan->getMediaScanType()->getName()}">
+                                        <img src="{$mediaScans_path}{$scan->getId()}.{$scan->getImage()}" alt="Click to enlarge!" class="media_scan_img"></a>
+                                    </a>
+                                </div>
+                                <div>
+                                    <a title="Remove scan from this media"
+                                        href="../games/db_games_release_detail.php?game_id={$game->getId()}&amp;release_id={$release->getId()}&amp;media_id={$linked_media->getId()}&amp;media_scan_id={$scan->getId()}&amp;ext={$scan->getImage()}&amp;action=remove_scan"
+                                        onclick="javascript:return confirm('This scan will be permanently deleted')">
+                                        <span class="fa fa-fw fa-trash"></span>
+                                    </a>
+                                </div>
+                            </div>
+                        {/foreach}
+                        <div class="media_scan">
+                            <div class="help-hint">&nbsp;</div>
+                            <div class="missing" style="height: 100px;">
+                                <a href="javascript:;" onclick="jQuery('#scan-options-{$linked_media->getId()}').toggle()">
+                                    <span class="fa fa-plus fa-3x"></span><br>
+                                    Add a scan
+                                </a>
+                            </div>
+                            <div>&nbsp;</div>
+
+                        </div>
+
+                    {else}
+                        <br>
+                        <div class="text-center missing">
+                            <span class="fa fa-warning"></span> No scan for this media. Consider <a href="javascript:;" onclick="jQuery('#scan-options-{$linked_media->getId()}').toggle()">adding one</a>.</span>
+                        </div>
+                    {/if}
+
+                    <div id="scan-options-{$linked_media->getId()}" style="display: none;">
+                        <br>
+                        <form action="../games/db_games_release_detail.php" enctype="multipart/form-data" method="post" name="add_file">
+                            <input type="hidden" name="game_id" value="{$game->getId()}">
+                            <input type="hidden" name="release_id" value="{$release->getId()}">
+                            <input type="hidden" name="media_id" value="{$linked_media->getId()}">
+                            <fieldset class="tertiary_fieldset">
+                                <a id="gd_developers"><b>Media scans</b></a>
+                                <div class="help-hint">
+                                    Overhere you can add multiple scanned images of a media (e.g. front and back of the floppy, contents of the box, goodies, codewheel...)
+                                </div>
+                                <br>
+                                <label class="input">Type</label>
+                                <select name="type" class="standard_select select_large" required>
+                                    <option value="">-</option>
+                                    {foreach from=$media_scan_types item=media_scan_type}
+                                        <option value={$media_scan_type->getId()}>{$media_scan_type->getName()}</option>
+                                    {/foreach}
+                                </select>
+                                <br>
+                                <label class="input">File</label>
+                                <input type="text" class="standard_input" id="file_upload_game_scan{$linked_media->getId()}" style="width:50%" required>&nbsp;
+                                <label for="file_upload2{$linked_media->getId()}" class="secondary_button">Select file</label>
+                                <input type="file" id="file_upload2{$linked_media->getId()}" name="image[]" onchange="add_scan_desc({$linked_media->getId()})" style="display:none;">
+                                <br><br>
+                                <input type="submit" value="Add scan" name="action" class="secondary_button">
+                            </fieldset>
+                        </form>
+                    </div>
+                    <br>
+                </fieldset>
+                <br><br>
+            {/foreach}
+        {/if}
+    </fieldset>
+</div>
