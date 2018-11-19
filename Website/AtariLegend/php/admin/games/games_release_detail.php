@@ -142,6 +142,7 @@ if ($_SERVER['REQUEST_METHOD'] == "GET") {
     }
 }
 
+$smarty->assign("tab", isset($tab) ? $tab : "general");
 $smarty->display("file:" . $cpanel_template_folder . "games_release_detail.html");
 
 mysqli_close($mysqli);
