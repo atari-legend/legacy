@@ -1595,6 +1595,13 @@ function create_log_entry($section, $section_id, $subsection, $subsection_id, $a
             $query_data   = $result->fetch_array(MYSQLI_BOTH);
             $section_name = $query_data['name'];
         }
+        elseif ($subsection == 'Sound hardware') {
+            // Get the the hardware
+            $query = "SELECT name FROM sound_hardware WHERE id = '$section_id'";
+            $result = $mysqli->query($query) or die("getting sound hardware failed");
+            $query_data   = $result->fetch_array(MYSQLI_BOTH);
+            $section_name = $query_data['name'];
+        }
         $subsection_name = $section_name;
     }
     

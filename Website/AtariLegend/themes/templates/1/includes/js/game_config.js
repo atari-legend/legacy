@@ -62,6 +62,9 @@ $(document).ready(function () {
     $('select[name=enhancement_select]').change(function () {
         hideShow('enhancement');
     });
+    $('select[name=sound_hardware_select]').change(function () {
+        hideShow('sound_hardware');
+    });
 });
 
 function hideShow (type) {
