@@ -159,7 +159,7 @@ class SoundHardwareDAO {
             "SoundHardwareDAO: updateSoundHardware",
             $this->mysqli,
             "UPDATE sound_hardware SET name = ? WHERE id = ?",
-            "si", $sound_hardware_id, $sound_hardware
+            "si", $sound_hardware, $sound_hardware_id
         );
         
         $stmt->close();
