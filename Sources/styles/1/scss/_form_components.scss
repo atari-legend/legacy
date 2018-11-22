@@ -175,6 +175,19 @@
             color: $info;
         }
     }
+
+    &.button_disabled {
+        border: dotted 1px #666;
+        background-color: #222;
+        color: #ccc !important;
+        cursor: not-allowed;
+
+        &:hover {
+            border: dotted 1px #666;
+            background-color: #222;
+            color: #ccc;
+        }
+    }
 }
 
 .primary_button:hover {
