@@ -13,7 +13,7 @@
             <input type="hidden" name="game_id" value="{$game->getId()}">
             <input type="hidden" name="action" value="add_media">
             <select name="media_type_id"
-                class="standard_select select_large" id="gd_dev_name" required>
+                class="standard_select select_large" required>
                 <option value="" selected="selected">-</option>
                 {foreach from=$media_types item=all_media_types}
                     <option value="{$all_media_types->getId()}">{$all_media_types->getName()}</option>
@@ -31,28 +31,47 @@
             <h3>{count($release_media)} media for this release</h3>
             {foreach from=$release_media item=linked_media name=media}
                 <fieldset class="secondary_fieldset media_fieldset">
-                    <a title="Remove {$linked_media->getMediaType()->getName()|escape:"html"} from this release"
-                        class="primary_button button_danger pull-right"
-                        href="../games/db_games_release_detail.php?game_id={$game->getId()}&amp;release_id={$release->getId()}&amp;media_id={$linked_media->getId()}&amp;action=remove_media"
-                        onclick="javascript:return confirm('This media will be permanently deleted')">
-                        <i class="fa fa-trash" aria-hidden="true"></i>
-                        Delete media
-                    </a>
+                    {if $dumps[$linked_media->getId()] != null or $mediaScans[$linked_media->getId()] != null}
+                        <a title="Dumps and scans must be deleted first"
+                            class="primary_button button_disabled pull-right"
+                            href="javascript:;">
+                            <i class="fa fa-trash" aria-hidden="true"></i>
+                            Delete media
+                        </a>
+                    {else}
+                        <a title="Remove {$linked_media->getMediaType()->getName()|escape:"html"} from this release"
+                            class="primary_button button_danger pull-right"
+                            href="../games/db_games_release_detail.php?game_id={$game->getId()}&amp;release_id={$release->getId()}&amp;media_id={$linked_media->getId()}&amp;action=remove_media"
+                            onclick="javascript:return confirm('This media will be permanently deleted')">
+                            <i class="fa fa-trash" aria-hidden="true"></i>
+                            Delete media
+                        </a>
+                    {/if}
 
                     <legend class="primary_legend">Media #{$smarty.foreach.media.index + 1}</legend>
 
                     <form action="../games/db_games_release_detail.php" method="post">
                         <input type="hidden" name="game_id" value="{$game->getId()}">
-                        <input type="hidden" name="action" value="edit_label">
+                        <input type="hidden" name="action" value="edit_media">
                         <input type="hidden" name="release_id" value="{$release->getId()}">
                         <input type="hidden" name="media_id" value="{$linked_media->getId()}">
 
                         <label class="input">Type</label>
-                        <input type="text" value="{$linked_media->getMediaType()->getName()}" class="standard_input input_medium" disabled id="gd_game_dev">
+
+                        <select name="media_type_id"
+                            class="standard_select select_large"
+                            onchange="jQuery('#update-type-{$linked_media->getId()}').show()"
+                            required>
+                            <option value="" selected="selected">-</option>
+                            {foreach from=$media_types item=all_media_types}
+                                <option value="{$all_media_types->getId()}" {if $all_media_types->getId() == $linked_media->getMediaType()->getId()}selected{/if}>{$all_media_types->getName()}</option>
+                            {/foreach}
+                        </select>
+                        <input id="update-type-{$linked_media->getId()}" class="secondary_button" type="submit" value="Update" style="display: none;">
                         <br>
 
                         <label class="input">Label</label>
-                        <input type="text" onkeydown="jQuery('#update-label-{$linked_media->getId()}').show()" value="{$linked_media->getLabel()}" class="standard_input input_medium" id="gd_game_dev" name="media_label" placeholder="Label (e.g. 'Disk A')">
+                        <input type="text" onkeydown="jQuery('#update-label-{$linked_media->getId()}').show()" value="{$linked_media->getLabel()}" class="standard_input input_large" name="media_label" placeholder="Label (e.g. 'Disk A')">
                         <input id="update-label-{$linked_media->getId()}" class="secondary_button" type="submit" value="Update" style="display: none;">
                     </form>
                     <br>
@@ -108,7 +127,7 @@
                             <input type="hidden" name="release_id" value="{$release->getId()}">
                             <input type="hidden" name="media_id" value="{$linked_media->getId()}">
                             <fieldset class="tertiary_fieldset">
-                                <a id="gd_developers"><b>File upload</b></a>
+                                <b>File upload</b>
                                 <div class="help-hint">
                                     Overhere you can add the actual file download(s) for this media. Select a format and a matching file, and additionally you may add some info of this dump.
                                     A media can have multiple dumps, for example a Pasti one and a MSA one. The file you upload can have extension 'st', 'stx', 'msa' or 'scp' or a zip file
@@ -186,7 +205,7 @@
                             <input type="hidden" name="release_id" value="{$release->getId()}">
                             <input type="hidden" name="media_id" value="{$linked_media->getId()}">
                             <fieldset class="tertiary_fieldset">
-                                <a id="gd_developers"><b>Media scans</b></a>
+                                <b>Media scans</b>
                                 <div class="help-hint">
                                     Overhere you can add multiple scanned images of a media (e.g. front and back of the floppy, contents of the box, goodies, codewheel...)
                                 </div>
