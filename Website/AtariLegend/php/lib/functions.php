@@ -511,7 +511,7 @@ function create_log_entry($section, $section_id, $subsection, $subsection_id, $a
 
         if ($subsection == 'Game' or $subsection == 'File' or $subsection == 'Screenshot' or $subsection == 'Mag score' or $subsection == 'Box back'
             or $subsection == 'Box front' or $subsection == 'Review' or $subsection == 'Review comment' or $subsection == 'Music'
-            or $subsection == 'Submission' or $subsection == 'Fact') {
+            or $subsection == 'Submission' or $subsection == 'Fact' or $subsection == 'Sound hardware') {
             $subsection_name = $section_name;
         }
 

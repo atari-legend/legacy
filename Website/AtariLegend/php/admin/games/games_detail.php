@@ -37,6 +37,7 @@ require_once __DIR__."/../../common/DAO/GameIndividualDAO.php";
 require_once __DIR__."/../../common/DAO/IndividualDAO.php";
 require_once __DIR__."/../../common/DAO/EngineDAO.php";
 require_once __DIR__."/../../common/DAO/ControlDAO.php";
+require_once __DIR__."/../../common/DAO/SoundHardwareDAO.php";
 
 $gameReleaseDao = new \AL\Common\DAO\GameReleaseDAO($mysqli);
 $gameDao = new \AL\Common\DAO\GameDAO($mysqli);
@@ -50,6 +51,7 @@ $gameIndividualDao = new \Al\Common\DAO\GameIndividualDAO($mysqli);
 $individualDao = new \Al\Common\DAO\IndividualDAO($mysqli);
 $engineDao = new \AL\Common\DAO\EngineDAO($mysqli);
 $controlDao = new \AL\Common\DAO\ControlDAO($mysqli);
+$soundHardwareDao = new \AL\Common\DAO\SoundHardwareDAO($mysqli);
 
 //***********************************************************************************
 //Let's get the general game info first.
@@ -206,6 +208,12 @@ while ($languages = $sql_languages->fetch_array(MYSQLI_BOTH)) {
         'name' => $languages['name']
     ));
 }
+
+//***********************************************************************************
+//get the sound hardware types
+//***********************************************************************************
+$smarty->assign('all_sound_hardware', $soundHardwareDao->getAllSoundHardware());
+$smarty->assign('linked_sound_hardware', $soundHardwareDao->getSoundHardwareForGame($game_id));
 
 //***********************************************************************************
 //The game statistics below on the page
