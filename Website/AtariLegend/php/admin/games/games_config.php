@@ -33,6 +33,8 @@ require_once __DIR__."/../../common/DAO/TosDAO.php";
 require_once __DIR__."/../../common/DAO/CopyProtectionDAO.php";
 require_once __DIR__."/../../common/DAO/DiskProtectionDAO.php";
 require_once __DIR__."/../../common/DAO/EnhancementDAO.php";
+require_once __DIR__."/../../common/DAO/MediaTypeDAO.php";
+require_once __DIR__."/../../common/DAO/MediaScanTypeDAO.php";
 require_once __DIR__."/../../common/DAO/SoundHardwareDAO.php";
 
 $engineDao = new \AL\Common\DAO\EngineDAO($mysqli);
@@ -51,6 +53,8 @@ $tosDao = new \AL\Common\DAO\TosDAO($mysqli);
 $copyProtectionDao = new \AL\Common\DAO\CopyProtectionDAO($mysqli);
 $diskProtectionDao = new \AL\Common\DAO\DiskProtectionDAO($mysqli);
 $enhancementDao = new \AL\Common\DAO\enhancementDAO($mysqli);
+$mediaTypeDao = new \AL\Common\DAO\MediaTypeDAO($mysqli);
+$mediaScanTypeDao = new \AL\Common\DAO\MediaScanTypeDAO($mysqli);
 $soundHardwareDao = new \AL\Common\DAO\SoundHardwareDAO($mysqli);
 
 
@@ -131,6 +135,14 @@ $smarty->assign('tos', $tosDao->getAllTos());
 $smarty->assign('enhancement', $enhancementDao->getAllEnhancements());
 
 //***********************************************************************************
+//get the media types
+//***********************************************************************************
+$smarty->assign('media_type', $mediaTypeDao->getAllMediaTypes());
+
+//***********************************************************************************
+//get the media scan types
+//***********************************************************************************
+$smarty->assign('media_scan_type', $mediaScanTypeDao->getAllMediaScanTypes());
 //get the sound hardware
 //***********************************************************************************
 $smarty->assign('soundhardware', $soundHardwareDao->getAllSoundHardware());
