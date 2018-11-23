@@ -52,6 +52,27 @@
 .no_border {
     border: 0 !important;
 }
+
+.table_full_width {
+    width: 100%;
+}
+
+.table_border {
+    border-spacing: 0;
+
+    th {
+        text-align: left;
+    }
+
+    td {
+        border-top: solid 1px #122323;
+    }
+
+    caption {
+        padding-bottom: .5rem;
+    }
+}
+
 //
 // Table Headers
 //
