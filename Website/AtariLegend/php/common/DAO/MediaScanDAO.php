@@ -14,7 +14,7 @@ class MediaScanDAO {
     public function __construct($mysqli) {
         $this->mysqli = $mysqli;
     }
-    
+
      /**
      * Add a mediaScan to a media
      *
@@ -22,7 +22,7 @@ class MediaScanDAO {
      * @param int media_type_id
      */
     public function addMediaScanToMedia($media_id, $scan_type_id, $media_scan_save_path, $image) {
-        
+
         foreach ($image['tmp_name'] as $key => $tmp_name) {
             if ($tmp_name !== 'none') {
                 // Check what extention the file has and if it is allowed.
@@ -39,7 +39,7 @@ class MediaScanDAO {
                 } elseif ($type_image == 'image/jpeg') {
                     $ext = 'jpg';
                 }
-                
+
                 if ($ext !== "") {
                     $stmt = \AL\Db\execute_query(
                         "MediaScanDAO: addMediaScanToMedia",
@@ -47,13 +47,13 @@ class MediaScanDAO {
                         "INSERT INTO media_scan (`media_id`, `media_scan_type_id`, `imgext`) VALUES (?, ?, ?)",
                         "iis", $media_id, $scan_type_id, $ext
                     );
-                    
+
                     $last_id = $stmt->insert_id;
-                    
+
                     // Rename the uploaded file to its autoincrement number and move it to its proper place.
                     $file_data = rename($image['tmp_name'][$key], "$media_scan_save_path$last_id.$ext");
                     chmod("$media_scan_save_path$last_id.$ext", 0777);
-                    
+
                     $stmt->close();
                 } else {
                     exit("This file extension is not allowed");
@@ -97,7 +97,7 @@ class MediaScanDAO {
 
         return $media_scan;
     }
-    
+
     /*
      * delete scan from a media
      *
@@ -110,17 +110,17 @@ class MediaScanDAO {
             "DELETE FROM media_scan WHERE id = ?",
             "i", $media_scan_id
         );
-        
+
         $new_path = $media_scan_save_path;
         $new_path .= $media_scan_id;
         $new_path .= ".";
         $new_path .= $ext;
 
         unlink("$new_path");
-        
+
         $stmt->close();
     }
-    
+
     /*
      * check is scantype exist on media
      *
@@ -141,16 +141,16 @@ class MediaScanDAO {
             $stmt,
             $media_scan_id
         );
-        
+
         $media_scan_id = null;
         if ($stmt->fetch()) {
             $media_scan_id  = new \AL\Common\Model\Dump\MediaScan(
                 $media_scan_id, null, null, null
             );
         }
-        
+
         $stmt->close();
-        
+
         return $media_scan_id;
     }
 }
