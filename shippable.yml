@@ -1,5 +1,11 @@
 language: node_js
 
+env:
+    global:
+        # Contains DEV_DEPLOY_HOST, DEV_DEPLOY_USER, DEV_DEPLOY_PATH
+        # variables encrypted via Shippable
+        - secure: O9ssVSQ+s0zyKXUvANhiqfSj4LzZHyUEJGKFoBHqt0m/lgiKE5J+8PuPQs+0NqgK83rIZtJx7CPphZmToFgeAy9TBphTAj41xpjc45VNhPfi3goBaV/9qUaiYyiqChNc++9UABKyiITofK8+ovYEj6egcXNwn9Qaonia57C8EoX0qAfil115RxiveBaiW+CbvNM+qkdA+3YOosRrqkxw5lra5SgXNwX8lS9cH+ryohK4CjvFAgPADWxIuuxdq04wEiFkcV8aSnH8CCb7W1oHEy2jut3xhyqCR7w96AXFARxgU/nkuZCMSznQZCXLKT18oEY2//bCC8ahCTxkWtVXSQ==
+
 build:
     # Build our custom Docker image with NodeJS + PHP as a pre step
     pre_ci:
@@ -15,3 +21,9 @@ build:
     ci:
         - shippable_retry npm install
         - npm run grunt
+
+    # If the build succeeded and we're on the development branch,
+    # sync all the file to the dev server
+    on_success:
+        - test ${BRANCH} = "development" || exit 0
+        - rsync -azv Website/AtariLegend/* $DEV_DEPLOY_USER@$DEV_DEPLOY_HOST:$DEV_DEPLOY_PATH/
