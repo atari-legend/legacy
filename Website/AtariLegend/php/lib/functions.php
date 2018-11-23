@@ -511,7 +511,7 @@ function create_log_entry($section, $section_id, $subsection, $subsection_id, $a
 
         if ($subsection == 'Game' or $subsection == 'File' or $subsection == 'Screenshot' or $subsection == 'Mag score' or $subsection == 'Box back'
             or $subsection == 'Box front' or $subsection == 'Review' or $subsection == 'Review comment' or $subsection == 'Music'
-            or $subsection == 'Submission' or $subsection == 'Fact') {
+            or $subsection == 'Submission' or $subsection == 'Fact' or $subsection == 'Sound hardware') {
             $subsection_name = $section_name;
         }
 
@@ -1592,6 +1592,13 @@ function create_log_entry($section, $section_id, $subsection, $subsection_id, $a
             // Get the Enhancement
             $query = "SELECT name FROM enhancement WHERE id = '$section_id'";
             $result = $mysqli->query($query) or die("getting enhancement failed");
+            $query_data   = $result->fetch_array(MYSQLI_BOTH);
+            $section_name = $query_data['name'];
+        }
+        elseif ($subsection == 'Sound hardware') {
+            // Get the the hardware
+            $query = "SELECT name FROM sound_hardware WHERE id = '$section_id'";
+            $result = $mysqli->query($query) or die("getting sound hardware failed");
             $query_data   = $result->fetch_array(MYSQLI_BOTH);
             $section_name = $query_data['name'];
         }
