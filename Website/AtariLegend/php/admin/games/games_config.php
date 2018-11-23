@@ -35,6 +35,7 @@ require_once __DIR__."/../../common/DAO/DiskProtectionDAO.php";
 require_once __DIR__."/../../common/DAO/EnhancementDAO.php";
 require_once __DIR__."/../../common/DAO/MediaTypeDAO.php";
 require_once __DIR__."/../../common/DAO/MediaScanTypeDAO.php";
+require_once __DIR__."/../../common/DAO/SoundHardwareDAO.php";
 
 $engineDao = new \AL\Common\DAO\EngineDAO($mysqli);
 $programmingLanguageDao = new \AL\Common\DAO\ProgrammingLanguageDAO($mysqli);
@@ -54,6 +55,7 @@ $diskProtectionDao = new \AL\Common\DAO\DiskProtectionDAO($mysqli);
 $enhancementDao = new \AL\Common\DAO\enhancementDAO($mysqli);
 $mediaTypeDao = new \AL\Common\DAO\MediaTypeDAO($mysqli);
 $mediaScanTypeDao = new \AL\Common\DAO\MediaScanTypeDAO($mysqli);
+$soundHardwareDao = new \AL\Common\DAO\SoundHardwareDAO($mysqli);
 
 
 //***********************************************************************************
@@ -141,6 +143,10 @@ $smarty->assign('media_type', $mediaTypeDao->getAllMediaTypes());
 //get the media scan types
 //***********************************************************************************
 $smarty->assign('media_scan_type', $mediaScanTypeDao->getAllMediaScanTypes());
+//get the sound hardware
+//***********************************************************************************
+$smarty->assign('soundhardware', $soundHardwareDao->getAllSoundHardware());
+
 
 //Send all smarty variables to the templates
 $smarty->display("file:" . $cpanel_template_folder . "games_config.html");
