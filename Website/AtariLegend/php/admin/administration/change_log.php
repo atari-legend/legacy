@@ -510,7 +510,8 @@ while ($log = $sql_log->fetch_array(MYSQLI_BOTH)) {
             OR $log['sub_section'] == 'Distributor' OR $log['sub_section'] == 'Scene' OR $log['sub_section'] == 'Memory Enhancement' OR $log['sub_section'] == 'Minimum Memory'
             OR $log['sub_section'] == 'Tos' OR $log['sub_section'] == 'Incompatible TOS' OR $log['sub_section'] == 'Protection' OR $log['sub_section'] == 'Language' 
             OR $log['sub_section'] == 'Disk Protection' OR $log['sub_section'] == 'Enhancement' OR $log['sub_section'] == 'System Enhancement' OR $log['sub_section'] == 'Incompatible Memory' 
-            OR $log['sub_section'] == 'Copy Protection') {
+            OR $log['sub_section'] == 'Copy Protection' OR $log['sub_section'] == 'Media Type' OR $log['sub_section'] == 'Media Scan Type' OR $log['sub_section'] == 'Media'
+            OR $log['sub_section'] == 'Dump' OR $log['sub_section'] == 'Media Scan') {
             $subsection_link = ("../games/games_release_detail.php" . '?game_id=' . $log['section_id'] . '&release_id=' . $log['sub_section_id']);
         }
     }
