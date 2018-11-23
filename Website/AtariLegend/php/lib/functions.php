@@ -511,7 +511,7 @@ function create_log_entry($section, $section_id, $subsection, $subsection_id, $a
 
         if ($subsection == 'Game' or $subsection == 'File' or $subsection == 'Screenshot' or $subsection == 'Mag score' or $subsection == 'Box back'
             or $subsection == 'Box front' or $subsection == 'Review' or $subsection == 'Review comment' or $subsection == 'Music'
-            or $subsection == 'Submission' or $subsection == 'Fact') {
+            or $subsection == 'Submission' or $subsection == 'Fact' or $subsection == 'Sound hardware') {
             $subsection_name = $section_name;
         }
 
@@ -1482,7 +1482,7 @@ function create_log_entry($section, $section_id, $subsection, $subsection_id, $a
         $subsection_name = ("Bug report ID " . $subsection_id);
         $section_name    = ("Bug report ID " . $subsection_id);
     }
-    
+
     //  Everything we do for the GAMES CONFIG section
     if ($section == 'Games Config') {
         if ($subsection == 'Games Engine') {
@@ -1595,9 +1595,28 @@ function create_log_entry($section, $section_id, $subsection, $subsection_id, $a
             $query_data   = $result->fetch_array(MYSQLI_BOTH);
             $section_name = $query_data['name'];
         }
+        elseif ($subsection == 'Media Type') {
+            // Get the Enhancement
+            $query = "SELECT name FROM media_type WHERE id = '$section_id'";
+            $result = $mysqli->query($query) or die("getting media type failed");
+            $query_data   = $result->fetch_array(MYSQLI_BOTH);
+            $section_name = $query_data['name'];
+        }
+        elseif ($subsection == 'Media Scan Type') {
+            // Get the Enhancement
+            $query = "SELECT name FROM media_scan_type WHERE id = '$section_id'";
+            $result = $mysqli->query($query) or die("getting media type failed");
+        }
+        elseif ($subsection == 'Sound hardware') {
+            // Get the the hardware
+            $query = "SELECT name FROM sound_hardware WHERE id = '$section_id'";
+            $result = $mysqli->query($query) or die("getting sound hardware failed");
+            $query_data   = $result->fetch_array(MYSQLI_BOTH);
+            $section_name = $query_data['name'];
+        }
         $subsection_name = $section_name;
     }
-    
+
     //Everything we do for GAME RELEASES
     if ($section == 'Game Release') {
 
@@ -1605,25 +1624,26 @@ function create_log_entry($section, $section_id, $subsection, $subsection_id, $a
         $query_game = "SELECT game_name FROM game WHERE game_id = '$section_id'";
         $result = $mysqli->query($query_game) or die("getting name failed");
         $query_data   = $result->fetch_array(MYSQLI_BOTH);
-        $section_name = $query_data['game_name'];    
-        
+        $section_name = $query_data['game_name'];
+
         if ($subsection == 'Game Release' OR $subsection == 'Release Info' OR $subsection == 'Release AKA' OR $subsection == 'Compatibility' OR $subsection == 'Distributor'
-            OR $subsection == 'Scene' or $subsection == 'Memory Enhancement' or $subsection == 'Minimum Memory' or $subsection == 'Incompatible Memory' or $subsection == 'Incompatible TOS' 
-            or $subsection == 'Protection' or $subsection == 'Language' or $subsection == 'System Enhancement' or $subsection == 'Copy Protection' or $subsection == 'Disk Protection') {
+            OR $subsection == 'Scene' or $subsection == 'Memory Enhancement' or $subsection == 'Minimum Memory' or $subsection == 'Incompatible Memory' or $subsection == 'Incompatible TOS'
+            or $subsection == 'Protection' or $subsection == 'Language' or $subsection == 'System Enhancement' or $subsection == 'Copy Protection' or $subsection == 'Disk Protection' or $subsection == 'Media'
+            OR $subsection == 'Dump' OR $subsection == 'Media Scan') {
             $subsection_name = $section_name;
         }
-        
+
         if ($subsection == 'Distributor') {
             // get the distributor name
-            $query_distributor = "SELECT * FROM pub_dev 
-                                  LEFT JOIN game_release_distributor ON (pub_dev.pub_dev_id = game_release_distributor.pub_dev_id)  
+            $query_distributor = "SELECT * FROM pub_dev
+                                  LEFT JOIN game_release_distributor ON (pub_dev.pub_dev_id = game_release_distributor.pub_dev_id)
                                   WHERE pub_dev.pub_dev_id = '$subsection_id'";
             $result = $mysqli->query($query_distributor) or die("getting name failed");
             $query_data   = $result->fetch_array(MYSQLI_BOTH);
-            $subsection_name = $query_data['pub_dev_name']; 
-            $subsection_id = $query_data['game_release_id'];            
+            $subsection_name = $query_data['pub_dev_name'];
+            $subsection_id = $query_data['game_release_id'];
         }
-    }   
+    }
 
     $section_name    = $mysqli->real_escape_string($section_name);
     $subsection_name = $mysqli->real_escape_string($subsection_name);

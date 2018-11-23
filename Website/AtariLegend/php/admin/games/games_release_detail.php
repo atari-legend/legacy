@@ -20,6 +20,11 @@ require_once __DIR__."/../../common/DAO/TosDAO.php";
 require_once __DIR__."/../../common/DAO/CopyProtectionDAO.php";
 require_once __DIR__."/../../common/DAO/DiskProtectionDAO.php";
 require_once __DIR__."/../../common/DAO/EnhancementDAO.php";
+require_once __DIR__."/../../common/DAO/MediaTypeDAO.php";
+require_once __DIR__."/../../common/DAO/MediaDAO.php";
+require_once __DIR__."/../../common/DAO/DumpDAO.php";
+require_once __DIR__."/../../common/DAO/MediaScanTypeDAO.php";
+require_once __DIR__."/../../common/DAO/MediaScanDAO.php";
 
 $gameReleaseDao = new \AL\Common\DAO\GameReleaseDAO($mysqli);
 $gameDao = new \AL\Common\DAO\GameDao($mysqli);
@@ -37,6 +42,11 @@ $tosDao = new \AL\Common\DAO\TosDAO($mysqli);
 $copyProtectionDao = new \AL\Common\DAO\CopyProtectionDAO($mysqli);
 $diskProtectionDao = new \AL\Common\DAO\DiskProtectionDAO($mysqli);
 $enhancementDao = new \AL\Common\DAO\EnhancementDAO($mysqli);
+$mediaTypeDao = new \AL\Common\DAO\MediaTypeDAO($mysqli);
+$mediaDao = new \AL\Common\DAO\MediaDAO($mysqli);
+$dumpDao = new \AL\Common\DAO\DumpDAO($mysqli);
+$mediaScanTypeDao = new \AL\Common\DAO\MediaScanTypeDAO($mysqli);
+$mediaScanDao = new \AL\Common\DAO\MediaScanDAO($mysqli);
 
 if ($_SERVER['REQUEST_METHOD'] == "GET") {
     $smarty->assign('license_types', $gameReleaseDao->getLicenseTypes());
@@ -54,11 +64,15 @@ if ($_SERVER['REQUEST_METHOD'] == "GET") {
     $smarty->assign('copy_protections', $copyProtectionDao->getAllCopyProtections());
     $smarty->assign('disk_protections', $diskProtectionDao->getAllDiskProtections());
     $smarty->assign('enhancements', $enhancementDao->getAllEnhancements());
-    
+    $smarty->assign('media_types', $mediaTypeDao->getAllMediaTypes());
+    $smarty->assign('dump_formats', $dumpDao->getFormats());
+    $smarty->assign('media_scan_types', $mediaScanTypeDao->getAllMediaScanTypes());
+
     // Edit existing release
     if (isset($release_id)) {
         $release = $gameReleaseDao->getRelease($release_id);
         $game = $gameDao->getGame($release->getGameId());
+
         $smarty->assign('game_screenshot', $gameDao->getRandomScreenshot($game->getId()));
 
         $smarty->assign('release', $release);
@@ -75,13 +89,28 @@ if ($_SERVER['REQUEST_METHOD'] == "GET") {
         $smarty->assign('release_akas', $gameReleaseAkaDao->getAllGameReleaseAkas($release->getId()));
         $smarty->assign('release_trainer_options', $trainerOptionDao->getTrainerOptionsForRelease($release->getId()));
         $smarty->assign('distributors', $pubDevDao->getAllPubDevs());
-        $smarty->assign('release_distributors', $pubDevDao->getDistributorsForRelease($release->getId()));   
+        $smarty->assign('release_distributors', $pubDevDao->getDistributorsForRelease($release->getId()));
         $smarty->assign('release_memory_enhancements', $memoryDao->getMemoryForRelease($release->getId()));
         $smarty->assign('release_minimum_memory', $memoryDao->getMinimumMemoryForRelease($release->getId()));
         $smarty->assign('release_memory_incompatible', $memoryDao->getMemoryIncompatibleForRelease($release->getId()));
         $smarty->assign('release_copy_protections', $copyProtectionDao->getCopyProtectionsForRelease($release->getId()));
         $smarty->assign('release_disk_protections', $diskProtectionDao->getDiskProtectionsForRelease($release->getId()));
         $smarty->assign('release_languages', $languageDao->getAllGameReleaseLanguages($release->getId()));
+
+        $media = $mediaDao->getAllMediaFromRelease($release->getId());
+        $smarty->assign('release_media', $media);
+
+        $dumps = [];
+        $mediaScans = [];
+        foreach ($media as $medium) {
+            $dumps[$medium->getId()] = $dumpDao->getAllDumpsFromMedia($medium->getId());
+            $mediaScans[$medium->getId()] = $mediaScanDao->getAllMediaScansFromMedia($medium->getId());
+        }
+        $smarty->assign('dumps', $dumps);
+        $smarty->assign('mediaScans', $mediaScans);
+        $smarty->assign('mediaScans_path', $media_scan_path);
+
+
     } else {
         // Creating a new release
         $game = $gameDao->getGame($game_id);
@@ -102,6 +131,9 @@ if ($_SERVER['REQUEST_METHOD'] == "GET") {
         $smarty->assign('release_memory_incompatible', []);
         $smarty->assign('release_minimum_memory', []);
         $smarty->assign('release_disk_protections', []);
+        $smarty->assign('release_media', []);
+        $smarty->assign('dumps', []);
+        $smarty->assign('mediaScans', []);
 
         // Pass through a pub_dev_id, location_id and release type that may be in URL parameters
         $smarty->assign('pub_dev_id', isset($pub_dev_id) ? $pub_dev_id : null);
@@ -110,6 +142,7 @@ if ($_SERVER['REQUEST_METHOD'] == "GET") {
     }
 }
 
+$smarty->assign("tab", isset($tab) ? $tab : "general");
 $smarty->display("file:" . $cpanel_template_folder . "games_release_detail.html");
 
 mysqli_close($mysqli);
