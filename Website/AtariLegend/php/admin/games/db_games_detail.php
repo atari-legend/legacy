@@ -31,6 +31,7 @@ require_once __DIR__."/../../common/DAO/GameGenreDAO.php";
 require_once __DIR__."/../../common/DAO/PortDAO.php";
 require_once __DIR__."/../../common/DAO/EngineDAO.php";
 require_once __DIR__."/../../common/DAO/ControlDAO.php";
+require_once __DIR__."/../../common/DAO/SoundHardwareDAO.php";
 
 $changeLogDao = new \AL\Common\DAO\ChangeLogDAO($mysqli);
 $gameReleaseDao = new \AL\Common\DAO\GameReleaseDAO($mysqli);
@@ -39,6 +40,7 @@ $gameGenreDao = new \AL\Common\DAO\GameGenreDAO($mysqli);
 $portDao = new \AL\Common\DAO\PortDAO($mysqli);
 $engineDao = new \AL\Common\DAO\engineDAO($mysqli);
 $controlDao = new \AL\Common\DAO\controlDAO($mysqli);
+$soundHardwareDao = new \AL\Common\DAO\SoundHardwareDAO($mysqli);
 
 if (isset($game_id)){
     $stmt = $mysqli->prepare("SELECT game_name FROM game WHERE game_id = ?") or die($mysqli->error);
@@ -135,6 +137,32 @@ if (isset($action) and $action == 'update_aka') {
     $stmt->close();
 
     $_SESSION['edit_message'] = "AKA link has been updated";
+    header("Location: ../games/games_detail.php?game_id=$game_id#gd_game_aka");
+}
+
+//***********************************************************************************
+//If add soundhardware button has been pressed
+//***********************************************************************************
+if (isset($action) and $action == 'add_sound_hardware') {
+
+    $soundHardwareDao->addSoundHardwareToGame($game_id, $sound_hardware_id);
+
+    create_log_entry('Games', $game_id, 'Sound hardware', $sound_hardware_id, 'Insert', $_SESSION['user_id']);
+
+    $_SESSION['edit_message'] = "Sound hardware has been deleted";
+    header("Location: ../games/games_detail.php?game_id=$game_id#gd_game_aka");
+}
+
+//***********************************************************************************
+//If delete soundhardware button has been pressed
+//***********************************************************************************
+if (isset($action) and $action == 'delete_sound_hardware') {
+
+    $soundHardwareDao->deleteSoundHardwareFromGame($game_id, $sound_hardware_id);
+
+    create_log_entry('Games', $game_id, 'Sound hardware', $sound_hardware_id, 'Delete', $_SESSION['user_id']);
+
+    $_SESSION['edit_message'] = "Sound hardware has been added";
     header("Location: ../games/games_detail.php?game_id=$game_id#gd_game_aka");
 }
 

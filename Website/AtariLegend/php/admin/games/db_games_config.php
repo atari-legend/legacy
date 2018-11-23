@@ -24,6 +24,7 @@ require_once __DIR__."/../../common/DAO/TosDAO.php";
 require_once __DIR__."/../../common/DAO/CopyProtectionDAO.php";
 require_once __DIR__."/../../common/DAO/DiskProtectionDAO.php";
 require_once __DIR__."/../../common/DAO/EnhancementDAO.php";
+require_once __DIR__."/../../common/DAO/SoundHardwareDAO.php";
 
 $changeLogDao = new \AL\Common\DAO\ChangeLogDAO($mysqli);
 $engineDao = new \AL\Common\DAO\EngineDAO($mysqli);
@@ -42,6 +43,7 @@ $tosDao = new \AL\Common\DAO\TosDAO($mysqli);
 $copyProtectionDao = new \AL\Common\DAO\CopyProtectionDAO($mysqli);
 $diskProtectionDao = new \AL\Common\DAO\DiskProtectionDAO($mysqli);
 $enhancementDao = new \AL\Common\DAO\EnhancementDAO($mysqli);
+$soundHardwareDao = new \AL\Common\DAO\SoundHardwareDAO($mysqli);
 
 switch ($_POST['action']) {
 	case "Add engine":
@@ -459,6 +461,32 @@ switch ($_POST['action']) {
 
         $_SESSION['edit_message'] = "Enhancement has been updated" ;
         break;      
+    
+    case "Add hardware":
+        $soundHardwareDao->addSoundHardware($sound_hardware_new);
+        
+        $new_sound_hardware_id = $mysqli->insert_id;
+        
+        create_log_entry('Games Config', $new_sound_hardware_id, 'Sound hardware', $new_sound_hardware_id, 'Insert', $_SESSION['user_id']);
+        
+        $_SESSION['edit_message'] = "$sound_hardware_new has been added" ;
+        break;
+        
+    case "Delete hardware":
+        create_log_entry('Games Config', $sound_hardware_id_edit, 'Sound hardware', $sound_hardware_id_edit, 'Delete', $_SESSION['user_id']);
+        
+        $soundHardwareDao->deleteSoundHardware($sound_hardware_id_edit);       
+
+        $_SESSION['edit_message'] = "Hardware has been deleted" ;
+        break;
+        
+    case "Modify hardware":
+        $soundHardwareDao->updateSoundHardware($sound_hardware_id_edit, $sound_hardware_edit);
+
+        create_log_entry('Games Config', $sound_hardware_id_edit, 'Sound hardware', $sound_hardware_id_edit, 'Update', $_SESSION['user_id']);
+
+        $_SESSION['edit_message'] = "Hardware has been updated" ;
+        break;  
 }
 
 header("Location: games_config.php");

@@ -194,6 +194,34 @@
                     <input type="submit" name="action" value="Add dev role" class="secondary_button">
                 </form>
             </fieldset>
+            <br>
+            <fieldset class="secondary_fieldset">
+                <legend class="primary_legend">Extra</legend>
+                <div class="help-hint">
+                    Add, modify or delete the extras in this section.
+                </div>
+                <br>
+                <br>
+                <b>Sound Hardware</b>&nbsp;&nbsp;
+                <br>
+                <form action="../games/db_games_config.php" method="post" name="sound_hardware">
+                    <select name="sound_hardware_select" class="standard_select input_medium grayed_out" id="sound_hardware_select">
+                        <option value="" selected="selected">-</option>
+                        {foreach from=$soundhardware item=all_soundhardware}
+                            <option value="{$all_soundhardware->getId()}">{$all_soundhardware->getName()}</option>
+                        {/foreach}
+                    </select>
+                    <input type="text" name="sound_hardware_edit" class="standard_input input_medium" style="display:none;" id="sound_hardware_edit">
+                    <input type="text" name="sound_hardware_id_edit" class="standard_input input_medium" style="display:none;" id="sound_hardware_id_edit">
+                    <input type="submit" name="action" value="Modify hardware" class="secondary_button" style="display:none;" id="sound_hardware_mod">
+                    <input type="submit" name="action" value="Delete hardware" class="primary_button button_danger" style="display:none;" id="sound_hardware_del">
+                </form>
+                <hr class="separator_add">
+                <form action="../games/db_games_config.php" method="post" name="sound_hardware">
+                    <input type="text" name="sound_hardware_new" class="standard_input input_medium" placeholder="Enter new hardware" required>
+                    <input type="submit" value="Add hardware" name="action" class="secondary_button">
+                </form>
+            </fieldset>
         </div>
         <div id="tab-game_release" class="tabcontent tabpane">
             <fieldset class="secondary_fieldset">
