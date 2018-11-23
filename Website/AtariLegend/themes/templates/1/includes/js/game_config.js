@@ -68,6 +68,9 @@ $(document).ready(function () {
     $('select[name=media_scan_type_select]').change(function () {
         hideShow('media_scan_type');
     });
+    $('select[name=sound_hardware_select]').change(function () {
+        hideShow('sound_hardware');
+    });
 });
 
 function hideShow (type) {
