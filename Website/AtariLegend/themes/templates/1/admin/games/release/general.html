@@ -13,6 +13,7 @@
             <input type="hidden" name="game_id" value="{$game->getId()}">
             <input type="hidden" name="release_id" value="{$release->getId()}">
             <input type="hidden" name="action" value="general">
+            <input type="hidden" name="tab" value="general">
 
             <label class="input">Release date</label>
             {html_select_date time=$release->getDate() year_empty="Unknown" start_year=1984 display_days=0 display_months=0 class="standard_select select_large"}
