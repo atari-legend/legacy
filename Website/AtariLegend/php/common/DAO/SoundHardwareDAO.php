@@ -76,7 +76,7 @@ class SoundHardwareDAO {
 
         $stmt->close();
 
-        return $$sound_hardware_types;
+        return $sound_hardware_types;
     }
     
      /**
@@ -86,13 +86,13 @@ class SoundHardwareDAO {
      * @param integer hardware ID
      * $param text description
      */
-    public function addSoundHardwareToGame($game_id, $hardware_id, $description) {
+    public function addSoundHardwareToGame($game_id, $hardware_id) {
        
         $stmt = \AL\Db\execute_query(
             "SoundHardwareDAO: addSoundHardwareToGame",
             $this->mysqli,
-            "INSERT INTO game_sound_hardware (game_id, sound_hardware_id, description) VALUES (?, ?, ?)",
-            "iis", $game_id, $hardware_id, $description
+            "INSERT INTO game_sound_hardware (game_id, sound_hardware_id) VALUES (?, ?)",
+            "ii", $game_id, $hardware_id
         );
 
         $stmt->close();

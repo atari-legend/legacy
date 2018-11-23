@@ -24,7 +24,7 @@ class ChangeLog {
         "Games" => array("AKA", "Box back", "Box front", "Comment","Creator",
             "Developer", "Fact", "File", "Mag score", "Music","Game", "Publisher",
             "Review", "Review comment", "Screenshot", "Similar", "Submission", "Year",
-            "Release"
+            "Release", "Sound hardware"
         ),
         "Individuals" => array("Image", "Individual", "Nickname"),
         "Interviews" => array("Comment", "Interview", "Screenshots"),
@@ -212,6 +212,10 @@ class ChangeLog {
                 "Similar" => array(
                     "Update" => "Updated $section_name",
                     "Insert" => "Added $sub_section_name as similar to $section_name",
+                    "Delete" => "Updated $section_name"),
+                "Sound hardware" => array(
+                    "Update" => "Updated $section_name",
+                    "Insert" => "Added sound hardware to $section_name",
                     "Delete" => "Updated $section_name"),
             )
         );
