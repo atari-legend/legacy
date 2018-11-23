@@ -182,6 +182,39 @@ select option.location_continent {
     margin-left: 2%;
 }
 
+.media_scan_img {
+    width: 100px;
+    max-height: 100px;
+    float: left;
+    margin: 5px;
+    background:#294f4f;
+    border-radius:5px;
+    padding:1px;
+}
+
+.media_fieldset {
+    label.input {
+        display: inline-block;
+        font-weight: bold;
+        width: 70px;
+    }
+}
+
+.missing {
+    border: dashed 2px #888;
+    padding: 1rem;
+}
+
+.media_scan {
+    display:inline-block;
+    text-align:center;
+    padding: 5px 10px 5px 10px;
+
+    &:hover {
+        background-color: #122323;
+    }
+}
+
 //*----------------------------------------------------------
 //Games review
 //------------------------------------------------------------ */

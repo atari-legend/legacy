@@ -492,6 +492,12 @@ img {
     }
 }
 
+.tertiary_fieldset {
+    background-color: #193f3f;
+    padding: 10px;
+    border: none;
+}
+
 .secondary_legend {
     padding: 1px 10px;
     color: #ffffff;
@@ -640,18 +646,19 @@ ul.tabs li {
     float: left;
     border: none;
     outline: none;
-    cursor: pointer;
-    padding: 14px 16px;
     transition: .3s;
-}
 
-ul.tabs li a {
-    color: #000 !important;
+    a {
+        color: #000 !important;
+        display: block;
+        padding: 14px 16px;
+    }
 }
 
 //* Change background color of buttons on hover */
 div.tab button:hover,
-ul.tabs li:hover {
+ul.tabs li:hover,
+ul.tabs li a:focus {
     background-color: #006f6f;
 }
 

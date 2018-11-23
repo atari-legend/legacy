@@ -578,6 +578,48 @@ $('#input-tags3').selectize({
                     </div>
                 {/if}
             </div>
+
+            <fieldset class="secondary_fieldset">
+                <legend class="primary_legend">Extras</legend>
+                <a id="gd_sound_hardware"><b>Sound Hardware</b></a>
+                <br>
+                <div class="help-hint">
+                    Does the game support extra (external) sound hardware?
+                </div>
+                <br>
+                {if isset($linked_sound_hardware)}
+                    {foreach from=$linked_sound_hardware item=sound_hardware}
+                    <form action="../games/db_games_detail.php" method="post" name="sound_hardware" id="sound_hardware">
+                        <input type="hidden" name="action" value="update_sound_hardware">
+                        <input type="hidden" name="game_id" value="{$game_id}">
+                        <input type="hidden" name="sound_hardware_id" value="{$sound_hardware->getId()}">
+                        <a href="../games/db_games_detail.php?sound_hardware_id={$sound_hardware->getId()}&action=delete_sound_hardware&game_id={$game_id}"
+                            class="left_nav_link"
+                            onclick="javascript:return confirm('This hardware will be removed from the game')">
+                            <span class="fa fa-fw fa-trash"></span>
+                        </a>
+                        <input type="text" value="{$sound_hardware->getName()}" class="standard_input input_large" disabled id="gd_sound_hardware">
+                        <br>
+                    </form>
+                    {/foreach}
+                {/if}
+                <hr class="separator_add">
+                <form action="../games/db_games_detail.php" method="post">
+                    <input type="hidden" name="game_id" value="{$game_id}">
+                    <input type="hidden" name="action" value="add_sound_hardware">
+                    <span class="fa fa-fw"></span>
+                    <select name="sound_hardware_id"
+                        class="standard_select select_large" id="sound_hardware_name" required>
+                        <option value="" selected="selected" disabled></option>
+                        {foreach from=$all_sound_hardware item=all_hardware}
+                            <option value="{$all_hardware->getId()}">{$all_hardware->getName()}</option>
+                        {/foreach}
+                    </select>
+
+                    <input type="submit" value="Add hardware" class="secondary_button">
+                </form>
+                <br>
+            </fieldset>
             <div id="gd_bottom">
                 <div id="gd_back">
                     <div class="standard_tile_text_center"><a href="javascript:history.go(-1)" class="standard_tile_link">back</a></div>
