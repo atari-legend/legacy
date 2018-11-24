@@ -12,6 +12,12 @@
  *
  ***************************************************************************/
 
+const MIME_TYPES_TO_EXT = array(
+    "image/jpeg" => "jpg",
+    "image/png" => "png",
+    "image/x-png" => "png"
+);
+
 function InsertALCode($alcode) {
     $alcode = preg_replace(
         "#\[color\=(\#[0-9A-F]{0,6}|[A-z]+)\](.*)\[\/color\]#Ui",
@@ -1729,7 +1735,7 @@ function create_log_entry($section, $section_id, $subsection, $subsection_id, $a
             or $subsection == 'Incompatible Memory' or $subsection == 'Incompatible TOS'
             or $subsection == 'Protection' or $subsection == 'Language' or $subsection == 'System Enhancement'
             or $subsection == 'Copy Protection' or $subsection == 'Disk Protection' or $subsection == 'Media'
-            or $subsection == 'Dump' or $subsection == 'Media Scan') {
+            or $subsection == 'Dump' or $subsection == 'Media Scan' or $subsection == "Scan") {
             $subsection_name = $section_name;
         }
 

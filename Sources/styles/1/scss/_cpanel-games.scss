@@ -183,10 +183,8 @@ select option.location_continent {
 }
 
 .media_scan_img {
-    width: 100px;
     max-height: 100px;
-    float: left;
-    margin: 5px;
+    margin: 5px auto 5px auto;
     background:#294f4f;
     border-radius:5px;
     padding:1px;
@@ -212,6 +210,12 @@ select option.location_continent {
 
     &:hover {
         background-color: #122323;
+    }
+
+    .help-hint {
+        max-width: 120px;
+        margin: auto;
+        margin-bottom: 5px;
     }
 }
 
