@@ -26,6 +26,7 @@ class ChangeLog {
             "Review", "Review comment", "Screenshot", "Similar", "Submission", "Year",
             "Release", "Sound hardware"
         ),
+        "Game Release" => array("Scan"),
         "Individuals" => array("Image", "Individual", "Nickname"),
         "Interviews" => array("Comment", "Interview", "Screenshots"),
         "Lingo" => array("Lingo"),

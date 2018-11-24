@@ -43,6 +43,7 @@
                 <li {if $tab == "compatibility"}class="active"{/if}><a href="?game_id={$game->getId()}&release_id={$release->getId()}&tab=compatibility">SYSTEM INFO</a></li>
                 <li {if $tab == "scene"}class="active"{/if}><a href="?game_id={$game->getId()}&release_id={$release->getId()}&tab=scene">SCENE</a></li>
                 <li {if $tab == "dump"}class="active"{/if}><a href="?game_id={$game->getId()}&release_id={$release->getId()}&tab=dump">DUMP</a></li>
+                <li {if $tab == "scans"}class="active"{/if}><a href="?game_id={$game->getId()}&release_id={$release->getId()}&tab=scans">SCANS</a></li>
             </ul>
 
             {include file="1/admin/games/release/$tab.html"}
