@@ -75,6 +75,27 @@ switch ($action) {
             )
         );
     break;
+
+    // ================ TEMPORARY START
+    // Merge Game box scan into a release
+    case "merge_game_boxscan":
+        // Add box scan to the release
+        $id = $gameReleaseScanDao->addScanToRelease($game_release_id, $side == 0 ? 'Box front' : 'Box back', $imgext, null);
+
+        // Move boxscan to the release scans folder
+        @mkdir($game_release_scan_save_path);
+        rename($game_boxscan_save_path.$game_boxscan_id.".".$imgext, $game_release_scan_save_path.$id.".".$imgext);
+
+        // Delete boxscan from DB
+        $stmt = \AL\Db\execute_query(
+            "db_games_release_scans.php: Delete Game Box scan",
+            $mysqli,
+            "DELETE FROM game_boxscan WHERE game_boxscan_id = ?",
+            "i", $game_boxscan_id
+        );
+
+    break;
+    // ================ TEMPORARY END
 }
 
 header("Location: games_release_detail.php?game_id=$game_id&release_id=$game_release_id&tab=scans");

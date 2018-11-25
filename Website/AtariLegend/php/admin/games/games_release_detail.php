@@ -113,6 +113,40 @@ if ($_SERVER['REQUEST_METHOD'] == "GET") {
         $smarty->assign('mediaScans', $mediaScans);
         $smarty->assign('mediaScans_path', $media_scan_path);
 
+        // ================ TEMPORARY START
+        // Retrieve Box Scans attached to the game, to merge them in a release
+        $stmt = \AL\Db\execute_query(
+            "games_release_details.php: Get game boxscans",
+            $mysqli,
+            "SELECT
+                game_boxscan.game_boxscan_id, imgext, game_boxscan_side
+            FROM
+                game_boxscan
+            LEFT JOIN game_box_couples ON game_box_couples.game_boxscan_id = game_boxscan.game_boxscan_id
+            WHERE
+                game_boxscan.game_id = ?",
+            "i", $game->getId()
+        );
+
+        \AL\Db\bind_result(
+            "games_release_details.php: Get game boxscans",
+            $stmt,
+            $game_boxscan_id, $imgext, $game_boxscan_side
+        );
+
+        $game_boxscans = [];
+        while ($stmt->fetch()) {
+            $game_boxscans[] = array(
+                "game_boxscan_id" => $game_boxscan_id,
+                "imgext" => $imgext,
+                "game_boxscan_side" => $game_boxscan_side
+            );
+        }
+        $stmt->close();
+
+        $smarty->assign('game_boxscan_path', $game_boxscan_path);
+        $smarty->assign('game_boxscans', $game_boxscans);
+        // ================ TEMPORARY END
 
     } else {
         // Creating a new release
