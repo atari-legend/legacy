@@ -36,6 +36,7 @@ require_once __DIR__."/../../common/DAO/CopyProtectionDAO.php";
 require_once __DIR__."/../../common/DAO/DiskProtectionDAO.php";
 require_once __DIR__."/../../common/DAO/SoundHardwareDAO.php";
 require_once __DIR__."/../../common/DAO/GameProgressSystemDAO.php";
+require_once __DIR__."/../../common/DAO/GameReleaseScanDAO.php";
 
 $gameReleaseDao = new \AL\Common\DAO\GameReleaseDAO($mysqli);
 $gameSeriesDao = new \AL\Common\DAO\GameSeriesDAO($mysqli);
@@ -58,7 +59,7 @@ $copyProtectionDao = new \AL\Common\DAO\CopyProtectionDAO($mysqli);
 $diskProtectionDao = new \AL\Common\DAO\DiskProtectionDAO($mysqli);
 $soundHardwareDao = new \AL\Common\DAO\SoundHardwareDAO($mysqli);
 $gameProgressSystemDao = new \AL\Common\DAO\GameProgressSystemDAO($mysqli);
-
+$gameReleaseScanDao = new \AL\Common\DAO\GameReleaseScanDAO($mysqli);
 
 /**
  * Generates an SEO-friendly description of a game, depending on the data available
@@ -170,8 +171,7 @@ $sql_game = $mysqli->query(
                game.game_id,
                game.game_series_id
                FROM game
-               WHERE game.game_id='$game_id'"
-) or die("Error getting game info");
+               WHERE game.game_id='$game_id'") or die("Error getting game info");
 
 if ($game_info = $sql_game->fetch_array(MYSQLI_BOTH)) {
     $smarty->assign(
@@ -566,6 +566,16 @@ if ($imagenum_rows > 0) {
     }
 
     $smarty->assign("nr_box", $front);
+}
+
+// Get box scans for all release
+// This is temporary until we revamp the games/relase details page
+$smarty->assign('release_scans', []);
+foreach ($releases as $release) {
+    $release_scans = $gameReleaseScanDao->getScansForRelease($release->getId());
+    foreach ($release_scans as $scan) {
+        $smarty->append('release_scans', $scan);
+    }
 }
 
 //***********************************************************************************
