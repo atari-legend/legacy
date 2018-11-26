@@ -59,7 +59,9 @@ switch ($action) {
     case "delete":
         $scan = $gameReleaseScanDao->getScan($scan_id);
         $gameReleaseScanDao->deleteScan($scan_id);
-        unlink($scan->getFile());
+        if (!@unlink($scan->getFile())) {
+            $_SESSION['edit_message'] = "Error deleting scan: ".error_get_last()["message"];
+        }
 
         $changeLogDao->insertChangeLog(
             new \AL\Common\Model\Database\ChangeLog(
@@ -84,15 +86,17 @@ switch ($action) {
 
         // Move boxscan to the release scans folder
         @mkdir($game_release_scan_save_path);
-        rename($game_boxscan_save_path.$game_boxscan_id.".".$imgext, $game_release_scan_save_path.$id.".".$imgext);
-
-        // Delete boxscan from DB
-        $stmt = \AL\Db\execute_query(
-            "db_games_release_scans.php: Delete Game Box scan",
-            $mysqli,
-            "DELETE FROM game_boxscan WHERE game_boxscan_id = ?",
-            "i", $game_boxscan_id
-        );
+        if (!@rename($game_boxscan_save_path.$game_boxscan_id.".".$imgext, $game_release_scan_save_path.$id.".".$imgext)) {
+            $_SESSION['edit_message'] = "Error moving file: ".error_get_last()["message"];
+        } else {
+            // Delete boxscan from DB
+            $stmt = \AL\Db\execute_query(
+                "db_games_release_scans.php: Delete Game Box scan",
+                $mysqli,
+                "DELETE FROM game_boxscan WHERE game_boxscan_id = ?",
+                "i", $game_boxscan_id
+            );
+        }
 
     break;
     // ================ TEMPORARY END
