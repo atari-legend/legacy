@@ -126,6 +126,27 @@
                 </form>
                 <br>
                 <br>
+                <b>Progress System</b>&nbsp;&nbsp;
+                <br>
+                <form action="../games/db_games_config.php" method="post" name="progress_system">
+                    <select name="progress_select" class="standard_select input_medium grayed_out" id="progress_select">
+                        <option value="" selected="selected">-</option>
+                        {foreach from=$progress_system item=all_progress_systems}
+                            <option value="{$all_progress_systems->getId()}">{$all_progress_systems->getName()}</option>
+                        {/foreach}
+                    </select>
+                    <input type="text" name="progress_edit" class="standard_input input_medium" style="display:none;" id="progress_edit">
+                    <input type="text" name="progress_id_edit" class="standard_input input_medium" style="display:none;" id="progress_id_edit">
+                    <input type="submit" value="Modify progress system" name="action" class="secondary_button" style="display:none;" id="progress_mod">
+                    <input type="submit" value="Delete progress system" name="action" class="primary_button button_danger" style="display:none;" id="progress_del">
+                </form>
+                <hr class="separator_add">
+                <form action="../games/db_games_config.php" method="post" name="port">
+                    <input type="text" name="progress_new" class="standard_input input_medium" placeholder="Enter new progress system " required>
+                    <input type="submit" value="Add progress system" name="action" class="secondary_button">
+                </form>
+                <br>
+                <br>
                 <b>Controls</b>&nbsp;&nbsp;
                 <br>
                 <form action="../games/db_games_config.php" method="post" name="control">
