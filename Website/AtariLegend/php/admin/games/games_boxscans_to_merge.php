@@ -14,7 +14,8 @@ $stmt = \AL\Db\execute_query(
         imgext
     FROM
         game_boxscan
-    LEFT JOIN game ON game.game_id = game_boxscan.game_id",
+    LEFT JOIN game ON game.game_id = game_boxscan.game_id
+    ORDER BY game.game_name ASC",
     null, null
 );
 
