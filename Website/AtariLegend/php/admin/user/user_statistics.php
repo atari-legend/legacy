@@ -131,13 +131,13 @@ $smarty->assign('nr_reviews', $nr_reviews);
 mysqli_free_result($sql);
 
 // START - NUMBER OF DOWNLOADS BY USER
-$query     = $mysqli->query("SELECT COUNT(*) AS count FROM game_download_info WHERE user_id = $user_id_selected");
+/* $query     = $mysqli->query("SELECT COUNT(*) AS count FROM game_download_info WHERE user_id = $user_id_selected");
 $gamecount = $query->fetch_array(MYSQLI_BOTH);
 $gamecount = $gamecount['count'];
 
 $smarty->assign('nr_downloads', $gamecount);
 
-mysqli_free_result($query);
+mysqli_free_result($query); */
 
 // START - NUMBER OF SUBMISSIONS BY USER
 $sql = $mysqli->query("SELECT * FROM game_submitinfo
