@@ -25,5 +25,5 @@ build:
     # If the build succeeded and we're on the development branch,
     # sync all the file to the dev server
     on_success:
-        - test ${BRANCH} = "development" || exit 0
+        - test ${BRANCH} = "development" || return 0
         - rsync -azv Website/AtariLegend/* $DEV_DEPLOY_USER@$DEV_DEPLOY_HOST:$DEV_DEPLOY_PATH/
