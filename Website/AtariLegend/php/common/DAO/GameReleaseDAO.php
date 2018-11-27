@@ -23,6 +23,7 @@ class GameReleaseDAO {
     const TYPE_SLIDESHOW = 'Slideshow';
     const TYPE_UNOFFICIAL = 'Unofficial';
     const TYPE_DATADISK = 'Data disk';
+    const TYPE_REVIEWCOPY = 'Review copy';
     
     const STATUS_DEVELOPMENT = 'Development';
     const STATUS_UNFINISHED = 'Unfinished';
@@ -56,7 +57,8 @@ class GameReleaseDAO {
             GameReleaseDAO::TYPE_NON_PLAYABLE_DEMO,
             GameReleaseDAO::TYPE_SLIDESHOW,
             GameReleaseDAO::TYPE_UNOFFICIAL,
-            GameReleaseDAO::TYPE_DATADISK
+            GameReleaseDAO::TYPE_DATADISK,
+            GameReleaseDAO::TYPE_REVIEWCOPY
         );
     }
     
