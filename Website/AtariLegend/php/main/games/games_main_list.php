@@ -44,7 +44,6 @@ if (empty($game_author)) {
             game_boxscan.game_boxscan_id,
             screenshot_game.screenshot_id,
             game_music.music_id,
-            game_download.game_download_id,
             pd2.pub_dev_name as 'developer_name',
             pd2.pub_dev_id as 'developer_id',
             game_genre_cross.game_genre_id,
@@ -56,7 +55,6 @@ if (empty($game_author)) {
             LEFT JOIN game_genre ON (game_genre_cross.game_genre_id = game_genre.id)
             LEFT JOIN screenshot_game ON (screenshot_game.game_id = game.game_id)
             LEFT JOIN game_music ON (game_music.game_id = game.game_id)
-            LEFT JOIN game_download ON (game_download.game_id = game.game_id) 
             LEFT JOIN game_programming_language ON (game.game_id = game_programming_language.game_id)
             LEFT JOIN game_engine ON (game.game_id = game_engine.game_id)
             LEFT JOIN game_developer ON (game_developer.game_id = game.game_id)
@@ -71,7 +69,6 @@ if (empty($game_author)) {
             game_boxscan.game_boxscan_id,
             screenshot_game.screenshot_id,
             game_music.music_id,
-            game_download.game_download_id,
             pd2.pub_dev_name as 'developer_name',
             pd2.pub_dev_id as 'developer_id',
             game_genre_cross.game_genre_id,
@@ -84,7 +81,6 @@ if (empty($game_author)) {
             LEFT JOIN game_genre ON (game_genre_cross.game_genre_id = game_genre.id)
             LEFT JOIN screenshot_game ON (screenshot_game.game_id = game.game_id)
             LEFT JOIN game_music ON (game_music.game_id = game.game_id)
-            LEFT JOIN game_download ON (game_download.game_id = game.game_id)           
             LEFT JOIN game_programming_language ON (game.game_id = game_programming_language.game_id)
             LEFT JOIN game_engine ON (game.game_id = game_engine.game_id)
             LEFT JOIN game_developer ON (game_developer.game_id = game.game_id)
@@ -102,7 +98,6 @@ if (empty($game_author)) {
              game_boxscan.game_boxscan_id,
              screenshot_game.screenshot_id,
              game_music.music_id,
-             game_download.game_download_id,
              pd2.pub_dev_name as 'developer_name',
              pd2.pub_dev_id as 'developer_id',
              game_genre_cross.game_genre_id,
@@ -115,7 +110,6 @@ if (empty($game_author)) {
           LEFT JOIN game_boxscan ON (game_boxscan.game_id = game_aka.game_id)
           LEFT JOIN screenshot_game ON (screenshot_game.game_id = game.game_id)
           LEFT JOIN game_music ON (game_music.game_id = game.game_id)
-          LEFT JOIN game_download ON (game_download.game_id = game.game_id)
           LEFT JOIN game_programming_language ON (game.game_id = game_programming_language.game_id)
           LEFT JOIN game_engine ON (game.game_id = game_engine.game_id)
           LEFT JOIN game_developer ON (game.game_id = game_developer.game_id)
@@ -131,7 +125,6 @@ if (empty($game_author)) {
              game_boxscan.game_boxscan_id,
              screenshot_game.screenshot_id,
              game_music.music_id,
-             game_download.game_download_id,
              pd2.pub_dev_name as 'developer_name',
              pd2.pub_dev_id as 'developer_id',
              game_genre_cross.game_genre_id,
@@ -145,7 +138,6 @@ if (empty($game_author)) {
           LEFT JOIN game_boxscan ON (game_boxscan.game_id = game_aka.game_id)
           LEFT JOIN screenshot_game ON (screenshot_game.game_id = game.game_id)
           LEFT JOIN game_music ON (game_music.game_id = game.game_id)
-          LEFT JOIN game_download ON (game_download.game_id = game.game_id)        
           LEFT JOIN game_programming_language ON (game.game_id = game_programming_language.game_id)
           LEFT JOIN game_engine ON (game.game_id = game_engine.game_id)
           LEFT JOIN game_developer ON (game.game_id = game_developer.game_id)
@@ -525,11 +517,6 @@ if (isset($action) and $action == "search") {
                     } else {
                         $box = "0";
                     }
-                    if ($sql_game_search['game_download_id'] != '') {
-                        $down = "1";
-                    } else {
-                        $down = "0";
-                    }
                     if ($sql_game_search['screenshot_id'] != '') {
                         $screen = "1";
                     } else {
@@ -559,12 +546,6 @@ if (isset($action) and $action == "search") {
                         }
                     }
 
-                    if (isset($download) and $download == "1") {
-                        if ($down == '0') {
-                            $ignore = 1;
-                        }
-                    }
-
                     if ($ignore == 0) {
                         $i++;
 
@@ -578,7 +559,6 @@ if (isset($action) and $action == "search") {
                                 'developer_name' => $dev_name,
                                 'music' => $music,
                                 'boxscan' => $box,
-                                'download' => $down,
                                 'screenshot' => $screen);
 
                             $data[] = $list_data;
@@ -625,7 +605,6 @@ if (isset($action) and $action == "search") {
                                 'developer_name' => $dev_name,
                                 'music' => $sql_game_search['music_id'],
                                 'boxscan' => $sql_game_search['game_boxscan_id'],
-                                'download' => $sql_game_search['game_download_id'],
                                 'review' => $sql_game_search['review_game_id'],
                                 'path' => $game_screenshot_path,
                                 'screenshot_image' => $screenshot_image,
