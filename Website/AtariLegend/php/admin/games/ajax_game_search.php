@@ -33,7 +33,6 @@ $RESULTGAME = "SELECT game.game_id,
         game_boxscan.game_boxscan_id,
         screenshot_game.screenshot_id,
         game_music.music_id,
-        game_download.game_download_id,
         pd1.pub_dev_name AS 'publisher_name',
         pd1.pub_dev_id AS 'publisher_id',
         pd2.pub_dev_name AS 'developer_name',
@@ -43,7 +42,6 @@ $RESULTGAME = "SELECT game.game_id,
         LEFT JOIN game_boxscan ON (game_boxscan.game_id = game.game_id)
         LEFT JOIN screenshot_game ON (screenshot_game.game_id = game.game_id)
         LEFT JOIN game_music ON (game_music.game_id = game.game_id)
-        LEFT JOIN game_download ON (game_download.game_id = game.game_id)
         LEFT JOIN game_programming_language ON (game.game_id = game_programming_language.game_id)
         LEFT JOIN game_engine ON (game.game_id = game_engine.game_id)
         LEFT JOIN game_developer ON (game_developer.game_id = game.game_id)
@@ -58,7 +56,6 @@ $RESULTAKA = "SELECT
          game_boxscan.game_boxscan_id,
          screenshot_game.screenshot_id,
          game_music.music_id,
-         game_download.game_download_id,
          pd1.pub_dev_name as 'publisher_name',
          pd1.pub_dev_id as 'publisher_id',
          pd2.pub_dev_name as 'developer_name',
@@ -68,8 +65,7 @@ $RESULTAKA = "SELECT
       LEFT JOIN game ON (game_aka.game_id = game.game_id)
       LEFT JOIN game_boxscan ON (game_boxscan.game_id = game_aka.game_id)
       LEFT JOIN screenshot_game ON (screenshot_game.game_id = game.game_id)
-      LEFT JOIN game_music ON (game_music.game_id = game.game_id)
-      LEFT JOIN game_download ON (game_download.game_id = game.game_id)      
+      LEFT JOIN game_music ON (game_music.game_id = game.game_id)    
       LEFT JOIN game_programming_language ON (game.game_id = game_programming_language.game_id)
       LEFT JOIN game_engine ON (game.game_id = game_engine.game_id)
       LEFT JOIN game_developer ON (game.game_id = game_developer.game_id)
@@ -313,7 +309,6 @@ if (isset($action) and $action == "search") {
                         'year' => $sql_game_search['game_release_year'],
                         'music' => $sql_game_search['music_id'],
                         'boxscan' => $sql_game_search['game_boxscan_id'],
-                        'download' => $sql_game_search['game_download_id'],
                         'screenshot' => $sql_game_search['screenshot_id']
                     ));
         }
