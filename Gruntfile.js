@@ -149,7 +149,8 @@ module.exports = function (grunt) {
                     '<%= webRoot %>php/common/Model/**/*.php',
                     '<%= webRoot %>php/lib/Db.php',
                     '<%= webRoot %>php/admin/news/**/*.php',
-                    '<%= webRoot %>php/admin/games/**/games_series_*.php'
+                    '<%= webRoot %>php/admin/games/**/games_series_*.php',
+                    '<%= webRoot %>php/main/**/*.php'
                 ]
             },
             all: {
