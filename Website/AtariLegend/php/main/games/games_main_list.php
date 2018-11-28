@@ -7,7 +7,6 @@
  *   email                : admin@atarilegend.com
  *
  *   Id: games_main_list.php,v 0.10 2017/06/25 23:19 Gatekeeper
- *
  ***************************************************************************/
 
 /*
@@ -17,14 +16,14 @@
  */
 
 //load all common functions
-include("../../config/common.php");
+require "../../config/common.php";
 
 //Load this include to fill the pub and dev field. No need to reinvent the wheel, right? Or is this lazy coding? :-)
-include("../../admin/games/quick_search_games.php");
+require "../../admin/games/quick_search_games.php";
 
 //load the tiles
-include("../../common/tiles/latest_comments_tile.php");
-include("../../common/tiles/screenstar.php");
+require "../../common/tiles/latest_comments_tile.php";
+require "../../common/tiles/screenstar.php";
 
 require_once __DIR__."/../../common/DAO/GameReleaseDAO.php";
 
@@ -56,7 +55,7 @@ if (empty($game_author)) {
             LEFT JOIN game_genre ON (game_genre_cross.game_genre_id = game_genre.id)
             LEFT JOIN screenshot_game ON (screenshot_game.game_id = game.game_id)
             LEFT JOIN game_music ON (game_music.game_id = game.game_id)
-            LEFT JOIN game_download ON (game_download.game_id = game.game_id) 
+            LEFT JOIN game_download ON (game_download.game_id = game.game_id)
             LEFT JOIN game_programming_language ON (game.game_id = game_programming_language.game_id)
             LEFT JOIN game_engine ON (game.game_id = game_engine.game_id)
             LEFT JOIN game_developer ON (game_developer.game_id = game.game_id)
@@ -84,7 +83,7 @@ if (empty($game_author)) {
             LEFT JOIN game_genre ON (game_genre_cross.game_genre_id = game_genre.id)
             LEFT JOIN screenshot_game ON (screenshot_game.game_id = game.game_id)
             LEFT JOIN game_music ON (game_music.game_id = game.game_id)
-            LEFT JOIN game_download ON (game_download.game_id = game.game_id)           
+            LEFT JOIN game_download ON (game_download.game_id = game.game_id)
             LEFT JOIN game_programming_language ON (game.game_id = game_programming_language.game_id)
             LEFT JOIN game_engine ON (game.game_id = game_engine.game_id)
             LEFT JOIN game_developer ON (game_developer.game_id = game.game_id)
@@ -145,7 +144,7 @@ if (empty($game_author)) {
           LEFT JOIN game_boxscan ON (game_boxscan.game_id = game_aka.game_id)
           LEFT JOIN screenshot_game ON (screenshot_game.game_id = game.game_id)
           LEFT JOIN game_music ON (game_music.game_id = game.game_id)
-          LEFT JOIN game_download ON (game_download.game_id = game.game_id)        
+          LEFT JOIN game_download ON (game_download.game_id = game.game_id)
           LEFT JOIN game_programming_language ON (game.game_id = game_programming_language.game_id)
           LEFT JOIN game_engine ON (game.game_id = game_engine.game_id)
           LEFT JOIN game_developer ON (game.game_id = game_developer.game_id)
@@ -303,10 +302,13 @@ if (isset($action) and $action == "search") {
     //Before we start the build the query, we check if there is at least
     //one search field filled in or used!
 
-    if ($publisher_select == "" and $gamebrowse_select == "" and $publisher_input == "" and $developer_input == "" and $year_input == "" and $cat_input == ""
-        and $gamesearch == "" and $developer_select == "" and $year_select == "" and $category_select == "" and empty($game_author_select)
+    if ($publisher_select == "" and $gamebrowse_select == "" and $publisher_input == "" and $developer_input == ""
+        and $year_input == "" and $cat_input == "" and $gamesearch == "" and $developer_select == ""
+        and $year_select == "" and $category_select == "" and empty($game_author_select)
         and empty($unreleased_select) and empty($development_select) and empty($arcade_select) and empty($stos_select)
-        and empty($unfinished_select) and empty($seuck_select) and empty($stac_select) and empty($screenshot) and empty($download) and empty($boxscan) and empty($review_select)) {
+        and empty($unfinished_select) and empty($seuck_select) and empty($stac_select) and empty($screenshot)
+        and empty($download) and empty($boxscan) and empty($review_select)
+    ) {
         $edit_message             = "Please fill in one of the fields";
         $_SESSION['edit_message'] = $edit_message;
 
@@ -500,7 +502,8 @@ if (isset($action) and $action == "search") {
                 if (isset($stac) and $stac == "1") {
                     $RESULTAKA .= " AND game_engine.engine_id ='2'";
                 }
-                $RESULTAKA .= ' GROUP BY game_aka.game_id, game_aka.aka_name HAVING COUNT(DISTINCT game_aka.game_id, game_aka.aka_name) = 1';
+                $RESULTAKA .= ' GROUP BY game_aka.game_id, game_aka.aka_name';
+                $RESULTAKA .= ' HAVING COUNT(DISTINCT game_aka.game_id, game_aka.aka_name) = 1';
                 $RESULTAKA .= ' ORDER BY game_aka.aka_name ASC';
 
                 $mysqli->query("CREATE TEMPORARY TABLE temp ENGINE=MEMORY $RESULTGAME") or die(mysqli_error());
@@ -585,11 +588,13 @@ if (isset($action) and $action == "search") {
                         } else {
                             if (isset($boxscan) and $boxscan == "1") {
                                 //Select a random boxscan record
-                                $sql_screenshots = $mysqli->query("
+                                $sql_screenshots = $mysqli->query(
+                                    "
                                 SELECT *
                                 FROM game_boxscan
                                 WHERE game_id='$sql_game_search[game_id]' and game_boxscan_side = '0'
-                                ORDER BY RAND() LIMIT 1")
+                                ORDER BY RAND() LIMIT 1"
+                                )
                                 or die("Database error - selecting screenshots");
 
                                 while ($screenshot_result =  $sql_screenshots->fetch_array(MYSQLI_BOTH)) {
@@ -602,11 +607,14 @@ if (isset($action) and $action == "search") {
                                 }
                             } else {
                                 //Select a random screenshot record
-                                $sql_screenshots = $mysqli->query("SELECT *
-                                                                    FROM screenshot_game
-                                                                    LEFT JOIN screenshot_main ON (screenshot_game.screenshot_id = screenshot_main.screenshot_id)
-                                                                    WHERE screenshot_game.game_id = '$sql_game_search[game_id]'
-                                                                    ORDER BY RAND() LIMIT 1") or die("Database error - selecting screenshots");
+                                $sql_screenshots = $mysqli->query(
+                                    "SELECT *
+                                    FROM screenshot_game
+                                    LEFT JOIN screenshot_main
+                                    ON (screenshot_game.screenshot_id = screenshot_main.screenshot_id)
+                                    WHERE screenshot_game.game_id = '$sql_game_search[game_id]'
+                                    ORDER BY RAND() LIMIT 1"
+                                ) or die("Database error - selecting screenshots");
 
                                 while ($screenshot_result =  $sql_screenshots->fetch_array(MYSQLI_BOTH)) {
                                     //Ready screenshots path and filename
@@ -618,7 +626,8 @@ if (isset($action) and $action == "search") {
                                 }
                             }
 
-                            $smarty->append('game_search', array(
+                            $smarty->append(
+                                'game_search', array(
                                 'game_id' => $sql_game_search['game_id'],
                                 'game_name' => $game_name,
                                 'developer_id' => $sql_game_search['developer_id'],
@@ -630,7 +639,8 @@ if (isset($action) and $action == "search") {
                                 'path' => $game_screenshot_path,
                                 'screenshot_image' => $screenshot_image,
                                 'screenshot_id' => $screenshot_id,
-                            ));
+                                )
+                            );
                         }
                     }
                 }
