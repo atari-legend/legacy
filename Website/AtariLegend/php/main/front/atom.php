@@ -71,8 +71,9 @@ foreach ($articles as $article) {
 
 /**
  * Sort Atom items by date
- * @param array First atom item
- * @param array Second atom item
+ *
+ * @param  array First atom item
+ * @param  array Second atom item
  * @return integer Compared value of items
  */
 function sort_by_date($a, $b) {
@@ -94,5 +95,3 @@ if (count($items) > 0) {
 
 // header("Content-Type: application/atom+xml");
 $smarty->display("file:${mainsite_template_folder}atom.xml");
-
-
