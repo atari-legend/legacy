@@ -1,26 +1,26 @@
 <?php
 /***************************************************************************
-*                                articles_main.php
-*                            ------------------------------
-*   begin                : Wednesday May 2, 2018
-*   copyright            : (C) 2018 Atari Legend
-*   email                : martens_maarten@hotmail.com
-*
-*   Id: articles_main.php,v 0.1 2018/05/02 16:37 STG
-****************************************************************************/
+ *                                articles_main.php
+ *                            ------------------------------
+ *   begin                : Wednesday May 2, 2018
+ *   copyright            : (C) 2018 Atari Legend
+ *   email                : martens_maarten@hotmail.com
+ *
+ *   Id: articles_main.php,v 0.1 2018/05/02 16:37 STG
+ ****************************************************************************/
 
 //****************************************************************************************
 // This is the main page of the articles section.
 //****************************************************************************************
 
 //load all common functions
-include("../../config/common.php");
+require "../../config/common.php";
 
 //load the tiles
-include("../../common/tiles/hotlinks_tile.php");
-include("../../common/tiles/did_you_know_tile.php");
-include("../../common/tiles/screenstar.php");
-include("../../common/tiles/tile_bug_report.php");
+require "../../common/tiles/hotlinks_tile.php";
+require "../../common/tiles/did_you_know_tile.php";
+require "../../common/tiles/screenstar.php";
+require "../../common/tiles/tile_bug_report.php";
 
 //Get the articles
 $v_counter = (isset($_GET["v_counter"]) ? $_GET["v_counter"] : 0);
@@ -30,11 +30,13 @@ $query_number = $mysqli->query("SELECT * FROM article_main") or die("Couldn't ge
 $v_rows = $query_number->num_rows;
 
 //main query
-$sql_articles = $mysqli->query("SELECT * FROM article_main
+$sql_articles = $mysqli->query(
+    "SELECT * FROM article_main
                               LEFT JOIN article_text on (article_main.article_id = article_text.article_id)
                               LEFT JOIN article_type on (article_main.article_type_id = article_type.article_type_id)
                               LEFT JOIN users on ( article_main.user_id = users.user_id )
-                              ORDER BY article_text.article_date DESC LIMIT  " . $v_counter . ", 5") or die("Couldn't query database for articles");
+                              ORDER BY article_text.article_date DESC LIMIT  " . $v_counter . ", 5"
+) or die("Couldn't query database for articles");
 
 while ($article = $sql_articles->fetch_array(MYSQLI_BOTH)) {
     $article_date = date("F j, Y", $article['article_date']);
@@ -44,12 +46,14 @@ while ($article = $sql_articles->fetch_array(MYSQLI_BOTH)) {
     $article_text  = InsertALCode($article_text);
     //$article_text = InsertSmillies($article_text);
     $article_title = rawurlencode($article['article_title']);
-    
+
     //Get a screenshot of this article
-    $query_screenshots_article = $mysqli->query("SELECT * FROM article_main
-                                    LEFT JOIN screenshot_article ON (article_main.article_id = screenshot_article.article_id)
-                                    LEFT JOIN screenshot_main ON (screenshot_article.screenshot_id = screenshot_main.screenshot_id)
-                                    WHERE article_main.article_id = '$article[article_id]' ORDER BY RAND() LIMIT 1") or die("Error - Couldn't query article screenshots");
+    $query_screenshots_article = $mysqli->query(
+        "SELECT * FROM article_main
+        LEFT JOIN screenshot_article ON (article_main.article_id = screenshot_article.article_id)
+        LEFT JOIN screenshot_main ON (screenshot_article.screenshot_id = screenshot_main.screenshot_id)
+        WHERE article_main.article_id = '$article[article_id]' ORDER BY RAND() LIMIT 1"
+    ) or die("Error - Couldn't query article screenshots");
 
     $sql_screenshots_article = $query_screenshots_article->fetch_array(MYSQLI_BOTH);
 
@@ -59,7 +63,8 @@ while ($article = $sql_articles->fetch_array(MYSQLI_BOTH)) {
     $new_path .= $sql_screenshots_article['imgext'];
 
 
-    $smarty->append('article_list', array(
+    $smarty->append(
+        'article_list', array(
         'userid' => $article['userid'],
         'user_id' => $article['user_id'],
         'user_email' => $article['email'],
@@ -69,7 +74,8 @@ while ($article = $sql_articles->fetch_array(MYSQLI_BOTH)) {
         'article_type' => $article['article_type'],
         'article_text' => $article_text,
         'article_img' => $new_path
-    ));
+        )
+    );
 }
 
 $smarty->assign('nr_articles', $v_rows);
@@ -97,12 +103,14 @@ if (empty($v_linknext)) {
     $v_linknext = "";
 }
 
-$smarty->assign('links', array(
+$smarty->assign(
+    'links', array(
     'linkback' => $v_linkback,
     'linknext' => $v_linknext,
     'v_counter' => $v_counter,
     'c_counter' => $c_counter
-));
+    )
+);
 
 //Send all smarty variables to the templates
 $smarty->display("file:" . $mainsite_template_folder . "articles_main.html");

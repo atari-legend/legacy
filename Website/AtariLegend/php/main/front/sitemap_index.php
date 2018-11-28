@@ -6,7 +6,7 @@
  * (1 per letter of the alphabet)
  */
 
-require("../../config/common.php");
+require "../../config/common.php";
 
 header("Content-Type: application/xml");
 

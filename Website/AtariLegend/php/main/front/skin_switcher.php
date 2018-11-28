@@ -4,20 +4,18 @@
  *                            --------------------------
  *   copyright            : (C) 2015 Atari Legend
  *   email                : silversurfer@atari-forum.com
- *
- *
  ***************************************************************************/
 
 //Skin Switching functions
 
 extract($_REQUEST);
 
-include("../../config/connect.php");
-include("../../../php/vendor/smarty/smarty/libs/Smarty.class.php");
-include("../../config/config.php");
-include("../../lib/user_functions.php");
-include("../../lib/functions.php");
-include("../../lib/karma.php");
+require "../../config/connect.php";
+require "../../../php/vendor/smarty/smarty/libs/Smarty.class.php";
+require "../../config/config.php";
+require "../../lib/user_functions.php";
+require "../../lib/functions.php";
+require "../../lib/karma.php";
 
 //Check if the user is logged on to the site
 sec_session_start();

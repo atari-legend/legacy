@@ -7,7 +7,6 @@
  *   email                : admin@atarilegend.com
  *
  *   Id: games_main.php,v 0.10 2017/06/16 20:42 Gatekeeper - creation of file
- *
  ***************************************************************************/
 
 /*
@@ -17,17 +16,17 @@
  */
 
 //load all common functions
-include("../../config/common.php");
+require "../../config/common.php";
 
 //Load this include to fill the pub and dev field. No need to reinvent the wheel, right? Or is this lazy coding? :-)
-include("../../admin/games/quick_search_games.php");
+require "../../admin/games/quick_search_games.php";
 
 //load the tiles
-include("../../common/tiles/who_is_it_tile.php");
-include("../../common/tiles/tile_stats.php");
-include("../../common/tiles/screenstar.php");
-include("../../common/tiles/latest_comments_tile.php");
-include("../../common/tiles/changes_per_month_tile.php");
+require "../../common/tiles/who_is_it_tile.php";
+require "../../common/tiles/tile_stats.php";
+require "../../common/tiles/screenstar.php";
+require "../../common/tiles/latest_comments_tile.php";
+require "../../common/tiles/changes_per_month_tile.php";
 
 require_once __DIR__."/../../common/DAO/GameReleaseDAO.php";
 require_once __DIR__."/../../common/DAO/GameGenreDAO.php";
