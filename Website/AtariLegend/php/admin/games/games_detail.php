@@ -38,6 +38,7 @@ require_once __DIR__."/../../common/DAO/IndividualDAO.php";
 require_once __DIR__."/../../common/DAO/EngineDAO.php";
 require_once __DIR__."/../../common/DAO/ControlDAO.php";
 require_once __DIR__."/../../common/DAO/SoundHardwareDAO.php";
+require_once __DIR__."/../../common/DAO/GameProgressSystemDAO.php";
 
 $gameReleaseDao = new \AL\Common\DAO\GameReleaseDAO($mysqli);
 $gameDao = new \AL\Common\DAO\GameDAO($mysqli);
@@ -52,6 +53,7 @@ $individualDao = new \Al\Common\DAO\IndividualDAO($mysqli);
 $engineDao = new \AL\Common\DAO\EngineDAO($mysqli);
 $controlDao = new \AL\Common\DAO\ControlDAO($mysqli);
 $soundHardwareDao = new \AL\Common\DAO\SoundHardwareDAO($mysqli);
+$gameProgressSystemDao = new \AL\Common\DAO\GameProgressSystemDAO($mysqli);
 
 //***********************************************************************************
 //Let's get the general game info first.
@@ -105,6 +107,12 @@ $smarty->assign('game_programming_languages', $programmingLanguageDao->getProgra
 //***********************************************************************************
 $smarty->assign('ports', $portDao->getAllPorts());
 $smarty->assign('game_port', $portDao->getPortForGame($game_id));
+
+//***********************************************************************************
+//get the game progress systems & the progress system for this game
+//***********************************************************************************
+$smarty->assign('progress_system', $gameProgressSystemDao->getAllProgressSystems());
+$smarty->assign('game_progress_system', $gameProgressSystemDao->getProgressSystemForGame($game_id));
 
 //***********************************************************************************
 //get the game controls & the controls already selected for this game

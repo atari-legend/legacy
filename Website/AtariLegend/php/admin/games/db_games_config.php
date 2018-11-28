@@ -27,6 +27,7 @@ require_once __DIR__."/../../common/DAO/EnhancementDAO.php";
 require_once __DIR__."/../../common/DAO/MediaTypeDAO.php";
 require_once __DIR__."/../../common/DAO/MediaScanTypeDAO.php";
 require_once __DIR__."/../../common/DAO/SoundHardwareDAO.php";
+require_once __DIR__."/../../common/DAO/GameProgressSystemDAO.php";
 
 $changeLogDao = new \AL\Common\DAO\ChangeLogDAO($mysqli);
 $engineDao = new \AL\Common\DAO\EngineDAO($mysqli);
@@ -48,6 +49,7 @@ $enhancementDao = new \AL\Common\DAO\EnhancementDAO($mysqli);
 $mediaTypeDao = new \AL\Common\DAO\MediaTypeDAO($mysqli);
 $mediaScanTypeDao = new \AL\Common\DAO\MediaScanTypeDAO($mysqli);
 $soundHardwareDao = new \AL\Common\DAO\SoundHardwareDAO($mysqli);
+$gameProgressSystemDao = new \AL\Common\DAO\GameProgressSystemDAO($mysqli);
 
 switch ($_POST['action']) {
 	case "Add engine":
@@ -543,6 +545,32 @@ switch ($_POST['action']) {
         create_log_entry('Games Config', $sound_hardware_id_edit, 'Sound hardware', $sound_hardware_id_edit, 'Update', $_SESSION['user_id']);
 
         $_SESSION['edit_message'] = "Hardware has been updated" ;
+        break;
+        
+    case "Add progress system":
+        $gameProgressSystemDao->addProgressSystem($progress_new);
+
+        $new_progress_id = $mysqli->insert_id;
+
+        create_log_entry('Games Config', $new_progress_id, 'Progress System',$new_progress_id, 'Insert', $_SESSION['user_id']);
+
+        $_SESSION['edit_message'] = "$progress_new has been added" ;
+        break;
+
+    case "Delete progress system":
+        create_log_entry('Games Config', $progress_id_edit, 'Progress System', $progress_id_edit, 'Delete', $_SESSION['user_id']);
+
+        $gameProgressSystemDao->deleteProgressSystem($progress_id_edit);
+
+        $_SESSION['edit_message'] = "Progress system has been deleted" ;
+        break;
+
+    case "Modify progress system":
+        $gameProgressSystemDao->updateProgressSystem($progress_id_edit, $progress_edit);
+
+        create_log_entry('Games Config', $progress_id_edit, 'Progress System', progress_id_edit, 'Update', $_SESSION['user_id']);
+
+        $_SESSION['edit_message'] = "Progress system has been updated" ;
         break;
 }
 
