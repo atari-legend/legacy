@@ -1614,6 +1614,13 @@ function create_log_entry($section, $section_id, $subsection, $subsection_id, $a
             $query_data   = $result->fetch_array(MYSQLI_BOTH);
             $section_name = $query_data['name'];
         }
+        elseif ($subsection == 'Progress System') {
+            // Get the the system
+            $query = "SELECT name FROM game_progress_system WHERE id = '$section_id'";
+            $result = $mysqli->query($query) or die("getting progress system failed");
+            $query_data   = $result->fetch_array(MYSQLI_BOTH);
+            $section_name = $query_data['name'];
+        }
         $subsection_name = $section_name;
     }
 

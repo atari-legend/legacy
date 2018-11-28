@@ -32,6 +32,7 @@ require_once __DIR__."/../../common/DAO/PortDAO.php";
 require_once __DIR__."/../../common/DAO/EngineDAO.php";
 require_once __DIR__."/../../common/DAO/ControlDAO.php";
 require_once __DIR__."/../../common/DAO/SoundHardwareDAO.php";
+require_once __DIR__."/../../common/DAO/GameProgressSystemDAO.php";
 
 $changeLogDao = new \AL\Common\DAO\ChangeLogDAO($mysqli);
 $gameReleaseDao = new \AL\Common\DAO\GameReleaseDAO($mysqli);
@@ -41,6 +42,7 @@ $portDao = new \AL\Common\DAO\PortDAO($mysqli);
 $engineDao = new \AL\Common\DAO\engineDAO($mysqli);
 $controlDao = new \AL\Common\DAO\controlDAO($mysqli);
 $soundHardwareDao = new \AL\Common\DAO\SoundHardwareDAO($mysqli);
+$gameProgressSystemDao = new \AL\Common\DAO\GameProgressSystemDAO($mysqli);
 
 if (isset($game_id)){
     $stmt = $mysqli->prepare("SELECT game_name FROM game WHERE game_id = ?") or die($mysqli->error);
@@ -222,6 +224,10 @@ if (isset($action) and $action == 'modify_game') {
     //Update the port
     if ($port_id == ''){$port_id = null;}
     $portDao->setPortForGame($game_id, isset($port_id) ? $port_id : null);
+    
+    //Update the game progress system
+    if ($progress_system_id == ''){$progress_system_id = null;}
+    $gameProgressSystemDao->setProgressSystemForGame($game_id, isset($progress_system_id) ? $progress_system_id : null);
     
     //Update the game controls
     $controlDao->setGameControlForGame($game_id, isset($game_control) ? $game_control : []);
