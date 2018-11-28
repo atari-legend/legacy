@@ -655,6 +655,12 @@ ul.tabs li {
     }
 }
 
+div.tab button.tablinks {
+    display: block;
+    padding: 14px 16px;
+    cursor: pointer;
+}
+
 //* Change background color of buttons on hover */
 div.tab button:hover,
 ul.tabs li:hover,
