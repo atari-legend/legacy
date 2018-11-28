@@ -376,10 +376,15 @@ if (isset($action) and $action == 'delete_game') {
                                                     }
 
                                                     $sdbquery = $mysqli->query("DELETE FROM game WHERE game_id = '$game_id' ");
+<<<<<<< HEAD
+=======
+                                                    //$sdbquery = $mysqli->query("DELETE FROM game_publisher WHERE game_id = '$game_id'");
+>>>>>>> CleanUpTables
                                                     $sdbquery = $mysqli->query("DELETE FROM game_developer WHERE game_id = '$game_id' ");
                                                     $sdbquery = $mysqli->query("DELETE FROM game_genre_cross WHERE game_id = '$game_id' ");
                                                     $sdbquery = $mysqli->query("DELETE FROM game_development WHERE game_id='$game_id'");
                                                     $sdbquery = $mysqli->query("DELETE FROM game_unreleased WHERE game_id='$game_id'");
+<<<<<<< HEAD
                                                     $sdbquery = $mysqli->query("DELETE FROM game_programming_language WHERE game_id='$game_id'");
                                                     $sdbquery = $mysqli->query("DELETE FROM game_engine WHERE game_id='$game_id'");
                                                     $sdbquery = $mysqli->query("DELETE FROM game_control WHERE game_id='$game_id'");
@@ -387,6 +392,27 @@ if (isset($action) and $action == 'delete_game') {
                                                     $sdbquery = $mysqli->query("DELETE FROM game_unfinished WHERE game_id='$game_id'");
                                                     $sdbquery = $mysqli->query("DELETE FROM game_aka WHERE game_id='$game_id'");
                                                     $sdbquery = $mysqli->query("DELETE FROM game_similar WHERE game_id='$game_id'");
+=======
+                                                    //$sdbquery = $mysqli->query("DELETE FROM game_free WHERE game_id='$game_id'");
+                                                    $sdbquery = $mysqli->query("DELETE FROM game_programming_language WHERE game_id='$game_id'");
+                                                    $sdbquery = $mysqli->query("DELETE FROM game_engine WHERE game_id='$game_id'");
+                                                    $sdbquery = $mysqli->query("DELETE FROM game_control WHERE game_id='$game_id'");
+                                                    //$sdbquery = $mysqli->query("DELETE FROM game_arcade WHERE game_id='$game_id'");
+                                                    $sdbquery = $mysqli->query("DELETE FROM game_wanted WHERE game_id='$game_id'");
+                                                    //$sdbquery = $mysqli->query("DELETE FROM game_mono WHERE game_id='$game_id'");
+                                                    $sdbquery = $mysqli->query("DELETE FROM game_unfinished WHERE game_id='$game_id'");
+                                                    //$sdbquery = $mysqli->query("DELETE FROM game_falcon_enhan WHERE game_id='$game_id'");
+                                                    //$sdbquery = $mysqli->query("DELETE FROM game_falcon_only WHERE game_id='$game_id'");
+                                                    //$sdbquery = $mysqli->query("DELETE FROM game_falcon_rgb WHERE game_id='$game_id'");
+                                                    //$sdbquery = $mysqli->query("DELETE FROM game_falcon_vga WHERE game_id='$game_id'");
+                                                    //$sdbquery = $mysqli->query("DELETE FROM game_ste_enhan WHERE game_id='$game_id'");
+                                                    //$sdbquery = $mysqli->query("DELETE FROM game_ste_only WHERE game_id='$game_id'");
+                                                    $sdbquery = $mysqli->query("DELETE FROM game_aka WHERE game_id='$game_id'");
+                                                    //$sdbquery = $mysqli->query("DELETE FROM lingo_game WHERE game_id='$game_id'");
+                                                    $sdbquery = $mysqli->query("DELETE FROM game_similar WHERE game_id='$game_id'");
+                                                    //$sdbquery = $mysqli->query("DELETE FROM game_series_cross WHERE game_id='$game_id'");
+                                                    //$sdbquery = $mysqli->query("DELETE FROM game_author WHERE game_id='$game_id'");
+>>>>>>> CleanUpTables
                                                     $sdbquery = $mysqli->query("DELETE FROM game_individual WHERE game_id='$game_id'");
                                                     $sdbquery = $mysqli->query("DELETE FROM game_sound_hardware WHERE game_id='$game_id'");
 
