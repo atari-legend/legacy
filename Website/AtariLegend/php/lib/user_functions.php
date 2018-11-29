@@ -26,7 +26,9 @@ function sec_session_start() {
     }
     // Gets current cookies params.
     $cookieParams = session_get_cookie_params();
-    session_set_cookie_params($cookieParams["lifetime"], $cookieParams["path"], $cookieParams["domain"], $secure, $httponly);
+    session_set_cookie_params(
+        $cookieParams["lifetime"], $cookieParams["path"], $cookieParams["domain"], $secure, $httponly
+    );
     // Sets the session name to the one set above.
     session_name($session_name);
     session_start(); // Start the PHP session
@@ -67,7 +69,8 @@ function md5_test($userid, $md5_password, $password, $mysqli) {
                     // Create salted password
                     $update_password = hash('sha512', $password . $random_salt);
 
-                    if ($update_stmt = $mysqli->prepare("UPDATE users SET password=NULL, sha512_password=?, salt=? WHERE user_id=?")) {
+                    if ($update_stmt = $mysqli->prepare("UPDATE users
+                        SET password=NULL, sha512_password=?, salt=?WHERE user_id=?")) {
                         $update_stmt->bind_param('sss', $update_password, $random_salt, $user_id);
                         // Execute the prepared query.
                         if (!$update_stmt->execute()) {

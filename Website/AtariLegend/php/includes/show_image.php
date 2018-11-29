@@ -9,7 +9,11 @@ $png_compression  = '7';
 
 //
 //example: file=../data/images/game_screenshots/521.png&resize=420,null,null,null&crop=null,null,null,null
-//WideImage_Image resize( [mixed $width = null], [mixed $height = null], [string $fit = 'inside'], [string $scale = 'any'])
+//WideImage_Image resize(
+//      [mixed $width = null],
+//      [mixed $height = null],
+//      [string $fit = 'inside'],
+//      [string $scale = 'any'])
 
 //Parameters: resize
 //mixed   $width    The new width (smart coordinate), or null.

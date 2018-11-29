@@ -145,9 +145,10 @@ module.exports = function (grunt) {
         phpcs: {
             application: {
                 src: [
-                    '<%= webRoot %>php/common/DAO/**/*.php',
-                    '<%= webRoot %>php/common/Model/**/*.php',
-                    '<%= webRoot %>php/lib/Db.php',
+                    '<%= webRoot %>php/common/**/*.php',
+                    '<%= webRoot %>php/config/**/*.php',
+                    '<%= webRoot %>php/includes/**/*.php',
+                    '<%= webRoot %>php/lib/**/*.php',
                     '<%= webRoot %>php/admin/news/**/*.php',
                     '<%= webRoot %>php/admin/games/**/games_series_*.php',
                     '<%= webRoot %>php/main/**/*.php'
