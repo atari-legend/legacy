@@ -409,26 +409,9 @@ function statistics_stack() {
         mysqli_free_result($query);
     }
     // END - COUNT HOW MANY GAMES HAS CATEGORIES SET
-
-
-
-    // START - COUNT NUMBER OF DOWNLOADABLE FILES
-    $query      = $mysqli->query("SELECT COUNT(game_id) AS count FROM game_download");
-    $game_files = $query->fetch_array(MYSQLI_BOTH);
-    $stack[]    = "$game_files[count] files for download";
-
-    // END - COUNT NUMBER OF DOWNLOADABLE FILES
-
-    mysqli_free_result($query);
-
+ 
     // START - COUNT HOW MANY GAMES HAS DOWNLOAD
-    $query         = $mysqli->query("SELECT COUNT(DISTINCT game_id) AS count FROM game_download");
-    $game_download = $query->fetch_array(MYSQLI_BOTH);
-    $stack[]       = "$game_download[count] games have download";
-
-    // END - COUNT HOW MANY GAMES HAS DOWNLOAD
-
-    mysqli_free_result($query);
+    // To do
 
     // START - GAME REVIEW STATS
     $query       = $mysqli->query("SELECT COUNT(DISTINCT game_id) AS count FROM review_game");

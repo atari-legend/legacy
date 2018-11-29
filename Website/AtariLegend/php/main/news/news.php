@@ -1,33 +1,35 @@
 <?php
 /***************************************************************************
-*                                news.php
-*                            ------------------------------
-*   begin                : Friday, August 25, 2017
-*   copyright            : (C) 2017 Atari Legend
-*   email                : martens_maarten@hotmail.com
-*
-*   Id: news.php,v 0.1 2017/08/25 19:50 STG
-****************************************************************************/
+ *                                news.php
+ *                            ------------------------------
+ *   begin                : Friday, August 25, 2017
+ *   copyright            : (C) 2017 Atari Legend
+ *   email                : martens_maarten@hotmail.com
+ *
+ *   Id: news.php,v 0.1 2017/08/25 19:50 STG
+ ****************************************************************************/
 
 //*********************************************************************************************
 // This is the main news page
 //*********************************************************************************************
 
 //load all common functions
-include("../../config/common.php");
+require "../../config/common.php";
 
 //load the tiles
-include("../../common/tiles/screenstar.php");
-include("../../common/tiles/did_you_know_tile.php");
-include("../../common/tiles/latest_comments_tile.php");
+require "../../common/tiles/screenstar.php";
+require "../../common/tiles/did_you_know_tile.php";
+require "../../common/tiles/latest_comments_tile.php";
 
 $v_counter= (isset($_GET["v_counter"]) ? $_GET["v_counter"] : 0);
 
 //Select the news from the DB
-$query_news = $mysqli->query("SELECT * FROM news
+$query_news = $mysqli->query(
+    "SELECT * FROM news
                                LEFT JOIN news_image ON (news.news_image_id = news_image.news_image_id)
                                LEFT JOIN users ON (news.user_id = users.user_id)
-                               ORDER BY news.news_date DESC LIMIT  " . $v_counter . ", 6");
+                               ORDER BY news.news_date DESC LIMIT  " . $v_counter . ", 6"
+);
 
 //check the number of news updates
 $query_number = $mysqli->query("SELECT * FROM news ORDER BY news_date DESC")
@@ -50,7 +52,8 @@ while ($sql_news = $query_news->fetch_array(MYSQLI_BOTH)) {
     //convert the date to readible format
     $news_date = date("F j, Y", $sql_news['news_date']);
 
-    $smarty->append('news', array(
+    $smarty->append(
+        'news', array(
                 'news_date' => $news_date,
                 'news_headline' => $sql_news['news_headline'],
                 'news_text' => $news_text,
@@ -58,7 +61,8 @@ while ($sql_news = $query_news->fetch_array(MYSQLI_BOTH)) {
                 'image_id' => $sql_news['news_image_id'],
                 'user_id' => $sql_news['user_id'],
                 'user_name' => $sql_news['userid'],
-                'email' => $sql_news['email']));
+        'email' => $sql_news['email'])
+    );
 }
 
 //Check if back arrow is needed
