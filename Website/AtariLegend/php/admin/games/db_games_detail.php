@@ -348,62 +348,56 @@ if (isset($action) and $action == 'delete_game') {
                                             if ($sdbquery->num_rows > 0) {
                                                 $_SESSION['edit_message'] = "Deletion failed - This game has releases linked to it - Delete it in the appropriate section";
                                                 header("Location: ../games/games_detail.php?game_id=$game_id");
-                                            } else {   
-                                                create_log_entry('Games', $game_id, 'Game', $game_id, 'Delete', $_SESSION['user_id']);
+                                            } else {
+                                                $sdbquery = $mysqli->query("SELECT * FROM game_sound_hardware WHERE game_id='$game_id'") or die("Error getting sound_hardware info");
+                                                if ($sdbquery->num_rows > 0) {
+                                                    $_SESSION['edit_message'] = "Deletion failed - This game has sound hardware linked - Delete it in the appropriate section";
+                                                    header("Location: ../games/games_detail.php?game_id=$game_id");
+                                                } else {   
+                                                    create_log_entry('Games', $game_id, 'Game', $game_id, 'Delete', $_SESSION['user_id']);
 
-                                                $releases = $gameReleaseDao->getReleasesForGame($game_id);
-                                                foreach ($releases as $release) {
-                                                    $gameReleaseDao->deleteRelease($release->getId());
+                                                    $releases = $gameReleaseDao->getReleasesForGame($game_id);
+                                                    foreach ($releases as $release) {
+                                                        $gameReleaseDao->deleteRelease($release->getId());
 
-                                                    $changeLogDao->insertChangeLog(
-                                                        new \AL\Common\Model\Database\ChangeLog(
-                                                            -1,
-                                                            "Games",
-                                                            $game_id,
-                                                            $edited_game_name,
-                                                            "Release",
-                                                            $release->getId(),
-                                                            $edited_game_name,
-                                                            $_SESSION["user_id"],
-                                                            \AL\Common\Model\Database\ChangeLog::ACTION_DELETE
-                                                        )
-                                                    );
+                                                        $changeLogDao->insertChangeLog(
+                                                            new \AL\Common\Model\Database\ChangeLog(
+                                                                -1,
+                                                                "Games",
+                                                                $game_id,
+                                                                $edited_game_name,
+                                                                "Release",
+                                                                $release->getId(),
+                                                                $edited_game_name,
+                                                                $_SESSION["user_id"],
+                                                                \AL\Common\Model\Database\ChangeLog::ACTION_DELETE
+                                                            )
+                                                        );
+                                                    }
+
+                                                    $sdbquery = $mysqli->query("DELETE FROM game WHERE game_id = '$game_id' ");
+                                                    $sdbquery = $mysqli->query("DELETE FROM game_developer WHERE game_id = '$game_id' ");
+                                                    $sdbquery = $mysqli->query("DELETE FROM game_genre_cross WHERE game_id = '$game_id' ");
+                                                    $sdbquery = $mysqli->query("DELETE FROM game_development WHERE game_id='$game_id'");
+                                                    $sdbquery = $mysqli->query("DELETE FROM game_unreleased WHERE game_id='$game_id'");
+                                                    $sdbquery = $mysqli->query("DELETE FROM game_programming_language WHERE game_id='$game_id'");
+                                                    $sdbquery = $mysqli->query("DELETE FROM game_engine WHERE game_id='$game_id'");
+                                                    $sdbquery = $mysqli->query("DELETE FROM game_control WHERE game_id='$game_id'");
+                                                    $sdbquery = $mysqli->query("DELETE FROM game_wanted WHERE game_id='$game_id'");
+                                                    $sdbquery = $mysqli->query("DELETE FROM game_unfinished WHERE game_id='$game_id'");
+                                                    $sdbquery = $mysqli->query("DELETE FROM game_aka WHERE game_id='$game_id'");
+                                                    $sdbquery = $mysqli->query("DELETE FROM game_similar WHERE game_id='$game_id'");
+                                                    $sdbquery = $mysqli->query("DELETE FROM game_individual WHERE game_id='$game_id'");
+                                                    $sdbquery = $mysqli->query("DELETE FROM game_sound_hardware WHERE game_id='$game_id'");
+
+                                                    $_SESSION['edit_message'] = "Game has been deleted";
+
+                                                    header("Location: ../games/games_main.php");
+                                                    $smarty->assign("user_id", $_SESSION['user_id']);
+
+                                                    //close the connection
+                                                    mysqli_free_result();
                                                 }
-
-                                                $sdbquery = $mysqli->query("DELETE FROM game WHERE game_id = '$game_id' ");
-                                                //$sdbquery = $mysqli->query("DELETE FROM game_publisher WHERE game_id = '$game_id'");
-                                                $sdbquery = $mysqli->query("DELETE FROM game_developer WHERE game_id = '$game_id' ");
-                                                $sdbquery = $mysqli->query("DELETE FROM game_genre_cross WHERE game_id = '$game_id' ");
-                                                $sdbquery = $mysqli->query("DELETE FROM game_development WHERE game_id='$game_id'");
-                                                $sdbquery = $mysqli->query("DELETE FROM game_unreleased WHERE game_id='$game_id'");
-                                                //$sdbquery = $mysqli->query("DELETE FROM game_free WHERE game_id='$game_id'");
-                                                $sdbquery = $mysqli->query("DELETE FROM game_programming_language WHERE game_id='$game_id'");
-                                                $sdbquery = $mysqli->query("DELETE FROM game_engine WHERE game_id='$game_id'");
-                                                $sdbquery = $mysqli->query("DELETE FROM game_control WHERE game_id='$game_id'");
-                                                //$sdbquery = $mysqli->query("DELETE FROM game_arcade WHERE game_id='$game_id'");
-                                                $sdbquery = $mysqli->query("DELETE FROM game_wanted WHERE game_id='$game_id'");
-                                                //$sdbquery = $mysqli->query("DELETE FROM game_mono WHERE game_id='$game_id'");
-                                                $sdbquery = $mysqli->query("DELETE FROM game_unfinished WHERE game_id='$game_id'");
-                                                //$sdbquery = $mysqli->query("DELETE FROM game_falcon_enhan WHERE game_id='$game_id'");
-                                                //$sdbquery = $mysqli->query("DELETE FROM game_falcon_only WHERE game_id='$game_id'");
-                                                //$sdbquery = $mysqli->query("DELETE FROM game_falcon_rgb WHERE game_id='$game_id'");
-                                                //$sdbquery = $mysqli->query("DELETE FROM game_falcon_vga WHERE game_id='$game_id'");
-                                                //$sdbquery = $mysqli->query("DELETE FROM game_ste_enhan WHERE game_id='$game_id'");
-                                                //$sdbquery = $mysqli->query("DELETE FROM game_ste_only WHERE game_id='$game_id'");
-                                                $sdbquery = $mysqli->query("DELETE FROM game_aka WHERE game_id='$game_id'");
-                                                //$sdbquery = $mysqli->query("DELETE FROM lingo_game WHERE game_id='$game_id'");
-                                                $sdbquery = $mysqli->query("DELETE FROM game_similar WHERE game_id='$game_id'");
-                                                //$sdbquery = $mysqli->query("DELETE FROM game_series_cross WHERE game_id='$game_id'");
-                                                //$sdbquery = $mysqli->query("DELETE FROM game_author WHERE game_id='$game_id'");
-                                                $sdbquery = $mysqli->query("DELETE FROM game_individual WHERE game_id='$game_id'");
-
-                                                $_SESSION['edit_message'] = "Game has been deleted";
-
-                                                header("Location: ../games/games_main.php");
-                                                $smarty->assign("user_id", $_SESSION['user_id']);
-
-                                                //close the connection
-                                                mysqli_free_result();
                                             }
                                         }
                                     }
