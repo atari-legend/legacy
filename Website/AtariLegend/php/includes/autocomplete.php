@@ -44,7 +44,8 @@ if ($extraVar == 'title') {
     //$mysqli->query("INSERT INTO temp $demo_aka_name_query");
 
     //Get the results
-    $result = $mysqli->query("SELECT game_name FROM temp WHERE game_name LIKE '%$upperString%' ORDER BY game_name ASC LIMIT 10") or die("error getting date for autocomplete");
+    $result = $mysqli->query("SELECT game_name FROM temp WHERE game_name LIKE '%$upperString%'
+        ORDER BY game_name ASC LIMIT 10") or die("error getting date for autocomplete");
 
     while ($row = $result->fetch_assoc()) {
         $json[] = $row['game_name'];
@@ -103,7 +104,8 @@ if ($extraVar == 'cat') {
 }
 
 if ($extraVar == 'individual') {
-    $stmt = $mysqli->prepare("SELECT ind_id, ind_name from individuals WHERE LOWER(ind_name) LIKE CONCAT('%',LOWER(?),'%') ORDER BY ind_name")
+    $stmt = $mysqli->prepare("SELECT ind_id, ind_name from individuals
+        WHERE LOWER(ind_name) LIKE CONCAT('%',LOWER(?),'%') ORDER BY ind_name")
         or die("problems getting data from individuals table: ".$mysqli->error);
     $stmt->bind_param("s", $term);
     $stmt->execute();

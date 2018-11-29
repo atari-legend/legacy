@@ -20,8 +20,10 @@
  ***************************************************************************/
 
 function clean_words($mode, &$entry) {
-    static $drop_char_match =   array('^', '$', '&', '(', ')', '<', '>', '`', '\'', '"', '|', ',', '@', '_', '?', '%', '-', '~', '+', '.', '[', ']', '{', '}', ':', '\\', '/', '=', '#', '\'', ';', '!');
-    static $drop_char_replace = array(' ', ' ', ' ', ' ', ' ', ' ', ' ', '',  '',   ' ', ' ', ' ', ' ', '',  ' ', ' ', '',  ' ',  ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ' , ' ', ' ', ' ', ' ',  ' ', ' ');
+    static $drop_char_match =   array('^', '$', '&', '(', ')', '<', '>', '`', '\'', '"', '|', ',', '@', '_', '?',
+        '%', '-', '~', '+', '.', '[', ']', '{', '}', ':', '\\', '/', '=', '#', '\'', ';', '!');
+    static $drop_char_replace = array(' ', ' ', ' ', ' ', ' ', ' ', ' ', '',  '',   ' ', ' ', ' ', ' ', '',  ' ',
+        ' ', '',  ' ',  ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ' , ' ', ' ', ' ', ' ',  ' ', ' ');
 
     $entry = ' ' . strip_tags(strtolower($entry)) . ' ';
 
@@ -81,7 +83,8 @@ function add_search_words($mode, $post_id, $post_text, $post_title = '') {
                 if ($search_matches[$i] != '') {
                     $word[] = $search_matches[$i];
                     if (!strstr($word_insert_sql[$word_in], "'" . $search_matches[$i] . "'")) {
-                        $word_insert_sql[$word_in] .= ($word_insert_sql[$word_in] != "") ? ", '" . $search_matches[$i] . "'" : "'" . $search_matches[$i] . "'";
+                        $word_insert_sql[$word_in] .= ($word_insert_sql[$word_in] != "") ? ", '" .
+                            $search_matches[$i] . "'" : "'" . $search_matches[$i] . "'";
                     }
                 }
             }

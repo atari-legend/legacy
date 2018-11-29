@@ -17,12 +17,12 @@
 
 //Get the latest interviews
 $sql_interview = $mysqli->query("SELECT *
-                                FROM interview_main
-                                LEFT JOIN interview_text on (interview_main.interview_id = interview_text.interview_id)
-                                LEFT JOIN users on (interview_main.user_id = users.user_id)
-                                LEFT JOIN individuals on (interview_main.ind_id = individuals.ind_id)
-                                LEFT JOIN individual_text on (interview_main.ind_id = individual_text.ind_id)
-                                ORDER BY interview_text.interview_date DESC LIMIT 5") or die("couldn't get 5 latest interviews");
+    FROM interview_main
+    LEFT JOIN interview_text on (interview_main.interview_id = interview_text.interview_id)
+    LEFT JOIN users on (interview_main.user_id = users.user_id)
+    LEFT JOIN individuals on (interview_main.ind_id = individuals.ind_id)
+    LEFT JOIN individual_text on (interview_main.ind_id = individual_text.ind_id)
+    ORDER BY interview_text.interview_date DESC LIMIT 5") or die("couldn't get 5 latest interviews");
 
 while ($sql_recent_interviews = $sql_interview->fetch_array(MYSQLI_BOTH)) {
     $v_interview_date = date("F j, Y", $sql_recent_interviews['interview_date']);
