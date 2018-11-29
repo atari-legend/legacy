@@ -18,18 +18,10 @@ include("../../common/tiles/tile_bug_report.php");
 //This is the actual authorization check
 if (login_check($mysqli) == false) {
     $_SESSION['edit_message'] = "Please log in to use this functionality";
-    if(isset($_SERVER['HTTP_REFERER'])) {
+    if (isset($_SERVER['HTTP_REFERER'])) {
         header('Location: ' . $_SERVER['HTTP_REFERER']);
-    }
-    else { 
+    } else {
         header('Location:../../main/front/front.php');
     }
     die('');
 }
-
-//if ($_SESSION['permission']==1 or $_SESSION['permission']=='1')
-//{
-//}else{
-//	echo $_SESSION['permission']; echo "<br>";
-//	exit("You don't have permission to enter the control panel");
-//}

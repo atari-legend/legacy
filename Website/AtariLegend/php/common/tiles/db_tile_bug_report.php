@@ -19,7 +19,9 @@ include("../../config/common.php");
 if (isset($textfield_bug) and $textfield_bug != 'Bug report' and $textfield_bug != '' and $bug_report_type != '-') {
     $timestamp = time();
     $textfield = $mysqli->real_escape_string($textfield_bug);
-    $mysqli->query("INSERT INTO bug_report (bug_report_type_id, bug_report_text, user_id, bug_report_date ) VALUES ('$bug_report_type', '$textfield', '$_SESSION[user_id]', '$timestamp')") or die("Inserting the bug report failed");
+    $mysqli->query("INSERT INTO bug_report (bug_report_type_id, bug_report_text, user_id, bug_report_date )
+        VALUES ('$bug_report_type', '$textfield', '$_SESSION[user_id]', '$timestamp')")
+        or die("Inserting the bug report failed");
 
     $new_bug_report_id = $mysqli->insert_id;
     create_log_entry('Bug', $new_bug_report_id, 'Bug', $new_bug_report_id, 'Insert', $_SESSION['user_id']);

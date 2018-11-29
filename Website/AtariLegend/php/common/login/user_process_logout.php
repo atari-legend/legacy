@@ -27,7 +27,6 @@ $_SESSION = array();
 //$params = session_get_cookie_params();
 
 // Delete the actual cookie.
-//setcookie("cooksession", session_id(), time()-60*60*24*100, $params["path"], $params["domain"], $params["secure"], $params["httponly"]);
 setcookie("cooksession", session_id(), time()-60*60*24*100, "/");
 
 // Destroy session
