@@ -71,6 +71,9 @@ $(document).ready(function () {
     $('select[name=sound_hardware_select]').change(function () {
         hideShow('sound_hardware');
     });
+    $('select[name=progress_select]').change(function () {
+        hideShow('progress');
+    });
 });
 
 function hideShow (type) {

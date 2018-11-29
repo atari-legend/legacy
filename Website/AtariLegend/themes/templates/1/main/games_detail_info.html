@@ -339,6 +339,36 @@
                     </td>
                 </tr>
             {/if}
+            {if isset($progressSystem) AND $progressSystem->getName() != ''}
+                <tr>
+                    <td class="w-30">
+                        <span class="games_main_detail_info_right">Progress</span>
+                        <br>
+                    </td>
+                    <td class="w-5">
+                        <span class="games_main_detail_info_left text-center">-</span>
+                        <br>
+                    </td>
+                    <td class="w-60">
+                        {$progressSystem->getName()}
+                    </td>
+                </tr>
+            {/if}
+            {foreach from=$soundHardware item=externalsoundHardware name=externalSH}
+                <tr>
+                    <td class="w-30">
+                        {if $smarty.foreach.externalSH.first}<span class="games_main_detail_info_right">Sound HW</span>{/if}
+                        <br>
+                    </td>
+                    <td class="w-5">
+                        <span class="games_main_detail_info_left text-center">-</span>
+                        <br>
+                    </td>
+                    <td class="w-60">
+                        {$externalsoundHardware->getName()}
+                    </td>
+                </tr>
+            {/foreach}
             {foreach from=$game_controls item=controls name=control}
                 <tr>
                     <td class="w-30">

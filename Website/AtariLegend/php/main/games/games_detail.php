@@ -34,6 +34,8 @@ require_once __DIR__."/../../common/DAO/MemoryDAO.php";
 require_once __DIR__."/../../common/DAO/TosDAO.php";
 require_once __DIR__."/../../common/DAO/CopyProtectionDAO.php";
 require_once __DIR__."/../../common/DAO/DiskProtectionDAO.php";
+require_once __DIR__."/../../common/DAO/SoundHardwareDAO.php";
+require_once __DIR__."/../../common/DAO/GameProgressSystemDAO.php";
 
 $gameReleaseDao = new \AL\Common\DAO\GameReleaseDAO($mysqli);
 $gameSeriesDao = new \AL\Common\DAO\GameSeriesDAO($mysqli);
@@ -54,6 +56,9 @@ $memoryDao = new \AL\Common\DAO\MemoryDAO($mysqli);
 $tosDao = new \AL\Common\DAO\TosDAO($mysqli);
 $copyProtectionDao = new \AL\Common\DAO\CopyProtectionDAO($mysqli);
 $diskProtectionDao = new \AL\Common\DAO\DiskProtectionDAO($mysqli);
+$soundHardwareDao = new \AL\Common\DAO\SoundHardwareDAO($mysqli);
+$gameProgressSystemDao = new \AL\Common\DAO\GameProgressSystemDAO($mysqli);
+
 
 /**
  * Generates an SEO-friendly description of a game, depending on the data available
@@ -253,6 +258,18 @@ $smarty->assign('game_genres', $game_genres);
 //***********************************************************************************
 $port = $portDao->getPortForGame($game_id);
 $smarty->assign('port', $port);
+
+//***********************************************************************************
+//get the external sound hardware
+//***********************************************************************************
+$soundHardware = $soundHardwareDao->getSoundHardwareForGame($game_id);
+$smarty->assign('soundHardware', $soundHardware);
+
+//***********************************************************************************
+//get the progress system
+//***********************************************************************************
+$progressSystem = $gameProgressSystemDao->getProgressSystemForGame($game_id);
+$smarty->assign('progressSystem', $progressSystem);
 
 //***********************************************************************************
 //get the engines & the engines already selected for this game
