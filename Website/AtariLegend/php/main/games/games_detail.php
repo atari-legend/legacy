@@ -171,7 +171,8 @@ $sql_game = $mysqli->query(
                game.game_id,
                game.game_series_id
                FROM game
-               WHERE game.game_id='$game_id'") or die("Error getting game info");
+               WHERE game.game_id='$game_id'"
+) or die("Error getting game info");
 
 if ($game_info = $sql_game->fetch_array(MYSQLI_BOTH)) {
     $smarty->assign(
