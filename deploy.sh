@@ -13,5 +13,7 @@ echo "Current HEAD_BRANCH: ${HEAD_BRANCH}"
 # We want to deploy only when the dev branch is built, outside of a
 # pull request
 if [ -z "${HEAD_BRANCH}" ] && [ "${BRANCH}" == "development" ]; then
-    rsync -azv Website/AtariLegend/* $DEV_DEPLOY_USER@$DEV_DEPLOY_HOST:$DEV_DEPLOY_PATH/
+    # Exclude data/ and the connection settings file as we don't want
+    # them to be deleted on the remote server
+    rsync -avz --exclude data --exclude php/config/connection_settings.php --delete Website/AtariLegend/* $DEV_DEPLOY_USER@$DEV_DEPLOY_HOST:$DEV_DEPLOY_PATH/
 fi
