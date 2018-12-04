@@ -25,6 +25,7 @@ require_once __DIR__."/../../common/DAO/MediaDAO.php";
 require_once __DIR__."/../../common/DAO/DumpDAO.php";
 require_once __DIR__."/../../common/DAO/MediaScanTypeDAO.php";
 require_once __DIR__."/../../common/DAO/MediaScanDAO.php";
+require_once __DIR__."/../../common/DAO/GameReleaseScanDAO.php";
 
 $gameReleaseDao = new \AL\Common\DAO\GameReleaseDAO($mysqli);
 $gameDao = new \AL\Common\DAO\GameDao($mysqli);
@@ -47,6 +48,7 @@ $mediaDao = new \AL\Common\DAO\MediaDAO($mysqli);
 $dumpDao = new \AL\Common\DAO\DumpDAO($mysqli);
 $mediaScanTypeDao = new \AL\Common\DAO\MediaScanTypeDAO($mysqli);
 $mediaScanDao = new \AL\Common\DAO\MediaScanDAO($mysqli);
+$gameReleaseScanDao = new AL\Common\DAO\GameReleaseScanDAO($mysqli);
 
 if ($_SERVER['REQUEST_METHOD'] == "GET") {
     $smarty->assign('license_types', $gameReleaseDao->getLicenseTypes());
@@ -67,6 +69,7 @@ if ($_SERVER['REQUEST_METHOD'] == "GET") {
     $smarty->assign('media_types', $mediaTypeDao->getAllMediaTypes());
     $smarty->assign('dump_formats', $dumpDao->getFormats());
     $smarty->assign('media_scan_types', $mediaScanTypeDao->getAllMediaScanTypes());
+    $smarty->assign('game_release_scan_types', $gameReleaseScanDao->getScanTypes());
 
     // Edit existing release
     if (isset($release_id)) {
@@ -96,7 +99,7 @@ if ($_SERVER['REQUEST_METHOD'] == "GET") {
         $smarty->assign('release_copy_protections', $copyProtectionDao->getCopyProtectionsForRelease($release->getId()));
         $smarty->assign('release_disk_protections', $diskProtectionDao->getDiskProtectionsForRelease($release->getId()));
         $smarty->assign('release_languages', $languageDao->getAllGameReleaseLanguages($release->getId()));
-
+        $smarty->assign('release_scans', $gameReleaseScanDao->getScansForRelease($release->getId()));
         $media = $mediaDao->getAllMediaFromRelease($release->getId());
         $smarty->assign('release_media', $media);
 
@@ -110,6 +113,40 @@ if ($_SERVER['REQUEST_METHOD'] == "GET") {
         $smarty->assign('mediaScans', $mediaScans);
         $smarty->assign('mediaScans_path', $media_scan_path);
 
+        // ================ TEMPORARY START
+        // Retrieve Box Scans attached to the game, to merge them in a release
+        $stmt = \AL\Db\execute_query(
+            "games_release_details.php: Get game boxscans",
+            $mysqli,
+            "SELECT
+                game_boxscan.game_boxscan_id, imgext, game_boxscan_side
+            FROM
+                game_boxscan
+            LEFT JOIN game_box_couples ON game_box_couples.game_boxscan_id = game_boxscan.game_boxscan_id
+            WHERE
+                game_boxscan.game_id = ?",
+            "i", $game->getId()
+        );
+
+        \AL\Db\bind_result(
+            "games_release_details.php: Get game boxscans",
+            $stmt,
+            $game_boxscan_id, $imgext, $game_boxscan_side
+        );
+
+        $game_boxscans = [];
+        while ($stmt->fetch()) {
+            $game_boxscans[] = array(
+                "game_boxscan_id" => $game_boxscan_id,
+                "imgext" => $imgext,
+                "game_boxscan_side" => $game_boxscan_side
+            );
+        }
+        $stmt->close();
+
+        $smarty->assign('game_boxscan_path', $game_boxscan_path);
+        $smarty->assign('game_boxscans', $game_boxscans);
+        // ================ TEMPORARY END
 
     } else {
         // Creating a new release
