@@ -42,7 +42,7 @@ switch ($action) {
                         )
                     );
                 } else {
-                    //FIXME: Unknown type
+                    $_SESSION['edit_message'] = "File type is not supported";
                 }
             } else {
                 switch ($file["error"]) {
@@ -61,6 +61,8 @@ switch ($action) {
         $gameReleaseScanDao->deleteScan($scan_id);
         if (!@unlink($scan->getFile())) {
             $_SESSION['edit_message'] = "Error deleting scan: ".error_get_last()["message"];
+        } else {
+            $_SESSION['edit_message'] = "Scan deleted";
         }
 
         $changeLogDao->insertChangeLog(
