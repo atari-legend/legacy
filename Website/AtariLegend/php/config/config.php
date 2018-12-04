@@ -122,6 +122,10 @@ $game_fact_screenshot_save_path="../../../data/images/game_fact_screenshots/";
 $music_game_path="../../data/music/games/";
 $music_game_save_path="../../../data/music/games/";
 
+//releases
+$game_release_scan_path="../../data/images/game_release_scans/";
+$game_release_scan_save_path="../../../data/images/game_release_scans/";
+
 //interview
 $interview_screenshot_path="../../data/images/interview_screenshots/";
 $interview_screenshot_save_path="../../../data/images/interview_screenshots/";
