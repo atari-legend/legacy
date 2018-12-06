@@ -209,8 +209,14 @@ if (isset($action) and $action == 'modify_game') {
     // game_table
 
     $game_name = $mysqli->real_escape_string($game_name);
-
-    $sdbquery = $mysqli->query("UPDATE game SET game_name='$game_name' WHERE game_id=$game_id") or die("trouble updating game");
+        
+    if (isset($midi_link)) {
+        $midi_link = 1;
+    }else{
+        $midi_link = 0;
+    }
+    
+    $sdbquery = $mysqli->query("UPDATE game SET game_name='$game_name', midi_link='$midi_link', players='$players' WHERE game_id=$game_id") or die("trouble updating game");
 
     //Update the game genre
     $gameGenreDao->setGameGenreForGame($game_id, isset($game_genre) ? $game_genre : []);

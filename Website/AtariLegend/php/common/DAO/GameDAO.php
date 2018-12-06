@@ -23,20 +23,20 @@ class GameDAO {
         $stmt = \AL\Db\execute_query(
             "GameDAO: getGame: $game_id",
             $this->mysqli,
-            "SELECT game_id, game_name, game_series_id FROM game WHERE game_id = ?",
+            "SELECT game_id, game_name, game_series_id, midi_link, players FROM game WHERE game_id = ?",
             "i", $game_id
         );
 
         \AL\Db\bind_result(
             "GameDAO: getGame: $game_id",
             $stmt,
-            $game_id, $game_name, $game_series_id
+            $game_id, $game_name, $game_series_id, $midi_link, $players
         );
 
         $game = null;
         if ($stmt->fetch()) {
             $game = new \AL\Common\Model\Game\Game(
-                $game_id, $game_name, $game_series_id
+                $game_id, $game_name, $game_series_id, $midi_link, $players
             );
         }
 

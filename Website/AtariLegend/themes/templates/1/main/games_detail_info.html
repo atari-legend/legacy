@@ -384,6 +384,32 @@
                     </td>
                 </tr>
             {/foreach}
+            {if isset($game_info.nr_of_players) and ($game_info.nr_of_players <> 0) and ($game_info.nr_of_players <> null)}
+                <tr>
+                    <td class="w-30" style="vertical-align:top;">
+                        <span class="games_main_detail_info_right">Players</span>
+                    </td>
+                    <td class="w-5" style="vertical-align:top;">
+                        <span class="games_main_detail_info_left text-center">-</span>
+                    </td>
+                    <td class="w-60">
+                        {$game_info.nr_of_players}
+                    </td>
+                </tr>
+            {/if}
+            {if isset($game_info.midi_link) and ($game_info.midi_link == 1)}
+                <tr>
+                    <td class="w-30" style="vertical-align:top;">
+                        <span class="games_main_detail_info_right">Midi-Link</span>
+                    </td>
+                    <td class="w-5" style="vertical-align:top;">
+                        <span class="games_main_detail_info_left text-center">-</span>
+                    </td>
+                    <td class="w-60">
+                        Yes
+                    </td>
+                </tr>
+            {/if}
             {if isset($game_vs)}
                 {foreach from=$game_vs item=line name=game_vs}
                     <tr>
