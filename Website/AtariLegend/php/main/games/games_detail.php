@@ -169,7 +169,9 @@ function generate_game_description(
 $sql_game = $mysqli->query(
     "SELECT game_name,
                game.game_id,
-               game.game_series_id
+               game.game_series_id,
+               game.players,
+               game.midi_link
                FROM game
                WHERE game.game_id='$game_id'"
 ) or die("Error getting game info");
@@ -178,6 +180,8 @@ if ($game_info = $sql_game->fetch_array(MYSQLI_BOTH)) {
     $smarty->assign(
         'game_info', array(
         'game_name' => $game_info['game_name'],
+        'nr_of_players' => $game_info['players'],
+        'midi_link' => $game_info['midi_link'],
         'game_id' => $game_info['game_id']
         )
     );

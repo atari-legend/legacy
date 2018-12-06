@@ -309,6 +309,29 @@ $('#input-tags3').selectize({
                         <br>
                         <br>
                         <br>
+                        <b>Multiplayer options</b>
+                        <hr class="separator_add">
+                        <br>
+                        Nr of Players
+                        <br>
+                        <input type="text" maxlength="255" name="players" value="{if ($game->getPlayers() <> 0)}{$game->getPlayers()}{/if}" class="standard_input input_small">
+                        <br>
+                        <br>
+                        Midi Link
+                        <br>
+                        <div class="checkbox links_mod_checkbox">
+                            <input type="checkbox"
+                                id="midi_link"
+                                name="midi_link"
+                                {if $game->getMidiLink() == '1'}checked{/if}
+                                value="{$game->getMidiLink()}">
+                                <label for="midi_link"></label>
+                        </div>
+                        <br>
+                        <span class="help-hint">The nr of players and the midi-link option are not linked together.</span>
+                        <br>
+                        <br>
+                        <hr class="separator_add">
                         <div class="gd_clear">
                             <input type="submit" name="valider" value="Save changes" class="secondary_button">
                         </div>
