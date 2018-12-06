@@ -16,4 +16,7 @@ if [ -z "${HEAD_BRANCH}" ] && [ "${BRANCH}" == "development" ]; then
     # Exclude data/ and the connection settings file as we don't want
     # them to be deleted on the remote server
     rsync -avz --exclude data --exclude php/config/connection_settings.php --delete Website/AtariLegend/* $DEV_DEPLOY_USER@$DEV_DEPLOY_HOST:$DEV_DEPLOY_PATH/
+
+    # Run the DB upgrade script via the PHP command-line interface
+    ssh $DEV_DEPLOY_USER@$DEV_DEPLOY_HOST "cd $DEV_DEPLOY_PATH/php/admin/administration/ && php7.1-cli database_update.php"
 fi
