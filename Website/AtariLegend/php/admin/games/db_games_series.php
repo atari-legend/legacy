@@ -155,7 +155,7 @@ if ($action == "delete_gameseries") {
 
 if ($action == "add_to_series") {
     if (isset($game_ids)) {
-        foreach($game_ids as $game_id) {
+        foreach ($game_ids as $game_id) {
             $gameSeriesDao->addGameToSeries($game_series_id, $game_id);
 
             $_SESSION['edit_message'] = "Game added to series";

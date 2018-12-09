@@ -36,7 +36,6 @@ while ($games = $sql_games->fetch_array(MYSQLI_BOTH)) {
     ));
 }
 
-
 //get the number of reviews in the archive
 $query_number = $mysqli->query("SELECT * FROM review_main WHERE review_edit = '0'") or die("Couldn't get the number of reviews");
 $v_reviews = $query_number->num_rows;
@@ -60,7 +59,7 @@ $RESULTGAME = "SELECT
                     LEFT JOIN users ON ( review_main.user_id = users.user_id)
                     WHERE review_game.game_id IS NOT NULL
                     GROUP BY game.game_id, game.game_name, userid, review_date HAVING COUNT(DISTINCT game.game_id, game.game_name, userid, review_date) = 1 
-                    ORDER BY game_name ASC"; 
+                    ORDER BY game_name ASC";
 
 $games = $mysqli->query($RESULTGAME);
 

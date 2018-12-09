@@ -50,7 +50,8 @@ $smarty->assign('website', array(
 
 //get the categories of this website
 $website = $mysqli->query("SELECT * FROM website_category_cross
-          LEFT JOIN website_category ON (website_category_cross.website_category_id = website_category.website_category_id)
+          LEFT JOIN website_category
+            ON (website_category_cross.website_category_id = website_category.website_category_id)
           WHERE website_category_cross.website_id = '$website_id'");
 
 while ($category_row = $website->fetch_array(MYSQLI_BOTH)) {

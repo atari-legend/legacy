@@ -82,7 +82,7 @@ if ($action == "fact_delete" or $action == "delete_screenshot") {
     //****************************************************************************************
     if (isset($fact_id)) {
         if ($_SESSION['permission']==1 or $_SESSION['permission']=='1') {
-            if ($action == "fact_delete"){
+            if ($action == "fact_delete") {
                 //Let's first check if this submission has screenshots.
                 $query_fact_screenshot = $mysqli->query("SELECT * FROM screenshot_game_fact WHERE game_fact_id = " . $fact_id . "") or die("something is wrong with mysqli of fact screenshots");
 
@@ -110,9 +110,9 @@ if ($action == "fact_delete" or $action == "delete_screenshot") {
                 create_log_entry('Games', $game_id, 'Fact', $game_id, 'Delete', $_SESSION['user_id']);
 
                 $sql = $mysqli->query("DELETE FROM game_fact WHERE game_fact_id = '$fact_id'") or die("couldn't delete game_fact quote");
-                
-                $osd_message = "Fact deleted";   
-            }else{
+
+                $osd_message = "Fact deleted";
+            } else {
                 //get the extension
                 $SCREENSHOT = $mysqli->query("SELECT * FROM screenshot_main
                                           WHERE screenshot_id = '$screenshot_id'") or die("Database error - selecting screenshots");
@@ -132,18 +132,18 @@ if ($action == "fact_delete" or $action == "delete_screenshot") {
 
                 create_log_entry('Games', $game_id, 'Fact', $game_id, 'Delete shot', $_SESSION['user_id']);
 
-                $osd_message = "Screenshot deleted";  
+                $osd_message = "Screenshot deleted";
             }
         } else {
-            $osd_message = "You don't have permission to perform this task";   
+            $osd_message = "You don't have permission to perform this task";
         }
-        
+
         //load the facts for this games
         $query_games_facts = $mysqli->query("SELECT * from game_fact
                                              LEFT JOIN game ON (game.game_id = game_fact.game_id)
                                              WHERE game_fact.game_id = $game_id") or die("error in query game facts");
-        
-        $i = 0;        
+
+        $i = 0;
 
         while ($sql_games_facts  = $query_games_facts->fetch_array(MYSQLI_BOTH)) {
             $i++;
@@ -177,16 +177,16 @@ if ($action == "fact_delete" or $action == "delete_screenshot") {
                 'game_fact_nr' => $i,
                 'game_fact' => $fact_text
             ));
-            
+
             $smarty->assign('game_name', $sql_games_facts['game_name']);
         }
 
         $smarty->assign('game_id', $game_id);
-        
+
         $smarty->assign('smarty_action', 'delete_game_facts');
-        
+
         $smarty->assign('osd_message', $osd_message);
-        
+
         //Send to smarty for return value
         $smarty->display("file:" . $cpanel_template_folder . "ajax_game_facts_edit.html");
     }
@@ -202,11 +202,11 @@ if ($action == "fact_update") {
     $mysqli->query("UPDATE game_fact SET game_fact='$fact_text' WHERE game_fact_id='$fact_id'") or die("couldn't update game_facts table");
 
     create_log_entry('Games', $game_id, 'Fact', $game_id, 'Update', $_SESSION['user_id']);
-    $_SESSION['edit_message'] =  "fact updated";   
-    
+    $_SESSION['edit_message'] =  "fact updated";
+
     //Here we'll be looping on each of the inputs on the page that are filled in with an image!
     $image = $_FILES['image'];
-    
+
     foreach ($image['tmp_name'] as $key => $tmp_name) {
         if ($tmp_name !== 'none') {
             // Check what extention the file has and if it is allowed.
@@ -252,8 +252,8 @@ if ($action == "fact_update") {
     $query_games_facts = $mysqli->query("SELECT * from game_fact
                                          LEFT JOIN game ON (game.game_id = game_fact.game_id)
                                          WHERE game_fact.game_id = $game_id") or die("error in query game facts");
-    
-    $i = 0;        
+
+    $i = 0;
 
     while ($sql_games_facts = $query_games_facts->fetch_array(MYSQLI_BOTH)) {
         $i++;

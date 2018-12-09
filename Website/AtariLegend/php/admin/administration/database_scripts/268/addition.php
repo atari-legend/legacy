@@ -25,7 +25,8 @@ $stmt = \AL\Db\execute_query(
         game_release.game_id
     HAVING
         C = 1",
-    null, null
+    null,
+    null
 );
 
 $stmt->store_result();
@@ -33,7 +34,9 @@ $stmt->store_result();
 \AL\Db\bind_result(
     "migrate_boxscans_to_single_release: Get single release games",
     $stmt,
-    $game_id, $game_release_id, $count
+    $game_id,
+    $game_release_id,
+    $count
 );
 
 while ($stmt->fetch()) {
@@ -43,7 +46,8 @@ while ($stmt->fetch()) {
         $mysqli,
         "SELECT game_boxscan_id, imgext, game_boxscan_side FROM game_boxscan
         WHERE game_id = ?",
-        "i", $game_id
+        "i",
+        $game_id
     );
 
     $stmt2->store_result();
@@ -51,7 +55,9 @@ while ($stmt->fetch()) {
     \AL\Db\bind_result(
         "migrate_boxscans_to_single_release: Get single release games",
         $stmt2,
-        $game_boxscan_id, $imgext, $side
+        $game_boxscan_id,
+        $imgext,
+        $side
     );
 
     while ($stmt2->fetch()) {

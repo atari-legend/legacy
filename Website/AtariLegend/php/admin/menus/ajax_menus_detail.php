@@ -92,7 +92,8 @@ if (isset($action) and $action == "edit_disk_box" and $menu_disk_id !== '') {
     $smarty->assign('individuals', $menucreditDao->getMenuDiskCredits($menu_disk_id));
 
     // Menu state dropdown
-    $query_menu_state = $mysqli->query("SELECT * FROM menu_disk_state ORDER BY state_id ASC") or die('Error: ' . mysqli_error($mysqli));
+    $query_menu_state = $mysqli->query("SELECT * FROM menu_disk_state ORDER BY state_id ASC")
+        or die('Error: ' . mysqli_error($mysqli));
 
     while ($query = $query_menu_state->fetch_array(MYSQLI_BOTH)) {
         // This smarty is used for for the menu_disk credits
@@ -141,9 +142,9 @@ if (isset($action) and $action == "edit_disk_box" and $menu_disk_id !== '') {
 
     //Get the screenshots for this menu if they exist
     $sql_screenshots = $mysqli->query("SELECT * FROM screenshot_menu
-                                    LEFT JOIN screenshot_main ON (screenshot_menu.screenshot_id = screenshot_main.screenshot_id)
-                                    WHERE screenshot_menu.menu_disk_id = '$menu_disk_id' ORDER BY screenshot_menu.screenshot_id")
-                                    or die('Error: ' . mysqli_error($mysqli));
+        LEFT JOIN screenshot_main ON (screenshot_menu.screenshot_id = screenshot_main.screenshot_id)
+        WHERE screenshot_menu.menu_disk_id = '$menu_disk_id' ORDER BY screenshot_menu.screenshot_id")
+        or die('Error: ' . mysqli_error($mysqli));
 
     $count         = 1;
     $v_screenshots = 0;
@@ -172,7 +173,8 @@ if (isset($action) and $action == "edit_disk_box" and $menu_disk_id !== '') {
     //uploaded
     //************************************************************************************************
     //get the existing downloads
-    $SQL_DOWNLOADS = $mysqli->query("SELECT * FROM menu_disk_download WHERE menu_disk_id='$menu_disk_id'") or die('Error: ' . mysqli_error($mysqli));
+    $SQL_DOWNLOADS = $mysqli->query("SELECT * FROM menu_disk_download WHERE menu_disk_id='$menu_disk_id'")
+        or die('Error: ' . mysqli_error($mysqli));
 
     $nr_downloads = 0;
     while ($downloads = $SQL_DOWNLOADS->fetch_array(MYSQLI_BOTH)) {
@@ -253,7 +255,6 @@ if (isset($action) and $action == "close_edit_disk_box" and $menu_disk_id !== ''
 
 // POP ADD INTRO CREDITS
 if (isset($action) and $action == "add_intro_credit") {
-
     // Get individual data for the author search
     $smarty->assign('individuals', $individualDao->getIndividualsStartingWith("num"));
     $menu_disk_id = $query;
@@ -296,9 +297,11 @@ if (isset($action) and $action == "ind_gen_browse") {
 if (isset($action) and $action == "ind_gen_search") {
     if (isset($query) and $query !== "empty") {
         $query = $mysqli->real_escape_string($query);
-        $query_temporary = $mysqli->query("SELECT ind_id,ind_name FROM individuals WHERE ind_name LIKE '%$query%' ORDER BY ind_name ASC") or die('Error: ' . mysqli_error($mysqli));
+        $query_temporary = $mysqli->query("SELECT ind_id,ind_name FROM individuals
+            WHERE ind_name LIKE '%$query%' ORDER BY ind_name ASC") or die('Error: ' . mysqli_error($mysqli));
     } elseif ($query == "empty") {
-        $query_temporary = $mysqli->query("SELECT ind_id,ind_name FROM individuals WHERE ind_name LIKE '%a%' ORDER BY ind_name ASC") or die("Failed to query temporary table");
+        $query_temporary = $mysqli->query("SELECT ind_id,ind_name FROM individuals
+            WHERE ind_name LIKE '%a%' ORDER BY ind_name ASC") or die("Failed to query temporary table");
     }
 
     while ($genealogy_ind = $query_temporary->fetch_array(MYSQLI_BOTH)) {

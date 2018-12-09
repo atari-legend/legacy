@@ -23,8 +23,8 @@
 include("../../config/common.php");
 include("../../config/admin.php");
 
-require_once __DIR__."/../../common/Model/Database/ChangeLog.php" ;
-require_once __DIR__."/../../common/DAO/ChangeLogDAO.php" ;
+require_once __DIR__."/../../common/Model/Database/ChangeLog.php";
+require_once __DIR__."/../../common/DAO/ChangeLogDAO.php";
 
 $changeLogDao = new \AL\Common\DAO\ChangeLogDAO($mysqli);
 
@@ -92,7 +92,8 @@ if (isset($action) and $action == 'avatar_upload') {
                     )
                 );
             } else {
-                $_SESSION['edit_message'] = "Upload failed due to not confirming to specs - width and height must be 600px max";
+                $_SESSION['edit_message'] = "Upload failed due to not confirming to specs - "
+                    ."width and height must be 600px max";
                 $mysqli->query("UPDATE users SET avatar_ext='' WHERE user_id='$user_id_selected'");
                 unlink("$user_avatar_save_path$user_id_selected.$ext");
             }
@@ -144,7 +145,10 @@ if (isset($action) and $action == 'reset_pwd') {
         $random_salt = hash('sha512', uniqid(mt_rand(1, mt_getrandmax()), true));//create random salt
         $update_password = hash('sha512', $sha512 . $random_salt); // Create salted password
 
-        $mysqli->query("UPDATE users SET password='$md5pass', sha512_password = '$update_password', salt = '$random_salt' WHERE user_id='$user_id_selected'");
+        $mysqli->query("UPDATE users SET password='$md5pass',
+            sha512_password = '$update_password',
+            salt = '$random_salt'
+            WHERE user_id='$user_id_selected'");
 
         //If you are changing your own pwd, we need to update the session vars
         if ($user_id_selected == $_SESSION['user_id']) {
@@ -186,7 +190,10 @@ if (isset($action) and $action == 'reset_pwd') {
                 $random_salt = hash('sha512', uniqid(mt_rand(1, mt_getrandmax()), true));//create random salt
                 $update_password = hash('sha512', $sha512 . $random_salt); // Create salted password
 
-                $mysqli->query("UPDATE users SET password='$md5pass', sha512_password = '$update_password', salt = '$random_salt' WHERE user_id='$user_id_selected'");
+                $mysqli->query("UPDATE users SET password='$md5pass',
+                    sha512_password = '$update_password',
+                    salt = '$random_salt'
+                    WHERE user_id='$user_id_selected'");
 
                 //Let's log in - fill the session vars
                 if (login($_SESSION['userid'], $sha512, $mysqli) == true) {
@@ -239,9 +246,17 @@ if (isset($action) and $action == 'modify_user') {
     if ($user_af == 'http://') {
         $user_af = '';
     }
-    
-    if (isset($user_inactive)) { $user_inactive = '1'; } else { $user_inactive = '0';}
-    if (isset($user_show_email)) { $user_show_email = '1'; } else { $user_show_email = '0';}
+
+    if (isset($user_inactive)) {
+        $user_inactive = '1';
+    } else {
+        $user_inactive = '0';
+    }
+    if (isset($user_show_email)) {
+        $user_show_email = '1';
+    } else {
+        $user_show_email = '0';
+    }
 
     if (isset($_POST['pmd5']) &&  $_POST['pmd5'] != '' && isset($_POST['p']) && $_POST['p'] != '') {
         $user_name = $mysqli->real_escape_string($user_name);
@@ -250,13 +265,22 @@ if (isset($action) and $action == 'modify_user') {
         $random_salt = hash('sha512', uniqid(mt_rand(1, mt_getrandmax()), true));//create random salt
         $update_password = hash('sha512', $sha512 . $random_salt); // Create salted password
 
-        $mysqli->query("UPDATE users SET userid='$user_name', password='$md5pass', sha512_password='$update_password', salt='$random_salt', email='$user_email', permission='$user_permission', user_website='$user_website', user_fb='$user_fb', user_twitter='$user_twitter', user_af='$user_af', inactive=$user_inactive, show_email='$user_show_email' WHERE user_id='$user_id_selected'") or die($mysqli->error);
-       
+        $mysqli->query("UPDATE users SET userid='$user_name', password='$md5pass',
+            sha512_password='$update_password', salt='$random_salt',
+            email='$user_email', permission='$user_permission', user_website='$user_website',
+            user_fb='$user_fb', user_twitter='$user_twitter', user_af='$user_af',
+            inactive=$user_inactive, show_email='$user_show_email'
+            WHERE user_id='$user_id_selected'") or die($mysqli->error);
+
         $_SESSION['edit_message'] = "User data modified";
     } else {
         $user_name = $mysqli->real_escape_string($user_name);
 
-        $mysqli->query("UPDATE users SET userid='$user_name', email='$user_email', permission='$user_permission', user_website='$user_website', user_fb='$user_fb', user_twitter='$user_twitter', user_af='$user_af', inactive='$user_inactive', show_email='$user_show_email' WHERE user_id='$user_id_selected'") or die($mysqli->error);
+        $mysqli->query("UPDATE users SET userid='$user_name', email='$user_email',
+            permission='$user_permission', user_website='$user_website',
+            user_fb='$user_fb', user_twitter='$user_twitter',
+            user_af='$user_af', inactive='$user_inactive', show_email='$user_show_email'
+            WHERE user_id='$user_id_selected'") or die($mysqli->error);
 
         $_SESSION['edit_message'] = "User data modified";
     }
@@ -274,7 +298,6 @@ if (isset($action) and $action == 'modify_user') {
             \AL\Common\Model\Database\ChangeLog::ACTION_UPDATE
         )
     );
-
 }
 
 //****************************************************************************************
@@ -288,7 +311,8 @@ if (isset($action) and $action == 'delete_user') {
             WHERE comments.user_id = '$user_id_selected'") or die("error selecting game comments");
 
     if ($sql->num_rows > 0) {
-        $_SESSION['edit_message'] = 'Deletion failed - This user has submitted game comments - Delete it in the appropriate section';
+        $_SESSION['edit_message'] = 'Deletion failed - This user has submitted game comments - '
+            .'Delete it in the appropriate section';
     } else {
         $sql = $mysqli->query("SELECT * FROM review_main
               LEFT JOIN review_game ON (review_main.review_id = review_game.review_id)
@@ -296,23 +320,29 @@ if (isset($action) and $action == 'delete_user') {
               WHERE review_main.user_id = '$user_id_selected'") or die("error selecting game reviews");
 
         if ($sql->num_rows > 0) {
-            $_SESSION['edit_message'] = 'Deletion failed - This user has submitted game reviews - Delete it in the appropriate section';
+            $_SESSION['edit_message'] = 'Deletion failed - This user has submitted game reviews - '
+                .'Delete it in the appropriate section';
         } else {
             $sql = $mysqli->query("SELECT * FROM game_submitinfo
                     LEFT JOIN game ON (game_submitinfo.game_id = game.game_id)
                     WHERE user_id = '$user_id_selected'") or die("error selecting game info");
             if ($sql->num_rows > 0) {
-                $_SESSION['edit_message'] = 'Deletion failed - This user has submitted game info - Delete it in the appropriate section';
+                $_SESSION['edit_message'] = 'Deletion failed - This user has submitted game info - '
+                    .'Delete it in the appropriate section';
             } else {
-                $sql = $mysqli->query("SELECT * FROM website WHERE user_id = '$user_id_selected'") or die("error selecting links");
+                $sql = $mysqli->query("SELECT * FROM website WHERE user_id = '$user_id_selected'")
+                    or die("error selecting links");
 
                 if ($sql->num_rows > 0) {
-                    $_SESSION['edit_message'] = 'Deletion failed - This user has submitted links - Delete it in the appropriate section';
+                    $_SESSION['edit_message'] = 'Deletion failed - This user has submitted links - '
+                        .'Delete it in the appropriate section';
                 } else {
-                    $sql = $mysqli->query("SELECT * FROM news WHERE user_id = '$user_id_selected'") or die("error selecting news");
+                    $sql = $mysqli->query("SELECT * FROM news WHERE user_id = '$user_id_selected'")
+                        or die("error selecting news");
 
                     if ($sql->num_rows > 0) {
-                        $_SESSION['edit_message'] = 'Deletion failed - This user has submitted news updates - Delete it in the appropriate section';
+                        $_SESSION['edit_message'] = 'Deletion failed - This user has submitted news updates - '
+                            .'Delete it in the appropriate section';
                     } else {
                         $sql = $mysqli->query("SELECT * FROM comments
                         LEFT JOIN demo_user_comments ON (comments.comments_id = demo_user_comments.comments_id)
@@ -320,7 +350,8 @@ if (isset($action) and $action == 'delete_user') {
                         WHERE comments.user_id = $user_id_selected") or die("error selecting demo comments");
 
                         if ($sql->num_rows > 0) {
-                            $_SESSION['edit_message'] = 'Deletion failed - This user has submitted demo comments - Delete it in the appropriate section';
+                            $_SESSION['edit_message'] = 'Deletion failed - This user has submitted demo comments - '
+                                .'Delete it in the appropriate section';
                         } else {
                             $changeLogDao->insertChangeLog(
                                 new \AL\Common\Model\Database\ChangeLog(
@@ -336,7 +367,8 @@ if (isset($action) and $action == 'delete_user') {
                                 )
                             );
 
-                            $mysqli->query("DELETE from users WHERE user_id='$user_id_selected'") or die('deleting user failed');
+                            $mysqli->query("DELETE from users WHERE user_id='$user_id_selected'")
+                                or die('deleting user failed');
 
                             $_SESSION['edit_message'] = 'User deleted succesfully';
 

@@ -62,8 +62,8 @@ while ($sql_games_facts = $query_games_facts->fetch_array(MYSQLI_BOTH)) {
         'game_fact' => $fact_text
     ));
 
-    if (isset($game_name)){
-    }else{
+    if (isset($game_name)) {
+    } else {
         $smarty->assign('game_name', $sql_games_facts['game_name']);
     }
 }

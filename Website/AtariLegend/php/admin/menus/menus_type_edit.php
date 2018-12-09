@@ -38,7 +38,8 @@ if ($menu_type_id == '-' or $menu_type_id == ' ') {
     }
     $smarty->assign("user_id", $_SESSION['user_id']);
 
-    $result_menus_type_edit = $mysqli->query("SELECT * FROM menu_types_main WHERE menu_types_main_id = $menu_type_id") or die('Error: ' . mysqli_error($mysqli));
+    $result_menus_type_edit = $mysqli->query("SELECT * FROM menu_types_main WHERE menu_types_main_id = $menu_type_id")
+        or die('Error: ' . mysqli_error($mysqli));
 
     while ($row = $result_menus_type_edit->fetch_array(MYSQLI_BOTH)) {
         $smarty->assign('menus_type_edit', array(

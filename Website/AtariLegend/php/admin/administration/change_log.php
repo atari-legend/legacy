@@ -71,9 +71,9 @@ while ($log = $sql_log->fetch_array(MYSQLI_BOTH)) {
             $subsection_link = ("../games/games_detail.php" . '?game_id=' . $log['sub_section_id']);
         }
 
-         if ($log['sub_section'] == 'Release'){
+        if ($log['sub_section'] == 'Release') {
             $subsection_link = "";
-         }
+        }
 
         if ($log['sub_section'] == 'Creator') {
             $subsection_link = ("../individuals/individuals_edit.php" . '?ind_id=' . $log['sub_section_id']);
@@ -506,12 +506,12 @@ while ($log = $sql_log->fetch_array(MYSQLI_BOTH)) {
     //  the GAMES RELEASE SECTION
     if ($log['section'] == 'Game Release') {
         $section_link    = ("../games/games_release_detail.php" . '?game_id=' . $log['section_id'] . '&release_id=' . $log['sub_section_id']);
-        if ($log['sub_section'] == 'Game Release' OR $log['sub_section'] == 'Release Info' OR $log['sub_section'] == 'Release AKA' OR $log['sub_section'] == 'Compatibility'
-            OR $log['sub_section'] == 'Distributor' OR $log['sub_section'] == 'Scene' OR $log['sub_section'] == 'Memory Enhancement' OR $log['sub_section'] == 'Minimum Memory'
-            OR $log['sub_section'] == 'Tos' OR $log['sub_section'] == 'Incompatible TOS' OR $log['sub_section'] == 'Protection' OR $log['sub_section'] == 'Language'
-            OR $log['sub_section'] == 'Disk Protection' OR $log['sub_section'] == 'Enhancement' OR $log['sub_section'] == 'System Enhancement' OR $log['sub_section'] == 'Incompatible Memory'
-            OR $log['sub_section'] == 'Copy Protection' OR $log['sub_section'] == 'Media Type' OR $log['sub_section'] == 'Media Scan Type' OR $log['sub_section'] == 'Media'
-            OR $log['sub_section'] == 'Dump' OR $log['sub_section'] == 'Media Scan' OR $log['sub_section'] == 'Scan') {
+        if ($log['sub_section'] == 'Game Release' or $log['sub_section'] == 'Release Info' or $log['sub_section'] == 'Release AKA' or $log['sub_section'] == 'Compatibility'
+            or $log['sub_section'] == 'Distributor' or $log['sub_section'] == 'Scene' or $log['sub_section'] == 'Memory Enhancement' or $log['sub_section'] == 'Minimum Memory'
+            or $log['sub_section'] == 'Tos' or $log['sub_section'] == 'Incompatible TOS' or $log['sub_section'] == 'Protection' or $log['sub_section'] == 'Language'
+            or $log['sub_section'] == 'Disk Protection' or $log['sub_section'] == 'Enhancement' or $log['sub_section'] == 'System Enhancement' or $log['sub_section'] == 'Incompatible Memory'
+            or $log['sub_section'] == 'Copy Protection' or $log['sub_section'] == 'Media Type' or $log['sub_section'] == 'Media Scan Type' or $log['sub_section'] == 'Media'
+            or $log['sub_section'] == 'Dump' or $log['sub_section'] == 'Media Scan' or $log['sub_section'] == 'Scan') {
             $subsection_link = ("../games/games_release_detail.php" . '?game_id=' . $log['section_id'] . '&release_id=' . $log['sub_section_id']);
         }
     }

@@ -25,7 +25,8 @@ include("../../config/admin.php");
 include("../../admin/games/quick_search_games.php");
 
 //Get list of all individuals
-$sql_individuals = $mysqli->query("SELECT * FROM individuals ORDER BY ind_name ASC") or die("Couldn't query indiciduals database");
+$sql_individuals = $mysqli->query("SELECT * FROM individuals ORDER BY ind_name ASC")
+    or die("Couldn't query indiciduals database");
 
 while ($individuals = $sql_individuals->fetch_array(MYSQLI_BOTH)) {
     $smarty->append('individuals', array(
@@ -61,7 +62,8 @@ $sql_interview = $mysqli->query("SELECT *
     LEFT JOIN users on (interview_main.user_id = users.user_id)
     LEFT JOIN individuals on (interview_main.ind_id = individuals.ind_id)
     LEFT JOIN individual_text on (interview_main.ind_id = individual_text.ind_id)
-    ORDER BY interview_text.interview_date DESC LIMIT  " . $v_counter . ", 5") or die("Error - Couldn't query interview data");
+    ORDER BY interview_text.interview_date DESC LIMIT  " . $v_counter . ", 5")
+    or die("Error - Couldn't query interview data");
 
 while ($query_interview = $sql_interview->fetch_array(MYSQLI_BOTH)) {
     $v_interview_date = date("F j, Y", $query_interview['interview_date']);
@@ -82,7 +84,8 @@ while ($query_interview = $sql_interview->fetch_array(MYSQLI_BOTH)) {
     }
 
     //The interviewed person's picture
-    if ($query_interview['ind_imgext'] == 'png' or $query_interview['ind_imgext'] == 'jpg' or $query_interview['ind_imgext'] == 'gif') {
+    if ($query_interview['ind_imgext'] == 'png' or $query_interview['ind_imgext'] == 'jpg'
+        or $query_interview['ind_imgext'] == 'gif') {
         $v_ind_image = $individual_screenshot_path;
         $v_ind_image .= $query_interview['ind_id'];
         $v_ind_image .= '.';

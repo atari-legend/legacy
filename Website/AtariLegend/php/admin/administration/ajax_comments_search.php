@@ -9,7 +9,7 @@
  *   Id: ajax_comments_search.php 23/04/2018 ST Graveyard - creation of file
  *
  ***************************************************************************/
- 
+
  //load all common functions
 include("../../config/common.php");
 include("../../config/admin.php");
@@ -24,8 +24,7 @@ $commentsDao = new AL\Common\DAO\CommentsDAO($mysqli);
 //********************************************************************************************
 $date = date_to_timestamp($comments_searchYear, $comments_searchMonth, $comments_searchDay);
 
-if ( $author_search == '-' )
-{ 
+if ($author_search == '-') {
     $view = "comments_all";
 } else {
     $view = "users_comments";

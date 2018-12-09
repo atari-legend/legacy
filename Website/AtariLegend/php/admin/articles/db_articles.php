@@ -71,14 +71,14 @@ if (isset($action2) and $action2 == 'add_screens') {
             }
         }
     } else {
-            $osd_message = "You do not have the necessary authorizations to perform this action";
+        $osd_message = "You do not have the necessary authorizations to perform this action";
     }
-    
+
     if (isset($osd_message)) {
     } else {
         $osd_message = "No screenshot uploaded";
     }
-    
+
     //Let's get the screenshots for the article
     $sql_screenshots = $mysqli->query("SELECT * FROM screenshot_article
                                       LEFT JOIN screenshot_main on ( screenshot_article.screenshot_id = screenshot_main.screenshot_id )
@@ -206,12 +206,12 @@ if (isset($action) and $action == 'delete_screenshot_comment') {
     } else {
         $osd_message = "You do not have the necessary authorizations to perform this action";
     }
-    
+
     if (isset($osd_message)) {
     } else {
         $osd_message = "No screenshot uploaded";
     }
-    
+
     //Let's get the screenshots for the article
     $sql_screenshots = $mysqli->query("SELECT * FROM screenshot_article
                                       LEFT JOIN screenshot_main on ( screenshot_article.screenshot_id = screenshot_main.screenshot_id )
@@ -246,7 +246,7 @@ if (isset($action) and $action == 'delete_screenshot_comment') {
     }
 
     $smarty->assign('osd_message', $osd_message);
-    
+
     $smarty->assign('smarty_action', 'add_screen_to_article_return');
     $smarty->assign('article_id', $article_id);
 
@@ -320,7 +320,7 @@ if (isset($action) and $action == 'update_article' and (!isset($action2))) {
         header("Location: ../articles/articles_main.php");
     } else {
         include("../../config/admin_rights.php");
-        
+
         $sdbquery = $mysqli->query("INSERT INTO article_main (user_id) VALUES ($user_id)") or die("Couldn't insert into article_main");
 
         //get the id of the inserted interview

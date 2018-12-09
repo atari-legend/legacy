@@ -16,13 +16,17 @@ $stmt = \AL\Db\execute_query(
         game_boxscan
     LEFT JOIN game ON game.game_id = game_boxscan.game_id
     ORDER BY game.game_name ASC",
-    null, null
+    null,
+    null
 );
 
 \AL\Db\bind_result(
     "games_boxscans_to_merge.php: Get games with boxscans",
     $stmt,
-    $game_id, $game_name, $game_boxscan_id, $game_boxscan_imgext
+    $game_id,
+    $game_name,
+    $game_boxscan_id,
+    $game_boxscan_imgext
 );
 
 $smarty->assign('boxscans', []);
@@ -37,4 +41,3 @@ while ($stmt->fetch()) {
 $stmt->close();
 
 $smarty->display("file:" . $cpanel_template_folder . "games_boxscans_to_merge.html");
-

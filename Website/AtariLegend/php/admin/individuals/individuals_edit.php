@@ -28,7 +28,8 @@ include("../../admin/games/quick_search_games.php");
 
 if ($ind_id == '-') {
     //Get the individuals
-    $sql_individuals = $mysqli->query("SELECT * FROM individuals ORDER BY ind_name ASC") or die("Couldn't query individual database");
+    $sql_individuals = $mysqli->query("SELECT * FROM individuals ORDER BY ind_name ASC")
+        or die("Couldn't query individual database");
 
     while ($individuals = $sql_individuals->fetch_array(MYSQLI_BOTH)) {
         $smarty->append('individuals', array(
@@ -45,7 +46,8 @@ if ($ind_id == '-') {
     $smarty->display("file:" . $cpanel_template_folder . "individuals_main.html");
 } else {
     //Let's see if we have selected a nickname
-    $sql_nick = $mysqli->query("SELECT * FROM individual_nicks WHERE nick_id=$ind_id") or die("problem getting nickname");
+    $sql_nick = $mysqli->query("SELECT * FROM individual_nicks WHERE nick_id=$ind_id")
+        or die("problem getting nickname");
 
     while ($ind_nicks = $sql_nick->fetch_array(MYSQLI_BOTH)) {
         $ind_id = $ind_nicks['ind_id'];
@@ -57,7 +59,8 @@ if ($ind_id == '-') {
                     WHERE individuals.ind_id=$ind_id");
 
     while ($individuals = $sql_individuals->fetch_array(MYSQLI_BOTH)) {
-        if ($individuals['ind_imgext'] == 'png' or $individuals['ind_imgext'] == 'jpg' or $individuals['ind_imgext'] == 'gif') {
+        if ($individuals['ind_imgext'] == 'png' or $individuals['ind_imgext'] == 'jpg'
+            or $individuals['ind_imgext'] == 'gif') {
             $v_ind_image = $individual_screenshot_path;
             $v_ind_image .= $ind_id;
             $v_ind_image .= '.';
@@ -77,7 +80,8 @@ if ($ind_id == '-') {
     }
 
     // Get nickname information
-    $sql_nick = $mysqli->query("SELECT * FROM individual_nicks where ind_id=$ind_id") or die("problem getting nickname");
+    $sql_nick = $mysqli->query("SELECT * FROM individual_nicks where ind_id=$ind_id")
+        or die("problem getting nickname");
 
     while ($ind_nicks = $sql_nick->fetch_array(MYSQLI_BOTH)) {
         $ind_id = $ind_nicks['nick_id'];

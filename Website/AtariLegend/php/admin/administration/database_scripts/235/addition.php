@@ -31,7 +31,6 @@ while ($game_development = $result2->fetch_array(MYSQLI_BOTH)) {
         or die("Error inserting unfinished releases: ".$mysqli->error);
 }
 
-
 //
 // let's do game_unreleased
 //
@@ -46,4 +45,3 @@ while ($game_unreleased = $result3->fetch_array(MYSQLI_BOTH)) {
     $mysqli->query("UPDATE game_release SET status = 'Unreleased' WHERE game_id = $game_id")
         or die("Error inserting unfinished releases: ".$mysqli->error);
 }
-
