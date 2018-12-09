@@ -10,7 +10,7 @@
  *   Id: interviews_main.php,v 0.10 05/10/2016 23:06 Gatekeeper
  *             - AL 2.0 / creation of section
  *   Id: interviews_main.php,v 0.11 25/04/2018 17:15 STG
- *             - Update making more user friendly 
+ *             - Update making more user friendly
  *
  ***************************************************************************/
 
@@ -72,7 +72,6 @@ while ($article = $sql_articles->fetch_array(MYSQLI_BOTH)) {
 }
 
 $smarty->assign('nr_articles', $v_rows);
-
 
 //Check if back arrow is needed
 if ($v_counter > 0) {

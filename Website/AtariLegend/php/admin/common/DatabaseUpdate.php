@@ -3,7 +3,6 @@ namespace AL\Admin\Common;
 
 /** A database update script to execute */
 class DatabaseUpdate {
-
     const EXECUTE_ON_SUCCESS = "success";
     const EXECUTE_ON_FAILURE = "failure";
 
@@ -40,7 +39,6 @@ class DatabaseUpdate {
         $disable_fk,
         $has_addition_script
     ) {
-
         if (!is_int($id)) {
             die("id must be an integer, but was: '$id'");
         }
@@ -52,7 +50,8 @@ class DatabaseUpdate {
             die("Invalid value '$execute_on' for 'execute_on'. Only ".join(", ", DatabaseUpdate::EXECUTE_ON)." are supported");
         }
         $this->execute_on = $execute_on;
-        $this->condition = str_replace("__DBNAME__", $db_name, $condition);;
+        $this->condition = str_replace("__DBNAME__", $db_name, $condition);
+        ;
         $this->sql = $sql;
 
         if (!is_bool($autoexecute)) {

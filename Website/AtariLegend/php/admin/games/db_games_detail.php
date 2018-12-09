@@ -44,7 +44,7 @@ $controlDao = new \AL\Common\DAO\controlDAO($mysqli);
 $soundHardwareDao = new \AL\Common\DAO\SoundHardwareDAO($mysqli);
 $gameProgressSystemDao = new \AL\Common\DAO\GameProgressSystemDAO($mysqli);
 
-if (isset($game_id)){
+if (isset($game_id)) {
     $stmt = $mysqli->prepare("SELECT game_name FROM game WHERE game_id = ?") or die($mysqli->error);
     $stmt->bind_param("s", $game_id) or die($mysqli->error);
     $stmt->execute() or die($mysqli->error);
@@ -105,8 +105,7 @@ if (isset($action) and $action == 'delete_aka') {
 //If add aka button has been pressed
 //***********************************************************************************
 if (isset($action) and $action == 'game_aka') {
-
-    if ($language_id == ""){
+    if ($language_id == "") {
         $language_id = null;
     }
 
@@ -129,7 +128,7 @@ if (isset($action) and $action == 'game_aka') {
 if (isset($action) and $action == 'update_aka') {
     create_log_entry('Games', $game_id, 'AKA', $game_aka_id, 'Update', $_SESSION['user_id']);
 
-    if ($new_language_id == ""){
+    if ($new_language_id == "") {
         $new_language_id = null;
     }
 
@@ -146,7 +145,6 @@ if (isset($action) and $action == 'update_aka') {
 //If add soundhardware button has been pressed
 //***********************************************************************************
 if (isset($action) and $action == 'add_sound_hardware') {
-
     $soundHardwareDao->addSoundHardwareToGame($game_id, $sound_hardware_id);
 
     create_log_entry('Games', $game_id, 'Sound hardware', $sound_hardware_id, 'Insert', $_SESSION['user_id']);
@@ -159,7 +157,6 @@ if (isset($action) and $action == 'add_sound_hardware') {
 //If delete soundhardware button has been pressed
 //***********************************************************************************
 if (isset($action) and $action == 'delete_sound_hardware') {
-
     $soundHardwareDao->deleteSoundHardwareFromGame($game_id, $sound_hardware_id);
 
     create_log_entry('Games', $game_id, 'Sound hardware', $sound_hardware_id, 'Delete', $_SESSION['user_id']);
@@ -214,21 +211,25 @@ if (isset($action) and $action == 'modify_game') {
 
     //Update the game genre
     $gameGenreDao->setGameGenreForGame($game_id, isset($game_genre) ? $game_genre : []);
-    
+
     //Update the game engine
     $engineDao->setGameEngineForGame($game_id, isset($game_engine) ? $game_engine : []);
-    
+
     //Update the programming language
     $programmingLanguageDao->setProgrammingLanguageForGame($game_id, isset($programming_language) ? $programming_language : []);
-    
+
     //Update the port
-    if ($port_id == ''){$port_id = null;}
+    if ($port_id == '') {
+        $port_id = null;
+    }
     $portDao->setPortForGame($game_id, isset($port_id) ? $port_id : null);
-    
+
     //Update the game progress system
-    if ($progress_system_id == ''){$progress_system_id = null;}
+    if ($progress_system_id == '') {
+        $progress_system_id = null;
+    }
     $gameProgressSystemDao->setProgressSystemForGame($game_id, isset($progress_system_id) ? $progress_system_id : null);
-    
+
     //Update the game controls
     $controlDao->setGameControlForGame($game_id, isset($game_control) ? $game_control : []);
 
@@ -359,7 +360,7 @@ if (isset($action) and $action == 'delete_game') {
                                                 if ($sdbquery->num_rows > 0) {
                                                     $_SESSION['edit_message'] = "Deletion failed - This game has sound hardware linked - Delete it in the appropriate section";
                                                     header("Location: ../games/games_detail.php?game_id=$game_id");
-                                                } else {   
+                                                } else {
                                                     create_log_entry('Games', $game_id, 'Game', $game_id, 'Delete', $_SESSION['user_id']);
 
                                                     $releases = $gameReleaseDao->getReleasesForGame($game_id);

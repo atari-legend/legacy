@@ -121,7 +121,6 @@ foreach ($updates as $update) {
                 'file_name' => $update->getFilename(),
                 'test_result' => ""
             ));
-
         } else {
             // Change is NOT set to auto-execute
             $can_be_executed = $condition_query_result == $update->getExecuteOn();

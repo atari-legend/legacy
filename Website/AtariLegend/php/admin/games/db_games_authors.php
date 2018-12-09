@@ -81,4 +81,3 @@ switch ($action) {
 }
 
 header("Location: games_detail.php?game_id=$game_id#gd_authors");
-?>

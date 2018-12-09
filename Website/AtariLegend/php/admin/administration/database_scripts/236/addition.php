@@ -15,11 +15,9 @@ $result1 = $mysqli->query("DROP TABLE game_unfinished")
 $result2 = $mysqli->query("DROP TABLE game_development")
                             or die("Unable to drop game_development".$mysqli->error);
 
-
 //
 // let's do game_unreleased
 //
 
 $result3 = $mysqli->query("DROP TABLE game_unreleased")
                             or die("Unable to drop game_unreleased".$mysqli->error);
-

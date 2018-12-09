@@ -38,7 +38,8 @@ $smarty->assign("user_id", $_SESSION['user_id']);
 // VALIDATE LINKS THAT HAVE SUBMITTED THROUGH THE FRONTPAGE
 //****************************************************************************************
 
-$result = $mysqli->query("SELECT * FROM website_validate LEFT JOIN users ON (website_validate.user_id = users.user_id)") or die("couldn't query website_validate");
+$result = $mysqli->query("SELECT * FROM website_validate LEFT JOIN users ON (website_validate.user_id = users.user_id)")
+    or die("couldn't query website_validate");
 
 if ($result->num_rows < 1) {
     $section   = "Validate links";

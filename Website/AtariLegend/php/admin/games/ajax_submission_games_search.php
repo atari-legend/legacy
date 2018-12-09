@@ -8,7 +8,7 @@
  *
  *   Id: ajax_submission_games_search.php 31/05/2018 ST Graveyard - creation of file
  ***************************************************************************/
- 
+
 include("../../config/common.php");
 include("../../config/admin.php");
 require_once __DIR__."/../../lib/Db.php";
@@ -23,8 +23,7 @@ $smarty->assign("nr_submission", $GameSubmissionDAO->getGameSubmissionCount());
 
 $date = date_to_timestamp($submsission_searchYear, $submsission_searchMonth, $submsission_searchDay);
 
-if ( $author_search == '-' )
-{ 
+if ($author_search == '-') {
 } else {
     $user_id = $author_search;
 }
