@@ -50,8 +50,7 @@ $mediaScanDao = new \AL\Common\DAO\MediaScanDAO($mysqli);
 //***********************************************************************************
 // Add a new release
 //***********************************************************************************
-if (isset($action) && ($action == 'add_release'))
-{
+if (isset($action) && ($action == 'add_release')) {
     $game = $gameDao->getGame($game_id);
 
     // Do not store an alternative title if it's identical to the game
@@ -60,7 +59,7 @@ if (isset($action) && ($action == 'add_release'))
             $name = null;
         }
     } else {
-       $name = null;
+        $name = null;
     }
 
     if (isset($Date_Year)) {
@@ -72,9 +71,18 @@ if (isset($action) && ($action == 'add_release'))
         $date = null;
     }
 
-    if (isset ($license)) {} else {$license = null;}
-    if (isset ($$type)) {} else {$type = null;}
-    if (isset ($pub_dev_id)) {} else {$pub_dev_id = null;}
+    if (isset($license)) {
+    } else {
+        $license = null;
+    }
+    if (isset($$type)) {
+    } else {
+        $type = null;
+    }
+    if (isset($pub_dev_id)) {
+    } else {
+        $pub_dev_id = null;
+    }
 
     $release_id = $gameReleaseDao->addReleaseForGame(
         $game_id,
@@ -88,17 +96,15 @@ if (isset($action) && ($action == 'add_release'))
     create_log_entry('Game Release', $game_id, 'Game Release', $release_id, 'Insert', $_SESSION['user_id']);
 
     header("Location: ../games/games_release_detail.php?game_id=$game_id&release_id=$release_id&tab=general");
-
 }
 
 //***********************************************************************************
 // Update general release data
 //***********************************************************************************
-if (isset($action) && ($action == 'general'))
-{
+if (isset($action) && ($action == 'general')) {
     $game = $gameDao->getGame($game_id);
 
-// Do not store an alternative title if it's identical to the game
+    // Do not store an alternative title if it's identical to the game
     if (strtolower($name) == strtolower($game->getName())) {
         $name = null;
     }
@@ -134,10 +140,9 @@ if (isset($action) && ($action == 'general'))
 //If add aka button has been pressed
 //***********************************************************************************
 if (isset($action) and $action == 'game_release_aka') {
-
     create_log_entry('Game Release', $game_id, 'Release AKA', $game_release_id, 'Insert', $_SESSION['user_id']);
 
-    if ($language_id == ""){
+    if ($language_id == "") {
         $language_id = null;
     }
 
@@ -151,10 +156,9 @@ if (isset($action) and $action == 'game_release_aka') {
 //If update release_aka link has been pressed
 //***********************************************************************************
 if (isset($action) and $action == 'update_release_aka') {
-
     create_log_entry('Game Release', $game_id, 'Release AKA', $game_release_id, 'Update', $_SESSION['user_id']);
 
-    if ($new_language_id == ""){
+    if ($new_language_id == "") {
         $new_language_id = null;
     }
 
@@ -168,7 +172,6 @@ if (isset($action) and $action == 'update_release_aka') {
 //If delete aka link has been pressed
 //***********************************************************************************
 if (isset($action) and $action == 'delete_release_aka') {
-
     create_log_entry('Game Release', $game_id, 'Release AKA', $game_release_id, 'Delete', $_SESSION['user_id']);
 
     $gameReleaseAkaDao->DeleteAkaForRelease($game_release_aka_id, $game_release_id);
@@ -185,7 +188,7 @@ if (isset($action) && ($action == 'features')) {
 
     if (isset($hd_installable)) {
         $hd_installable = 1;
-    }else{
+    } else {
         $hd_installable = 0;
     }
 
@@ -205,12 +208,10 @@ if (isset($action) && ($action == 'features')) {
     }
 }
 
-
 //***********************************************************************************
 //add a distributor to a release
 //***********************************************************************************
 if (isset($action) && ($action == 'add_distributor')) {
-
     $pubDevDao->addDistributorToRelease($release_id, $distributor_id);
 
     $new_distributor_id = $mysqli->insert_id;
@@ -225,14 +226,12 @@ if (isset($action) && ($action == 'add_distributor')) {
 //remove a distributor to a release
 //***********************************************************************************
 if (isset($action) && ($action == 'remove_distributor')) {
-
     create_log_entry('Game Release', $game_id, 'Distributor', $pub_dev_id, 'Delete', $_SESSION['user_id']);
 
     $pubDevDao->deleteDistributorFromRelease($release_id, $pub_dev_id);
 
     $_SESSION['edit_message'] = "Distributor has been removed";
     header("Location: ../games/games_release_detail.php?game_id=$game_id&release_id=$release_id&tab=general");
-
 }
 
 //***********************************************************************************
@@ -257,8 +256,9 @@ if (isset($action) && ($action == 'scene')) {
 //add a memory enhancement to a release
 //***********************************************************************************
 if (isset($action) && ($action == 'add_memory_enhancement')) {
-
-    if ( $memory_enhancement == '') {$memory_enhancement=null;}
+    if ($memory_enhancement == '') {
+        $memory_enhancement=null;
+    }
 
     $memoryDao->setMemoryForRelease($release_id, $memory_id, $memory_enhancement);
 
@@ -268,12 +268,10 @@ if (isset($action) && ($action == 'add_memory_enhancement')) {
     header("Location: ../games/games_release_detail.php?game_id=$game_id&release_id=$release_id&tab=compatibility");
 }
 
-
 //***********************************************************************************
 //Update a memory enhancement to a release
 //***********************************************************************************
 if (isset($action) && ($action == 'update_memory_enhancement')) {
-
     $memoryDao->UpdateMemoryForRelease($release_id, $memory_id, $new_enhancement);
 
     create_log_entry('Game Release', $game_id, 'Memory Enhancement', $release_id, 'Update', $_SESSION['user_id']);
@@ -282,12 +280,10 @@ if (isset($action) && ($action == 'update_memory_enhancement')) {
     header("Location: ../games/games_release_detail.php?game_id=$game_id&release_id=$release_id&tab=compatibility");
 }
 
-
 //***********************************************************************************
 //Delete a memory enhancement to a release
 //***********************************************************************************
 if (isset($action) && ($action == 'remove_memory_enhancement')) {
-
     $memoryDao->DeleteMemoryForRelease($release_id, $memory_id);
 
     create_log_entry('Game Release', $game_id, 'Memory Enhancement', $release_id, 'Delete', $_SESSION['user_id']);
@@ -300,7 +296,6 @@ if (isset($action) && ($action == 'remove_memory_enhancement')) {
 //add a memory minimum to a release
 //***********************************************************************************
 if (isset($action) && ($action == 'add_minimum_memory')) {
-
     $memoryDao->setMinimumMemoryForRelease($release_id, $memory_id);
 
     create_log_entry('Game Release', $game_id, 'Minimum Memory', $release_id, 'Insert', $_SESSION['user_id']);
@@ -313,7 +308,6 @@ if (isset($action) && ($action == 'add_minimum_memory')) {
 //Delete a memory minimum to a release
 //***********************************************************************************
 if (isset($action) && ($action == 'remove_minimum_memory')) {
-
     $memoryDao->DeleteMinimumMemoryForRelease($release_id, $memory_id);
 
     create_log_entry('Game Release', $game_id, 'Minimum Memory', $release_id, 'Delete', $_SESSION['user_id']);
@@ -326,7 +320,6 @@ if (isset($action) && ($action == 'remove_minimum_memory')) {
 //Delete a memory incompatible to a release
 //***********************************************************************************
 if (isset($action) && ($action == 'remove_incompatible_memory')) {
-
     $memoryDao->deleteMemoryIncompatibleForRelease($release_id, $memory_id);
 
     create_log_entry('Game Release', $game_id, 'Incompatible Memory', $release_id, 'Delete', $_SESSION['user_id']);
@@ -339,7 +332,6 @@ if (isset($action) && ($action == 'remove_incompatible_memory')) {
 //add a memory incompatible to a release
 //***********************************************************************************
 if (isset($action) && ($action == 'add_incompatible_memory')) {
-
     $memoryDao->setMemoryIncompatibleForRelease($release_id, $memory_id);
 
     create_log_entry('Game Release', $game_id, 'Incompatible Memory', $release_id, 'Insert', $_SESSION['user_id']);
@@ -352,8 +344,7 @@ if (isset($action) && ($action == 'add_incompatible_memory')) {
 //add a incompatible TOS to a release
 //***********************************************************************************
 if (isset($action) && ($action == 'add_tos_incompatible')) {
-
-    if ($language_id == ''){
+    if ($language_id == '') {
         $language_id = null;
     }
 
@@ -369,7 +360,6 @@ if (isset($action) && ($action == 'add_tos_incompatible')) {
 //Update incompatible TOS language for a release
 //***********************************************************************************
 if (isset($action) && ($action == 'update_tos_incompatible')) {
-
     $tosDao->updateTosLanguageForRelease($release_id, $tos_id, $new_language_id);
 
     create_log_entry('Game Release', $game_id, 'Incompatible TOS', $release_id, 'Update', $_SESSION['user_id']);
@@ -382,7 +372,6 @@ if (isset($action) && ($action == 'update_tos_incompatible')) {
 //Delete incompatible TOS language for a release
 //***********************************************************************************
 if (isset($action) && ($action == 'remove_tos_incompatible')) {
-
     $tosDao->deleteTosForRelease($release_id, $tos_id);
 
     create_log_entry('Game Release', $game_id, 'Incompatible TOS', $release_id, 'Delete', $_SESSION['user_id']);
@@ -395,7 +384,6 @@ if (isset($action) && ($action == 'remove_tos_incompatible')) {
 //Add the copy protection for a release
 //***********************************************************************************
 if (isset($action) && ($action == 'add_copy_protection')) {
-
     $copyProtectionDao->addCopyProtectionForRelease($release_id, isset($protection_id) ? $protection_id : [], $copy_protection_note);
 
     create_log_entry('Game Release', $game_id, 'Copy Protection', $release_id, 'Add', $_SESSION['user_id']);
@@ -408,7 +396,6 @@ if (isset($action) && ($action == 'add_copy_protection')) {
 //Delete the copy protection for a release
 //***********************************************************************************
 if (isset($action) && ($action == 'remove_copy_protection')) {
-
     $copyProtectionDao->deleteCopyProtectionForRelease($release_id, isset($protection_id) ? $protection_id : []);
 
     create_log_entry('Game Release', $game_id, 'Copy Protection', $release_id, 'Delete', $_SESSION['user_id']);
@@ -421,7 +408,6 @@ if (isset($action) && ($action == 'remove_copy_protection')) {
 //Add the disk protection for a release
 //***********************************************************************************
 if (isset($action) && ($action == 'add_disk_protection')) {
-
     $diskProtectionDao->addDiskProtectionForRelease($release_id, isset($protection_id) ? $protection_id : [], $disk_protection_note);
 
     create_log_entry('Game Release', $game_id, 'Disk Protection', $release_id, 'Add', $_SESSION['user_id']);
@@ -434,7 +420,6 @@ if (isset($action) && ($action == 'add_disk_protection')) {
 //Delete the disk protection for a release
 //***********************************************************************************
 if (isset($action) && ($action == 'remove_disk_protection')) {
-
     $diskProtectionDao->deleteDiskProtectionForRelease($release_id, isset($protection_id) ? $protection_id : []);
 
     create_log_entry('Game Release', $game_id, 'Disk Protection', $release_id, 'Delete', $_SESSION['user_id']);
@@ -447,7 +432,6 @@ if (isset($action) && ($action == 'remove_disk_protection')) {
 //add a language to a release
 //***********************************************************************************
 if (isset($action) && ($action == 'add_release_language')) {
-
     $languageDao->addLanguageForRelease($release_id, $language_id);
 
     $new_language_id = $mysqli->insert_id;
@@ -462,22 +446,19 @@ if (isset($action) && ($action == 'add_release_language')) {
 //remove a language from a release
 //***********************************************************************************
 if (isset($action) && ($action == 'remove_release_language')) {
-
     create_log_entry('Game Release', $game_id, 'Language', $release_id, 'Delete', $_SESSION['user_id']);
 
     $languageDao->deleteLanguageFromRelease($release_id, $language_id);
 
     $_SESSION['edit_message'] = "Language has been removed";
     header("Location: ../games/games_release_detail.php?game_id=$game_id&release_id=$release_id&tab=general");
-
 }
 
 //***********************************************************************************
 //add a system enhancement to a release
 //***********************************************************************************
 if (isset($action) && ($action == 'add_system_enhanced')) {
-
-    if ($enhancement_id == ''){
+    if ($enhancement_id == '') {
         $enhancement_id = null;
     }
 
@@ -493,7 +474,6 @@ if (isset($action) && ($action == 'add_system_enhanced')) {
 //Update system enhancement for a release
 //***********************************************************************************
 if (isset($action) && ($action == 'update_system_enhanced')) {
-
     $systemDao->updateEnhancedSystemForRelease($release_id, $system_id, $new_enhancement_id);
 
     create_log_entry('Game Release', $game_id, 'System Enhancement', $release_id, 'Update', $_SESSION['user_id']);
@@ -506,7 +486,6 @@ if (isset($action) && ($action == 'update_system_enhanced')) {
 //Update system enhancement for a release
 //***********************************************************************************
 if (isset($action) && ($action == 'remove_system_enhanced')) {
-
     $systemDao->deleteEnhancedSystemForRelease($release_id, $system_id);
 
     create_log_entry('Game Release', $game_id, 'System Enhancement', $release_id, 'Delete', $_SESSION['user_id']);
@@ -519,8 +498,7 @@ if (isset($action) && ($action == 'remove_system_enhanced')) {
 //add a media to a release
 //***********************************************************************************
 if (isset($action) && ($action == 'add_media')) {
-
-    if ($media_label == ''){
+    if ($media_label == '') {
         $media_label = null;
     }
 
@@ -536,7 +514,6 @@ if (isset($action) && ($action == 'add_media')) {
 //delete a media from a release
 //***********************************************************************************
 if (isset($action) && ($action == 'remove_media')) {
-
     $mediaDao->deleteMediaFromRelease($media_id);
 
     create_log_entry('Game Release', $game_id, 'Media', $release_id, 'Delete', $_SESSION['user_id']);
@@ -570,7 +547,6 @@ if (isset($action) && ($action == 'Add file')) {
 //delete a file from a media
 //***********************************************************************************
 if (isset($action) && ($action == 'remove_dump')) {
-
     $dumpDao->deleteDumpFromMedia($dump_id, $game_file_path);
 
     create_log_entry('Game Release', $game_id, 'Dump', $release_id, 'Delete', $_SESSION['user_id']);
@@ -583,12 +559,11 @@ if (isset($action) && ($action == 'remove_dump')) {
 //add a media scan
 //***********************************************************************************
 if (isset($action) && ($action == 'Add scan')) {
-
     $image = $_FILES['image'];
 
     //first we need to check if this scan type already exists for this medium
     $scan_check = $mediaScanDao->checkForScanType($media_id, $type);
-    if ($scan_check == null){
+    if ($scan_check == null) {
         $mediaScanDao->addMediaScanToMedia($media_id, $type, $media_scan_save_path, $image);
 
         create_log_entry('Game Release', $game_id, 'Media Scan', $release_id, 'Insert', $_SESSION['user_id']);
@@ -597,7 +572,6 @@ if (isset($action) && ($action == 'Add scan')) {
         $_SESSION['edit_message'] = "This scan type is already used for this media";
     }
 
-
     header("Location: ../games/games_release_detail.php?game_id=$game_id&release_id=$release_id&tab=dump");
 }
 
@@ -605,7 +579,6 @@ if (isset($action) && ($action == 'Add scan')) {
 //remove scan from media
 //***********************************************************************************
 if (isset($action) && ($action == 'remove_scan')) {
-
     $mediaScanDao->deleteScanFromMedia($media_scan_id, $media_scan_save_path, $ext);
 
     create_log_entry('Game Release', $game_id, 'Media Scan', $release_id, 'Delete', $_SESSION['user_id']);
@@ -618,14 +591,12 @@ if (isset($action) && ($action == 'remove_scan')) {
 //Edit the media label
 //***********************************************************************************
 if (isset($action) && ($action == 'edit_media')) {
-
     $mediaDao->updateMedia($media_id, $media_label, $media_type_id);
     create_log_entry('Game Release', $game_id, 'Media', $release_id, 'Update', $_SESSION['user_id']);
     $_SESSION['edit_message'] = "label updated for this media";
 
     header("Location: ../games/games_release_detail.php?game_id=$game_id&release_id=$release_id&tab=dump");
 }
-
 
 //close the connection
 mysqli_close($mysqli);

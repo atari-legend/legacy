@@ -59,7 +59,6 @@ $mediaScanTypeDao = new \AL\Common\DAO\MediaScanTypeDAO($mysqli);
 $soundHardwareDao = new \AL\Common\DAO\SoundHardwareDAO($mysqli);
 $gameProgressSystemDao = new \AL\Common\DAO\GameProgressSystemDAO($mysqli);
 
-
 //***********************************************************************************
 //get the engines
 //***********************************************************************************

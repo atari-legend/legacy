@@ -32,7 +32,8 @@ if (isset($action) and $action == "addnew_link") {
     $name      = trim($name);
     $descr = $mysqli->real_escape_string($descr);
 
-    $mysqli->query("INSERT INTO website (website_name, website_url, website_date, description, user_id) VALUES ('$name', '$url','$timestamp', '$descr', '$user_id')") or die("Unable to insert website into database");
+    $mysqli->query("INSERT INTO website (website_name, website_url, website_date, description, user_id)
+        VALUES ('$name', '$url','$timestamp', '$descr', '$user_id')") or die("Unable to insert website into database");
     $website_id = $mysqli->insert_id;
 
     $karma_action = "weblink";
@@ -40,7 +41,8 @@ if (isset($action) and $action == "addnew_link") {
     UserKarma($user_id, $karma_action);
 
     if ($category !== '') {
-        $mysqli->query("INSERT INTO website_category_cross (website_id, website_category_id) VALUES ('$website_id', '$category')") or die("Unable to insert website category into database");
+        $mysqli->query("INSERT INTO website_category_cross (website_id, website_category_id)
+            VALUES ('$website_id', '$category')") or die("Unable to insert website category into database");
     }
 
     $_SESSION['edit_message'] = "Link added to the database";
@@ -56,7 +58,8 @@ if (isset($action) and $action == "add_cat") {
     // add category to the tables
     //****************************************************************************************
     if ($cat_id !== '') {
-        $mysqli->query("INSERT INTO website_category_cross (website_id, website_category_id) VALUES ('$website_id', '$cat_id')") or die("Unable to insert category into database");
+        $mysqli->query("INSERT INTO website_category_cross (website_id, website_category_id)
+            VALUES ('$website_id', '$cat_id')") or die("Unable to insert category into database");
     }
 
     create_log_entry('Links', $website_id, 'Category', $cat_id, 'Insert', $_SESSION['user_id']);
@@ -73,7 +76,9 @@ if (isset($action) and $action == "delete_category") {
     if ($category_id !== '') {
         create_log_entry('Links', $website_id, 'Category', $category_id, 'Delete', $_SESSION['user_id']);
 
-        $sql = $mysqli->query("DELETE FROM website_category_cross WHERE website_category_id = '$category_id' and website_id = '$website_id'") or die("Failed to delete category");
+        $sql = $mysqli->query("DELETE FROM website_category_cross
+            WHERE website_category_id = '$category_id' and website_id = '$website_id'")
+            or die("Failed to delete category");
     }
 
     $_SESSION['edit_message'] = "Link Category deleted from database";
@@ -85,7 +90,8 @@ if (isset($action) and $action == "link_delete") {
     //****************************************************************************************
     // Delete the links from the tables
     //****************************************************************************************
-    $RESULT = $mysqli->query("SELECT website_category_id FROM website_category_cross WHERE website_id = '$website_id'") or die("Unable to select the website_category_id");
+    $RESULT = $mysqli->query("SELECT website_category_id FROM website_category_cross WHERE website_id = '$website_id'")
+        or die("Unable to select the website_category_id");
     $rowcat = $RESULT->fetch_array(MYSQLI_BOTH);
 
     $website_query = $mysqli->query("SELECT website_imgext FROM website WHERE website_id='$website_id'");
@@ -97,8 +103,10 @@ if (isset($action) and $action == "link_delete") {
 
     create_log_entry('Links', $website_id, 'Link', $website_id, 'Delete', $_SESSION['user_id']);
 
-    $sql = $mysqli->query("DELETE FROM website WHERE website_id = '$website_id'") or die("Failed to delete website");
-    $sql = $mysqli->query("DELETE FROM website_category_cross WHERE website_id = '$website_id'") or die("Failed to delete website");
+    $sql = $mysqli->query("DELETE FROM website WHERE website_id = '$website_id'")
+        or die("Failed to delete website");
+    $sql = $mysqli->query("DELETE FROM website_category_cross WHERE website_id = '$website_id'")
+        or die("Failed to delete website");
 
     //mysqli_close();
 
@@ -149,7 +157,8 @@ if (isset($action) and $action == 'modify_link') {
         list($website_imgext) = $website_query->fetch_array(MYSQLI_BOTH);
         $full_filename = "$website_image_save_path$website_id.$website_imgext";
 
-        $mysqli->query("UPDATE website SET website_imgext=null WHERE website_id='$website_id'") or die("unable to delete the file from the database");
+        $mysqli->query("UPDATE website SET website_imgext=null WHERE website_id='$website_id'")
+            or die("unable to delete the file from the database");
         unlink("$website_image_save_path$website_id.$website_imgext") or die("unable to delete the file from server");
     }
 
@@ -157,9 +166,13 @@ if (isset($action) and $action == 'modify_link') {
     $website_description_text = $mysqli->real_escape_string($website_description_text);
     $website_description_text = trim($website_description_text);
     if (isset($website_inactive)) {
-        $mysqli->query("UPDATE website SET website_name='$website_name', website_url='$website_url', description='$website_description_text', inactive=TRUE WHERE website_id='$website_id'") or die($mysqli->error);
+        $mysqli->query("UPDATE website SET website_name='$website_name', website_url='$website_url',
+            description='$website_description_text', inactive=TRUE WHERE website_id='$website_id'")
+            or die($mysqli->error);
     } else {
-        $mysqli->query("UPDATE website SET website_name='$website_name', website_url='$website_url', description='$website_description_text', inactive=FALSE WHERE website_id='$website_id'") or die($mysqli->error);
+        $mysqli->query("UPDATE website SET website_name='$website_name', website_url='$website_url',
+            description='$website_description_text', inactive=FALSE WHERE website_id='$website_id'")
+            or die($mysqli->error);
     }
 
     create_log_entry('Links', $website_id, 'Link', $website_id, 'Update', $_SESSION['user_id']);
@@ -172,11 +185,13 @@ if (isset($action) and $action == 'modify_link') {
 }
 
 if (isset($action) and $action == "approve_link") {
-    //**************************************************************************************************************************
-    // This is where the actual links will be inserted into the DB if they have been submitted from the frontpage and validated.
-    //**************************************************************************************************************************
+    //**************************************************************************************************
+    // This is where the actual links will be inserted into the DB if they have been submitted from the
+    // frontpage and validated.
+    //**************************************************************************************************
 
-    $result = $mysqli->query("SELECT * FROM website_validate WHERE website_id='$validate_website_id'") or die("couldn't query website_validate");
+    $result = $mysqli->query("SELECT * FROM website_validate WHERE website_id='$validate_website_id'")
+        or die("couldn't query website_validate");
 
     list($website_id, $name, $url, $website_date, $category, $descr, $user_id) = $result->fetch_array(MYSQLI_BOTH);
 
@@ -184,14 +199,17 @@ if (isset($action) and $action == "approve_link") {
 
     //UserKarma($user_id,$karma_action);
 
-    $mysqli->query("INSERT INTO website (website_name, website_url, website_date, description, user_id) VALUES ('$validate_website_name', '$validate_website_url','$website_date','$descr', $user_id)") or die("Unable to insert validated website: ".$mysqli->error);
+    $mysqli->query("INSERT INTO website (website_name, website_url, website_date, description, user_id)
+        VALUES ('$validate_website_name', '$validate_website_url','$website_date','$descr', $user_id)")
+        or die("Unable to insert validated website: ".$mysqli->error);
     $website_id = $mysqli->insert_id;
 
     $RESULT  = $mysqli->query("SELECT * FROM website ORDER BY website_id DESC LIMIT 0,1");
     $rowlink = $RESULT->fetch_array(MYSQLI_BOTH);
 
     if (isset($category)) {
-        $mysqli->query("INSERT INTO website_category_cross (website_id, website_category_id) VALUES ('$rowlink[website_id]', '$validate_category')");
+        $mysqli->query("INSERT INTO website_category_cross (website_id, website_category_id)
+            VALUES ('$rowlink[website_id]', '$validate_category')");
     }
 
     $sql = $mysqli->query("DELETE FROM website_validate WHERE website_id = '$validate_website_id'");
@@ -204,9 +222,9 @@ if (isset($action) and $action == "approve_link") {
 }
 
 if (isset($action) and $action == "val_delete") {
-    //**************************************************************************************************************************
+    //******************************************************************************************************
     // This is where we delete links that has been submitted that we don't want.
-    //**************************************************************************************************************************
+    //******************************************************************************************************
     create_log_entry('Links', $website_id, 'Link submit', $website_id, 'Delete', $_SESSION['user_id']);
 
     $sql = $mysqli->query("DELETE FROM website_validate WHERE website_id = '$website_id'");
@@ -218,9 +236,9 @@ if (isset($action) and $action == "val_delete") {
 }
 
 if (isset($action) and $action == "new_cat") {
-    //**************************************************************************************************************************
+    //******************************************************************************************************
     // This is where we insert new categories into the archive
-    //**************************************************************************************************************************
+    //******************************************************************************************************
 
     $sql = $mysqli->query("INSERT INTO website_category (website_category_name) VALUES ('$newcat')");
 
@@ -240,7 +258,8 @@ if (isset($action) and $action == 'del_cat') {
 
     // move the links connected to a category before killing the category.
     if ($move == "yes") {
-        $mysqli->query("UPDATE website_category_cross SET website_category_id='$new_category' WHERE website_category_id='$category_id'");
+        $mysqli->query("UPDATE website_category_cross SET website_category_id='$new_category'
+            WHERE website_category_id='$category_id'");
     }
 
     // Delete!
@@ -258,11 +277,13 @@ if (isset($action) and $action == 'del_cat') {
 //****************************************************************************************
 if (isset($action) and $action == "del_category") {
     //check if the categorie has some websites linked to it
-    $website_count = $mysqli->query("SELECT website_id FROM website_category_cross WHERE website_category_id = '$category_id'");
+    $website_count = $mysqli->query("SELECT website_id FROM website_category_cross
+        WHERE website_category_id = '$category_id'");
 
     if ($website_count->num_rows == 0) {
         create_log_entry('Links cat', $category_id, 'Category', $category_id, 'Delete', $_SESSION['user_id']);
-        $sql = $mysqli->query("DELETE FROM website_category WHERE website_category_id = '$category_id'") or die("Failed to delete category");
+        $sql = $mysqli->query("DELETE FROM website_category WHERE website_category_id = '$category_id'")
+            or die("Failed to delete category");
         $_SESSION['edit_message'] = "Link category deleted";
     } else {
         $_SESSION['edit_message'] = "deletion failed - Category has websites linked to it";

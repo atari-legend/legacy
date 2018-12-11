@@ -67,7 +67,6 @@ $sql_game = $mysqli->query("SELECT game_name,
                WHERE game.game_id='$game_id'") or die("Error getting game info: " . $mysqli->error);
 
 while ($game_info = $sql_game->fetch_array(MYSQLI_BOTH)) {
-
     $smarty->assign('game_info', array(
         'game_name' => $game_info['game_name'],
         'game_id' => $game_info['game_id'],

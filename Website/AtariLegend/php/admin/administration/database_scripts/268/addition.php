@@ -25,7 +25,8 @@ $stmt = \AL\Db\execute_query(
         game_release.game_id
     HAVING
         C = 1",
-    null, null
+    null,
+    null
 );
 
 $stmt->store_result();
@@ -33,7 +34,9 @@ $stmt->store_result();
 \AL\Db\bind_result(
     "migrate_boxscans_to_single_release: Get single release games",
     $stmt,
-    $game_id, $game_release_id, $count
+    $game_id,
+    $game_release_id,
+    $count
 );
 
 while ($stmt->fetch()) {
@@ -43,7 +46,8 @@ while ($stmt->fetch()) {
         $mysqli,
         "SELECT game_boxscan_id, imgext, game_boxscan_side FROM game_boxscan
         WHERE game_id = ?",
-        "i", $game_id
+        "i",
+        $game_id
     );
 
     $stmt2->store_result();
@@ -51,12 +55,18 @@ while ($stmt->fetch()) {
     \AL\Db\bind_result(
         "migrate_boxscans_to_single_release: Get single release games",
         $stmt2,
-        $game_boxscan_id, $imgext, $side
+        $game_boxscan_id,
+        $imgext,
+        $side
     );
 
     while ($stmt2->fetch()) {
         // For each boxscan, create a new game_release_scan
-        $id = $gameReleaseScanDao->addScanToRelease($game_release_id, $side == 0 ? 'Box front' : 'Box back', $imgext, null);
+        $id = $gameReleaseScanDao->addScanToRelease(
+            $game_release_id, $side == 0 ? 'Box front' : 'Box back',
+            $imgext,
+            null
+        );
         // Move the image in the new location
         rename($game_boxscan_save_path.$game_boxscan_id.".".$imgext, $game_release_scan_save_path.$id.".".$imgext);
         // Delete our game_boxscan row

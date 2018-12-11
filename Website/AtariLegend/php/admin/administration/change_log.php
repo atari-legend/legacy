@@ -67,13 +67,14 @@ while ($log = $sql_log->fetch_array(MYSQLI_BOTH)) {
     if ($log['section'] == 'Games') {
         $section_link = ("../games/games_detail.php" . '?game_id=' . $log['section_id']);
 
-        if ($log['sub_section'] == 'Game' or $log['sub_section'] == 'AKA' or $log['sub_section'] == 'Year' or $log['sub_section'] == 'Submission' or $log['sub_section'] == 'Sound hardware') {
+        if ($log['sub_section'] == 'Game' or $log['sub_section'] == 'AKA' or $log['sub_section'] == 'Year'
+            or $log['sub_section'] == 'Submission' or $log['sub_section'] == 'Sound hardware') {
             $subsection_link = ("../games/games_detail.php" . '?game_id=' . $log['sub_section_id']);
         }
 
-         if ($log['sub_section'] == 'Release'){
+        if ($log['sub_section'] == 'Release') {
             $subsection_link = "";
-         }
+        }
 
         if ($log['sub_section'] == 'Creator') {
             $subsection_link = ("../individuals/individuals_edit.php" . '?ind_id=' . $log['sub_section_id']);
@@ -88,30 +89,34 @@ while ($log = $sql_log->fetch_array(MYSQLI_BOTH)) {
         }
 
         if ($log['sub_section'] == 'Fact') {
-            $subsection_link = ("../games/games_facts.php" . '?game_id=' . $log['sub_section_id'] . '&game_name=' . $log['section_name']);
+            $subsection_link = ("../games/games_facts.php" . '?game_id=' . $log['sub_section_id']
+                . '&game_name=' . $log['section_name']);
         }
 
         if ($log['sub_section'] == 'Screenshot') {
-            $subsection_link = ("../games/games_screenshot_add.php" . '?game_id=' . $log['sub_section_id'] . '&game_name=' . $log['section_name']);
+            $subsection_link = ("../games/games_screenshot_add.php" . '?game_id=' . $log['sub_section_id']
+                . '&game_name=' . $log['section_name']);
         }
 
         if ($log['sub_section'] == 'Mag score') {
-            $subsection_link = ("../magazine/magazine_review_score.php" . '?game_id=' . $log['sub_section_id'] . '&game_name=' . $log['section_name']);
+            $subsection_link = ("../magazine/magazine_review_score.php" . '?game_id=' . $log['sub_section_id']
+                . '&game_name=' . $log['section_name']);
         }
 
         if ($log['sub_section'] == 'Box back' or $log['sub_section'] == 'Box front') {
-            $subsection_link = ("../games/games_box.php" . '?game_id=' . $log['sub_section_id'] . '&game_name=' . $log['section_name']);
+            $subsection_link = ("../games/games_box.php" . '?game_id=' . $log['sub_section_id'] . '&game_name='
+                . $log['section_name']);
         }
 
         if ($log['sub_section'] == 'Similar') {
-            $subsection_link = ("../games/games_similar.php" . '?game_id=' . $log['sub_section_id'] . '&game_name=' . $log['section_name']);
+            $subsection_link = ("../games/games_similar.php" . '?game_id=' . $log['sub_section_id'] . '&game_name='
+                . $log['section_name']);
         }
 
         if ($log['sub_section'] == 'Comment') {
             if ($log['action'] == 'Delete') {
                 $subsection_link = ("../administration/change_log.php");
             } else {
-                //$subsection_link = ("../games/games_comment_edit.php" . '?game_user_comments_id=' . $log['sub_section_id'] . '&v_counter=0');
                 $subsection_link = ("../administration/comments.php");
             }
         }
@@ -121,7 +126,8 @@ while ($log = $sql_log->fetch_array(MYSQLI_BOTH)) {
                 //$subsection_link = ("../games/games_review_add.php" . '?game_id=' . $log['section_id']);
                 $subsection_link = ("../games/games_review.php");
             } else {
-                $subsection_link = ("../games/games_review_edit.php" . '?reviewid=' . $log['sub_section_id'] . '&game_id=' . $log['section_id']);
+                $subsection_link = ("../games/games_review_edit.php" . '?reviewid=' . $log['sub_section_id']
+                    . '&game_id=' . $log['section_id']);
             }
         }
 
@@ -132,10 +138,12 @@ while ($log = $sql_log->fetch_array(MYSQLI_BOTH)) {
 
     //  the GAMES SERIES SECTION
     if ($log['section'] == 'Game series') {
-        $section_link = ("../games/games_series_editor.php" . '?game_series_id=' . $log['section_id'] . '&series_page=series_editor');
+        $section_link = ("../games/games_series_editor.php" . '?game_series_id=' . $log['section_id']
+            . '&series_page=series_editor');
 
         if ($log['sub_section'] == 'Series') {
-            $subsection_link = ("../games/games_series_editor.php" . '?game_series_id=' . $log['section_id'] . '&series_page=series_editor');
+            $subsection_link = ("../games/games_series_editor.php" . '?game_series_id=' . $log['section_id']
+                . '&series_page=series_editor');
         }
 
         if ($log['sub_section'] == 'Game') {
@@ -221,7 +229,8 @@ while ($log = $sql_log->fetch_array(MYSQLI_BOTH)) {
     if ($log['section'] == 'Individuals') {
         $section_link = ("../individuals/individuals_edit.php" . '?ind_id=' . $log['section_id']);
 
-        if ($log['sub_section'] == 'Individual' or $log['sub_section'] == 'Image' or $log['sub_section'] == 'Nickname') {
+        if ($log['sub_section'] == 'Individual' or $log['sub_section'] == 'Image'
+            or $log['sub_section'] == 'Nickname') {
             $subsection_link = $section_link;
         }
     }
@@ -248,7 +257,6 @@ while ($log = $sql_log->fetch_array(MYSQLI_BOTH)) {
             if ($log['action'] == 'Delete') {
                 $subsection_link = ("../administration/change_log.php");
             } else {
-                //$subsection_link = ("../interviews/interviews_comment_edit.php" . '?interview_user_comments_id=' . $log['sub_section_id'] . '&v_counter=0');
                 $subsection_link = ("../administration/comments.php");
             }
         }
@@ -256,14 +264,12 @@ while ($log = $sql_log->fetch_array(MYSQLI_BOTH)) {
 
     //  the REVIEW SECTION
     if ($log['section'] == 'Reviews') {
-        //$section_link = ("../games/games_review_comment_edit.php" . '?review_user_comments_id=' . $log['sub_section_id'] . '&v_counter=0');
         $section_link = ("../administration/comments.php");
 
         if ($log['sub_section'] == 'Comment') {
             if ($log['action'] == 'Delete') {
                 $subsection_link = ("../administration/change_log.php");
             } else {
-                //$subsection_link = ("../games/games_review_comment_edit.php" . '?review_user_comments_id=' . $log['sub_section_id'] . '&v_counter=0');
                 $subsection_link = ("../administration/comments.php");
             }
         }
@@ -291,7 +297,8 @@ while ($log = $sql_log->fetch_array(MYSQLI_BOTH)) {
     if ($log['section'] == 'Menu set') {
         $section_link = ("../menus/menus_disk_list.php" . '?menu_sets_id=' . $log['section_id']);
 
-        if ($log['sub_section'] == 'Menu set' or $log['sub_section'] == 'Menu disk (multiple)' or $log['sub_section'] == 'Menu type' or $log['sub_section'] == 'Menu disk') {
+        if ($log['sub_section'] == 'Menu set' or $log['sub_section'] == 'Menu disk (multiple)'
+            or $log['sub_section'] == 'Menu type' or $log['sub_section'] == 'Menu disk') {
             $subsection_link = $section_link;
         }
 
@@ -314,12 +321,14 @@ while ($log = $sql_log->fetch_array(MYSQLI_BOTH)) {
 
         if ($log['sub_section'] == 'Subcrew') {
             $subsection_link = "../crew/crew_editor.php?crewbrowse=&crewsearch=&crew_select=" . $log['sub_section_id'];
-            $section_link    = "../crew/crew_genealogy.php?action=genealogy&crewbrowse=&crewsearch=&crew_select=" . $log['section_id'];
+            $section_link    = "../crew/crew_genealogy.php?action=genealogy&crewbrowse=&crewsearch=&crew_select="
+                . $log['section_id'];
         }
 
         if ($log['sub_section'] == 'Member' or $log['sub_section'] == 'Nickname') {
             $subsection_link = ("../individuals/individuals_edit.php" . '?ind_id=' . $log['sub_section_id']);
-            $section_link    = "../crew/crew_genealogy.php?action=genealogy&crewbrowse=&crewsearch=&crew_select=" . $log['section_id'];
+            $section_link    = "../crew/crew_genealogy.php?action=genealogy&crewbrowse=&crewsearch=&crew_select="
+                . $log['section_id'];
         }
     }
 
@@ -367,7 +376,6 @@ while ($log = $sql_log->fetch_array(MYSQLI_BOTH)) {
             if ($log['action'] == 'Delete') {
                 $subsection_link = ("../administration/comments.php");
             } else {
-                //$subsection_link = ("../interviews/interviews_comment_edit.php" . '?interview_user_comments_id=' . $log['sub_section_id'] . '&v_counter=0');
                 $subsection_link = ("../administration/comments.php");
             }
         }
@@ -474,7 +482,8 @@ while ($log = $sql_log->fetch_array(MYSQLI_BOTH)) {
         }
 
         if ($log['sub_section'] == 'Crew') {
-            $subsection_link = ("../crew/crew_editor.php?crewbrowse=&crewsearch=&crew_select=" . $log['sub_section_id']);
+            $subsection_link = ("../crew/crew_editor.php?crewbrowse=&crewsearch=&crew_select="
+                . $log['sub_section_id']);
         }
 
         if ($log['sub_section'] == 'Authors') {
@@ -505,14 +514,21 @@ while ($log = $sql_log->fetch_array(MYSQLI_BOTH)) {
 
     //  the GAMES RELEASE SECTION
     if ($log['section'] == 'Game Release') {
-        $section_link    = ("../games/games_release_detail.php" . '?game_id=' . $log['section_id'] . '&release_id=' . $log['sub_section_id']);
-        if ($log['sub_section'] == 'Game Release' OR $log['sub_section'] == 'Release Info' OR $log['sub_section'] == 'Release AKA' OR $log['sub_section'] == 'Compatibility'
-            OR $log['sub_section'] == 'Distributor' OR $log['sub_section'] == 'Scene' OR $log['sub_section'] == 'Memory Enhancement' OR $log['sub_section'] == 'Minimum Memory'
-            OR $log['sub_section'] == 'Tos' OR $log['sub_section'] == 'Incompatible TOS' OR $log['sub_section'] == 'Protection' OR $log['sub_section'] == 'Language'
-            OR $log['sub_section'] == 'Disk Protection' OR $log['sub_section'] == 'Enhancement' OR $log['sub_section'] == 'System Enhancement' OR $log['sub_section'] == 'Incompatible Memory'
-            OR $log['sub_section'] == 'Copy Protection' OR $log['sub_section'] == 'Media Type' OR $log['sub_section'] == 'Media Scan Type' OR $log['sub_section'] == 'Media'
-            OR $log['sub_section'] == 'Dump' OR $log['sub_section'] == 'Media Scan' OR $log['sub_section'] == 'Scan') {
-            $subsection_link = ("../games/games_release_detail.php" . '?game_id=' . $log['section_id'] . '&release_id=' . $log['sub_section_id']);
+        $section_link    = ("../games/games_release_detail.php" . '?game_id=' . $log['section_id'] . '&release_id='
+            . $log['sub_section_id']);
+        if ($log['sub_section'] == 'Game Release' or $log['sub_section'] == 'Release Info'
+            or $log['sub_section'] == 'Release AKA' or $log['sub_section'] == 'Compatibility'
+            or $log['sub_section'] == 'Distributor' or $log['sub_section'] == 'Scene'
+            or $log['sub_section'] == 'Memory Enhancement' or $log['sub_section'] == 'Minimum Memory'
+            or $log['sub_section'] == 'Tos' or $log['sub_section'] == 'Incompatible TOS'
+            or $log['sub_section'] == 'Protection' or $log['sub_section'] == 'Language'
+            or $log['sub_section'] == 'Disk Protection' or $log['sub_section'] == 'Enhancement'
+            or $log['sub_section'] == 'System Enhancement' or $log['sub_section'] == 'Incompatible Memory'
+            or $log['sub_section'] == 'Copy Protection' or $log['sub_section'] == 'Media Type'
+            or $log['sub_section'] == 'Media Scan Type' or $log['sub_section'] == 'Media'
+            or $log['sub_section'] == 'Dump' or $log['sub_section'] == 'Media Scan' or $log['sub_section'] == 'Scan') {
+            $subsection_link = ("../games/games_release_detail.php" . '?game_id=' . $log['section_id']
+                . '&release_id=' . $log['sub_section_id']);
         }
     }
 
@@ -534,7 +550,8 @@ while ($log = $sql_log->fetch_array(MYSQLI_BOTH)) {
 if ($v_counter > 0) {
     // Build the link
     if ($action == 'log_search') {
-        $v_linkback = ("change_log.php?action=log_search" . '&Date_Year=' . ($Date_Year) . '&Date_Month=' . ($Date_Month) . '&Date_Day=' . ($Date_Day) . '&v_counter=' . ($v_counter - 25));
+        $v_linkback = ("change_log.php?action=log_search" . '&Date_Year=' . ($Date_Year) . '&Date_Month='
+            . ($Date_Month) . '&Date_Day=' . ($Date_Day) . '&v_counter=' . ($v_counter - 25));
     } else {
         $v_linkback = ("change_log.php" . '?v_counter=' . ($v_counter - 25));
     }
@@ -544,7 +561,8 @@ if ($v_counter > 0) {
 if ($v_log > ($v_counter + 25)) {
     // Build the link
     if ($action == 'log_search') {
-        $v_linknext = ("change_log.php?action=log_search" . '&Date_Year=' . ($Date_Year) . '&Date_Month=' . ($Date_Month) . '&Date_Day=' . ($Date_Day) . '&v_counter=' . ($v_counter + 25));
+        $v_linknext = ("change_log.php?action=log_search" . '&Date_Year=' . ($Date_Year) . '&Date_Month='
+            . ($Date_Month) . '&Date_Day=' . ($Date_Day) . '&v_counter=' . ($v_counter + 25));
     } else {
         $v_linknext = ("change_log.php" . '?v_counter=' . ($v_counter + 25));
     }

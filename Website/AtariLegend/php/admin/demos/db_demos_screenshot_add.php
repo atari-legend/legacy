@@ -44,9 +44,11 @@ if (isset($action) and $action == 'add_screens') {
             }
 
             if ($ext !== "") {
-                // First we insert the directory path of where the file will be stored... this also creates an autoinc number for us.
+                // First we insert the directory path of where the file will be stored...
+                // this also creates an autoinc number for us.
 
-                $sdbquery = $mysqli->query("INSERT INTO screenshot_main (screenshot_id,imgext) VALUES ('','$ext')") or die("Database error - inserting screenshots");
+                $sdbquery = $mysqli->query("INSERT INTO screenshot_main (screenshot_id,imgext) VALUES ('','$ext')")
+                    or die("Database error - inserting screenshots");
 
                 //select the newly entered screenshot_id from the main table
                 $SCREENSHOT = $mysqli->query("SELECT screenshot_id FROM screenshot_main
@@ -55,7 +57,8 @@ if (isset($action) and $action == 'add_screens') {
                 $screenshotrow = $SCREENSHOT->fetch_row();
                 $screenshot_id = $screenshotrow[0];
 
-                $sdbquery = $mysqli->query("INSERT INTO screenshot_demo (demo_id, screenshot_id) VALUES ($demo_id, $screenshot_id)") or die("Database error - inserting screenshots2");
+                $sdbquery = $mysqli->query("INSERT INTO screenshot_demo (demo_id, screenshot_id)
+                    VALUES ($demo_id, $screenshot_id)") or die("Database error - inserting screenshots2");
 
                 // Rename the uploaded file to its autoincrement number and move it to its proper place.
                 $file_data = rename($image['tmp_name'][$key], "$demo_screenshot_path$screenshotrow[0].$ext");
@@ -70,8 +73,8 @@ if (isset($action) and $action == 'add_screens') {
 //If we pressed the delete screenshot link
 if (isset($action) and $action == 'delete_screen') {
     $sql_demoshot = $mysqli->query("SELECT * FROM screenshot_demo
-                                      WHERE demo_id = $demo_id
-                                      AND screenshot_id = $screenshot_id") or die("Database error - selecting screenshots demo");
+        WHERE demo_id = $demo_id
+        AND screenshot_id = $screenshot_id") or die("Database error - selecting screenshots demo");
 
     $demoshot   = $sql_demoshot->fetch_row();
     $demoshotid = $demoshot[0];

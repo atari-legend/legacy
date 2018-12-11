@@ -18,8 +18,8 @@ include("../../config/admin.php");
 include("../../vendor/phpmailer/phpmailer/PHPMailerAutoload.php");
 include("../../config/admin_rights.php");
 
-require_once __DIR__."/../../common/Model/Database/ChangeLog.php" ;
-require_once __DIR__."/../../common/DAO/ChangeLogDAO.php" ;
+require_once __DIR__."/../../common/Model/Database/ChangeLog.php";
+require_once __DIR__."/../../common/DAO/ChangeLogDAO.php";
 
 $changeLogDao = new \AL\Common\DAO\ChangeLogDAO($mysqli);
 
@@ -65,7 +65,8 @@ if (isset($action) and $action == "email_user") {
         $i     = 0;
         foreach ($user_id as $user) {
             //get the email address
-            $sql = $mysqli->query("SELECT email FROM users WHERE user_id = '$user' ") or die("error getting email user");
+            $sql = $mysqli->query("SELECT email FROM users WHERE user_id = '$user' ")
+                or die("error getting email user");
             $query_data = $sql->fetch_array(MYSQLI_BOTH);
 
             $mail->AddAddress($query_data['email']);
@@ -131,7 +132,8 @@ if ((isset($action) and $action == "deactivate_user")) {
                 )
             );
 
-            $sql = $mysqli->query("UPDATE users SET inactive = '1' WHERE user_id = '$user'; ") or die("error updating user");
+            $sql = $mysqli->query("UPDATE users SET inactive = '1' WHERE user_id = '$user'; ")
+                or die("error updating user");
             $i++;
         }
         $time_elapsed_secs        = microtime(true) - $start;
@@ -164,7 +166,8 @@ if ((isset($action) and $action == "activate_user")) {
                 )
             );
 
-            $sql = $mysqli->query("UPDATE users SET inactive = 0 WHERE user_id = '$user'; ") or die("error updating user");
+            $sql = $mysqli->query("UPDATE users SET inactive = 0 WHERE user_id = '$user'; ")
+                or die("error updating user");
             $i++;
         }
         $time_elapsed_secs        = microtime(true) - $start;

@@ -125,13 +125,16 @@ if ($_SERVER['REQUEST_METHOD'] == "GET") {
             LEFT JOIN game_box_couples ON game_box_couples.game_boxscan_id = game_boxscan.game_boxscan_id
             WHERE
                 game_boxscan.game_id = ?",
-            "i", $game->getId()
+            "i",
+            $game->getId()
         );
 
         \AL\Db\bind_result(
             "games_release_details.php: Get game boxscans",
             $stmt,
-            $game_boxscan_id, $imgext, $game_boxscan_side
+            $game_boxscan_id,
+            $imgext,
+            $game_boxscan_side
         );
 
         $game_boxscans = [];
@@ -146,8 +149,7 @@ if ($_SERVER['REQUEST_METHOD'] == "GET") {
 
         $smarty->assign('game_boxscan_path', $game_boxscan_path);
         $smarty->assign('game_boxscans', $game_boxscans);
-        // ================ TEMPORARY END
-
+    // ================ TEMPORARY END
     } else {
         // Creating a new release
         $game = $gameDao->getGame($game_id);

@@ -34,7 +34,7 @@ while ($games = $result->fetch_array(MYSQLI_BOTH)) {
         FROM game_publisher
         WHERE game_id = $game_id")
         or die($mysqli->error);
-    $publisher = $publisher_result->fetch_array(MYSQLI_BOTH) or die ($mysqli->error);
+    $publisher = $publisher_result->fetch_array(MYSQLI_BOTH) or die($mysqli->error);
 
     $continent_id = 'NULL';
     if ($publisher['continent_id'] != null) {
@@ -58,5 +58,4 @@ while ($games = $result->fetch_array(MYSQLI_BOTH)) {
     // Remove the publisher we just merged
     $mysqli->query("DELETE FROM game_publisher WHERE pub_dev_id = ".$publisher['pub_dev_id']." AND game_id = $game_id")
         or die($mysqli->error);
-
 }

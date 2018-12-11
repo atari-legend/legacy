@@ -38,7 +38,8 @@ if ($doc_category_id == '-' or $doc_category_id == ' ') {
     }
     $smarty->assign("user_id", $_SESSION['user_id']);
 
-    $result_doc_category_edit = $mysqli->query("SELECT * FROM doc_category WHERE doc_category_id = $doc_category_id") or die("error getting doc category");
+    $result_doc_category_edit = $mysqli->query("SELECT * FROM doc_category WHERE doc_category_id = $doc_category_id")
+        or die("error getting doc category");
 
     while ($row = $result_doc_category_edit->fetch_array(MYSQLI_BOTH)) {
         $smarty->assign('doc_category_edit', array(

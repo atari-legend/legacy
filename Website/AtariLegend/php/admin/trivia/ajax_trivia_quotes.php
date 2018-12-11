@@ -56,8 +56,8 @@ if (isset($trivia_id) and $action == "did_you_know_edit_view") {
 if (isset($spotlight_id) and $action == "spotlight_edit_view") {
     //load the existing spotlight entries
     $query_spotlight = $mysqli->query("SELECT * from spotlight
-                                            LEFT JOIN screenshot_main ON (spotlight.screenshot_id = screenshot_main.screenshot_id)
-                                            WHERE spotlight_id = $spotlight_id") or die("error in query spotlight");
+        LEFT JOIN screenshot_main ON (spotlight.screenshot_id = screenshot_main.screenshot_id)
+        WHERE spotlight_id = $spotlight_id") or die("error in query spotlight");
 
     if ($sql_spotlight = $query_spotlight->fetch_array(MYSQLI_BOTH)) {
         $new_path = $spotlight_screenshot_path;

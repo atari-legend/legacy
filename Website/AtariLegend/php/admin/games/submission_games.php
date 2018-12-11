@@ -34,9 +34,9 @@ $GameSubmissionDAO = new AL\Common\DAO\GameSubmissionDAO($mysqli);
 $smarty->assign("nr_submission", $GameSubmissionDAO->getGameSubmissionCount());
 
 if (isset($done)) {
-    $smarty->assign('done', $done );
+    $smarty->assign('done', $done);
 } else {
-    $smarty->assign('done', '' );
+    $smarty->assign('done', '');
 }
 
 $submissions = $GameSubmissionDAO->getLatestSubmissions(isset($user_id) ? $user_id : null, isset($last_timestamp) ? $last_timestamp : null, isset($action) ? $action : null, isset($done) ? $done : null);
@@ -75,7 +75,6 @@ while ($authors = $sql_author->fetch_array(MYSQLI_BOTH)) {
         'user_name' => $authors['userid']
     ));
 }
-
 
 if (isset($user_id)) {
     $smarty->assign("user_id", $user_id);
