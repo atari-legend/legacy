@@ -86,12 +86,12 @@ while ($DEMO = $SQL_DEMO->fetch_array(MYSQLI_BOTH)) {
 
 //get the music info
 $sql_music = $mysqli->query("SELECT * FROM demo_music
-                            LEFT JOIN music ON (demo_music.music_id = music.music_id)
-                            LEFT JOIN music_author ON (music.music_id = music_author.music_id)
-                            LEFT JOIN individuals ON (music_author.ind_id = individuals.ind_id)
-                            LEFT JOIN music_types ON (music.music_id = music_types.music_id)
-                            LEFT JOIN music_types_main ON (music_types.music_types_main_id = music_types_main.music_types_main_id)
-                            WHERE demo_music.demo_id='$demo_id'");
+    LEFT JOIN music ON (demo_music.music_id = music.music_id)
+    LEFT JOIN music_author ON (music.music_id = music_author.music_id)
+    LEFT JOIN individuals ON (music_author.ind_id = individuals.ind_id)
+    LEFT JOIN music_types ON (music.music_id = music_types.music_id)
+    LEFT JOIN music_types_main ON (music_types.music_types_main_id = music_types_main.music_types_main_id)
+    WHERE demo_music.demo_id='$demo_id'");
 $i         = 0;
 while ($MUSIC = $sql_music->fetch_array(MYSQLI_BOTH)) {
     $i++;

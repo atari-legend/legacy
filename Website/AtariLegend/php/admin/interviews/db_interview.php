@@ -20,7 +20,8 @@
 
 include("../../config/common.php");
 include("../../config/admin.php");
-//include("../../config/admin_rights.php"); /*--> We can not use it like this because of the ajax. redirecting does not work correctly with the inheritance of Ajax.
+//include("../../config/admin_rights.php"); /*--> We can not use it like this because of the ajax.
+// redirecting does not work correctly with the inheritance of Ajax.
 
 if (isset($action) and $action == "stop") {
     echo "test";
@@ -58,8 +59,10 @@ if (isset($action2) and $action2 == 'add_screens') {
                 }
 
                 if ($ext !== "") {
-                    // First we insert the directory path of where the file will be stored... this also creates an autoinc number for us.
-                    $sdbquery = $mysqli->query("INSERT INTO screenshot_main (imgext) VALUES ('$ext')") or die("Database error - inserting screenshots: ".$mysqli->error);
+                    // First we insert the directory path of where the file will be stored...
+                    // this also creates an autoinc number for us.
+                    $sdbquery = $mysqli->query("INSERT INTO screenshot_main (imgext) VALUES ('$ext')")
+                        or die("Database error - inserting screenshots: ".$mysqli->error);
 
                     //select the newly entered screenshot_id from the main table
                     $SCREENSHOT = $mysqli->query("SELECT screenshot_id FROM screenshot_main
@@ -68,14 +71,25 @@ if (isset($action2) and $action2 == 'add_screens') {
                     $screenshotrow = $SCREENSHOT->fetch_row();
                     $screenshot_id = $screenshotrow[0];
 
-                    $sdbquery = $mysqli->query("INSERT INTO screenshot_interview (interview_id, screenshot_id) VALUES ($interview_id, $screenshot_id)") or die("Database error - inserting screenshots2");
+                    $sdbquery = $mysqli->query("INSERT INTO screenshot_interview (interview_id, screenshot_id)
+                        VALUES ($interview_id, $screenshot_id)") or die("Database error - inserting screenshots2");
 
                     // Rename the uploaded file to its autoincrement number and move it to its proper place.
-                    $file_data = rename($image['tmp_name'][$key], "$interview_screenshot_save_path$screenshotrow[0].$ext");
+                    $file_data = rename(
+                        $image['tmp_name'][$key],
+                        "$interview_screenshot_save_path$screenshotrow[0].$ext"
+                    );
 
                     $osd_message = "Screenshot uploaded";
 
-                    create_log_entry('Interviews', $interview_id, 'Screenshots', $interview_id, 'Insert', $_SESSION['user_id']);
+                    create_log_entry(
+                        'Interviews',
+                        $interview_id,
+                        'Screenshots',
+                        $interview_id,
+                        'Insert',
+                        $_SESSION['user_id']
+                    );
 
                     chmod("$interview_screenshot_save_path$screenshotrow[0].$ext", 0777);
                 }
@@ -92,8 +106,10 @@ if (isset($action2) and $action2 == 'add_screens') {
 
     //Let's get the screenshots for the interview
     $sql_screenshots = $mysqli->query("SELECT * FROM screenshot_interview
-                    LEFT JOIN screenshot_main on ( screenshot_interview.screenshot_id = screenshot_main.screenshot_id )
-                    WHERE screenshot_interview.interview_id = '$interview_id' ORDER BY screenshot_interview.screenshot_id ASC") or die("Database error - getting screenshots & comments");
+        LEFT JOIN screenshot_main on ( screenshot_interview.screenshot_id = screenshot_main.screenshot_id )
+        WHERE screenshot_interview.interview_id = '$interview_id'
+        ORDER BY screenshot_interview.screenshot_id ASC")
+        or die("Database error - getting screenshots & comments");
 
     //get the number of screenshots in the archive
     $v_screenshots = $sql_screenshots->num_rows;
@@ -109,7 +125,8 @@ if (isset($action2) and $action2 == 'add_screens') {
 
         //We need to get the comments with each screenshot
         $sql_comments = $mysqli->query("SELECT * FROM interview_comments
-                     WHERE screenshot_interview_id  = $screenshots[screenshot_interview_id]") or die("Database error - getting screenshots comments");
+            WHERE screenshot_interview_id  = $screenshots[screenshot_interview_id]")
+            or die("Database error - getting screenshots comments");
 
         $comments = $sql_comments->fetch_array(MYSQLI_BOTH);
 
@@ -142,14 +159,16 @@ if (isset($action) and $action == "delete_interview") {
     $sql = $mysqli->query("DELETE FROM interview_text WHERE interview_id = '$interview_id' ");
 
     //delete the comments at every screenshot for this review
-    $SCREENSHOT = $mysqli->query("SELECT * FROM screenshot_interview where interview_id = '$interview_id' ") or die("Database error - getting screenshots");
+    $SCREENSHOT = $mysqli->query("SELECT * FROM screenshot_interview where interview_id = '$interview_id' ")
+        or die("Database error - getting screenshots");
 
     while ($screenshotrow = $SCREENSHOT->fetch_row()) {
         $sql = $mysqli->query("DELETE FROM interview_comments WHERE screenshot_interview_id = $screenshotrow[0] ");
     }
 
     //delete the screenshots
-    $SCREENSHOT2 = $mysqli->query("SELECT * FROM screenshot_interview where interview_id = '$interview_id' ") or die("Database error - getting screenshots");
+    $SCREENSHOT2 = $mysqli->query("SELECT * FROM screenshot_interview where interview_id = '$interview_id' ")
+        or die("Database error - getting screenshots");
 
     while ($screenshotrow = $SCREENSHOT2->fetch_row()) {
         //get the extension
@@ -193,7 +212,8 @@ if (isset($action) and $action == 'delete_screenshot_comment') {
         create_log_entry('Interviews', $interview_id, 'Screenshots', $interview_id, 'Delete', $_SESSION['user_id']);
 
         //delete the screenshot comment from the DB table
-        $sdbquery = $mysqli->query("DELETE FROM interview_comments WHERE screenshot_interview_id = $interviewshotid") or die("Error deleting comment");
+        $sdbquery = $mysqli->query("DELETE FROM interview_comments WHERE screenshot_interview_id = $interviewshotid")
+            or die("Error deleting comment");
 
         //get the extension
         $SCREENSHOT = $mysqli->query("SELECT * FROM screenshot_main
@@ -223,8 +243,9 @@ if (isset($action) and $action == 'delete_screenshot_comment') {
 
     //Let's get the screenshots for the interview
     $sql_screenshots = $mysqli->query("SELECT * FROM screenshot_interview
-                    LEFT JOIN screenshot_main on ( screenshot_interview.screenshot_id = screenshot_main.screenshot_id )
-                    WHERE screenshot_interview.interview_id = '$interview_id' ORDER BY screenshot_interview.screenshot_id ASC") or die("Database error - getting screenshots & comments");
+        LEFT JOIN screenshot_main on ( screenshot_interview.screenshot_id = screenshot_main.screenshot_id )
+        WHERE screenshot_interview.interview_id = '$interview_id' ORDER BY screenshot_interview.screenshot_id ASC")
+        or die("Database error - getting screenshots & comments");
 
     //get the number of screenshots in the archive
     $v_screenshots = $sql_screenshots->num_rows;
@@ -240,7 +261,8 @@ if (isset($action) and $action == 'delete_screenshot_comment') {
 
         //We need to get the comments with each screenshot
         $sql_comments = $mysqli->query("SELECT * FROM interview_comments
-                     WHERE screenshot_interview_id  = $screenshots[screenshot_interview_id]") or die("Database error - getting screenshots comments");
+            WHERE screenshot_interview_id  = $screenshots[screenshot_interview_id]")
+            or die("Database error - getting screenshots comments");
 
         $comments = $sql_comments->fetch_array(MYSQLI_BOTH);
 
@@ -282,21 +304,27 @@ if (isset($action) and $action == 'update_interview' and (!isset($action2))) {
 
     //check if this is first update. If yes, interview_text is not filled yet and we need to do a create
     //Let's get the screenshots for the interview
-    $sql_interview_text = $mysqli->query("SELECT * FROM interview_text WHERE interview_id = '$interview_id'") or die("Database error - getting interview text");
+    $sql_interview_text = $mysqli->query("SELECT * FROM interview_text WHERE interview_id = '$interview_id'")
+        or die("Database error - getting interview text");
 
     //get the number of screenshots in the archive
     $v_nr_text = $sql_interview_text->num_rows;
 
     if ($v_nr_text > 0) {
-        $sdbquery = $mysqli->query("UPDATE interview_text SET interview_text = '$textfield', interview_date = '$date', interview_intro = '$textintro', interview_chapters = '$textchapters' WHERE interview_id = $interview_id") or die("Couldn't update into interview_text");
+        $sdbquery = $mysqli->query("UPDATE interview_text SET interview_text = '$textfield', interview_date = '$date',
+            interview_intro = '$textintro', interview_chapters = '$textchapters' WHERE interview_id = $interview_id")
+            or die("Couldn't update into interview_text");
     } else {
-        $sdbquery = $mysqli->query("INSERT INTO interview_text (interview_id, interview_text, interview_date, interview_intro, interview_chapters) VALUES ($interview_id, '$textfield', '$date', '$textintro','$textchapters')") or die("Couldn't insert into interview_text");
+        $sdbquery = $mysqli->query("INSERT INTO interview_text (interview_id, interview_text, interview_date,
+            interview_intro, interview_chapters) VALUES ($interview_id, '$textfield', '$date', '$textintro',
+            '$textchapters')") or die("Couldn't insert into interview_text");
     }
 
     //we're gonna add the screenhots into the screenshot_interview table and fill up the interview_comment table.
     //We need to loop on the screenshot table to check the shots used. If a comment field is filled,
     //the screenshot was used!
-    $SCREEN = $mysqli->query("SELECT * FROM screenshot_interview where interview_id = '$interview_id' ORDER BY screenshot_id ASC") or die("Database error - getting screenshots");
+    $SCREEN = $mysqli->query("SELECT * FROM screenshot_interview where interview_id = '$interview_id'
+        ORDER BY screenshot_id ASC") or die("Database error - getting screenshots");
 
     $i = 0;
     while ($screenrow = $SCREEN->fetch_row()) {
@@ -309,7 +337,9 @@ if (isset($action) and $action == 'update_interview' and (!isset($action2))) {
             $interviewshotid = $screenrow[0];
 
             //check if comment already exists for this shot
-            $INTERVIEWCOMMENT = $mysqli->query("SELECT * FROM interview_comments where screenshot_interview_id = $interviewshotid") or die("Database error - selecting screenshot interview comment");
+            $INTERVIEWCOMMENT = $mysqli->query("SELECT * FROM interview_comments
+                where screenshot_interview_id = $interviewshotid")
+                or die("Database error - selecting screenshot interview comment");
 
             $number = $INTERVIEWCOMMENT->num_rows;
 
@@ -317,7 +347,8 @@ if (isset($action) and $action == 'update_interview' and (!isset($action2))) {
                 $sdbquery = $mysqli->query("UPDATE interview_comments SET comment_text = '$comment'
                      WHERE screenshot_interview_id = $interviewshotid") or die("Couldn't update interview_comments");
             } else {
-                $sdbquery = $mysqli->query("INSERT INTO interview_comments (screenshot_interview_id, comment_text) VALUES ($interviewshotid, '$comment')") or die("Couldn't insert into interview_comments");
+                $sdbquery = $mysqli->query("INSERT INTO interview_comments (screenshot_interview_id, comment_text)
+                    VALUES ($interviewshotid, '$comment')") or die("Couldn't insert into interview_comments");
             }
         }
         $i++;
@@ -337,14 +368,16 @@ if (isset($action) and $action == 'update_interview' and (!isset($action2))) {
         header("Location: ../interviews/interviews_main.php");
     } else {
         include("../../config/admin_rights.php");
-        $sdbquery = $mysqli->query("INSERT INTO interview_main (ind_id) VALUES ($individual_create)") or die("Couldn't insert into interview_main");
+        $sdbquery = $mysqli->query("INSERT INTO interview_main (ind_id) VALUES ($individual_create)")
+            or die("Couldn't insert into interview_main");
 
         //get the id of the inserted interview
         $id = $mysqli->insert_id;
 
         //insert the date of today
         $date = date_to_timestamp(date("Y"), date("m"), date("d"));
-        $sdbquery = $mysqli->query("INSERT INTO interview_text (interview_id, interview_date) VALUES ($id, '$date')") or die("Couldn't insert into interview_text");
+        $sdbquery = $mysqli->query("INSERT INTO interview_text (interview_id, interview_date) VALUES ($id, '$date')")
+            or die("Couldn't insert into interview_text");
 
         create_log_entry('Interviews', $individual_create, 'Interview', $id, 'Insert', $_SESSION['user_id']);
 

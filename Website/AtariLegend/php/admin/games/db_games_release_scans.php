@@ -16,7 +16,6 @@ $game = $gameDao->getGame($game_id);
 switch ($action) {
     case "upload":
         if ($_FILES["scan"] != null) {
-
             $file = $_FILES["scan"];
 
             if ($file["error"] == 0) {
@@ -96,7 +95,8 @@ switch ($action) {
                 "db_games_release_scans.php: Delete Game Box scan",
                 $mysqli,
                 "DELETE FROM game_boxscan WHERE game_boxscan_id = ?",
-                "i", $game_boxscan_id
+                "i",
+                $game_boxscan_id
             );
         }
 

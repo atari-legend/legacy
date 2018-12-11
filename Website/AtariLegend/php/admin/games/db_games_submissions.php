@@ -33,10 +33,10 @@ if ($action == "update_submission") {
         // This is where the submissions get "sent" to "done"
         //****************************************************************************************
         if (isset($submit_id)) {
-            $commentquery = $mysqli->query("UPDATE game_submitinfo SET game_done = '1' WHERE game_submitinfo_id='$submit_id'") or die ("can't update submission");
-            
+            $commentquery = $mysqli->query("UPDATE game_submitinfo SET game_done = '1' WHERE game_submitinfo_id='$submit_id'") or die("can't update submission");
+
             //this means we are in user search mode (clicked on the user submissions)
-            if (isset($user_id)){
+            if (isset($user_id)) {
                 list($user_id) = $sql_user->fetch_array(MYSQLI_BOTH);
                 $karma_action = "game_submission";
 
@@ -49,16 +49,16 @@ if ($action == "update_submission") {
 
                 UserKarma($user_id, $karma_action);
                 $user_id = null;
-            } 
+            }
         }
 
         $message = "Submission set to done status - transferred to done list";
 
         create_log_entry('Games', $submit_id, 'Submission', $submit_id, 'Update', $_SESSION['user_id']);
-    }else{
+    } else {
         $message = "You don't have permission to perform this task";
     }
-    
+
     echo $message;
     mysqli_close($mysqli);
 }
@@ -99,13 +99,13 @@ if ($action == "delete_submission") {
             create_log_entry('Games', $submit_id, 'Submission', $submit_id, 'Delete', $_SESSION['user_id']);
 
             $sql = $mysqli->query("DELETE FROM game_submitinfo WHERE game_submitinfo_id = '$submit_id'") or die("couldn't delete game_submissions quote");
-            
+
             $message = "Submission deleted";
         }
-    }else{
+    } else {
         $message = "You don't have permission to perform this task";
     }
-    
+
     echo $message;
     mysqli_close($mysqli);
 }
@@ -148,11 +148,11 @@ if ($action == "move_submission_tocomment") {
 
                 create_log_entry('Games', $new_comment_id, 'Comment', $new_comment_id, 'Insert', $_SESSION['user_id']);
             }
-        } 
+        }
     } else {
         $message = "You don't have permission to perform this task";
     }
-    
+
     echo $message;
     mysqli_close($mysqli);
 }

@@ -58,10 +58,10 @@ if (isset($catpick)) {
 }
 
 $LINKSQL = $mysqli->query("SELECT * FROM website
-                        LEFT JOIN website_category_cross ON (website.website_id = website_category_cross.website_id)
-                        LEFT JOIN website_category ON (website_category.website_category_id = website_category_cross.website_category_id)
-                        WHERE website_category_cross.website_category_id=$website_category_id ORDER by website.website_name")
-                        or die("Couldn't query website and website description");
+    LEFT JOIN website_category_cross ON (website.website_id = website_category_cross.website_id)
+    LEFT JOIN website_category ON (website_category.website_category_id = website_category_cross.website_category_id)
+    WHERE website_category_cross.website_category_id=$website_category_id ORDER by website.website_name")
+    or die("Couldn't query website and website description");
 
 while ($rowlink = $LINKSQL->fetch_array(MYSQLI_BOTH)) {
     $timestamp = date("d-m-y", $rowlink['website_date']);
@@ -81,7 +81,7 @@ while ($rowlink = $LINKSQL->fetch_array(MYSQLI_BOTH)) {
         'submitted' => $submitted,
         'user_id' => $rowlink['user_id'],
         'inactive' => $rowlink['inactive'],
-        'category_name' => $rowlink['website_category_name'], 
+        'category_name' => $rowlink['website_category_name'],
         'website_imgext' => $rowlink['website_imgext']));
 }
 

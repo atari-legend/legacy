@@ -133,15 +133,19 @@ if (isset($action) and ($action == "game_browse" xor $action == "game_search")) 
     //Perform queries
     $mysqli->query("CREATE TEMPORARY TABLE temp ENGINE=MEMORY $sql_build") or die(mysqli_error());
     $mysqli->query("INSERT INTO temp $sql_build_aka") or die(mysqli_error());
-    $mysqli->query("INSERT INTO temp $sql_build_demo") or die("Couldn't query Software Database5 ($sql_build_demo): ".$mysqli->error);
-    $mysqli->query("INSERT INTO temp $sql_build_demo_aka") or die("Couldn't query Software Database6 ($sql_build_demo_aka)");
-    $mysqli->query("INSERT INTO temp $sql_build_tool") or die("Couldn't query Software Database7 ($sql_build_tool)");
+    $mysqli->query("INSERT INTO temp $sql_build_demo")
+        or die("Couldn't query Software Database5 ($sql_build_demo): ".$mysqli->error);
+    $mysqli->query("INSERT INTO temp $sql_build_demo_aka")
+        or die("Couldn't query Software Database6 ($sql_build_demo_aka)");
+    $mysqli->query("INSERT INTO temp $sql_build_tool")
+        or die("Couldn't query Software Database7 ($sql_build_tool)");
 
     $sql_series_link = $mysqli->query("SELECT * FROM temp ORDER BY software_name ASC") or die(mysqli_error());
 
     $smarty->assign('smarty_action', 'game_list');
 
-    while ($query_series_link = $sql_series_link->fetch_array(MYSQLI_BOTH)) { // This smarty is used for creating the list of games contained within a game series
+    while ($query_series_link = $sql_series_link->fetch_array(MYSQLI_BOTH)) {
+        // This smarty is used for creating the list of games contained within a game series
         $smarty->append('series_link', array(
             'game_id' => $query_series_link['software_id'],
             'game_name' => $query_series_link['software_name'],

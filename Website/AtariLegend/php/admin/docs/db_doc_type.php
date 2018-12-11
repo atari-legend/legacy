@@ -16,7 +16,8 @@ include("../../config/admin_rights.php");
 
 //update the doc type
 if (isset($doc_type_id) and isset($action) and $action == 'update') {
-    $sdbquery = $mysqli->query("UPDATE doc_type SET doc_type_name = '$doc_type_name' WHERE doc_type_id = $doc_type_id") or die("Couldn't Update the doc type");
+    $sdbquery = $mysqli->query("UPDATE doc_type SET doc_type_name = '$doc_type_name' WHERE doc_type_id = $doc_type_id")
+        or die("Couldn't Update the doc type");
 
     $_SESSION['edit_message'] = "Doc type succesfully updated";
 
@@ -47,7 +48,8 @@ if (isset($action) and $action == 'insert_type') {
         $_SESSION['edit_message'] = "Please fill in a doc type name";
         header("Location: ../docs/doc_type.php");
     } else {
-        $sql_doctype = $mysqli->query("INSERT INTO doc_type (doc_type_name) VALUES ('$type_name')") or die("error inserting doc type");
+        $sql_doctype = $mysqli->query("INSERT INTO doc_type (doc_type_name) VALUES ('$type_name')")
+            or die("error inserting doc type");
 
         $new_doc_type_id = $mysqli->insert_id;
 

@@ -22,8 +22,8 @@ include("../../config/common.php");
 include("../../config/admin.php");
 
 $sql = $mysqli->query("SELECT * FROM magazine_game
-                        LEFT JOIN game ON (magazine_game.game_id = game.game_id)
-                        WHERE magazine_game.magazine_issue_id='$magazine_issue_id'") or die("Error retriving magazines reviews");
+    LEFT JOIN game ON (magazine_game.game_id = game.game_id)
+    WHERE magazine_game.magazine_issue_id='$magazine_issue_id'") or die("Error retriving magazines reviews");
 
 while ($fetch = $sql->fetch_array(MYSQLI_BOTH)) {
     $smarty->append('magazine', array(
@@ -31,7 +31,8 @@ while ($fetch = $sql->fetch_array(MYSQLI_BOTH)) {
         'score' => $fetch['score']
     ));
 }
-$sql_magazine = $mysqli->query("SELECT * FROM magazine_issue WHERE magazine_issue_id='$magazine_issue_id'") or die("Error retriving magazines info");
+$sql_magazine = $mysqli->query("SELECT * FROM magazine_issue WHERE magazine_issue_id='$magazine_issue_id'")
+    or die("Error retriving magazines info");
 
 $fetch_magazine = $sql_magazine->fetch_array(MYSQLI_BOTH);
 
