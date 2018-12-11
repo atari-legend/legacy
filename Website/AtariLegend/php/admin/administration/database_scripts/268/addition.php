@@ -62,7 +62,11 @@ while ($stmt->fetch()) {
 
     while ($stmt2->fetch()) {
         // For each boxscan, create a new game_release_scan
-        $id = $gameReleaseScanDao->addScanToRelease($game_release_id, $side == 0 ? 'Box front' : 'Box back', $imgext, null);
+        $id = $gameReleaseScanDao->addScanToRelease(
+            $game_release_id, $side == 0 ? 'Box front' : 'Box back',
+            $imgext,
+            null
+        );
         // Move the image in the new location
         rename($game_boxscan_save_path.$game_boxscan_id.".".$imgext, $game_release_scan_save_path.$id.".".$imgext);
         // Delete our game_boxscan row

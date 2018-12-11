@@ -45,10 +45,11 @@ $v_rows = $query_number->num_rows;
 
 //main query
 $sql_articles = $mysqli->query("SELECT * FROM article_main
-                              LEFT JOIN article_text on (article_main.article_id = article_text.article_id)
-                              LEFT JOIN article_type on (article_main.article_type_id = article_type.article_type_id)
-                              LEFT JOIN users on ( article_main.user_id = users.user_id )
-                              ORDER BY article_text.article_date DESC LIMIT  " . $v_counter . ", 5") or die("Couldn't query database for articles");
+    LEFT JOIN article_text on (article_main.article_id = article_text.article_id)
+    LEFT JOIN article_type on (article_main.article_type_id = article_type.article_type_id)
+    LEFT JOIN users on ( article_main.user_id = users.user_id )
+    ORDER BY article_text.article_date DESC LIMIT  " . $v_counter . ", 5")
+    or die("Couldn't query database for articles");
 
 while ($article = $sql_articles->fetch_array(MYSQLI_BOTH)) {
     $article_date = date("F j, Y", $article['article_date']);

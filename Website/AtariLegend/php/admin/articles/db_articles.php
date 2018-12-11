@@ -50,21 +50,31 @@ if (isset($action2) and $action2 == 'add_screens') {
                 }
 
                 if ($ext !== "") {
-                    // First we insert the directory path of where the file will be stored... this also creates an autoinc number for us.
+                    // First we insert the directory path of where the file will be stored...
+                    // this also creates an autoinc number for us.
 
-                    $sdbquery = $mysqli->query("INSERT INTO screenshot_main (imgext) VALUES ('$ext')") or die('Error: ' . mysqli_error($mysqli));
+                    $sdbquery = $mysqli->query("INSERT INTO screenshot_main (imgext) VALUES ('$ext')")
+                        or die('Error: ' . mysqli_error($mysqli));
 
                     //select the newly entered screenshot_id from the main table
                     $screenshot_id = $mysqli->insert_id;
 
-                    $sdbquery = $mysqli->query("INSERT INTO screenshot_article (article_id, screenshot_id) VALUES ($article_id, $screenshot_id)") or die("Database error - inserting screenshots2");
+                    $sdbquery = $mysqli->query("INSERT INTO screenshot_article (article_id, screenshot_id)
+                        VALUES ($article_id, $screenshot_id)") or die("Database error - inserting screenshots2");
 
                     // Rename the uploaded file to its autoincrement number and move it to its proper place.
                     $file_data = rename($image['tmp_name'][$key], "$article_screenshot_save_path$screenshot_id.$ext");
 
                     $osd_message = 'Screenshots added';
 
-                    create_log_entry('Articles', $article_id, 'Screenshots', $article_id, 'Insert', $_SESSION['user_id']);
+                    create_log_entry(
+                        'Articles',
+                        $article_id,
+                        'Screenshots',
+                        $article_id,
+                        'Insert',
+                        $_SESSION['user_id']
+                    );
 
                     chmod("$article_screenshot_save_path$screenshot_id.$ext", 0777);
                 }
@@ -81,8 +91,9 @@ if (isset($action2) and $action2 == 'add_screens') {
 
     //Let's get the screenshots for the article
     $sql_screenshots = $mysqli->query("SELECT * FROM screenshot_article
-                                      LEFT JOIN screenshot_main on ( screenshot_article.screenshot_id = screenshot_main.screenshot_id )
-                                      WHERE screenshot_article.article_id = '$article_id' ORDER BY screenshot_article.screenshot_id ASC") or die("Database error - getting screenshots & comments");
+        LEFT JOIN screenshot_main on ( screenshot_article.screenshot_id = screenshot_main.screenshot_id )
+        WHERE screenshot_article.article_id = '$article_id' ORDER BY screenshot_article.screenshot_id ASC")
+        or die("Database error - getting screenshots & comments");
 
     //get the number of screenshots in the archive
     $v_screeshots = $sql_screenshots->num_rows;
@@ -98,7 +109,8 @@ if (isset($action2) and $action2 == 'add_screens') {
 
         //We need to get the comments with each screenshot
         $sql_comments = $mysqli->query("SELECT * FROM article_comments
-                                        WHERE screenshot_article_id  = $screenshots[screenshot_article_id]") or die("Database error - getting screenshots comments");
+            WHERE screenshot_article_id  = $screenshots[screenshot_article_id]")
+            or die("Database error - getting screenshots comments");
 
         $comments = $sql_comments->fetch_array(MYSQLI_BOTH);
 
@@ -132,14 +144,16 @@ if (isset($action) and $action == "delete_article") {
     $sql = $mysqli->query("DELETE FROM article_text WHERE article_id = '$article_id' ");
 
     //delete the comments at every screenshot for this review
-    $SCREENSHOT = $mysqli->query("SELECT * FROM screenshot_article where article_id = '$article_id' ") or die("Database error - getting screenshots");
+    $SCREENSHOT = $mysqli->query("SELECT * FROM screenshot_article where article_id = '$article_id' ")
+        or die("Database error - getting screenshots");
 
     while ($screenshotrow = $SCREENSHOT->fetch_row()) {
         $sql = $mysqli->query("DELETE FROM article_comments WHERE screenshot_article_id = $screenshotrow[0] ");
     }
 
     //delete the screenshots
-    $SCREENSHOT2 = $mysqli->query("SELECT * FROM screenshot_article where article_id = '$article_id' ") or die("Database error - getting screenshots");
+    $SCREENSHOT2 = $mysqli->query("SELECT * FROM screenshot_article where article_id = '$article_id' ")
+        or die("Database error - getting screenshots");
 
     while ($screenshotrow = $SCREENSHOT2->fetch_row()) {
         //get the extension
@@ -183,7 +197,8 @@ if (isset($action) and $action == 'delete_screenshot_comment') {
         create_log_entry('Articles', $article_id, 'Screenshots', $article_id, 'Delete', $_SESSION['user_id']);
 
         //delete the screenshot comment from the DB table
-        $sdbquery = $mysqli->query("DELETE FROM article_comments WHERE screenshot_article_id = $articleshotid") or die("Error deleting comment");
+        $sdbquery = $mysqli->query("DELETE FROM article_comments WHERE screenshot_article_id = $articleshotid")
+            or die("Error deleting comment");
 
         //get the extension
         $SCREENSHOT = $mysqli->query("SELECT * FROM screenshot_main
@@ -214,8 +229,9 @@ if (isset($action) and $action == 'delete_screenshot_comment') {
 
     //Let's get the screenshots for the article
     $sql_screenshots = $mysqli->query("SELECT * FROM screenshot_article
-                                      LEFT JOIN screenshot_main on ( screenshot_article.screenshot_id = screenshot_main.screenshot_id )
-                                      WHERE screenshot_article.article_id = '$article_id' ORDER BY screenshot_article.screenshot_id ASC") or die("Database error - getting screenshots & comments");
+        LEFT JOIN screenshot_main on ( screenshot_article.screenshot_id = screenshot_main.screenshot_id )
+        WHERE screenshot_article.article_id = '$article_id' ORDER BY screenshot_article.screenshot_id ASC")
+        or die("Database error - getting screenshots & comments");
 
     //get the number of screenshots in the archive
     $v_screeshots = $sql_screenshots->num_rows;
@@ -231,7 +247,8 @@ if (isset($action) and $action == 'delete_screenshot_comment') {
 
         //We need to get the comments with each screenshot
         $sql_comments = $mysqli->query("SELECT * FROM article_comments
-                                        WHERE screenshot_article_id  = $screenshots[screenshot_article_id]") or die("Database error - getting screenshots comments");
+            WHERE screenshot_article_id  = $screenshots[screenshot_article_id]")
+            or die("Database error - getting screenshots comments");
 
         $comments = $sql_comments->fetch_array(MYSQLI_BOTH);
 
@@ -271,12 +288,15 @@ if (isset($action) and $action == 'update_article' and (!isset($action2))) {
     $textfield = $mysqli->real_escape_string($textfield);
     $textintro = $mysqli->real_escape_string($textintro);
 
-    $sdbquery = $mysqli->query("UPDATE article_text SET article_text = '$textfield', article_date = '$date', article_intro = '$textintro', article_title = '$article_title' WHERE article_id = $article_id") or die("Couldn't update into article_text");
+    $sdbquery = $mysqli->query("UPDATE article_text SET article_text = '$textfield', article_date = '$date',
+        article_intro = '$textintro', article_title = '$article_title' WHERE article_id = $article_id")
+        or die("Couldn't update into article_text");
 
     //we're gonna add the screenhots into the screenshot_article table and fill up the article_comment table.
     //We need to loop on the screenshot table to check the shots used. If a comment field is filled,
     //the screenshot was used!
-    $SCREEN = $mysqli->query("SELECT * FROM screenshot_article where article_id = '$article_id' ORDER BY screenshot_id ASC") or die("Database error - getting screenshots");
+    $SCREEN = $mysqli->query("SELECT * FROM screenshot_article where article_id = '$article_id'
+        ORDER BY screenshot_id ASC") or die("Database error - getting screenshots");
 
     $i = 0;
     while ($screenrow = $SCREEN->fetch_row()) {
@@ -289,7 +309,9 @@ if (isset($action) and $action == 'update_article' and (!isset($action2))) {
             $articleshotid = $screenrow[0];
 
             //check if comment already exists for this shot
-            $articleCOMMENT = $mysqli->query("SELECT * FROM article_comments where screenshot_article_id = $articleshotid") or die("Database error - selecting screenshot article comment");
+            $articleCOMMENT = $mysqli->query("SELECT * FROM article_comments
+                where screenshot_article_id = $articleshotid")
+                or die("Database error - selecting screenshot article comment");
 
             $number = $articleCOMMENT->num_rows;
 
@@ -297,7 +319,8 @@ if (isset($action) and $action == 'update_article' and (!isset($action2))) {
                 $sdbquery = $mysqli->query("UPDATE article_comments SET comment_text = '$comment'
                      WHERE screenshot_article_id = $articleshotid") or die("Couldn't update article_comments");
             } else {
-                $sdbquery = $mysqli->query("INSERT INTO article_comments (screenshot_article_id, comment_text) VALUES ($articleshotid, '$comment')") or die("Couldn't insert into article_comments");
+                $sdbquery = $mysqli->query("INSERT INTO article_comments (screenshot_article_id, comment_text)
+                    VALUES ($articleshotid, '$comment')") or die("Couldn't insert into article_comments");
             }
         }
         $i++;
@@ -321,7 +344,8 @@ if (isset($action) and $action == 'update_article' and (!isset($action2))) {
     } else {
         include("../../config/admin_rights.php");
 
-        $sdbquery = $mysqli->query("INSERT INTO article_main (user_id) VALUES ($user_id)") or die("Couldn't insert into article_main");
+        $sdbquery = $mysqli->query("INSERT INTO article_main (user_id) VALUES ($user_id)")
+            or die("Couldn't insert into article_main");
 
         //get the id of the inserted interview
         $id = $mysqli->insert_id;
@@ -329,7 +353,8 @@ if (isset($action) and $action == 'update_article' and (!isset($action2))) {
         //insert the date of today
         $date = date_to_timestamp(date("Y"), date("m"), date("d"));
 
-        $sdbquery = $mysqli->query("INSERT INTO article_text (article_id, article_date, article_title) VALUES ($id, '$date', '$article_title')") or die("Couldn't insert into article_text");
+        $sdbquery = $mysqli->query("INSERT INTO article_text (article_id, article_date, article_title)
+            VALUES ($id, '$date', '$article_title')") or die("Couldn't insert into article_text");
 
         create_log_entry('Articles', $id, 'Article', $id, 'Insert', $_SESSION['user_id']);
 

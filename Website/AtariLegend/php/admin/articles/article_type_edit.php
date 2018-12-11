@@ -39,7 +39,8 @@ if ($article_type_id == '-' or $article_type_id == ' ') {
     }
     $smarty->assign("user_id", $_SESSION['user_id']);
 
-    $result_article_type_edit = $mysqli->query("SELECT * FROM article_type WHERE article_type_id = $article_type_id") or die("error getting article type");
+    $result_article_type_edit = $mysqli->query("SELECT * FROM article_type WHERE article_type_id = $article_type_id")
+        or die("error getting article type");
 
     while ($row = $result_article_type_edit->fetch_array(MYSQLI_BOTH)) {
         $smarty->assign('article_type_edit', array(
