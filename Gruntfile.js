@@ -146,13 +146,8 @@ module.exports = function (grunt) {
             all: {
                 src: [
                     '<%= webRoot %>php/**/*.php',
-                    '!<%= webRoot %>php/admin/administration/**/*.php',
-                    '!<%= webRoot %>php/admin/articles/**/*.php',
-                    '!<%= webRoot %>php/admin/common/**/*.php',
-                    '!<%= webRoot %>php/admin/company/**/*.php',
-                    '!<%= webRoot %>php/admin/crew/**/*.php',
-                    '!<%= webRoot %>php/admin/demos/**/*.php',
-                    '!<%= webRoot %>php/admin/docs/**/*.php',
+                    // No point fixing legacy DB scripts that will never be run again
+                    '!<%= webRoot %>php/admin/administration/database_scripts/legacy/**/*.php',
                     '!<%= webRoot %>php/admin/games/**/*.php',
                     '!<%= webRoot %>php/{temp,vendor}/**/*.php'
                 ]

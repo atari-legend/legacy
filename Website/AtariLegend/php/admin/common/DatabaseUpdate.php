@@ -47,7 +47,8 @@ class DatabaseUpdate {
         $this->description = $description;
 
         if (!in_array($execute_on, DatabaseUpdate::EXECUTE_ON)) {
-            die("Invalid value '$execute_on' for 'execute_on'. Only ".join(", ", DatabaseUpdate::EXECUTE_ON)." are supported");
+            die("Invalid value '$execute_on' for 'execute_on'. Only "
+                .join(", ", DatabaseUpdate::EXECUTE_ON)." are supported");
         }
         $this->execute_on = $execute_on;
         $this->condition = str_replace("__DBNAME__", $db_name, $condition);

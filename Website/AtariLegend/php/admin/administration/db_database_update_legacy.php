@@ -48,7 +48,8 @@ if (isset($action) and $action == "update_database") {
     foreach ($database_update as $key) {
         if ($key['database_update_id'] == $update_script_id) {
             // Run the test condition query
-            $test_query = $mysqli->query("$key[test_condition]") or die("Database update $key[database_update_id] Test condition failed");
+            $test_query = $mysqli->query("$key[test_condition]")
+                or die("Database update $key[database_update_id] Test condition failed");
 
             // check if the condition query returns true or false
             if ($test_query->fetch_row() == true) {
@@ -63,7 +64,8 @@ if (isset($action) and $action == "update_database") {
                 if (strncmp($key['database_update_sql'], "..", 2) === 0) {
                     include $key['database_update_sql'];
                 } else {
-                    $mysqli->query("$key[database_update_sql]") or die("Database update $key[database_update_id] failed!");
+                    $mysqli->query("$key[database_update_sql]")
+                        or die("Database update $key[database_update_id] failed!");
                 }
 
                 // Add info to the database_change table
@@ -79,8 +81,10 @@ if (isset($action) and $action == "update_database") {
                 $update_description = $mysqli->real_escape_string($key['update_description']);
 
                 $mysqli->query("INSERT INTO database_change
-            (database_update_id, update_description, execute_timestamp, implementation_state, update_filename, database_change_script)
-             VALUES ('$key[database_update_id]', '$update_description','$timestamp', 'implemented', '$key[update_filename]', '$script_string')") or die("Unable to insert into database_change table");
+                    (database_update_id, update_description, execute_timestamp, implementation_state,
+                    update_filename, database_change_script)
+                    VALUES ('$key[database_update_id]', '$update_description','$timestamp', 'implemented',
+                    '$key[update_filename]', '$script_string')") or die("Unable to insert into database_change table");
 
                 $_SESSION['edit_message'] = "Database altered";
             }
