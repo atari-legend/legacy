@@ -9,9 +9,37 @@ require_once __DIR__."/../Model/Game/Game.php" ;
  */
 class GameDAO {
     private $mysqli;
+    
+    const MULTIPLAY_TYPE_SIMULTANEOUS = 'Simultaneous';
+    const MULTIPLAY_TYPE_TURN_BY_TURN = 'Turn by turn';
+    
+    const MULTIPLAY_HARDWARE_CARTRIDGE = 'Cartridge';
+    const MULTIPLAY_HARDWARE_MIDI_LINK = 'Midi-Link';
 
     public function __construct($mysqli) {
         $this->mysqli = $mysqli;
+    }
+    
+    /**
+     * Get all the multiplayer types
+     * @return String[] A list of multiplayer types
+     */
+    public function getMultiplayerTypes() {
+        return array(
+            GameDAO::MULTIPLAY_TYPE_SIMULTANEOUS,
+            GameDAO::MULTIPLAY_TYPE_TURN_BY_TURN
+        );
+    }
+    
+    /**
+     * Get all the multiplayer hardware
+     * @return String[] A list of multiplayer hardware
+     */
+    public function getMultiplayerHardware() {
+        return array(
+            GameDAO::MULTIPLAY_HARDWARE_CARTRIDGE,
+            GameDAO::MULTIPLAY_HARDWARE_MIDI_LINK
+        );
     }
 
     /**
@@ -21,22 +49,25 @@ class GameDAO {
      */
     public function getGame($game_id) {
         $stmt = \AL\Db\execute_query(
-            "GameDAO: getGame: $game_id",
+            "GameDAO: getGame",
             $this->mysqli,
-            "SELECT game_id, game_name, game_series_id, midi_link, players FROM game WHERE game_id = ?",
+            "SELECT game_id, game_name, game_series_id, nr_players_on_same_machine,
+                nr_player_multiple_machines, multiplayer_type, multiplayer_hardware FROM game WHERE game_id = ?",
             "i", $game_id
         );
 
         \AL\Db\bind_result(
-            "GameDAO: getGame: $game_id",
+            "GameDAO: getGame",
             $stmt,
-            $game_id, $game_name, $game_series_id, $midi_link, $players
+            $game_id, $game_name, $game_series_id, $nr_players_on_same_machine, $nr_player_multiple_machines, 
+            $multiplayer_type, $multiplayer_hardware
         );
 
         $game = null;
         if ($stmt->fetch()) {
             $game = new \AL\Common\Model\Game\Game(
-                $game_id, $game_name, $game_series_id, $midi_link, $players
+                $game_id, $game_name, $game_series_id, $nr_players_on_same_machine, $nr_player_multiple_machines,
+                $multiplayer_type, $multiplayer_hardware
             );
         }
 
@@ -44,7 +75,29 @@ class GameDAO {
 
         return $game;
     }
+    
+    /**
+     * Update the multiplayer attributes of a game
+     *
+     * @param integer $release_id ID of the release to update
+     */
+    public function updateGameMultiplayer($game_id, $players_same, $players_other, $multiplayer_type, $multiplayer_hardware) {
+        $stmt = \AL\Db\execute_query(
+            "GameDAO: updateGameMultiplayer",
+            $this->mysqli,
+            "UPDATE game
+            SET
+                `nr_players_on_same_machine` = ?,
+                `nr_player_multiple_machines` = ?,
+                `multiplayer_type` = ?,
+                `multiplayer_hardware` = ?               
+            WHERE game_id = ?",
+            "iissi", $players_same, $players_other, $multiplayer_type, $multiplayer_hardware, $game_id
+        );
 
+        $stmt->close();
+    }
+ 
     /**
      * Get a random screenshot for a game
      * @param number $game_id ID of the game to get a screenshot for

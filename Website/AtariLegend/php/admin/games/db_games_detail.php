@@ -24,6 +24,7 @@ include("../../config/common.php");
 include("../../config/admin.php");
 include("../../config/admin_rights.php");
 
+require_once __DIR__."/../../common/DAO/GameDAO.php";
 require_once __DIR__."/../../common/DAO/GameReleaseDAO.php";
 require_once __DIR__."/../../common/DAO/ChangeLogDAO.php";
 require_once __DIR__."/../../common/DAO/ProgrammingLanguageDAO.php";
@@ -34,6 +35,7 @@ require_once __DIR__."/../../common/DAO/ControlDAO.php";
 require_once __DIR__."/../../common/DAO/SoundHardwareDAO.php";
 require_once __DIR__."/../../common/DAO/GameProgressSystemDAO.php";
 
+$gameDao = new \AL\Common\DAO\GameDAO($mysqli);
 $changeLogDao = new \AL\Common\DAO\ChangeLogDAO($mysqli);
 $gameReleaseDao = new \AL\Common\DAO\GameReleaseDAO($mysqli);
 $programmingLanguageDao = new \AL\Common\DAO\ProgrammingLanguageDAO($mysqli);
@@ -209,14 +211,8 @@ if (isset($action) and $action == 'modify_game') {
     // game_table
 
     $game_name = $mysqli->real_escape_string($game_name);
-        
-    if (isset($midi_link)) {
-        $midi_link = 1;
-    }else{
-        $midi_link = 0;
-    }
     
-    $sdbquery = $mysqli->query("UPDATE game SET game_name='$game_name', midi_link='$midi_link', players='$players' WHERE game_id=$game_id") or die("trouble updating game");
+    $sdbquery = $mysqli->query("UPDATE game SET game_name='$game_name' WHERE game_id=$game_id") or die("trouble updating game");
 
     //Update the game genre
     $gameGenreDao->setGameGenreForGame($game_id, isset($game_genre) ? $game_genre : []);
@@ -288,6 +284,25 @@ if (isset($action) and $action == 'modify_game') {
     create_log_entry('Games', $game_id, 'Game', $game_id, 'Update', $_SESSION['user_id']);
 
     header("Location: ../games/games_detail.php?game_id=$game_id#games_detail");
+}
+
+//***********************************************************************************
+//Update the multiplayer options
+//***********************************************************************************
+if (isset($action) and $action == 'modify_game_multiplayer') {
+   
+    $gameDao->updateGameMultiplayer(
+        $game_id, 
+        $players_same, 
+        $players_other, 
+        ($multiplayer_type != '') ? $multiplayer_type : null,
+        ($multiplayer_hardware != '') ? $multiplayer_hardware : null
+    );
+
+    create_log_entry('Games', $game_id, 'Game', $game_id, 'Update', $_SESSION['user_id']);
+
+    $_SESSION['edit_message'] = "Multiplayer options updated";
+    header("Location: ../games/games_detail.php?game_id=$game_id#games_detail");   
 }
 
 //***********************************************************************************
