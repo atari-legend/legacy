@@ -49,24 +49,24 @@ class GameDAO {
      */
     public function getGame($game_id) {
         $stmt = \AL\Db\execute_query(
-            "GameDAO: getGame",
+            "GameDAO: getGame: $game_id",
             $this->mysqli,
-            "SELECT game_id, game_name, game_series_id, nr_players_on_same_machine,
-                nr_player_multiple_machines, multiplayer_type, multiplayer_hardware FROM game WHERE game_id = ?",
+            "SELECT game_id, game_name, game_series_id, number_players_on_same_machine,
+                number_players_multiple_machines, multiplayer_type, multiplayer_hardware FROM game WHERE game_id = ?",
             "i", $game_id
         );
 
         \AL\Db\bind_result(
-            "GameDAO: getGame",
+            "GameDAO: getGame: $game_id",
             $stmt,
-            $game_id, $game_name, $game_series_id, $nr_players_on_same_machine, $nr_player_multiple_machines, 
+            $game_id, $game_name, $game_series_id, $number_players_on_same_machine, $number_players_multiple_machines, 
             $multiplayer_type, $multiplayer_hardware
         );
 
         $game = null;
         if ($stmt->fetch()) {
             $game = new \AL\Common\Model\Game\Game(
-                $game_id, $game_name, $game_series_id, $nr_players_on_same_machine, $nr_player_multiple_machines,
+                $game_id, $game_name, $game_series_id, $number_players_on_same_machine, $number_players_multiple_machines,
                 $multiplayer_type, $multiplayer_hardware
             );
         }
@@ -87,8 +87,8 @@ class GameDAO {
             $this->mysqli,
             "UPDATE game
             SET
-                `nr_players_on_same_machine` = ?,
-                `nr_player_multiple_machines` = ?,
+                `number_players_on_same_machine` = ?,
+                `number_players_multiple_machines` = ?,
                 `multiplayer_type` = ?,
                 `multiplayer_hardware` = ?               
             WHERE game_id = ?",
