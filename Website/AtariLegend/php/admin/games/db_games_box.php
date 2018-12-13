@@ -62,18 +62,20 @@ if (isset($action) and $action == "boxscan_upload") {
                 }
 
                 if ($mode == "back") {
-                    $sdbquery = $mysqli->query("INSERT INTO game_boxscan (game_id, game_boxscan_side,imgext) VALUES ('$game_id', '1','$ext')");
+                    $sdbquery = $mysqli->query("INSERT INTO game_boxscan (game_id, game_boxscan_side,imgext)
+                        VALUES ('$game_id', '1','$ext')");
 
                     //get the id of the inserted back cover
                     $boxback = $mysqli->query("SELECT game_boxscan_id FROM game_boxscan
-                                         order by game_boxscan_id desc") or die("Database error - selecting back box scan");
+                        order by game_boxscan_id desc") or die("Database error - selecting back box scan");
 
                     $backbox    = $boxback->fetch_row();
                     $backbox_id = $backbox[0];
 
                     //insert the id of the front box
 
-                    $sdbquery  = $mysqli->query("INSERT INTO game_box_couples (game_boxscan_id, game_boxscan_cross) VALUES ('$frontscan_id', '$backbox_id')");
+                    $sdbquery  = $mysqli->query("INSERT INTO game_box_couples (game_boxscan_id, game_boxscan_cross)
+                        VALUES ('$frontscan_id', '$backbox_id')");
                     // @Dal, notice I use $filename instead of $file_data
                     // Rename the uploaded file to its autoincrement number and move it to its proper place.
                     $file_data = rename("$filename", "$game_boxscan_save_path$backbox[0].$ext");
@@ -84,11 +86,12 @@ if (isset($action) and $action == "boxscan_upload") {
 
                     chmod("$game_boxscan_save_path$backbox[0].$ext", 0777);
                 } else {
-                    $sdbquery = $mysqli->query("INSERT INTO game_boxscan (game_id,game_boxscan_side,imgext) VALUES ('$game_id','0','$ext')") or die("Whats wrong???");
+                    $sdbquery = $mysqli->query("INSERT INTO game_boxscan (game_id,game_boxscan_side,imgext)
+                        VALUES ('$game_id','0','$ext')") or die("Whats wrong???");
 
                     //get the id of the inserted front cover
                     $box = $mysqli->query("SELECT game_boxscan_id FROM game_boxscan
-                                    order by game_boxscan_id desc") or die("Database error - selecting front box scan");
+                        order by game_boxscan_id desc") or die("Database error - selecting front box scan");
 
                     $boxCover  = $box->fetch_row();
                     $box_id    = $boxCover[0];
