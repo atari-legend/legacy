@@ -61,7 +61,7 @@ $gameProgressSystemDao = new \AL\Common\DAO\GameProgressSystemDAO($mysqli);
 $sql_game = $mysqli->query("SELECT game_name,
                game.game_id,
                game.game_series_id,
-               game_series.name as game_series_name          
+               game_series.name as game_series_name
                FROM game
                LEFT JOIN game_series ON (game.game_series_id = game_series.id)
                WHERE game.game_id='$game_id'") or die("Error getting game info: " . $mysqli->error);
@@ -139,9 +139,9 @@ $smarty->assign('pubdevs', $pubDevDao->getAllPubDevs());
 
 //let's get the developers for this game
 $sql_developer = $mysqli->query("SELECT * FROM pub_dev
-                  LEFT JOIN game_developer ON ( pub_dev.pub_dev_id = game_developer.dev_pub_id )
-                  LEFT JOIN developer_role ON ( game_developer.developer_role_id = developer_role.id )
-                  WHERE game_developer.game_id = '$game_id' ORDER BY pub_dev_name ASC") or die("Couldn't query developers");
+    LEFT JOIN game_developer ON ( pub_dev.pub_dev_id = game_developer.dev_pub_id )
+    LEFT JOIN developer_role ON ( game_developer.developer_role_id = developer_role.id )
+    WHERE game_developer.game_id = '$game_id' ORDER BY pub_dev_name ASC") or die("Couldn't query developers");
 
 while ($developers = $sql_developer->fetch_array(MYSQLI_BOTH)) {
     $smarty->append('developers', array(
@@ -156,7 +156,8 @@ while ($developers = $sql_developer->fetch_array(MYSQLI_BOTH)) {
 //Get the developer roles
 //**********************************************************************************
 
-$sql_developer_role = $mysqli->query("SELECT * FROM developer_role ORDER BY role ASC") or die("Couldn't query developer_role database");
+$sql_developer_role = $mysqli->query("SELECT * FROM developer_role ORDER BY role ASC")
+    or die("Couldn't query developer_role database");
 
 while ($developer_role = $sql_developer_role->fetch_array(MYSQLI_BOTH)) {
     $smarty->append('developer_role', array(
@@ -227,42 +228,49 @@ $smarty->assign('linked_sound_hardware', $soundHardwareDao->getSoundHardwareForG
 //***********************************************************************************
 
 //Get the number of screenshots!
-$numberscreen = $mysqli->query("SELECT count(*) as count FROM screenshot_game WHERE game_id = '$game_id'") or die("couldn't get number of screenshots");
+$numberscreen = $mysqli->query("SELECT count(*) as count FROM screenshot_game WHERE game_id = '$game_id'")
+    or die("couldn't get number of screenshots");
 $array = $numberscreen->fetch_array(MYSQLI_BOTH);
 
 $smarty->assign("nr_screenshots", $array['count']);
 
 //check the number of boxscans
-$numberbox = $mysqli->query("SELECT count(*) as count FROM game_boxscan WHERE game_id = '$game_id'") or die("couldn't get number of boxscans");
+$numberbox = $mysqli->query("SELECT count(*) as count FROM game_boxscan WHERE game_id = '$game_id'")
+    or die("couldn't get number of boxscans");
 $array = $numberbox->fetch_array(MYSQLI_BOTH);
 
 $smarty->assign("nr_boxscans", $array['count']);
 
 //Check how many reviews a game has
-$numberreviews = $mysqli->query("SELECT count(*) as count FROM review_game WHERE game_id = '$game_id'") or die("couldn't get number of reviews");
+$numberreviews = $mysqli->query("SELECT count(*) as count FROM review_game WHERE game_id = '$game_id'")
+    or die("couldn't get number of reviews");
 $array = $numberreviews->fetch_array(MYSQLI_BOTH);
 
 $smarty->assign("nr_reviews", $array['count']);
 
 //check how many pics there are in the game gallery
-$numbergallery = $mysqli->query("SELECT count(*) as count FROM game_gallery WHERE game_id = '$game_id'") or die("couldn't get number of gallery pics");
+$numbergallery = $mysqli->query("SELECT count(*) as count FROM game_gallery WHERE game_id = '$game_id'")
+    or die("couldn't get number of gallery pics");
 $array = $numbergallery->fetch_array(MYSQLI_BOTH);
 
 $smarty->assign("nr_pics", $array['count']);
 
 //check how many music files this game has
-$numbermusic = $mysqli->query("SELECT count(*) as count FROM game_music WHERE game_id = '$game_id'") or die("couldn't get number of music files");
+$numbermusic = $mysqli->query("SELECT count(*) as count FROM game_music WHERE game_id = '$game_id'")
+    or die("couldn't get number of music files");
 $array = $numbermusic->fetch_array(MYSQLI_BOTH);
 
 $smarty->assign("nr_music", $array['count']);
 
 //check how many magazine reviews this game has
-$numbermag = $mysqli->query("SELECT count(*) as count FROM magazine_game WHERE game_id = '$game_id'") or die("couldn't get number of mag reviews");
+$numbermag = $mysqli->query("SELECT count(*) as count FROM magazine_game WHERE game_id = '$game_id'")
+    or die("couldn't get number of mag reviews");
 $array = $numbermag->fetch_array(MYSQLI_BOTH);
 
 $smarty->assign("nr_magazines", $array['count']);
 
-$number_comments = $mysqli->query("SELECT count(*) as count FROM game_user_comments WHERE game_id = '$game_id'") or die("couldn't get number of comments");
+$number_comments = $mysqli->query("SELECT count(*) as count FROM game_user_comments WHERE game_id = '$game_id'")
+    or die("couldn't get number of comments");
 
 $array = $number_comments->fetch_array(MYSQLI_BOTH);
 

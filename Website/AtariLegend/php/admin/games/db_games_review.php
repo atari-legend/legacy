@@ -38,10 +38,12 @@ if (isset($action) and $action == 'delete_comment') {
         $reviewshotid  = $reviewshotrow[0];
 
         //delete the screenshot comment from the DB table
-        $sdbquery = $mysqli->query("DELETE FROM review_comments WHERE screenshot_review_id = $reviewshotid") or die("failed deleting review_comments");
+        $sdbquery = $mysqli->query("DELETE FROM review_comments WHERE screenshot_review_id = $reviewshotid")
+            or die("failed deleting review_comments");
 
         //delete the screenshot linked to the review
-        $sdbquery = $mysqli->query("DELETE FROM screenshot_review WHERE review_id = $reviewid AND screenshot_id = $screenshot_id") or die("failed deleting screenshot_review");
+        $sdbquery = $mysqli->query("DELETE FROM screenshot_reviewWHERE review_id = $reviewid
+            AND screenshot_id = $screenshot_id") or die("failed deleting screenshot_review");
 
         create_log_entry('Games', $game_id, 'Review comment', $reviewid, 'Delete', $_SESSION['user_id']);
 
@@ -53,7 +55,8 @@ if (isset($action) and $action == 'delete_comment') {
     $smarty->assign('osd_message', $osd_message);
 
     //get the name of the game
-    $sql_game = $mysqli->query("SELECT * FROM game WHERE game_id='$game_id'") or die("Database error - getting game name");
+    $sql_game = $mysqli->query("SELECT * FROM game WHERE game_id='$game_id'")
+        or die("Database error - getting game name");
 
     while ($game = $sql_game->fetch_array(MYSQLI_BOTH)) {
         $smarty->assign('game', array(
@@ -105,7 +108,8 @@ if (isset($action) and $action == 'delete_comment') {
     }
 
     //get the screenshots
-    $sql_screenshots = $mysqli->query("SELECT * FROM screenshot_game WHERE game_id = '$game_id' ORDER BY screenshot_id ASC") or die("Database error - getting screenshots");
+    $sql_screenshots = $mysqli->query("SELECT * FROM screenshot_game
+        WHERE game_id = '$game_id' ORDER BY screenshot_id ASC") or die("Database error - getting screenshots");
 
     $i = 0;
 
@@ -118,8 +122,9 @@ if (isset($action) and $action == 'delete_comment') {
         $v_screenshot .= 'png';
 
         $sql_COMMENTS = $mysqli->query("SELECT review_comments.comment_text FROM screenshot_review
-                                 LEFT JOIN review_comments on (screenshot_review.screenshot_review_id = review_comments.screenshot_review_id)
-                                 WHERE screenshot_review.screenshot_id = '$screenshots[2]' AND screenshot_review.review_id = '$reviewid'") or die("Database error - getting screenshots comments");
+            LEFT JOIN review_comments on (screenshot_review.screenshot_review_id = review_comments.screenshot_review_id)
+            WHERE screenshot_review.screenshot_id = '$screenshots[2]' AND screenshot_review.review_id = '$reviewid'")
+            or die("Database error - getting screenshots comments");
 
         $screencomment = $sql_COMMENTS->fetch_array(MYSQLI_BOTH);
 
@@ -145,18 +150,24 @@ if (isset($action) and $action == 'delete_comment') {
 if (isset($action) and ($action == 'delete_review' or $action == 'delete_submission')) {
     include("../../config/admin_rights.php");
 
-    $sql = $mysqli->query("DELETE FROM review_main WHERE review_id = '$reviewid' ") or die("deletion review_main failed");
-    $sql = $mysqli->query("DELETE FROM review_game WHERE review_id = '$reviewid' AND game_id = '$game_id' ") or die("deletion review_game failed");
-    $sql = $mysqli->query("DELETE FROM review_score WHERE review_id = '$reviewid' ") or die("deletion review_score failed");
+    $sql = $mysqli->query("DELETE FROM review_main WHERE review_id = '$reviewid' ")
+        or die("deletion review_main failed");
+    $sql = $mysqli->query("DELETE FROM review_game WHERE review_id = '$reviewid' AND game_id = '$game_id' ")
+        or die("deletion review_game failed");
+    $sql = $mysqli->query("DELETE FROM review_score WHERE review_id = '$reviewid' ")
+        or die("deletion review_score failed");
 
     //delete the comments at every screenshot for this review
-    $SCREENSHOT = $mysqli->query("SELECT * FROM screenshot_review where review_id = '$reviewid' ") or die("Database error - getting screenshots");
+    $SCREENSHOT = $mysqli->query("SELECT * FROM screenshot_review where review_id = '$reviewid' ")
+        or die("Database error - getting screenshots");
 
     while ($screenshotrow = $SCREENSHOT->fetch_row()) {
-        $sql = $mysqli->query("DELETE FROM review_comments WHERE screenshot_review_id = $screenshotrow[0] ") or die("deletion review_comments failed");
+        $sql = $mysqli->query("DELETE FROM review_comments WHERE screenshot_review_id = $screenshotrow[0] ")
+            or die("deletion review_comments failed");
     }
 
-    $sql = $mysqli->query("DELETE FROM screenshot_review WHERE review_id = '$reviewid' ") or die("deletion screenshot failed");
+    $sql = $mysqli->query("DELETE FROM screenshot_review WHERE review_id = '$reviewid' ")
+        or die("deletion screenshot failed");
 
     $_SESSION['edit_message'] = "Review deleted";
 
@@ -177,25 +188,31 @@ if ($action == 'edit_review' or $action == 'submitted') {
 
     $textfield = $mysqli->real_escape_string($textfield);
 
-    $sdbquery = $mysqli->query("UPDATE review_main set user_id = '$members', review_text = '$textfield', review_date = '$date', review_edit = '0'
-               WHERE review_id = '$reviewid'") or die("Couldn't update review_main");
+    $sdbquery = $mysqli->query("UPDATE review_main set user_id = '$members', review_text = '$textfield',
+        review_date = '$date', review_edit = '0'
+        WHERE review_id = '$reviewid'") or die("Couldn't update review_main");
 
     //check if comment already exists for this shot
-    $REVIEWSCORE = $mysqli->query("SELECT * FROM review_score where review_id = $reviewid") or die("Database error - selecting scores");
+    $REVIEWSCORE = $mysqli->query("SELECT * FROM review_score where review_id = $reviewid")
+        or die("Database error - selecting scores");
 
     $score = $REVIEWSCORE->num_rows;
 
     if ($score > 0) {
-        $sdbquery = $mysqli->query("UPDATE review_score SET review_graphics = $graphics, review_sound = $sound, review_gameplay = $gameplay, review_overall = $conclusion
-                 WHERE review_id = $reviewid") or die("Couldn't update review_score");
+        $sdbquery = $mysqli->query("UPDATE review_score SET review_graphics = $graphics, review_sound = $sound,
+        review_gameplay = $gameplay, review_overall = $conclusion
+        WHERE review_id = $reviewid") or die("Couldn't update review_score");
     } else {
-        $sdbquery = $mysqli->query("INSERT INTO review_score (review_id, review_graphics, review_sound, review_gameplay, review_overall) VALUES ($reviewid, '$graphics', '$sound', '$gameplay', '$conclusion')") or die("Couldn't insert the update of the review_score");
+        $sdbquery = $mysqli->query("INSERT INTO review_score (review_id, review_graphics, review_sound, review_gameplay,
+            review_overall) VALUES ($reviewid, '$graphics', '$sound', '$gameplay', '$conclusion')")
+            or die("Couldn't insert the update of the review_score");
     }
 
     //we're gonna add the screenhots into the screenshot_review table and fill up the review_comment table.
     //We need to loop on the screenshot table to check the shots used. If a comment field is filled,
     //the screenshot was used!
-    $SCREEN = $mysqli->query("SELECT * FROM screenshot_game where game_id = '$game_id' ORDER BY screenshot_id ASC") or die("Database error - getting screenshots");
+    $SCREEN = $mysqli->query("SELECT * FROM screenshot_game where game_id = '$game_id' ORDER BY screenshot_id ASC")
+        or die("Database error - getting screenshots");
 
     $i = 0;
 
@@ -214,7 +231,8 @@ if ($action == 'edit_review' or $action == 'submitted') {
 
             if ($number > 0) {
             } else { //else insert it
-                $sdbquery = $mysqli->query("INSERT INTO screenshot_review (review_id, screenshot_id) VALUES ('$reviewid', '$screenid')") or die("Couldn't insert into screenshot_review");
+                $sdbquery = $mysqli->query("INSERT INTO screenshot_review (review_id, screenshot_id)
+                    VALUES ('$reviewid', '$screenid')") or die("Couldn't insert into screenshot_review");
             }
 
             $REVIEWSHOT = $mysqli->query("SELECT * FROM screenshot_review where review_id = '$reviewid' AND
@@ -225,7 +243,9 @@ if ($action == 'edit_review' or $action == 'submitted') {
             $reviewshotid = $reviewshotrow[0];
 
             //check if comment already exists for this shot
-            $REVIEWCOMMENT = $mysqli->query("SELECT * FROM review_comments where screenshot_review_id = '$reviewshotid'") or die("Database error - selecting screenshot review comment");
+            $REVIEWCOMMENT = $mysqli->query("SELECT * FROM review_comments
+                where screenshot_review_id = '$reviewshotid'")
+                or die("Database error - selecting screenshot review comment");
 
             $number = $REVIEWCOMMENT->num_rows;
 
@@ -236,7 +256,8 @@ if ($action == 'edit_review' or $action == 'submitted') {
                        WHERE screenshot_review_id = '$reviewshotid'") or die("Couldn't update review_comments");
             } else { //else insert it
                 $comment = $mysqli->real_escape_string($comment);
-                $sdbquery = $mysqli->query("INSERT INTO review_comments (screenshot_review_id, comment_text) VALUES ('$reviewshotid', '$comment')") or die("Couldn't insert into review_comments");
+                $sdbquery = $mysqli->query("INSERT INTO review_comments (screenshot_review_id, comment_text)
+                    VALUES ('$reviewshotid', '$comment')") or die("Couldn't insert into review_comments");
             }
         }
         $i++;
@@ -256,7 +277,8 @@ if ($action == 'edit_review' or $action == 'submitted') {
 if (isset($action) and $action == 'move_to_comment') {
     include("../../config/admin_rights.php");
 
-    $sql_edit_REVIEW = $mysqli->query("SELECT * FROM review_main WHERE review_id = $reviewid") or die("Database error - selecting review data");
+    $sql_edit_REVIEW = $mysqli->query("SELECT * FROM review_main WHERE review_id = $reviewid")
+        or die("Database error - selecting review data");
 
     $edit_review = $sql_edit_REVIEW->fetch_array(MYSQLI_BOTH);
 
@@ -264,26 +286,34 @@ if (isset($action) and $action == 'move_to_comment') {
     $review_timestamp = $edit_review['review_date'];
     $review_user_id   = $edit_review['user_id'];
 
-    $sql = $mysqli->query("INSERT INTO comments (comment,timestamp,user_id) VALUES ('$review_text','$review_timestamp','$review_user_id')") or die("something is wrong with INSERT mysql3");
+    $sql = $mysqli->query("INSERT INTO comments (comment,timestamp,user_id)
+        VALUES ('$review_text','$review_timestamp','$review_user_id')") or die("something is wrong with INSERT mysql3");
 
     $new_comment_id = $mysqli->insert_id;
 
-    $sql = $mysqli->query("INSERT INTO game_user_comments (game_id,comment_id) VALUES ('$game_id',LAST_INSERT_ID())") or die("something is wrong with INSERT mysql4");
+    $sql = $mysqli->query("INSERT INTO game_user_comments (game_id,comment_id) VALUES ('$game_id',LAST_INSERT_ID())")
+        or die("something is wrong with INSERT mysql4");
 
     create_log_entry('Games', $new_comment_id, 'Comment', $new_comment_id, 'Insert', $_SESSION['user_id']);
 
-    $sql = $mysqli->query("DELETE FROM review_main WHERE review_id = '$reviewid' ") or die("deletion review_main failed");
-    $sql = $mysqli->query("DELETE FROM review_game WHERE review_id = '$reviewid' AND game_id = '$game_id' ") or die("deletion review_game failed");
-    $sql = $mysqli->query("DELETE FROM review_score WHERE review_id = '$reviewid' ") or die("deletion review_score failed");
+    $sql = $mysqli->query("DELETE FROM review_main WHERE review_id = '$reviewid' ")
+        or die("deletion review_main failed");
+    $sql = $mysqli->query("DELETE FROM review_game WHERE review_id = '$reviewid' AND game_id = '$game_id' ")
+        or die("deletion review_game failed");
+    $sql = $mysqli->query("DELETE FROM review_score WHERE review_id = '$reviewid' ")
+        or die("deletion review_score failed");
 
     //delete the comments at every screenshot for this review
-    $SCREENSHOT = $mysqli->query("SELECT * FROM screenshot_review where review_id = '$reviewid' ") or die("Database error - getting screenshots");
+    $SCREENSHOT = $mysqli->query("SELECT * FROM screenshot_review where review_id = '$reviewid' ")
+        or die("Database error - getting screenshots");
 
     while ($screenshotrow = $SCREENSHOT->fetch_row()) {
-        $sql = $mysqli->query("DELETE FROM review_comments WHERE screenshot_review_id = $screenshotrow[0] ") or die("deletion review_comments failed");
+        $sql = $mysqli->query("DELETE FROM review_comments WHERE screenshot_review_id = $screenshotrow[0] ")
+            or die("deletion review_comments failed");
     }
 
-    $sql = $mysqli->query("DELETE FROM screenshot_review WHERE review_id = '$reviewid' ") or die("deletion screenshot failed");
+    $sql = $mysqli->query("DELETE FROM screenshot_review WHERE review_id = '$reviewid' ")
+        or die("deletion screenshot failed");
 
     $_SESSION['edit_message'] = "Review converted to comment";
 
@@ -302,7 +332,8 @@ if (isset($action) and $action == 'add_review') {
 
     $user_id_review = $_SESSION['user_id'];
 
-    $sdbquery = $mysqli->query("INSERT INTO review_main (review_date, user_id) VALUES ('$date',$user_id_review)") or die("Couldn't insert into review_main");
+    $sdbquery = $mysqli->query("INSERT INTO review_main (review_date, user_id) VALUES ('$date',$user_id_review)")
+        or die("Couldn't insert into review_main");
 
     //get the id of the inserted review
     $REVIEW = $mysqli->query("SELECT review_id FROM review_main
@@ -313,7 +344,8 @@ if (isset($action) and $action == 'add_review') {
     $reviewid = $reviewrow[0];
 
     //Then, we'll be filling up the game review table
-    $sdbquery = $mysqli->query("INSERT INTO review_game (review_id, game_id) VALUES ($reviewid, $game_create)") or die("Couldn't insert into review_game");
+    $sdbquery = $mysqli->query("INSERT INTO review_game (review_id, game_id) VALUES ($reviewid, $game_create)")
+        or die("Couldn't insert into review_game");
 
     create_log_entry('Games', $game_create, 'Review', $reviewid, 'Insert', $_SESSION['user_id']);
 

@@ -96,8 +96,14 @@ if ($_SERVER['REQUEST_METHOD'] == "GET") {
         $smarty->assign('release_memory_enhancements', $memoryDao->getMemoryForRelease($release->getId()));
         $smarty->assign('release_minimum_memory', $memoryDao->getMinimumMemoryForRelease($release->getId()));
         $smarty->assign('release_memory_incompatible', $memoryDao->getMemoryIncompatibleForRelease($release->getId()));
-        $smarty->assign('release_copy_protections', $copyProtectionDao->getCopyProtectionsForRelease($release->getId()));
-        $smarty->assign('release_disk_protections', $diskProtectionDao->getDiskProtectionsForRelease($release->getId()));
+        $smarty->assign(
+            'release_copy_protections',
+            $copyProtectionDao->getCopyProtectionsForRelease($release->getId())
+        );
+        $smarty->assign(
+            'release_disk_protections',
+            $diskProtectionDao->getDiskProtectionsForRelease($release->getId())
+        );
         $smarty->assign('release_languages', $languageDao->getAllGameReleaseLanguages($release->getId()));
         $smarty->assign('release_scans', $gameReleaseScanDao->getScansForRelease($release->getId()));
         $media = $mediaDao->getAllMediaFromRelease($release->getId());
@@ -156,7 +162,10 @@ if ($_SERVER['REQUEST_METHOD'] == "GET") {
         $smarty->assign('game', $game);
         $smarty->assign('game_releases', $gameReleaseDao->getReleasesForGame($game->getId()));
 
-        $smarty->assign('release', new AL\Common\Model\Game\GameRelease(-1, $game->getId(), '', '', '', '', null, null));
+        $smarty->assign(
+            'release',
+            new AL\Common\Model\Game\GameRelease(-1, $game->getId(), '', '', '', '', null, null)
+        );
 
         $smarty->assign('system_incompatible', []);
         $smarty->assign('emulator_incompatible', []);

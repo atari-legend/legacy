@@ -90,12 +90,12 @@ while ($GAME = $SQL_GAME->fetch_array(MYSQLI_BOTH)) {
 
 //get the music info
 $sql_music = $mysqli->query("SELECT * FROM game_music
-                            LEFT JOIN music ON (game_music.music_id = music.music_id)
-                            LEFT JOIN music_author ON (music.music_id = music_author.music_id)
-                            LEFT JOIN individuals ON (music_author.ind_id = individuals.ind_id)
-                            LEFT JOIN music_types ON (music.music_id = music_types.music_id)
-                            LEFT JOIN music_types_main ON (music_types.music_types_main_id = music_types_main.music_types_main_id)
-                            WHERE game_music.game_id='$game_id'");
+    LEFT JOIN music ON (game_music.music_id = music.music_id)
+    LEFT JOIN music_author ON (music.music_id = music_author.music_id)
+    LEFT JOIN individuals ON (music_author.ind_id = individuals.ind_id)
+    LEFT JOIN music_types ON (music.music_id = music_types.music_id)
+    LEFT JOIN music_types_main ON (music_types.music_types_main_id = music_types_main.music_types_main_id)
+    WHERE game_music.game_id='$game_id'");
 $i         = 0;
 while ($MUSIC = $sql_music->fetch_array(MYSQLI_BOTH)) {
     $i++;
@@ -111,12 +111,12 @@ while ($MUSIC = $sql_music->fetch_array(MYSQLI_BOTH)) {
 $smarty->assign('nr_of_zaks', $i);
 
 $SQL_MUSICIAN = $mysqli->query("SELECT *
-                           FROM game_individual
-                           LEFT JOIN individual_role ON ( game_individual.individual_role_id = individual_role.id )
-                           LEFT JOIN game ON ( game_individual.game_id = game.game_id )
-                           LEFT JOIN individuals ON ( game_individual.individual_id = individuals.ind_id )
-                           WHERE game.game_id='$game_id'
-                           AND individual_role.name = 'Music'") or die("Error getting game musician");
+    FROM game_individual
+    LEFT JOIN individual_role ON ( game_individual.individual_role_id = individual_role.id )
+    LEFT JOIN game ON ( game_individual.game_id = game.game_id )
+    LEFT JOIN individuals ON ( game_individual.individual_id = individuals.ind_id )
+    WHERE game.game_id='$game_id'
+    AND individual_role.name = 'Music'") or die("Error getting game musician");
 $i = 0;
 
 while ($MUSICIAN = $SQL_MUSICIAN->fetch_array(MYSQLI_BOTH)) {
@@ -132,7 +132,8 @@ if (isset($i) and $i == 0) {
     $_SESSION['edit_message'] = "No musician attached to this game, go to the detail pages to add a musician first";
     header("Location: ../games/games_music.php");
 } else {
-    $_SESSION['edit_message'] = "To add more musicians, just click the game name in the header to go to the detail pages of this game";
+    $_SESSION['edit_message'] = "To add more musicians, just click the game name in the header "
+        ."to go to the detail pages of this game";
 }
 
 $smarty->assign("user_id", $_SESSION['user_id']);
