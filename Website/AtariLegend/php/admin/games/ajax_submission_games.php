@@ -41,15 +41,22 @@ if ($last_timestamp == '') {
     $last_timestamp = null;
 }
 
-$submissions = $GameSubmissionDAO->getLatestSubmissions(isset($user_id) ? $user_id : null, isset($last_timestamp) ? $last_timestamp : null, isset($action) ? $action : null, isset($done) ? $done : null);
+$submissions = $GameSubmissionDAO->getLatestSubmissions(
+    isset($user_id) ? $user_id : null,
+    isset($last_timestamp) ? $last_timestamp : null,
+    isset($action) ? $action : null,
+    isset($done) ? $done : null
+);
 $smarty->assign('submission', $submissions);
 
 //check if there are screenshot added to the submission
 foreach ($submissions as $submissionId) {
     $submitinfo_id = $submissionId->getSubmissionId();
     $query_screenshots_submission = $mysqli->query("SELECT * FROM screenshot_main
-                                        LEFT JOIN screenshot_game_submitinfo ON (screenshot_main.screenshot_id = screenshot_game_submitinfo.screenshot_id)
-                                        WHERE screenshot_game_submitinfo.game_submitinfo_id = '$submitinfo_id'") or die("Error - Couldn't query submitinfo screenshots");
+        LEFT JOIN screenshot_game_submitinfo
+        ON (screenshot_main.screenshot_id = screenshot_game_submitinfo.screenshot_id)
+        WHERE screenshot_game_submitinfo.game_submitinfo_id = '$submitinfo_id'")
+        or die("Error - Couldn't query submitinfo screenshots");
 
     while ($sql_screenshots_submission = $query_screenshots_submission->fetch_array(MYSQLI_BOTH)) {
         $new_path = $game_submit_screenshot_path;
@@ -67,8 +74,8 @@ foreach ($submissions as $submissionId) {
 
 //Get the authors for submission search
 $sql_author = $mysqli->query("SELECT game_submitinfo.user_id, users.userid FROM game_submitinfo
-                              LEFT JOIN users ON ( game_submitinfo.user_id = users.user_id ) 
-                              GROUP BY game_submitinfo.user_id 
+                              LEFT JOIN users ON ( game_submitinfo.user_id = users.user_id )
+                              GROUP BY game_submitinfo.user_id
                               ORDER BY users.userid ASC") or die("Database error - getting members name");
 
 while ($authors = $sql_author->fetch_array(MYSQLI_BOTH)) {

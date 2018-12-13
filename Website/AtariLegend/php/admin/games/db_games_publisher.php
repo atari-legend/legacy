@@ -107,7 +107,9 @@ switch ($action) {
             $release->getName(),
             $release->getDate(),
             $release->getLicense(),
-            ($game_extra_info_id != null && $game_extra_info_id == 1) ? \AL\Common\DAO\GameReleaseDAO::TYPE_BUDGET : $release->getType(),
+            ($game_extra_info_id != null && $game_extra_info_id == 1)
+                ? \AL\Common\DAO\GameReleaseDAO::TYPE_BUDGET
+                : $release->getType(),
             $pub_dev_id
         );
 

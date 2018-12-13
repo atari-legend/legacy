@@ -37,29 +37,32 @@ while ($games = $sql_games->fetch_array(MYSQLI_BOTH)) {
 }
 
 //get the number of reviews in the archive
-$query_number = $mysqli->query("SELECT * FROM review_main WHERE review_edit = '0'") or die("Couldn't get the number of reviews");
+$query_number = $mysqli->query("SELECT * FROM review_main WHERE review_edit = '0'")
+    or die("Couldn't get the number of reviews");
 $v_reviews = $query_number->num_rows;
 
-$query_reviewed = $mysqli->query("SELECT * FROM review_game GROUP BY game_id HAVING COUNT(DISTINCT game_id) = 1") or die("Couldn't get the number of reviewed games");
+$query_reviewed = $mysqli->query("SELECT * FROM review_game GROUP BY game_id HAVING COUNT(DISTINCT game_id) = 1")
+    or die("Couldn't get the number of reviewed games");
 $v_review_games = $query_reviewed->num_rows;
 
 $RESULTGAME = "SELECT
-                    game.game_id,
-                    game.game_name,
-                    pub_dev.pub_dev_name,
-                    pub_dev.pub_dev_id,
-                    users.userid,
-                    review_main.review_date,
-                    review_main.review_id
-                    FROM game
-                    LEFT JOIN game_developer ON ( game.game_id = game_developer.game_id )
-                    LEFT JOIN pub_dev ON ( game_developer.dev_pub_id = pub_dev.pub_dev_id )
-                    LEFT JOIN review_game ON ( review_game.game_id = game.game_id )
-                    LEFT JOIN review_main ON ( review_main.review_id = review_game.review_id)
-                    LEFT JOIN users ON ( review_main.user_id = users.user_id)
-                    WHERE review_game.game_id IS NOT NULL
-                    GROUP BY game.game_id, game.game_name, userid, review_date HAVING COUNT(DISTINCT game.game_id, game.game_name, userid, review_date) = 1 
-                    ORDER BY game_name ASC";
+    game.game_id,
+    game.game_name,
+    pub_dev.pub_dev_name,
+    pub_dev.pub_dev_id,
+    users.userid,
+    review_main.review_date,
+    review_main.review_id
+    FROM game
+    LEFT JOIN game_developer ON ( game.game_id = game_developer.game_id )
+    LEFT JOIN pub_dev ON ( game_developer.dev_pub_id = pub_dev.pub_dev_id )
+    LEFT JOIN review_game ON ( review_game.game_id = game.game_id )
+    LEFT JOIN review_main ON ( review_main.review_id = review_game.review_id)
+    LEFT JOIN users ON ( review_main.user_id = users.user_id)
+    WHERE review_game.game_id IS NOT NULL
+    GROUP BY game.game_id, game.game_name, userid, review_date
+    HAVING COUNT(DISTINCT game.game_id, game.game_name, userid, review_date) = 1
+    ORDER BY game_name ASC";
 
 $games = $mysqli->query($RESULTGAME);
 

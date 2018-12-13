@@ -148,7 +148,6 @@ module.exports = function (grunt) {
                     '<%= webRoot %>php/**/*.php',
                     // No point fixing legacy DB scripts that will never be run again
                     '!<%= webRoot %>php/admin/administration/database_scripts/legacy/**/*.php',
-                    '!<%= webRoot %>php/admin/games/**/*.php',
                     '!<%= webRoot %>php/{temp,vendor}/**/*.php'
                 ]
             },
