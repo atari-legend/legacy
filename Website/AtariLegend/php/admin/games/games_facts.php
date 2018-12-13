@@ -33,8 +33,9 @@ while ($sql_games_facts = $query_games_facts->fetch_array(MYSQLI_BOTH)) {
 
     //check if there are screenshot added to the submission
     $query_screenshots_facts = $mysqli->query("SELECT * FROM screenshot_main
-                                        LEFT JOIN screenshot_game_fact ON (screenshot_main.screenshot_id = screenshot_game_fact.screenshot_id)
-                                        WHERE screenshot_game_fact.game_fact_id = '$sql_games_facts[game_fact_id]'") or die("Error - Couldn't query fact screenshots");
+        LEFT JOIN screenshot_game_fact ON (screenshot_main.screenshot_id = screenshot_game_fact.screenshot_id)
+        WHERE screenshot_game_fact.game_fact_id = '$sql_games_facts[game_fact_id]'")
+        or die("Error - Couldn't query fact screenshots");
 
     while ($sql_screenshots_facts = $query_screenshots_facts->fetch_array(MYSQLI_BOTH)) {
         $new_path = $game_fact_screenshot_path;

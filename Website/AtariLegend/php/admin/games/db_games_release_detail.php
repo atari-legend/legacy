@@ -195,7 +195,10 @@ if (isset($action) && ($action == 'features')) {
     $systemDao->setIncompatibleSystemsForRelease($release_id, isset($system_incompatible) ? $system_incompatible : []);
     //$systemDao->setEnhancedSystemsForRelease($release_id, isset($system_enhanced) ? $system_enhanced : []);
     $resolutionDao->setResolutionsForRelease($release_id, isset($resolution) ? $resolution : []);
-    $emulatorDao->setIncompatibleEmulatorsForRelease($release_id, isset($emulator_incompatible) ? $emulator_incompatible : []);
+    $emulatorDao->setIncompatibleEmulatorsForRelease(
+        $release_id,
+        isset($emulator_incompatible) ? $emulator_incompatible : []
+    );
     $gameReleaseDao->updateHdRelease($release_id, $hd_installable);
 
     create_log_entry('Game Release', $game_id, 'Compatibility', $release_id, 'Update', $_SESSION['user_id']);
@@ -238,7 +241,6 @@ if (isset($action) && ($action == 'remove_distributor')) {
 //update the release options at the scene tab
 //***********************************************************************************
 if (isset($action) && ($action == 'scene')) {
-
     //Update the game engine
     $trainerOptionDao->setTrainerOptionsForRelease($release_id, isset($trainer_option) ? $trainer_option : []);
 
@@ -384,7 +386,10 @@ if (isset($action) && ($action == 'remove_tos_incompatible')) {
 //Add the copy protection for a release
 //***********************************************************************************
 if (isset($action) && ($action == 'add_copy_protection')) {
-    $copyProtectionDao->addCopyProtectionForRelease($release_id, isset($protection_id) ? $protection_id : [], $copy_protection_note);
+    $copyProtectionDao->addCopyProtectionForRelease(
+        $release_id,
+        isset($protection_id) ? $protection_id : [], $copy_protection_note
+    );
 
     create_log_entry('Game Release', $game_id, 'Copy Protection', $release_id, 'Add', $_SESSION['user_id']);
     $_SESSION['edit_message'] = "Copy Protection added";
@@ -408,7 +413,11 @@ if (isset($action) && ($action == 'remove_copy_protection')) {
 //Add the disk protection for a release
 //***********************************************************************************
 if (isset($action) && ($action == 'add_disk_protection')) {
-    $diskProtectionDao->addDiskProtectionForRelease($release_id, isset($protection_id) ? $protection_id : [], $disk_protection_note);
+    $diskProtectionDao->addDiskProtectionForRelease(
+        $release_id,
+        isset($protection_id) ? $protection_id : [],
+        $disk_protection_note
+    );
 
     create_log_entry('Game Release', $game_id, 'Disk Protection', $release_id, 'Add', $_SESSION['user_id']);
     $_SESSION['edit_message'] = "Disk Protection added";
@@ -526,7 +535,6 @@ if (isset($action) && ($action == 'remove_media')) {
 //delete a media from a release
 //***********************************************************************************
 if (isset($action) && ($action == 'Add file')) {
-
     // adding this vars inhere as the $_FILES['game_download_name']
     // is not recognized in the DumpDAO.php file
     $game_download_name = $_FILES['game_download_name'];
@@ -535,7 +543,11 @@ if (isset($action) && ($action == 'Add file')) {
     $filesize = $_FILES['game_download_name']["size"];
 
     //Also adding the game_file_paths vars, not recognized in the DumpDAO.php file
-    $dumpDao->AddDumpToMedia($media_id, $format, $filename, $tempfilename, $info, $game_file_temp_path, $game_file_path, $filesize);
+    $dumpDao->AddDumpToMedia(
+        $media_id, $format, $filename,
+        $tempfilename, $info, $game_file_temp_path,
+        $game_file_path, $filesize
+    );
 
     create_log_entry('Game Release', $game_id, 'Dump', $release_id, 'Insert', $_SESSION['user_id']);
 

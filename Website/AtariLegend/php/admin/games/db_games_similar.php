@@ -25,7 +25,8 @@ include("../../config/admin_rights.php");
 if (isset($action) and $action == 'delete_similar') {
     create_log_entry('Games', $game_id, 'Similar', $game_similar_id, 'Delete', $_SESSION['user_id']);
 
-    $sql_aka = $mysqli->query("DELETE FROM game_similar WHERE game_similar_id = '$game_similar_id' AND game_id = '$game_id'") or die("Couldn't delete similar game");
+    $sql_aka = $mysqli->query("DELETE FROM game_similar WHERE game_similar_id = '$game_similar_id'
+        AND game_id = '$game_id'") or die("Couldn't delete similar game");
 
     $_SESSION['edit_message'] = "Similar game deleted";
 
@@ -36,7 +37,8 @@ if (isset($action) and $action == 'delete_similar') {
 //If add similar button has been pressed
 //***********************************************************************************
 if (isset($action) and $action == 'add_game_similar') {
-    $sql_aka = $mysqli->query("INSERT INTO game_similar (game_id, game_similar_cross) VALUES ('$game_id','$game_similar')") or die("Couldn't insert similar game");
+    $sql_aka = $mysqli->query("INSERT INTO game_similar (game_id, game_similar_cross)
+        VALUES ('$game_id','$game_similar')") or die("Couldn't insert similar game");
 
     create_log_entry('Games', $game_id, 'Similar', $game_similar, 'Insert', $_SESSION['user_id']);
 

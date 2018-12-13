@@ -56,10 +56,10 @@ $smarty->assign('score', array(
 
 //Get the screenshots and the comments of this review
 $query_screenshots = $mysqli->query("SELECT * FROM review_main
-                                LEFT JOIN screenshot_review ON (review_main.review_id = screenshot_review.review_id)
-                                LEFT JOIN screenshot_main ON (screenshot_review.screenshot_id = screenshot_main.screenshot_id)
-                                LEFT JOIN review_comments ON (screenshot_review.screenshot_review_id = review_comments.screenshot_review_id)
-                                WHERE review_main.review_id = '$review_id' AND review_main.review_edit = '0'");
+    LEFT JOIN screenshot_review ON (review_main.review_id = screenshot_review.review_id)
+    LEFT JOIN screenshot_main ON (screenshot_review.screenshot_id = screenshot_main.screenshot_id)
+    LEFT JOIN review_comments ON (screenshot_review.screenshot_review_id = review_comments.screenshot_review_id)
+    WHERE review_main.review_id = '$review_id' AND review_main.review_edit = '0'");
 
 $count = 1;
 
