@@ -326,10 +326,10 @@ $('#input-tags3').selectize({
                     <input type="hidden" name="action" value="modify_game_multiplayer">
                     <br>
                     <label class="input">Players (Same machine)</label>
-                    <input type="text" name="players_same" class="standard_input input_small" value="{if ($game->getPlayersSameMachine() <> 0)}{$game->getPlayersSameMachine()}{/if}">
+                    <input type="text" name="players_same" class="standard_input input_large" value="{if ($game->getPlayersSameMachine() <> 0)}{$game->getPlayersSameMachine()}{/if}">
                     <br>
                     <label class="input">Players (Linked machines)</label>
-                    <input type="text" name="players_other" class="standard_input input_small" value="{if ($game->getPlayersMultipleMachines() <> 0)}{$game->getPlayersMultipleMachines()}{/if}">
+                    <input type="text" name="players_other" class="standard_input input_large" value="{if ($game->getPlayersMultipleMachines() <> 0)}{$game->getPlayersMultipleMachines()}{/if}">
                     <br>
                     <label class="input">Type</label>
                     <select name="multiplayer_type" class="standard_select select_large">
@@ -339,7 +339,7 @@ $('#input-tags3').selectize({
                         {/foreach}
                     </select>
                     <br>
-                    <label class="input">Hardware</label>
+                    <label class="input">Link hardware</label>
                     <select name="multiplayer_hardware" class="standard_select select_large">
                         <option value="">-</option>
                         {foreach from=$multiplayer_hardware item=hardware}
