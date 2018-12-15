@@ -20,8 +20,8 @@ class Game {
         $nr_players_on_same_machine = null,
         $nr_player_multiple_machines = null,
         $multiplayer_type = null,
-        $multiplayer_hardware = null)
-    {
+        $multiplayer_hardware = null
+    ){
         $this->id = $id;
         $this->name = $name;
         $this->series_id = $series_id;
