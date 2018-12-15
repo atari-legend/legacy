@@ -59,15 +59,15 @@ class GameDAO {
         \AL\Db\bind_result(
             "GameDAO: getGame: $game_id",
             $stmt,
-            $game_id, $game_name, $game_series_id, $number_players_on_same_machine, $number_players_multiple_machines, 
+            $game_id, $game_name, $game_series_id, $number_players_on_same_machine, $number_players_multiple_machines,
             $multiplayer_type, $multiplayer_hardware
         );
 
         $game = null;
         if ($stmt->fetch()) {
             $game = new \AL\Common\Model\Game\Game(
-                $game_id, $game_name, $game_series_id, $number_players_on_same_machine, $number_players_multiple_machines,
-                $multiplayer_type, $multiplayer_hardware
+                $game_id, $game_name, $game_series_id, $number_players_on_same_machine,
+                $number_players_multiple_machines, $multiplayer_type, $multiplayer_hardware
             );
         }
 
@@ -81,7 +81,13 @@ class GameDAO {
      *
      * @param integer $release_id ID of the release to update
      */
-    public function updateGameMultiplayer($game_id, $players_same, $players_other, $multiplayer_type, $multiplayer_hardware) {
+    public function updateGameMultiplayer(
+        $game_id,
+        $players_same,
+        $players_other,
+        $multiplayer_type,
+        $multiplayer_hardware
+        ) {
         $stmt = \AL\Db\execute_query(
             "GameDAO: updateGameMultiplayer",
             $this->mysqli,

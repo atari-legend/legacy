@@ -300,11 +300,10 @@ if (isset($action) and $action == 'modify_game') {
 //Update the multiplayer options
 //***********************************************************************************
 if (isset($action) and $action == 'modify_game_multiplayer') {
-   
     $gameDao->updateGameMultiplayer(
-        $game_id, 
-        $players_same, 
-        $players_other, 
+        $game_id,
+        $players_same,
+        $players_other,
         ($multiplayer_type != '') ? $multiplayer_type : null,
         ($multiplayer_hardware != '') ? $multiplayer_hardware : null
     );
@@ -312,7 +311,7 @@ if (isset($action) and $action == 'modify_game_multiplayer') {
     create_log_entry('Games', $game_id, 'Game', $game_id, 'Update', $_SESSION['user_id']);
 
     $_SESSION['edit_message'] = "Multiplayer options updated";
-    header("Location: ../games/games_detail.php?game_id=$game_id#games_detail");   
+    header("Location: ../games/games_detail.php?game_id=$game_id#games_detail");
 }
 
 //***********************************************************************************
