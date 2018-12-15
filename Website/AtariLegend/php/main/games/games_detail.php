@@ -37,6 +37,7 @@ require_once __DIR__."/../../common/DAO/DiskProtectionDAO.php";
 require_once __DIR__."/../../common/DAO/SoundHardwareDAO.php";
 require_once __DIR__."/../../common/DAO/GameProgressSystemDAO.php";
 require_once __DIR__."/../../common/DAO/GameReleaseScanDAO.php";
+require_once __DIR__."/../../common/DAO/GameDAO.php";
 
 $gameReleaseDao = new \AL\Common\DAO\GameReleaseDAO($mysqli);
 $gameSeriesDao = new \AL\Common\DAO\GameSeriesDAO($mysqli);
@@ -60,6 +61,7 @@ $diskProtectionDao = new \AL\Common\DAO\DiskProtectionDAO($mysqli);
 $soundHardwareDao = new \AL\Common\DAO\SoundHardwareDAO($mysqli);
 $gameProgressSystemDao = new \AL\Common\DAO\GameProgressSystemDAO($mysqli);
 $gameReleaseScanDao = new \AL\Common\DAO\GameReleaseScanDAO($mysqli);
+$gameDao = new \AL\Common\DAO\GameDAO($mysqli);
 
 /**
  * Generates an SEO-friendly description of a game, depending on the data available
@@ -182,6 +184,9 @@ if ($game_info = $sql_game->fetch_array(MYSQLI_BOTH)) {
         )
     );
 }
+
+//Get the game data --> new way of working
+$smarty->assign('game', $gameDao->getGame($game_id));
 
 // Get the programming languages
 $smarty->assign('programming_languages', $programmingLanguageDao->getAllProgrammingLanguages());
