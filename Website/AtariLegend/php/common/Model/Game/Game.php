@@ -11,9 +11,17 @@ class Game {
     private $nr_players_on_same_machine;
     private $nr_player_multiple_machines;
     private $multiplayer_type;
-    private $multiplayer_hardware;   
+    private $multiplayer_hardware;
 
-    public function __construct($id, $name, $series_id = null, $nr_players_on_same_machine = null, $nr_player_multiple_machines = null, $multiplayer_type = null, $multiplayer_hardware = null) {
+    public function __construct(
+    $id,
+    $name,
+    $series_id = null,
+    $nr_players_on_same_machine = null,
+    $nr_player_multiple_machines = null,
+    $multiplayer_type = null,
+    $multiplayer_hardware = null)
+    {
         $this->id = $id;
         $this->name = $name;
         $this->series_id = $series_id;
