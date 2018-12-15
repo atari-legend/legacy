@@ -44,7 +44,8 @@ if (isset($mode) and $mode == "back") {
     ));
 }
 
-$IMAGE = $mysqli->query("SELECT * FROM game_boxscan WHERE game_id='$game_id' ORDER BY game_boxscan_side, game_boxscan_id") or die("Database error - selecting gamebox scan");
+$IMAGE = $mysqli->query("SELECT * FROM game_boxscan WHERE game_id='$game_id'
+    ORDER BY game_boxscan_side, game_boxscan_id") or die("Database error - selecting gamebox scan");
 
 $imagenum_rows = $IMAGE->num_rows;
 
@@ -68,7 +69,8 @@ if ($imagenum_rows > 0) {
         } else { // Else back covers
             $back++;
 
-            $couple = $mysqli->query("SELECT game_boxscan_id FROM game_box_couples WHERE game_boxscan_cross=$rowimage[game_boxscan_id]") or die("Database error - selecting gamebox scan");
+            $couple = $mysqli->query("SELECT game_boxscan_id FROM game_box_couples
+                WHERE game_boxscan_cross=$rowimage[game_boxscan_id]") or die("Database error - selecting gamebox scan");
             $couplerow        = $couple->fetch_row();
             $boxscan_cross_id = $couplerow[0];
 

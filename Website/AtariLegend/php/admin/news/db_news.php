@@ -57,7 +57,7 @@ if (isset($action) and $action == "add_news") {
     // we have to convert the date vars into a time stamp to be inserted into the db
     $news_date = date_to_timestamp($Date_Year, $Date_Month, $Date_Day);
 
-   // Check if form is filled.
+    // Check if form is filled.
     if ($headline == '' or $descr == '') {
         $_SESSION['edit_message'] = "Please fill in the necessary fields";
     } else {

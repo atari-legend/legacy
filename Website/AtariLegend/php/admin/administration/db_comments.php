@@ -54,7 +54,6 @@ if (isset($action) and $action == "delete") {
             $sql_articles = "DELETE FROM article_user_comments WHERE comments_id = '$comments_id'";
             $sql_gamereviews = "DELETE FROM review_user_comments WHERE comment_id = '$comments_id'";
             $sql_comments = "DELETE FROM comments WHERE comments_id = '$comments_id'";
-        
 
             $mysqli->query($sql_games);
             if ($mysqli->affected_rows > 0) {

@@ -52,30 +52,36 @@ $soundHardwareDao = new \AL\Common\DAO\SoundHardwareDAO($mysqli);
 $gameProgressSystemDao = new \AL\Common\DAO\GameProgressSystemDAO($mysqli);
 
 switch ($_POST['action']) {
-	case "Add engine":
+    case "Add engine":
         $engineDao->addGameEngine($engine_new);
 
         $new_engine_id = $mysqli->insert_id;
 
-        create_log_entry('Games Config', $new_engine_id, 'Games Engine', $new_engine_id, 'Insert', $_SESSION['user_id']);
+        create_log_entry(
+            'Games Config', $new_engine_id, 'Games Engine', $new_engine_id, 'Insert', $_SESSION['user_id']
+        );
 
-        $_SESSION['edit_message'] = "$engine_new has been added" ;
+        $_SESSION['edit_message'] = "$engine_new has been added";
         break;
 
     case "Delete engine":
-        create_log_entry('Games Config', $engine_id_edit, 'Games Engine', $engine_id_edit, 'Delete', $_SESSION['user_id']);
+        create_log_entry(
+            'Games Config', $engine_id_edit, 'Games Engine', $engine_id_edit, 'Delete', $_SESSION['user_id']
+        );
 
         $engineDao->deleteGameEngine($engine_id_edit);
 
-        $_SESSION['edit_message'] = "Engine has been deleted" ;
+        $_SESSION['edit_message'] = "Engine has been deleted";
         break;
 
     case "Modify engine":
         $engineDao->updateGameEngine($engine_id_edit, $engine_edit);
 
-        create_log_entry('Games Config', $engine_id_edit, 'Games Engine', $engine_id_edit, 'Update', $_SESSION['user_id']);
+        create_log_entry(
+            'Games Config', $engine_id_edit, 'Games Engine', $engine_id_edit, 'Update', $_SESSION['user_id']
+        );
 
-        $_SESSION['edit_message'] = "Engine has been updated" ;
+        $_SESSION['edit_message'] = "Engine has been updated";
         break;
 
     case "Add language":
@@ -83,25 +89,34 @@ switch ($_POST['action']) {
 
         $new_programming_language_id = $mysqli->insert_id;
 
-        create_log_entry('Games Config', $new_programming_language_id, 'Programming Language',$new_programming_language_id, 'Insert', $_SESSION['user_id']);
+        create_log_entry(
+            'Games Config', $new_programming_language_id, 'Programming Language', $new_programming_language_id,
+            'Insert', $_SESSION['user_id']
+        );
 
-        $_SESSION['edit_message'] = "$programming_language_new has been added" ;
+        $_SESSION['edit_message'] = "$programming_language_new has been added";
         break;
 
     case "Delete language":
-        create_log_entry('Games Config', $programming_language_id_edit, 'Programming Language', $programming_language_id_edit, 'Delete', $_SESSION['user_id']);
+        create_log_entry(
+            'Games Config', $programming_language_id_edit, 'Programming Language',
+            $programming_language_id_edit, 'Delete', $_SESSION['user_id']
+        );
 
         $programmingLanguageDao->deleteProgrammingLanguage($programming_language_id_edit);
 
-        $_SESSION['edit_message'] = "Programming language has been deleted" ;
+        $_SESSION['edit_message'] = "Programming language has been deleted";
         break;
 
     case "Modify language":
         $programmingLanguageDao->updateProgrammingLanguage($programming_language_id_edit, $programming_language_edit);
 
-        create_log_entry('Games Config', $programming_language_id_edit, 'Programming Language', $programming_language_id_edit, 'Update', $_SESSION['user_id']);
+        create_log_entry(
+            'Games Config', $programming_language_id_edit, 'Programming Language',
+            $programming_language_id_edit, 'Update', $_SESSION['user_id']
+        );
 
-        $_SESSION['edit_message'] = "Programming language has been updated" ;
+        $_SESSION['edit_message'] = "Programming language has been updated";
         break;
 
     case "Add genre":
@@ -109,9 +124,9 @@ switch ($_POST['action']) {
 
         $new_genre_id = $mysqli->insert_id;
 
-        create_log_entry('Games Config', $new_genre_id, 'Genre',$new_genre_id, 'Insert', $_SESSION['user_id']);
+        create_log_entry('Games Config', $new_genre_id, 'Genre', $new_genre_id, 'Insert', $_SESSION['user_id']);
 
-        $_SESSION['edit_message'] = "$genre_new has been added" ;
+        $_SESSION['edit_message'] = "$genre_new has been added";
         break;
 
     case "Delete genre":
@@ -119,7 +134,7 @@ switch ($_POST['action']) {
 
         $gameGenreDao->deleteGenre($genre_id_edit);
 
-        $_SESSION['edit_message'] = "Genre has been deleted" ;
+        $_SESSION['edit_message'] = "Genre has been deleted";
         break;
 
     case "Modify genre":
@@ -127,7 +142,7 @@ switch ($_POST['action']) {
 
         create_log_entry('Games Config', $genre_id_edit, 'Genre', $genre_id_edit, 'Update', $_SESSION['user_id']);
 
-        $_SESSION['edit_message'] = "Genre has been updated" ;
+        $_SESSION['edit_message'] = "Genre has been updated";
         break;
 
     case "Add port":
@@ -135,9 +150,9 @@ switch ($_POST['action']) {
 
         $new_port_id = $mysqli->insert_id;
 
-        create_log_entry('Games Config', $new_port_id, 'Port',$new_port_id, 'Insert', $_SESSION['user_id']);
+        create_log_entry('Games Config', $new_port_id, 'Port', $new_port_id, 'Insert', $_SESSION['user_id']);
 
-        $_SESSION['edit_message'] = "$port_new has been added" ;
+        $_SESSION['edit_message'] = "$port_new has been added";
         break;
 
     case "Delete port":
@@ -145,7 +160,7 @@ switch ($_POST['action']) {
 
         $portDao->deletePort($port_id_edit);
 
-        $_SESSION['edit_message'] = "Port has been deleted" ;
+        $_SESSION['edit_message'] = "Port has been deleted";
         break;
 
     case "Modify port":
@@ -153,7 +168,7 @@ switch ($_POST['action']) {
 
         create_log_entry('Games Config', $port_id_edit, 'Port', $port_id_edit, 'Update', $_SESSION['user_id']);
 
-        $_SESSION['edit_message'] = "Port has been updated" ;
+        $_SESSION['edit_message'] = "Port has been updated";
         break;
 
     case "Add ind role":
@@ -161,25 +176,34 @@ switch ($_POST['action']) {
 
         $new_individual_role_id = $mysqli->insert_id;
 
-        create_log_entry('Games Config', $new_individual_role_id, 'Individual Role',$new_individual_role_id, 'Insert', $_SESSION['user_id']);
+        create_log_entry(
+            'Games Config', $new_individual_role_id, 'Individual Role',
+            $new_individual_role_id, 'Insert', $_SESSION['user_id']
+        );
 
-        $_SESSION['edit_message'] = "$individual_role_new has been added" ;
+        $_SESSION['edit_message'] = "$individual_role_new has been added";
         break;
 
     case "Delete ind role":
-        create_log_entry('Games Config', $individual_role_id_edit, 'Individual Role', $individual_role_id_edit, 'Delete', $_SESSION['user_id']);
+        create_log_entry(
+            'Games Config', $individual_role_id_edit, 'Individual Role',
+            $individual_role_id_edit, 'Delete', $_SESSION['user_id']
+        );
 
         $individualRoleDao->deleteIndividualRole($individual_role_id_edit);
 
-        $_SESSION['edit_message'] = "Individual role has been deleted" ;
+        $_SESSION['edit_message'] = "Individual role has been deleted";
         break;
 
     case "Modify ind role":
         $individualRoleDao->updateIndividualRole($individual_role_id_edit, $individual_role_edit);
 
-        create_log_entry('Games Config', $individual_role_id_edit, 'Individual Role', $individual_role_id_edit, 'Update', $_SESSION['user_id']);
+        create_log_entry(
+            'Games Config', $individual_role_id_edit, 'Individual Role', $individual_role_id_edit,
+            'Update', $_SESSION['user_id']
+        );
 
-        $_SESSION['edit_message'] = "Individual role has been updated" ;
+        $_SESSION['edit_message'] = "Individual role has been updated";
         break;
 
     case "Add dev role":
@@ -187,25 +211,34 @@ switch ($_POST['action']) {
 
         $new_developer_role_id = $mysqli->insert_id;
 
-        create_log_entry('Games Config', $new_developer_role_id, 'Developer Role',$new_developer_role_id, 'Insert', $_SESSION['user_id']);
+        create_log_entry(
+            'Games Config', $new_developer_role_id, 'Developer Role',
+            $new_developer_role_id, 'Insert', $_SESSION['user_id']
+        );
 
-        $_SESSION['edit_message'] = "$developer_role_new has been added" ;
+        $_SESSION['edit_message'] = "$developer_role_new has been added";
         break;
 
     case "Delete dev role":
-        create_log_entry('Games Config', $developer_role_id_edit, 'Developer Role', $developer_role_id_edit, 'Delete', $_SESSION['user_id']);
+        create_log_entry(
+            'Games Config', $developer_role_id_edit, 'Developer Role',
+            $developer_role_id_edit, 'Delete', $_SESSION['user_id']
+        );
 
         $developerRoleDao->deleteDeveloperRole($developer_role_id_edit);
 
-        $_SESSION['edit_message'] = "Developer role has been deleted" ;
+        $_SESSION['edit_message'] = "Developer role has been deleted";
         break;
 
     case "Modify dev role":
         $developerRoleDao->updateDeveloperRole($developer_role_id_edit, $developer_role_edit);
 
-        create_log_entry('Games Config', $developer_role_id_edit, 'Developer Role', $developer_role_id_edit, 'Update', $_SESSION['user_id']);
+        create_log_entry(
+            'Games Config', $developer_role_id_edit, 'Developer Role',
+            $developer_role_id_edit, 'Update', $_SESSION['user_id']
+        );
 
-        $_SESSION['edit_message'] = "Developer role has been updated" ;
+        $_SESSION['edit_message'] = "Developer role has been updated";
         break;
 
     case "Add control":
@@ -213,9 +246,9 @@ switch ($_POST['action']) {
 
         $new_control_id = $mysqli->insert_id;
 
-        create_log_entry('Games Config', $new_control_id, 'Control',$new_control_id, 'Insert', $_SESSION['user_id']);
+        create_log_entry('Games Config', $new_control_id, 'Control', $new_control_id, 'Insert', $_SESSION['user_id']);
 
-        $_SESSION['edit_message'] = "$control_new has been added" ;
+        $_SESSION['edit_message'] = "$control_new has been added";
         break;
 
     case "Delete control":
@@ -223,7 +256,7 @@ switch ($_POST['action']) {
 
         $controlDao->deleteControl($control_id_edit);
 
-        $_SESSION['edit_message'] = "Control has been deleted" ;
+        $_SESSION['edit_message'] = "Control has been deleted";
         break;
 
     case "Modify control":
@@ -231,7 +264,7 @@ switch ($_POST['action']) {
 
         create_log_entry('Games Config', $control_id_edit, 'Control', $control_id_edit, 'Update', $_SESSION['user_id']);
 
-        $_SESSION['edit_message'] = "Control has been updated" ;
+        $_SESSION['edit_message'] = "Control has been updated";
         break;
 
     case "Add resolution":
@@ -239,25 +272,34 @@ switch ($_POST['action']) {
 
         $new_resolution_id = $mysqli->insert_id;
 
-        create_log_entry('Games Config', $new_resolution_id, 'Resolution', $new_resolution_id, 'Insert', $_SESSION['user_id']);
+        create_log_entry(
+            'Games Config', $new_resolution_id, 'Resolution', $new_resolution_id,
+            'Insert', $_SESSION['user_id']
+        );
 
-        $_SESSION['edit_message'] = "$resolution_new has been added" ;
+        $_SESSION['edit_message'] = "$resolution_new has been added";
         break;
 
     case "Delete resolution":
-        create_log_entry('Games Config', $resolution_id_edit, 'Resolution', $resolution_id_edit, 'Delete', $_SESSION['user_id']);
+        create_log_entry(
+            'Games Config', $resolution_id_edit, 'Resolution', $resolution_id_edit,
+            'Delete', $_SESSION['user_id']
+        );
 
         $resolutionDao->deleteResolution($resolution_id_edit);
 
-        $_SESSION['edit_message'] = "Resolution has been deleted" ;
+        $_SESSION['edit_message'] = "Resolution has been deleted";
         break;
 
     case "Modify resolution":
         $resolutionDao->updateResolution($resolution_id_edit, $resolution_edit);
 
-        create_log_entry('Games Config', $resolution_id_edit, 'Resolution', $resolution_id_edit, 'Update', $_SESSION['user_id']);
+        create_log_entry(
+            'Games Config', $resolution_id_edit, 'Resolution',
+            $resolution_id_edit, 'Update', $_SESSION['user_id']
+        );
 
-        $_SESSION['edit_message'] = "Resolution has been updated" ;
+        $_SESSION['edit_message'] = "Resolution has been updated";
         break;
 
     case "Add system":
@@ -267,7 +309,7 @@ switch ($_POST['action']) {
 
         create_log_entry('Games Config', $new_system_id, 'System', $new_system_id, 'Insert', $_SESSION['user_id']);
 
-        $_SESSION['edit_message'] = "$system_new has been added" ;
+        $_SESSION['edit_message'] = "$system_new has been added";
         break;
 
     case "Delete system":
@@ -275,7 +317,7 @@ switch ($_POST['action']) {
 
         $systemDao->deleteSystem($system_id_edit);
 
-        $_SESSION['edit_message'] = "System has been deleted" ;
+        $_SESSION['edit_message'] = "System has been deleted";
         break;
 
     case "Modify system":
@@ -283,7 +325,7 @@ switch ($_POST['action']) {
 
         create_log_entry('Games Config', $system_id_edit, 'System', $system_id_edit, 'Update', $_SESSION['user_id']);
 
-        $_SESSION['edit_message'] = "System has been updated" ;
+        $_SESSION['edit_message'] = "System has been updated";
         break;
 
     case "Add emulator":
@@ -291,25 +333,34 @@ switch ($_POST['action']) {
 
         $new_emulator_id = $mysqli->insert_id;
 
-        create_log_entry('Games Config', $new_emulator_id, 'Emulator', $new_emulator_id, 'Insert', $_SESSION['user_id']);
+        create_log_entry(
+            'Games Config', $new_emulator_id, 'Emulator', $new_emulator_id,
+            'Insert', $_SESSION['user_id']
+        );
 
-        $_SESSION['edit_message'] = "$emulator_new has been added" ;
+        $_SESSION['edit_message'] = "$emulator_new has been added";
         break;
 
     case "Delete emulator":
-        create_log_entry('Games Config', $emulator_id_edit, 'Emulator', $emulator_id_edit, 'Delete', $_SESSION['user_id']);
+        create_log_entry(
+            'Games Config', $emulator_id_edit, 'Emulator', $emulator_id_edit,
+            'Delete', $_SESSION['user_id']
+        );
 
         $emulatorDao->deleteEmulator($emulator_id_edit);
 
-        $_SESSION['edit_message'] = "Emulator has been deleted" ;
+        $_SESSION['edit_message'] = "Emulator has been deleted";
         break;
 
     case "Modify emulator":
         $emulatorDao->updateEmulator($emulator_id_edit, $emulator_edit);
 
-        create_log_entry('Games Config', $emulator_id_edit, 'Emulator', $emulator_id_edit, 'Update', $_SESSION['user_id']);
+        create_log_entry(
+            'Games Config', $emulator_id_edit, 'Emulator',
+            $emulator_id_edit, 'Update', $_SESSION['user_id']
+        );
 
-        $_SESSION['edit_message'] = "Emulator has been updated" ;
+        $_SESSION['edit_message'] = "Emulator has been updated";
         break;
 
     case "Add trainer":
@@ -317,25 +368,34 @@ switch ($_POST['action']) {
 
         $new_trainer_option_id = $mysqli->insert_id;
 
-        create_log_entry('Games Config', $new_trainer_option_id, 'Trainer', $new_trainer_option_id, 'Insert', $_SESSION['user_id']);
+        create_log_entry(
+            'Games Config', $new_trainer_option_id, 'Trainer',
+            $new_trainer_option_id, 'Insert', $_SESSION['user_id']
+        );
 
-        $_SESSION['edit_message'] = "$trainer_option_new has been added" ;
+        $_SESSION['edit_message'] = "$trainer_option_new has been added";
         break;
 
     case "Delete trainer":
-        create_log_entry('Games Config', $trainer_option_id_edit, 'Trainer', $trainer_option_id_edit, 'Delete', $_SESSION['user_id']);
+        create_log_entry(
+            'Games Config', $trainer_option_id_edit, 'Trainer',
+            $trainer_option_id_edit, 'Delete', $_SESSION['user_id']
+        );
 
         $trainerOptionDao->deleteTrainerOption($trainer_option_id_edit);
 
-        $_SESSION['edit_message'] = "Trainer has been deleted" ;
+        $_SESSION['edit_message'] = "Trainer has been deleted";
         break;
 
     case "Modify trainer":
         $trainerOptionDao->updateTrainerOption($trainer_option_id_edit, $trainer_option_edit);
 
-        create_log_entry('Games Config', $trainer_option_id_edit, 'Trainer', $trainer_option_id_edit, 'Update', $_SESSION['user_id']);
+        create_log_entry(
+            'Games Config', $trainer_option_id_edit, 'Trainer',
+            $trainer_option_id_edit, 'Update', $_SESSION['user_id']
+        );
 
-        $_SESSION['edit_message'] = "Trainer has been updated" ;
+        $_SESSION['edit_message'] = "Trainer has been updated";
         break;
 
     case "Add memory":
@@ -345,7 +405,7 @@ switch ($_POST['action']) {
 
         create_log_entry('Games Config', $new_memory_id, 'Memory', $new_memory_id, 'Insert', $_SESSION['user_id']);
 
-        $_SESSION['edit_message'] = "$memory_new has been added" ;
+        $_SESSION['edit_message'] = "$memory_new has been added";
         break;
 
     case "Delete memory":
@@ -353,7 +413,7 @@ switch ($_POST['action']) {
 
         $memoryDao->deleteMemory($memory_id_edit);
 
-        $_SESSION['edit_message'] = "Memory has been deleted" ;
+        $_SESSION['edit_message'] = "Memory has been deleted";
         break;
 
     case "Modify memory":
@@ -361,7 +421,7 @@ switch ($_POST['action']) {
 
         create_log_entry('Games Config', $memory_id_edit, 'Memory', $memory_id_edit, 'Update', $_SESSION['user_id']);
 
-        $_SESSION['edit_message'] = "Memory has been updated" ;
+        $_SESSION['edit_message'] = "Memory has been updated";
         break;
 
     case "Add TOS":
@@ -371,7 +431,7 @@ switch ($_POST['action']) {
 
         create_log_entry('Games Config', $new_tos_id, 'Tos', $new_tos_id, 'Insert', $_SESSION['user_id']);
 
-        $_SESSION['edit_message'] = "$tos_new has been added" ;
+        $_SESSION['edit_message'] = "$tos_new has been added";
         break;
 
     case "Delete TOS":
@@ -379,7 +439,7 @@ switch ($_POST['action']) {
 
         $tosDao->deleteTos($tos_id_edit);
 
-        $_SESSION['edit_message'] = "TOS has been deleted" ;
+        $_SESSION['edit_message'] = "TOS has been deleted";
         break;
 
     case "Modify TOS":
@@ -387,7 +447,7 @@ switch ($_POST['action']) {
 
         create_log_entry('Games Config', $tos_id_edit, 'Tos', $tos_id_edit, 'Update', $_SESSION['user_id']);
 
-        $_SESSION['edit_message'] = "Tos has been updated" ;
+        $_SESSION['edit_message'] = "Tos has been updated";
         break;
 
     case "Add protection":
@@ -395,25 +455,34 @@ switch ($_POST['action']) {
 
         $new_copy_protection_id = $mysqli->insert_id;
 
-        create_log_entry('Games Config', $new_copy_protection_id, 'Protection', $new_copy_protection_id, 'Insert', $_SESSION['user_id']);
+        create_log_entry(
+            'Games Config', $new_copy_protection_id, 'Protection',
+            $new_copy_protection_id, 'Insert', $_SESSION['user_id']
+        );
 
-        $_SESSION['edit_message'] = "$copy_protection_new has been added" ;
+        $_SESSION['edit_message'] = "$copy_protection_new has been added";
         break;
 
     case "Delete protection":
-        create_log_entry('Games Config', $copy_protection_id_edit, 'Protection', $copy_protection_id_edit, 'Delete', $_SESSION['user_id']);
+        create_log_entry(
+            'Games Config', $copy_protection_id_edit, 'Protection',
+            $copy_protection_id_edit, 'Delete', $_SESSION['user_id']
+        );
 
         $copyProtectionDao->deleteCopyProtection($copy_protection_id_edit);
 
-        $_SESSION['edit_message'] = "Protection has been deleted" ;
+        $_SESSION['edit_message'] = "Protection has been deleted";
         break;
 
     case "Modify protection":
         $copyProtectionDao->updateCopyProtection($copy_protection_id_edit, $copy_protection_edit);
 
-        create_log_entry('Games Config', $copy_protection_id_edit, 'Protection', $copy_protection_id_edit, 'Update', $_SESSION['user_id']);
+        create_log_entry(
+            'Games Config', $copy_protection_id_edit, 'Protection',
+            $copy_protection_id_edit, 'Update', $_SESSION['user_id']
+        );
 
-        $_SESSION['edit_message'] = "Protection has been updated" ;
+        $_SESSION['edit_message'] = "Protection has been updated";
         break;
 
     case "Add disk protection":
@@ -421,25 +490,34 @@ switch ($_POST['action']) {
 
         $new_disk_protection_id = $mysqli->insert_id;
 
-        create_log_entry('Games Config', $new_disk_protection_id, 'Disk Protection', $new_disk_protection_id, 'Insert', $_SESSION['user_id']);
+        create_log_entry(
+            'Games Config', $new_disk_protection_id, 'Disk Protection',
+            $new_disk_protection_id, 'Insert', $_SESSION['user_id']
+        );
 
-        $_SESSION['edit_message'] = "$disk_protection_new has been added" ;
+        $_SESSION['edit_message'] = "$disk_protection_new has been added";
         break;
 
     case "Delete disk protection":
-        create_log_entry('Games Config', $disk_protection_id_edit, 'Disk Protection', $disk_protection_id_edit, 'Delete', $_SESSION['user_id']);
+        create_log_entry(
+            'Games Config', $disk_protection_id_edit, 'Disk Protection',
+            $disk_protection_id_edit, 'Delete', $_SESSION['user_id']
+        );
 
         $diskProtectionDao->deleteDiskProtection($disk_protection_id_edit);
 
-        $_SESSION['edit_message'] = "Protection has been deleted" ;
+        $_SESSION['edit_message'] = "Protection has been deleted";
         break;
 
     case "Modify disk protection":
         $diskProtectionDao->updateDiskProtection($disk_protection_id_edit, $disk_protection_edit);
 
-        create_log_entry('Games Config', $disk_protection_id_edit, 'Disk Protection', $disk_protection_id_edit, 'Update', $_SESSION['user_id']);
+        create_log_entry(
+            'Games Config', $disk_protection_id_edit, 'Disk Protection',
+            $disk_protection_id_edit, 'Update', $_SESSION['user_id']
+        );
 
-        $_SESSION['edit_message'] = "Protection has been updated" ;
+        $_SESSION['edit_message'] = "Protection has been updated";
         break;
 
     case "Add enhancement":
@@ -447,25 +525,34 @@ switch ($_POST['action']) {
 
         $new_enhancement_id = $mysqli->insert_id;
 
-        create_log_entry('Games Config', $new_enhancement_id, 'Enhancement', $new_enhancement_id, 'Insert', $_SESSION['user_id']);
+        create_log_entry(
+            'Games Config', $new_enhancement_id, 'Enhancement',
+            $new_enhancement_id, 'Insert', $_SESSION['user_id']
+        );
 
-        $_SESSION['edit_message'] = "$enhancement_new has been added" ;
+        $_SESSION['edit_message'] = "$enhancement_new has been added";
         break;
 
     case "Delete enhancement":
-        create_log_entry('Games Config', $enhancement_id_edit, 'Enhancement', $enhancement_id_edit, 'Delete', $_SESSION['user_id']);
+        create_log_entry(
+            'Games Config', $enhancement_id_edit, 'Enhancement',
+            $enhancement_id_edit, 'Delete', $_SESSION['user_id']
+        );
 
         $enhancementDao->deleteEnhancement($enhancement_id_edit);
 
-        $_SESSION['edit_message'] = "Enhancement has been deleted" ;
+        $_SESSION['edit_message'] = "Enhancement has been deleted";
         break;
 
     case "Modify enhancement":
         $enhancementDao->updateEnhancement($enhancement_id_edit, $enhancement_edit);
 
-        create_log_entry('Games Config', $enhancement_id_edit, 'Enhancement', $enhancement_id_edit, 'Update', $_SESSION['user_id']);
+        create_log_entry(
+            'Games Config', $enhancement_id_edit, 'Enhancement', $enhancement_id_edit,
+            'Update', $_SESSION['user_id']
+        );
 
-        $_SESSION['edit_message'] = "Enhancement has been updated" ;
+        $_SESSION['edit_message'] = "Enhancement has been updated";
         break;
 
     case "Add type":
@@ -475,23 +562,29 @@ switch ($_POST['action']) {
 
         create_log_entry('Games Config', $media_type_id, 'Media Type', $media_type_id, 'Insert', $_SESSION['user_id']);
 
-        $_SESSION['edit_message'] = "$media_type_new has been added" ;
+        $_SESSION['edit_message'] = "$media_type_new has been added";
         break;
 
     case "Delete type":
-        create_log_entry('Games Config', $media_type_id_edit, 'Media Type', $media_type_id_edit, 'Delete', $_SESSION['user_id']);
+        create_log_entry(
+            'Games Config', $media_type_id_edit, 'Media Type',
+            $media_type_id_edit, 'Delete', $_SESSION['user_id']
+        );
 
         $mediaTypeDao->deleteMediaType($media_type_id_edit);
 
-        $_SESSION['edit_message'] = "Media type has been deleted" ;
+        $_SESSION['edit_message'] = "Media type has been deleted";
         break;
 
     case "Modify type":
         $mediaTypeDao->updateMediaType($media_type_id_edit, $media_type_edit);
 
-        create_log_entry('Games Config', $media_type_id_edit, 'Media Type', $media_type_id_edit, 'Update', $_SESSION['user_id']);
+        create_log_entry(
+            'Games Config', $media_type_id_edit, 'Media Type', $media_type_id_edit,
+            'Update', $_SESSION['user_id']
+        );
 
-        $_SESSION['edit_message'] = "Media Type has been updated" ;
+        $_SESSION['edit_message'] = "Media Type has been updated";
         break;
 
     case "Add scan type":
@@ -499,25 +592,34 @@ switch ($_POST['action']) {
 
         $media_scan_type_id = $mysqli->insert_id;
 
-        create_log_entry('Games Config', $media_scan_type_id, 'Media Scan Type', $media_scan_type_id, 'Insert', $_SESSION['user_id']);
+        create_log_entry(
+            'Games Config', $media_scan_type_id, 'Media Scan Type',
+            $media_scan_type_id, 'Insert', $_SESSION['user_id']
+        );
 
-        $_SESSION['edit_message'] = "$media_scan_type_new has been added" ;
+        $_SESSION['edit_message'] = "$media_scan_type_new has been added";
         break;
 
     case "Delete scan type":
-        create_log_entry('Games Config', $media_scan_type_id_edit, 'Media Scan Type', $media_scan_type_id_edit, 'Delete', $_SESSION['user_id']);
+        create_log_entry(
+            'Games Config', $media_scan_type_id_edit, 'Media Scan Type',
+            $media_scan_type_id_edit, 'Delete', $_SESSION['user_id']
+        );
 
         $mediaScanTypeDao->deleteMediaScanType($media_scan_type_id_edit);
 
-        $_SESSION['edit_message'] = "Media scan type has been deleted" ;
+        $_SESSION['edit_message'] = "Media scan type has been deleted";
         break;
 
     case "Modify scan type":
         $mediaScanTypeDao->updateMediaScanType($media_scan_type_id_edit, $media_scan_type_edit);
 
-        create_log_entry('Games Config', $media_scan_type_id_edit, 'Media Scan Type', $media_Scan_type_id_edit, 'Update', $_SESSION['user_id']);
+        create_log_entry(
+            'Games Config', $media_scan_type_id_edit, 'Media Scan Type',
+            $media_Scan_type_id_edit, 'Update', $_SESSION['user_id']
+        );
 
-        $_SESSION['edit_message'] = "Media Scan Type has been updated" ;
+        $_SESSION['edit_message'] = "Media Scan Type has been updated";
         break;
         break;
 
@@ -526,51 +628,69 @@ switch ($_POST['action']) {
 
         $new_sound_hardware_id = $mysqli->insert_id;
 
-        create_log_entry('Games Config', $new_sound_hardware_id, 'Sound hardware', $new_sound_hardware_id, 'Insert', $_SESSION['user_id']);
+        create_log_entry(
+            'Games Config', $new_sound_hardware_id, 'Sound hardware',
+            $new_sound_hardware_id, 'Insert', $_SESSION['user_id']
+        );
 
-        $_SESSION['edit_message'] = "$sound_hardware_new has been added" ;
+        $_SESSION['edit_message'] = "$sound_hardware_new has been added";
         break;
 
     case "Delete hardware":
-        create_log_entry('Games Config', $sound_hardware_id_edit, 'Sound hardware', $sound_hardware_id_edit, 'Delete', $_SESSION['user_id']);
+        create_log_entry(
+            'Games Config', $sound_hardware_id_edit, 'Sound hardware',
+            $sound_hardware_id_edit, 'Delete', $_SESSION['user_id']
+        );
 
         $soundHardwareDao->deleteSoundHardware($sound_hardware_id_edit);
 
-        $_SESSION['edit_message'] = "Hardware has been deleted" ;
+        $_SESSION['edit_message'] = "Hardware has been deleted";
         break;
 
     case "Modify hardware":
         $soundHardwareDao->updateSoundHardware($sound_hardware_id_edit, $sound_hardware_edit);
 
-        create_log_entry('Games Config', $sound_hardware_id_edit, 'Sound hardware', $sound_hardware_id_edit, 'Update', $_SESSION['user_id']);
+        create_log_entry(
+            'Games Config', $sound_hardware_id_edit, 'Sound hardware',
+            $sound_hardware_id_edit, 'Update', $_SESSION['user_id']
+        );
 
-        $_SESSION['edit_message'] = "Hardware has been updated" ;
+        $_SESSION['edit_message'] = "Hardware has been updated";
         break;
-        
+
     case "Add progress system":
         $gameProgressSystemDao->addProgressSystem($progress_new);
 
         $new_progress_id = $mysqli->insert_id;
 
-        create_log_entry('Games Config', $new_progress_id, 'Progress System',$new_progress_id, 'Insert', $_SESSION['user_id']);
+        create_log_entry(
+            'Games Config', $new_progress_id, 'Progress System',
+            $new_progress_id, 'Insert', $_SESSION['user_id']
+        );
 
-        $_SESSION['edit_message'] = "$progress_new has been added" ;
+        $_SESSION['edit_message'] = "$progress_new has been added";
         break;
 
     case "Delete progress system":
-        create_log_entry('Games Config', $progress_id_edit, 'Progress System', $progress_id_edit, 'Delete', $_SESSION['user_id']);
+        create_log_entry(
+            'Games Config', $progress_id_edit, 'Progress System',
+            $progress_id_edit, 'Delete', $_SESSION['user_id']
+        );
 
         $gameProgressSystemDao->deleteProgressSystem($progress_id_edit);
 
-        $_SESSION['edit_message'] = "Progress system has been deleted" ;
+        $_SESSION['edit_message'] = "Progress system has been deleted";
         break;
 
     case "Modify progress system":
         $gameProgressSystemDao->updateProgressSystem($progress_id_edit, $progress_edit);
 
-        create_log_entry('Games Config', $progress_id_edit, 'Progress System', progress_id_edit, 'Update', $_SESSION['user_id']);
+        create_log_entry(
+            'Games Config', $progress_id_edit, 'Progress System',
+            $progress_id_edit, 'Update', $_SESSION['user_id']
+        );
 
-        $_SESSION['edit_message'] = "Progress system has been updated" ;
+        $_SESSION['edit_message'] = "Progress system has been updated";
         break;
 }
 

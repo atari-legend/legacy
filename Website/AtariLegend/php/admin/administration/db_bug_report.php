@@ -24,7 +24,8 @@ include("../../config/admin_rights.php");
 if (isset($action) and $action == "delete") {
     create_log_entry('Bug', $bug_report_id, 'Bug', $bug_report_id, 'Delete', $_SESSION['user_id']);
 
-    $sql = $mysqli->query("DELETE FROM bug_report WHERE bug_report_id = '$bug_report_id'") or die("Couldn't delete bug report text");
+    $sql = $mysqli->query("DELETE FROM bug_report WHERE bug_report_id = '$bug_report_id'")
+        or die("Couldn't delete bug report text");
     $_SESSION['edit_message'] = "bug report has been deleted";
 
     header("Location: ../administration/bug_report.php");

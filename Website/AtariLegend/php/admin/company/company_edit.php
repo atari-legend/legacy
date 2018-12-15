@@ -29,7 +29,8 @@ if ($comp_id == '-') {
     $smarty->assign("message", $message);
 
     //Get the companies
-    $sql_company = $mysqli->query("SELECT * FROM pub_dev ORDER BY pub_dev_name ASC") or die("Couldn't query Publisher and Developer database");
+    $sql_company = $mysqli->query("SELECT * FROM pub_dev ORDER BY pub_dev_name ASC")
+        or die("Couldn't query Publisher and Developer database");
 
     while ($company = $sql_company->fetch_array(MYSQLI_BOTH)) {
         $smarty->append('company', array(
@@ -51,7 +52,8 @@ if ($comp_id == '-') {
 
     while ($company = $sql_company->fetch_array(MYSQLI_BOTH)) {
         //The interviewed person's picture
-        if ($company['pub_dev_imgext'] == 'png' or $company['pub_dev_imgext'] == 'jpg' or $company['pub_dev_imgext'] == 'gif') {
+        if ($company['pub_dev_imgext'] == 'png' or $company['pub_dev_imgext'] == 'jpg'
+            or $company['pub_dev_imgext'] == 'gif') {
             $v_ind_image = $company_screenshot_path;
             $v_ind_image .= $comp_id;
             $v_ind_image .= '.';

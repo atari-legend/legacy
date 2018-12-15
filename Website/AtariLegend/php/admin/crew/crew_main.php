@@ -43,7 +43,8 @@ if (isset($new_crew)) {
     $smarty->assign('new_crew', $new_crew);
 }
 
-$sql_crew = $mysqli->query("SELECT * FROM crew WHERE crew_name REGEXP '^[0-9].*' ORDER BY crew_name ASC") or die("Couldn't query Crew database");
+$sql_crew = $mysqli->query("SELECT * FROM crew WHERE crew_name REGEXP '^[0-9].*' ORDER BY crew_name ASC")
+    or die("Couldn't query Crew database");
 
 while ($crew = $sql_crew->fetch_array(MYSQLI_BOTH)) {
     $smarty->append('crew', array(

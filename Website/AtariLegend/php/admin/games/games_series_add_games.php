@@ -78,7 +78,7 @@ if (isset($action) && $action == 'add_games_search') {
         ));
 
         while ($query_series_link = $sql_series_link->fetch_array(MYSQLI_BOTH)) {
-             // This smarty is used for creating the list of games contained within a game series
+            // This smarty is used for creating the list of games contained within a game series
             $smarty->append('series_link', array(
                 'game_id' => $query_series_link['game_id'],
                 'game_name' => $query_series_link['game_name'],

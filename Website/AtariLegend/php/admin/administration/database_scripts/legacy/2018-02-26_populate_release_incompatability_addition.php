@@ -17,15 +17,14 @@ $falcon = 1;
 //Let's first loop over the Falcon only table
 $result3 = $mysqli->query("SELECT * FROM game_falcon_only")
                             or die("Unable to retrieve the list of Falcon only titles: ".$mysqli->error);
-                            
+
 while ($falcon_only = $result3->fetch_array(MYSQLI_BOTH)) {
-    
+
     //  Now let's see if we have a game release for this entry. This is not always the case so it seems.
     $result4 = $mysqli->query("SELECT * FROM game_release WHERE game_id = $falcon_only[game_id]")
                             or die("Unable to retrieve the game_id from the game release table: ".$mysqli->error);
 
     while ($game_release = $result4->fetch_array(MYSQLI_BOTH)) {
-
         $game_release_id = $game_release['id'];
 
         // Insert incompatible systems into the incompatibility table
@@ -64,13 +63,12 @@ $result1 = $mysqli->query("SELECT * FROM game_ste_only")
                             or die("Unable to retrieve the list of STe only titles: ".$mysqli->error);
 
 while ($ste_only = $result1->fetch_array(MYSQLI_BOTH)) {
-    
+
 //  Now let's see if we have a game release for this entry. This is not always the case so it seems.
     $result2 = $mysqli->query("SELECT * FROM game_release WHERE game_id = $ste_only[game_id]")
                             or die("Unable to retrieve the game_id from the game release table: ".$mysqli->error);
 
     while ($game_release = $result2->fetch_array(MYSQLI_BOTH)) {
-
         $game_release_id = $game_release['id'];
 
         // Insert incompatible systems into the incompatibility table

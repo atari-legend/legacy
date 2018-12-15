@@ -106,7 +106,8 @@ if (isset($action) and $action == "search") {
         $RESULTDEMO .= "demo_name LIKE '%$demosearch%'";
         $RESULTDEMO .= $crew_select;
         $RESULTDEMO .= $year_select;
-        $RESULTDEMO .= ' GROUP BY demo.demo_id, demo.demo_name HAVING COUNT(DISTINCT demo.demo_id, demo.demo_name ) = 1';
+        $RESULTDEMO .= ' GROUP BY demo.demo_id, demo.demo_name
+            HAVING COUNT(DISTINCT demo.demo_id, demo.demo_name ) = 1';
         $RESULTDEMO .= ' ORDER BY demo_name ASC';
 
         //echo $RESULTDEMO;
@@ -149,7 +150,8 @@ if (isset($action) and $action == "search") {
                 $RESULTAKA .= "demo_aka.aka_name LIKE '%$demosearch%'";
                 $RESULTAKA .= $crew_select;
                 $RESULTAKA .= $year_select;
-                $RESULTAKA .= ' GROUP BY demo_aka.demo_id, demo_aka.aka_name HAVING COUNT(DISTINCT demo_aka.demo_id, demo_aka.aka_name) = 1';
+                $RESULTAKA .= ' GROUP BY demo_aka.demo_id, demo_aka.aka_name
+                    HAVING COUNT(DISTINCT demo_aka.demo_id, demo_aka.aka_name) = 1';
                 $RESULTAKA .= ' ORDER BY demo_aka.aka_name ASC';
 
                 $mysqli->query("CREATE TEMPORARY TABLE temp ENGINE=MEMORY $RESULTDEMO") or die("does not compute");
@@ -158,7 +160,8 @@ if (isset($action) and $action == "search") {
                 $temp_query = $mysqli->query("SELECT * FROM temp ORDER BY demo_name ASC") or die("does not compute3");
 
                 $end1       = gettimeofday();
-                $totaltime1 = (float) ($end1['sec'] - $start1['sec']) + ((float) ($end1['usec'] - $start1['usec']) / 1000000);
+                $totaltime1 = (float) ($end1['sec'] - $start1['sec'])
+                    + ((float) ($end1['usec'] - $start1['usec']) / 1000000);
 
                 list($end2, $end3) = explode(":", exec('date +%N:%S'));
                 $totaltime2 = (float) ($end3 - $start3) + ((float) ($end2 - $start2) / 1000000000);

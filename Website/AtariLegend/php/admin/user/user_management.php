@@ -23,7 +23,8 @@ $start = microtime(true);
 if (isset($action) and $action == 'quick_search_users') {
     $last_visit_timestamp = date_to_timestamp($Date_Year, $Date_Month, $Date_Day);
 
-    $sql_query = "SELECT users.user_id, users.userid, users.email, users.join_date, users.last_visit, users.show_email FROM users";
+    $sql_query = "SELECT users.user_id, users.userid, users.email, users.join_date, users.last_visit, users.show_email
+        FROM users";
 
     if (isset($with_comments) and $with_comments == "1") {
         $sql_query .= " LEFT JOIN comments ON (users.user_id = comments.user_id)";
@@ -37,7 +38,8 @@ if (isset($action) and $action == 'quick_search_users') {
     if ((isset($with_links) and $with_links == "1") || (isset($no_links) and $no_links == "1")) {
         $sql_query .= " LEFT JOIN website ON (users.user_id = website.user_id)";
     }
-    if ((isset($with_submissions) and $with_submissions == "1") || (isset($no_submissions) and $no_submissions == "1")) {
+    if ((isset($with_submissions) and $with_submissions == "1")
+        || (isset($no_submissions) and $no_submissions == "1")) {
         $sql_query .= " LEFT JOIN game_submitinfo ON (users.user_id = game_submitinfo.user_id)";
         $sql_query .= " LEFT JOIN demo_submitinfo ON (users.user_id = demo_submitinfo.user_id)";
     }
@@ -161,7 +163,10 @@ if (isset($action) and $action == 'quick_search_users') {
     $smarty->assign("query_time", $time_elapsed_secs);
 
     //See if we can mass delete - this is a extra measurement not to mass delete a population
-    if ((isset($no_comments) and $no_comments == "1") and (isset($no_review) and $no_review == "1") and (isset($no_submissions) and $no_submissions == "1") and (isset($no_links) and $no_links == "1") and (isset($no_news) and $no_news == "1") and (isset($no_interviews) and $no_interviews == "1") and (isset($not_admin) and $not_admin == "1")) {
+    if ((isset($no_comments) and $no_comments == "1") and (isset($no_review) and $no_review == "1")
+        and (isset($no_submissions) and $no_submissions == "1") and (isset($no_links) and $no_links == "1")
+        and (isset($no_news) and $no_news == "1") and (isset($no_interviews) and $no_interviews == "1")
+        and (isset($not_admin) and $not_admin == "1")) {
         $smarty->assign("delete_link", "1");
     }
 
@@ -180,7 +185,8 @@ if (isset($action) and $action == 'quick_search_users') {
     $time_elapsed_secs = microtime(true) - $start;
     $smarty->assign("query_time", $time_elapsed_secs);
 } else {
-    $sql_users = $mysqli->query("SELECT * FROM users WHERE userid REGEXP '^[0-9].*' ORDER BY users.userid") or die("Couldn't query users Database");
+    $sql_users = $mysqli->query("SELECT * FROM users WHERE userid REGEXP '^[0-9].*' ORDER BY users.userid")
+        or die("Couldn't query users Database");
     $nr_users = 0;
     while ($query_users = $sql_users->fetch_array(MYSQLI_BOTH)) {
         //if (empty($nr_users)) {

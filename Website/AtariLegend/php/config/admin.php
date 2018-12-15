@@ -15,8 +15,11 @@
 //But I did not want to include this file in every single page, so I placed the include here.
 include("../../common/tiles/tile_bug_report.php");
 
-//This is the actual authorization check
-if (login_check($mysqli) == false) {
+// This is the actual authorization check
+
+// We allow scripts running on the command line to run so that we can run the
+// DB upgrade script when we auto-deploy on DEV
+if (php_sapi_name() !== "cli" && login_check($mysqli) == false) {
     $_SESSION['edit_message'] = "Please log in to use this functionality";
     if (isset($_SERVER['HTTP_REFERER'])) {
         header('Location: ' . $_SERVER['HTTP_REFERER']);

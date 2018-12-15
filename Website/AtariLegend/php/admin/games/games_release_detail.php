@@ -96,8 +96,14 @@ if ($_SERVER['REQUEST_METHOD'] == "GET") {
         $smarty->assign('release_memory_enhancements', $memoryDao->getMemoryForRelease($release->getId()));
         $smarty->assign('release_minimum_memory', $memoryDao->getMinimumMemoryForRelease($release->getId()));
         $smarty->assign('release_memory_incompatible', $memoryDao->getMemoryIncompatibleForRelease($release->getId()));
-        $smarty->assign('release_copy_protections', $copyProtectionDao->getCopyProtectionsForRelease($release->getId()));
-        $smarty->assign('release_disk_protections', $diskProtectionDao->getDiskProtectionsForRelease($release->getId()));
+        $smarty->assign(
+            'release_copy_protections',
+            $copyProtectionDao->getCopyProtectionsForRelease($release->getId())
+        );
+        $smarty->assign(
+            'release_disk_protections',
+            $diskProtectionDao->getDiskProtectionsForRelease($release->getId())
+        );
         $smarty->assign('release_languages', $languageDao->getAllGameReleaseLanguages($release->getId()));
         $smarty->assign('release_scans', $gameReleaseScanDao->getScansForRelease($release->getId()));
         $media = $mediaDao->getAllMediaFromRelease($release->getId());
@@ -125,13 +131,16 @@ if ($_SERVER['REQUEST_METHOD'] == "GET") {
             LEFT JOIN game_box_couples ON game_box_couples.game_boxscan_id = game_boxscan.game_boxscan_id
             WHERE
                 game_boxscan.game_id = ?",
-            "i", $game->getId()
+            "i",
+            $game->getId()
         );
 
         \AL\Db\bind_result(
             "games_release_details.php: Get game boxscans",
             $stmt,
-            $game_boxscan_id, $imgext, $game_boxscan_side
+            $game_boxscan_id,
+            $imgext,
+            $game_boxscan_side
         );
 
         $game_boxscans = [];
@@ -146,15 +155,17 @@ if ($_SERVER['REQUEST_METHOD'] == "GET") {
 
         $smarty->assign('game_boxscan_path', $game_boxscan_path);
         $smarty->assign('game_boxscans', $game_boxscans);
-        // ================ TEMPORARY END
-
+    // ================ TEMPORARY END
     } else {
         // Creating a new release
         $game = $gameDao->getGame($game_id);
         $smarty->assign('game', $game);
         $smarty->assign('game_releases', $gameReleaseDao->getReleasesForGame($game->getId()));
 
-        $smarty->assign('release', new AL\Common\Model\Game\GameRelease(-1, $game->getId(), '', '', '', '', null, null));
+        $smarty->assign(
+            'release',
+            new AL\Common\Model\Game\GameRelease(-1, $game->getId(), '', '', '', '', null, null)
+        );
 
         $smarty->assign('system_incompatible', []);
         $smarty->assign('emulator_incompatible', []);

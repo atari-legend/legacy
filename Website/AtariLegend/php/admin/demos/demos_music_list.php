@@ -76,7 +76,8 @@ if (isset($action) and $action == 'search') {
                     $i++;
 
                     //check how many muzaks there are for the game
-                    $numberzaks = $mysqli->query("SELECT count(*) as count FROM demo_music WHERE demo_id='$row[demo_id]'") or die("couldn't get number of zaks");
+                    $numberzaks = $mysqli->query("SELECT count(*) as count
+                        FROM demo_music WHERE demo_id='$row[demo_id]'") or die("couldn't get number of zaks");
 
                     $array = $numberzaks->fetch_array(MYSQLI_BOTH);
 
@@ -90,7 +91,8 @@ if (isset($action) and $action == 'search') {
                 }
 
                 $end1       = gettimeofday();
-                $totaltime1 = (float) ($end1['sec'] - $start1['sec']) + ((float) ($end1['usec'] - $start1['usec']) / 1000000);
+                $totaltime1 = (float) ($end1['sec'] - $start1['sec'])
+                    + ((float) ($end1['usec'] - $start1['usec']) / 1000000);
 
                 $smarty->assign('querytime', $totaltime1);
                 $smarty->assign('nr_of_entries', $i);

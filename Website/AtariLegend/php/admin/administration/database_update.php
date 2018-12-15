@@ -30,16 +30,12 @@ foreach (glob("../../admin/administration/database_scripts/**/*.ini") as $filena
         $ini["description"],
         $ini["condition"],
         $ini["execute_on"],
-
         // Some updates may not have an SQL statement if they have an addition.php script
         isset($ini["sql"]) ? $ini["sql"] : null,
-
         // Auto-execute by default, if not set
         isset($ini["autoexecute"]) ? filter_var($ini["autoexecute"], FILTER_VALIDATE_BOOLEAN) : true,
-
         // Do not disable foreign key constraints by default
         isset($ini["disable_fk"]) ? filter_var($ini["disable_fk"], FILTER_VALIDATE_BOOLEAN) : false,
-
         file_exists("$update_folder/addition.php")
     );
 }
@@ -70,11 +66,9 @@ foreach ($updates as $update) {
         // Should we execute it automatically, or was it requested as a specific update?
         if ($update->getAutoExecute()
             || (isset($execute_id) && $update->getId() == $execute_id)) {
-
             // Only execute if the condition query is in the expected
             // failed / succeeded state
             if ($condition_query_result == $update->getExecuteOn()) {
-
                 // Being a transaction so that we don't let the DB in an unstable
                 // state if something goes wrong
                 mysqli_begin_transaction($mysqli) or die("Error while starting transaction: ".$mysqli->error);
@@ -121,7 +115,6 @@ foreach ($updates as $update) {
                 'file_name' => $update->getFilename(),
                 'test_result' => ""
             ));
-
         } else {
             // Change is NOT set to auto-execute
             $can_be_executed = $condition_query_result == $update->getExecuteOn();
@@ -131,7 +124,9 @@ foreach ($updates as $update) {
                 'implementation_state' => ($can_be_executed ? 'pending' : 'test condition failed'),
                 'allow_execute' => ($can_be_executed ? "yes" : "no"),
                 'file_name' => $update->getFilename(),
-                'test_result' => ($can_be_executed ? "Ready to Execute" : "Expected ".$update->getExecuteOn()." but got $condition_query_result")
+                'test_result' => ($can_be_executed
+                    ? "Ready to Execute"
+                    : "Expected ".$update->getExecuteOn()." but got $condition_query_result")
             ));
         }
     } else {

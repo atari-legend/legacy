@@ -54,9 +54,7 @@ if (isset($action) and $action == 'add_download') {
 
         // check if the extention is valid.
         if ($ext == "stx" || $ext == "msa") {
-        } // pretty isn't it? ;)
-
-        else {
+        } else {
             exit("Try uploading a diskimage type that is allowed, like stx or msa not $ext");
         }
 
@@ -64,7 +62,8 @@ if (isset($action) and $action == 'add_download') {
         $timestamp = time();
 
         // Insert the ext,timestamp and the demo id into the demo download table.
-        $sdbquery = $mysqli->query("INSERT INTO demo_download (demo_id,demo_ext,date) VALUES ('$demo_id','$ext','$timestamp')") or die("ERROR! Couldn't insert date, ext and demo id");
+        $sdbquery = $mysqli->query("INSERT INTO demo_download (demo_id,demo_ext,date)
+            VALUES ('$demo_id','$ext','$timestamp')") or die("ERROR! Couldn't insert date, ext and demo id");
 
         //select the newly created demo_download_id from the demo_download table
         $DEMODOWN = $mysqli->query("SELECT demo_download_id FROM demo_download
@@ -80,7 +79,8 @@ if (isset($action) and $action == 'add_download') {
         }
 
         // rename diskimage to increment number
-        rename("$demo_file_temp_path$filename", "$demo_file_temp_path$demodownrow[0].$ext") or die("couldn't rename the file");
+        rename("$demo_file_temp_path$filename", "$demo_file_temp_path$demodownrow[0].$ext")
+            or die("couldn't rename the file");
 
         //Time to rezip file and place it in the proper location.
         $archive = new PclZip("$demo_file_path$demodownrow[0].zip");
@@ -89,11 +89,13 @@ if (isset($action) and $action == 'add_download') {
             die("Error : " . $archive->errorInfo(true));
         }
 
-        // Time to do the safeties, here we do a md5 file hash that we later enter into the database, this will be used in the download
-        // function to check everytime the file is being downloaded... if the hashes don't match, then datacorruption have changed the file.
+        // Time to do the safeties, here we do a md5 file hash that we later enter into the database, this will be used
+        // in the download function to check everytime the file is being downloaded... if the hashes don't match, then
+        // datacorruption have changed the file.
         $crc = md5_file("$demo_file_path$demodownrow[0].zip");
 
-        $sdbquery = $mysqli->query("UPDATE demo_download SET md5 = '$crc' WHERE demo_download_id = '$demodownrow[0]'") or die("Couldn't insert md5hash");
+        $sdbquery = $mysqli->query("UPDATE demo_download SET md5 = '$crc' WHERE demo_download_id = '$demodownrow[0]'")
+            or die("Couldn't insert md5hash");
 
         // Add entry to search table for search purposes
         $mysqli->query("UPDATE demo_search SET download='1' WHERE demo_id='$demo_id'");

@@ -5,7 +5,6 @@ $mysqli->query("INSERT INTO game_release_location (game_release_id, location_id)
     SELECT id, 120 FROM game_release WHERE continent_id = 1")
     or die($mysqli->error);
 
-
 // North America
 $mysqli->query("INSERT INTO game_release_location (game_release_id, location_id)
     SELECT id, 172 FROM game_release WHERE continent_id = 2")

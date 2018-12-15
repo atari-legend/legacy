@@ -38,7 +38,8 @@ $smarty->assign('demo', array(
 ));
 
 //get the existing downloads
-$SQL_DOWNLOADS = $mysqli->query("SELECT * FROM demo_download WHERE demo_id='$demo_id'") or die("Error getting download info");
+$SQL_DOWNLOADS = $mysqli->query("SELECT * FROM demo_download WHERE demo_id='$demo_id'")
+    or die("Error getting download info");
 
 $nr_downloads = 1;
 
