@@ -20,8 +20,9 @@ include("../../config/admin.php");
 
 //Get the screenshots for this demo, if they exist
 $sql_screenshots = $mysqli->query("SELECT * FROM screenshot_demo
-                                LEFT JOIN screenshot_main ON (screenshot_demo.screenshot_id = screenshot_main.screenshot_id)
-                                WHERE screenshot_demo.demo_id = '$demo_id' ORDER BY screenshot_demo.screenshot_id") or die("Database error - selecting screenshots");
+    LEFT JOIN screenshot_main ON (screenshot_demo.screenshot_id = screenshot_main.screenshot_id)
+    WHERE screenshot_demo.demo_id = '$demo_id' ORDER BY screenshot_demo.screenshot_id")
+    or die("Database error - selecting screenshots");
 
 $count         = 1;
 $v_screenshots = 1;

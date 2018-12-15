@@ -31,7 +31,7 @@ while ($game_seauck = $result4->fetch_array(MYSQLI_BOTH)) {
     $game_id = $game_seauck['game_id'];
 
     // Insert SEUCK
-   $mysqli->query("
+    $mysqli->query("
      INSERT INTO game_engine
             (game_id, engine_id)
         VALUES

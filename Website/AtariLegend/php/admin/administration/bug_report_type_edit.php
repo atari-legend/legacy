@@ -39,7 +39,8 @@ if ($type_id == '-' or $type_id == ' ') {
     }
     $smarty->assign("user_id", $_SESSION['user_id']);
 
-    $result_bug_report_type_edit = $mysqli->query("SELECT * FROM bug_report_type WHERE bug_report_type_id = $type_id") or die("error getting type");
+    $result_bug_report_type_edit = $mysqli->query("SELECT * FROM bug_report_type WHERE bug_report_type_id = $type_id")
+        or die("error getting type");
 
     while ($row = $result_bug_report_type_edit->fetch_array(MYSQLI_BOTH)) {
         $smarty->assign('type_edit', array(

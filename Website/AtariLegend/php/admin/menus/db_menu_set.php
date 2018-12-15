@@ -15,7 +15,8 @@ include("../../config/common.php");
 include("../../config/admin.php");
 include("../../admin/menus/db_menu_functions.php");
 require_once __DIR__."/../../common/DAO/MenusSetDAO.php";
-//include("../../config/admin_rights.php"); /*--> We can not use it like this because of the ajax. redirecting does not work correctly with the inheritance of Ajax.
+//include("../../config/admin_rights.php"); /*--> We can not use it like this because of the ajax. redirecting does not
+// work correctly with the inheritance of Ajax.
 
 //This is used for the AJAX parts when user rights do not suffice
 $osd_message = 'You do not have the necessary authorizations to perform this action';
@@ -160,16 +161,20 @@ if ($action == "delete_ind_from_menu_set") {
 if (isset($action) and ($action == "delete_set")) {
     include("../../config/admin_rights.php");
     //when deleting a set, we only check for menu disks
-    $sql = $mysqli->query("SELECT * FROM menu_disk WHERE menu_sets_id='$menu_sets_id'") or die('Error: ' . mysqli_error($mysqli));
+    $sql = $mysqli->query("SELECT * FROM menu_disk WHERE menu_sets_id='$menu_sets_id'")
+        or die('Error: ' . mysqli_error($mysqli));
     if ($sql->num_rows > 0) {
         $_SESSION['edit_message'] = "This set still has menu disks linked to it. Delete them first.";
         header("Location: ../menus/menus_disk_list.php?menu_sets_id=$menu_sets_id");
     } else {
         create_log_entry('Menu set', $menu_sets_id, 'Menu set', $menu_sets_id, 'Delete', $_SESSION['user_id']);
 
-        $mysqli->query("DELETE from menu_set WHERE menu_sets_id='$menu_sets_id'") or die('Error: ' . mysqli_error($mysqli));
-        $mysqli->query("DELETE from crew_menu_prod WHERE menu_sets_id='$menu_sets_id'") or die('Error: ' . mysqli_error($mysqli));
-        $mysqli->query("DELETE from ind_menu_prod WHERE menu_sets_id='$menu_sets_id'") or die('Error: ' . mysqli_error($mysqli));
+        $mysqli->query("DELETE from menu_set WHERE menu_sets_id='$menu_sets_id'")
+            or die('Error: ' . mysqli_error($mysqli));
+        $mysqli->query("DELETE from crew_menu_prod WHERE menu_sets_id='$menu_sets_id'")
+            or die('Error: ' . mysqli_error($mysqli));
+        $mysqli->query("DELETE from ind_menu_prod WHERE menu_sets_id='$menu_sets_id'")
+            or die('Error: ' . mysqli_error($mysqli));
         $_SESSION['edit_message'] = "Menuset completely removed";
 
         //Send all smarty variables to the templates

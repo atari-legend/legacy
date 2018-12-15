@@ -25,7 +25,8 @@ if (empty($list) or $list == '') {
     $list = "current";
 }
 // get the total nr of submissions in the DB
-$query_total_number = $mysqli->query("SELECT * FROM demo_submitinfo") or die("Couldn't get the total number of submissions");
+$query_total_number = $mysqli->query("SELECT * FROM demo_submitinfo")
+    or die("Couldn't get the total number of submissions");
 $v_rows_total = $query_total_number->num_rows;
 
 $smarty->assign('total_nr_submissions', $v_rows_total);
@@ -85,7 +86,8 @@ while ($query_submission = $sql_submission->fetch_array(MYSQLI_BOTH)) {
                  WHERE user_id = '$query_submission[user_id]'");
     $usercomment_number = $query_user->num_rows;
 
-    $query_submitinfo = $mysqli->query("SELECT * FROM demo_submitinfo WHERE user_id = '$query_submission[user_id]'") or die("Could not count user submissions");
+    $query_submitinfo = $mysqli->query("SELECT * FROM demo_submitinfo WHERE user_id = '$query_submission[user_id]'")
+        or die("Could not count user submissions");
     $usersubmit_number = $query_submitinfo->num_rows;
 
     //Get the dataElements we want to place on screen

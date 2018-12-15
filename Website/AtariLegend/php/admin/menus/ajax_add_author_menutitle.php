@@ -34,15 +34,15 @@ while ($individuals = $sql_individuals->fetch_array(MYSQLI_BOTH)) {
 
 //load the authors for this title
 $sql_author_info = "SELECT  individuals.ind_id,
-                            individuals.ind_name,
-                            author_type.author_type_info,
-                            author_type.author_type_id,
-                            menu_disk_title_author.menu_disk_title_author_id
-                            FROM menu_disk_title_author
-                            LEFT JOIN individuals ON (individuals.ind_id = menu_disk_title_author.ind_id)
-                            LEFT JOIN author_type ON (menu_disk_title_author.author_type_id = author_type.author_type_id)
-                            WHERE menu_disk_title_author.menu_disk_title_id = '$menu_disk_title_id'
-                            ORDER BY individuals.ind_name ASC";
+    individuals.ind_name,
+    author_type.author_type_info,
+    author_type.author_type_id,
+    menu_disk_title_author.menu_disk_title_author_id
+    FROM menu_disk_title_author
+    LEFT JOIN individuals ON (individuals.ind_id = menu_disk_title_author.ind_id)
+    LEFT JOIN author_type ON (menu_disk_title_author.author_type_id = author_type.author_type_id)
+    WHERE menu_disk_title_author.menu_disk_title_id = '$menu_disk_title_id'
+    ORDER BY individuals.ind_name ASC";
 
 $query_author_info = $mysqli->query($sql_author_info) or die("problem getting author info");
 

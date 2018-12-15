@@ -18,7 +18,8 @@
 
 $start = microtime(true);
 $last_visit_timestamp = date_to_timestamp($Date_Year, $Date_Month, $Date_Day);
-$sql_query = "SELECT users.user_id, users.userid, users.email, users.join_date, users.last_visit, users.show_email FROM users";
+$sql_query = "SELECT users.user_id, users.userid, users.email, users.join_date, users.last_visit, users.show_email
+    FROM users";
 if (isset($with_comments) and $with_comments == "1") {
     $sql_query .= " LEFT JOIN comments ON (users.user_id = comments.user_id)";
 }
@@ -140,7 +141,10 @@ while ($query_users = $sql_users->fetch_array(MYSQLI_BOTH)) {
 $time_elapsed_secs = microtime(true) - $start;
 $smarty->assign("query_time", $time_elapsed_secs);
 //See if we can mass delete - this is a extra measurement not to mass delete a population
-if ((isset($no_comments) and $no_comments == "1") and (isset($no_review) and $no_review == "1") and (isset($no_submissions) and $no_submissions == "1") and (isset($no_links) and $no_links == "1") and (isset($no_news) and $no_news == "1") and (isset($no_interviews) and $no_interviews == "1") and (isset($not_admin) and $not_admin == "1")) {
+if ((isset($no_comments) and $no_comments == "1") and (isset($no_review) and $no_review == "1")
+    and (isset($no_submissions) and $no_submissions == "1") and (isset($no_links) and $no_links == "1")
+    and (isset($no_news) and $no_news == "1") and (isset($no_interviews) and $no_interviews == "1")
+    and (isset($not_admin) and $not_admin == "1")) {
     $smarty->assign("delete_link", "1");
 }
 if (isset($with_email) and $with_email == "1") {

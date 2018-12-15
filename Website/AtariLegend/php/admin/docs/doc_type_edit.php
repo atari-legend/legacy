@@ -38,7 +38,8 @@ if ($doc_type_id == '-' or $doc_type_id == ' ') {
     }
     $smarty->assign("user_id", $_SESSION['user_id']);
 
-    $result_doc_type_edit = $mysqli->query("SELECT * FROM doc_type WHERE doc_type_id = $doc_type_id") or die("error getting doc type");
+    $result_doc_type_edit = $mysqli->query("SELECT * FROM doc_type WHERE doc_type_id = $doc_type_id")
+        or die("error getting doc type");
 
     while ($row = $result_doc_type_edit->fetch_array(MYSQLI_BOTH)) {
         $smarty->assign('doc_type_edit', array(

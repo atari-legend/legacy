@@ -30,7 +30,8 @@ if ((isset($action)
     and ($action == "company_publisher_browse"
         or $action == "company_developer_browse"))) {
     $smarty->assign('smarty_action', $action);
-    $smarty->assign('letter',
+    $smarty->assign(
+        'letter',
         ($query == 'num') ? '0-9' : $query
     );
     $smarty->assign('pubdevs', $pubDevDao->getPubDevsStartingWith(

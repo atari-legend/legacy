@@ -25,7 +25,8 @@ include("../../admin/games/quick_search_games.php");
 
 if (isset($reviewid) and isset($game_id)) {
     //get the name of the game
-    $sql_game = $mysqli->query("SELECT * FROM game WHERE game_id='$game_id'") or die("Database error - getting game name");
+    $sql_game = $mysqli->query("SELECT * FROM game WHERE game_id='$game_id'")
+        or die("Database error - getting game name");
 
     while ($game = $sql_game->fetch_array(MYSQLI_BOTH)) {
         $smarty->assign('game', array(
@@ -77,7 +78,8 @@ if (isset($reviewid) and isset($game_id)) {
     }
 
     //get the screenshots
-    $sql_screenshots = $mysqli->query("SELECT * FROM screenshot_game WHERE game_id = '$game_id' ORDER BY screenshot_id ASC") or die("Database error - getting screenshots");
+    $sql_screenshots = $mysqli->query("SELECT * FROM screenshot_game
+        WHERE game_id = '$game_id' ORDER BY screenshot_id ASC") or die("Database error - getting screenshots");
 
     $i = 0;
 
@@ -90,8 +92,9 @@ if (isset($reviewid) and isset($game_id)) {
         $v_screenshot .= 'png';
 
         $sql_COMMENTS = $mysqli->query("SELECT review_comments.comment_text FROM screenshot_review
-                                 LEFT JOIN review_comments on (screenshot_review.screenshot_review_id = review_comments.screenshot_review_id)
-                                 WHERE screenshot_review.screenshot_id = '$screenshots[2]' AND screenshot_review.review_id = '$reviewid'") or die("Database error - getting screenshots comments");
+            LEFT JOIN review_comments on (screenshot_review.screenshot_review_id = review_comments.screenshot_review_id)
+            WHERE screenshot_review.screenshot_id = '$screenshots[2]' AND screenshot_review.review_id = '$reviewid'")
+            or die("Database error - getting screenshots comments");
 
         $screencomment = $sql_COMMENTS->fetch_array(MYSQLI_BOTH);
 

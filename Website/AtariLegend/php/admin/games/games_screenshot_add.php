@@ -23,8 +23,9 @@ include("../../admin/games/quick_search_games.php");
 
 //Get the screenshots for this game, if they exist
 $sql_screenshots = $mysqli->query("SELECT * FROM screenshot_game
-                    LEFT JOIN screenshot_main ON (screenshot_game.screenshot_id = screenshot_main.screenshot_id)
-                    WHERE screenshot_game.game_id = '$game_id' ORDER BY screenshot_game.screenshot_id") or die("Database error - selecting screenshots");
+    LEFT JOIN screenshot_main ON (screenshot_game.screenshot_id = screenshot_main.screenshot_id)
+    WHERE screenshot_game.game_id = '$game_id' ORDER BY screenshot_game.screenshot_id")
+    or die("Database error - selecting screenshots");
 
 $count         = 1;
 $v_screenshots = 0;

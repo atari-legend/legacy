@@ -24,7 +24,8 @@ include("../../config/admin.php");
 include("../../admin/games/quick_search_games.php");
 
 //Get the individuals
-$sql_individuals = $mysqli->query("SELECT * FROM individuals ORDER BY ind_name ASC") or die("Couldn't query indiciduals database");
+$sql_individuals = $mysqli->query("SELECT * FROM individuals ORDER BY ind_name ASC")
+    or die("Couldn't query indiciduals database");
 
 while ($individuals = $sql_individuals->fetch_array(MYSQLI_BOTH)) {
     $smarty->append('individuals', array(
@@ -34,7 +35,8 @@ while ($individuals = $sql_individuals->fetch_array(MYSQLI_BOTH)) {
 }
 
 //Get the authors for the interview
-$sql_author = $mysqli->query("SELECT user_id,userid FROM users ORDER BY userid ASC") or die("Database error - getting members name");
+$sql_author = $mysqli->query("SELECT user_id,userid FROM users ORDER BY userid ASC")
+    or die("Database error - getting members name");
 
 while ($authors = $sql_author->fetch_array(MYSQLI_BOTH)) {
     $smarty->append('authors', array(
@@ -45,20 +47,18 @@ while ($authors = $sql_author->fetch_array(MYSQLI_BOTH)) {
 
 //we need to get the data of the loaded interview
 $sql_interview = $mysqli->query("SELECT * FROM interview_main
-                LEFT JOIN interview_text ON ( interview_main.interview_id = interview_text.interview_id )
-                LEFT JOIN individuals on ( interview_main.ind_id = individuals.ind_id )
-                LEFT JOIN users on ( interview_main.user_id = users.user_id)
-                WHERE interview_main.interview_id = '$interview_id'") or die("Database error - selecting interview data");
+    LEFT JOIN interview_text ON ( interview_main.interview_id = interview_text.interview_id )
+    LEFT JOIN individuals on ( interview_main.ind_id = individuals.ind_id )
+    LEFT JOIN users on ( interview_main.user_id = users.user_id)
+    WHERE interview_main.interview_id = '$interview_id'") or die("Database error - selecting interview data");
 
 while ($interview = $sql_interview->fetch_array(MYSQLI_BOTH)) {
-    
     if (!(isset($interview['user_id']))) {
         $author_id = $_SESSION['user_id'];
-    }
-    else { 
+    } else {
         $author_id = $interview['user_id'];
     }
-    
+
     $smarty->assign('interview', array(
         'interview_date' => $interview['interview_date'],
         'interview_id' => $interview_id,
@@ -74,8 +74,9 @@ while ($interview = $sql_interview->fetch_array(MYSQLI_BOTH)) {
 
 //Let's get the screenshots for the interview
 $sql_screenshots = $mysqli->query("SELECT * FROM screenshot_interview
-                LEFT JOIN screenshot_main on ( screenshot_interview.screenshot_id = screenshot_main.screenshot_id )
-                WHERE screenshot_interview.interview_id = '$interview_id' ORDER BY screenshot_interview.screenshot_id ASC") or die("Database error - getting screenshots & comments");
+    LEFT JOIN screenshot_main on ( screenshot_interview.screenshot_id = screenshot_main.screenshot_id )
+    WHERE screenshot_interview.interview_id = '$interview_id' ORDER BY screenshot_interview.screenshot_id ASC")
+    or die("Database error - getting screenshots & comments");
 
 //get the number of screenshots in the archive
 $v_screeshots = $sql_screenshots->num_rows;
@@ -91,7 +92,8 @@ while ($screenshots = $sql_screenshots->fetch_array(MYSQLI_BOTH)) {
 
     //We need to get the comments with each screenshot
     $sql_comments = $mysqli->query("SELECT * FROM interview_comments
-                 WHERE screenshot_interview_id  = $screenshots[screenshot_interview_id]") or die("Database error - getting screenshots comments");
+        WHERE screenshot_interview_id  = $screenshots[screenshot_interview_id]")
+        or die("Database error - getting screenshots comments");
 
     $comments = $sql_comments->fetch_array(MYSQLI_BOTH);
 

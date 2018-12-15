@@ -21,7 +21,8 @@
 include("../../config/common.php");
 include("../../config/admin.php");
 
-$sql_magazine = $mysqli->query("SELECT * FROM magazine WHERE magazine_id='$magazine_id'") or die("Error retriving magazines info");
+$sql_magazine = $mysqli->query("SELECT * FROM magazine WHERE magazine_id='$magazine_id'")
+    or die("Error retriving magazines info");
 
 list($magazine_id, $magazine_name) = $sql_magazine->fetch_row();
 
@@ -31,7 +32,8 @@ $smarty->assign('magazine', array(
 ));
 
 // Query for issues
-$sql = $mysqli->query("SELECT * FROM magazine_issue WHERE magazine_id='$magazine_id' ORDER BY magazine_issue_nr ASC") or die("Error retriving issues");
+$sql = $mysqli->query("SELECT * FROM magazine_issue WHERE magazine_id='$magazine_id' ORDER BY magazine_issue_nr ASC")
+    or die("Error retriving issues");
 
 while ($fetch = $sql->fetch_array(MYSQLI_BOTH)) {
     if ($fetch['magazine_issue_imgext'] !== '') {

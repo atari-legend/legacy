@@ -16,7 +16,8 @@ include("../../config/admin_rights.php");
 
 //update the menu type
 if (isset($menus_type_id) and isset($action) and $action == 'update') {
-    $sdbquery = $mysqli->query("UPDATE menu_types_main SET menu_types_text = '$menus_type_name' WHERE menu_types_main_id = $menus_type_id") or die('Error: ' . mysqli_error($mysqli));
+    $sdbquery = $mysqli->query("UPDATE menu_types_main SET menu_types_text = '$menus_type_name'
+        WHERE menu_types_main_id = $menus_type_id") or die('Error: ' . mysqli_error($mysqli));
 
     $_SESSION['edit_message'] = "Menu type succesfully updated";
 
@@ -39,7 +40,8 @@ if (isset($menus_type_id) and isset($action) and $action == 'delete_menus_type')
         } else {
             create_log_entry('Menu type', $menus_type_id, 'Menu type', $menus_type_id, 'Delete', $_SESSION['user_id']);
 
-            $mysqli->query("DELETE FROM menu_types_main WHERE menu_types_main_id = $menus_type_id") or die('Error: ' . mysqli_error($mysqli));
+            $mysqli->query("DELETE FROM menu_types_main WHERE menu_types_main_id = $menus_type_id")
+                or die('Error: ' . mysqli_error($mysqli));
 
             $_SESSION['edit_message'] = "Menu type succesfully deleted";
         }
@@ -52,11 +54,19 @@ if (isset($action) and $action == 'insert_type') {
         $_SESSION['edit_message'] = "Please fill in a menu type name";
         header("Location: ../menus/menus_type.php");
     } else {
-        $sql_individuals = $mysqli->query("INSERT INTO  menu_types_main (menu_types_text) VALUES ('$type_name')") or die('Error: ' . mysqli_error($mysqli));
+        $sql_individuals = $mysqli->query("INSERT INTO  menu_types_main (menu_types_text) VALUES ('$type_name')")
+            or die('Error: ' . mysqli_error($mysqli));
 
         $new_menu_type_id = $mysqli->insert_id;
 
-        create_log_entry('Menu type', $new_menu_type_id, 'Menu type', $new_menu_type_id, 'Insert', $_SESSION['user_id']);
+        create_log_entry(
+            'Menu type',
+            $new_menu_type_id,
+            'Menu type',
+            $new_menu_type_id,
+            'Insert',
+            $_SESSION['user_id']
+        );
 
         $_SESSION['edit_message'] = "menu type succesfully inserted";
         header("Location: ../menus/menus_type.php");

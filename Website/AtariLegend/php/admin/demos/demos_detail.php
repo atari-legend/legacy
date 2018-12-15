@@ -66,7 +66,8 @@ while ($demo_info = $sql_demo->fetch_array(MYSQLI_BOTH)) {
 $sql_categories = $mysqli->query("SELECT * FROM demo_cat ORDER BY demo_cat_name") or die("Error loading categories");
 
 while ($categories = $sql_categories->fetch_array(MYSQLI_BOTH)) {
-    $sql_demo_cat = $mysqli->query("SELECT * FROM demo_cat_cross WHERE demo_id='$demo_id' AND demo_cat_id=$categories[demo_cat_id]") or die("Error loading categorie cross table");
+    $sql_demo_cat = $mysqli->query("SELECT * FROM demo_cat_cross WHERE demo_id='$demo_id'
+        AND demo_cat_id=$categories[demo_cat_id]") or die("Error loading categorie cross table");
 
     $selected = $sql_demo_cat->num_rows;
     if ($selected == 1) {
@@ -105,7 +106,8 @@ while ($individuals = $query_temporary->fetch_array(MYSQLI_BOTH)) {
 }
 
 // Get the author types
-$sql_author = $mysqli->query("SELECT * FROM author_type ORDER BY author_type_info ASC") or die("Couldn't query author_types");
+$sql_author = $mysqli->query("SELECT * FROM author_type ORDER BY author_type_info ASC")
+    or die("Couldn't query author_types");
 
 while ($author = $sql_author->fetch_array(MYSQLI_BOTH)) {
     $smarty->append('author_types', array(
@@ -116,9 +118,10 @@ while ($author = $sql_author->fetch_array(MYSQLI_BOTH)) {
 
 //Starting off with displaying the authors that are linked to the game and having a delete option for them */
 $sql_demoauthors = $mysqli->query("SELECT * FROM demo_author
-                                   LEFT JOIN individuals ON (demo_author.ind_id = individuals.ind_id)
-                                   LEFT JOIN author_type ON (demo_author.author_type_id = author_type.author_type_id)
-                                   WHERE demo_author.demo_id='$demo_id' ORDER BY author_type.author_type_id, individuals.ind_name") or die("Error loading authors");
+    LEFT JOIN individuals ON (demo_author.ind_id = individuals.ind_id)
+    LEFT JOIN author_type ON (demo_author.author_type_id = author_type.author_type_id)
+    WHERE demo_author.demo_id='$demo_id' ORDER BY author_type.author_type_id, individuals.ind_name")
+    or die("Error loading authors");
 
 while ($demo_author = $sql_demoauthors->fetch_array(MYSQLI_BOTH)) {
     $smarty->append('demo_author', array(
@@ -147,8 +150,8 @@ while ($crew = $sql_crew->fetch_array(MYSQLI_BOTH)) {
 
 //let's get the crew for this demo
 $sql_crew = $mysqli->query("SELECT * FROM crew
-                            LEFT JOIN crew_demo_prod ON ( crew.crew_id = crew_demo_prod.crew_id )
-                            WHERE crew_demo_prod.demo_id = '$demo_id' ORDER BY crew_name ASC") or die("Couldn't query publishers");
+    LEFT JOIN crew_demo_prod ON ( crew.crew_id = crew_demo_prod.crew_id )
+    WHERE crew_demo_prod.demo_id = '$demo_id' ORDER BY crew_name ASC")or die("Couldn't query publishers");
 
 while ($crew = $sql_crew->fetch_array(MYSQLI_BOTH)) {
     $url_crew_name = rawurlencode($crew['crew_name']);
@@ -186,13 +189,15 @@ $smarty->assign("nr_aka", $nr_aka);
 //***********************************************************************************
 
 //Get the number of screenshots!
-$numberscreen = $mysqli->query("SELECT count(*) as count FROM screenshot_demo WHERE demo_id = '$demo_id'") or die("couldn't get number of screenshots");
+$numberscreen = $mysqli->query("SELECT count(*) as count FROM screenshot_demo WHERE demo_id = '$demo_id'")
+    or die("couldn't get number of screenshots");
 $array = $numberscreen->fetch_array(MYSQLI_BOTH);
 
 $smarty->assign("nr_screenshots", $array['count']);
 
 //check how many music files this game has
-$numbermusic = $mysqli->query("SELECT count(*) as count FROM demo_music WHERE demo_id = '$demo_id'") or die("couldn't get number of music files");
+$numbermusic = $mysqli->query("SELECT count(*) as count FROM demo_music WHERE demo_id = '$demo_id'")
+    or die("couldn't get number of music files");
 $array = $numbermusic->fetch_array(MYSQLI_BOTH);
 
 $smarty->assign("nr_music", $array['count']);
