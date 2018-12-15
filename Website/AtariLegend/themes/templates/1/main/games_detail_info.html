@@ -384,6 +384,58 @@
                     </td>
                 </tr>
             {/foreach}
+            {if ($game->getPlayersSameMachine() <> 0) and ($game->getPlayersSameMachine() <> null)}
+                <tr>
+                    <td class="w-30" style="vertical-align:top;">
+                        <span class="games_main_detail_info_right">Players</span>
+                    </td>
+                    <td class="w-5" style="vertical-align:top;">
+                        <span class="games_main_detail_info_left text-center">-</span>
+                    </td>
+                    <td class="w-60">
+                        {$game->getPlayersSameMachine()} <span class="standard_tile_subtext">(Same machine)</span>
+                    </td>
+                </tr>
+            {/if}
+            {if ($game->getPlayersMultipleMachines() <> 0) and ($game->getPlayersMultipleMachines() <> null)}
+                <tr>
+                    <td class="w-30" style="vertical-align:top;">
+                        <span class="games_main_detail_info_right">Players</span>
+                    </td>
+                    <td class="w-5" style="vertical-align:top;">
+                        <span class="games_main_detail_info_left text-center">-</span>
+                    </td>
+                    <td class="w-60">
+                        {$game->getPlayersMultipleMachines()} <span class="standard_tile_subtext">(Multiple machines)</span>
+                    </td>
+                </tr>
+            {/if}
+            {if ($game->getMultiplayerType() <> null)}
+                <tr>
+                    <td class="w-30" style="vertical-align:top;">
+                        <span class="games_main_detail_info_right">Type</span>
+                    </td>
+                    <td class="w-5" style="vertical-align:top;">
+                        <span class="games_main_detail_info_left text-center">-</span>
+                    </td>
+                    <td class="w-60">
+                        {$game->getMultiplayerType()} <span class="standard_tile_subtext">(Multiplayer)</span>
+                    </td>
+                </tr>
+            {/if}
+            {if ($game->getMultiplayerHardware() <> null)}
+                <tr>
+                    <td class="w-30" style="vertical-align:top;">
+                        <span class="games_main_detail_info_right">Link hardware</span>
+                    </td>
+                    <td class="w-5" style="vertical-align:top;">
+                        <span class="games_main_detail_info_left text-center">-</span>
+                    </td>
+                    <td class="w-60">
+                        {$game->getMultiplayerHardware()} <span class="standard_tile_subtext">(Multiplayer)</span>
+                    </td>
+                </tr>
+            {/if}
             {if isset($game_vs)}
                 {foreach from=$game_vs item=line name=game_vs}
                     <tr>

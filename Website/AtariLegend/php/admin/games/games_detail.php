@@ -224,6 +224,12 @@ $smarty->assign('all_sound_hardware', $soundHardwareDao->getAllSoundHardware());
 $smarty->assign('linked_sound_hardware', $soundHardwareDao->getSoundHardwareForGame($game_id));
 
 //***********************************************************************************
+//get the multiplayer options
+//***********************************************************************************
+$smarty->assign('multiplayer_types', $gameDao->getMultiplayerTypes());
+$smarty->assign('multiplayer_hardware', $gameDao->getMultiplayerHardware());
+
+//***********************************************************************************
 //The game statistics below on the page
 //***********************************************************************************
 
