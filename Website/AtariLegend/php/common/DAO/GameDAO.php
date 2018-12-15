@@ -87,7 +87,7 @@ class GameDAO {
         $players_other,
         $multiplayer_type,
         $multiplayer_hardware
-        ) {
+    ) {
         $stmt = \AL\Db\execute_query(
             "GameDAO: updateGameMultiplayer",
             $this->mysqli,
