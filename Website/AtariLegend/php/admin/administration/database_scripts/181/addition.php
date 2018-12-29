@@ -16,7 +16,6 @@ while ($game_stos = $result1->fetch_array(MYSQLI_BOTH)) {
                             or die("Unable to retrieve the game_id from the game table: ".$mysqli->error);
 
     while ($game = $result5->fetch_array(MYSQLI_BOTH)) {
-
         $game_id = $game['game_id'];
 
         // Insert STOS

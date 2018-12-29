@@ -1,0 +1,100 @@
+<div id="tab-general" class="tabpane active">
+    <fieldset class="secondary_fieldset">
+        <legend class="primary_legend">Scans</legend>
+            <div class="help-hint">
+                Use this section to upload scans of the release box, content of the box (Goodies, code wheel, …)
+            </div>
+            <br>
+
+        {if count($release_scans) > 0}
+            {foreach from=$release_scans item=scan}
+                <div class="media_scan">
+                    <div class="help-hint">
+                        {$scan->getType()}
+                    </div>
+                    <div>
+                        <a href="../../includes/show_image.php?file={$scan->getImage()}&amp;resize=410,null,null,null" data-lightbox="image-1" data-title="{$scan->getType()}">
+                            <img src="{$scan->getImage()}" alt="Click to enlarge" class="media_scan_img"></a>
+                        </a>
+                    </div>
+                    <div>
+                        {if $scan->getNotes()}
+                            <div class="help-hint" style="clear: both">{$scan->getNotes()}</div>
+                        {/if}
+                        <a title="Remove scan from this release"
+                            href="../games/db_games_release_scans.php?game_id={$game->getId()}&amp;game_release_id={$release->getId()}&amp;scan_id={$scan->getId()}&amp;action=delete"
+                            onclick="javascript:return confirm('This scan will be permanently deleted')">
+                            <span class="fa fa-fw fa-trash"></span>
+                        </a>
+                    </div>
+                </div>
+            {/foreach}
+            <div class="media_scan">
+                <div class="help-hint">&nbsp;</div>
+                <div class="missing" style="height: 120px;">
+                    <a href="javascript:;" onclick="jQuery('#scan-upload').toggle()">
+                        <span class="fa fa-plus fa-3x"></span><br>
+                        Add a scan
+                    </a>
+                </div>
+                <div>&nbsp;</div>
+            </div>
+        {else}
+            <br>
+            <div class="text-center missing">
+                <span class="fa fa-warning"></span> No scan for this release. Consider <a href="javascript:;" onclick="jQuery('#scan-upload').toggle()">adding one</a>.</span>
+            </div>
+        {/if}
+
+        <div id="scan-upload" style="display: none;">
+            <br>
+            <form action="../games/db_games_release_scans.php" method="post" enctype="multipart/form-data">
+            <input type="hidden" name="action" value="upload">
+            <input type="hidden" name="game_id" value="{$game->getId()}">
+            <input type="hidden" name="game_release_id" value="{$release->getId()}">
+                <fieldset class="tertiary_fieldset media_fieldset">
+                    <b>Add a release scan</b>
+                    <br>
+                    <label class="input">Type</label>
+                    <select name="type" class="standard_select select_large" required>
+                            {foreach from=$game_release_scan_types item=type}
+                                <option value="{$type}">{$type}</option>
+                            {/foreach}
+                    </select>
+                    <br>
+                    <label class="input">File</label>
+                    <input type="file" name="scan" class="standard_input" style="width: 50%" required>
+                    <br>
+                    <label class="input">Notes</label>
+                    <input type="text" name="notes" class="standard_input" style="width: 50%">
+                    <br><br>
+                    <input type="submit" value="Add scan" class="secondary_button">
+                </fieldset>
+            </form>
+        </div>
+    </fieldset>
+
+    {* ======== TEMPORARY START: Game Box Scans to move to Release *}
+    {if count($game_boxscans) > 0}
+        <br>
+        <fieldset class="secondary_fieldset">
+            <legend class="primary_legend">Game scans to merge</legend>
+            <div class="help-hint">
+                The scans below are currently associated to the game, and needs to be moved into a specific release.
+            </div>
+            <br>
+
+            {foreach from=$game_boxscans item=scan}
+                <a href="../../includes/show_image.php?file={$game_boxscan_path}{$scan.game_boxscan_id}.{$scan.imgext}" data-lightbox="image-2">
+                    <img src="{$game_boxscan_path}{$scan.game_boxscan_id}.{$scan.imgext}"
+                        style="display: inline; max-height: 150px; vertical-align: middle;">
+                </a>
+                {if $scan.game_boxscan_side == 0}Front{else}Back{/if} -
+                <a href="../games/db_games_release_scans.php?game_id={$game->getId()}&game_release_id={$release->getId()}&game_boxscan_id={$scan.game_boxscan_id}&imgext={$scan.imgext}&side={$scan.game_boxscan_side}&action=merge_game_boxscan">Move into this release ({$release->getDate()|date_format:"Y"|default:"[no date]"} {$release->getName()|default:""})</a>
+                <br>
+                <br>
+            {/foreach}
+        </fieldset>
+    {/if}
+    {* ======== TEMPORARY END: Game Box Scans to move to Release *}
+</div>

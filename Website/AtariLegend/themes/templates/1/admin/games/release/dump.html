@@ -105,7 +105,7 @@
                                     <td><a href="../user/user_detail.php?user_id_selected={$dump->getUser()->getId()}">{$dump->getUser()->getName()}</a></td>
                                     <td>{$dump->getInfo()|default:"-"}</td>
                                     <td>{math equation="floor(x/y)" x=$dump->getSize() y=1024} KB</td>
-                                    <td><a href="../../../data/zips/games/{$dump->getId()}.zip"><span class="fa fa-download"></span></a></td>
+                                    <td>{if $user_session.permission == '1'}<a href="../../../data/zips/games/{$dump->getId()}.zip"><span class="fa fa-download"></span></a>{else}<span class="fa fa-download"></span>{/if}</td>
                                 </tr>
                                 {/foreach}
                             </tbody>
@@ -181,7 +181,7 @@
                         {/foreach}
                         <div class="media_scan">
                             <div class="help-hint">&nbsp;</div>
-                            <div class="missing" style="height: 100px;">
+                            <div class="missing" style="height: 120px;">
                                 <a href="javascript:;" onclick="jQuery('#scan-options-{$linked_media->getId()}').toggle()">
                                     <span class="fa fa-plus fa-3x"></span><br>
                                     Add a scan
@@ -207,7 +207,7 @@
                             <fieldset class="tertiary_fieldset">
                                 <b>Media scans</b>
                                 <div class="help-hint">
-                                    Overhere you can add multiple scanned images of a media (e.g. front and back of the floppy, contents of the box, goodies, codewheel...)
+                                    Overhere you can add multiple scanned images of a media (e.g. front and back of the floppy, ...)
                                 </div>
                                 <br>
                                 <label class="input">Type</label>

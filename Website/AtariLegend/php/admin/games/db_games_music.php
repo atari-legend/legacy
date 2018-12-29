@@ -38,9 +38,12 @@ if (isset($action) and $action == 'delete_music') {
             $music_ext = $musicrow['imgext'];
 
             $sql = $mysqli->query("DELETE FROM music WHERE music_id = '$music' ") or die("error deleting music");
-            $sql = $mysqli->query("DELETE FROM game_music WHERE music_id = '$music' ") or die("error deleting game_music");
-            $sql = $mysqli->query("DELETE FROM music_author WHERE music_id = '$music' ") or die("error deleting music_author");
-            $sql = $mysqli->query("DELETE FROM music_types WHERE music_id = '$music' ") or die("error deleting music_types");
+            $sql = $mysqli->query("DELETE FROM game_music WHERE music_id = '$music' ")
+                or die("error deleting game_music");
+            $sql = $mysqli->query("DELETE FROM music_author WHERE music_id = '$music' ")
+                or die("error deleting music_author");
+            $sql = $mysqli->query("DELETE FROM music_types WHERE music_id = '$music' ")
+                or die("error deleting music_types");
 
             $new_path = $music_game_save_path;
             $new_path .= $music;
@@ -82,7 +85,8 @@ if (isset($action) and $action == 'upload_zaks') {
 
             if ($ext == 'ym' or $ext == 'mod' or $ext == 'snd' or $ext == 'mp3') {
                 // First we insert extension of the file... this also creates an autoinc number for us.
-                $sdbquery = $mysqli->query("INSERT INTO music (music_id,imgext,mime_type) VALUES ('','$ext','$mime_type')") or die("Database error - inserting music_id");
+                $sdbquery = $mysqli->query("INSERT INTO music (music_id,imgext,mime_type)
+                    VALUES ('','$ext','$mime_type')") or die("Database error - inserting music_id");
 
                 //select the newly entered music_id from the main table
                 $MUSIC = $mysqli->query("SELECT music_id FROM music
@@ -91,23 +95,28 @@ if (isset($action) and $action == 'upload_zaks') {
                 $musicrow = $MUSIC->fetch_row();
                 $music_id = $musicrow[0];
 
-                $sdbquery = $mysqli->query("INSERT INTO game_music (game_id,music_id) VALUES ('$game_id','$music_id')") or die("Database error - inserting music id");
+                $sdbquery = $mysqli->query("INSERT INTO game_music (game_id,music_id)
+                    VALUES ('$game_id','$music_id')") or die("Database error - inserting music id");
 
                 // Insert the author id
 
-                $sdbquery = $mysqli->query("INSERT INTO music_author (music_id,ind_id) VALUES ('$music_id','$ind_id')") or die("Database error - couldn't insert author id");
+                $sdbquery = $mysqli->query("INSERT INTO music_author (music_id,ind_id)
+                    VALUES ('$music_id','$ind_id')") or die("Database error - couldn't insert author id");
 
                 // Get the type id and insert it into the music type table
-                $typequery = $mysqli->query("SELECT music_types_main_id FROM music_types_main WHERE extention='$ext'") or die("Database error - selecting music_id");
+                $typequery = $mysqli->query("SELECT music_types_main_id FROM music_types_main WHERE extention='$ext'")
+                    or die("Database error - selecting music_id");
 
                 $typerow = $typequery->fetch_row();
                 $type_id = $typerow[0];
 
                 // Insert the type id
-                $sdbquery = $mysqli->query("INSERT INTO music_types (music_types_main_id,music_id) VALUES ('$type_id','$music_id')") or die("Database error - inserting type id");
+                $sdbquery = $mysqli->query("INSERT INTO music_types (music_types_main_id,music_id)
+                    VALUES ('$type_id','$music_id')") or die("Database error - inserting type id");
 
                 // Rename the uploaded file to its autoincrement number and move it to its proper place.
-                $file_data = rename($image['tmp_name'][$key], "$music_game_save_path$music_id.$ext") or die("couldn't rename and move file");
+                $file_data = rename($image['tmp_name'][$key], "$music_game_save_path$music_id.$ext")
+                    or die("couldn't rename and move file");
 
                 chmod("$music_game_save_path$music_id.$ext", 0777) or die("couldn't chmod file");
                 $_SESSION['edit_message'] = "Music file uploaded";

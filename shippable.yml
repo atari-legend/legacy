@@ -1,5 +1,14 @@
 language: node_js
 
+env:
+    global:
+        # Contains DEV_DEPLOY_HOST, DEV_DEPLOY_USER, DEV_DEPLOY_PATH
+        # variables encrypted via Shippable
+        - secure: O9ssVSQ+s0zyKXUvANhiqfSj4LzZHyUEJGKFoBHqt0m/lgiKE5J+8PuPQs+0NqgK83rIZtJx7CPphZmToFgeAy9TBphTAj41xpjc45VNhPfi3goBaV/9qUaiYyiqChNc++9UABKyiITofK8+ovYEj6egcXNwn9Qaonia57C8EoX0qAfil115RxiveBaiW+CbvNM+qkdA+3YOosRrqkxw5lra5SgXNwX8lS9cH+ryohK4CjvFAgPADWxIuuxdq04wEiFkcV8aSnH8CCb7W1oHEy2jut3xhyqCR7w96AXFARxgU/nkuZCMSznQZCXLKT18oEY2//bCC8ahCTxkWtVXSQ==
+        # Contains PROD_DEPLOY_HOST, PROD_DEPLOY_USER, PROD_DEPLOY_PATH
+        # variables encrypted via Shippable
+        - secure: JXo6bK6Eb3UTUQlD0zPm6C+xgc/ksqguzJLdty9FOGQlhWZ5nqEAG3Wv5gyUo/S3CIZMBop3lbmO/PbPexzi3DzLrAs9dM8UVUSea5SZvHLazGDVBuxdc/t+lii5r6m0+hUbMviN/U9P6Z4qJOqj2ShlwBgpJ+dgHZLbbpkd9R1PFxzb5ENaO1N4I5qvFfjn/AzsF6IR0SAaKrOTgcmoPmgNkpaMbfi+avsiPkR7+WcA514MiTlmvbiu8DXKeZFKmwp/JXljZ+JC+3ZPTM78tkR2rxli+7eta+wH6sMzIcaHOTl1kvtUe3LfWfI07XQXiz+yPxuTpsOBo8dWsnJPzQ==
+
 build:
     # Build our custom Docker image with NodeJS + PHP as a pre step
     pre_ci:
@@ -15,3 +24,8 @@ build:
     ci:
         - shippable_retry npm install
         - npm run grunt
+
+    # If the build succeeded and we're on the development branch,
+    # sync all the file to the dev server
+    on_success:
+        - ./deploy.sh

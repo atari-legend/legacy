@@ -50,7 +50,8 @@ if ($crewsearch != '-' and $crewbrowse == '-') {
         ));
     }
 } else {
-    $sql_crew = $mysqli->query("SELECT * FROM crew WHERE crew_name REGEXP '^[0-9].*' ORDER BY crew_name ASC") or die("Couldn't query Crew database");
+    $sql_crew = $mysqli->query("SELECT * FROM crew WHERE crew_name REGEXP '^[0-9].*' ORDER BY crew_name ASC")
+        or die("Couldn't query Crew database");
 
     while ($crew = $sql_crew->fetch_array(MYSQLI_BOTH)) {
         $smarty->append('crew', array(
@@ -105,7 +106,8 @@ $az_output = az_dropdown_output(0);
 $smarty->assign('az_value', $az_value);
 $smarty->assign('az_output', $az_output);
 
-// Search variables that got to be sent with the headers all through this module or else the code will dump the user back to the crew_main.php
+// Search variables that got to be sent with the headers all through this module or else the code will dump
+// the user back to the crew_main.php
 $smarty->assign('tracking', array(
     'crewsearch' => $crewsearch,
     'crewbrowse' => $crewbrowse

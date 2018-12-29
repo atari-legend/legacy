@@ -20,10 +20,10 @@ include("../../config/common.php");
 include("../../admin/games/quick_search_games.php");
 include("../../config/admin.php");
 
-$sql_bug_report = $mysqli->query("SELECT * FROM bug_report 
-                                  LEFT JOIN bug_report_type ON (bug_report.bug_report_type_id = bug_report_type.bug_report_type_id)
-                                  LEFT JOIN users ON (bug_report.user_id = users.user_id)
-                                  ORDER BY bug_report_date ASC");
+$sql_bug_report = $mysqli->query("SELECT * FROM bug_report
+    LEFT JOIN bug_report_type ON (bug_report.bug_report_type_id = bug_report_type.bug_report_type_id)
+    LEFT JOIN users ON (bug_report.user_id = users.user_id)
+    ORDER BY bug_report_date ASC");
 
 while ($query_bug_report = $sql_bug_report->fetch_array(MYSQLI_BOTH)) {
     $bug_report_text = nl2br($query_bug_report['bug_report_text']);

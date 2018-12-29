@@ -22,13 +22,16 @@ if (isset($action)) {
     if ($action=='delete_comment') {
         create_log_entry('Games', $comment_id, 'Comment', $comment_id, 'Delete', $_SESSION['user_id']);
 
-        $sql = $mysqli->query("DELETE FROM game_user_comments WHERE comment_id = '$comment_id'") or die("couldn't delete game_comment quote");
-        $sql = $mysqli->query("DELETE FROM comments WHERE comments_id = '$comment_id'") or die("couldn't delete comment quote");
+        $sql = $mysqli->query("DELETE FROM game_user_comments WHERE comment_id = '$comment_id'")
+            or die("couldn't delete game_comment quote");
+        $sql = $mysqli->query("DELETE FROM comments WHERE comments_id = '$comment_id'")
+            or die("couldn't delete comment quote");
     } else {
         //$data = $_POST['data'];
         $data = $mysqli->real_escape_string($data);
 
-        $mysqli->query("UPDATE comments SET comment='$data' WHERE comments_id='$comment_id'") or die("couldn't update comments table");
+        $mysqli->query("UPDATE comments SET comment='$data' WHERE comments_id='$comment_id'")
+            or die("couldn't update comments table");
 
         create_log_entry('Games', $comment_id, 'Comment', $comment_id, 'Update', $_SESSION['user_id']);
     }
@@ -36,20 +39,20 @@ if (isset($action)) {
     //get all the data
     if (isset($type) and $type == 'user') {
         $sql_comment = $mysqli->query("SELECT *
-                                        FROM game_user_comments
-                                        LEFT JOIN comments ON ( game_user_comments.comment_id = comments.comments_id )
-                                        LEFT JOIN users ON ( comments.user_id = users.user_id )
-                                        LEFT JOIN game ON ( game_user_comments.game_id = game.game_id )
-                                        WHERE comments.user_id = '$_SESSION[user_id]'
-                                        ORDER BY comments.timestamp DESC LIMIT 10") or die("Syntax Error! Couldn't not get the comments!");
+            FROM game_user_comments
+            LEFT JOIN comments ON ( game_user_comments.comment_id = comments.comments_id )
+            LEFT JOIN users ON ( comments.user_id = users.user_id )
+            LEFT JOIN game ON ( game_user_comments.game_id = game.game_id )
+            WHERE comments.user_id = '$_SESSION[user_id]'
+            ORDER BY comments.timestamp DESC LIMIT 10") or die("Syntax Error! Couldn't not get the comments!");
         $smarty->assign('type', 'user');
     } else {
         $sql_comment = $mysqli->query("SELECT *
-                                        FROM game_user_comments
-                                        LEFT JOIN comments ON ( game_user_comments.comment_id = comments.comments_id )
-                                        LEFT JOIN users ON ( comments.user_id = users.user_id )
-                                        LEFT JOIN game ON ( game_user_comments.game_id = game.game_id )
-                                        ORDER BY comments.timestamp DESC LIMIT 10") or die("Syntax Error! Couldn't not get the comments!");
+            FROM game_user_comments
+            LEFT JOIN comments ON ( game_user_comments.comment_id = comments.comments_id )
+            LEFT JOIN users ON ( comments.user_id = users.user_id )
+            LEFT JOIN game ON ( game_user_comments.game_id = game.game_id )
+            ORDER BY comments.timestamp DESC LIMIT 10") or die("Syntax Error! Couldn't not get the comments!");
     }
 
     // lets put the comments in a smarty array
@@ -64,9 +67,10 @@ if (isset($action)) {
         $comment = stripslashes($query_comment['comment']);
         $comment = trim($comment);
         $comment = RemoveSmillies($comment);
-            
-        //this is needed, because users can change their own comments on the website, however this is done with JS (instead of a post with pure HTML)
-        //The translation of the 'enter' breaks is different in JS, so in JS I do a conversion to a <br>. However, when we edit a comment, this <br> should not be
+
+        //this is needed, because users can change their own comments on the website, however this is done with JS
+        //(instead of a post with pure HTML) The translation of the 'enter' breaks is different in JS, so in JS I do a
+        // conversion to a <br>. However, when we edit a comment, this <br> should not be
         //visible to the user, hence again, now this conversion in php
         $breaks = array("<br />","<br>","<br/>");
         $comment = str_ireplace($breaks, "\r\n", $comment);

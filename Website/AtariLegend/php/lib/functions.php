@@ -12,8 +12,17 @@
  *
  ***************************************************************************/
 
+const MIME_TYPES_TO_EXT = array(
+    "image/jpeg" => "jpg",
+    "image/png" => "png",
+    "image/x-png" => "png"
+);
+
 function InsertALCode($alcode) {
-    $alcode = preg_replace("#\[color\=(\#[0-9A-F]{0,6}|[A-z]+)\](.*)\[\/color\]#Ui", "<span style=\"color: $1;\">$2</span>", $alcode);
+    $alcode = preg_replace(
+        "#\[color\=(\#[0-9A-F]{0,6}|[A-z]+)\](.*)\[\/color\]#Ui",
+        "<span style=\"color: $1;\">$2</span>", $alcode
+    );
     //$alcode = eregi_replace("\\[style=([^\\[]*)\\]","<span class=\"\\1\">",$alcode);
     //$alcode = str_replace("[/style]", "</span>", $alcode);
     $alcode = preg_replace("(\[size=(.+?)\](.+?)\[\/size\])is", "<span style=\"font-size: $1px\">$2</span>", $alcode);
@@ -50,11 +59,30 @@ function InsertALCode($alcode) {
     $alcode = str_replace("[/code]", "</pre></blockquote>", $alcode);
     $alcode = preg_replace("#\[url\](www\..+)\[\/url\]#i", "[url=http://$1]$1[/url]", $alcode);
     $alcode = preg_replace("#\[url\=(www\..+)\](.*)\[\/url\]#i", "[url=http://$1]$2[/url]", $alcode);
-    $alcode = preg_replace("#\[url\=(.*)\](.*)\[\/url\]#Ui", "<a href=\"$1\" class=\"standard_tile_link_black\">$2</a>", $alcode);
-    $alcode = preg_replace("#\[url\](.*)\[\/url\]#Ui", "<a href=\"$1\" class=\"standard_tile_link_black\">$1</a>", $alcode);
-    $alcode = preg_replace("#\[hotspotUrl\=(.*)\](.*)\[\/hotspotUrl\]#Ui", "<a href=\"$1\" class=\"standard_tile_link_black\">$2</a>", $alcode);
-    $alcode = preg_replace("#(^|[\n ])([\w]+?://.*?[^ \"\n\r\t<]*)#is", "\\1<a href=\"\\2\" target=\"_blank\" class=\"standard_tile_link_black\">\\2</a>", $alcode);
-    $alcode = preg_replace("#(^|[\n ])((www|ftp)\.[\w\-]+\.[\w\-.\~]+(?:/[^ \"\t\n\r<]*)?)#is", "\\1<a href=\"http://\\2\" target=\"_blank\" class=\"standard_tile_link_black\">\\2</a>", $alcode);
+    $alcode = preg_replace(
+        "#\[url\=(.*)\](.*)\[\/url\]#Ui", "<a href=\"$1\" class=\"standard_tile_link_black\">$2</a>",
+        $alcode
+    );
+    $alcode = preg_replace(
+        "#\[url\](.*)\[\/url\]#Ui",
+        "<a href=\"$1\" class=\"standard_tile_link_black\">$1</a>",
+        $alcode
+    );
+    $alcode = preg_replace(
+        "#\[hotspotUrl\=(.*)\](.*)\[\/hotspotUrl\]#Ui",
+        "<a href=\"$1\" class=\"standard_tile_link_black\">$2</a>",
+        $alcode
+    );
+    $alcode = preg_replace(
+        "#(^|[\n ])([\w]+?://.*?[^ \"\n\r\t<]*)#is",
+        "\\1<a href=\"\\2\" target=\"_blank\" class=\"standard_tile_link_black\">\\2</a>",
+        $alcode
+    );
+    $alcode = preg_replace(
+        "#(^|[\n ])((www|ftp)\.[\w\-]+\.[\w\-.\~]+(?:/[^ \"\t\n\r<]*)?)#is",
+        "\\1<a href=\"http://\\2\" target=\"_blank\" class=\"standard_tile_link_black\">\\2</a>",
+        $alcode
+    );
 
     return $alcode;
 }
@@ -71,9 +99,16 @@ function BBCode($Text) {
     $MAILSearchString = $URLSearchString . " a-zA-Z0-9\.@";
 
     // Perform URL Search
-    $Text = preg_replace("/\[url\]([$URLSearchString]*)\[\/url\]/", '<a href="$1" target="_blank" class="standard_tile_link_black">$1</a>', $Text);
-    $Text = preg_replace("(\[url\=([$URLSearchString]*)\](.+?)\[/url\])", '<a href="$1" target="_blank" class="standard_tile_link_black">$2</a>', $Text);
-    //$Text = preg_replace("(\[url\=([$URLSearchString]*)\]([$URLSearchString]*)\[/url\])", '<a href="$1" target="_blank" class="main_links">$2</a>', $Text);
+    $Text = preg_replace(
+        "/\[url\]([$URLSearchString]*)\[\/url\]/",
+        '<a href="$1" target="_blank" class="standard_tile_link_black">$1</a>',
+        $Text
+    );
+    $Text = preg_replace(
+        "(\[url\=([$URLSearchString]*)\](.+?)\[/url\])",
+        '<a href="$1" target="_blank" class="standard_tile_link_black">$2</a>',
+        $Text
+    );
 
     // Perform MAIL Search
     $Text = preg_replace("(\[mail\]([$MAILSearchString]*)\[/mail\])", '<a href="mailto:$1">$1</a>', $Text);
@@ -145,38 +180,118 @@ function BBCode($Text) {
     $Text = preg_replace("/\[img\=([0-9]*)x([0-9]*)\](.+?)\[\/img\]/", '<img src="$3" height="$2" width="$1">', $Text);
 
     // urls without using the url tag
-    $Text = preg_replace("#(^|[\n ])([\w]+?://.*?[^ \"\n\r\t<]*)#is", "\\1<a href=\"\\2\" target=\"_blank\" class=\"standard_tile_link\">\\2</a>", $Text);
+    $Text = preg_replace(
+        "#(^|[\n ])([\w]+?://.*?[^ \"\n\r\t<]*)#is",
+        "\\1<a href=\"\\2\" target=\"_blank\" class=\"standard_tile_link\">\\2</a>",
+        $Text
+    );
 
-    $Text = preg_replace("#(^|[\n ])((www|ftp)\.[\w\-]+\.[\w\-.\~]+(?:/[^ \"\t\n\r<]*)?)#is", "\\1<a href=\"http://\\2\" target=\"_blank\" class=\"standard_tile_link\">\\2</a>", $Text);
+    $Text = preg_replace(
+        "#(^|[\n ])((www|ftp)\.[\w\-]+\.[\w\-.\~]+(?:/[^ \"\t\n\r<]*)?)#is",
+        "\\1<a href=\"http://\\2\" target=\"_blank\" class=\"standard_tile_link\">\\2</a>",
+        $Text
+    );
 
     return $Text;
 }
 
 function InsertSmillies($alcode) {
-    $alcode = str_replace(":-D", "<img style=\"vertical-align: middle;\" src=\"../templates/0/emoticons/icon_biggrin.gif\">", $alcode);
-    $alcode = str_replace(":)", "<img style=\"vertical-align: middle;\" src=\"../templates/0/emoticons/icon_smile.gif\">", $alcode);
-    $alcode = str_replace(":(", "<img style=\"vertical-align: middle;\" src=\"../templates/0/emoticons/icon_sad.gif\">", $alcode);
-    $alcode = str_replace("8O", "<img style=\"vertical-align: middle;\" src=\"../templates/0/emoticons/icon_eek.gif\">", $alcode);
-    $alcode = str_replace(":?", "<img style=\"vertical-align: middle;\" src=\"../templates/0/emoticons/icon_confused.gif\">", $alcode);
-    $alcode = str_replace(" 8)", "<img style=\"vertical-align: middle;\" src=\"../templates/0/emoticons/icon_cool.gif\">", $alcode);
-    $alcode = str_replace(":x", "<img style=\"vertical-align: middle;\" src=\"../templates/0/emoticons/icon_mad.gif\">", $alcode);
-    $alcode = str_replace(":P", "<img style=\"vertical-align: middle;\" src=\"../templates/0/emoticons/icon_razz.gif\">", $alcode);
-    $alcode = str_replace(":oops:", "<img style=\"vertical-align: middle;\" src=\"../templates/0/emoticons/icon_redface.gif\">", $alcode);
-    $alcode = str_replace(":evil:", "<img style=\"vertical-align: middle;\" src=\"../templates/0/emoticons/icon_evil.gif\">", $alcode);
-    $alcode = str_replace(":twisted:", "<img style=\"vertical-align: middle;\" src=\"../templates/0/emoticons/icon_twisted.gif\">", $alcode);
-    $alcode = str_replace(":roll:", "<img style=\"vertical-align: middle;\" src=\"../templates/0/emoticons/icon_rolleyes.gif\">", $alcode);
-    $alcode = str_replace(":frown:", "<img style=\"vertical-align: middle;\" src=\"../templates/0/emoticons/icon_frown.gif\">", $alcode);
-    $alcode = str_replace(":|", "<img style=\"vertical-align: middle;\" src=\"../templates/0/emoticons/icon_neutral.gif\">", $alcode);
-    $alcode = str_replace(":mrgreen:", "<img style=\"vertical-align: middle;\" src=\"../templates/0/emoticons/icon_mrgreen.gif\">", $alcode);
-    $alcode = str_replace(":o", "<img style=\"vertical-align: middle;\" src=\"../templates/0/emoticons/icon_surprised.gif\">", $alcode);
-    $alcode = str_replace(":lol:", "<img style=\"vertical-align: middle;\" src=\"../templates/0/emoticons/icon_lol.gif\">", $alcode);
-    $alcode = str_replace(":cry:", "<img style=\"vertical-align: middle;\" src=\"../templates/0/emoticons/icon_cry.gif\">", $alcode);
-    $alcode = str_replace(";)", "<img style=\"vertical-align: middle;\" src=\"../templates/0/emoticons/icon_wink.gif\">", $alcode);
-    $alcode = str_replace(":wink:", "<img style=\"vertical-align: middle;\" src=\"../templates/0/emoticons/icon_wink.gif\">", $alcode);
-    $alcode = str_replace(":!:", "<img style=\"vertical-align: middle;\" src=\"../templates/0/emoticons/icon_exclaim.gif\">", $alcode);
-    $alcode = str_replace(":arrow:", "<img style=\"vertical-align: middle;\" src=\"../templates/0/emoticons/icon_arrow.gif\">", $alcode);
-    $alcode = str_replace(":?:", "<img style=\"vertical-align: middle;\" src=\"../templates/0/emoticons/icon_question.gif\">", $alcode);
-    $alcode = str_replace(":idea:", "<img style=\"vertical-align: middle;\" src=\"../templates/0/emoticons/icon_idea.gif\">", $alcode);
+    $alcode = str_replace(
+        ":-D", "<img style=\"vertical-align: middle;\" src=\"../templates/0/emoticons/icon_biggrin.gif\">",
+        $alcode
+    );
+    $alcode = str_replace(
+        ":)", "<img style=\"vertical-align: middle;\" src=\"../templates/0/emoticons/icon_smile.gif\">",
+        $alcode
+    );
+    $alcode = str_replace(
+        ":(", "<img style=\"vertical-align: middle;\" src=\"../templates/0/emoticons/icon_sad.gif\">",
+        $alcode
+    );
+    $alcode = str_replace(
+        "8O", "<img style=\"vertical-align: middle;\" src=\"../templates/0/emoticons/icon_eek.gif\">",
+        $alcode
+    );
+    $alcode = str_replace(
+        ":?", "<img style=\"vertical-align: middle;\" src=\"../templates/0/emoticons/icon_confused.gif\">",
+        $alcode
+    );
+    $alcode = str_replace(
+        " 8)", "<img style=\"vertical-align: middle;\" src=\"../templates/0/emoticons/icon_cool.gif\">",
+        $alcode
+    );
+    $alcode = str_replace(
+        ":x", "<img style=\"vertical-align: middle;\" src=\"../templates/0/emoticons/icon_mad.gif\">",
+        $alcode
+    );
+    $alcode = str_replace(
+        ":P", "<img style=\"vertical-align: middle;\" src=\"../templates/0/emoticons/icon_razz.gif\">",
+        $alcode
+    );
+    $alcode = str_replace(
+        ":oops:", "<img style=\"vertical-align: middle;\" src=\"../templates/0/emoticons/icon_redface.gif\">",
+        $alcode
+    );
+    $alcode = str_replace(
+        ":evil:", "<img style=\"vertical-align: middle;\" src=\"../templates/0/emoticons/icon_evil.gif\">",
+        $alcode
+    );
+    $alcode = str_replace(
+        ":twisted:", "<img style=\"vertical-align: middle;\" src=\"../templates/0/emoticons/icon_twisted.gif\">",
+        $alcode
+    );
+    $alcode = str_replace(
+        ":roll:", "<img style=\"vertical-align: middle;\" src=\"../templates/0/emoticons/icon_rolleyes.gif\">",
+        $alcode
+    );
+    $alcode = str_replace(
+        ":frown:", "<img style=\"vertical-align: middle;\" src=\"../templates/0/emoticons/icon_frown.gif\">",
+        $alcode
+    );
+    $alcode = str_replace(
+        ":|", "<img style=\"vertical-align: middle;\" src=\"../templates/0/emoticons/icon_neutral.gif\">",
+        $alcode
+    );
+    $alcode = str_replace(
+        ":mrgreen:", "<img style=\"vertical-align: middle;\" src=\"../templates/0/emoticons/icon_mrgreen.gif\">",
+        $alcode
+    );
+    $alcode = str_replace(
+        ":o", "<img style=\"vertical-align: middle;\" src=\"../templates/0/emoticons/icon_surprised.gif\">",
+        $alcode
+    );
+    $alcode = str_replace(
+        ":lol:", "<img style=\"vertical-align: middle;\" src=\"../templates/0/emoticons/icon_lol.gif\">",
+        $alcode
+    );
+    $alcode = str_replace(
+        ":cry:", "<img style=\"vertical-align: middle;\" src=\"../templates/0/emoticons/icon_cry.gif\">",
+        $alcode
+    );
+    $alcode = str_replace(
+        ";)", "<img style=\"vertical-align: middle;\" src=\"../templates/0/emoticons/icon_wink.gif\">",
+        $alcode
+    );
+    $alcode = str_replace(
+        ":wink:", "<img style=\"vertical-align: middle;\" src=\"../templates/0/emoticons/icon_wink.gif\">",
+        $alcode
+    );
+    $alcode = str_replace(
+        ":!:", "<img style=\"vertical-align: middle;\" src=\"../templates/0/emoticons/icon_exclaim.gif\">",
+        $alcode
+    );
+    $alcode = str_replace(
+        ":arrow:", "<img style=\"vertical-align: middle;\" src=\"../templates/0/emoticons/icon_arrow.gif\">",
+        $alcode
+    );
+    $alcode = str_replace(
+        ":?:", "<img style=\"vertical-align: middle;\" src=\"../templates/0/emoticons/icon_question.gif\">",
+        $alcode
+    );
+    $alcode = str_replace(
+        ":idea:", "<img style=\"vertical-align: middle;\" src=\"../templates/0/emoticons/icon_idea.gif\">",
+        $alcode
+    );
     return $alcode;
 }
 
@@ -226,8 +341,10 @@ function date_to_timestamp($date_Year, $date_Month, $date_Day) {
 
 function filter($entry) {
     // Filter out strange characters like ^, $, &, change "it's" to "its"
-    static $drop_char_match = array('^', '$', '&', '(', ')', '<', '>', '`', '"', '|', ',', '@', '_', '?', '%', '-', '~', '+', '.', '[', ']', '{', '}', ':', '\\', '/', '=', '#', '\'', ';', '!');
-    static $drop_char_replace = array('', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '');
+    static $drop_char_match = array('^', '$', '&', '(', ')', '<', '>', '`', '"', '|', ',', '@', '_', '?', '%', '-',
+        '~', '+', '.', '[', ']', '{', '}', ':', '\\', '/', '=', '#', '\'', ';', '!');
+    static $drop_char_replace = array('', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '',
+        '', '', '', '', '', '', '', '', '', '', '');
 
     for ($i = 0; $i < count($drop_char_match); $i++) {
         $entry = str_replace($drop_char_match[$i], $drop_char_replace[$i], $entry);
@@ -237,7 +354,8 @@ function filter($entry) {
 
 function search($entry) {
     // search for strange characters like ^, $, &, change "it's" to "its"
-    static $drop_char_match = array('^', '$', '&', '(', ')', '<', '>', '`', '"', '|', ',', '@', '_', '?', '%', '-', '~', '+', '.', '[', ']', '{', '}', ':', '\\', '/', '=', '#', '\'', ';', '!');
+    static $drop_char_match = array('^', '$', '&', '(', ')', '<', '>', '`', '"', '|', ',', '@', '_', '?', '%', '-', '~',
+         '+', '.', '[', ']', '{', '}', ':', '\\', '/', '=', '#', '\'', ';', '!');
 
     $count = 0;
 
@@ -410,25 +528,8 @@ function statistics_stack() {
     }
     // END - COUNT HOW MANY GAMES HAS CATEGORIES SET
 
-
-
-    // START - COUNT NUMBER OF DOWNLOADABLE FILES
-    $query      = $mysqli->query("SELECT COUNT(game_id) AS count FROM game_download");
-    $game_files = $query->fetch_array(MYSQLI_BOTH);
-    $stack[]    = "$game_files[count] files for download";
-
-    // END - COUNT NUMBER OF DOWNLOADABLE FILES
-
-    mysqli_free_result($query);
-
     // START - COUNT HOW MANY GAMES HAS DOWNLOAD
-    $query         = $mysqli->query("SELECT COUNT(DISTINCT game_id) AS count FROM game_download");
-    $game_download = $query->fetch_array(MYSQLI_BOTH);
-    $stack[]       = "$game_download[count] games have download";
-
-    // END - COUNT HOW MANY GAMES HAS DOWNLOAD
-
-    mysqli_free_result($query);
+    // To do
 
     // START - GAME REVIEW STATS
     $query       = $mysqli->query("SELECT COUNT(DISTINCT game_id) AS count FROM review_game");
@@ -485,8 +586,8 @@ function statistics_stack() {
     return $stack;
 }
 
-//This function will create a change log table entry according to its parameters. In the db* files, with every DB transaction,
-//this function is called. The table is used for the change log section of the cpanel.
+//This function will create a change log table entry according to its parameters. In the db* files, with every DB
+// transaction, this function is called. The table is used for the change log section of the cpanel.
 function create_log_entry($section, $section_id, $subsection, $subsection_id, $action, $user_id) {
     global $mysqli;
 
@@ -509,9 +610,10 @@ function create_log_entry($section, $section_id, $subsection, $subsection_id, $a
         $query_data   = $result->fetch_array(MYSQLI_BOTH);
         $section_name = $query_data['game_name'];
 
-        if ($subsection == 'Game' or $subsection == 'File' or $subsection == 'Screenshot' or $subsection == 'Mag score' or $subsection == 'Box back'
-            or $subsection == 'Box front' or $subsection == 'Review' or $subsection == 'Review comment' or $subsection == 'Music'
-            or $subsection == 'Submission' or $subsection == 'Fact' or $subsection == 'Sound hardware') {
+        if ($subsection == 'Game' or $subsection == 'File' or $subsection == 'Screenshot' or $subsection == 'Mag score'
+            or $subsection == 'Box back' or $subsection == 'Box front' or $subsection == 'Review'
+            or $subsection == 'Review comment' or $subsection == 'Music' or $subsection == 'Submission'
+            or $subsection == 'Fact' or $subsection == 'Sound hardware') {
             $subsection_name = $section_name;
         }
 
@@ -595,7 +697,8 @@ function create_log_entry($section, $section_id, $subsection, $subsection_id, $a
         if ($subsection == 'Game') {
             if ($action == 'Delete') {
                 //get the game_id and game_series_id
-                $query_series = "SELECT game_id, game_series_id FROM game_series_cross WHERE game_series_cross_id = '$subsection_id'";
+                $query_series = "SELECT game_id, game_series_id FROM game_series_cross
+                    WHERE game_series_cross_id = '$subsection_id'";
                 $result = $mysqli->query($query_series) or die("getting series info failed");
                 $query_data    = $result->fetch_array(MYSQLI_BOTH);
                 $subsection_id = $query_data['game_id'];
@@ -642,7 +745,8 @@ function create_log_entry($section, $section_id, $subsection, $subsection_id, $a
 
         if ($subsection == 'Category') {
             // Get the category name
-            $query_cat = "SELECT website_category_name FROM website_category WHERE website_category_id = '$subsection_id'";
+            $query_cat = "SELECT website_category_name FROM website_category
+                WHERE website_category_id = '$subsection_id'";
             $result = $mysqli->query($query_cat) or die("getting category name failed");
             $query_data      = $result->fetch_array(MYSQLI_BOTH);
             $subsection_name = $query_data['website_category_name'];
@@ -756,12 +860,12 @@ function create_log_entry($section, $section_id, $subsection, $subsection_id, $a
         if ($subsection == 'Comment') {
             //get game_id and interview_user_comments_id
             $query_user_comment = "SELECT interview_user_comments.interview_id,
-                                          interview_user_comments.interview_user_comments_id,
-                                          individuals.ind_name
-                                          FROM interview_user_comments
-                                          LEFT JOIN interview_main ON ( interview_user_comments.interview_id = interview_main.interview_id )
-                                          LEFT JOIN individuals on (interview_main.ind_id = individuals.ind_id)
-                                          WHERE interview_user_comments.comment_id = '$subsection_id'";
+                interview_user_comments.interview_user_comments_id,
+                individuals.ind_name
+                FROM interview_user_comments
+                LEFT JOIN interview_main ON ( interview_user_comments.interview_id = interview_main.interview_id )
+                LEFT JOIN individuals on (interview_main.ind_id = individuals.ind_id)
+                WHERE interview_user_comments.comment_id = '$subsection_id'";
 
             $result = $mysqli->query($query_user_comment) or die("getting user comments id failed");
             $query_data      = $result->fetch_array(MYSQLI_BOTH);
@@ -777,10 +881,10 @@ function create_log_entry($section, $section_id, $subsection, $subsection_id, $a
         if ($subsection == 'Comment') {
             //get the game name
             $query_user_comment = "SELECT * FROM review_user_comments
-                                          LEFT JOIN review_main ON (review_user_comments.review_id = review_main.review_id)
-                                          LEFT JOIN review_game ON (review_main.review_id = review_game.review_id)
-                                          LEFT JOIN game ON (game.game_id = review_game.game_id)
-                                          WHERE review_user_comments.comment_id = '$subsection_id'";
+                LEFT JOIN review_main ON (review_user_comments.review_id = review_main.review_id)
+                LEFT JOIN review_game ON (review_main.review_id = review_game.review_id)
+                LEFT JOIN game ON (game.game_id = review_game.game_id)
+                WHERE review_user_comments.comment_id = '$subsection_id'";
 
             $result = $mysqli->query($query_user_comment) or die("getting user comments id failed");
             $query_data      = $result->fetch_array(MYSQLI_BOTH);
@@ -854,7 +958,8 @@ function create_log_entry($section, $section_id, $subsection, $subsection_id, $a
 
         if ($subsection == 'Menu type') {
             // get the name of the menu type
-            $query_menu_type = "SELECT menu_types_text FROM menu_types_main WHERE menu_types_main_id = '$subsection_id'";
+            $query_menu_type = "SELECT menu_types_text FROM menu_types_main
+                WHERE menu_types_main_id = '$subsection_id'";
             $result = $mysqli->query($query_menu_type) or die("getting menu type name failed");
             $query_data      = $result->fetch_array(MYSQLI_BOTH);
             $subsection_name = $query_data['menu_types_text'];
@@ -1198,7 +1303,8 @@ function create_log_entry($section, $section_id, $subsection, $subsection_id, $a
 
             if ($type == '6') {
                 //get the doc cross id
-                $query_game_doc = "SELECT doc_games_id FROM menu_disk_title_doc_games WHERE menu_disk_title_id = '$subsection_id'";
+                $query_game_doc = "SELECT doc_games_id FROM menu_disk_title_doc_games
+                    WHERE menu_disk_title_id = '$subsection_id'";
                 $result = $mysqli->query($query_game_doc) or die("getting doc_game_id failed");
                 $query_data    = $result->fetch_array(MYSQLI_BOTH);
                 $subsection_id = $query_data['doc_games_id'];
@@ -1222,13 +1328,15 @@ function create_log_entry($section, $section_id, $subsection, $subsection_id, $a
 
                 if ($subsection_name == '') {
                     //get the doc cross id
-                    $query_tool_doc = "SELECT doc_tools_id FROM menu_disk_title_doc_tools WHERE menu_disk_title_id = '$subsection_id'";
+                    $query_tool_doc = "SELECT doc_tools_id FROM menu_disk_title_doc_tools
+                        WHERE menu_disk_title_id = '$subsection_id'";
                     $result = $mysqli->query($query_tool_doc) or die("getting doc_tools_id failed");
                     $query_data    = $result->fetch_array(MYSQLI_BOTH);
                     $subsection_id = $query_data['doc_tools_id'];
 
                     //get the id of the tool
-                    $query_tool = "SELECT tools_id FROM menu_disk_title_tools WHERE menu_disk_title_id = '$subsection_id'";
+                    $query_tool = "SELECT tools_id FROM menu_disk_title_tools
+                        WHERE menu_disk_title_id = '$subsection_id'";
                     $result = $mysqli->query($query_tool) or die("getting toold id failed");
                     $query_data    = $result->fetch_array(MYSQLI_BOTH);
                     $subsection_id = $query_data['tools_id'];
@@ -1277,12 +1385,12 @@ function create_log_entry($section, $section_id, $subsection, $subsection_id, $a
         if ($subsection == 'Comment') {
             //we need to get the title
             $query_user_comment = "SELECT article_user_comments.article_id,
-                                          article_user_comments.article_user_comments_id,
-                                          article_text.article_title
-                                          FROM article_user_comments
-                                          LEFT JOIN article_main ON ( article_user_comments.article_id = article_main.article_id )
-                                          LEFT JOIN article_text on ( article_main.article_id = article_text.article_id )
-                                          WHERE article_user_comments.comments_id = '$subsection_id'";
+                article_user_comments.article_user_comments_id,
+                article_text.article_title
+                FROM article_user_comments
+                LEFT JOIN article_main ON ( article_user_comments.article_id = article_main.article_id )
+                LEFT JOIN article_text on ( article_main.article_id = article_text.article_id )
+                WHERE article_user_comments.comments_id = '$subsection_id'";
 
             $result = $mysqli->query($query_user_comment) or die("getting user comments id failed");
             $query_data      = $result->fetch_array(MYSQLI_BOTH);
@@ -1545,72 +1653,68 @@ function create_log_entry($section, $section_id, $subsection, $subsection_id, $a
             $result = $mysqli->query($query) or die("getting system failed");
             $query_data   = $result->fetch_array(MYSQLI_BOTH);
             $section_name = $query_data['name'];
-        }
-        elseif ($subsection == 'Emulator') {
+        } elseif ($subsection == 'Emulator') {
             // Get the emulator name
             $query = "SELECT name FROM emulator WHERE id = '$section_id'";
             $result = $mysqli->query($query) or die("getting emulator failed");
             $query_data   = $result->fetch_array(MYSQLI_BOTH);
             $section_name = $query_data['name'];
-        }
-        elseif ($subsection == 'Trainer') {
+        } elseif ($subsection == 'Trainer') {
             // Get the trainer option name
             $query = "SELECT name FROM trainer_option WHERE id = '$section_id'";
             $result = $mysqli->query($query) or die("getting trainer option failed");
             $query_data   = $result->fetch_array(MYSQLI_BOTH);
             $section_name = $query_data['name'];
-        }
-        elseif ($subsection == 'Memory') {
+        } elseif ($subsection == 'Memory') {
             // Get the memory amount
             $query = "SELECT memory FROM memory WHERE id = '$section_id'";
             $result = $mysqli->query($query) or die("getting memory amount failed");
             $query_data   = $result->fetch_array(MYSQLI_BOTH);
             $section_name = $query_data['memory'];
-        }
-        elseif ($subsection == 'Tos') {
+        } elseif ($subsection == 'Tos') {
             // Get the tos amount
             $query = "SELECT name FROM tos WHERE id = '$section_id'";
             $result = $mysqli->query($query) or die("getting tos version failed");
             $query_data   = $result->fetch_array(MYSQLI_BOTH);
             $section_name = $query_data['name'];
-        }
-        elseif ($subsection == 'Protection') {
+        } elseif ($subsection == 'Protection') {
             // Get the protection type
             $query = "SELECT name FROM copy_protection WHERE id = '$section_id'";
             $result = $mysqli->query($query) or die("getting copy protection failed");
             $query_data   = $result->fetch_array(MYSQLI_BOTH);
             $section_name = $query_data['name'];
-        }
-        elseif ($subsection == 'Disk Protection') {
+        } elseif ($subsection == 'Disk Protection') {
             // Get the protection type
             $query = "SELECT name FROM disk_protection WHERE id = '$section_id'";
             $result = $mysqli->query($query) or die("getting disk protection failed");
             $query_data   = $result->fetch_array(MYSQLI_BOTH);
             $section_name = $query_data['name'];
-        }
-        elseif ($subsection == 'Enhancement') {
+        } elseif ($subsection == 'Enhancement') {
             // Get the Enhancement
             $query = "SELECT name FROM enhancement WHERE id = '$section_id'";
             $result = $mysqli->query($query) or die("getting enhancement failed");
             $query_data   = $result->fetch_array(MYSQLI_BOTH);
             $section_name = $query_data['name'];
-        }
-        elseif ($subsection == 'Media Type') {
+        } elseif ($subsection == 'Media Type') {
             // Get the Enhancement
             $query = "SELECT name FROM media_type WHERE id = '$section_id'";
             $result = $mysqli->query($query) or die("getting media type failed");
             $query_data   = $result->fetch_array(MYSQLI_BOTH);
             $section_name = $query_data['name'];
-        }
-        elseif ($subsection == 'Media Scan Type') {
+        } elseif ($subsection == 'Media Scan Type') {
             // Get the Enhancement
             $query = "SELECT name FROM media_scan_type WHERE id = '$section_id'";
             $result = $mysqli->query($query) or die("getting media type failed");
-        }
-        elseif ($subsection == 'Sound hardware') {
+        } elseif ($subsection == 'Sound hardware') {
             // Get the the hardware
             $query = "SELECT name FROM sound_hardware WHERE id = '$section_id'";
             $result = $mysqli->query($query) or die("getting sound hardware failed");
+            $query_data   = $result->fetch_array(MYSQLI_BOTH);
+            $section_name = $query_data['name'];
+        } elseif ($subsection == 'Progress System') {
+            // Get the the system
+            $query = "SELECT name FROM game_progress_system WHERE id = '$section_id'";
+            $result = $mysqli->query($query) or die("getting progress system failed");
             $query_data   = $result->fetch_array(MYSQLI_BOTH);
             $section_name = $query_data['name'];
         }
@@ -1619,24 +1723,27 @@ function create_log_entry($section, $section_id, $subsection, $subsection_id, $a
 
     //Everything we do for GAME RELEASES
     if ($section == 'Game Release') {
-
         //  get the release name
         $query_game = "SELECT game_name FROM game WHERE game_id = '$section_id'";
         $result = $mysqli->query($query_game) or die("getting name failed");
         $query_data   = $result->fetch_array(MYSQLI_BOTH);
         $section_name = $query_data['game_name'];
 
-        if ($subsection == 'Game Release' OR $subsection == 'Release Info' OR $subsection == 'Release AKA' OR $subsection == 'Compatibility' OR $subsection == 'Distributor'
-            OR $subsection == 'Scene' or $subsection == 'Memory Enhancement' or $subsection == 'Minimum Memory' or $subsection == 'Incompatible Memory' or $subsection == 'Incompatible TOS'
-            or $subsection == 'Protection' or $subsection == 'Language' or $subsection == 'System Enhancement' or $subsection == 'Copy Protection' or $subsection == 'Disk Protection' or $subsection == 'Media'
-            OR $subsection == 'Dump' OR $subsection == 'Media Scan') {
+        if ($subsection == 'Game Release' or $subsection == 'Release Info' or $subsection == 'Release AKA'
+            or $subsection == 'Compatibility' or $subsection == 'Distributor'
+            or $subsection == 'Scene' or $subsection == 'Memory Enhancement' or $subsection == 'Minimum Memory'
+            or $subsection == 'Incompatible Memory' or $subsection == 'Incompatible TOS'
+            or $subsection == 'Protection' or $subsection == 'Language' or $subsection == 'System Enhancement'
+            or $subsection == 'Copy Protection' or $subsection == 'Disk Protection' or $subsection == 'Media'
+            or $subsection == 'Dump' or $subsection == 'Media Scan' or $subsection == "Scan") {
             $subsection_name = $section_name;
         }
 
         if ($subsection == 'Distributor') {
             // get the distributor name
             $query_distributor = "SELECT * FROM pub_dev
-                                  LEFT JOIN game_release_distributor ON (pub_dev.pub_dev_id = game_release_distributor.pub_dev_id)
+                                  LEFT JOIN game_release_distributor
+                                  ON (pub_dev.pub_dev_id = game_release_distributor.pub_dev_id)
                                   WHERE pub_dev.pub_dev_id = '$subsection_id'";
             $result = $mysqli->query($query_distributor) or die("getting name failed");
             $query_data   = $result->fetch_array(MYSQLI_BOTH);
@@ -1648,5 +1755,8 @@ function create_log_entry($section, $section_id, $subsection, $subsection_id, $a
     $section_name    = $mysqli->real_escape_string($section_name);
     $subsection_name = $mysqli->real_escape_string($subsection_name);
 
-    $sql_log = $mysqli->query("INSERT INTO change_log (section, section_id, section_name, sub_section, sub_section_id, sub_section_name, user_id, action, timestamp) VALUES ('$section', '$section_id', '$section_name', '$subsection', '$subsection_id', '$subsection_name', '$user_id', '$action', '$log_time')") or die("Couldn't insert change log into database");
+    $sql_log = $mysqli->query("INSERT INTO change_log
+        (section, section_id, section_name, sub_section, sub_section_id, sub_section_name, user_id, action, timestamp)
+        VALUES ('$section', '$section_id', '$section_name', '$subsection', '$subsection_id', '$subsection_name',
+        '$user_id', '$action', '$log_time')") or die("Couldn't insert change log into database");
 }

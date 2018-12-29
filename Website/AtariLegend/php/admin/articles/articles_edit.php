@@ -45,7 +45,8 @@ while ($authors = $sql_author->fetch_array(MYSQLI_BOTH)) {
 }
 
 //get the types
-$sql_types = $mysqli->query("SELECT article_type_id,article_type FROM article_type") or die("Database error - getting the article types");
+$sql_types = $mysqli->query("SELECT article_type_id,article_type FROM article_type")
+    or die("Database error - getting the article types");
 
 while ($article_types = $sql_types->fetch_array(MYSQLI_BOTH)) {
     $smarty->append('article_types', array(
@@ -74,8 +75,9 @@ while ($article = $sql_article->fetch_array(MYSQLI_BOTH)) {
 
 //Let's get the screenshots for the article
 $sql_screenshots = $mysqli->query("SELECT * FROM screenshot_article
-                                  LEFT JOIN screenshot_main on ( screenshot_article.screenshot_id = screenshot_main.screenshot_id )
-                                  WHERE screenshot_article.article_id = '$article_id' ORDER BY screenshot_article.screenshot_id ASC") or die("Database error - getting screenshots & comments");
+    LEFT JOIN screenshot_main on ( screenshot_article.screenshot_id = screenshot_main.screenshot_id )
+    WHERE screenshot_article.article_id = '$article_id' ORDER BY screenshot_article.screenshot_id ASC")
+    or die("Database error - getting screenshots & comments");
 
 //get the number of screenshots in the archive
 $v_screeshots = $sql_screenshots->num_rows;
@@ -91,7 +93,8 @@ while ($screenshots = $sql_screenshots->fetch_array(MYSQLI_BOTH)) {
 
     //We need to get the comments with each screenshot
     $sql_comments = $mysqli->query("SELECT * FROM article_comments
-                                    WHERE screenshot_article_id  = $screenshots[screenshot_article_id]") or die("Database error - getting screenshots comments");
+        WHERE screenshot_article_id  = $screenshots[screenshot_article_id]")
+        or die("Database error - getting screenshots comments");
 
     $comments = $sql_comments->fetch_array(MYSQLI_BOTH);
 

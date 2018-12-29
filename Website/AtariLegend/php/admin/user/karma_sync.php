@@ -114,7 +114,8 @@ while (list($user_id, $user_name, $karma_value) = $sql_user->fetch_array(MYSQLI_
     $karma_value = $karma_value + ($nr_news * $value_news);
     $karma_value = $karma_value + ($nr_downloads * $value_gamedownload);
 
-    $update = $mysqli->query("UPDATE users SET karma='$karma_value' WHERE user_id='$user_id'") or die("Failed to update karma");
+    $update = $mysqli->query("UPDATE users SET karma='$karma_value' WHERE user_id='$user_id'")
+        or die("Failed to update karma");
 }
 
 $sql_user2 = $mysqli->query("SELECT user_id,userid,karma FROM users ORDER BY karma DESC");

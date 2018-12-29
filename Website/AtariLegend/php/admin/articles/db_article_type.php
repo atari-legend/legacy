@@ -19,11 +19,19 @@ include("../../config/admin_rights.php");
 
 //update the article type
 if (isset($article_type_id) and isset($action) and $action == 'update') {
-    $sdbquery = $mysqli->query("UPDATE article_type SET article_type = '$article_type_name' WHERE article_type_id = $article_type_id") or die("Couldn't Update the article type");
+    $sdbquery = $mysqli->query("UPDATE article_type SET article_type = '$article_type_name'
+        WHERE article_type_id = $article_type_id") or die("Couldn't Update the article type");
 
     $_SESSION['edit_message'] = "Article type succesfully updated";
 
-    create_log_entry('Article type', $article_type_id, 'Article type', $article_type_id, 'Update', $_SESSION['user_id']);
+    create_log_entry(
+        'Article type',
+        $article_type_id,
+        'Article type',
+        $article_type_id,
+        'Update',
+        $_SESSION['user_id']
+    );
 
     header("Location: ../articles/article_type_edit.php?article_type_id=$article_type_id");
 }
@@ -35,9 +43,17 @@ if (isset($article_type_id) and isset($action) and $action == 'delete_article_ty
     if ($sql->num_rows > 0) {
         $_SESSION['edit_message'] = 'Deletion failed - This article type is linked to an article';
     } else {
-        create_log_entry('Article type', $article_type_id, 'Article type', $article_type_id, 'Delete', $_SESSION['user_id']);
+        create_log_entry(
+            'Article type',
+            $article_type_id,
+            'Article type',
+            $article_type_id,
+            'Delete',
+            $_SESSION['user_id']
+        );
 
-        $mysqli->query("DELETE FROM article_type WHERE article_type_id = $article_type_id") or die("Failed to delete article type");
+        $mysqli->query("DELETE FROM article_type WHERE article_type_id = $article_type_id")
+            or die("Failed to delete article type");
 
         $_SESSION['edit_message'] = "Article type succesfully deleted";
     }
@@ -50,11 +66,19 @@ if (isset($action) and $action == 'insert_type') {
         $_SESSION['edit_message'] = "Please fill in a article type name";
         header("Location: ../articles/article_type.php");
     } else {
-        $sql_article_type = $mysqli->query("INSERT INTO article_type (article_type) VALUES ('$type_name')") or die("error inserting article type");
+        $sql_article_type = $mysqli->query("INSERT INTO article_type (article_type) VALUES ('$type_name')")
+            or die("error inserting article type");
 
         $new_article_type_id = $mysqli->insert_id;
 
-        create_log_entry('Article type', $new_article_type_id, 'Article type', $new_article_type_id, 'Insert', $_SESSION['user_id']);
+        create_log_entry(
+            'Article type',
+            $new_article_type_id,
+            'Article type',
+            $new_article_type_id,
+            'Insert',
+            $_SESSION['user_id']
+        );
 
         $_SESSION['edit_message'] = "article type succesfully inserted";
         header("Location: ../articles/article_type.php");

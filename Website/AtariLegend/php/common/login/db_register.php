@@ -25,16 +25,19 @@ require_once __DIR__."/../../common/DAO/ChangeLogDAO.php" ;
 $changeLogDao = new \AL\Common\DAO\ChangeLogDAO($mysqli);
 
 if (isset($action) and $action == 'confirm') {
-    //when the confirmation email link is pressed we enter this part of the code. We check if the user exists and set the account to active.
-    //Then we auto log in!
+    //when the confirmation email link is pressed we enter this part of the code. We check if the user exists and set
+    //the account to active. Then we auto log in!
 
     if (isset($_GET['usn']) && !empty($_GET['usn']) and isset($_GET['pwd']) && !empty($_GET['pwd'])) {
         // Verify data
-        $query_user = $mysqli->query("SELECT * FROM users WHERE userid='$_GET[usn]' AND password='$_GET[pwd]' AND inactive='1'") or die(mysql_error());
+        $query_user = $mysqli->query("SELECT * FROM users WHERE userid='$_GET[usn]'
+            AND password='$_GET[pwd]'
+            AND inactive='1'") or die(mysql_error());
         $match  = $query_user->num_rows;
 
         if ($match > 0) {
-            $query_update_user = $mysqli->query("UPDATE users SET inactive = '0' WHERE userid = '$_GET[usn]'") or die("Couldn't Update user table");
+            $query_update_user = $mysqli->query("UPDATE users SET inactive = '0' WHERE userid = '$_GET[usn]'")
+                or die("Couldn't Update user table");
 
             $_SESSION['edit_message'] = "Account succesfully updated - Please log in";
             header("Location: ../../main/front/front.php");
@@ -48,7 +51,8 @@ if (isset($action) and $action == 'confirm') {
     }
 } else {
     // Make sure all fields were entered
-    if (!$_POST['userid'] || !$_POST['password'] || !$_POST['password_again'] || !$_POST['email'] || !isset($_POST['accept_license']) || $_POST['accept_license'] !== "true") {
+    if (!$_POST['userid'] || !$_POST['password'] || !$_POST['password_again']
+        || !$_POST['email'] || !isset($_POST['accept_license']) || $_POST['accept_license'] !== "true") {
         $_SESSION['edit_message'] = "You didn't fill in a required field.";
         header("Location: ../../main/front/front.php?action=register");
     } else {
@@ -90,11 +94,19 @@ if (isset($action) and $action == 'confirm') {
                             $user_name = $mysqli->real_escape_string($_POST['userid']);
                             $md5pass = hash('md5', $_POST['password']); // The md5 hashed password.
                             $sha512 = hash('sha512', $_POST['password']); // The hashed password.
-                            $random_salt = hash('sha512', uniqid(mt_rand(1, mt_getrandmax()), true));//create random salt
+                            $random_salt = hash(
+                                'sha512',
+                                uniqid(mt_rand(1, mt_getrandmax()), true)
+                            ); //create random salt
                             $update_password = hash('sha512', $sha512 . $random_salt); // Create salted password
                             $timestamp = time();
 
-                            $sdbquery = $mysqli->query("INSERT INTO users (userid, password, sha512_password, salt, email, permission, join_date, last_visit, user_website, user_fb, user_twitter, user_af, inactive) VALUES ('$user_name', '$md5pass', '$update_password', '$random_salt', '$email', 2, '$timestamp', '$timestamp', '$website', '$fb_profile', '$twitter_profile', '$af_profile', '1')") or die("Couldn't insert user into users table");
+                            $sdbquery = $mysqli->query("INSERT INTO users (
+                                userid, password, sha512_password, salt, email, permission, join_date,
+                                last_visit, user_website, user_fb, user_twitter, user_af, inactive)
+                                VALUES ('$user_name', '$md5pass', '$update_password', '$random_salt',
+                                '$email', 2, '$timestamp', '$timestamp', '$website', '$fb_profile', '$twitter_profile',
+                                '$af_profile', '1')") or die("Couldn't insert user into users table");
                             $new_user_id = $mysqli->insert_id;
 
                             //Let's create an email for verification
@@ -110,10 +122,10 @@ if (isset($action) and $action == 'confirm') {
 
                             // Create Email
 
-                            //We need to comment out this comment to have it to work from server, on localhost it runs with this command
-                            //$mail->isSMTP(); // Set mailer to use SMTP
+                            //We need to comment out this comment to have it to work from server, on localhost it runs
+                            //with this command $mail->isSMTP(); // Set mailer to use SMTP
 
-                            $mail->SMTPDebug  = 1;                            // enables SMTP debug information (for testing)
+                            $mail->SMTPDebug  = 1;                      // enables SMTP debug information (for testing)
                             // 1 = errors and messages
                             // 2 = messages only
                             //$mail->Host = 'smtp.live.com';                    // Specify main and backup SMTP servers
@@ -136,7 +148,10 @@ if (isset($action) and $action == 'confirm') {
                             $mail->Subject = 'Atarilegend - Account confirmation';
 
                             // Mail them their key
-                            $mailbody = "Dear user,\n\nIf this e-mail does not apply to you please ignore it. Please activate your account at www.atarilegend.com\n\nby clicking the link below. If you cannot click it, please paste it into your web browser's address bar.\n\n" . $pwrurl . "\n\nThanks,\nTEAM AL";
+                            $mailbody = "Dear user,\n\nIf this e-mail does not apply to you please ignore it. "
+                                ."Please activate your account at www.atarilegend.com\n\nby clicking the link below. "
+                                ."If you cannot click it, please paste it into your web browser's address bar.\n\n"
+                                . $pwrurl . "\n\nThanks,\nTEAM AL";
 
                             $mail->Body    = $mailbody;
 
@@ -165,7 +180,8 @@ if (isset($action) and $action == 'confirm') {
                                 )
                             );
 
-                            $_SESSION['edit_message'] = "An email was sent to you. Please follow the link to activate the account";
+                            $_SESSION['edit_message'] = "An email was sent to you. Please follow the link to activate "
+                                ."the account";
                             header("Location: ../../main/front/front.php");
                         }
                     }

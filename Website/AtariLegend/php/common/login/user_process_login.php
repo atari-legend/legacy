@@ -46,12 +46,12 @@ if (isset($_POST['userid'], $_POST['p'])) {
             //$params = session_get_cookie_params();
 
             // Delete the actual cookie.
-            //setcookie("cooksession", session_id(), time()+60*60*24*100, $params["path"], $params["domain"], $params["secure"], $params["httponly"]);
             setcookie("cooksession", session_id(), time()+60*60*24*100, "/");
             $session_id = session_id();
 
             //update the table with the session id
-            $sdbquery = $mysqli->query("UPDATE users SET session = '$session_id' WHERE userid = '$userid'") or die("Couldn't Update user table with session id");
+            $sdbquery = $mysqli->query("UPDATE users SET session = '$session_id' WHERE userid = '$userid'")
+                or die("Couldn't Update user table with session id");
             ;
         }
         //header('Location: ../../main/front/front.php');

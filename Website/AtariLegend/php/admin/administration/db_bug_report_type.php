@@ -16,7 +16,8 @@ include("../../config/admin_rights.php");
 
 //update the download options
 if (isset($type_id) and isset($action) and $action == 'update') {
-    $sdbquery = $mysqli->query("UPDATE bug_report_type SET bug_report_type = '$type_name' WHERE bug_report_type_id = $type_id") or die("Couldn't Update the bug report type table");
+    $sdbquery = $mysqli->query("UPDATE bug_report_type SET bug_report_type = '$type_name'
+        WHERE bug_report_type_id = $type_id") or die("Couldn't Update the bug report type table");
 
     $_SESSION['edit_message'] = "Type succesfully updated";
 
@@ -34,7 +35,8 @@ if (isset($type_id) and isset($action) and $action == 'delete_type') {
     } else {
         create_log_entry('Bug type', $type_id, 'Bug type', $type_id, 'Delete', $_SESSION['user_id']);
 
-        $mysqli->query("DELETE FROM bug_report_type WHERE bug_report_type_id = $type_id") or die("Failed to delete type");
+        $mysqli->query("DELETE FROM bug_report_type WHERE bug_report_type_id = $type_id")
+            or die("Failed to delete type");
 
         $_SESSION['edit_message'] = "Type succesfully deleted";
     }
@@ -46,7 +48,8 @@ if (isset($action) and $action == 'insert_type') {
         $_SESSION['edit_message'] = "Please fill in a type name";
         header("Location: ../administration/bug_report_type.php");
     } else {
-        $sdbquery = $mysqli->query("INSERT INTO bug_report_type (bug_report_type) VALUES ('$type_name')") or die("error inserting type");
+        $sdbquery = $mysqli->query("INSERT INTO bug_report_type (bug_report_type) VALUES ('$type_name')")
+            or die("error inserting type");
 
         $new_type_id = $mysqli->insert_id;
 
