@@ -7,7 +7,7 @@ env:
         - secure: O9ssVSQ+s0zyKXUvANhiqfSj4LzZHyUEJGKFoBHqt0m/lgiKE5J+8PuPQs+0NqgK83rIZtJx7CPphZmToFgeAy9TBphTAj41xpjc45VNhPfi3goBaV/9qUaiYyiqChNc++9UABKyiITofK8+ovYEj6egcXNwn9Qaonia57C8EoX0qAfil115RxiveBaiW+CbvNM+qkdA+3YOosRrqkxw5lra5SgXNwX8lS9cH+ryohK4CjvFAgPADWxIuuxdq04wEiFkcV8aSnH8CCb7W1oHEy2jut3xhyqCR7w96AXFARxgU/nkuZCMSznQZCXLKT18oEY2//bCC8ahCTxkWtVXSQ==
         # Contains PROD_DEPLOY_HOST, PROD_DEPLOY_USER, PROD_DEPLOY_PATH
         # variables encrypted via Shippable
-        - secure: JXo6bK6Eb3UTUQlD0zPm6C+xgc/ksqguzJLdty9FOGQlhWZ5nqEAG3Wv5gyUo/S3CIZMBop3lbmO/PbPexzi3DzLrAs9dM8UVUSea5SZvHLazGDVBuxdc/t+lii5r6m0+hUbMviN/U9P6Z4qJOqj2ShlwBgpJ+dgHZLbbpkd9R1PFxzb5ENaO1N4I5qvFfjn/AzsF6IR0SAaKrOTgcmoPmgNkpaMbfi+avsiPkR7+WcA514MiTlmvbiu8DXKeZFKmwp/JXljZ+JC+3ZPTM78tkR2rxli+7eta+wH6sMzIcaHOTl1kvtUe3LfWfI07XQXiz+yPxuTpsOBo8dWsnJPzQ==
+        - secure: YOIoQBRIe8qAqprC2hmY1xK+oz1OUSD7HQleZV05C/leXYnl29km5tNGT4u8IV9OgBSBR+U/pT12wFEMtdEUB6+1VsjrPGhiSy7ouJjTC4ZrRjs83pXNo8uRvkcof1EAQb0U4vI+9nWUG1jSBRysu2yvwLGZ+oYGG32e7SHyg5YuwIuf/djpxc2m+XJb+rAubM1eoYKkFuLB4yO7IJvjgx3HSS/HPwaT71/XfnYJrIDxKq0PIG8hwOO9rcY4jOgXf48OfP3ooVu0e0B9D8BiQCE7GoGx0pLcvSeqg5UnBE9ikh6lpstpowbbKrfOK4faQqSK9kQ2n2YBlfhaVw7Ynw==
 
 build:
     # Build our custom Docker image with NodeJS + PHP as a pre step
