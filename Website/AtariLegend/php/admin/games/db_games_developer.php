@@ -72,7 +72,8 @@ switch ($action) {
             $game_id,
             $pub_dev_id,
             $developer_role_id,
-            $new_developer_role_id);
+            $new_developer_role_id
+        );
 
         $changeLogDao->insertChangeLog(
             new \AL\Common\Model\Database\ChangeLog(
@@ -93,4 +94,3 @@ switch ($action) {
 }
 
 header("Location: games_detail.php?game_id=$game_id#gd_developers");
-?>

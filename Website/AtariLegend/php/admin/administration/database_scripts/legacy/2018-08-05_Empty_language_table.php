@@ -19,8 +19,8 @@ WHERE table_schema = '$db_databasename'
 AND table_name = 'language'";
 
 // Database change
-$database_update_sql = "TRUNCATE TABLE language"; 
- 
+$database_update_sql = "TRUNCATE TABLE language";
+
 // If the update should auto execute without user interaction set to "yes".
 $database_autoexecute = "yes";
 

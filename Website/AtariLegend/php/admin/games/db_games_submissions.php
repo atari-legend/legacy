@@ -33,10 +33,11 @@ if ($action == "update_submission") {
         // This is where the submissions get "sent" to "done"
         //****************************************************************************************
         if (isset($submit_id)) {
-            $commentquery = $mysqli->query("UPDATE game_submitinfo SET game_done = '1' WHERE game_submitinfo_id='$submit_id'") or die ("can't update submission");
-            
+            $commentquery = $mysqli->query("UPDATE game_submitinfo SET game_done = '1'
+                WHERE game_submitinfo_id='$submit_id'") or die("can't update submission");
+
             //this means we are in user search mode (clicked on the user submissions)
-            if (isset($user_id)){
+            if (isset($user_id)) {
                 list($user_id) = $sql_user->fetch_array(MYSQLI_BOTH);
                 $karma_action = "game_submission";
 
@@ -49,16 +50,16 @@ if ($action == "update_submission") {
 
                 UserKarma($user_id, $karma_action);
                 $user_id = null;
-            } 
+            }
         }
 
         $message = "Submission set to done status - transferred to done list";
 
         create_log_entry('Games', $submit_id, 'Submission', $submit_id, 'Update', $_SESSION['user_id']);
-    }else{
+    } else {
         $message = "You don't have permission to perform this task";
     }
-    
+
     echo $message;
     mysqli_close($mysqli);
 }
@@ -73,14 +74,16 @@ if ($action == "delete_submission") {
     if ($_SESSION['permission']==1 or $_SESSION['permission']=='1') {
         if (isset($submit_id)) {
             //Let's first check if this submission has screenshots.
-            $query_submit_screenshot = $mysqli->query("SELECT * FROM screenshot_game_submitinfo WHERE game_submitinfo_id = " . $submit_id . "") or die("something is wrong with mysqli of submissions screenshots");
+            $query_submit_screenshot = $mysqli->query("SELECT * FROM screenshot_game_submitinfo
+                WHERE game_submitinfo_id = " . $submit_id . "")
+                or die("something is wrong with mysqli of submissions screenshots");
 
             while ($sql_submit_screenshot = $query_submit_screenshot->fetch_array(MYSQLI_BOTH)) {
                 $screenshot_id = $sql_submit_screenshot['screenshot_id'];
 
                 //get the extension
                 $SCREENSHOT = $mysqli->query("SELECT * FROM screenshot_main
-                                          WHERE screenshot_id = '$screenshot_id'") or die("Database error - selecting screenshots");
+                    WHERE screenshot_id = '$screenshot_id'") or die("Database error - selecting screenshots");
 
                 $screenshotrow  = $SCREENSHOT->fetch_array(MYSQLI_BOTH);
                 $screenshot_ext = $screenshotrow['imgext'];
@@ -98,14 +101,15 @@ if ($action == "delete_submission") {
 
             create_log_entry('Games', $submit_id, 'Submission', $submit_id, 'Delete', $_SESSION['user_id']);
 
-            $sql = $mysqli->query("DELETE FROM game_submitinfo WHERE game_submitinfo_id = '$submit_id'") or die("couldn't delete game_submissions quote");
-            
+            $sql = $mysqli->query("DELETE FROM game_submitinfo WHERE game_submitinfo_id = '$submit_id'")
+                or die("couldn't delete game_submissions quote");
+
             $message = "Submission deleted";
         }
-    }else{
+    } else {
         $message = "You don't have permission to perform this task";
     }
-    
+
     echo $message;
     mysqli_close($mysqli);
 }
@@ -120,14 +124,18 @@ if ($action == "move_submission_tocomment") {
 
     if ($_SESSION['permission']==1 or $_SESSION['permission']=='1') {
         if (isset($submit_id)) {
-            //Let's first check if this submission has screenshots. If so, it is not suited for movement to comment section!
-            $query_submit_screenshot = $mysqli->query("SELECT * FROM screenshot_game_submitinfo WHERE game_submitinfo_id = " . $submit_id . "") or die("something is wrong with mysqli of submissions screenshots");
+            //Let's first check if this submission has screenshots.
+            //If so, it is not suited for movement to comment section!
+            $query_submit_screenshot = $mysqli->query("SELECT * FROM screenshot_game_submitinfo
+                WHERE game_submitinfo_id = " . $submit_id . "")
+                or die("something is wrong with mysqli of submissions screenshots");
             $v_rows = $query_submit_screenshot->num_rows;
 
             if ($v_rows > 0) {
                 $message = "Submission has screenshots and is not suited for the comment section";
             } else {
-                $query_submit = $mysqli->query("SELECT * FROM game_submitinfo WHERE game_submitinfo_id = " . $submit_id . "") or die("something is wrong with mysqli");
+                $query_submit = $mysqli->query("SELECT * FROM game_submitinfo
+                    WHERE game_submitinfo_id = " . $submit_id . "") or die("something is wrong with mysqli");
                 $sql_submit = $query_submit->fetch_array(MYSQLI_BOTH) or die("something is wrong with mysqli2");
 
                 $submit_text   = $sql_submit['submit_text'];
@@ -136,23 +144,27 @@ if ($action == "move_submission_tocomment") {
                 $sub_user_id   = $sql_submit['user_id'];
                 $sub_game_id   = $sql_submit['game_id'];
 
-                $sql = $mysqli->query("INSERT INTO comments (comment,timestamp,user_id) VALUES ('$submit_text','$sub_timestamp','$sub_user_id')") or die("something is wrong with INSERT mysql3");
+                $sql = $mysqli->query("INSERT INTO comments (comment,timestamp,user_id)
+                    VALUES ('$submit_text','$sub_timestamp','$sub_user_id')")
+                    or die("something is wrong with INSERT mysql3");
 
                 $new_comment_id = $mysqli->insert_id;
 
-                $sql = $mysqli->query("INSERT INTO game_user_comments (game_id,comment_id) VALUES ('$sub_game_id',LAST_INSERT_ID())") or die("something is wrong with INSERT mysql4");
+                $sql = $mysqli->query("INSERT INTO game_user_comments (game_id,comment_id)
+                    VALUES ('$sub_game_id',LAST_INSERT_ID())") or die("something is wrong with INSERT mysql4");
 
-                $sql = $mysqli->query("DELETE FROM game_submitinfo WHERE game_submitinfo_id = " . $submit_id . "") or die("couldn't delete game_submissions quote");
+                $sql = $mysqli->query("DELETE FROM game_submitinfo WHERE game_submitinfo_id = " . $submit_id . "")
+                    or die("couldn't delete game_submissions quote");
 
                 $message = "Submission converted to game comment";
 
                 create_log_entry('Games', $new_comment_id, 'Comment', $new_comment_id, 'Insert', $_SESSION['user_id']);
             }
-        } 
+        }
     } else {
         $message = "You don't have permission to perform this task";
     }
-    
+
     echo $message;
     mysqli_close($mysqli);
 }

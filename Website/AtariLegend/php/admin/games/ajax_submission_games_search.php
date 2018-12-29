@@ -8,7 +8,7 @@
  *
  *   Id: ajax_submission_games_search.php 31/05/2018 ST Graveyard - creation of file
  ***************************************************************************/
- 
+
 include("../../config/common.php");
 include("../../config/admin.php");
 require_once __DIR__."/../../lib/Db.php";
@@ -23,8 +23,7 @@ $smarty->assign("nr_submission", $GameSubmissionDAO->getGameSubmissionCount());
 
 $date = date_to_timestamp($submsission_searchYear, $submsission_searchMonth, $submsission_searchDay);
 
-if ( $author_search == '-' )
-{ 
+if ($author_search == '-') {
 } else {
     $user_id = $author_search;
 }
@@ -39,15 +38,22 @@ if (isset($done) and $done == '1') {
     $done = '2'; //only open is flagged
 }
 
-$submissions = $GameSubmissionDAO->getLatestSubmissions(isset($user_id) ? $user_id : null, isset($date) ? $date : null, isset($action) ? $action : null, isset($done) ? $done : null);
+$submissions = $GameSubmissionDAO->getLatestSubmissions(
+    isset($user_id) ? $user_id : null,
+    isset($date) ? $date : null,
+    isset($action) ? $action : null,
+    isset($done) ? $done : null
+);
 $smarty->assign('submission', $submissions);
 
 //check if there are screenshot added to the submission
 foreach ($submissions as $submissionId) {
     $submitinfo_id = $submissionId->getSubmissionId();
     $query_screenshots_submission = $mysqli->query("SELECT * FROM screenshot_main
-                                        LEFT JOIN screenshot_game_submitinfo ON (screenshot_main.screenshot_id = screenshot_game_submitinfo.screenshot_id)
-                                        WHERE screenshot_game_submitinfo.game_submitinfo_id = '$submitinfo_id'") or die("Error - Couldn't query submitinfo screenshots");
+        LEFT JOIN screenshot_game_submitinfo
+        ON (screenshot_main.screenshot_id = screenshot_game_submitinfo.screenshot_id)
+        WHERE screenshot_game_submitinfo.game_submitinfo_id = '$submitinfo_id'")
+        or die("Error - Couldn't query submitinfo screenshots");
 
     while ($sql_screenshots_submission = $query_screenshots_submission->fetch_array(MYSQLI_BOTH)) {
         $new_path = $game_submit_screenshot_path;
@@ -65,8 +71,8 @@ foreach ($submissions as $submissionId) {
 
 //Get the authors for submission search
 $sql_author = $mysqli->query("SELECT game_submitinfo.user_id, users.userid FROM game_submitinfo
-                              LEFT JOIN users ON ( game_submitinfo.user_id = users.user_id ) 
-                              GROUP BY game_submitinfo.user_id 
+                              LEFT JOIN users ON ( game_submitinfo.user_id = users.user_id )
+                              GROUP BY game_submitinfo.user_id
                               ORDER BY users.userid ASC") or die("Database error - getting members name");
 
 while ($authors = $sql_author->fetch_array(MYSQLI_BOTH)) {

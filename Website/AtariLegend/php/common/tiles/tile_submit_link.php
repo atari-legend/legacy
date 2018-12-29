@@ -5,7 +5,6 @@ require_once __DIR__."/../DAO/ValidateLinkDAO.php";
 if (isset($name)
     && isset($url)
     && isset($description)) {
-
     $dao = new AL\Common\DAO\ValidateLinkDAO($mysqli);
     $id = $dao->addValidateLink($name, $url, $description);
 

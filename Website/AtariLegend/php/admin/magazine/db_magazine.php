@@ -24,7 +24,8 @@ if (isset($action) and $action == "insert_magazine") {
     // This is where we insert the magazine name into the database
     //****************************************************************************************
 
-    $mysqli->query("INSERT INTO magazine (magazine_name) VALUES ('$newmag')") or die("Unable to insert magazine into database");
+    $mysqli->query("INSERT INTO magazine (magazine_name) VALUES ('$newmag')")
+        or die("Unable to insert magazine into database");
 
     // Redirect back to previous page
     header("Location: ../magazine/magazine_add.php");
@@ -36,7 +37,8 @@ if (isset($action) and $action == "add_issue") {
     //****************************************************************************************
 
     if (isset($newissue) and isset($magazine_id)) {
-        $mysqli->query("INSERT INTO magazine_issue (magazine_issue_nr,magazine_id) VALUES ('$newissue','$magazine_id')");
+        $mysqli->query("INSERT INTO magazine_issue (magazine_issue_nr,magazine_id)
+            VALUES ('$newissue','$magazine_id')");
 
         mysqli_close($mysqli);
     }
@@ -50,11 +52,14 @@ if (isset($action) and $action == "delete_issue") {
     // This is where we delete issue
     //****************************************************************************************
 
-    $sqldel = $mysqli->query("SELECT * FROM magazine_issue WHERE magazine_issue_id='$magazine_issue_id'") or die("Error retriving magazines");
+    $sqldel = $mysqli->query("SELECT * FROM magazine_issue WHERE magazine_issue_id='$magazine_issue_id'")
+        or die("Error retriving magazines");
     $fetchdel = $sqldel->fetch_array(MYSQLI_BOTH);
 
-    $do_delete = $mysqli->query("DELETE FROM magazine_issue WHERE magazine_issue_id='$magazine_issue_id'") or die("couldn't delete issue!");
-    $do_delete = $mysqli->query("DELETE FROM magazine_game WHERE magazine_issue_id='$magazine_issue_id'") or die("couldn't delete score!");
+    $do_delete = $mysqli->query("DELETE FROM magazine_issue WHERE magazine_issue_id='$magazine_issue_id'")
+        or die("couldn't delete issue!");
+    $do_delete = $mysqli->query("DELETE FROM magazine_game WHERE magazine_issue_id='$magazine_issue_id'")
+        or die("couldn't delete score!");
 
     //remove potential coverscan
 
@@ -76,10 +81,12 @@ if (isset($action) and $action == "coverscan_upload") {
         $imgext = "jpg";
 
         // Insert the image extention to the database.
-        $sdbquery = $mysqli->query("UPDATE magazine_issue SET magazine_issue_imgext='$imgext' WHERE magazine_issue_id='$magazine_issue_id'") or die("ERROR! Couldn't insert extension");
+        $sdbquery = $mysqli->query("UPDATE magazine_issue SET magazine_issue_imgext='$imgext'
+            WHERE magazine_issue_id='$magazine_issue_id'") or die("ERROR! Couldn't insert extension");
 
         // Rename the uploaded file to its issue autoincrement number and move it to its proper place.
-        $file_data = rename($_FILES['coverscan']['tmp_name'], "$magazine_scan_path$magazine_issue_id.$imgext") or die("ERROR couldn't upload and move file!!");
+        $file_data = rename($_FILES['coverscan']['tmp_name'], "$magazine_scan_path$magazine_issue_id.$imgext")
+            or die("ERROR couldn't upload and move file!!");
 
         chmod("$magazine_scan_path$magazine_issue_id.$imgext", 0777);
     }
@@ -95,7 +102,8 @@ if (isset($action) and $action == "delete_coverscan") {
     // This is where we delete coverscans
     //****************************************************************************************
 
-    $sqldel = $mysqli->query("SELECT * FROM magazine_issue WHERE magazine_issue_id='$magazine_issue_id'") or die("Error retriving magazines");
+    $sqldel = $mysqli->query("SELECT * FROM magazine_issue WHERE magazine_issue_id='$magazine_issue_id'")
+        or die("Error retriving magazines");
     $fetchdel = $sqldel->fetch_array(MYSQLI_BOTH);
 
     //remove coverscan
@@ -104,7 +112,8 @@ if (isset($action) and $action == "delete_coverscan") {
         unlink("$magazine_scan_path$magazine_issue_id.$fetchdel[magazine_issue_imgext]");
     }
 
-    $sdbquery = $mysqli->query("UPDATE magazine_issue SET magazine_issue_imgext='' WHERE magazine_issue_id='$magazine_issue_id'") or die("ERROR! Couldn't delete extension");
+    $sdbquery = $mysqli->query("UPDATE magazine_issue SET magazine_issue_imgext=''
+        WHERE magazine_issue_id='$magazine_issue_id'") or die("ERROR! Couldn't delete extension");
 
     mysqli_close($mysqli);
 
@@ -116,7 +125,8 @@ if (isset($action) and $action == "score_delete") {
     //****************************************************************************************
     // This is where we delete review scores
     //****************************************************************************************
-    $do_delete = $mysqli->query("DELETE FROM magazine_game WHERE magazine_game_id='$magazine_game_id'") or die("couldn't delete score!");
+    $do_delete = $mysqli->query("DELETE FROM magazine_game WHERE magazine_game_id='$magazine_game_id'")
+        or die("couldn't delete score!");
 
     create_log_entry('Games', $game_id, 'Mag score', $game_id, 'Delete', $_SESSION['user_id']);
 
@@ -133,7 +143,8 @@ if (isset($action) and $action == "set_score") {
     // This is where we set review scores
     //****************************************************************************************
     if (isset($score)) {
-        $mysqli->query("INSERT INTO magazine_game (magazine_issue_id,game_id,score) VALUES ('$magazine_issue_id','$game_id','$score')") or die("Couldn't update the magazine table");
+        $mysqli->query("INSERT INTO magazine_game (magazine_issue_id,game_id,score)
+        VALUES ('$magazine_issue_id','$game_id','$score')") or die("Couldn't update the magazine table");
     }
 
     create_log_entry('Games', $game_id, 'Mag score', $game_id, 'Insert', $_SESSION['user_id']);

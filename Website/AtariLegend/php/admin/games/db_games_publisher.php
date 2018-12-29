@@ -79,7 +79,8 @@ switch ($action) {
             $continent_id,
             $game_extra_info_id,
             $new_continent_id,
-            $new_game_extra_info_id);
+            $new_game_extra_info_id
+        );
 
         $changeLogDao->insertChangeLog(
             new \AL\Common\Model\Database\ChangeLog(
@@ -106,8 +107,11 @@ switch ($action) {
             $release->getName(),
             $release->getDate(),
             $release->getLicense(),
-            ($game_extra_info_id != null && $game_extra_info_id == 1) ? \AL\Common\DAO\GameReleaseDAO::TYPE_BUDGET : $release->getType(),
-            $pub_dev_id);
+            ($game_extra_info_id != null && $game_extra_info_id == 1)
+                ? \AL\Common\DAO\GameReleaseDAO::TYPE_BUDGET
+                : $release->getType(),
+            $pub_dev_id
+        );
 
         if ($continent_id != null) {
             // The publisher had a continent_id associated to it. We need to
@@ -176,4 +180,3 @@ switch ($action) {
 }
 
 header("Location: games_detail.php?game_id=$game_id#gd_publisher_info");
-?>

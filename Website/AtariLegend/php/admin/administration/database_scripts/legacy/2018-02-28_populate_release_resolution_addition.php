@@ -17,7 +17,6 @@ while ($game_mono = $result1->fetch_array(MYSQLI_BOTH)) {
                             or die("Unable to retrieve the game_id from the game release table: ".$mysqli->error);
 
     while ($game_release = $result5->fetch_array(MYSQLI_BOTH)) {
-
         $game_release_id = $game_release['id'];
 
         // Insert mono/ST Highrez

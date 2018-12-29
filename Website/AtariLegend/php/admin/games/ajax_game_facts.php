@@ -14,9 +14,8 @@ include("../../config/common.php");
 include("../../config/admin.php");
 //include("../../config/admin_rights.php");
 
-
 if (isset($fact_id) and $action == "game_fact_edit_view") {
-     //load the fact
+    //load the fact
     $query_game_fact = $mysqli->query("SELECT * from game_fact
                                        WHERE game_fact_id = $fact_id") or die("error in query game facts");
     $query_fact = $query_game_fact->fetch_array(MYSQLI_BOTH);

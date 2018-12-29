@@ -172,6 +172,16 @@ $('#input-tags3').selectize({
                         </select>
                         <br>
                         <br>
+                        <b>Progress System</b>
+                        <br>
+                        <select name="progress_system_id" class="standard_select select_large">
+                            <option value="">-</option>
+                            {foreach from=$progress_system item=all_progress_systems}
+                                <option value="{$all_progress_systems->getId()}" {if $all_progress_systems->getId() eq $game_progress_system->getId()} selected{/if}>{$all_progress_systems->getName()}</option>
+                            {/foreach}
+                        </select>
+                        <br>
+                        <br>
                         <br>
                         <div class="basic_game_info">
                             <b>Game genres</b>&nbsp;&nbsp;
@@ -298,13 +308,53 @@ $('#input-tags3').selectize({
                         </div>
                         <br>
                         <br>
-                        <br>
                         <div class="gd_clear">
                             <input type="submit" name="valider" value="Save changes" class="secondary_button">
                         </div>
                 </form>
             </fieldset>
+
             <br>
+
+            <fieldset class="secondary_fieldset">
+                <legend class="primary_legend">Multiplayer Options</legend>
+                <div class="help-hint">
+                    Overhere you add all features regarding multiplay.
+                </div>
+                <form action="../games/db_games_detail.php" method="post" name="edit_multiplayer" class="release_editor">
+                    <input type="hidden" name="game_id" value="{$game->getId()}">
+                    <input type="hidden" name="action" value="modify_game_multiplayer">
+                    <br>
+                    <label class="input">Players (Same machine)</label>
+                    <input type="text" name="players_same" class="standard_input input_large" value="{if ($game->getPlayersSameMachine() <> 0)}{$game->getPlayersSameMachine()}{/if}">
+                    <br>
+                    <label class="input">Players (Linked machines)</label>
+                    <input type="text" name="players_other" class="standard_input input_large" value="{if ($game->getPlayersMultipleMachines() <> 0)}{$game->getPlayersMultipleMachines()}{/if}">
+                    <br>
+                    <label class="input">Type</label>
+                    <select name="multiplayer_type" class="standard_select select_large">
+                        <option value="">-</option>
+                        {foreach from=$multiplayer_types item=type}
+                            <option {if $type == $game->getMultiplayerType()}selected{/if}>{$type}</option>
+                        {/foreach}
+                    </select>
+                    <br>
+                    <label class="input">Link hardware</label>
+                    <select name="multiplayer_hardware" class="standard_select select_large">
+                        <option value="">-</option>
+                        {foreach from=$multiplayer_hardware item=hardware}
+                            <option {if $hardware == $game->getMultiplayerHardware()}selected{/if}>{$hardware}</option>
+                        {/foreach}
+                    </select>
+                    <br>
+                    <br>
+                    <div class="gd_clear">
+                        <input type="submit" name="valider" value="Save changes" class="secondary_button">
+                    </div>
+                </form>
+            </fieldset>
+
+            </br>
 
             <fieldset class="secondary_fieldset">
                 <legend class="primary_legend">Development info</legend>

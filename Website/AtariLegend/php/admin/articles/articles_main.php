@@ -10,7 +10,7 @@
  *   Id: interviews_main.php,v 0.10 05/10/2016 23:06 Gatekeeper
  *             - AL 2.0 / creation of section
  *   Id: interviews_main.php,v 0.11 25/04/2018 17:15 STG
- *             - Update making more user friendly 
+ *             - Update making more user friendly
  *
  ***************************************************************************/
 
@@ -45,10 +45,11 @@ $v_rows = $query_number->num_rows;
 
 //main query
 $sql_articles = $mysqli->query("SELECT * FROM article_main
-                              LEFT JOIN article_text on (article_main.article_id = article_text.article_id)
-                              LEFT JOIN article_type on (article_main.article_type_id = article_type.article_type_id)
-                              LEFT JOIN users on ( article_main.user_id = users.user_id )
-                              ORDER BY article_text.article_date DESC LIMIT  " . $v_counter . ", 5") or die("Couldn't query database for articles");
+    LEFT JOIN article_text on (article_main.article_id = article_text.article_id)
+    LEFT JOIN article_type on (article_main.article_type_id = article_type.article_type_id)
+    LEFT JOIN users on ( article_main.user_id = users.user_id )
+    ORDER BY article_text.article_date DESC LIMIT  " . $v_counter . ", 5")
+    or die("Couldn't query database for articles");
 
 while ($article = $sql_articles->fetch_array(MYSQLI_BOTH)) {
     $article_date = date("F j, Y", $article['article_date']);
@@ -72,7 +73,6 @@ while ($article = $sql_articles->fetch_array(MYSQLI_BOTH)) {
 }
 
 $smarty->assign('nr_articles', $v_rows);
-
 
 //Check if back arrow is needed
 if ($v_counter > 0) {

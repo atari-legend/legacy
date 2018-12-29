@@ -23,7 +23,8 @@ if ($action == "update_submission") {
     //****************************************************************************************
 
     if (isset($submit_id)) {
-        $commentquery = $mysqli->query("UPDATE demo_submitinfo SET demo_done = '1' WHERE demo_submitinfo_id='$submit_id'") or die("couldn't update demo_submissions quote");
+        $commentquery = $mysqli->query("UPDATE demo_submitinfo SET demo_done = '1'
+            WHERE demo_submitinfo_id='$submit_id'") or die("couldn't update demo_submissions quote");
 
         $sql_user = $mysqli->query("SELECT user_id FROM demo_submitinfo WHERE demo_submitinfo_id='$submit_id'");
 
@@ -41,7 +42,8 @@ if ($action == "delete_submission") {
     //****************************************************************************************
 
     if (isset($submit_id)) {
-        $sql = $mysqli->query("DELETE FROM demo_submitinfo WHERE demo_submitinfo_id = '$submit_id'") or die("couldn't delete demo_submissions quote");
+        $sql = $mysqli->query("DELETE FROM demo_submitinfo WHERE demo_submitinfo_id = '$submit_id'")
+            or die("couldn't delete demo_submissions quote");
     }
     if ($list == "done") {
         header("Location: ../demos/submission_demos.php?v_counter=$v_counter&list=$list");

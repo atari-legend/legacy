@@ -25,7 +25,8 @@ include("../../config/admin.php");
 include("../../admin/games/quick_search_games.php");
 
 //Get the companies
-$sql_company = $mysqli->query("SELECT * FROM pub_dev ORDER BY pub_dev_name ASC") or die("Couldn't query Publisher and Developer database");
+$sql_company = $mysqli->query("SELECT * FROM pub_dev ORDER BY pub_dev_name ASC")
+    or die("Couldn't query Publisher and Developer database");
 
 while ($company = $sql_company->fetch_array(MYSQLI_BOTH)) {
     $smarty->append('company', array(

@@ -12,7 +12,8 @@
  *       - AL 2.0 (logging)
  *   id : db_menu_disk.php, v 1.21 2017/02/26 STG
  *       - It seems mysqli_free_result is not used for insert or update statements
- *         from the manual : Returns FALSE on failure. For successful SELECT, SHOW, DESCRIBE or EXPLAIN queries mysqli_query()
+ *         from the manual : Returns FALSE on failure. For successful SELECT, SHOW, DESCRIBE or
+ *          EXPLAIN queries mysqli_query()
  *         will return a mysqli_result object. For other successful queries mysqli_query() will return TRUE.
  *       - Extra check before we delete a crew
  ***************************************************************************/
@@ -101,7 +102,8 @@ if ($action == "delete_logo") {
 
     $crew = $sql_crew->fetch_array(MYSQLI_BOTH);
 
-    $mysqli->query("UPDATE crew SET crew_logo='' WHERE crew_id='$crew_select'") or die('Error: ' . mysqli_error($mysqli));
+    $mysqli->query("UPDATE crew SET crew_logo='' WHERE crew_id='$crew_select'")
+        or die('Error: ' . mysqli_error($mysqli));
 
     unlink("$crew_logo_save_path$crew_select.$crew[crew_logo]");
 
@@ -110,7 +112,8 @@ if ($action == "delete_logo") {
 
     $crew_search = '';
 
-    header("Location: ../crew/crew_editor.php?crew_select=$crew_select&crewsearch=$crew_search&crewbrowse=$crewbrowse&action=main");
+    header("Location: ../crew/crew_editor.php?"
+        ."crew_select=$crew_select&crewsearch=$crew_search&crewbrowse=$crewbrowse&action=main");
 }
 
 //****************************************************************************************
@@ -144,13 +147,17 @@ if ($action == "delete_crew") {
                 $_SESSION['edit_message'] = "Crew deleted";
                 create_log_entry('Crew', $crew_select, 'Crew', $crew_select, 'Delete', $_SESSION['user_id']);
 
-                $mysqli->query("DELETE FROM crew WHERE crew_id='$crew_select'") or die('Error: ' . mysqli_error($mysqli));
+                $mysqli->query("DELETE FROM crew WHERE crew_id='$crew_select'")
+                    or die('Error: ' . mysqli_error($mysqli));
                 ;
-                $mysqli->query("DELETE FROM sub_crew WHERE crew_id='$crew_select'") or die('Error: ' . mysqli_error($mysqli));
+                $mysqli->query("DELETE FROM sub_crew WHERE crew_id='$crew_select'")
+                    or die('Error: ' . mysqli_error($mysqli));
                 ;
-                $mysqli->query("DELETE FROM sub_crew WHERE parent_id='$crew_select'") or die('Error: ' . mysqli_error($mysqli));
+                $mysqli->query("DELETE FROM sub_crew WHERE parent_id='$crew_select'")
+                    or die('Error: ' . mysqli_error($mysqli));
                 ;
-                $mysqli->query("DELETE FROM crew_individual WHERE crew_id='$crew_select'") or die('Error: ' . mysqli_error($mysqli));
+                $mysqli->query("DELETE FROM crew_individual WHERE crew_id='$crew_select'")
+                    or die('Error: ' . mysqli_error($mysqli));
                 ;
                 header("Location: ../crew/crew_main.php");
             }
@@ -181,7 +188,8 @@ if ($action == "update_main_info") {
     $_SESSION['edit_message'] = "Crew updated";
     create_log_entry('Crew', $crew_select, 'Crew', $crew_select, 'Update', $_SESSION['user_id']);
 
-    header("Location: ../crew/crew_editor.php?crew_select=$crew_select&crewsearch=$crewsearch&crewbrowse=$crewbrowse&action=main");
+    header("Location: ../crew/crew_editor.php?"
+        ."crew_select=$crew_select&crewsearch=$crewsearch&crewbrowse=$crewbrowse&action=main");
 }
 
 //****************************************************************************************
@@ -195,7 +203,8 @@ if ($action == "parent_crew") {
         create_log_entry('Crew', $crew_select, 'Subcrew', $value, 'Insert', $_SESSION['user_id']);
     }
 
-    header("Location: ../crew/crew_genealogy.php?crew_select=$crew_select&crewsearch=$crewsearch&crewbrowse=$crewbrowse&action=genealogy");
+    header("Location: ../crew/crew_genealogy.php?"
+        ."crew_select=$crew_select&crewsearch=$crewsearch&crewbrowse=$crewbrowse&action=genealogy");
 }
 
 //****************************************************************************************
@@ -209,7 +218,8 @@ if ($action == "add_member") {
         create_log_entry('Crew', $crew_select, 'Member', $ind_id, 'Insert', $_SESSION['user_id']);
     }
 
-    header("Location: ../crew/crew_genealogy.php?crew_select=$crew_select&crewsearch=$crewsearch&crewbrowse=$crewbrowse&action=genealogy");
+    header("Location: ../crew/crew_genealogy.php?"
+        ."crew_select=$crew_select&crewsearch=$crewsearch&crewbrowse=$crewbrowse&action=genealogy");
 }
 
 //****************************************************************************************
@@ -223,7 +233,8 @@ if ($action == "delete_crew_member") {
         $mysqli->query("DELETE FROM crew_individual WHERE crew_individual_id='$crew_individual_id'");
     }
 
-    header("Location: ../crew/crew_genealogy.php?crew_select=$crew_select&crewsearch=$crewsearch&crewbrowse=$crewbrowse&action=genealogy");
+    header("Location: ../crew/crew_genealogy.php?"
+        ."crew_select=$crew_select&crewsearch=$crewsearch&crewbrowse=$crewbrowse&action=genealogy");
 }
 
 //****************************************************************************************
@@ -237,7 +248,8 @@ if ($action == "delete_subcrew") {
         $mysqli->query("DELETE FROM sub_crew WHERE sub_crew_id='$sub_crew_id'");
     }
 
-    header("Location: ../crew/crew_genealogy.php?crew_select=$crew_select&crewsearch=$crewsearch&crewbrowse=$crewbrowse&action=genealogy");
+    header("Location: ../crew/crew_genealogy.php?"
+        ."crew_select=$crew_select&crewsearch=$crewsearch&crewbrowse=$crewbrowse&action=genealogy");
 }
 
 //****************************************************************************************
@@ -246,17 +258,34 @@ if ($action == "delete_subcrew") {
 if ($action == "update_nick") {
     if (isset($individual_nicks_id) and isset($crew_individual_id)) {
         if ($individual_nicks_id == "-") {
-            $mysqli->query("UPDATE crew_individual SET individual_nicks_id='' WHERE crew_individual_id='$crew_individual_id'") or die("Failed to remove nickname");
+            $mysqli->query("UPDATE crew_individual SET individual_nicks_id=''
+                WHERE crew_individual_id='$crew_individual_id'") or die("Failed to remove nickname");
 
             $_SESSION['edit_message'] = "Nickname removed";
-            create_log_entry('Crew', $crew_individual_id, 'Nickname', $crew_individual_id, 'Delete', $_SESSION['user_id']);
+            create_log_entry(
+                'Crew',
+                $crew_individual_id,
+                'Nickname',
+                $crew_individual_id,
+                'Delete',
+                $_SESSION['user_id']
+            );
         } else {
-            $mysqli->query("UPDATE crew_individual SET individual_nicks_id='$individual_nicks_id' WHERE crew_individual_id='$crew_individual_id'") or die("Failed to update nickname information");
+            $mysqli->query("UPDATE crew_individual SET individual_nicks_id='$individual_nicks_id'
+                WHERE crew_individual_id='$crew_individual_id'") or die("Failed to update nickname information");
 
             $_SESSION['edit_message'] = "Nickname added";
-            create_log_entry('Crew', $crew_individual_id, 'Nickname', $crew_individual_id, 'Insert', $_SESSION['user_id']);
+            create_log_entry(
+                'Crew',
+                $crew_individual_id,
+                'Nickname',
+                $crew_individual_id,
+                'Insert',
+                $_SESSION['user_id']
+            );
         }
     }
 
-    header("Location: ../crew/crew_genealogy.php?crew_select=$crew_select&crewsearch=$crewsearch&crewbrowse=$crewbrowse&action=genealogy");
+    header("Location: ../crew/crew_genealogy.php?"
+        ."crew_select=$crew_select&crewsearch=$crewsearch&crewbrowse=$crewbrowse&action=genealogy");
 }

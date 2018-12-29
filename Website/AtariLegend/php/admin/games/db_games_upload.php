@@ -65,7 +65,8 @@ if (isset($action) and $action == 'add_download') {
         $timestamp = time();
 
         // Insert the ext,timestamp and the game id into the game download table.
-        $sdbquery = $mysqli->query("INSERT INTO game_download (game_id,game_ext,date) VALUES ('$game_id','$ext','$timestamp')") or die("ERROR! Couldn't insert date, ext and game id");
+        $sdbquery = $mysqli->query("INSERT INTO game_download (game_id,game_ext,date)
+            VALUES ('$game_id','$ext','$timestamp')") or die("ERROR! Couldn't insert date, ext and game id");
 
         //select the newly created game_download_id from the game_download table
         $GAMEDOWN = $mysqli->query("SELECT game_download_id FROM game_download
@@ -81,7 +82,8 @@ if (isset($action) and $action == 'add_download') {
         }
 
         // rename diskimage to increment number
-        rename("$game_file_temp_path$filename", "$game_file_temp_path$gamedownrow[0].$ext") or die("couldn't rename the file");
+        rename("$game_file_temp_path$filename", "$game_file_temp_path$gamedownrow[0].$ext")
+            or die("couldn't rename the file");
 
         //Time to rezip file and place it in the proper location.
         $archive = new PclZip("$game_file_path$gamedownrow[0].zip");
@@ -90,11 +92,13 @@ if (isset($action) and $action == 'add_download') {
             die("Error : " . $archive->errorInfo(true));
         }
 
-        // Time to do the safeties, here we do a md5 file hash that we later enter into the database, this will be used in the download
-        // function to check everytime the file is being downloaded... if the hashes don't match, then datacorruption have changed the file.
+        // Time to do the safeties, here we do a md5 file hash that we later enter into the database, this will be used
+        // in the download function to check everytime the file is being downloaded... if the hashes don't match,
+        // then datacorruption have changed the file.
         $crc = md5_file("$game_file_path$gamedownrow[0].zip");
 
-        $sdbquery = $mysqli->query("UPDATE game_download SET md5 = '$crc' WHERE game_download_id = '$gamedownrow[0]'") or die("Couldn't insert md5hash");
+        $sdbquery = $mysqli->query("UPDATE game_download SET md5 = '$crc' WHERE game_download_id = '$gamedownrow[0]'")
+            or die("Couldn't insert md5hash");
 
         // Add entry to search table for search purposes
         // $mysqli->query("UPDATE game_search SET download='1' WHERE game_id='$game_id'");

@@ -94,7 +94,8 @@ if (isset($action) and $action == 'update') {
     $comp_name = $mysqli->real_escape_string($comp_name);
     $textfield = $mysqli->real_escape_string($textfield);
 
-    $sdbquery = $mysqli->query("UPDATE pub_dev SET pub_dev_name = '$comp_name' WHERE pub_dev_id = $comp_id") or die("Couldn't Update into pub_dev");
+    $sdbquery = $mysqli->query("UPDATE pub_dev SET pub_dev_name = '$comp_name' WHERE pub_dev_id = $comp_id")
+        or die("Couldn't Update into pub_dev");
 
     $COMPANYtext = $mysqli->query("SELECT pub_dev_id FROM pub_dev_text
                 WHERE pub_dev_id = $comp_id") or die("Database error - selecting pub_dev_text");
@@ -102,9 +103,11 @@ if (isset($action) and $action == 'update') {
     $pubdevrowtext = $COMPANYtext->num_rows;
 
     if ($pubdevrowtext < 1) {
-        $sdbquery = $mysqli->query("INSERT INTO pub_dev_text (pub_dev_id, pub_dev_profile) VALUES ($comp_id, '$textfield')") or die("Couldn't insert into pub_dev_text");
+        $sdbquery = $mysqli->query("INSERT INTO pub_dev_text (pub_dev_id, pub_dev_profile)
+            VALUES ($comp_id, '$textfield')") or die("Couldn't insert into pub_dev_text");
     } else {
-        $sdbquery = $mysqli->query("UPDATE pub_dev_text SET pub_dev_profile = '$textfield' WHERE pub_dev_id = $comp_id") or die("Couldn't Update into pub_dev_text");
+        $sdbquery = $mysqli->query("UPDATE pub_dev_text SET pub_dev_profile = '$textfield'
+            WHERE pub_dev_id = $comp_id") or die("Couldn't Update into pub_dev_text");
     }
 
     create_log_entry('Company', $comp_id, 'Company', $comp_id, 'Update', $_SESSION['user_id']);
@@ -118,12 +121,14 @@ if (isset($action) and $action == 'update') {
 if ($action == 'delete_comp') {
     // let's first check if this company is still used!
     /* let's see if the title contains authors */
-    $sql = $mysqli->query("SELECT * FROM game_developer WHERE dev_pub_id = '$comp_id'") or die("error selecting game_developer table");
+    $sql = $mysqli->query("SELECT * FROM game_developer WHERE dev_pub_id = '$comp_id'")
+        or die("error selecting game_developer table");
     if ($sql->num_rows > 0) {
         $_SESSION['edit_message'] = "This company is still linked to one or more games";
         header("Location: ../company/company_main.php");
     } else {
-        $sql = $mysqli->query("SELECT * FROM game_publisher WHERE pub_dev_id = '$comp_id'") or die("error selecting game_publisher table");
+        $sql = $mysqli->query("SELECT * FROM game_publisher WHERE pub_dev_id = '$comp_id'")
+            or die("error selecting game_publisher table");
         if ($sql->num_rows > 0) {
             $_SESSION['edit_message'] = "This company is still linked to one or more games";
             header("Location: ../company/company_main.php");
@@ -174,7 +179,8 @@ if ($action == "insert_comp") {
 
         $id = $pubdevrow[0];
 
-        $sdbquery = $mysqli->query("INSERT INTO pub_dev_text (pub_dev_id, pub_dev_profile) VALUES ($id, '$textfield')") or die("Couldn't insert into pub_dev_text");
+        $sdbquery = $mysqli->query("INSERT INTO pub_dev_text (pub_dev_id, pub_dev_profile) VALUES ($id, '$textfield')")
+            or die("Couldn't insert into pub_dev_text");
 
         create_log_entry('Company', $id, 'Company', $id, 'Insert', $_SESSION['user_id']);
 

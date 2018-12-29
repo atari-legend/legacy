@@ -17,7 +17,8 @@ include("../../admin/games/quick_search_games.php");
 
 //load the existing spotlight entries
 $query_spotlight = $mysqli->query("SELECT * from spotlight
-                                            LEFT JOIN screenshot_main ON (spotlight.screenshot_id = screenshot_main.screenshot_id)") or die("error in query spotlight");
+    LEFT JOIN screenshot_main ON (spotlight.screenshot_id = screenshot_main.screenshot_id)")
+    or die("error in query spotlight");
 
 while ($sql_spotlight = $query_spotlight->fetch_array(MYSQLI_BOTH)) {
     $new_path = $spotlight_screenshot_path;
