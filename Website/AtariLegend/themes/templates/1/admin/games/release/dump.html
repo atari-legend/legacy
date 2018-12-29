@@ -105,7 +105,7 @@
                                     <td><a href="../user/user_detail.php?user_id_selected={$dump->getUser()->getId()}">{$dump->getUser()->getName()}</a></td>
                                     <td>{$dump->getInfo()|default:"-"}</td>
                                     <td>{math equation="floor(x/y)" x=$dump->getSize() y=1024} KB</td>
-                                    <td><a href="../../../data/zips/games/{$dump->getId()}.zip"><span class="fa fa-download"></span></a></td>
+                                    <td>{if $user_session.permission == '1'}<a href="../../../data/zips/games/{$dump->getId()}.zip"><span class="fa fa-download"></span></a>{else}<span class="fa fa-download"></span>{/if}</td>
                                 </tr>
                                 {/foreach}
                             </tbody>
