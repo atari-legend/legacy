@@ -45,8 +45,7 @@ fi
 if [ -z "${HEAD_BRANCH}" ] && [ "${BRANCH}" == "master" ]; then
     echo "Production deployment"
 
-    # Use -n (dry run) for testing for now
-    rsync -n ${RSYNC_FLAGS[@]} Website/AtariLegend/ $PROD_DEPLOY_USER@$PROD_DEPLOY_HOST:$PROD_DEPLOY_PATH/
+    rsync ${RSYNC_FLAGS[@]} Website/AtariLegend/ $PROD_DEPLOY_USER@$PROD_DEPLOY_HOST:$PROD_DEPLOY_PATH/
 
     # Run the DB upgrade script via the PHP command-line interface
     ssh $PROD_DEPLOY_USER@$PROD_DEPLOY_HOST "cd $PROD_DEPLOY_PATH/php/admin/administration/ && php7.1-cli database_update.php"
