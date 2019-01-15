@@ -120,7 +120,7 @@ class PubDevDAO {
         );
 
         \AL\Db\bind_result(
-            "EngineDAO: getGameEnginesForGame",
+            "PubDevDAO: getDistributorsForRelease",
             $stmt,
             $id, $name, $profile, $imgext
         );

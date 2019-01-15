@@ -157,6 +157,32 @@ switch ($extraParams) {
         // phpcs:enable
         $stmt->close();
         break;
+    case "crew":
+        $stmt = $mysqli->prepare(
+            "SELECT crew_id, crew_name
+            FROM crew
+            WHERE LOWER(crew_name) LIKE CONCAT('%',LOWER(?),'%')"
+        )
+        or
+        die("Error querying crew: ".$mysqli->error);
+
+        $stmt->bind_param("s", $term);
+        $stmt->execute();
+        $stmt->bind_result($crew_id, $crew_name);
+
+        // phpcs:disable Generic.WhiteSpace.ScopeIndent
+        while ($stmt->fetch()) {
+            array_push(
+                $json,
+                array(
+                    "value" => $crew_id,
+                    "label" => $crew_name
+                )
+            );
+        }
+        // phpcs:enable
+        $stmt->close();
+        break;
 }
 
 header("Content-Type: application/json");

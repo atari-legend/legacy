@@ -26,6 +26,7 @@ require_once __DIR__."/../../common/DAO/DiskProtectionDAO.php";
 require_once __DIR__."/../../common/DAO/MediaDAO.php";
 require_once __DIR__."/../../common/DAO/DumpDAO.php";
 require_once __DIR__."/../../common/DAO/MediaScanDAO.php";
+require_once __DIR__."/../../common/DAO/CrewDAO.php";
 
 $gameReleaseDao = new \AL\Common\DAO\GameReleaseDAO($mysqli);
 $gameDao = new \AL\Common\DAO\GameDao($mysqli);
@@ -46,6 +47,7 @@ $diskProtectionDao = new \AL\Common\DAO\DiskProtectionDAO($mysqli);
 $mediaDao = new \AL\Common\DAO\MediaDAO($mysqli);
 $dumpDao = new \AL\Common\DAO\DumpDAO($mysqli);
 $mediaScanDao = new \AL\Common\DAO\MediaScanDAO($mysqli);
+$crewDao = new \AL\Common\DAO\CrewDAO($mysqli);
 
 //***********************************************************************************
 // Add a new release
@@ -234,6 +236,32 @@ if (isset($action) && ($action == 'remove_distributor')) {
     $pubDevDao->deleteDistributorFromRelease($release_id, $pub_dev_id);
 
     $_SESSION['edit_message'] = "Distributor has been removed";
+    header("Location: ../games/games_release_detail.php?game_id=$game_id&release_id=$release_id&tab=general");
+}
+
+//***********************************************************************************
+//add a crew to a release
+//***********************************************************************************
+if (isset($action) && ($action == 'add_crew')) {
+    $crewDao->addCrewToRelease($release_id, $crew_id);
+
+    $new_crew_id = $mysqli->insert_id;
+
+    create_log_entry('Game Release', $game_id, 'Crew', $crew_id, 'Insert', $_SESSION['user_id']);
+
+    $_SESSION['edit_message'] = "Crew has been added";
+    header("Location: ../games/games_release_detail.php?game_id=$game_id&release_id=$release_id&tab=general");
+}
+
+//***********************************************************************************
+//remove a crew to a release
+//***********************************************************************************
+if (isset($action) && ($action == 'remove_crew')) {
+    create_log_entry('Game Release', $game_id, 'Crew', $crew_id, 'Delete', $_SESSION['user_id']);
+
+    $crewDao->deleteCrewFromRelease($release_id, $crew_id);
+
+    $_SESSION['edit_message'] = "Crew has been removed";
     header("Location: ../games/games_release_detail.php?game_id=$game_id&release_id=$release_id&tab=general");
 }
 
