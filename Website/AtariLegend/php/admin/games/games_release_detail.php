@@ -26,6 +26,7 @@ require_once __DIR__."/../../common/DAO/DumpDAO.php";
 require_once __DIR__."/../../common/DAO/MediaScanTypeDAO.php";
 require_once __DIR__."/../../common/DAO/MediaScanDAO.php";
 require_once __DIR__."/../../common/DAO/GameReleaseScanDAO.php";
+require_once __DIR__."/../../common/DAO/CrewDAO.php";
 
 $gameReleaseDao = new \AL\Common\DAO\GameReleaseDAO($mysqli);
 $gameDao = new \AL\Common\DAO\GameDao($mysqli);
@@ -49,6 +50,7 @@ $dumpDao = new \AL\Common\DAO\DumpDAO($mysqli);
 $mediaScanTypeDao = new \AL\Common\DAO\MediaScanTypeDAO($mysqli);
 $mediaScanDao = new \AL\Common\DAO\MediaScanDAO($mysqli);
 $gameReleaseScanDao = new AL\Common\DAO\GameReleaseScanDAO($mysqli);
+$crewDao = new \AL\Common\DAO\CrewDAO($mysqli);
 
 if ($_SERVER['REQUEST_METHOD'] == "GET") {
     $smarty->assign('license_types', $gameReleaseDao->getLicenseTypes());
@@ -70,6 +72,8 @@ if ($_SERVER['REQUEST_METHOD'] == "GET") {
     $smarty->assign('dump_formats', $dumpDao->getFormats());
     $smarty->assign('media_scan_types', $mediaScanTypeDao->getAllMediaScanTypes());
     $smarty->assign('game_release_scan_types', $gameReleaseScanDao->getScanTypes());
+    $smarty->assign('crews', $crewDao->getAllCrews());
+    
 
     // Edit existing release
     if (isset($release_id)) {
@@ -156,6 +160,7 @@ if ($_SERVER['REQUEST_METHOD'] == "GET") {
         $smarty->assign('game_boxscan_path', $game_boxscan_path);
         $smarty->assign('game_boxscans', $game_boxscans);
     // ================ TEMPORARY END
+        $smarty->assign('release_crews', $crewDao->getCrewsForRelease($release->getId()));
     } else {
         // Creating a new release
         $game = $gameDao->getGame($game_id);

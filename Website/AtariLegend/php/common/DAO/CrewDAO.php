@@ -13,6 +13,10 @@ class CrewDAO {
     public function __construct($mysqli) {
         $this->mysqli = $mysqli;
     }
+    
+    public function getAllCrews() {
+        return $this->getCrewsStartingWith(".");
+    }
 
     /**
      * Search for crews
@@ -108,5 +112,76 @@ class CrewDAO {
         $stmt->close();
 
         return $new_crew_id;
+    }
+    
+    /**
+     * Get list of crews for a game_release
+     *
+     * @param integer release ID
+     */
+    public function getCrewsForRelease($game_release_id) {
+        $stmt = \AL\Db\execute_query(
+            "CrewsDAO: getCrewsForRelease",
+            $this->mysqli,
+            "SELECT
+                crew.crew_id,
+                crew.crew_name
+            FROM
+                crew
+            LEFT JOIN game_release_crew ON crew.crew_id = game_release_crew.crew_id
+            WHERE game_release_crew.game_release_id = ?",
+            "i", $game_release_id
+        );
+
+        \AL\Db\bind_result(
+            "CrewsDAO: getCrewsForRelease",
+            $stmt,
+            $id, $name
+        );
+
+        $crews = [];
+        while ($stmt->fetch()) {
+            $crews[] = new \AL\Common\Model\Crew\Crew(
+                $id, $name
+            );
+        }
+
+        $stmt->close();
+
+        return $crews;
+    }
+    
+     /**
+     * add a crew to a release
+     *
+     * @param integer release ID
+     * @param integer crew ID
+     */
+    public function addCrewToRelease($release_id, $crew_id) {
+        $stmt = \AL\Db\execute_query(
+            "CrewDAO: addCrewToRelease",
+            $this->mysqli,
+            "INSERT INTO game_release_crew (game_release_id, crew_id) VALUES (?, ?)",
+            "ii", $release_id, $crew_id
+        );
+
+        $stmt->close();
+    }
+        
+    /**
+     * delete a crew from a release
+     *
+     * @param int release_id
+     * @param int crew_id
+     */
+    public function deleteCrewFromRelease($release_id, $crew_id) {
+        $stmt = \AL\Db\execute_query(
+            "CrewDAO: deleteCrewFromRelease",
+            $this->mysqli,
+            "DELETE FROM game_release_crew WHERE game_release_id = ? and crew_id = ?",
+            "ii", $release_id, $crew_id
+        );
+
+        $stmt->close();
     }
 }
