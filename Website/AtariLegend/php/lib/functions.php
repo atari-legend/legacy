@@ -1750,6 +1750,18 @@ function create_log_entry($section, $section_id, $subsection, $subsection_id, $a
             $subsection_name = $query_data['pub_dev_name'];
             $subsection_id = $query_data['game_release_id'];
         }
+        
+        if ($subsection == 'Crew') {
+            // get the distributor name
+            $query_crew = "SELECT * FROM crew
+                                  LEFT JOIN game_release_crew
+                                  ON (crew.crew_id = game_release_crew.crew_id)
+                                  WHERE crew.crew_id = '$subsection_id'";
+            $result = $mysqli->query($query_crew) or die("getting name failed");
+            $query_data   = $result->fetch_array(MYSQLI_BOTH);
+            $subsection_name = $query_data['crew_name'];
+            $subsection_id = $query_data['game_release_id'];
+        }
     }
 
     $section_name    = $mysqli->real_escape_string($section_name);

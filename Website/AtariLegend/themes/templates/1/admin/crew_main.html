@@ -33,7 +33,7 @@ function crewinsert() {
             buttons: {
                 'Add': function () {
                     $(this).dialog('close');
-                    url="db_crew.php?crew_select="+crew_select+"&action=delete_crew";
+                    url="db_crew.php?new_crew="+JSnewcrew+"&action=insert_crew";
                     location.href=url;
                 },
                 Cancel: function () {

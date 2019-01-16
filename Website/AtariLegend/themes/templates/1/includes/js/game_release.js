@@ -4,6 +4,7 @@
 $(document).ready(function () {
     $('select[name=pub_dev_id]').altAutocomplete();
     $('select[name=distributor_id]').altAutocomplete();
+    $('select[name=crew_id]').altAutocomplete();
 });
 
 window.add_scan_desc = function (field) {

@@ -95,6 +95,9 @@
                 &times;
             </a>
             <br>
+            <span class="help-hint">A publisher is only selected for officials releases, not for an unofficial one (a crack or hack)</span>
+
+            <br>
             <br>
             <label class="input">Note</label>
             <input type="text" name="notes" class="standard_input" style="width:75%" value="{$release->getNotes()}">
@@ -107,6 +110,65 @@
             <button type="submit" name="submit_type" value="save" class="secondary_button">Save changes</button>
             <a href="games_detail.php?game_id={$game->getId()}">Cancel</a>
         </form>
+    </fieldset>
+    <br>
+
+    <fieldset class="secondary_fieldset">
+        <legend class="primary_legend">Crews</legend>
+        <div class="help-hint">
+            You can add as many crews as you like to a game release. Remember, a crew is only allowed for unnofficial releases like cracks, hacks ...
+        </div>
+        <br>
+        <a id="gd_developers"><b>Crews</b></a>
+        <br>
+
+        {if isset($release_crews)}
+            {foreach from=$release_crews item=release_crew}
+                <form action="../games/db_games_release_detail.php" method="get">
+                    <a title="Remove {$release_crew->getName()|escape:"html"} from this release"
+                        href="../games/db_games_release_detail.php?game_id={$game->getId()}&amp;release_id={$release->getId()}&amp;crew_id={$release_crew->getId()}&amp;action=remove_crew"
+                        onclick="javascript:return confirm('This crew will be removed from the release')">
+                        <span class="fa fa-fw fa-trash"></span>
+                    </a>
+
+                    <input type="hidden" name="action" value="update_crew">
+                    <input type="hidden" name="release_id" value="{$release->getId()}">
+                    <input type="hidden" name="crew_id" value="{$release_crew->getid()}">
+                    <input type="text" value="{$release_crew->getName()}" class="standard_input input_large" disabled id="gd_game_dev">
+                    <a href="../crew/crew_editor.php?crewsearch=&crewbrowse=&crew_select={$release_crew->getid()}" title="Edit crew" class="standard_tile_link"><i class="fa fa-fw fa-pencil edit_author" aria-hidden="true"></i></a>
+                </form>
+            {/foreach}
+        {/if}
+
+        <hr class="separator_add">
+
+        <form action="../games/db_games_release_detail.php" method="post">
+            <input type="hidden" name="release_id" value="{$release->getId()}">
+            <input type="hidden" name="game_id" value="{$game->getId()}">
+            <input type="hidden" name="action" value="add_crew">
+
+            <a href="javascript:;"
+                class="left_nav_link"
+                id="crew_select_toggle"
+                title="Click for dropdown mode">
+                <i class="fa fa-fw fa-chevron-circle-down" aria-hidden="true"></i>
+            </a>
+
+            <select name="crew_id"
+                class="standard_select select_large" id="gd_dev_name"
+                data-alt-autocomplete-endpoint="../common/autocomplete.php?extraParams=crew"
+                data-alt-autocomplete-toggle="#crew_select_toggle"
+                data-alt-autocomplete-placeholder="Start typing a name…"
+                required>
+                <option value="" selected="selected" disabled></option>
+                {foreach from=$crews item=crew}
+                    <option value="{$crew->getId()}">{$crew->getName()}</option>
+                {/foreach}
+            </select>
+
+            <input type="submit" value="Add crew" class="secondary_button">
+        </form>
+        <br>
     </fieldset>
     <br>
 
