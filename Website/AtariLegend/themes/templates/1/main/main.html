@@ -232,7 +232,32 @@
             </header>
         </div>
         <div id="wrapper">
-            {block name=main_body}{/block}
+            <div id="main">
+                {if isset($breadcrumb)}
+                    {if count($breadcrumb) > 0}
+                        <ul id="breadcrumb">
+                            <li><a href="/">Home</a></li>
+                            {foreach from=$breadcrumb item=crumb name=breadcrumb}
+                                <li {if $smarty.foreach.breadcrumb.last}class="active"{/if}>
+                                    {if $smarty.foreach.breadcrumb.last}
+                                        {$crumb->getLabel()}
+                                    {else}
+                                        <a href="{$crumb->getLink()}">{$crumb->getLabel()}</a>
+                                    {/if}
+                                </li>
+                            {/foreach}
+                        </ul>
+                    {/if}
+                {else}
+                    <div style="background-color: red; margin: 5px; padding: 5px; color: black;">
+                        Breadcrumb not set. Please add a <code>$breadcrumb</code> variable containing a list
+                        of <code>AL\Common\Model\Breadcrumb</code> objects.
+                    </div>
+                {/if}
+                <div class="main_container_cpanel">
+                    {block name=main_body}{/block}
+                </div>
+            </div>
             <div class="main_online">
                 {block name=who_is_online}
                     {include file='1/main/who_is_online.html'}

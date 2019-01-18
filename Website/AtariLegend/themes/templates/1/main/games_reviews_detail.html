@@ -352,244 +352,73 @@
 {/block}
 
 {block name=main_body}
-    <div id="main" class="main_container_games_details">
-        <div class="content_box_games_details" id="column_left_reviews_details">
+    <div class="content_box_games_details" id="column_left_reviews_details">
 
-            <!--*****************************-->
-            <!--START Credits tile -->
-            <!--*****************************-->
-            <br>
-            <div class="standard_tile">
-                <h1>AUTHOR</h1>
-                <div class="standard_tile_line"></div>
-                <div class="games_main_detail_comments_container">
-                    <table class="primary_table_list table_md no_border">
-                        {if isset($reviews_author)}
+        <!--*****************************-->
+        <!--START Credits tile -->
+        <!--*****************************-->
+        <div class="standard_tile">
+            <h1>AUTHOR</h1>
+            <div class="standard_tile_line"></div>
+            <div class="games_main_detail_comments_container">
+                <table class="primary_table_list table_md no_border">
+                    {if isset($reviews_author)}
+                    <tr>
+                        <td>
+                            <div class="standard_list_entry_news_text text-center">
+                                {$review.userid} has written {$nr_reviews_author} additional reviews :
+                            </div>
+                        </td>
+                    </tr>
+                    {foreach from=$reviews_author item=line name=reviews_author}
                         <tr>
                             <td>
+                                <span style="overflow: hidden;text-overflow: ellipsis"><a href="../games/games_detail.php?game_id={$line.game_id}" class="standard_tile_link" style="margin-left:10px;">{$line.game_name}</a></span>
+                                <br><span class="standard_tile_subtext" style="margin-left:15px;"><a href="../games/games_reviews_detail.php?review_id={$line.review_id}&game_id={$line.game_id}" style="margin-left:10px;">read more</a></span>
+                            </td>
+                        </tr>
+                    {/foreach}
+                    {else}
+                        <tr>
+                            <td class="w-100">
                                 <div class="standard_list_entry_news_text text-center">
-                                    {$review.userid} has written {$nr_reviews_author} additional reviews :
+                                    This person hasn't written any additional reviews
                                 </div>
                             </td>
                         </tr>
-                        {foreach from=$reviews_author item=line name=reviews_author}
-                            <tr>
-                                <td>
-                                    <span style="overflow: hidden;text-overflow: ellipsis"><a href="../games/games_detail.php?game_id={$line.game_id}" class="standard_tile_link" style="margin-left:10px;">{$line.game_name}</a></span>
-                                    <br><span class="standard_tile_subtext" style="margin-left:15px;"><a href="../games/games_reviews_detail.php?review_id={$line.review_id}&game_id={$line.game_id}" style="margin-left:10px;">read more</a></span>
-                                </td>
-                            </tr>
-                        {/foreach}
-                        {else}
-                            <tr>
-                                <td class="w-100">
-                                    <div class="standard_list_entry_news_text text-center">
-                                        This person hasn't written any additional reviews
-                                    </div>
-                                </td>
-                            </tr>
-                        {/if}
-                    </table>
-                </div>
-            </div>
-            <!--*****************************-->
-            <!--END Credits tile -->
-            <!--*****************************-->
-
-            {if isset($reviews_author)}
-                <br>
-                {include file='1/main/tile_bug_report.html'}
-            {else}
-            <!--*************************-->
-            <!--START review comments tile -->
-            <!--*************************-->
-            <br>
-            <div class="games_main_details_comments_position">
-                <div class="standard_tile">
-                    <div class="help-tip">
-                        <p>
-                            <u>Only available with your own comments:</u><br>
-                            <i class="fa fa-pencil" aria-hidden="true"></i> - Edit comment<br>
-                            <i class="fa fa-floppy-o" aria-hidden="true"></i> - Save changes to comment<br>
-                            <i class="fa fa-trash-o" aria-hidden="true"></i> - Delete comment (if )<br><br>
-                            <u>General options:</u><br>
-                            <i class="fa fa-envelope" aria-hidden="true"></i> - Email author of comment<br>
-                            <i class="fa fa-facebook-square" aria-hidden="true"></i> - Go to Facebook profile of author<br>
-                            <i class="fa fa-twitter" aria-hidden="true"></i> - Go to Twitter profile of author<br>
-                            <i class="fa fa-gamepad" aria-hidden="true"></i> - Go to Atari-Forum profle<br>
-                            <i class="fa fa-globe" aria-hidden="true"></i> - Visit user's website
-                        </p>
-                    </div>
-                    <h1>REVIEW COMMENTS</h1>
-                    <div class="standard_tile_line"></div>
-                    {if isset($user_session)}
-                        <form name="post">
-                        <div class="standard_list_entry standard_tile_padding text-center">
-
-                            <input type="button" accesskey= "b" name="addbbcode0" value="B" onclick="bbstyle(0,'textfield')" class="primary_button" title="Bold">
-                            <input type="button" accesskey= "u" name="addbbcode4" value="U" onclick="bbstyle(4,'textfield')" class="primary_button" title="Underline">
-                            <input type="button" accesskey= "i" name="addbbcode2" value="I" onclick="bbstyle(2,'textfield')" class="primary_button" title="Recursive">
-                            <input type="button" accesskey="w" name="addbbcode6" value="URL" onClick="bbstyle(6,'textfield')" class="primary_button" title="Add links">
-                            <input type="button" accesskey="x" name="addbbcode8" value="@" onClick="bbstyle(8,'textfield')" class="primary_button" title="Add email address">
-                            <textarea id="comment_add" rows="4" class="primary_textarea" name="textfield" ONSELECT="javascript:storeCaret(this);" ONCLICK="javascript:storeCaret(this);" ONKEYUP="javascript:storeCaret(this);" ONCHANGE="javascript:storeCaret(this);"></textarea>
-
-                            <input type="button" value="Add" class="primary_button" onClick="AddComment({$user_session.user_id},{$review.review_id})">
-                        </div>
-                        </form>
-                    {else}
-                        <div class="standard_list_entry" style="height:0;">
-                            <div class="games_main_detail_comments_log_on">
-                                Please log in to add your own comment to this review    .
-                            </div>
-                        </div>
                     {/if}
-                    <div class="standard_tile_line"></div>
-                    <div id="latest_comments_all">
-                    {if isset($comments)}
-                        <div class="games_main_detail_comments_container">
-                            {assign var="number" value=1}
-                            {foreach from=$comments item=line}
-                                <div {if $number is even}class="standard_list_entry standard_tile_padding_mini"{else}class="standard_list_entry_odd standard_tile_padding_mini"{/if} style="border-bottom: 1px solid black;">
-
-                                <span class="standard_tile_subtext" style="font-weight:bold;float:left;">
-                                    <a href="../../admin/user/user_detail.php?user_id_selected={$line.user_id}">{$line.user_name}</a>
-                                </span>
-                                <span class="standard_tile_subtext" style="font-weight:bold;float:right;display:inline;">
-                                    {if isset($user_session)}
-                                        <span style="font-weight:bold;float:left;margin-left:5px;margin-bottom:10px;">
-                                        {if $user_session.user_id == $line.user_id}
-                                            <a style="cursor: pointer;" onClick="CommentEditable({$line.comment_id},{$line.user_id})" class="latest_comments_link"><i class="fa fa-pencil" id="comment_edit_icon{$line.comment_id}" aria-hidden="true"  title="Click to edit comment"></i></a>
-                                            <a style="cursor: pointer;" onClick="SaveEditable({$line.comment_id},{$line.user_id},{$review.review_id})" class="latest_comments_link"><i class="fa fa-floppy-o" id="comment_save_icon{$line.comment_id}" aria-hidden="true" title="Click to save change" style="display:none;"></i></a>
-                                            <a style="cursor: pointer;" onClick="DeleteEditable({$line.comment_id},{$line.user_id},{$review.review_id})" class="latest_comments_link"><i class="fa fa-trash-o" id="comment_delete_icon{$line.comment_id}" aria-hidden="true" title="Click to delete comment"></i></a>
-                                        {/if}
-                                        {if $line.show_email == '1'}
-                                            {if $line.email != ''}
-                                                <a href="mailto:{$line.email}?subject=Comment%20of%20{$review.game_name|escape:'url'}%20review%20at%20Atari%20Legend" class="latest_comments_link" title="Click to email user"><i class="fa fa-envelope" aria-hidden="true"></i></a>
-                                            {/if}
-                                        {/if}
-                                        {if $line.user_fb != ''}
-                                            <a href="{$line.user_fb}" class="latest_comments_link" title="Click to visit Facebook profile"><i class="fa fa-facebook-square" aria-hidden="true"></i></a>
-                                        {/if}
-                                        {if $line.user_twitter != ''}
-                                            <a href="{$line.user_twitter}" class="latest_comments_link" title="Click to visit Twitter profile"><i class="fa fa-twitter" aria-hidden="true"></i></a>
-                                        {/if}
-                                        {if $line.user_af != ''}
-                                            <a href="{$line.user_af}" class="latest_comments_link" title="Click to visit Atari-Forum profile"><i class="fa fa-gamepad" aria-hidden="true"></i></a>
-                                        {/if}
-                                        {if $line.user_website != ''}
-                                            <a href="{$line.user_website}" class="latest_comments_link" title="Click to visit users website"><i class="fa fa-globe" aria-hidden="true"></i></a>
-                                        {/if}
-                                        </span>
-                                    {/if}
-                                </span>
-                                <div class="latest_comments_text">
-                                    <div id="latest_comment_edit{$line.comment_id}">
-                                        <div class="standard_link_color">{$line.comment}</div>
-                                    </div>
-                                    <div class="text-center">
-                                        <textarea id="comment_input{$line.comment_id}" class="primary_textarea" rows="5" style="display:none;">{$line.comment_edit}</textarea>
-                                    </div>
-                                </div>
-                                <br><br><br>
-                                <div class="standard_tile_subtext text-right" style="font-weight:bold;display:table-footer-group;vertical-align:bottom;">
-                                    {$line.date}
-                                </div>
-                                </div>
-                                {$number=$number+1}
-                            {/foreach}
-                        </div>
-                    {/if}
-                    </div>
-                    <div class="standard_tile_line"></div>
-                </div>
+                </table>
             </div>
-            <!--***********************-->
-            <!--END Game comments tile -->
-            <!--***********************-->
-            {/if}
         </div>
+        <!--*****************************-->
+        <!--END Credits tile -->
+        <!--*****************************-->
 
-        <div class="content_box_games_details" id="column_center_reviews_details">
-            <!--*********************-->
-            <!--START Review tile -->
-            <!--*********************-->
-            <br>
+        {if isset($reviews_author)}
+            {include file='1/main/tile_bug_report.html'}
+        {else}
+        <!--*************************-->
+        <!--START review comments tile -->
+        <!--*************************-->
+        <div class="games_main_details_comments_position">
             <div class="standard_tile">
-                <h1><a href="../games/games_detail.php?game_id={$review.game_id}" class="standard_tile_link" title="Click to see all comments">{$review.game_name|upper}</a></h1>
-                <div class="standard_tile_line"></div>
-                <div class="standard_tile_padding" id="games_detail_review_bg">
-                    <h4 style="white-space: nowrap;overflow: hidden;text-overflow: ellipsis;display:inline;">
-                        Written by <a href="../../admin/user/user_detail.php?user_id_selected={$review.user_id}" class="standard_tile_link">{$review.user_name}</a>
-                    </h4>
-                    <h2 style="float:right; display:inline;">
-                        <a href="javascript:history.go(-1)" class="standard_tile_link">Back <i class="fa fa-chevron-right" aria-hidden="true"></i></a>
-                    </h2>
-                    <h5 style="font-weight: bold;">{$review.date}</h5>
-                    <br>
-                    <br>
-                    <div class="games_detail_review_container">
-                        <div class="games_detail_review_child" id="games_detail_review_text">
-                            <div class="standard_link_color">{$review.text}</div>
-                            <b><i>Score</i></b>
-                            <br>
-                            <br>
-                            Graphics : <b>{$score.graphics}</b><br>
-                            Sound : <b>{$score.sound}</b><br>
-                            Gameplay : <b>{$score.gameplay}</b><br>
-                            Overall : <b>{$score.overall}</b><br><br>
-                        </div>
-                        <div class="games_detail_review_child" id="games_detail_review_screenshots">
-                            <div class="games_detail_review_screenshot_space">
-                                <br>
-                                <br>
-                                <br>
-                            </div>
-                            {foreach from=$screenshots_review item=line}
-                                <div class="games_detail_review_screenshot_order">
-                                    <a href="../../includes/show_image.php?file={$line.screenshot}&amp;resize=410,null,null,null" data-lightbox="image-1" data-title="{$line.comment}">
-                                        <img src="../../includes/show_image.php?file={$line.screenshot}&amp;resize=170,null,null,null" alt="Click to enlarge!" style="display:inline;" class="game_screenshot_img"></a>
-                                    <br>
-                                    <span class="standard_tile_subtext" style="font-weight: bold;">{$line.comment}</span>
-                                    <br>
-                                    <br>
-                                    <br>
-                                </div>
-                            {/foreach}
-                        </div>
-                    </div>
-                    <br>
+                <div class="help-tip">
+                    <p>
+                        <u>Only available with your own comments:</u><br>
+                        <i class="fa fa-pencil" aria-hidden="true"></i> - Edit comment<br>
+                        <i class="fa fa-floppy-o" aria-hidden="true"></i> - Save changes to comment<br>
+                        <i class="fa fa-trash-o" aria-hidden="true"></i> - Delete comment (if )<br><br>
+                        <u>General options:</u><br>
+                        <i class="fa fa-envelope" aria-hidden="true"></i> - Email author of comment<br>
+                        <i class="fa fa-facebook-square" aria-hidden="true"></i> - Go to Facebook profile of author<br>
+                        <i class="fa fa-twitter" aria-hidden="true"></i> - Go to Twitter profile of author<br>
+                        <i class="fa fa-gamepad" aria-hidden="true"></i> - Go to Atari-Forum profle<br>
+                        <i class="fa fa-globe" aria-hidden="true"></i> - Visit user's website
+                    </p>
                 </div>
-            </div>
-            <!--*********************-->
-            <!--END review tile -->
-            <!--*********************-->
-        </div>
-
-        <div class="content_box_games_details" id="column_right_reviews_details">
-            {if isset($reviews_author)}
-            <!--*************************-->
-            <!--START review comments tile -->
-            <!--*************************-->
-            <br>
-            <div class="games_main_details_comments_position">
-                <div class="standard_tile">
-                    <div class="help-tip">
-                        <p>
-                            <u>Only available with your own comments:</u><br>
-                            <i class="fa fa-pencil" aria-hidden="true"></i> - Edit comment<br>
-                            <i class="fa fa-floppy-o" aria-hidden="true"></i> - Save changes to comment<br>
-                            <i class="fa fa-trash-o" aria-hidden="true"></i> - Delete comment (if )<br><br>
-                            <u>General options:</u><br>
-                            <i class="fa fa-envelope" aria-hidden="true"></i> - Email author of comment<br>
-                            <i class="fa fa-facebook-square" aria-hidden="true"></i> - Go to Facebook profile of author<br>
-                            <i class="fa fa-twitter" aria-hidden="true"></i> - Go to Twitter profile of author<br>
-                            <i class="fa fa-gamepad" aria-hidden="true"></i> - Go to Atari-Forum profle<br>
-                            <i class="fa fa-globe" aria-hidden="true"></i> - Visit user's website
-                        </p>
-                    </div>
-                    <h1>REVIEW COMMENTS</h1>
-                    <div class="standard_tile_line"></div>
-                    {if isset($user_session)}
+                <h1>REVIEW COMMENTS</h1>
+                <div class="standard_tile_line"></div>
+                {if isset($user_session)}
                     <form name="post">
                     <div class="standard_list_entry standard_tile_padding text-center">
 
@@ -603,92 +432,254 @@
                         <input type="button" value="Add" class="primary_button" onClick="AddComment({$user_session.user_id},{$review.review_id})">
                     </div>
                     </form>
-                    {else}
-                        <div class="standard_list_entry" style="height:0;">
-                            <div class="games_main_detail_comments_log_on">
-                                Please log in to add your own comment to this review    .
-                            </div>
+                {else}
+                    <div class="standard_list_entry" style="height:0;">
+                        <div class="games_main_detail_comments_log_on">
+                            Please log in to add your own comment to this review    .
                         </div>
-                    {/if}
-                    <div class="standard_tile_line"></div>
-                    <div id="latest_comments_all">
-                    {if isset($comments)}
-                        <div class="games_main_detail_comments_container">
-                            {assign var="number" value=1}
-                            {foreach from=$comments item=line}
-                                <div {if $number is even}class="standard_list_entry standard_tile_padding_mini"{else}class="standard_list_entry_odd standard_tile_padding_mini"{/if} style="border-bottom: 1px solid black;">
-
-                                <span class="standard_tile_subtext" style="font-weight:bold;float:left;">
-                                    <a href="../../admin/user/user_detail.php?user_id_selected={$line.user_id}">{$line.user_name}</a>
-                                </span>
-                                <span class="standard_tile_subtext" style="font-weight:bold;float:right;display:inline;">
-                                    {if isset($user_session)}
-                                        <span style="font-weight:bold;float:left;margin-left:5px;margin-bottom:10px;">
-                                        {if $user_session.user_id == $line.user_id}
-                                            <a style="cursor: pointer;" onClick="CommentEditable({$line.comment_id},{$line.user_id})" class="latest_comments_link"><i class="fa fa-pencil" id="comment_edit_icon{$line.comment_id}" aria-hidden="true"  title="Click to edit comment"></i></a>
-                                            <a style="cursor: pointer;" onClick="SaveEditable({$line.comment_id},{$line.user_id},{$review.review_id})" class="latest_comments_link"><i class="fa fa-floppy-o" id="comment_save_icon{$line.comment_id}" aria-hidden="true" title="Click to save change" style="display:none;"></i></a>
-                                            <a style="cursor: pointer;" onClick="DeleteEditable({$line.comment_id},{$line.user_id},{$review.review_id})" class="latest_comments_link"><i class="fa fa-trash-o" id="comment_delete_icon{$line.comment_id}" aria-hidden="true" title="Click to delete comment"></i></a>
-                                        {/if}
-                                        {if $line.show_email == '1'}
-                                            {if $line.email != ''}
-                                                <a href="mailto:{$line.email}?subject=Comment%20of%20{$review.game_name|escape:'url'}%20review%20at%20Atari%20Legend" class="latest_comments_link" title="Click to email user"><i class="fa fa-envelope" aria-hidden="true"></i></a>
-                                            {/if}
-                                        {/if}
-                                        {if $line.user_fb != ''}
-                                            <a href="{$line.user_fb}" class="latest_comments_link" title="Click to visit Facebook profile"><i class="fa fa-facebook-square" aria-hidden="true"></i></a>
-                                        {/if}
-                                        {if $line.user_twitter != ''}
-                                            <a href="{$line.user_twitter}" class="latest_comments_link" title="Click to visit Twitter profile"><i class="fa fa-twitter" aria-hidden="true"></i></a>
-                                        {/if}
-                                        {if $line.user_af != ''}
-                                            <a href="{$line.user_af}" class="latest_comments_link" title="Click to visit Atari-Forum profile"><i class="fa fa-gamepad" aria-hidden="true"></i></a>
-                                        {/if}
-                                        {if $line.user_website != ''}
-                                            <a href="{$line.user_website}" class="latest_comments_link" title="Click to visit users website"><i class="fa fa-globe" aria-hidden="true"></i></a>
-                                        {/if}
-                                        </span>
-                                    {/if}
-                                </span>
-                                <div class="latest_comments_text">
-                                    <div id="latest_comment_edit{$line.comment_id}">
-                                        <div class="standard_link_color">{$line.comment}</div>
-                                    </div>
-                                    <div class="text-center">
-                                        <textarea id="comment_input{$line.comment_id}" class="primary_textarea" rows="5" style="display:none;">{$line.comment_edit}</textarea>
-                                    </div>
-                                </div>
-                                <br><br><br>
-                                <div class="standard_tile_subtext text-right" style="font-weight:bold;display:table-footer-group;vertical-align:bottom;">
-                                    {$line.date}
-                                </div>
-                                </div>
-                                {$number=$number+1}
-                            {/foreach}
-                        </div>
-                    {/if}
                     </div>
-                    <div class="standard_tile_line"></div>
+                {/if}
+                <div class="standard_tile_line"></div>
+                <div id="latest_comments_all">
+                {if isset($comments)}
+                    <div class="games_main_detail_comments_container">
+                        {assign var="number" value=1}
+                        {foreach from=$comments item=line}
+                            <div {if $number is even}class="standard_list_entry standard_tile_padding_mini"{else}class="standard_list_entry_odd standard_tile_padding_mini"{/if} style="border-bottom: 1px solid black;">
+
+                            <span class="standard_tile_subtext" style="font-weight:bold;float:left;">
+                                <a href="../../admin/user/user_detail.php?user_id_selected={$line.user_id}">{$line.user_name}</a>
+                            </span>
+                            <span class="standard_tile_subtext" style="font-weight:bold;float:right;display:inline;">
+                                {if isset($user_session)}
+                                    <span style="font-weight:bold;float:left;margin-left:5px;margin-bottom:10px;">
+                                    {if $user_session.user_id == $line.user_id}
+                                        <a style="cursor: pointer;" onClick="CommentEditable({$line.comment_id},{$line.user_id})" class="latest_comments_link"><i class="fa fa-pencil" id="comment_edit_icon{$line.comment_id}" aria-hidden="true"  title="Click to edit comment"></i></a>
+                                        <a style="cursor: pointer;" onClick="SaveEditable({$line.comment_id},{$line.user_id},{$review.review_id})" class="latest_comments_link"><i class="fa fa-floppy-o" id="comment_save_icon{$line.comment_id}" aria-hidden="true" title="Click to save change" style="display:none;"></i></a>
+                                        <a style="cursor: pointer;" onClick="DeleteEditable({$line.comment_id},{$line.user_id},{$review.review_id})" class="latest_comments_link"><i class="fa fa-trash-o" id="comment_delete_icon{$line.comment_id}" aria-hidden="true" title="Click to delete comment"></i></a>
+                                    {/if}
+                                    {if $line.show_email == '1'}
+                                        {if $line.email != ''}
+                                            <a href="mailto:{$line.email}?subject=Comment%20of%20{$review.game_name|escape:'url'}%20review%20at%20Atari%20Legend" class="latest_comments_link" title="Click to email user"><i class="fa fa-envelope" aria-hidden="true"></i></a>
+                                        {/if}
+                                    {/if}
+                                    {if $line.user_fb != ''}
+                                        <a href="{$line.user_fb}" class="latest_comments_link" title="Click to visit Facebook profile"><i class="fa fa-facebook-square" aria-hidden="true"></i></a>
+                                    {/if}
+                                    {if $line.user_twitter != ''}
+                                        <a href="{$line.user_twitter}" class="latest_comments_link" title="Click to visit Twitter profile"><i class="fa fa-twitter" aria-hidden="true"></i></a>
+                                    {/if}
+                                    {if $line.user_af != ''}
+                                        <a href="{$line.user_af}" class="latest_comments_link" title="Click to visit Atari-Forum profile"><i class="fa fa-gamepad" aria-hidden="true"></i></a>
+                                    {/if}
+                                    {if $line.user_website != ''}
+                                        <a href="{$line.user_website}" class="latest_comments_link" title="Click to visit users website"><i class="fa fa-globe" aria-hidden="true"></i></a>
+                                    {/if}
+                                    </span>
+                                {/if}
+                            </span>
+                            <div class="latest_comments_text">
+                                <div id="latest_comment_edit{$line.comment_id}">
+                                    <div class="standard_link_color">{$line.comment}</div>
+                                </div>
+                                <div class="text-center">
+                                    <textarea id="comment_input{$line.comment_id}" class="primary_textarea" rows="5" style="display:none;">{$line.comment_edit}</textarea>
+                                </div>
+                            </div>
+                            <br><br><br>
+                            <div class="standard_tile_subtext text-right" style="font-weight:bold;display:table-footer-group;vertical-align:bottom;">
+                                {$line.date}
+                            </div>
+                            </div>
+                            {$number=$number+1}
+                        {/foreach}
+                    </div>
+                {/if}
                 </div>
+                <div class="standard_tile_line"></div>
             </div>
-            <!--***********************-->
-            <!--END Game comments tile -->
-            <!--***********************-->
-            {else}
-                <br>
-                {include file='1/main/tile_bug_report.html'}
-            {/if}
-
-            <!--*****************************-->
-            <!--START latest interviews tile -->
-            <!--*****************************-->
-            {block name=latest_interview_tile}
-                <br>
-                {include file='1/main/latest_reviews_tile.html'}
-            {/block}
-            <!--*****************************-->
-            <!--END latest interviews tile   -->
-            <!--*****************************-->
-
         </div>
+        <!--***********************-->
+        <!--END Game comments tile -->
+        <!--***********************-->
+        {/if}
+    </div>
+
+    <div class="content_box_games_details" id="column_center_reviews_details">
+        <!--*********************-->
+        <!--START Review tile -->
+        <!--*********************-->
+        <div class="standard_tile">
+            <h1><a href="../games/games_detail.php?game_id={$review.game_id}" class="standard_tile_link" title="Click to see all comments">{$review.game_name|upper}</a></h1>
+            <div class="standard_tile_line"></div>
+            <div class="standard_tile_padding" id="games_detail_review_bg">
+                <h4 style="white-space: nowrap;overflow: hidden;text-overflow: ellipsis;display:inline;">
+                    Written by <a href="../../admin/user/user_detail.php?user_id_selected={$review.user_id}" class="standard_tile_link">{$review.user_name}</a>
+                </h4>
+                <h2 style="float:right; display:inline;">
+                    <a href="javascript:history.go(-1)" class="standard_tile_link">Back <i class="fa fa-chevron-right" aria-hidden="true"></i></a>
+                </h2>
+                <h5 style="font-weight: bold;">{$review.date}</h5>
+                <br>
+                <br>
+                <div class="games_detail_review_container">
+                    <div class="games_detail_review_child" id="games_detail_review_text">
+                        <div class="standard_link_color">{$review.text}</div>
+                        <b><i>Score</i></b>
+                        <br>
+                        <br>
+                        Graphics : <b>{$score.graphics}</b><br>
+                        Sound : <b>{$score.sound}</b><br>
+                        Gameplay : <b>{$score.gameplay}</b><br>
+                        Overall : <b>{$score.overall}</b><br><br>
+                    </div>
+                    <div class="games_detail_review_child" id="games_detail_review_screenshots">
+                        <div class="games_detail_review_screenshot_space">
+                            <br>
+                            <br>
+                            <br>
+                        </div>
+                        {foreach from=$screenshots_review item=line}
+                            <div class="games_detail_review_screenshot_order">
+                                <a href="../../includes/show_image.php?file={$line.screenshot}&amp;resize=410,null,null,null" data-lightbox="image-1" data-title="{$line.comment}">
+                                    <img src="../../includes/show_image.php?file={$line.screenshot}&amp;resize=170,null,null,null" alt="Click to enlarge!" style="display:inline;" class="game_screenshot_img"></a>
+                                <br>
+                                <span class="standard_tile_subtext" style="font-weight: bold;">{$line.comment}</span>
+                                <br>
+                                <br>
+                                <br>
+                            </div>
+                        {/foreach}
+                    </div>
+                </div>
+                <br>
+            </div>
+        </div>
+        <!--*********************-->
+        <!--END review tile -->
+        <!--*********************-->
+    </div>
+
+    <div class="content_box_games_details" id="column_right_reviews_details">
+        {if isset($reviews_author)}
+        <!--*************************-->
+        <!--START review comments tile -->
+        <!--*************************-->
+        <div class="games_main_details_comments_position">
+            <div class="standard_tile">
+                <div class="help-tip">
+                    <p>
+                        <u>Only available with your own comments:</u><br>
+                        <i class="fa fa-pencil" aria-hidden="true"></i> - Edit comment<br>
+                        <i class="fa fa-floppy-o" aria-hidden="true"></i> - Save changes to comment<br>
+                        <i class="fa fa-trash-o" aria-hidden="true"></i> - Delete comment (if )<br><br>
+                        <u>General options:</u><br>
+                        <i class="fa fa-envelope" aria-hidden="true"></i> - Email author of comment<br>
+                        <i class="fa fa-facebook-square" aria-hidden="true"></i> - Go to Facebook profile of author<br>
+                        <i class="fa fa-twitter" aria-hidden="true"></i> - Go to Twitter profile of author<br>
+                        <i class="fa fa-gamepad" aria-hidden="true"></i> - Go to Atari-Forum profle<br>
+                        <i class="fa fa-globe" aria-hidden="true"></i> - Visit user's website
+                    </p>
+                </div>
+                <h1>REVIEW COMMENTS</h1>
+                <div class="standard_tile_line"></div>
+                {if isset($user_session)}
+                <form name="post">
+                <div class="standard_list_entry standard_tile_padding text-center">
+
+                    <input type="button" accesskey= "b" name="addbbcode0" value="B" onclick="bbstyle(0,'textfield')" class="primary_button" title="Bold">
+                    <input type="button" accesskey= "u" name="addbbcode4" value="U" onclick="bbstyle(4,'textfield')" class="primary_button" title="Underline">
+                    <input type="button" accesskey= "i" name="addbbcode2" value="I" onclick="bbstyle(2,'textfield')" class="primary_button" title="Recursive">
+                    <input type="button" accesskey="w" name="addbbcode6" value="URL" onClick="bbstyle(6,'textfield')" class="primary_button" title="Add links">
+                    <input type="button" accesskey="x" name="addbbcode8" value="@" onClick="bbstyle(8,'textfield')" class="primary_button" title="Add email address">
+                    <textarea id="comment_add" rows="4" class="primary_textarea" name="textfield" ONSELECT="javascript:storeCaret(this);" ONCLICK="javascript:storeCaret(this);" ONKEYUP="javascript:storeCaret(this);" ONCHANGE="javascript:storeCaret(this);"></textarea>
+
+                    <input type="button" value="Add" class="primary_button" onClick="AddComment({$user_session.user_id},{$review.review_id})">
+                </div>
+                </form>
+                {else}
+                    <div class="standard_list_entry" style="height:0;">
+                        <div class="games_main_detail_comments_log_on">
+                            Please log in to add your own comment to this review    .
+                        </div>
+                    </div>
+                {/if}
+                <div class="standard_tile_line"></div>
+                <div id="latest_comments_all">
+                {if isset($comments)}
+                    <div class="games_main_detail_comments_container">
+                        {assign var="number" value=1}
+                        {foreach from=$comments item=line}
+                            <div {if $number is even}class="standard_list_entry standard_tile_padding_mini"{else}class="standard_list_entry_odd standard_tile_padding_mini"{/if} style="border-bottom: 1px solid black;">
+
+                            <span class="standard_tile_subtext" style="font-weight:bold;float:left;">
+                                <a href="../../admin/user/user_detail.php?user_id_selected={$line.user_id}">{$line.user_name}</a>
+                            </span>
+                            <span class="standard_tile_subtext" style="font-weight:bold;float:right;display:inline;">
+                                {if isset($user_session)}
+                                    <span style="font-weight:bold;float:left;margin-left:5px;margin-bottom:10px;">
+                                    {if $user_session.user_id == $line.user_id}
+                                        <a style="cursor: pointer;" onClick="CommentEditable({$line.comment_id},{$line.user_id})" class="latest_comments_link"><i class="fa fa-pencil" id="comment_edit_icon{$line.comment_id}" aria-hidden="true"  title="Click to edit comment"></i></a>
+                                        <a style="cursor: pointer;" onClick="SaveEditable({$line.comment_id},{$line.user_id},{$review.review_id})" class="latest_comments_link"><i class="fa fa-floppy-o" id="comment_save_icon{$line.comment_id}" aria-hidden="true" title="Click to save change" style="display:none;"></i></a>
+                                        <a style="cursor: pointer;" onClick="DeleteEditable({$line.comment_id},{$line.user_id},{$review.review_id})" class="latest_comments_link"><i class="fa fa-trash-o" id="comment_delete_icon{$line.comment_id}" aria-hidden="true" title="Click to delete comment"></i></a>
+                                    {/if}
+                                    {if $line.show_email == '1'}
+                                        {if $line.email != ''}
+                                            <a href="mailto:{$line.email}?subject=Comment%20of%20{$review.game_name|escape:'url'}%20review%20at%20Atari%20Legend" class="latest_comments_link" title="Click to email user"><i class="fa fa-envelope" aria-hidden="true"></i></a>
+                                        {/if}
+                                    {/if}
+                                    {if $line.user_fb != ''}
+                                        <a href="{$line.user_fb}" class="latest_comments_link" title="Click to visit Facebook profile"><i class="fa fa-facebook-square" aria-hidden="true"></i></a>
+                                    {/if}
+                                    {if $line.user_twitter != ''}
+                                        <a href="{$line.user_twitter}" class="latest_comments_link" title="Click to visit Twitter profile"><i class="fa fa-twitter" aria-hidden="true"></i></a>
+                                    {/if}
+                                    {if $line.user_af != ''}
+                                        <a href="{$line.user_af}" class="latest_comments_link" title="Click to visit Atari-Forum profile"><i class="fa fa-gamepad" aria-hidden="true"></i></a>
+                                    {/if}
+                                    {if $line.user_website != ''}
+                                        <a href="{$line.user_website}" class="latest_comments_link" title="Click to visit users website"><i class="fa fa-globe" aria-hidden="true"></i></a>
+                                    {/if}
+                                    </span>
+                                {/if}
+                            </span>
+                            <div class="latest_comments_text">
+                                <div id="latest_comment_edit{$line.comment_id}">
+                                    <div class="standard_link_color">{$line.comment}</div>
+                                </div>
+                                <div class="text-center">
+                                    <textarea id="comment_input{$line.comment_id}" class="primary_textarea" rows="5" style="display:none;">{$line.comment_edit}</textarea>
+                                </div>
+                            </div>
+                            <br><br><br>
+                            <div class="standard_tile_subtext text-right" style="font-weight:bold;display:table-footer-group;vertical-align:bottom;">
+                                {$line.date}
+                            </div>
+                            </div>
+                            {$number=$number+1}
+                        {/foreach}
+                    </div>
+                {/if}
+                </div>
+                <div class="standard_tile_line"></div>
+            </div>
+        </div>
+        <!--***********************-->
+        <!--END Game comments tile -->
+        <!--***********************-->
+        {else}
+            {include file='1/main/tile_bug_report.html'}
+        {/if}
+
+        <!--*****************************-->
+        <!--START latest interviews tile -->
+        <!--*****************************-->
+        {block name=latest_interview_tile}
+            {include file='1/main/latest_reviews_tile.html'}
+        {/block}
+        <!--*****************************-->
+        <!--END latest interviews tile   -->
+        <!--*****************************-->
+
     </div>
 {/block}

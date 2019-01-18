@@ -20,6 +20,7 @@ require "../../config/common.php";
 require "../../common/tiles/latest_interviews_tile.php";
 
 require_once __DIR__."/../../common/DAO/GameReleaseDAO.php";
+require_once __DIR__."/../../common/Model/Breadcrumb.php";
 
 $gameReleaseDao = new \AL\Common\DAO\GameReleaseDAO($mysqli);
 
@@ -216,6 +217,17 @@ while ($query_comment = $sql_comment->fetch_array(MYSQLI_BOTH)) {
         )
     );
 }
+
+$smarty->assign(
+    'breadcrumb',
+    array(
+        new AL\Common\Model\Breadcrumb("/interviews/interviews_main.php", "Interviews"),
+        new AL\Common\Model\Breadcrumb(
+            "/interviews/interviews_detail.php?selected_interview_id=$selected_interview_id",
+            $query_interview['ind_name']
+        )
+    )
+);
 
 //Send all smarty variables to the templates
 $smarty->display("file:" . $mainsite_template_folder . "interviews_detail.html");

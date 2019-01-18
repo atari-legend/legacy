@@ -20,6 +20,8 @@ require "../../common/tiles/did_you_know_tile.php";
 require "../../common/tiles/latest_comments_tile.php";
 require "../../common/tiles/tile_bug_report.php";
 
+require_once __DIR__."/../../common/Model/Breadcrumb.php";
+
 //Send all smarty variables to the templates
 if (isset($action) and $action == 'andreas') {
     // get the comments from the database
@@ -48,6 +50,13 @@ if (isset($action) and $action == 'andreas') {
     }
     $smarty->assign('action', 'andreas');
 }
+
+$smarty->assign(
+    'breadcrumb',
+    array(
+        new AL\Common\Model\Breadcrumb("/about/about.php", "About")
+    )
+);
 
 $smarty->display("file:" . $mainsite_template_folder . "about.html");
 

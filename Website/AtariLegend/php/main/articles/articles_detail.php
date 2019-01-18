@@ -19,6 +19,8 @@ require "../../config/common.php";
 //load the tiles
 require "../../common/tiles/latest_interviews_tile.php";
 
+require_once __DIR__."/../../common/Model/Breadcrumb.php";
+
 //***********************************************************************************
 //Let's get all the article data
 //***********************************************************************************
@@ -180,6 +182,17 @@ while ($query_articles_author = $sql_articles_author->fetch_array(MYSQLI_BOTH)) 
 }
 
 $smarty->assign('nr_articles_author', $count);
+
+$smarty->assign(
+    'breadcrumb',
+    array(
+        new AL\Common\Model\Breadcrumb("/articles/articles_main.php", "Articles"),
+        new AL\Common\Model\Breadcrumb(
+            "/articles/articles_detail.php?selected_article_id=$selected_article_id",
+            $article['article_title']
+        )
+    )
+);
 
 //Send all smarty variables to the templates
 $smarty->display("file:" . $mainsite_template_folder . "articles_detail.html");
