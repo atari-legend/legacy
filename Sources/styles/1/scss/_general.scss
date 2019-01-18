@@ -66,6 +66,28 @@ img {
     display: block;
 }
 
+//*---------------------
+// font options
+//*---------------------
+//color
+.f-color-gray {color: #bcbdbd;}
+.f-color-white {color: #ffffff;}
+
+//size
+.f-size-1em {font-size : 1em;}
+.f-size-12pt {font-size : 12pt;}
+.f-size-18pt {font-size : 18pt;}
+
+//appearance
+.f-family-audio {font-family: Audiowide, Arial, helvetica, sans-serif;}
+.f-weight-100{font-weight: 100;}
+
+//*---------------------
+// alignment
+//*---------------------
+.text-center {text-align: center;}
+.v-align-top {vertical-align:top;}
+
 //*----------------------------------------------------------
 // Main site width
 //------------------------------------------------------------ */

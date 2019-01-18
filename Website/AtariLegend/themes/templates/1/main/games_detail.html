@@ -594,13 +594,17 @@
             <br>
             <div class="games_main_details_screenshots_position_high">
                 <div class="standard_tile">
+                    <div class="help-tip">
+                        <p>
+                            <i class="fa fa-info-circle" aria-hidden="true"></i> - Open/close the profile of a company or individual<br>
+                            <i class="fa fa-picture-o" aria-hidden="true"></i> - Click for the company logo or author photo<br>
+                            <i class="fa fa-newspaper-o" aria-hidden="true"></i> - Interview available
+                        </p>
+                    </div>
                     <h1>
-                        {$game_info.game_name|upper}
-                        {if isset($smarty.session.permission) and $smarty.session.permission == 1}
-                            <a href="../../admin/games/games_detail.php?game_id={$game_id}" title="Edit this game in CPANEL" class="standard_tile_link_reverse"><span class="fa fa-pencil"></span></a>
-                        {/if}
+                        GAME INFO
                     </h1>
-                    <div class="standard_tile_line"></div>
+                    {include file='1/main/games_detail_info2.html' position='high'}
                     {if isset($screenshots)}
                         <div id="jssor_1" class="games_main_detail_screenshot">
                             <div data-u="slides" class="games_main_detail_slides">
