@@ -296,12 +296,6 @@
         margin: auto;
         order: 1;
     }
-    .main_container_games_details {
-        display: flex;
-        flex-direction: column-reverse;
-        float: left;
-        width: 100%;
-    }
 
     #column_left_games_details {
         width: 100%;
@@ -320,9 +314,6 @@
         float: right;
         margin: auto;
         order: 1;
-    }
-    .main_container_games_details > div {
-        width: 100%;
     }
     .content_box_games_details {
         display: block;

@@ -140,6 +140,7 @@ img {
     border-top: 10px solid #00d3d3;
     border-bottom: 3px solid #00d3d3;
     position: relative;
+    margin-bottom: 20px;
 }
 
 .standard_tile_line {
@@ -759,4 +760,34 @@ a.atom {
     float: left;
     margin-top: 5px;
     margin-left: 10px;
+}
+
+// Breadcrumb
+ul#breadcrumb {
+    display: block;
+    font-size: small;
+    list-style-type: none;
+    margin: 15px 10px 10px 10px;
+    min-height: 1px;
+
+    li {
+        display: inline;
+        color: #bcbdbd;
+
+        &:after {
+            content: ' »';
+        }
+
+        &:last-child:after {
+            content: none;
+        }
+
+        a {
+            color: #008b8b;
+
+            &:hover {
+                color: #fff;
+            }
+        }
+    }
 }

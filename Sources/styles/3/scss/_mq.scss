@@ -245,14 +245,10 @@
     }
 }
 @media screen and (max-width: 799px) {
-    .main_container_games_details,
     .main_container_cpanel {
         display: flex;
         flex-direction: column-reverse;
         float: left;
-        width: 100%;
-    }
-    .main_container_games_details > div {
         width: 100%;
     }
     .content_box_games_details {

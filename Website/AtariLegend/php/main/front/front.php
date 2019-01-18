@@ -71,6 +71,8 @@ if (isset($action) and $action=='first_time') {
     $smarty->assign('smarty_action', 'first_time');
 }
 
+$smarty->assign('breadcrumb', array());
+
 //Send all smarty variables to the templates
 $smarty->display("file:".$mainsite_template_folder."frontpage.html");
 

@@ -18,90 +18,84 @@
 {block name=title}Latest Atari ST news | Atari Legend{/block}
 
 {block name=main_body}
-    <div id="main" class="main_container_cpanel">
-        <div class="content_box_cpanel" id="column_left_cpanel">
-            <br>
-            <div class="games_main_details_comments_position">
-                <div class="standard_tile">
-                    <h1>SUBMIT NEWS</h1>
-                    <div class="standard_tile_line"></div>
-                    <div class="standard_tile_padding text-center">
-                        <h6 style="text-align:justify;">Did something important happen in the Atari scene
-                        that has not been posted yet, make sure to let us know by simply filling in this form. You will be
-                        credited on the front page of AtariLegend!</h6>
-
-                    {if isset($user_session)}
-                        <form method="post" name="post" action="../../main/news/db_news.php">
-                            <br>
-                            <input type="text" name="news_headline" class="standard_input input_full" placeholder="Headline">
-                            <textarea rows="4" class="primary_textarea" name="textfield" placeholder="News item"></textarea>
-                            <input type="submit" value="Add" class="primary_button">
-                        </form>
-                    {else}
-                        <div class="games_main_detail_comments_log_on">
-                            Please log in to submit a news item.
-                        </div>
-                    {/if}
-                    </div>
-                </div>
-            </div>
-            <br>
-            {include file='1/main/tile_class_of_al.html'}
-        </div>
-        <div class="content_box_cpanel" id="column_center_cpanel">
-            <br>
-            <div class="standard_tile" id="games_main">
-                <a href="../../front/atom.php" title="Atari Legend Atom Feed" class="atom">
-                    <img src="../../themes/templates/1/includes/img/feed-icon.png" alt="Atom feed icon">
-                </a>
-                <h1>LATEST NEWS</h1>
+    <div class="content_box_cpanel" id="column_left_cpanel">
+        <div class="games_main_details_comments_position">
+            <div class="standard_tile">
+                <h1>SUBMIT NEWS</h1>
                 <div class="standard_tile_line"></div>
-                <table class="primary_table_list  table_lg no_border">
-                {foreach from=$news item=line}
-                    <tr>
-                        <td class="news_left_head">
-                            <h6 class="news_head">{$line.news_headline}</h6>
-                        </td>
-                        <td class="news_right_head">
-                            <h6 style="text-align:right;margin-right:10px;" class="news_head">{$line.news_date} by <a href="../../admin/user/user_detail.php?user_id_selected={$line.user_id}" class="latest_comments_link">{$line.user_name}</a></h6>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td class="" colspan="2">
-                            {if $line.image_id != ''}
-                                <div style="text-align: justify;">
-                                    <img src="../../includes/show_image.php?file={$line.image}&amp;resize=160,null,null,null" alt="{$line.news_headline}" class="user_stats_img_dark" style="max-width:95%;float:left;margin-left:10px;margin-right:10px;margin-top:15px;">
-                                </div>
-                            {/if}
-                            <div style="text-align: justify;margin-top:10px;margin-left:10px;margin-right:10px;">
-                                <div class="news_main_text">
-                                    <span class="news_date">
-                                        {$line.news_date} by <a href="../../admin/user/user_detail.php?user_id_selected={$line.user_id}" class="latest_comments_link">{$line.user_name}</a><br><br>
-                                    </span>
-                                    {$line.news_text}
-                                </div>
-                            </div>
-                        </td>
-                    </tr>
-                {/foreach}
-                </table>
-                <div class="standard_tile_text_center">
-                    {if $links.linkback != ''}
-                        <a href ="../news/news.php{$links.linkback}" class="standard_tile_link" style="float:left;margin-left:5px;margin-top:10px;">Previous page</a>
-                    {/if}
-                    {if $links.linknext != ''}
-                        <a href="../news/news.php{$links.linknext}" class="standard_tile_link" style="float:right;margin-right:5px;margin-top:10px;">Next page</a>
-                    {/if}
+                <div class="standard_tile_padding text-center">
+                    <h6 style="text-align:justify;">Did something important happen in the Atari scene
+                    that has not been posted yet, make sure to let us know by simply filling in this form. You will be
+                    credited on the front page of AtariLegend!</h6>
+
+                {if isset($user_session)}
+                    <form method="post" name="post" action="../../main/news/db_news.php">
+                        <br>
+                        <input type="text" name="news_headline" class="standard_input input_full" placeholder="Headline">
+                        <textarea rows="4" class="primary_textarea" name="textfield" placeholder="News item"></textarea>
+                        <input type="submit" value="Add" class="primary_button">
+                    </form>
+                {else}
+                    <div class="games_main_detail_comments_log_on">
+                        Please log in to submit a news item.
+                    </div>
+                {/if}
                 </div>
             </div>
         </div>
-        <div class="content_box_cpanel" id="column_right_cpanel">
-            <br>
-            {block name=right_tile}
-                {include file='1/main/tile_screenstar.html'}
-                <br>
-                {include file='1/main/did_you_know_tile.html'}
-            {/block}
+
+        {include file='1/main/tile_class_of_al.html'}
+    </div>
+    <div class="content_box_cpanel" id="column_center_cpanel">
+        <div class="standard_tile" id="games_main">
+            <a href="../../front/atom.php" title="Atari Legend Atom Feed" class="atom">
+                <img src="../../themes/templates/1/includes/img/feed-icon.png" alt="Atom feed icon">
+            </a>
+            <h1>LATEST NEWS</h1>
+            <div class="standard_tile_line"></div>
+            <table class="primary_table_list  table_lg no_border">
+            {foreach from=$news item=line}
+                <tr>
+                    <td class="news_left_head">
+                        <h6 class="news_head">{$line.news_headline}</h6>
+                    </td>
+                    <td class="news_right_head">
+                        <h6 style="text-align:right;margin-right:10px;" class="news_head">{$line.news_date} by <a href="../../admin/user/user_detail.php?user_id_selected={$line.user_id}" class="latest_comments_link">{$line.user_name}</a></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="" colspan="2">
+                        {if $line.image_id != ''}
+                            <div style="text-align: justify;">
+                                <img src="../../includes/show_image.php?file={$line.image}&amp;resize=160,null,null,null" alt="{$line.news_headline}" class="user_stats_img_dark" style="max-width:95%;float:left;margin-left:10px;margin-right:10px;margin-top:15px;">
+                            </div>
+                        {/if}
+                        <div style="text-align: justify;margin-top:10px;margin-left:10px;margin-right:10px;">
+                            <div class="news_main_text">
+                                <span class="news_date">
+                                    {$line.news_date} by <a href="../../admin/user/user_detail.php?user_id_selected={$line.user_id}" class="latest_comments_link">{$line.user_name}</a><br><br>
+                                </span>
+                                {$line.news_text}
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+            {/foreach}
+            </table>
+            <div class="standard_tile_text_center">
+                {if $links.linkback != ''}
+                    <a href ="../news/news.php{$links.linkback}" class="standard_tile_link" style="float:left;margin-left:5px;margin-top:10px;">Previous page</a>
+                {/if}
+                {if $links.linknext != ''}
+                    <a href="../news/news.php{$links.linknext}" class="standard_tile_link" style="float:right;margin-right:5px;margin-top:10px;">Next page</a>
+                {/if}
+            </div>
         </div>
+    </div>
+    <div class="content_box_cpanel" id="column_right_cpanel">
+        {block name=right_tile}
+            {include file='1/main/tile_screenstar.html'}
+            {include file='1/main/did_you_know_tile.html'}
+        {/block}
     </div>
 {/block}

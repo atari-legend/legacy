@@ -26,6 +26,7 @@ require "../../common/tiles/latest_comments_tile.php";
 require "../../common/tiles/screenstar.php";
 
 require_once __DIR__."/../../common/DAO/GameReleaseDAO.php";
+require_once __DIR__."/../../common/Model/Breadcrumb.php" ;
 
 $gameReleaseDao = new \AL\Common\DAO\GameReleaseDAO($mysqli);
 
@@ -661,6 +662,13 @@ if (isset($action) and $action == "search") {
                     $smarty->assign("rest2", $rest2);
 
                     $smarty->assign("query_time", $time_elapsed_secs);
+
+                    $smarty->assign(
+                        'breadcrumb',
+                        array(
+                            new AL\Common\Model\Breadcrumb("/games/games_main_list.php", "Games List")
+                        )
+                    );
 
                     //Send all smarty variables to the templates
                     $smarty->display("file:" . $mainsite_template_folder . "games_main_list.html");
