@@ -570,19 +570,25 @@ if ($imagenum_rows > 0) {
             );
         }
     }
-
-    $smarty->assign("nr_box", $front);
 }
 
+$smarty->assign("nr_box", $front);
+    
+    
 // Get box scans for all release
 // This is temporary until we revamp the games/relase details page
+$nr_of_release_scans=0;
+
 $smarty->assign('release_scans', []);
 foreach ($releases as $release) {
     $release_scans = $gameReleaseScanDao->getScansForRelease($release->getId());
     foreach ($release_scans as $scan) {
         $smarty->append('release_scans', $scan);
+        $nr_of_release_scans++;
     }
 }
+
+$smarty->assign("nr_release", $nr_of_release_scans);
 
 //***********************************************************************************
 //Get the comments
