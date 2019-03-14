@@ -16,165 +16,23 @@
 //****************************************************************************************
 *}
 
-
 {extends file='1/main/main.html'}
 {block name=title}{$game_info.game_name} - Atari ST game | Atari Legend{/block}
 {block name=description}{$game_description}{/block}
 {block name=additional_scripts}
     <script src="{$template_dir}includes/js/vendor/jssor.slider-27.3.0.min.js"></script>
     <script src="{$template_dir}includes/js/game.js"></script> <!-- Load all game scripts -->
-    <script> <!-- script used for the jquery screenshot and boxscan slider -->
-        jQuery(document).ready(function ($) {
-
-        //screenshot slider code
-        var jssor_1_SlideshowTransitions = [
-            {literal}{$Duration:1200,$Opacity:2}{/literal}
-        ];
-
-        var jssor_1_options = {
-            $AutoPlay: 1,
-            $SlideshowOptions: {
-                $Class: $JssorSlideshowRunner$,
-                $Transitions: jssor_1_SlideshowTransitions,
-                $TransitionsOrder: 1
-            },
-            $ArrowNavigatorOptions: {
-                $Class: $JssorArrowNavigator$
-            },
-            $BulletNavigatorOptions: {
-                $Class: $JssorBulletNavigator$
-            },
-            $ThumbnailNavigatorOptions: {
-                $Class: $JssorThumbnailNavigator$,
-                {if $nr_screenshots < 10}
-                    $Rows: 1,
-                    $Align: 209,
-                {else}
-                    $Rows: 2,
-                    $Align: 171,
-                {/if}
-                $SpacingX: 5,
-                $SpacingY: 5,
-                $Orientation: 2
-            }
-        };
-
-        {if isset($screenshots)}
-            var jssor_1_slider = new $JssorSlider$("jssor_1", jssor_1_options);
-        {/if}
-
-        {if isset($boxscan) or count($release_scans) > 1}
-            // boxscan slider code
-            var jssor_2_SlideshowTransitions = [
-                {literal}{$Duration:1200,$Opacity:2}{/literal}
-            ];
-
-            var jssor_2_options = {
-                $AutoPlay: 1,
-                $FillMode: 5,
-                $SlideshowOptions: {
-                    $Class: $JssorSlideshowRunner$,
-                    $Transitions: jssor_1_SlideshowTransitions,
-                    $TransitionsOrder: 1
-                },
-                $ArrowNavigatorOptions: {
-                    $Class: $JssorArrowNavigator$
-                },
-                $ThumbnailNavigatorOptions: {
-                    $Class: $JssorThumbnailNavigator$,
-                    $Cols: 4,
-                    $Align: 400
-                }
-            };
-
-            var jssor_2_slider = new $JssorSlider$("jssor_2", jssor_2_options);
-        {/if}
-
-        /*#region responsive code begin*/
-        function ScaleSlider() {
-            {if isset($screenshots)}
-                //for screenshots
-                var containerElement = jssor_1_slider.$Elmt.parentNode;
-                var containerWidth = containerElement.clientWidth;
-                if (containerWidth) {
-                    var MAX_WIDTH = 960;
-
-                    var expectedWidth = containerWidth;
-
-                    if (MAX_WIDTH) {
-                        expectedWidth = Math.min(MAX_WIDTH, expectedWidth);
-                    }
-
-                    jssor_1_slider.$ScaleWidth(expectedWidth);
-                }
-                else {
-                    window.setTimeout(ScaleSlider, 30);
-                }
-            {/if}
-
-            {if isset($boxscan) or count($release_scans) > 1}
-            //for boxscans
-                var containerElement2 = jssor_2_slider.$Elmt.parentNode;
-                var containerWidth2 = containerElement2.clientWidth;
-                if (containerWidth2) {
-                    var MAX_WIDTH = 480;
-
-                    var expectedWidth2 = containerWidth2;
-
-                    if (MAX_WIDTH) {
-                        expectedWidth2 = Math.min(MAX_WIDTH, expectedWidth2);
-                    }
-
-                    jssor_2_slider.$ScaleWidth(expectedWidth2);
-                }
-                else {
-                    window.setTimeout(ScaleSlider, 30);
-                }
-            {/if}
-        }
-
-        ScaleSlider();
-        $(window).bind("load", ScaleSlider);
-        $(window).bind("resize", ScaleSlider);
-        $(window).bind("orientationchange", ScaleSlider);
-        /*#endregion responsive code end*/
-
-
-        //API $Play, $Pause
-        function Play() {
-            jssor_1_slider.$Play();
-        }
-
-        function Pause() {
-            jssor_1_slider.$Pause();
-        }
-
-        $("#play_jssor1").click(Play);
-        $("#pause_jssor1").click(Pause);
-
-        {if isset($boxscan) or count($release_scans) > 1}
-            function Play_box() {
-                jssor_2_slider.$Play();
-            }
-
-            function Pause_box() {
-                jssor_2_slider.$Pause();
-            }
-
-            $("#play_jssor2").click(Play_box);
-            $("#pause_jssor2").click(Pause_box);
-        {/if}
-    });
+    <script> <!-- we call the slideshow JS from the html file so we can pass certain variables to it -->
+        jQuery(document).ready( function() {
+            initJSsor({$nr_screenshots},{$nr_box},{$nr_release});
+        });
     </script>
-
     <script src="{$template_dir}includes/js/vendor/lightbox-2.9.0.min.js"></script>
-
     <script>
         lightbox.option({
             'showImageNumberLabel': false
         })
     </script>
-
     <script src="{$template_dir}includes/js/bbcode.js"></script> <!-- Load the BBCODE script - all the code for the options of the textfield of the comment section -->
     <script src="{$template_dir}includes/js/vendor/jquery.dotdotdot-1.8.3.min.js"></script> <!--this script is used for the elipsis (...) effect of the preview of the reviews -->
 {/block}
