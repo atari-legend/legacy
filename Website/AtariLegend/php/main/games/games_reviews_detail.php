@@ -20,6 +20,8 @@ require "../../config/common.php";
 require "../../common/tiles/latest_reviews_tile.php";
 require "../../common/tiles/tile_bug_report.php";
 
+require_once __DIR__."/../../common/Model/Breadcrumb.php";
+
 //***********************************************************************************
 //Let's get all the review and author data
 //***********************************************************************************
@@ -170,6 +172,17 @@ while ($query_comment = $sql_comment->fetch_array(MYSQLI_BOTH)) {
         )
     );
 }
+
+$smarty->assign(
+    'breadcrumb',
+    array(
+        new AL\Common\Model\Breadcrumb("/games/games_reviews_main.php", "Reviews"),
+        new AL\Common\Model\Breadcrumb(
+            "/games/games_reviews_detail.php?review_id=$review_id",
+            $query_review['game_name']
+        ),
+    )
+);
 
 //Send all smarty variables to the templates
 $smarty->display("file:" . $mainsite_template_folder . "games_reviews_detail.html");

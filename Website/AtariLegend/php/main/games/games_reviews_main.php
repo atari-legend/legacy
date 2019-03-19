@@ -22,6 +22,8 @@ require "../../common/tiles/did_you_know_tile.php";
 require "../../common/tiles/latest_comments_tile.php";
 require "../../common/tiles/tile_bug_report.php";
 
+require_once __DIR__."/../../common/Model/Breadcrumb.php";
+
 //***********************************************************************************
 //Let's get all the interview and author data
 //***********************************************************************************
@@ -224,6 +226,13 @@ $smarty->assign(
     'linknext' => $v_linknext,
     'v_counter' => $v_counter,
     'c_counter' => $c_counter
+    )
+);
+
+$smarty->assign(
+    'breadcrumb',
+    array(
+        new AL\Common\Model\Breadcrumb("/games/games_reviews_main.php", "Reviews")
     )
 );
 

@@ -27,6 +27,8 @@ require "../../common/tiles/user_contribution.php";
 require "../../common/tiles/latest_reviews_tile.php";
 require "../../common/tiles/tile_bug_report.php";
 
+require_once __DIR__."/../../common/Model/Breadcrumb.php";
+
 //***********************************************************************************
 //get the name of the game
 //***********************************************************************************
@@ -34,6 +36,7 @@ $sql_game = $mysqli->query("SELECT * FROM game WHERE game.game_id='$game_id'")
                             or die("Error getting game info");
 
 while ($game_info = $sql_game->fetch_array(MYSQLI_BOTH)) {
+    $game_name = $game_info['game_name'];
     $smarty->assign(
         'game_info', array(
         'game_name' => $game_info['game_name'],
@@ -111,6 +114,18 @@ if (isset($_SESSION['user_id'])) {
 }
 
 $smarty->assign("game_id", $game_id);
+
+$smarty->assign(
+    'breadcrumb',
+    array(
+        new AL\Common\Model\Breadcrumb("/games/games_reviews_main.php", "Reviews"),
+        new AL\Common\Model\Breadcrumb(
+            "/games/games_reviews_add.php?game_id=$game_id",
+            "Add a new review of ".$game_name
+        ),
+    )
+);
+
 
 //Send all smarty variables to the templates
 $smarty->display("file:" . $mainsite_template_folder . "games_reviews_add.html");

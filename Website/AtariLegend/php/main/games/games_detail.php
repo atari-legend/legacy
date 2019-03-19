@@ -38,6 +38,7 @@ require_once __DIR__."/../../common/DAO/SoundHardwareDAO.php";
 require_once __DIR__."/../../common/DAO/GameProgressSystemDAO.php";
 require_once __DIR__."/../../common/DAO/GameReleaseScanDAO.php";
 require_once __DIR__."/../../common/DAO/GameDAO.php";
+require_once __DIR__."/../../common/Model/Breadcrumb.php" ;
 
 $gameReleaseDao = new \AL\Common\DAO\GameReleaseDAO($mysqli);
 $gameSeriesDao = new \AL\Common\DAO\GameSeriesDAO($mysqli);
@@ -186,7 +187,8 @@ if ($game_info = $sql_game->fetch_array(MYSQLI_BOTH)) {
 }
 
 //Get the game data --> new way of working
-$smarty->assign('game', $gameDao->getGame($game_id));
+$game = $gameDao->getGame($game_id);
+$smarty->assign('game', $game);
 
 // Get the programming languages
 $smarty->assign('programming_languages', $programmingLanguageDao->getAllProgrammingLanguages());
@@ -822,6 +824,14 @@ $smarty->assign(
         $game_screenshots_count,
         $game_boxscans_count,
         $game_reviews_count
+    )
+);
+
+$smarty->assign(
+    'breadcrumb',
+    array(
+        new AL\Common\Model\Breadcrumb("/games/games_main.php", "Games"),
+        new AL\Common\Model\Breadcrumb("/games/games_detail.php?game_id=".$game->getId(), $game->getName()),
     )
 );
 

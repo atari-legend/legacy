@@ -21,6 +21,8 @@ require "../../common/tiles/screenstar.php";
 require "../../common/tiles/did_you_know_tile.php";
 require "../../common/tiles/latest_comments_tile.php";
 
+require_once __DIR__."/../../common/Model/Breadcrumb.php" ;
+
 $v_counter= (isset($_GET["v_counter"]) ? $_GET["v_counter"] : 0);
 
 //Select the news from the DB
@@ -92,6 +94,13 @@ $smarty->assign(
     array(
         'linkback' => $v_linkback,
         'linknext' => $v_linknext)
+);
+
+$smarty->assign(
+    'breadcrumb',
+    array(
+        new AL\Common\Model\Breadcrumb("/news/news.php", "News")
+    )
 );
 
 //Send all smarty variables to the templates

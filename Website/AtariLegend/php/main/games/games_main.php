@@ -30,6 +30,7 @@ require "../../common/tiles/changes_per_month_tile.php";
 
 require_once __DIR__."/../../common/DAO/GameReleaseDAO.php";
 require_once __DIR__."/../../common/DAO/GameGenreDAO.php";
+require_once __DIR__."/../../common/Model/Breadcrumb.php" ;
 
 $gameReleaseDao = new \AL\Common\DAO\GameReleaseDAO($mysqli);
 $GameGenreDao = new \AL\Common\DAO\GameGenreDAO($mysqli);
@@ -66,6 +67,13 @@ $smarty->assign("games_nr", $games_nr);
 if (isset($_SESSION['edit_message'])) {
     $smarty->assign("message", $_SESSION['edit_message']);
 }
+
+$smarty->assign(
+    'breadcrumb',
+    array(
+        new AL\Common\Model\Breadcrumb("/games/games_main.php", "Games")
+    )
+);
 
 //Send all smarty variables to the templates
 $smarty->display("file:" . $mainsite_template_folder. "games_main.html");

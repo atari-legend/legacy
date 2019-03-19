@@ -335,227 +335,218 @@
 {/block}
 
 {block name=main_body}
-    <div id="main" class="main_container_games_details">
-        <div class="content_box_games_details" id="column_left_reviews_details">
-            <!--*****************************-->
-            <!--START Credits tile -->
-            <!--*****************************-->
-            <br>
-            <div class="standard_tile">
-                <h1>GAME REVIEWS</h1>
-                <div class="standard_tile_line"></div>
-                <div class="games_main_detail_comments_container">
-                    <table class="primary_table_list table_md no_border">
-                        {if isset($reviews_author)}
+    <div class="content_box_games_details" id="column_left_reviews_details">
+        <!--*****************************-->
+        <!--START Credits tile -->
+        <!--*****************************-->
+        <div class="standard_tile">
+            <h1>GAME REVIEWS</h1>
+            <div class="standard_tile_line"></div>
+            <div class="games_main_detail_comments_container">
+                <table class="primary_table_list table_md no_border">
+                    {if isset($reviews_author)}
+                    <tr>
+                        <td>
+                            <div class="standard_list_entry_news_text text-center">
+                                {$user_session.userid} has written {$nr_reviews_author} additional reviews :
+                            </div>
+                        </td>
+                    </tr>
+                    {foreach from=$reviews_author item=line name=reviews_author}
                         <tr>
                             <td>
+                                <span style="overflow: hidden;text-overflow: ellipsis"><a href="../games/games_detail.php?game_id={$line.game_id}" class="standard_tile_link" style="margin-left:10px;">{$line.game_name}</a></span>
+                                <br><span class="standard_tile_subtext" style="margin-left:15px;"><a href="../games/games_reviews_detail.php?review_id={$line.review_id}&game_id={$line.game_id}" style="margin-left:10px;">read more</a></span>
+                            </td>
+                        </tr>
+                    {/foreach}
+                    {else}
+                        <tr>
+                            <td class="w-100">
                                 <div class="standard_list_entry_news_text text-center">
-                                    {$user_session.userid} has written {$nr_reviews_author} additional reviews :
+                                    You haven't written any reviews before. This is your first. Congratulations and good luck! For some examples, see tile 'Indepth reviews'.
                                 </div>
                             </td>
                         </tr>
-                        {foreach from=$reviews_author item=line name=reviews_author}
-                            <tr>
-                                <td>
-                                    <span style="overflow: hidden;text-overflow: ellipsis"><a href="../games/games_detail.php?game_id={$line.game_id}" class="standard_tile_link" style="margin-left:10px;">{$line.game_name}</a></span>
-                                    <br><span class="standard_tile_subtext" style="margin-left:15px;"><a href="../games/games_reviews_detail.php?review_id={$line.review_id}&game_id={$line.game_id}" style="margin-left:10px;">read more</a></span>
-                                </td>
-                            </tr>
-                        {/foreach}
-                        {else}
-                            <tr>
-                                <td class="w-100">
-                                    <div class="standard_list_entry_news_text text-center">
-                                        You haven't written any reviews before. This is your first. Congratulations and good luck! For some examples, see tile 'Indepth reviews'.
-                                    </div>
-                                </td>
-                            </tr>
-                        {/if}
-                    </table>
-                </div>
+                    {/if}
+                </table>
             </div>
-            <!--*****************************-->
-            <!--END Credits tile             -->
-            <!--*****************************-->
-            {if isset($reviews_author)}
-                <br>
-                {include file='1/main/latest_comments_tile.html'}
-            {else}
-                <br>
-                {include file='1/main/latest_reviews_tile.html'}
-            {/if}
         </div>
+        <!--*****************************-->
+        <!--END Credits tile             -->
+        <!--*****************************-->
+        {if isset($reviews_author)}
+            {include file='1/main/latest_comments_tile.html'}
+        {else}
+            {include file='1/main/latest_reviews_tile.html'}
+        {/if}
+    </div>
 
-        <div class="content_box_games_details" id="column_center_reviews_details">
-            {if isset($user_session)}
+    <div class="content_box_games_details" id="column_center_reviews_details">
+        {if isset($user_session)}
+        <div class="standard_tile">
+            <div class="help-tip">
+                <p>
+                    This is the place were you write your own reviews. Some things to consider :
+                    <br> - Make sure your review is worthy! A game review is more than an elaborate comment to a game (we have comments sections for this). See other reviews in the database as examples
+                    <br> - You are not obliged to follow the common review structure (comments, graphics, sounds, gameplay, conclusion)
+                    <br> - Your submitted review will be checked by our admin before it enters the database
+                    <br> - The score input fields are obliged
+                    <br> - Make sure to add some comments to the screenshots below to make the review more 'fun'. Every screenshot you comment, will be added to the review
+                    <br> - Click the screenshots for a bigger version
+                    <br> - Use the preview tab to see what your work looks like before you submit it
+                    <br> - THANKS A LOT for you submission and for making this website more interesting for all of us!
+                </p>
+            </div>
+            <h1>{$game_info.game_name|upper}</h1>
+            <div class="standard_tile_line"></div>
+            <div class="tab">
+                <button class="tablinks" onclick="openTab(event, 'edit')" id="defaultOpen">EDIT</button>
+                <button class="tablinks" onclick="openTab(event, 'preview')">PREVIEW</button>
+            </div>
+            <div id="edit" class="tabcontent">
+                <!--**************************-->
+                <!--START Write a review tile -->
+                <!--**************************-->
+                <form id="post" onsubmit="return add_review();" name="post">
+                    <div class="standard_tile_padding">
+                        <h6>
+                            Written by : <br>
+                            <select name="members" class="standard_select select_large">
+                                <option value="{$user_session.user_id}" selected>{$user_session.userid}</option>
+                            </select>
+                        </h6>
+                        <br>
+                        <h6>
+                            <div>Date :</div>
+                            <div>{html_select_date start_year="2000" class="standard_select"}</div>
+                        </h6>
+                    </div>
+                    <div class="standard_tile_padding">
+                        <h6>Review :</h6>
+                        <div style="width:100%;text-align:left;margin-top:10px;">
+                            <input type="button" accesskey= "b" name="addbbcode0" value="B" onclick="bbstyle(0,'textfield')" class="primary_button" title="Bold">
+                            <input type="button" accesskey= "u" name="addbbcode4" value="U" onclick="bbstyle(4,'textfield')" class="primary_button" title="Underline">
+                            <input type="button" accesskey= "i" name="addbbcode2" value="I" onclick="bbstyle(2,'textfield')" class="primary_button" title="Recursive">
+                            <input type="button" accesskey="w" name="addbbcode6" value="URL" onClick="bbstyle(6,'textfield')" class="primary_button" title="Add links">
+                            <input type="button" accesskey="x" name="addbbcode8" value="@" onClick="bbstyle(8,'textfield')" class="primary_button" title="Add email address">
+                            <textarea name="textfield" rows="15" class="primary_textarea" id="game_review_textfield" ONSELECT="javascript:storeCaret(this);" ONCLICK="javascript:storeCaret(this);" ONKEYUP="javascript:storeCaret(this);" ONCHANGE="javascript:storeCaret(this);" placeholder="Review (required)" required></textarea>
+                        </div>
+                        <br>
+                        <h6>Score :</h6>
+                        <div style="display:flex;justify-content:space-evenly;">
+                        <input type="text" name="graphics" class="standard_input input_large" placeholder="Graphics (required)" required>
+                        <input type="text" name="sound" class="standard_input input_medium" placeholder="Sound (required)" required>
+                        <input type="text" name="gameplay" class="standard_input input_medium" placeholder="Gameplay (required)" required>
+                        <input type="text" name="overall" class="standard_input input_large" placeholder="Overall (required)" required>
+                        </div>
+                    </div>
+                    <br>
+                    <div class="standard_tile_padding text-center">
+                        <h6>Screenshots</h6>
+                        <br>
+                        {if $nr_screenshots <> 0}
+                            <table class="primary_table_list no_border">
+                            {foreach from=$screenshots item=line}
+                                <tr>
+                                    <td class="w-15" style="border:0;">
+                                        <a href="../../includes/show_image.php?file={$line.screenshot_image_pop}&amp;resize=410,null,null,null" data-lightbox="image-1">
+                                            <img src="../../includes/show_image.php?file={$line.screenshot_image_pop}&amp;resize=75,null,null,null" alt="screenshot" style="display:inline; margin:5px;">
+                                        </a>
+                                    </td>
+                                    <td class="w-85" style="border:0;">
+                                        <input type="text" name="inputfield[]" id="comment_{$line.count}" class="standard_input input_large" style="width:95%;">
+                                    </td>
+                                </tr>
+                            {/foreach}
+                            </table>
+                        {else}
+                            There are currently no screenshots attached to this game. Go to the<a href="../games/games_detail.php?game_id={$game.game_id}" class="left_nav_link"> screenshot adding</a>
+                            page to link specific screenshots to this game.
+                        {/if}
+                        <br>
+                        <br>
+                        <br>
+                        <input type="hidden" name="action" value="add_review">
+                        <input type="hidden" name="game_id" value="{$game_info.game_id}">
+                        <input type="submit" value="Add" class="primary_button" style="margin-bottom:10px;">
+                    </div>
+                </form>
+                <!--**************************-->
+                <!--END Write a review tile -->
+                <!--**************************-->
+            </div>
+            <div id="preview" class="tabcontent">
+                <!--*********************-->
+                <!--START Preview tile -->
+                <!--*********************-->
+                <br>
+                <div class="standard_tile_padding" id="games_detail_review_bg">
+                    <h4 style="white-space: nowrap;overflow: hidden;text-overflow: ellipsis;display:inline;">
+                        Written by <a href="../../admin/user/user_detail.php?user_id_selected={$user_session.user_id}" class="standard_tile_link">{$user_session.userid}</a>
+                    </h4>
+                    <h5 style="font-weight: bold;"><div id="games_preview_review_date"></div></h5>
+                    <br>
+                    <br>
+                    <div class="games_detail_review_container">
+                        <div class="games_detail_review_child" id="games_detail_review_text">
+                            <div id="games_preview_review_text"></div>
+                            <br>
+                            <b><i>Score</i></b>
+                            <br>
+                            <br>
+                            Graphics : <span id="games_preview_review_graphics"></span><br>
+                            Sound : <span id="games_preview_review_sound"></span><br>
+                            Gameplay : <span id="games_preview_review_gameplay"></span><br>
+                            Overall : <span id="games_preview_review_overall"></span><br>
+                        </div>
+                        <div class="games_detail_review_child" id="games_detail_review_screenshots">
+                            <div class="games_detail_review_screenshot_space">
+                                <br>
+                                <br>
+                                <br>
+                            </div>
+                            {foreach from=$screenshots item=line}
+                                <div id="output_{$line.count}">
+                                    <div class="games_detail_review_screenshot_order">
+                                        <a href="../../includes/show_image.php?file={$line.screenshot_image_pop}&amp;resize=410,null,null,null" data-lightbox="image-1">
+                                            <img src="../../includes/show_image.php?file={$line.screenshot_image_pop}&amp;resize=170,null,null,null" alt="Click to enlarge!" style="display:inline;" class="game_screenshot_img">
+                                        </a>
+                                        <br>
+                                        <span class="standard_tile_subtext" style="font-weight: bold;" id="preview_comment_{$line.count}"></span>
+                                        <br>
+                                        <br>
+                                        <br>
+                                    </div>
+                                </div>
+                            {/foreach}
+                        </div>
+                    </div>
+                    <br>
+                </div>
+                <!--*********************-->
+                <!--END Preview tile -->
+                <!--*********************-->
+            </div>
+        </div>
+        {else}
             <br>
             <div class="standard_tile">
-                <div class="help-tip">
-                    <p>
-                        This is the place were you write your own reviews. Some things to consider :
-                        <br> - Make sure your review is worthy! A game review is more than an elaborate comment to a game (we have comments sections for this). See other reviews in the database as examples
-                        <br> - You are not obliged to follow the common review structure (comments, graphics, sounds, gameplay, conclusion)
-                        <br> - Your submitted review will be checked by our admin before it enters the database
-                        <br> - The score input fields are obliged
-                        <br> - Make sure to add some comments to the screenshots below to make the review more 'fun'. Every screenshot you comment, will be added to the review
-                        <br> - Click the screenshots for a bigger version
-                        <br> - Use the preview tab to see what your work looks like before you submit it
-                        <br> - THANKS A LOT for you submission and for making this website more interesting for all of us!
-                    </p>
-                </div>
                 <h1>{$game_info.game_name|upper}</h1>
                 <div class="standard_tile_line"></div>
-                <div class="tab">
-                    <button class="tablinks" onclick="openTab(event, 'edit')" id="defaultOpen">EDIT</button>
-                    <button class="tablinks" onclick="openTab(event, 'preview')">PREVIEW</button>
-                </div>
-                <div id="edit" class="tabcontent">
-                    <!--**************************-->
-                    <!--START Write a review tile -->
-                    <!--**************************-->
-                    <form id="post" onsubmit="return add_review();" name="post">
-                        <div class="standard_tile_padding">
-                            <h6>
-                                Written by : <br>
-                                <select name="members" class="standard_select select_large">
-                                    <option value="{$user_session.user_id}" selected>{$user_session.userid}</option>
-                                </select>
-                            </h6>
-                            <br>
-                            <h6>
-                                <div>Date :</div>
-                                <div>{html_select_date start_year="2000" class="standard_select"}</div>
-                            </h6>
-                        </div>
-                        <div class="standard_tile_padding">
-                            <h6>Review :</h6>
-                            <div style="width:100%;text-align:left;margin-top:10px;">
-                                <input type="button" accesskey= "b" name="addbbcode0" value="B" onclick="bbstyle(0,'textfield')" class="primary_button" title="Bold">
-                                <input type="button" accesskey= "u" name="addbbcode4" value="U" onclick="bbstyle(4,'textfield')" class="primary_button" title="Underline">
-                                <input type="button" accesskey= "i" name="addbbcode2" value="I" onclick="bbstyle(2,'textfield')" class="primary_button" title="Recursive">
-                                <input type="button" accesskey="w" name="addbbcode6" value="URL" onClick="bbstyle(6,'textfield')" class="primary_button" title="Add links">
-                                <input type="button" accesskey="x" name="addbbcode8" value="@" onClick="bbstyle(8,'textfield')" class="primary_button" title="Add email address">
-                                <textarea name="textfield" rows="15" class="primary_textarea" id="game_review_textfield" ONSELECT="javascript:storeCaret(this);" ONCLICK="javascript:storeCaret(this);" ONKEYUP="javascript:storeCaret(this);" ONCHANGE="javascript:storeCaret(this);" placeholder="Review (required)" required></textarea>
-                            </div>
-                            <br>
-                            <h6>Score :</h6>
-                            <div style="display:flex;justify-content:space-evenly;">
-                            <input type="text" name="graphics" class="standard_input input_large" placeholder="Graphics (required)" required>
-                            <input type="text" name="sound" class="standard_input input_medium" placeholder="Sound (required)" required>
-                            <input type="text" name="gameplay" class="standard_input input_medium" placeholder="Gameplay (required)" required>
-                            <input type="text" name="overall" class="standard_input input_large" placeholder="Overall (required)" required>
-                            </div>
-                        </div>
-                        <br>
-                        <div class="standard_tile_padding text-center">
-                            <h6>Screenshots</h6>
-                            <br>
-                            {if $nr_screenshots <> 0}
-                                <table class="primary_table_list no_border">
-                                {foreach from=$screenshots item=line}
-                                    <tr>
-                                        <td class="w-15" style="border:0;">
-                                            <a href="../../includes/show_image.php?file={$line.screenshot_image_pop}&amp;resize=410,null,null,null" data-lightbox="image-1">
-                                                <img src="../../includes/show_image.php?file={$line.screenshot_image_pop}&amp;resize=75,null,null,null" alt="screenshot" style="display:inline; margin:5px;">
-                                            </a>
-                                        </td>
-                                        <td class="w-85" style="border:0;">
-                                            <input type="text" name="inputfield[]" id="comment_{$line.count}" class="standard_input input_large" style="width:95%;">
-                                        </td>
-                                    </tr>
-                                {/foreach}
-                                </table>
-                            {else}
-                                There are currently no screenshots attached to this game. Go to the<a href="../games/games_detail.php?game_id={$game.game_id}" class="left_nav_link"> screenshot adding</a>
-                                page to link specific screenshots to this game.
-                            {/if}
-                            <br>
-                            <br>
-                            <br>
-                            <input type="hidden" name="action" value="add_review">
-                            <input type="hidden" name="game_id" value="{$game_info.game_id}">
-                            <input type="submit" value="Add" class="primary_button" style="margin-bottom:10px;">
-                        </div>
-                    </form>
-                    <!--**************************-->
-                    <!--END Write a review tile -->
-                    <!--**************************-->
-                </div>
-                <div id="preview" class="tabcontent">
-                    <!--*********************-->
-                    <!--START Preview tile -->
-                    <!--*********************-->
-                    <br>
-                    <div class="standard_tile_padding" id="games_detail_review_bg">
-                        <h4 style="white-space: nowrap;overflow: hidden;text-overflow: ellipsis;display:inline;">
-                            Written by <a href="../../admin/user/user_detail.php?user_id_selected={$user_session.user_id}" class="standard_tile_link">{$user_session.userid}</a>
-                        </h4>
-                        <h5 style="font-weight: bold;"><div id="games_preview_review_date"></div></h5>
-                        <br>
-                        <br>
-                        <div class="games_detail_review_container">
-                            <div class="games_detail_review_child" id="games_detail_review_text">
-                                <div id="games_preview_review_text"></div>
-                                <br>
-                                <b><i>Score</i></b>
-                                <br>
-                                <br>
-                                Graphics : <span id="games_preview_review_graphics"></span><br>
-                                Sound : <span id="games_preview_review_sound"></span><br>
-                                Gameplay : <span id="games_preview_review_gameplay"></span><br>
-                                Overall : <span id="games_preview_review_overall"></span><br>
-                            </div>
-                            <div class="games_detail_review_child" id="games_detail_review_screenshots">
-                                <div class="games_detail_review_screenshot_space">
-                                    <br>
-                                    <br>
-                                    <br>
-                                </div>
-                                {foreach from=$screenshots item=line}
-                                    <div id="output_{$line.count}">
-                                        <div class="games_detail_review_screenshot_order">
-                                            <a href="../../includes/show_image.php?file={$line.screenshot_image_pop}&amp;resize=410,null,null,null" data-lightbox="image-1">
-                                                <img src="../../includes/show_image.php?file={$line.screenshot_image_pop}&amp;resize=170,null,null,null" alt="Click to enlarge!" style="display:inline;" class="game_screenshot_img">
-                                            </a>
-                                            <br>
-                                            <span class="standard_tile_subtext" style="font-weight: bold;" id="preview_comment_{$line.count}"></span>
-                                            <br>
-                                            <br>
-                                            <br>
-                                        </div>
-                                    </div>
-                                {/foreach}
-                            </div>
-                        </div>
-                        <br>
-                    </div>
-                    <!--*********************-->
-                    <!--END Preview tile -->
-                    <!--*********************-->
+                <div class="standard_tile_padding">
+                    <h6>Please log in to use this page</h6>
                 </div>
             </div>
-            {else}
-                <br>
-                <div class="standard_tile">
-                    <h1>{$game_info.game_name|upper}</h1>
-                    <div class="standard_tile_line"></div>
-                    <div class="standard_tile_padding">
-                        <h6>Please log in to use this page</h6>
-                    </div>
-                </div>
-            {/if}
-        </div>
+        {/if}
+    </div>
 
-        <div class="content_box_games_details" id="column_right_reviews_details">
-            {if isset($reviews_author)}
-                <br>
-                {include file='1/admin/tile_user_contribution.html'}
-            {else}
-                <br>
-                {include file='1/main/latest_comments_tile.html'}
-            {/if}
-            <br>
-            {include file='1/main/tile_bug_report.html'}
-        </div>
+    <div class="content_box_games_details" id="column_right_reviews_details">
+        {if isset($reviews_author)}
+            {include file='1/admin/tile_user_contribution.html'}
+        {else}
+            {include file='1/main/latest_comments_tile.html'}
+        {/if}
+        {include file='1/main/tile_bug_report.html'}
     </div>
 {/block}
