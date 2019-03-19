@@ -83,7 +83,7 @@ window.initJSsor = function (nbScreenshots, nbBoxscans, nbReleasScans) {
 
                 jssor1Slider.$ScaleWidth(expectedWidth);
             } else {
-                window.setTimeout(ScaleSlider, 30);
+                window.setTimeout(window.ScaleSlider, 30);
             }
         }
 
@@ -101,15 +101,15 @@ window.initJSsor = function (nbScreenshots, nbBoxscans, nbReleasScans) {
 
                 jssor2Slider.$ScaleWidth(expectedWidth2);
             } else {
-                window.setTimeout(ScaleSlider, 30);
+                window.setTimeout(window.ScaleSlider, 30);
             }
         }
     }
 
-    ScaleSlider();
-    $(window).bind('load', ScaleSlider);
-    $(window).bind('resize', ScaleSlider);
-    $(window).bind('orientationchange', ScaleSlider);
+    window.ScaleSlider();
+    $(window).bind('load', window.ScaleSlider);
+    $(window).bind('resize', window.ScaleSlider);
+    $(window).bind('orientationchange', window.ScaleSlider);
     // endregion responsive code end
 
     // API $Play, $Pause
@@ -121,8 +121,8 @@ window.initJSsor = function (nbScreenshots, nbBoxscans, nbReleasScans) {
         jssor1Slider.$Pause();
     }
 
-    $('#play_jssor1').click(Play);
-    $('#pause_jssor1').click(Pause);
+    $('#play_jssor1').click(window.Play);
+    $('#pause_jssor1').click(window.Pause);
 
     if (nbBoxscans > 0 || nbReleasScans > 0) {
         window.Play_box = function () {
@@ -133,8 +133,8 @@ window.initJSsor = function (nbScreenshots, nbBoxscans, nbReleasScans) {
             jssor2Slider.$Pause();
         }
 
-        $('#play_jssor2').click(Play_box);
-        $('#pause_jssor2').click(Pause_box);
+        $('#play_jssor2').click(window.Play_box);
+        $('#pause_jssor2').click(window.Pause_box);
     }
 }
 
