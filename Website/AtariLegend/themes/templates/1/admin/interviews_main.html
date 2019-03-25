@@ -22,6 +22,12 @@
 
 {block name=java_script}
 <script src="{$template_dir}includes/js/vendor/jquery.dotdotdot-1.8.3.min.js"></script> <!--this script is used for the elipsis (...) effect of the preview of the reviews -->
+<script src="{$template_dir}includes/js/dotdotdot.js"></script>
+<script> <!-- call dotdotdot -->
+    jQuery(document).ready( function() {
+        initDot('.interview_main_text');
+    });
+</script>
 <script src="{$template_dir}includes/js/vendor/lightbox-2.9.0.min.js"></script><!--lightbox popup script-->
 <link type="text/css" href="{$style_dir}css/vendor/lightbox-2.9.0.css" hreflang="en" rel="stylesheet">
 <script>

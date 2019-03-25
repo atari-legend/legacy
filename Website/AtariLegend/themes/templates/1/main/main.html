@@ -265,24 +265,13 @@
         <script src="{$template_dir}includes/js/vendor/jquery-2.1.4.min.js"></script> <!-- main jquery stuff -->
         <script src="{$template_dir}includes/js/vendor/jquery-ui-1.11.4.min.js"></script> <!-- main jqueryUI stuff -->
         <script src="{$template_dir}includes/js/vendor/notify-osd-51f8de7.min.js"></script>
-
+        <script src="{$template_dir}includes/js/forms.js"></script> <!-- log on security script -->
+        <script src="{$template_dir}includes/js/main.js"></script> <!-- load all scripts used on site --> 
         {if isset($edit_message)}
             <script>
-                $(document).ready(function(){
-                    $.notify_osd.create({
-                        // script to display messages
-                        'text'        : '{$edit_message|escape:'quotes'}',          // notification message
-                        'icon'        : '{$style_dir}/images/osd_icons/star.png',   // icon path, 48x48
-                        'sticky'      : false,                                      // if true, timeout is ignored
-                        'timeout'     : 4,                                          // disappears after 6 seconds
-                        'dismissable' : true                                        // can be dismissed manually
-                        });
-                });
+                OSDMessageDisplay("{$edit_message|escape:'quotes'}");
             </script>
         {/if}
-
-        <script src="{$template_dir}includes/js/forms.js"></script> <!-- log on security script -->
-        <script src="{$template_dir}includes/js/main.js"></script>
 
         {* Inner pages can inject additional JS that gets put here, after jQuery is included *}
         {block name=additional_scripts}{/block}

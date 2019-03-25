@@ -55,8 +55,10 @@ window.openTab = function (evt, tabName, screenshotsNr) {
         } else { document.getElementById('games_preview_review_overall').innerHTML = 'please enter a number'; }
 
         var user = document.getElementById('member_select');
-        var strUser = user.options[user.selectedIndex].text;
-        document.getElementById('review_preview_user').innerHTML = strUser;
+        if (user != null) {
+            var strUser = user.options[user.selectedIndex].text;
+            document.getElementById('review_preview_user').innerHTML = strUser;
+        }
 
         // Do all the preps for the actual review text!
         var review = document.getElementsByName('textfield')[0].value;
@@ -85,6 +87,23 @@ window.openTab = function (evt, tabName, screenshotsNr) {
                 output2.style.display = 'inline';
             }
         }
+    }
+}
+
+window.add_review = function () {
+    var graphics = document.getElementsByName('graphics')[0].value;
+    var sound = document.getElementsByName('sound')[0].value;
+    var gameplay = document.getElementsByName('gameplay')[0].value;
+    var overall = document.getElementsByName('conclusion')[0].value;
+
+    if (!isNaN(graphics) && !isNaN(sound) && !isNaN(gameplay) && !isNaN(overall)) {
+        document.getElementById('post').method = 'post';
+        document.getElementById('post').action = '../games/db_games_reviews_add.php';
+        document.getElementById('post').submit();
+        return true;
+    } else {
+        alert('Please use only numeric values in the score field');
+        return false;
     }
 }
 

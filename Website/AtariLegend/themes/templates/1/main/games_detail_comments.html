@@ -43,7 +43,7 @@
                 <input type="button" accesskey="x" name="addbbcode8" value="@" onClick="bbstyle(8,'textfield')" class="primary_button" title="Add email address">
                 <textarea id="comment_add" rows="4" class="primary_textarea" name="textfield" ONSELECT="javascript:storeCaret(this);" ONCLICK="javascript:storeCaret(this);" ONKEYUP="javascript:storeCaret(this);" ONCHANGE="javascript:storeCaret(this);"></textarea>
                 <br>
-            <input type="button" value="Add" class="primary_button" onClick="AddComment({$user_session.user_id},{$game_info.game_id})">
+            <input type="button" value="Add" class="primary_button" onClick="AddComment({$user_session.user_id},'db_games_main_detail.php','add_comment','game_id={$game_info.game_id}')">
         </div>
         </form>
     {else}
@@ -69,8 +69,8 @@
                                     <span style="font-weight:bold;float:left;margin-left:5px;">
                                     {if $user_session.user_id == $line.user_id}
                                         <a style="cursor: pointer;" onClick="CommentEditable({$line.comment_id},{$line.user_id})" class="latest_comments_link"><i class="fa fa-pencil" id="comment_edit_icon{$line.comment_id}" aria-hidden="true"  title="Click to edit comment"></i></a>
-                                        <a style="cursor: pointer;" onClick="SaveEditable({$line.comment_id},{$line.user_id},{$game_info.game_id})" class="latest_comments_link"><i class="fa fa-floppy-o" id="comment_save_icon{$line.comment_id}" aria-hidden="true" title="Click to save change" style="display:none;"></i></a>
-                                        <a style="cursor: pointer;" onClick="DeleteEditable({$line.comment_id},{$line.user_id},{$game_info.game_id})" class="latest_comments_link"><i class="fa fa-trash-o" id="comment_delete_icon{$line.comment_id}" aria-hidden="true" title="Click to delete comment"></i></a>
+                                        <a style="cursor: pointer;" onClick="SaveEditable({$line.comment_id},'db_games_main_detail.php','save_comment','game_id={$game_info.game_id}')" class="latest_comments_link"><i class="fa fa-floppy-o" id="comment_save_icon{$line.comment_id}" aria-hidden="true" title="Click to save change" style="display:none;"></i></a>
+                                        <a style="cursor: pointer;" onClick="DeleteEditable({$line.comment_id},'db_games_main_detail.php','delete_comment','game_id={$game_info.game_id}')" class="latest_comments_link"><i class="fa fa-trash-o" id="comment_delete_icon{$line.comment_id}" aria-hidden="true" title="Click to delete comment"></i></a>
                                     {/if}
                                     {if $line.show_email == '1'}
                                         {if $line.email != ''}
