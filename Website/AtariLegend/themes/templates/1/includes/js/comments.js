@@ -1,3 +1,110 @@
+/*!
+ * comment.js
+ */
+
+/*!
+ * MAIN SITE code
+ */
+
+window.CommentEditable = function (commentId, userId) {
+    var string1 = 'latest_comment_edit';
+    var editableComment = string1.concat(commentId);
+
+    var string2 = 'comment_edit_icon';
+    var editIcon = string2.concat(commentId);
+
+    var string3 = 'comment_save_icon';
+    var saveIcon = string3.concat(commentId);
+
+    var string4 = 'comment_input';
+    var commentInput = string4.concat(commentId);
+
+    var input = document.getElementById(commentInput);
+    input.style.display = 'inline';
+
+    var save = document.getElementById(saveIcon);
+    save.style.display = 'inline';
+
+    var edit = document.getElementById(editIcon);
+    edit.style.display = 'none';
+
+    var output = document.getElementById(editableComment);
+    output.style.display = 'none';
+}
+
+window.SaveEditable = function (commentId, url, action, extra) {
+    var string = 'comment_input';
+    var commentData = string.concat(commentId);
+
+    var comment = document.getElementById(commentData).value
+    comment = comment.replace(/\n\r?/g, '<br />');
+
+    $.ajax({
+        // The URL for the request
+        url: url,
+        data: 'action=' + action + '&comment_id=' + commentId + '&data=' + comment + '&' + extra,
+        type: 'POST',
+        dataType: 'html',
+        // Code to run if the request succeeds;
+        success: function (html) {
+            $('#latest_comments_all').html(html);
+        }
+    });
+}
+
+window.DeleteEditable = function (commentId, url, action, extra) {
+    $('#JSGenericModal').dialog({
+        title: 'Delete',
+        open: $('#JSGenericModalText').text('Are you sure you want to delete this comment?'),
+        resizable: false,
+        height: 200,
+        modal: true,
+        buttons: {
+            'Delete': function () {
+                $(this).dialog('close');
+                $.ajax({
+                    // The URL for the request
+                    url: url,
+                    data: 'action=' + action + '&comment_id=' + commentId + '&' + extra,
+                    type: 'POST',
+                    dataType: 'html',
+                    // Code to run if the request succeeds;
+                    success: function (html) {
+                        $('#latest_comments_all').html(html);
+                    }
+                });
+            },
+            Cancel: function () {
+                $(this).dialog('close');
+            }
+        }
+    });
+}
+
+window.AddComment = function (userId, url, action, extra) {
+    var commentData = 'comment_add';
+    var comment = document.getElementById(commentData).value
+
+    comment = comment.replace(/\n\r?/g, '<br />');
+    document.getElementById('comment_add').value = '';
+
+    $.ajax({
+        // The URL for the request
+        url: url,
+        data: 'action=' + action + '&user_id=' + userId + '&data=' + comment + '&' + extra,
+        type: 'GET',
+        dataType: 'html',
+        // Code to run if the request succeeds;
+        success: function (html) {
+            $('#latest_comments_all').html(html);
+        }
+    });
+}
+
+/*!
+ * CPANEL code
+ */
+
 $(document).ready(function () {
     $('#comments_all').click(function () {
         $.ajaxQueue({
