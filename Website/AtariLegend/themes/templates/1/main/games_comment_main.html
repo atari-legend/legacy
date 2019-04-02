@@ -20,121 +20,7 @@
 {block name=title}Latest Atari ST game comments | Atari Legend{/block}
 
 {block name=additional_scripts}
-
-    {literal}
-    <script>
-    function CommentEditable(comment_id,user_id) {
-        var string = "comment_edit";
-        var editable_comment = string.concat(comment_id);
-
-        var string = "comment_edit_icon";
-        var edit_icon = string.concat(comment_id);
-
-        var string = "comment_save_icon";
-        var save_icon = string.concat(comment_id);
-
-        var string = "comment_input";
-        var comment_input = string.concat(comment_id);
-
-        var input = document.getElementById(comment_input);
-        input.style.display='inline';
-
-        var save = document.getElementById(save_icon);
-        save.style.display='inline';
-
-        var edit = document.getElementById(edit_icon);
-        edit.style.display='none';
-
-        var output = document.getElementById(editable_comment);
-        output.style.display='none';
-    }
-
-    function SaveEditable(comment_id,user_id,view,c_counter,v_counter) {
-
-        //It took me ages to get his to work because I'm a dipshit - I hate ajax --> ST Graveyard 14/07/2014 @fucking 00:44
-        //Im not using contenteditable crap on a div because this way, loads of <br> statements are added in the database.
-        //So I'm changing the div to a text area, still, in java it seems a return is not sent to the server so I'm doing a conversion to <br>
-        //Once the <br> are in the db, I do another conversion when I load the from the database into an input field
-
-        var string = "comment_input";
-        var comment_data = string.concat(comment_id);
-
-        var comment = document.getElementById(comment_data).value
-        comment = comment.replace(/\n\r?/g, '<br />');
-
-        var url = "../games/db_games_comment_main.php?action=save_comment&view="+view+"&comment_id="+comment_id+"&users_id="+user_id+"&c_counter="+c_counter+"&v_counter="+v_counter+"&data="+comment;
-
-        if (comment_id == "")
-        {
-            document.getElementById("main_comments_all").innerHTML = "";
-            return;
-        }
-        else
-        {
-            if (window.XMLHttpRequest)
-            {
-                // code for IE7+, Firefox, Chrome, Opera, Safari
-                xmlhttp = new XMLHttpRequest();
-            }
-            else
-            {
-                // code for IE6, IE5
-                xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
-            }
-            xmlhttp.onreadystatechange = function()
-            {
-                if (xmlhttp.readyState == 4 && xmlhttp.status == 200)
-                {
-                    document.getElementById("main_comments_all").innerHTML = xmlhttp.responseText;
-                }
-            }
-            xmlhttp.open("GET",url,true);
-            xmlhttp.send();
-        }
-    }
-
-    function DeleteEditable(comment_id,user_id,view,c_counter,v_counter) {
-
-        // CONFIRM REQUIRES ONE ARGUMENT
-        var message = "Are you sure you want to delete this comment?";
-        // CONFIRM IS BOOLEAN. THAT MEANS THAT
-        // IT RETURNS TRUE IF 'OK' IS CLICKED
-        // OTHERWISE IT RETURN FALSE
-        var return_value = confirm(message);
-
-        if (return_value !="0")
-        {
-            if (comment_id == "")
-                {
-                    document.getElementById("main_comments_all").innerHTML = "";
-                    return;
-                }
-                else
-                {
-                    if (window.XMLHttpRequest)
-                    {
-                        // code for IE7+, Firefox, Chrome, Opera, Safari
-                        xmlhttp = new XMLHttpRequest();
-                    }
-                    else
-                    {
-                        // code for IE6, IE5
-                        xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
-                    }
-                    xmlhttp.onreadystatechange = function()
-                    {
-                        if (xmlhttp.readyState == 4 && xmlhttp.status == 200)
-                        {
-                            document.getElementById("main_comments_all").innerHTML = xmlhttp.responseText;
-                        }
-                    }
-                    xmlhttp.open("GET","../games/db_games_comment_main.php?action=delete_comment&view="+view+"&users_id="+user_id+"&c_counter="+c_counter+"&v_counter="+v_counter+"&comment_id="+comment_id,true);
-                    xmlhttp.send();
-                }
-            }
-        }
-    </script>
-    {/literal}
+    <script src="{$template_dir}includes/js/comments.js"></script> <!-- Load all comment scripts -->
 {/block}
 
 {block name=main_body}
@@ -172,7 +58,7 @@
                     </h6>
                 </div>
 
-                    <div id="main_comments_all">
+                    <div id="latest_comments_all">
                         <table class="primary_table_list table_md">
                         {foreach from=$comments item=line}
                             <tr>
@@ -187,8 +73,8 @@
                                     {if isset($user_session)}
                                         {if $user_session.user_id == $line.users_id}
                                             <a style="cursor: pointer;" onClick="CommentEditable({$line.comment_id},{$line.users_id})" class="latest_comments_link"><i class="fa fa-pencil" id="comment_edit_icon{$line.comment_id}" aria-hidden="true"  title="Click to edit comment"></i></a>
-                                            <a style="cursor: pointer;" onClick="SaveEditable({$line.comment_id},{$line.users_id},'{$links.view}','{$links.c_counter}','{$links.v_counter}')" class="latest_comments_link"><i class="fa fa-floppy-o" id="comment_save_icon{$line.comment_id}" aria-hidden="true" title="Click to save change" style="display:none;"></i></a>
-                                            <a style="cursor: pointer;" onClick="DeleteEditable({$line.comment_id},{$line.users_id},'{$links.view}','{$links.c_counter}','{$links.v_counter}')" class="latest_comments_link"><i class="fa fa-trash-o" id="comment_delete_icon{$line.comment_id}" aria-hidden="true" title="Click to delete comment"></i></a>
+                                            <a style="cursor: pointer;" onClick="SaveEditable({$line.comment_id},'../games/db_games_comment_main.php','save_comment','users_id={$line.users_id}','{$links.view}','{$links.c_counter}','{$links.v_counter}')" class="latest_comments_link"><i class="fa fa-floppy-o" id="comment_save_icon{$line.comment_id}" aria-hidden="true" title="Click to save change" style="display:none;"></i></a>
+                                            <a style="cursor: pointer;" onClick="DeleteEditable({$line.comment_id},'../games/db_games_comment_main.php','delete_comment','users_id={$line.users_id}','{$links.view}','{$links.c_counter}','{$links.v_counter}')" class="latest_comments_link"><i class="fa fa-trash-o" id="comment_delete_icon{$line.comment_id}" aria-hidden="true" title="Click to delete comment"></i></a>
                                         {/if}
                                         {if $line.show_email == '1'}
                                             {if $line.email != ''}

@@ -32,7 +32,7 @@ window.CommentEditable = function (commentId, userId) {
     output.style.display = 'none';
 }
 
-window.SaveEditable = function (commentId, url, action, extra) {
+window.SaveEditable = function (commentId, url, action, extra, view = null, cCounter = null, vCounter = null) {
     var string = 'comment_input';
     var commentData = string.concat(commentId);
 
@@ -42,8 +42,8 @@ window.SaveEditable = function (commentId, url, action, extra) {
     $.ajax({
         // The URL for the request
         url: url,
-        data: 'action=' + action + '&comment_id=' + commentId + '&data=' + comment + '&' + extra,
-        type: 'POST',
+        data: 'action=' + action + '&comment_id=' + commentId + '&data=' + comment + '&view=' + view + '&c_counter=' + cCounter + '&v_counter=' + vCounter + '&' + extra,
+        type: 'GET',
         dataType: 'html',
         // Code to run if the request succeeds;
         success: function (html) {
@@ -52,7 +52,7 @@ window.SaveEditable = function (commentId, url, action, extra) {
     });
 }
 
-window.DeleteEditable = function (commentId, url, action, extra) {
+window.DeleteEditable = function (commentId, url, action, extra, view = null, Ccounter = null, Vcounter = null) {
     $('#JSGenericModal').dialog({
         title: 'Delete',
         open: $('#JSGenericModalText').text('Are you sure you want to delete this comment?'),
@@ -65,8 +65,8 @@ window.DeleteEditable = function (commentId, url, action, extra) {
                 $.ajax({
                     // The URL for the request
                     url: url,
-                    data: 'action=' + action + '&comment_id=' + commentId + '&' + extra,
-                    type: 'POST',
+                    data: 'action=' + action + '&comment_id=' + commentId + '&view=' + view + '&c_counter=' + Ccounter + '&v_counter=' + Vcounter + '&' + extra,
+                    type: 'GET',
                     dataType: 'html',
                     // Code to run if the request succeeds;
                     success: function (html) {
