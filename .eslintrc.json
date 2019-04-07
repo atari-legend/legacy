@@ -15,6 +15,12 @@
         "md5": true,
         "hex_sha512": true,
         "previewText": true,
-        "GameSearch": true
+        "GameSearch": true,
+        "Chart": true,
+        "$JssorSlideshowRunner$": true,
+        "$JssorArrowNavigator$": true,
+        "$JssorBulletNavigator$": true,
+        "$JssorThumbnailNavigator$": true,
+        "$JssorSlider$": true
     }
 }
