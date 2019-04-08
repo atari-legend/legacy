@@ -16,42 +16,12 @@
 //****************************************************************************************
 *}
 <script src="{$template_dir}includes/js/vendor/Chart-2.5.0.min.js"></script> <!-- chart creation -->
-<script>
-    // jQuery is not available yet at this point
+<script src="{$template_dir}includes/js/statistics.js"></script> <!-- Load all the stats scripts -->
+<script> <!-- call the pie chart script -->
     document.addEventListener("DOMContentLoaded", function(event) {
-
-    var data_cl_monthly = {$change_log_monthly_data};
-    var labels_cl_monthly = {$change_log_monthly_label};
-    var bg_cl = {$change_log_bg};
-    var border_width_cl = {$change_log_border_width};
-    var border_cl = {$change_log_border};
-    var ctx_change_line = document.getElementById('changelog_line').getContext("2d");
-
-    var myLineChart = new Chart(ctx_change_line, {
-        responsive: true,
-        type: 'bar',
-        data: {
-            labels: labels_cl_monthly,
-            datasets: [
-                {
-                    label: "Changes per month",
-                    backgroundColor: bg_cl,
-                    borderColor: border_cl,
-                    borderWidth: border_width_cl,
-                    data: data_cl_monthly,
-                }
-            ]
-        },
-        options: {
-        legend: {
-            display: false,
-
-            }
-        }
-    })
-});
+        initChart({$change_log_monthly_data},{$change_log_monthly_label},{$change_log_bg},{$change_log_border_width},{$change_log_border});
+    });
 </script>
-
 <div class="standard_tile">
     <h1>UPDATES</h1>
         <div class="standard_tile_line"></div>

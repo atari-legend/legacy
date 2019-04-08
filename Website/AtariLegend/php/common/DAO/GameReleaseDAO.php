@@ -367,7 +367,7 @@ class GameReleaseDAO {
             "GameReleaseDAO: getAllReleasesYears",
             $this->mysqli,
             "SELECT DISTINCT YEAR(`date`) FROM game_release
-            WHERE `date` IS NOT NULL
+            WHERE `date` IS NOT NULL AND `date` <> 0
             ORDER by `date` ASC",
             null, null
         );
