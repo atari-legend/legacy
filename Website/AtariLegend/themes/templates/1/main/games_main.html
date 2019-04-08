@@ -19,130 +19,7 @@ The main game page
 {block name=title}Search and browse Atari ST games | Atari Legend{/block}
 
 {block name=additional_scripts}
-    {literal}
-    <script> <!-- script needed for the autocompletion search engine -->
-        $(document).ready(function() {
-            $(".autocompleted").each(function() {
-                var extraParam = $(this).attr("data-autocomplete-param");
-                $(this).autocomplete({
-                    source: "../../../php/includes/autocomplete.php?extraParams=" + extraParam,
-                    minLength: 2,
-                });
-            });
-        });
-    </script>
-    {/literal}
-    <script>
-    function dropdown_pub() {
-        var publisher_input = document.getElementById("games_main_pub_input");
-        publisher_input.style.display='none';
-
-        var publisher = document.getElementById("games_main_pub_drop");
-        publisher.style.display='inline';
-
-        var pub_input_text = document.getElementById("input_pub");
-        pub_input_text.style.display='none';
-
-        var pub_drop_text = document.getElementById("drop_pub");
-        pub_drop_text.style.display='inline';
-    }
-
-    function input_pub() {
-        var publisher_input = document.getElementById("games_main_pub_input");
-        publisher_input.style.display='inline';
-
-        var publisher = document.getElementById("games_main_pub_drop");
-        publisher.style.display='none';
-
-        var pub_input_text = document.getElementById("input_pub");
-        pub_input_text.style.display='inline';
-
-        var pub_drop_text = document.getElementById("drop_pub");
-        pub_drop_text.style.display='none';
-    }
-
-    function dropdown_dev() {
-        var developer_input = document.getElementById("games_main_dev_input");
-        developer_input.style.display='none';
-
-        var developer = document.getElementById("games_main_dev_drop");
-        developer.style.display='inline';
-
-        var dev_input_text = document.getElementById("input_dev");
-        dev_input_text.style.display='none';
-
-        var dev_drop_text = document.getElementById("drop_dev");
-        dev_drop_text.style.display='inline';
-    }
-
-    function input_dev() {
-        var developer_input = document.getElementById("games_main_dev_input");
-        developer_input.style.display='inline';
-
-        var developer = document.getElementById("games_main_dev_drop");
-        developer.style.display='none';
-
-        var dev_input_text = document.getElementById("input_dev");
-        dev_input_text.style.display='inline';
-
-        var dev_drop_text = document.getElementById("drop_dev");
-        dev_drop_text.style.display='none';
-    }
-    function dropdown_year() {
-        var year_input = document.getElementById("games_main_year_input");
-        year_input.style.display='none';
-
-        var year = document.getElementById("games_main_year_drop");
-        year.style.display='inline';
-
-        var year_input_text = document.getElementById("input_year");
-        year_input_text.style.display='none';
-
-        var year_drop_text = document.getElementById("drop_year");
-        year_drop_text.style.display='inline';
-    }
-
-    function input_year() {
-        var year_input = document.getElementById("games_main_year_input");
-        year_input.style.display='inline';
-
-        var year = document.getElementById("games_main_year_drop");
-        year.style.display='none';
-
-        var year_input_text = document.getElementById("input_year");
-        year_input_text.style.display='inline';
-
-        var year_drop_text = document.getElementById("drop_year");
-        year_drop_text.style.display='none';
-    }
-    function dropdown_cat() {
-        var cat_input = document.getElementById("games_main_cat_input");
-        cat_input.style.display='none';
-
-        var cat = document.getElementById("games_main_cat_drop");
-        cat.style.display='inline';
-
-        var cat_input_text = document.getElementById("input_cat");
-        cat_input_text.style.display='none';
-
-        var cat_drop_text = document.getElementById("drop_cat");
-        cat_drop_text.style.display='inline';
-    }
-
-    function input_cat() {
-        var cat_input = document.getElementById("games_main_cat_input");
-        cat_input.style.display='inline';
-
-        var cat = document.getElementById("games_main_cat_drop");
-        cat.style.display='none';
-
-        var cat_input_text = document.getElementById("input_cat");
-        cat_input_text.style.display='inline';
-
-        var cat_drop_text = document.getElementById("drop_cat");
-        cat_drop_text.style.display='none';
-    }
-    </script>
+    <script src="{$template_dir}includes/js/dropdown_switch.js"></script> <!-- script to switch from input to drop and back -->
 {/block}
 
 {block name=main_body}
@@ -250,7 +127,7 @@ The main game page
                         </div>
                     </div>
                     <div class="games_main_row_site">
-                        <div class="games_main_text_site"><h6>By Publisher <a style="cursor: pointer;" onClick="dropdown_pub()" class="latest_comments_link"><i class="fa fa-chevron-circle-down" aria-hidden="true" id="input_pub" title="Click for drop down mode"></i></a><a style="cursor: pointer;" onClick="input_pub()" class="latest_comments_link"><i class="fa fa-chevron-circle-down" aria-hidden="true" id="drop_pub" title="Click for input field mode" style="display:none;"></i></a></h6></div>
+                        <div class="games_main_text_site"><h6>By Publisher <a style="cursor: pointer;" onClick="dropdown('games_main_pub_input','games_main_pub_drop','input_pub','drop_pub')" class="latest_comments_link"><i class="fa fa-chevron-circle-down" aria-hidden="true" id="input_pub" title="Click for drop down mode"></i></a><a style="cursor: pointer;" onClick="input('games_main_pub_input','games_main_pub_drop','input_pub','drop_pub')" class="latest_comments_link"><i class="fa fa-chevron-circle-down" aria-hidden="true" id="drop_pub" title="Click for input field mode" style="display:none;"></i></a></h6></div>
                         <div class="games_main_text_short"><h6>:</h6></div>
                         <div class="games_main_input_site">
                             <select name="publisher" id="games_main_pub_drop" style="display:none;" class="standard_select">
@@ -263,7 +140,7 @@ The main game page
                         </div>
                     </div>
                     <div class="games_main_row_site">
-                        <div class="games_main_text_site"><h6>By Developer <a style="cursor: pointer;" onClick="dropdown_dev()" class="latest_comments_link"><i class="fa fa-chevron-circle-down" aria-hidden="true" id="input_dev" title="Click for drop down mode"></i></a><a style="cursor: pointer;" onClick="input_dev()" class="latest_comments_link"><i class="fa fa-chevron-circle-down" aria-hidden="true" id="drop_dev" title="Click for input field mode" style="display:none;"></i></a></h6></div>
+                        <div class="games_main_text_site"><h6>By Developer <a style="cursor: pointer;" onClick="dropdown('games_main_dev_input','games_main_dev_drop','input_dev','drop_dev')" class="latest_comments_link"><i class="fa fa-chevron-circle-down" aria-hidden="true" id="input_dev" title="Click for drop down mode"></i></a><a style="cursor: pointer;" onClick="input('games_main_dev_input','games_main_dev_drop','input_dev','drop_dev')" class="latest_comments_link"><i class="fa fa-chevron-circle-down" aria-hidden="true" id="drop_dev" title="Click for input field mode" style="display:none;"></i></a></h6></div>
                         <div class="games_main_text_short"><h6>:</h6></div>
                         <div class="games_main_input_site">
                             <select name="developer" id="games_main_dev_drop" style="display:none;" class="standard_select">
@@ -276,7 +153,7 @@ The main game page
                         </div>
                     </div>
                     <div class="games_main_row_site">
-                        <div class="games_main_text_site"><h6>Release year <a style="cursor: pointer;" onClick="dropdown_year()" class="latest_comments_link"><i class="fa fa-chevron-circle-down" aria-hidden="true" id="input_year" title="Click for drop down mode"></i></a><a style="cursor: pointer;" onClick="input_year()" class="latest_comments_link"><i class="fa fa-chevron-circle-down" aria-hidden="true" id="drop_year" title="Click for input field mode" style="display:none;"></i></a></h6></div>
+                        <div class="games_main_text_site"><h6>Release year <a style="cursor: pointer;" onClick="dropdown('games_main_year_input','games_main_year_drop','input_year','drop_year')" class="latest_comments_link"><i class="fa fa-chevron-circle-down" aria-hidden="true" id="input_year" title="Click for drop down mode"></i></a><a style="cursor: pointer;" onClick="input('games_main_year_input','games_main_year_drop','input_year','drop_year')" class="latest_comments_link"><i class="fa fa-chevron-circle-down" aria-hidden="true" id="drop_year" title="Click for input field mode" style="display:none;"></i></a></h6></div>
                         <div class="games_main_text_short"><h6>:</h6></div>
                         <div class="games_main_input_site">
                             <select name="year" id="games_main_year_drop" style="display:none;" class="standard_select">
@@ -289,7 +166,7 @@ The main game page
                         </div>
                     </div>
                     <div class="games_main_row_site">
-                        <div class="games_main_text_site"><h6>Genre <a style="cursor: pointer;" onClick="dropdown_cat()" class="latest_comments_link"><i class="fa fa-chevron-circle-down" aria-hidden="true" id="input_cat" title="Click for drop down mode"></i></a><a style="cursor: pointer;" onClick="input_cat()" class="latest_comments_link"><i class="fa fa-chevron-circle-down" aria-hidden="true" id="drop_cat" title="Click for input field mode" style="display:none;"></i></a></h6></div>
+                        <div class="games_main_text_site"><h6>Genre <a style="cursor: pointer;" onClick="dropdown('games_main_cat_input','games_main_cat_drop','input_cat','drop_cat')" class="latest_comments_link"><i class="fa fa-chevron-circle-down" aria-hidden="true" id="input_cat" title="Click for drop down mode"></i></a><a style="cursor: pointer;" onClick="input('games_main_cat_input','games_main_cat_drop','input_cat','drop_cat')" class="latest_comments_link"><i class="fa fa-chevron-circle-down" aria-hidden="true" id="drop_cat" title="Click for input field mode" style="display:none;"></i></a></h6></div>
                         <div class="games_main_text_short"><h6>:</h6></div>
                         <div class="games_main_input_site">
                             <select name="category" id="games_main_cat_drop" style="display:none;" class="standard_select">

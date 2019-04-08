@@ -57,8 +57,8 @@ if ($extraVar == 'title') {
 if ($extraVar == 'publisher') {
     //Get the results
     $result = $mysqli->query("SELECT pub_dev.pub_dev_name
-                               FROM game_publisher
-                               LEFT JOIN pub_dev ON (game_publisher.pub_dev_id = pub_dev.pub_dev_id)
+                               FROM game_release
+                               LEFT JOIN pub_dev ON (game_release.pub_dev_id = pub_dev.pub_dev_id)
                                WHERE pub_dev_name LIKE '%$upperString%'
                                GROUP BY pub_dev.pub_dev_id HAVING COUNT(DISTINCT pub_dev.pub_dev_id) = 1
                                ORDER BY pub_dev.pub_dev_name ASC LIMIT 10")

@@ -252,30 +252,26 @@
             </span>
         </div>
 
+        <div id="JSGenericModal" title="" style="display:none;">
+            <p>
+                <span class="ui-icon ui-icon-alert" style="float:left; margin:0 7px 20px 0;"></span>
+                <div id="JSGenericModalText"></div>
+            </p>
+        </div>
+
         <script src="{$template_dir}includes/js/vendor/md5-1.0.1.min.js"></script>  <!-- log on security script -->
         <script src="{$template_dir}includes/js/vendor/sha512-2.2.min.js"></script> <!-- log on security script -->
         <script src="{$template_dir}includes/js/vendor/respond-1.1.0.min.js"></script> <!-- script needed for the side menu -->
         <script src="{$template_dir}includes/js/vendor/jquery-2.1.4.min.js"></script> <!-- main jquery stuff -->
         <script src="{$template_dir}includes/js/vendor/jquery-ui-1.11.4.min.js"></script> <!-- main jqueryUI stuff -->
         <script src="{$template_dir}includes/js/vendor/notify-osd-51f8de7.min.js"></script>
-
+        <script src="{$template_dir}includes/js/forms.js"></script> <!-- log on security script -->
+        <script src="{$template_dir}includes/js/main.js"></script> <!-- load all scripts used on site -->
         {if isset($edit_message)}
             <script>
-                $(document).ready(function(){
-                    $.notify_osd.create({
-                        // script to display messages
-                        'text'        : '{$edit_message|escape:'quotes'}',          // notification message
-                        'icon'        : '{$style_dir}/images/osd_icons/star.png',   // icon path, 48x48
-                        'sticky'      : false,                                      // if true, timeout is ignored
-                        'timeout'     : 4,                                          // disappears after 6 seconds
-                        'dismissable' : true                                        // can be dismissed manually
-                        });
-                });
+                OSDMessageDisplay("{$edit_message|escape:'quotes'}");
             </script>
         {/if}
-
-        <script src="{$template_dir}includes/js/forms.js"></script> <!-- log on security script -->
-        <script src="{$template_dir}includes/js/main.js"></script>
 
         {* Inner pages can inject additional JS that gets put here, after jQuery is included *}
         {block name=additional_scripts}{/block}

@@ -56,6 +56,8 @@ if (isset($_SESSION['user_id'])) {
     $count = 0;
 
     while ($screenshots = $sql_screenshots->fetch_array(MYSQLI_BOTH)) {
+        $count++;
+        
         //Ready screenshots path and filename
         $screenshot_image = $game_screenshot_save_path;
         $screenshot_image .= $screenshots['screenshot_id'];
@@ -76,7 +78,6 @@ if (isset($_SESSION['user_id'])) {
             'id' => $screenshots['screenshot_id']
             )
         );
-        $count++;
     }
 
     $smarty->assign("nr_screenshots", $count);
