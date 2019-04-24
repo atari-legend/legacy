@@ -127,10 +127,10 @@ if ($action == 'delete_comp') {
         $_SESSION['edit_message'] = "This company is still linked to one or more games";
         header("Location: ../company/company_main.php");
     } else {
-        $sql = $mysqli->query("SELECT * FROM game_publisher WHERE pub_dev_id = '$comp_id'")
+        $sql = $mysqli->query("SELECT * FROM game_release WHERE pub_dev_id = '$comp_id'")
             or die("error selecting game_publisher table");
         if ($sql->num_rows > 0) {
-            $_SESSION['edit_message'] = "This company is still linked to one or more games";
+            $_SESSION['edit_message'] = "This company is still linked to one or more releases";
             header("Location: ../company/company_main.php");
         } else {
             // Here we delete the company image
