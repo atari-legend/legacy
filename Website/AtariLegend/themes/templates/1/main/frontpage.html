@@ -76,9 +76,9 @@
                 {include file='1/main/date_quote_tile.html'}
             {/block}-->
 
-            <!--Start "class AL" tile-->
+            <!--Start "AL TV" tile-->
             {block name=class_tile}
-                {include file='1/main/tile_class_of_al.html'}
+                {include file='1/main/tile_al_tv.html'}
             {/block}
 
             <!--Start "Social Corner" tile-->
@@ -149,6 +149,9 @@
                 <div class="contact_tiles">
                     {block name=al_mobile}
                         {include file='1/main/tile_al_mobile.html'}
+                    {/block}
+                    {block name=class_tile}
+                        {include file='1/main/tile_class_of_al.html'}
                     {/block}
                 </div>
 
@@ -323,9 +326,9 @@
                 {include file='1/main/hotlinks_tile.html'}
             {/block}-->
 
-            <!--Start "class AL" tile-->
+            <!--Start "AL TV" tile-->
             {block name=class_tile}
-                {include file='1/main/tile_class_of_al.html'}
+                {include file='1/main/tile_al_tv.html'}
             {/block}
 
             <!--Start spotlight tile-->
@@ -371,6 +374,10 @@
                 {include file='1/main/tile_social_corner.html'}
             {/block}
 
+            {block name=class_tile}
+                {include file='1/main/tile_class_of_al.html'}
+            {/block}
+
         </div>
 
         <!--this column is only visible in the 2 colum mode -->
@@ -393,6 +400,10 @@
             <!--Start "statistics" tile-->
             {block name=statistics_tile}
                 {include file='1/main/statistics_tile.html'}
+            {/block}
+
+            {block name=class_tile}
+                {include file='1/main/tile_class_of_al.html'}
             {/block}
 
             <!--Start contact tiles-->
