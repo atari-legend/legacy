@@ -106,5 +106,5 @@ if (isset($action)) {
     $smarty->assign('article_id', $article_id);
 
     //Send all smarty variables to the templates
-    $smarty->display("file:" . $mainsite_template_folder . "ajax_articles_detail_comments.html");
+    $smarty->display("file:" . $mainsite_template_folder . "articles/ajax_articles_detail_comments.html");
 }

@@ -14,7 +14,7 @@
 //****************************************************************************************
 *}
 
-{extends file='1/main/main.html'}
+{extends file='../front/main.html'}
 {block name=title}Latest Atari ST news | Atari Legend{/block}
 
 {block name=main_body}
@@ -46,7 +46,7 @@
                 </div>
             </div>
             <br>
-            {include file='1/main/tile_class_of_al.html'}
+            {include file='../tiles/tile_class_of_al.html'}
         </div>
         <div class="content_box_cpanel" id="column_center_cpanel">
             <br>
@@ -98,9 +98,9 @@
         <div class="content_box_cpanel" id="column_right_cpanel">
             <br>
             {block name=right_tile}
-                {include file='1/main/tile_screenstar.html'}
+                {include file='../tiles/tile_screenstar.html'}
                 <br>
-                {include file='1/main/did_you_know_tile.html'}
+                {include file='../tiles/did_you_know_tile.html'}
             {/block}
         </div>
     </div>

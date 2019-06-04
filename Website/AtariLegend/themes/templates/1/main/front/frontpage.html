@@ -1,4 +1,4 @@
-{extends file='1/main/main.html'}
+{extends file='./main.html'}
 {*
 /***************************************************************************
 *                                frontpage.html
@@ -68,27 +68,27 @@
         <div class="column_wide_left_1920">
             <!--Start logon tile - will only be used on the front page so no inheritance here -->
             {block name=screenstar_tile}
-                {include file='1/main/tile_screenstar.html'}
+                {include file='../tiles/tile_screenstar.html'}
             {/block}
 
             <!--Start date quote tile
             {block name=date_quote_tile}
-                {include file='1/main/date_quote_tile.html'}
+                {include file='../tiles/date_quote_tile.html'}
             {/block}-->
 
             <!--Start "AL TV" tile-->
             {block name=class_tile}
-                {include file='1/main/tile_al_tv.html'}
+                {include file='../tiles/tile_al_tv.html'}
             {/block}
 
             <!--Start "Social Corner" tile-->
             {block name=social_corner_tile}
-                {include file='1/main/tile_social_corner.html'}
+                {include file='../tiles/tile_social_corner.html'}
             {/block}
 
             <!--Start open db tile-->
             {block name=date_quote_tile}
-                {include file='1/main/tile_open_db.html'}
+                {include file='../tiles/tile_open_db.html'}
             {/block}
 
         </div>
@@ -127,13 +127,13 @@
 
                 <!--Start latest news tile-->
                 {block name=latest_news_tile}
-                    {include file='1/main/latest_news_tile.html'}
+                    {include file='../tiles/latest_news_tile.html'}
                 {/block}
 
                 <!--Start latest reviews tile-->
                 {block name=latest_reviews_tile}
                     <div class="latest_reviews">
-                        {include file='1/main/latest_reviews_tile.html'}
+                        {include file='../tiles/latest_reviews_tile.html'}
                     </div>
                 {/block}
 
@@ -148,16 +148,16 @@
                 <!--Start "AL Mobile" tile-->
                 <div class="contact_tiles">
                     {block name=al_mobile}
-                        {include file='1/main/tile_al_mobile.html'}
+                        {include file='../tiles/tile_al_mobile.html'}
                     {/block}
                     {block name=class_tile}
-                        {include file='1/main/tile_class_of_al.html'}
+                        {include file='../tiles/tile_class_of_al.html'}
                     {/block}
                 </div>
 
                 <!--Start "statistics" tile-->
                 {block name=statistics_tile}
-                    {include file='1/main/statistics_tile.html'}
+                    {include file='../tiles/statistics_tile.html'}
                 {/block}
             </div>
         </div>
@@ -166,47 +166,47 @@
         <div class="column_wide_right_1920">
             {if (isset($action)) and ($action == 'register')}
                 {block name=user_register_tile}
-                    {include file='1/main/user_register_tile.html'}
+                    {include file='../tiles/user_register_tile.html'}
                 {/block}
             {/if}
 
             <!--password reset tile -->
             {if (isset($action)) and ($action == 'reset')}
                 {block name=user_reset_tile}
-                    {include file='1/main/user_reset_tile.html'}
+                    {include file='../tiles/user_reset_tile.html'}
                 {/block}
             {/if}
 
             <!--password reset tile - enter new pwd -->
             {if (isset($action)) and ($action == 'new_pwd')}
                 {block name=user_reset_tile}
-                    {include file='1/main/user_new_pwd_tile.html'}
+                    {include file='../tiles/user_new_pwd_tile.html'}
                 {/block}
             {/if}
 
             <!--Start "Who is it" tile-->
             {block name=who_is_it_tile}
-                {include file='1/main/who_is_it_tile.html'}
+                {include file='../tiles/who_is_it_tile.html'}
             {/block}
 
             <!--Start "hotlinks" tile-->
             {block name=hotlinks_tile}
-                {include file='1/main/hotlinks_tile.html'}
+                {include file='../tiles/hotlinks_tile.html'}
             {/block}
 
             <!--Start "Did you know" tile-->
             {block name=did_you_know_tile}
-                {include file='1/main/did_you_know_tile.html'}
+                {include file='../tiles/did_you_know_tile.html'}
             {/block}
 
             <!--Start spotlight tile-->
             {block name=spotlight_tile}
-                {include file='1/main/spotlight_tile.html'}
+                {include file='../tiles/spotlight_tile.html'}
             {/block}
 
             <!--Start "Social Corner" tile
             {block name=social_corner_tile}
-                {include file='1/main/tile_social_corner.html'}
+                {include file='../tiles/tile_social_corner.html'}
             {/block}-->
         </div>
 
@@ -215,27 +215,27 @@
             <!--register account tile -->
             {if (isset($action)) and ($action == 'register')}
                 {block name=user_register_tile}
-                    {include file='1/main/user_register_tile.html'}
+                    {include file='../tiles/user_register_tile.html'}
                 {/block}
             {/if}
 
             <!--password reset tile -->
             {if (isset($action)) and ($action == 'reset')}
                 {block name=user_reset_tile}
-                    {include file='1/main/user_reset_tile.html'}
+                    {include file='../tiles/user_reset_tile.html'}
                 {/block}
             {/if}
 
             <!--password reset tile - enter new pwd -->
             {if (isset($action)) and ($action == 'new_pwd')}
                 {block name=user_reset_tile}
-                    {include file='1/main/user_new_pwd_tile.html'}
+                    {include file='../tiles/user_new_pwd_tile.html'}
                 {/block}
             {/if}
 
             <!--Start "Who is it" tile-->
             {block name=who_is_it_tile}
-                {include file='1/main/who_is_it_tile.html'}
+                {include file='../tiles/who_is_it_tile.html'}
             {/block}
         </div>
 
@@ -243,22 +243,22 @@
         <div class="column_left">
             <!--Start latest news tile-->
             {block name=latest_news_tile}
-                {include file='1/main/latest_news_tile.html'}
+                {include file='../tiles/latest_news_tile.html'}
             {/block}
 
             <!--Start date quote tile
             {block name=date_quote_tile}
-                {include file='1/main/date_quote_tile.html'}
+                {include file='../tiles/date_quote_tile.html'}
             {/block}-->
 
             <!--Start open db tile-->
             {block name=date_quote_tile}
-                {include file='1/main/tile_open_db.html'}
+                {include file='../tiles/tile_open_db.html'}
             {/block}
 
             <!--Start "hotlinks" tile-->
             {block name=hotlinks_tile}
-                {include file='1/main/hotlinks_tile.html'}
+                {include file='../tiles/hotlinks_tile.html'}
             {/block}
         </div>
 
@@ -267,42 +267,42 @@
             <!--register account tile -->
             {if (isset($action)) and ($action == 'register')}
                 {block name=user_register_tile}
-                    {include file='1/main/user_register_tile.html'}
+                    {include file='../tiles/user_register_tile.html'}
                 {/block}
             {/if}
 
             <!--password reset tile -->
             {if (isset($action)) and ($action == 'reset')}
                 {block name=user_reset_tile}
-                    {include file='1/main/user_reset_tile.html'}
+                    {include file='../tiles/user_reset_tile.html'}
                 {/block}
             {/if}
 
             <!--password reset tile - enter new pwd -->
             {if (isset($action)) and ($action == 'new_pwd')}
                 {block name=user_reset_tile}
-                    {include file='1/main/user_new_pwd_tile.html'}
+                    {include file='../tiles/user_new_pwd_tile.html'}
                 {/block}
             {/if}
 
             <!--Start latest news tile-->
             {block name=latest_news_tile}
-                {include file='1/main/latest_news_tile.html'}
+                {include file='../tiles/latest_news_tile.html'}
             {/block}
 
             <!--Start "Who is it" tile-->
             {block name=who_is_it_tile}
-                {include file='1/main/who_is_it_tile.html'}
+                {include file='../tiles/who_is_it_tile.html'}
             {/block}
 
             <!--Start open db tile-->
             {block name=date_quote_tile}
-                {include file='1/main/tile_open_db.html'}
+                {include file='../tiles/tile_open_db.html'}
             {/block}
 
             <!--Start "hotlinks" tile-->
             {block name=hotlinks_tile}
-                {include file='1/main/hotlinks_tile.html'}
+                {include file='../tiles/hotlinks_tile.html'}
             {/block}
 
         </div>
@@ -312,32 +312,32 @@
             <!--Start latest reviews tile-->
             {block name=latest_reviews_tile}
                 <div class="latest_reviews">
-                    {include file='1/main/latest_reviews_tile.html'}
+                    {include file='../tiles/latest_reviews_tile.html'}
                 </div>
             {/block}
 
             <!--Start screenstar tile-->
             {block name=screenstar_tile}
-                {include file='1/main/tile_screenstar.html'}
+                {include file='../tiles/tile_screenstar.html'}
             {/block}
 
             <!--Start "hotlinks" tile
             {block name=hotlinks_tile}
-                {include file='1/main/hotlinks_tile.html'}
+                {include file='../tiles/hotlinks_tile.html'}
             {/block}-->
 
             <!--Start "AL TV" tile-->
             {block name=class_tile}
-                {include file='1/main/tile_al_tv.html'}
+                {include file='../tiles/tile_al_tv.html'}
             {/block}
 
             <!--Start spotlight tile-->
             {block name=spotlight_tile}
-                {include file='1/main/spotlight_tile.html'}
+                {include file='../tiles/spotlight_tile.html'}
             {/block}
 
             <!--{block name=social_corner_tile}
-                {include file='1/main/tile_social_corner.html'}
+                {include file='../tiles/tile_social_corner.html'}
             {/block}-->
 
         </div>
@@ -347,12 +347,12 @@
 
             <!--Start "Did you know" tile-->
             {block name=did_you_know_tile}
-                {include file='1/main/did_you_know_tile.html'}
+                {include file='../tiles/did_you_know_tile.html'}
             {/block}
 
             <!--Start "statistics" tile-->
             {block name=statistics_tile}
-                {include file='1/main/statistics_tile.html'}
+                {include file='../tiles/statistics_tile.html'}
             {/block}
 
             <!--Start contact tiles-->
@@ -366,16 +366,16 @@
             <!--Start "AL Mobile" tile-->
             {block name=al_mobile}
                 <div class="contact_tiles">
-                    {include file='1/main/tile_al_mobile.html'}
+                    {include file='../tiles/tile_al_mobile.html'}
                 </div>
             {/block}
 
             {block name=social_corner_tile}
-                {include file='1/main/tile_social_corner.html'}
+                {include file='../tiles/tile_social_corner.html'}
             {/block}
 
             {block name=class_tile}
-                {include file='1/main/tile_class_of_al.html'}
+                {include file='../tiles/tile_class_of_al.html'}
             {/block}
 
         </div>
@@ -385,25 +385,25 @@
 
             <!--Start date quote tile
             {block name=date_quote_tile}
-            {include file='1/main/date_quote_tile.html'}
+            {include file='../tiles/date_quote_tile.html'}
             {/block}-->
 
             <!--Start "Did you know" tile-->
             {block name=did_you_know_tile}
-                {include file='1/main/did_you_know_tile.html'}
+                {include file='../tiles/did_you_know_tile.html'}
             {/block}
 
             {block name=social_corner_tile}
-                {include file='1/main/tile_social_corner.html'}
+                {include file='../tiles/tile_social_corner.html'}
             {/block}
 
             <!--Start "statistics" tile-->
             {block name=statistics_tile}
-                {include file='1/main/statistics_tile.html'}
+                {include file='../tiles/statistics_tile.html'}
             {/block}
 
             {block name=class_tile}
-                {include file='1/main/tile_class_of_al.html'}
+                {include file='../tiles/tile_class_of_al.html'}
             {/block}
 
             <!--Start contact tiles-->
@@ -419,13 +419,13 @@
         <div class="column_right_tab">
             <!--Start date quote tile
             {block name=date_quote_tile}
-                {include file='1/main/date_quote_tile.html'}
+                {include file='../tiles/date_quote_tile.html'}
             {/block}-->
 
             <!--Start "AL Mobile" tile-->
             {block name=al_mobile}
                 <div class="contact_tiles">
-                    {include file='1/main/tile_al_mobile.html'}
+                    {include file='../tiles/tile_al_mobile.html'}
                 </div>
             {/block}
         </div>
