@@ -15,7 +15,7 @@
 *}
 
 
-{extends file='1/main/main.html'}
+{extends file='../front/main.html'}
 {block name=title}{$review.game_name} review (Atari ST) | Atari Legend{/block}
 {block name=additional_scripts}
     <!-- lightbox screenshot pop up script -->
@@ -87,7 +87,7 @@
 
             {if isset($reviews_author)}
                 <br>
-                {include file='1/main/tile_bug_report.html'}
+                {include file='../tiles/tile_bug_report.html'}
             {else}
             <!--*************************-->
             <!--START review comments tile -->
@@ -364,7 +364,7 @@
             <!--***********************-->
             {else}
                 <br>
-                {include file='1/main/tile_bug_report.html'}
+                {include file='../tiles/tile_bug_report.html'}
             {/if}
 
             <!--*****************************-->
@@ -372,7 +372,7 @@
             <!--*****************************-->
             {block name=latest_interview_tile}
                 <br>
-                {include file='1/main/latest_reviews_tile.html'}
+                {include file='../tiles/latest_reviews_tile.html'}
             {/block}
             <!--*****************************-->
             <!--END latest interviews tile   -->

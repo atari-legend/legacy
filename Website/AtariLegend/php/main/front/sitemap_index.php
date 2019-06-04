@@ -11,4 +11,4 @@ require "../../config/common.php";
 header("Content-Type: application/xml");
 
 $smarty->assign("range", array_merge(range(0, 9), range("a", "z")));
-$smarty->display("file:${mainsite_template_folder}sitemap_index.xml");
+$smarty->display("file:${mainsite_template_folder}front/sitemap_index.xml");

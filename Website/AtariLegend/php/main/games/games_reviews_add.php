@@ -57,7 +57,7 @@ if (isset($_SESSION['user_id'])) {
 
     while ($screenshots = $sql_screenshots->fetch_array(MYSQLI_BOTH)) {
         $count++;
-        
+
         //Ready screenshots path and filename
         $screenshot_image = $game_screenshot_save_path;
         $screenshot_image .= $screenshots['screenshot_id'];
@@ -114,7 +114,7 @@ if (isset($_SESSION['user_id'])) {
 $smarty->assign("game_id", $game_id);
 
 //Send all smarty variables to the templates
-$smarty->display("file:" . $mainsite_template_folder . "games_reviews_add.html");
+$smarty->display("file:" . $mainsite_template_folder . "games/games_reviews_add.html");
 
 //close the connection
 mysqli_close($mysqli);

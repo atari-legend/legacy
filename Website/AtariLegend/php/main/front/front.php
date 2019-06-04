@@ -73,7 +73,7 @@ if (isset($action) and $action=='first_time') {
 }
 
 //Send all smarty variables to the templates
-$smarty->display("file:".$mainsite_template_folder."frontpage.html");
+$smarty->display("file:".$mainsite_template_folder."front/frontpage.html");
 
 //close the connection
 mysqli_close($mysqli);

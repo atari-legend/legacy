@@ -50,4 +50,4 @@ $stmt->close();
 header("Content-Type: application/xml");
 
 $smarty->assign("game_ids", $game_ids);
-$smarty->display("file:${mainsite_template_folder}sitemap_games.xml");
+$smarty->display("file:${mainsite_template_folder}front/sitemap_games.xml");
