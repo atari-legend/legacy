@@ -49,7 +49,7 @@ if (isset($action) and $action == 'andreas') {
     $smarty->assign('action', 'andreas');
 }
 
-$smarty->display("file:" . $mainsite_template_folder . "about.html");
+$smarty->display("file:" . $mainsite_template_folder . "about/about.html");
 
 //close the connection
 mysqli_close($mysqli);

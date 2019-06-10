@@ -15,7 +15,7 @@ The main game page
 ************************************************************************************************
 *}
 
-{extends file='1/main/main.html'}
+{extends file='../front/main.html'}
 {if $smarty.get.gamebrowse}
     {block name=title}Atari ST games starting with {$smarty.get.gamebrowse|upper}&hellip; | Atari Legend{/block}
 {else}
@@ -49,7 +49,7 @@ The main game page
         <div class="content_box_cpanel" id="column_left_cpanel">
             <br>
             {block name=left_tile}
-                {include file='1/main/latest_comments_tile.html'}
+                {include file='../tiles/latest_comments_tile.html'}
             {/block}
         </div>
         <div class="content_box_cpanel" id="column_center_cpanel">
@@ -427,7 +427,7 @@ The main game page
         <div class="content_box_cpanel" id="column_right_cpanel">
             <br>
             {block name=right_tile}
-                {include file='1/main/tile_screenstar.html'}
+                {include file='../tiles/tile_screenstar.html'}
             {/block}
         </div>
     </div>

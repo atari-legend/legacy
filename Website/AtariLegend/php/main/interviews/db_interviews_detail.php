@@ -106,5 +106,5 @@ if (isset($action)) {
     $smarty->assign('selected_interview_id', $interview_id);
 
     //Send all smarty variables to the templates
-    $smarty->display("file:" . $mainsite_template_folder . "ajax_interviews_detail_comments.html");
+    $smarty->display("file:" . $mainsite_template_folder . "interviews/ajax_interviews_detail_comments.html");
 }

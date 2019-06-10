@@ -224,5 +224,5 @@ if (isset($action)) {
     );
 
     $smarty->assign('smarty_action', 'delete_comment');
-    $smarty->display("file:" . $mainsite_template_folder. "ajax_games_comment_main.html");
+    $smarty->display("file:" . $mainsite_template_folder. "games/ajax_games_comment_main.html");
 }

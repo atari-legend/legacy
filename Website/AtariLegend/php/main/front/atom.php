@@ -93,5 +93,5 @@ if (count($items) > 0) {
     $smarty->assign('last_updated', 0);
 }
 
-// header("Content-Type: application/atom+xml");
-$smarty->display("file:${mainsite_template_folder}atom.xml");
+header("Content-Type: application/atom+xml");
+$smarty->display("file:${mainsite_template_folder}front/atom.xml");

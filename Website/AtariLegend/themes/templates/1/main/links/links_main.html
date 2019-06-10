@@ -1,4 +1,4 @@
-{extends file="1/main/main.html"}
+{extends file="../front/main.html"}
 {if isset($current_category)}
     {block name=title}Atari ST links and resources - {$current_category->getName()} | Atari Legend{/block}
 {else}
@@ -22,9 +22,9 @@
     <div id="main" class="main_container_cpanel">
         <div class="content_box_cpanel" id="column_left_cpanel">
             <br>
-            {include file='1/main/tile_submit_link.html'}
+            {include file='../tiles/tile_submit_link.html'}
             <br>
-            {include file='1/main/tile_al_mobile.html'}
+            {include file='../tiles/tile_al_mobile.html'}
         </div>
         <div class="content_box_cpanel" id="column_center_cpanel">
             <br>
@@ -101,9 +101,9 @@
         </div>
         <div class="content_box_cpanel" id="column_right_cpanel">
             <br>
-            {include file='1/main/tile_screenstar.html'}
+            {include file='../tiles/tile_screenstar.html'}
             <br>
-            {include file='1/main/did_you_know_tile.html'}
+            {include file='../tiles/did_you_know_tile.html'}
         </div>
     </div>
 {/block}
