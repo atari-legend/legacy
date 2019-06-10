@@ -16,7 +16,7 @@
 //****************************************************************************************
 *}
 
-{extends file='1/main/main.html'}
+{extends file='../front/main.html'}
 {block name=title}Latest Atari ST game comments | Atari Legend{/block}
 
 {block name=additional_scripts}
@@ -28,9 +28,9 @@
         <div class="content_box_cpanel" id="column_left_cpanel">
             <br>
             {block name=left_tile}
-                {include file='1/main/statistics_tile.html'}
+                {include file='../tiles/statistics_tile.html'}
                 <br>
-                {include file='1/main/who_is_it_tile.html'}
+                {include file='../tiles/who_is_it_tile.html'}
             {/block}
         </div>
         <div class="content_box_cpanel" id="column_center_cpanel">
@@ -147,9 +147,9 @@
         <div class="content_box_cpanel" id="column_right_cpanel">
             <br>
             {block name=right_tile}
-                {include file='1/main/tile_screenstar.html'}
+                {include file='../tiles/tile_screenstar.html'}
                 <br>
-                {include file='1/main/tile_changes_per_month.html'}
+                {include file='../tiles/tile_changes_per_month.html'}
             {/block}
         </div>
     </div>

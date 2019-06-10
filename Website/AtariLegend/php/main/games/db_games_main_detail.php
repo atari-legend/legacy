@@ -274,5 +274,5 @@ if (isset($action)) {
     $smarty->assign('game_id', $game_id);
 
     //Send all smarty variables to the templates
-    $smarty->display("file:" . $mainsite_template_folder . "ajax_games_main_detail_comments.html");
+    $smarty->display("file:" . $mainsite_template_folder . "games/ajax_games_main_detail_comments.html");
 }

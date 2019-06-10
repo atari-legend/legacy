@@ -15,7 +15,7 @@ The main game page
 ************************************************************************************************
 *}
 
-{extends file='1/main/main.html'}
+{extends file='../front/main.html'}
 {block name=title}Search and browse Atari ST games | Atari Legend{/block}
 
 {block name=additional_scripts}
@@ -29,17 +29,17 @@ The main game page
             {block name=left_tile}
                 {if $mode == "advanced"}
                     {if isset($stats) and ($stats == 1)}
-                        {include file='1/main/statistics_tile.html'}
+                        {include file='../tiles/statistics_tile.html'}
                     {else}
-                        {include file='1/main/who_is_it_tile.html'}
+                        {include file='../tiles/who_is_it_tile.html'}
                     {/if}
                     <br>
-                    {include file='1/main/latest_comments_tile.html'}
+                    {include file='../tiles/latest_comments_tile.html'}
                 {else}
                     {if isset($stats) and ($stats == 1)}
-                        {include file='1/main/statistics_tile.html'}
+                        {include file='../tiles/statistics_tile.html'}
                     {else}
-                        {include file='1/main/latest_comments_tile.html'}
+                        {include file='../tiles/latest_comments_tile.html'}
                     {/if}
                 {/if}
 
@@ -361,11 +361,11 @@ The main game page
             <br>
             {block name=right_tile}
                 {if $mode == "advanced"}
-                    {include file='1/main/tile_screenstar.html'}
+                    {include file='../tiles/tile_screenstar.html'}
                     <br>
-                    {include file='1/main/tile_changes_per_month.html'}
+                    {include file='../tiles/tile_changes_per_month.html'}
                 {else}
-                    {include file='1/main/tile_changes_per_month.html'}
+                    {include file='../tiles/tile_changes_per_month.html'}
                 {/if}
             {/block}
         </div>

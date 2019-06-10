@@ -215,4 +215,4 @@ $smarty->assign(
 );
 
 //Send all smarty variables to the templates
-$smarty->display("file:" . $mainsite_template_folder . "games_comment_main.html");
+$smarty->display("file:" . $mainsite_template_folder . "games/games_comment_main.html");

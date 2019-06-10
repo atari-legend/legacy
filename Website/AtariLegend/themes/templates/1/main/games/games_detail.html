@@ -16,7 +16,7 @@
 //****************************************************************************************
 *}
 
-{extends file='1/main/main.html'}
+{extends file='../front/main.html'}
 {block name=title}{$game_info.game_name} - Atari ST game | Atari Legend{/block}
 {block name=description}{$game_description}{/block}
 {block name=additional_scripts}
@@ -59,9 +59,9 @@
             <!--START Game info & Game Release & Game series tile -->
             <!--**************************************************-->
                 <div class="games_main_details_info_position_high">
-                    {include file='1/main/games_detail_info.html' position='high'}
-                    {include file='1/main/games_detail_release_info.html'}
-                    {include file='1/main/games_detail_series_info.html'}
+                    {include file='../games/games_detail_info.html' position='high'}
+                    {include file='../games/games_detail_release_info.html'}
+                    {include file='../games/games_detail_series_info.html'}
                 </div>
             <!--***********************************************-->
             <!--END Game info & Game Release & Game series tile-->
@@ -72,7 +72,7 @@
             <!--START Game comments tile -->
             <!--*************************-->
                 <div class="games_main_details_comments_position_high">
-                    {include file='1/main/games_detail_comments.html'}
+                    {include file='../games/games_detail_comments.html'}
                 </div>
             <!--***********************-->
             <!--END Game comments tile -->
@@ -86,7 +86,7 @@
                         <!--Start game submission tile  -->
                         <!--****************************-->
                         <div class="games_main_details_submissions_position_high">
-                            {include file='1/main/games_detail_submission.html'}
+                            {include file='../games/games_detail_submission.html'}
                         </div>
                         <!--****************************-->
                         <!--END game submission tile    -->
@@ -97,12 +97,12 @@
 
             {if isset($boxscan) or count($release_scans) > 1}
                 <div class="games_main_details_submisions_position_medium">
-                    {include file='1/main/games_detail_submission_medium.html'}
+                    {include file='../games/games_detail_submission_medium.html'}
                 </div>
             {else}
                 {if isset($similar) or isset($interview) or isset($facts)}
                     <div class="games_main_details_submisions_position_medium">
-                        {include file='1/main/games_detail_submission_medium.html'}
+                        {include file='../games/games_detail_submission_medium.html'}
                     </div>
                 {/if}
             {/if}
@@ -187,9 +187,9 @@
             <!--*********************-->
                 <div class="games_main_details_info_position_low">
                     <br>
-                    {include file='1/main/games_detail_info.html' position='low'}
-                    {include file='1/main/games_detail_release_info.html'}
-                    {include file='1/main/games_detail_series_info.html'}
+                    {include file='../games/games_detail_info.html' position='low'}
+                    {include file='../games/games_detail_release_info.html'}
+                    {include file='../games/games_detail_series_info.html'}
                 </div>
             <!--*******************-->
             <!--END Game info tile -->
@@ -254,7 +254,7 @@
                         <!--****************************-->
                         <br>
                         <div class="games_main_details_submissions_position_high">
-                            {include file='1/main/games_detail_submission.html'}
+                            {include file='../games/games_detail_submission.html'}
                         </div>
                         <!--****************************-->
                         <!--END game submission tile    -->
@@ -270,7 +270,7 @@
                         <!--Start game submission tile  -->
                         <!--****************************-->
                         <div class="games_main_details_submissions_position_high">
-                            {include file='1/main/games_detail_submission.html'}
+                            {include file='../games/games_detail_submission.html'}
                         </div>
                         <!--****************************-->
                         <!--END game submission tile    -->
@@ -362,7 +362,7 @@
             <!--START interview tile -->
             <!--*********************-->
             <div class="games_main_details_interviews_position_high">
-                {include file='1/main/games_detail_interview.html'}
+                {include file='../games/games_detail_interview.html'}
             </div>
             <!--*********************-->
             <!--END interview tile   -->
@@ -372,7 +372,7 @@
             <!--START similar tile   -->
             <!--*********************-->
             <div class="games_main_details_similar_position_high">
-                {include file='1/main/games_detail_similar.html'}
+                {include file='../games/games_detail_similar.html'}
             </div>
             <!--*********************-->
             <!--END similar tile     -->
@@ -382,7 +382,7 @@
             <!--START Facts tile     -->
             <!--*********************-->
             <div class="games_main_details_facts_position_high">
-                {include file='1/main/games_detail_facts.html'}
+                {include file='../games/games_detail_facts.html'}
             </div>
             <!--*********************-->
             <!--END Facts tile          -->
@@ -396,7 +396,7 @@
                     <!--****************************-->
                     <div class="games_main_details_submissions_position_high">
                         <br>
-                        {include file='1/main/games_detail_submission.html'}
+                        {include file='../games/games_detail_submission.html'}
                     </div>
                     <!--****************************-->
                     <!--END game submission tile    -->
@@ -410,7 +410,7 @@
                         <!--****************************-->
                         <div class="games_main_details_submissions_position_high">
                             <br>
-                            {include file='1/main/games_detail_submission.html'}
+                            {include file='../games/games_detail_submission.html'}
                         </div>
                         <!--****************************-->
                         <!--END game submission tile    -->
@@ -422,7 +422,7 @@
                     <!--****************************-->
                     <div class="games_main_details_submissions_position_high">
                         <br>
-                        {include file='1/main/games_detail_submission.html'}
+                        {include file='../games/games_detail_submission.html'}
                     </div>
                     <!--****************************-->
                     <!--END game submission tile    -->
@@ -436,7 +436,7 @@
                 {else}
                     <br>
                     <div class="games_main_details_submisions_position_medium">
-                        {include file='1/main/games_detail_submission_medium.html'}
+                        {include file='../games/games_detail_submission_medium.html'}
                     </div>
                 {/if}
             {/if}

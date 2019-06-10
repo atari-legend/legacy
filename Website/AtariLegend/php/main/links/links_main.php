@@ -21,4 +21,4 @@ if (isset($category_id)) {
     $smarty->assign('links', $linkDao->getAllLinks(isset($offset) ? $offset : null));
     $smarty->assign('count', $linkDao->getLinkCount());
 }
-$smarty->display("file:${mainsite_template_folder}links_main.html");
+$smarty->display("file:${mainsite_template_folder}links/links_main.html");

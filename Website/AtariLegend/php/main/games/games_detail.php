@@ -573,8 +573,8 @@ if ($imagenum_rows > 0) {
 }
 
 $smarty->assign("nr_box", $front);
-    
-    
+
+
 // Get box scans for all release
 // This is temporary until we revamp the games/relase details page
 $nr_of_release_scans=0;
@@ -832,7 +832,7 @@ $smarty->assign(
 );
 
 //Send all smarty variables to the templates
-$smarty->display("file:" . $mainsite_template_folder . "games_detail.html");
+$smarty->display("file:" . $mainsite_template_folder . "games/games_detail.html");
 
 //close the connection
 mysqli_close($mysqli);
