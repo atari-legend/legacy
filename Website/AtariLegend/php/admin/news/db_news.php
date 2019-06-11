@@ -67,7 +67,7 @@ if (isset($action) and $action == "add_news") {
         // Insert the description and the image into the news_image table.
         $sdbquery = $mysqli->query("INSERT INTO news_submission
               (news_headline,news_text,news_image_id,user_id,news_date)
-               VALUES ('$headline','$descr','$icon','$members','$news_date')") or die("Error inserting news update");
+               VALUES ('$headline','$descr','$icon','$members','$news_date')") or die("Error inserting news update: ".$mysqli->error);
 
         $_SESSION['edit_message'] = "News added correctly";
 
@@ -127,7 +127,7 @@ if (isset($action) and $action == "save_news_text") {
     $smarty->assign("user_id", $_SESSION['user_id']);
 
     //Send to smarty for return value
-    $smarty->display("file:" . $cpanel_template_folder . "ajax_news_approve_edit.html");
+    $smarty->display("file:" . $cpanel_template_folder . "news/ajax_news_approve_edit.html");
 }
 
 //****************************************************************************************
@@ -195,7 +195,7 @@ if (isset($action) and $action == "approve_submission") {
     $smarty->assign("user_id", $_SESSION['user_id']);
 
     //Send to smarty for return value
-    $smarty->display("file:" . $cpanel_template_folder . "ajax_news_approve_edit.html");
+    $smarty->display("file:" . $cpanel_template_folder . "news/ajax_news_approve_edit.html");
 }
 
 //********************************************************************************************
@@ -232,7 +232,7 @@ if (isset($action) and $action == "delete_submission") {
     $smarty->assign("user_id", $_SESSION['user_id']);
 
     //Send to smarty for return value
-    $smarty->display("file:" . $cpanel_template_folder . "ajax_news_approve_edit.html");
+    $smarty->display("file:" . $cpanel_template_folder . "news/ajax_news_approve_edit.html");
 }
 
 //****************************************************************************************
@@ -279,7 +279,7 @@ if (isset($action) and $action == "save_news_post_text") {
     $smarty->assign("user_id", $_SESSION['user_id']);
 
     //Send to smarty for return value
-    $smarty->display("file:" . $cpanel_template_folder . "ajax_news_post_edit.html");
+    $smarty->display("file:" . $cpanel_template_folder . "news/ajax_news_post_edit.html");
 }
 
 if (isset($action) and $action == "image_upload") {

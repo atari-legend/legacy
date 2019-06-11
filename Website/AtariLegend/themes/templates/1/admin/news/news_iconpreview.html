@@ -1,0 +1,49 @@
+{*
+/***************************************************************************
+*                                news_iconpreview.html
+*                            --------------------------
+*   begin                : Sunday may 1, 2005
+*   copyright            : (C) 2005 Atari Legend
+*   email                : maarten.martens@freebel.net
+*
+*   Id: news_iconpreview.html,v 0.10 2005/05/01 ST Graveyard
+*   Id: news_iconpreview.html,v 0.20 2016/07/28 ST Graveyard
+*       - AL 2.0
+*
+***************************************************************************/
+//****************************************************************************************
+// This is the sub template file to generate the newsicon add page
+//****************************************************************************************
+
+*}
+{extends file='../main.html'}
+
+{block name=title}Preview news icons{/block}
+
+{block name=main_tile}
+<div class="standard_tile" id="news_icon_preview">
+    <h1>NEWS ICON PREVIEWS</h1>
+    <div class="standard_tile_line"></div>
+    <div class="standard_tile_padding">
+        <div class="left_nav_section">
+            These are all the available news icons
+        </div>
+        <br>
+        <br>
+        <fieldset class="secondary_fieldset centered_fieldset">
+            <legend class="primary_legend">Icons</legend>
+            {foreach from=$news_images item=line name=line}
+                <div style="display:inline-block;text-align:center;margin-left:10px;margin-right:10px;">
+                    <img src="../../includes/show_image.php?file={$line.image_link}&amp;resize=150,null,null,null" width="150" alt="Click to enlarge!" class="game_screenshot_img" style="display:inline;">
+                    <br>
+                    {$line.image_name}
+                    <br>
+                    <br>
+                </div>
+            {/foreach}
+        </fieldset>
+        <br>
+        <div class="standard_tile_text_center"><a href="javascript:history.go(-1)" class="standard_tile_link">back</a></div>
+    </div>
+</div>
+{/block}

@@ -1,0 +1,247 @@
+{*
+/***************************************************************************
+*                            menu_disk_list.tpl
+*                            --------------------------
+*   begin                : Sunday, August 28, 2005
+*   copyright            : (C) 2005 Atari Legend
+*   email                : admin@atarilegend.com
+*
+*   id : menus_list.html ,v 0.10 2016/08/29 ST Graveyard 22:41
+*           - AL 2.0
+*   Id : menus_list.html ,v 0.20 2017/02/07 STG
+*           - adding authors
+***************************************************************************/
+
+************************************************************************************************
+The main game page
+************************************************************************************************
+*}
+{extends file='../main.html'}
+{block name=java_script}
+<script src="{$template_dir}includes/js/vendor/lightbox-2.9.0.min.js"></script>
+<link type="text/css" href="{$style_dir}css/vendor/lightbox-2.9.0.css" hreflang="en" rel="stylesheet">
+<script src="{$template_dir}includes/js/vendor/jquery.ajaxQueue-0.1.1.min.js"></script>
+<script src="{$template_dir}includes/js/menus.js"></script>
+{/block}
+
+{block name=title}Menus Search results{/block}
+
+{block name=left_tile}
+<div class="standard_tile">
+    <h1>SET OPTIONS</h1>
+    <div class="standard_tile_line"></div>
+    <div class="standard_tile_text_center">
+        <br>
+        <form action="../menus/menus_disk_list.php" method="get" name="post" id="menu_set_change">
+            <select name="menu_sets_id" class="standard_select select_large" onchange="this.form.submit()">
+                <option value="" selected style="background-color:white;">Change Menu Set</option>
+                {foreach from=$menuset_list item=line}
+                    {html_options values=$line->getMenuSetsId() output=$line->getMenuSetsName()}
+                {/foreach}
+            </select>
+        </form>
+        <br>
+        <div class="standard_tile_line"></div>
+        <br>
+        {* Name set *}
+        <form action="../menus/db_menu_set.php" method="post" name="post" id="menu_name_edit">
+            <b>Menu set Editor</b><br><br>
+            Change name of menu set:<br>
+            <input type="text" name="menu_sets_name" value="{$menuset_info->getMenuSetsName()}" class="standard_input input_large"><br/>
+            <input type="hidden" name="menu_sets_id" value="{$menuset_info->getMenuSetsId()}">
+            <input type="hidden" name="action" value="menu_set_name_update">
+            <br>
+            <input type="submit" value="Update" class="primary_button">
+        </form>
+        <br>
+        <div class="standard_tile_line"></div>
+        <div class="help-tip">
+            <p>This is the overal type of the menu disk. Eg. The "Adrenaline UK" set is considered to be a game set. The "Sewer Doc Disk" set is an E-zine/doc set. However, this does not
+            mean a game set can not contain anything else. Each menu disk title in the database has its own menu disk title TYPE attribute. Please see the general HELP of this section for more details.</p>
+        </div>
+        <br>
+        <form action="../menus/db_menu_set.php" method="post" name="post" id="menu_type_edit">
+            <div style="margin-left:20px;">
+                Menu type:<br>
+            </div>
+            <select name="menu_type_browse" size="1" class="standard_select select_large">
+                <option value="" selected>-</option>
+                {foreach from=$menu_types item=line}
+                    {html_options values=$line->getTypeId() output=$line->getTypeName()}
+                {/foreach}
+            </select>
+            <input type="hidden" name="menu_sets_id" value="{$menuset_info->getMenuSetsId()}">
+            <input type="hidden" name="action" value="menu_set_type_set">
+            <br><br>
+            <input type="submit" value="Set" class="primary_button">
+        </form>
+        <br>
+        {if isset($connected_menu_types)}
+            {foreach from=$connected_menu_types item=line}
+                {$line->getTypeName()} - <a href="#" class="standard_tile_link" onclick="menuTypeDelete({$line->getTypeId()},{$menuset_info->getMenuSetsId()});">Delete</a><br>
+            {/foreach}
+        {/if}
+        <br>
+        <div class="standard_tile_line"></div>
+        <div class="help-tip">
+            <p>Most Menu Sets are released by a certain crew, a group of people. This is where you set the crew of this menu set. If you want to add or edit a crew, go to the <a href="../crew/crew_main.php" class="standard_tile_link">Crew</a> section.</p>
+        </div>
+        <br>
+        {* Add crew section *}
+        <div style="margin-left:20px;">
+            <b>Crew Editor</b><br>
+        </div>
+        <br>
+        Set Crew for menu set:<br>
+        <form action="../menus/db_menu_set.php" method="post" name="post_menu_crew_set" id="menu_crew_set">
+            <select name="crew_browse" size="1" class="standard_select select_small" onchange="browseCrew(this.value)">
+                <option value="" SELECTED>-</option>
+                {html_options values=$az_value output=$az_output}
+            </select>
+            {* Ajax *}
+            <div id="option_crew">
+                <select name="crew_id" class="standard_select select_large">
+                    <option value="" selected>-</option>
+                    {foreach from=$crews item=line}
+                        {html_options values=$line->getId() output=$line->getName()}
+                    {/foreach}
+                </select>
+            </div>
+            <br>
+            <input type="submit" value="Set" class="primary_button">
+            <input type="hidden" name="menu_sets_id" value="{$menuset_info->getMenuSetsId()}">
+            <input type="hidden" name="action" value="menu_set_crew_set">
+        </form>
+        <br>
+        {if isset($connected_crew)}
+        {foreach from=$connected_crew item=line}
+            {$line->getName()} - <a href="#" class="standard_tile_link" onclick="deleteMenuSetCrewModal({$line->getId()},{$menuset_info->getMenuSetsId()});">Delete</a><br>
+        {/foreach}
+        {/if}
+        <br>
+        <div class="standard_tile_line"></div>
+        <div class="help-tip">
+            <p>Some Menu Sets were released by one individual. These sets are not common, but do exist. Go to the <a href="../individuals/individuals_main.php" class="standard_tile_link">Individuals</a> section for more details.</p>
+        </div>
+        <br>
+        {* Add Individual section *}
+        <div style="margin-left:20px;">
+            <b>Individual Editor</b><br>
+        </div>
+        <br>
+        Set individual for menu set:<br>
+        <form action="../menus/db_menu_set.php" method="post" name="post_menu_ind_set" id="menu_ind_set">
+            <select name="ind_browse" size="1" class="standard_select select_small" onchange="browseIndividual(this.value)">
+                <option value="" SELECTED>-</option>
+                {html_options values=$az_value output=$az_output}
+            </select>
+            {* Ajax *}
+            <div id="option_ind">
+                <select name="ind_id" class="standard_select select_large">
+                    <option value="" selected>-</option>
+                    {foreach from=$individuals item=line}
+                        {html_options values=$line->getId() output=$line->getName()}
+                    {/foreach}
+                </select>
+            </div>
+            <br>
+            <input type="submit" value="Set" class="primary_button">
+            <input type="hidden" name="menu_sets_id" value="{$menuset_info->getMenuSetsId()}">
+            <input type="hidden" name="action" value="menu_set_ind_set">
+        </form>
+        <br>
+        {if isset($connected_ind)}
+        {foreach from=$connected_ind item=line}
+            {$line->getName()} - <a href="#" class="standard_tile_link" onclick="deleteMenuSetIndividualModal({$line->getId()},{$menuset_info->getMenuSetsId()});">Delete</a><br>
+        {/foreach}
+        {/if}
+        <br>
+        <div class="standard_tile_line"></div>
+        <br>
+        Quick add new Crew to db:
+        <form action="../menus/db_menu_disk.php" method="post" name="post_menu_crew_add" id="menu_crew_add">
+            <input type="text" name="new_crew_name" value="" class="standard_input input_large">
+            <br>
+            <br>
+            <input type="submit" value="Add" class="primary_button">
+            <input type="hidden" name="menu_sets_id" value="{$menuset_info->getMenuSetsId()}">
+            <input type="hidden" name="action" value="menu_set_crew_add">
+        </form>
+        <br>
+        <div class="standard_tile_line"></div>
+        <br>
+        Quick add new individual to db:
+        <form action="../menus/db_menu_disk.php" method="post" name="post_menu_ind_add" id="menu_ind_add">
+            <input type="text" name="new_ind_name" value="" class="standard_input input_large">
+            <br>
+            <br>
+            <input type="submit" value="Add" class="primary_button">
+            <input type="hidden" name="menu_sets_id" value="{$menuset_info->getMenuSetsId()}">
+            <input type="hidden" name="action" value="menu_set_ind_add">
+        </form>
+        <br>
+    </div>
+</div>
+<br>
+
+{/block}
+
+{block name=main_tile}
+<div class="standard_tile">
+    <h1>EDIT SET</h1>
+    <div class="standard_tile_line"></div>
+    <div class="standard_tile_padding">
+        <div class="left_nav_section">
+            Overhere you can edit/delete menu set <b>{$menuset_info->getMenuSetsName()}</b>, or you can add menu disks to it. You can also make the set available on the website with the publish options.
+        </div>
+        <br>
+        <div class="main_company_container">
+            <div class="child_edit_company text-left">
+                <fieldset class="secondary_fieldset">
+                    <legend class="primary_legend">More options</legend>
+                        <div id="close_new_disk"><a onclick="addNewdisk({$menuset_info->getMenuSetsId()})" style="cursor: pointer;" class="standard_tile_link" >Add New Disk</a><br></div>
+                        <a onclick="deleteSet({$menuset_info->getMenuSetsId()})" style="cursor: pointer;" class="standard_tile_link">Delete set</a>
+                </fieldset>
+            </div>
+            <div class="child_add_company text-left">
+                <fieldset class="secondary_fieldset">
+                    <legend class="primary_legend">Publish Set</legend>
+                        <input onchange="publishSet({$menuset_info->getMenuSetsId()},'online')" type="radio" name="publish" value="online" {if ({$menu_set.online}=='1')}checked{/if}> Online<br>
+                        <input onchange="publishSet({$menuset_info->getMenuSetsId()},'offline')" type="radio" name="publish" value="offline" {if ({$menu_set.online}=='0')}checked{/if}> Offline<br>
+                </fieldset>
+            </div>
+        </div>
+        <br>
+        <div id="new_disk"></div>
+        <br>
+        <div class="table-responsive">
+            <table class="secondary_table_list table_sm table_hover text-nowrap">
+                <tr>
+                    <th class="w-30">Menu Disk</th>
+                    <th class="w-30">Crew</th>
+                    <th class="w-20">Individual</th>
+                    <th class="text-right w-20">State</th>
+                </tr>
+                {if isset($menus_list)}
+                    {foreach from=$menus_list item=line}
+                        <tr id="diskedit_ajax_{$line->getMenuDisk()->getId()}">
+                            <td>{if null !== $line->getMenuDisk()}<a onclick="editDisk({$line->getMenuDisk()->getId()})" style="cursor: pointer;">{$line->getMenuDisk()->getName()}</a>{else}<i>n/a</i>{/if}</td>
+                            <td>{if null !== $line->getCrew()}{$line->getCrew()->getName()}{else}<i>n/a</i>{/if}</td>
+                            <td>{if null !== $line->getIndividual()}{$line->getIndividual()->getName()}{else}<i>n/a</i>{/if}</td>
+                            <td class="text-right">{if $line->getMenuState() != ''}{$line->getMenuState()}{else}<i>n/a</i>{/if}</td>
+                        </tr>
+                    {/foreach}
+                {/if}
+                <tr>
+                    <td colspan="4">
+                        <b>{if $nr_of_entries == 1}1 menu disk found {else} {$nr_of_entries} menu disks found{/if} in {$querytime} sec </b>
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </div>
+</div>
+<br>
+<div class="standard_tile_text_center"><a href="javascript:history.go(-1)" class="standard_tile_link">back</a></div>
+<br>
+{/block}

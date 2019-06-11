@@ -130,7 +130,7 @@ if (isset($action2) and $action2 == 'add_screens') {
     $smarty->assign('article_id', $article_id);
 
     //Send to smarty for return value
-    $smarty->display("file:" . $cpanel_template_folder . "ajax_article_add_screenshots.html");
+    $smarty->display("file:" . $cpanel_template_folder . "articles/ajax_article_add_screenshots.html");
 }
 
 //*************************************************************************
@@ -268,7 +268,7 @@ if (isset($action) and $action == 'delete_screenshot_comment') {
     $smarty->assign('article_id', $article_id);
 
     //Send to smarty for return value
-    $smarty->display("file:" . $cpanel_template_folder . "ajax_article_add_screenshots.html");
+    $smarty->display("file:" . $cpanel_template_folder . "articles/ajax_article_add_screenshots.html");
 }
 
 //*************************************************************************

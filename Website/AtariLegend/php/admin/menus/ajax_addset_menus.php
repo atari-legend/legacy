@@ -250,4 +250,4 @@ $smarty->assign('menu_disk_id', $menu_disk_id);
 $smarty->assign('title_name', $title_name);
 
 //Send all smarty variables to the templates
-$smarty->display("file:" . $cpanel_template_folder . "ajax_menus_add_set.html");
+$smarty->display("file:" . $cpanel_template_folder . "menus/ajax_menus_add_set.html");

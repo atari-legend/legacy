@@ -19,4 +19,4 @@ include("../../config/admin.php");
 $smarty->assign('menu_disk_id', $menu_disk_id);
 
 //Send all smarty variables to the templates
-$smarty->display("file:".$cpanel_template_folder."ajax_menus_add_file.html");
+$smarty->display("file:".$cpanel_template_folder."menus/ajax_menus_add_file.html");

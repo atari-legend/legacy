@@ -40,4 +40,4 @@ if ((isset($action)
 }
 
 //Send all smarty variables to the templates
-$smarty->display("file:" . $cpanel_template_folder . "ajax_games_detail.html");
+$smarty->display("file:" . $cpanel_template_folder . "games/ajax_games_detail.html");

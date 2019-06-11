@@ -136,7 +136,7 @@ if ($i == 0) {
 $smarty->assign("user_id", $_SESSION['user_id']);
 
 //Send all smarty variables to the templates
-$smarty->display("file:" . $cpanel_template_folder . "demos_music_detail.html");
+$smarty->display("file:" . $cpanel_template_folder . "demos/demos_music_detail.html");
 
 //close the connection
 mysqli_close($mysqli);

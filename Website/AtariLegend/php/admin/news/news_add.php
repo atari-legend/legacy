@@ -46,7 +46,7 @@ while ($authors = $sql_author->fetch_array(MYSQLI_BOTH)) {
 $smarty->assign("user_id", $_SESSION['user_id']);
 
 //Send all smarty variables to the templates
-$smarty->display("file:" . $cpanel_template_folder . "news_add.html");
+$smarty->display("file:" . $cpanel_template_folder . "news/news_add.html");
 
 //close the connection
 mysqli_close($mysqli);

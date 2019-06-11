@@ -99,7 +99,7 @@ $smarty->assign('game_review_nr', $v_review_games);
 $smarty->assign("user_id", $_SESSION['user_id']);
 
 //Send all smarty variables to the templates
-$smarty->display("file:" . $cpanel_template_folder . "games_review.html");
+$smarty->display("file:" . $cpanel_template_folder . "games/games_review.html");
 
 //close the connection
 mysqli_close($mysqli);

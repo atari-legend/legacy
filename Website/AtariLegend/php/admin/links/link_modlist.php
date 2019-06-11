@@ -86,4 +86,4 @@ while ($rowlink = $LINKSQL->fetch_array(MYSQLI_BOTH)) {
 }
 
 //Send all smarty variables to the templates
-$smarty->display("file:".$cpanel_template_folder."link_modlist.html");
+$smarty->display("file:".$cpanel_template_folder."links/link_modlist.html");

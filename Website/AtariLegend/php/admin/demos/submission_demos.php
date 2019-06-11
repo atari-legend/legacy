@@ -149,4 +149,4 @@ $smarty->assign('structure', array(
 ));
 
 //Send all smarty variables to the templates
-$smarty->display("file:" . $cpanel_template_folder . "submission_demos.html");
+$smarty->display("file:" . $cpanel_template_folder . "demos/submission_demos.html");

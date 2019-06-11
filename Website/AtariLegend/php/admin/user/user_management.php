@@ -238,4 +238,4 @@ $v_rows = $query_number->num_rows;
 $smarty->assign('nr_users_total', $v_rows);
 
 //Send all smarty variables to the templates
-$smarty->display("file:" . $cpanel_template_folder . "user_management.html");
+$smarty->display("file:" . $cpanel_template_folder . "user/user_management.html");

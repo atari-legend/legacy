@@ -198,7 +198,7 @@ mysqli_free_result($sql);
 $smarty->assign('user_id_selected', $user_id_selected);
 
 //Send all smarty variables to the templates
-$smarty->display("file:" . $cpanel_template_folder . "user_statistics.html");
+$smarty->display("file:" . $cpanel_template_folder . "user/user_statistics.html");
 
 //close the connection
 mysqli_close($mysqli);

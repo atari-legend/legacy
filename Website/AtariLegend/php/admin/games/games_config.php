@@ -156,7 +156,7 @@ $smarty->assign('soundhardware', $soundHardwareDao->getAllSoundHardware());
 $smarty->assign('progress_system', $gameProgressSystemDao->getAllProgressSystems());
 
 //Send all smarty variables to the templates
-$smarty->display("file:" . $cpanel_template_folder . "games_config.html");
+$smarty->display("file:" . $cpanel_template_folder . "games/games_config.html");
 
 //close the connection
 mysqli_close($mysqli);

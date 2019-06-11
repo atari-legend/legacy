@@ -160,6 +160,4 @@ $time_elapsed_secs = microtime(true) - $start;
 $smarty->assign("query_time", $time_elapsed_secs);
 
 //Send all smarty variables to the templates
-$smarty->display("file:" . $cpanel_template_folder . "ajax_user_management.html");
-//Send all smarty variables to the templates
-//$smarty->display("file:" . $cpanel_template_folder . "user_management.html");
+$smarty->display("file:" . $cpanel_template_folder . "user/ajax_user_management.html");

@@ -79,7 +79,7 @@ $smarty->assign('az_value', $az_value);
 $smarty->assign('az_output', $az_output);
 
 //Send all smarty variables to the templates
-$smarty->display("file:" . $cpanel_template_folder . "ajax_menus_add_author_title.html");
+$smarty->display("file:" . $cpanel_template_folder . "menus/ajax_menus_add_author_title.html");
 
 //close the connection
 mysqli_close($mysqli);

@@ -47,4 +47,4 @@ $smarty->assign('magazine', array(
 ));
 
 //Send all smarty variables to the templates
-$smarty->display("file:" . $cpanel_template_folder . "magazine_issue_edit.html");
+$smarty->display("file:" . $cpanel_template_folder . "magazine/magazine_issue_edit.html");
