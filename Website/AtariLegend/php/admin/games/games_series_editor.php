@@ -52,4 +52,4 @@ while ($query_series_link = $sql_series_link->fetch_array(MYSQLI_BOTH)) {
 }
 
 //Send all smarty variables to the templates
-$smarty->display("file:" . $cpanel_template_folder . "games_series_editor.html");
+$smarty->display("file:" . $cpanel_template_folder . "games/games_series_editor.html");

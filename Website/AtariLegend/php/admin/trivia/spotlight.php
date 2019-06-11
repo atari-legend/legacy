@@ -35,4 +35,4 @@ while ($sql_spotlight = $query_spotlight->fetch_array(MYSQLI_BOTH)) {
 }
 
 //Send all smarty variables to the templates
-$smarty->display("file:" . $cpanel_template_folder . "spotlight.html");
+$smarty->display("file:" . $cpanel_template_folder . "trivia/spotlight.html");

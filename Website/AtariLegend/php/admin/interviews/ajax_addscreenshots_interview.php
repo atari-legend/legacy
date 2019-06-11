@@ -19,4 +19,4 @@ include("../../config/admin.php");
 $smarty->assign('interview_id', $interview_id);
 
 //Send all smarty variables to the templates
-$smarty->display("file:".$cpanel_template_folder."ajax_interview_add_screenshots.html");
+$smarty->display("file:".$cpanel_template_folder."interviews/ajax_interview_add_screenshots.html");

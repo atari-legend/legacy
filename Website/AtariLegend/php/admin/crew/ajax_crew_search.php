@@ -44,7 +44,7 @@ if (isset($action) and $action == "crew_browse") {
             'crew_name' => $query_crew['crew_name']
         ));
     }
-    $smarty->display("file:" . $cpanel_template_folder . "ajax_crew_editor.html");
+    $smarty->display("file:" . $cpanel_template_folder . "crew/ajax_crew_editor.html");
 }
 
 if (isset($action) and $action == "crew_search") {
@@ -64,7 +64,7 @@ if (isset($action) and $action == "crew_search") {
         ));
     }
 
-    $smarty->display("file:" . $cpanel_template_folder . "ajax_crew_editor.html");
+    $smarty->display("file:" . $cpanel_template_folder . "crew/ajax_crew_editor.html");
 }
 
 if (isset($action) and $action == "crew_gen_browse") {

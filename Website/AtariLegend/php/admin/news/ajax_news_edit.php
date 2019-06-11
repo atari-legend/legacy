@@ -30,7 +30,7 @@ $smarty->assign(
 );
 
 //Send all smarty variables to the templates
-$smarty->display("file:" . $cpanel_template_folder . "ajax_news_edit.html");
+$smarty->display("file:" . $cpanel_template_folder . "news/ajax_news_edit.html");
 
 //close the connection
 mysqli_close($mysqli);

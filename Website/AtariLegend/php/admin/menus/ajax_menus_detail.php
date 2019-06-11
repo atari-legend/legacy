@@ -314,4 +314,4 @@ if (isset($action) and $action == "ind_gen_search") {
 }
 
 //Send all smarty variables to the templates
-$smarty->display("file:" . $cpanel_template_folder . "ajax_menus_detail.html");
+$smarty->display("file:" . $cpanel_template_folder . "menus/ajax_menus_detail.html");

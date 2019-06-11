@@ -577,7 +577,7 @@ $smarty->assign('links', array(
 $smarty->assign("user_id", $_SESSION['user_id']);
 
 //Send all smarty variables to the templates
-$smarty->display("file:" . $cpanel_template_folder . "change_log.html");
+$smarty->display("file:" . $cpanel_template_folder . "administration/change_log.html");
 
 //close the connection
 mysqli_close($mysqli);

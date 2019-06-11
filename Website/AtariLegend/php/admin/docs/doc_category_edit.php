@@ -49,7 +49,7 @@ if ($doc_category_id == '-' or $doc_category_id == ' ') {
     }
 
     //Send all smarty variables to the templates
-    $smarty->display("file:" . $cpanel_template_folder . "doc_category_edit.html");
+    $smarty->display("file:" . $cpanel_template_folder . "docs/doc_category_edit.html");
 }
 
 //close the connection

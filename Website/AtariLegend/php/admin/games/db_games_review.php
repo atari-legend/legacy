@@ -144,7 +144,7 @@ if (isset($action) and $action == 'delete_comment') {
     $smarty->assign('game_id', $game_id);
 
     //Send to smarty for return value
-    $smarty->display("file:" . $cpanel_template_folder . "ajax_review_add_comment.html");
+    $smarty->display("file:" . $cpanel_template_folder . "games/ajax_review_add_comment.html");
 }
 
 if (isset($action) and ($action == 'delete_review' or $action == 'delete_submission')) {

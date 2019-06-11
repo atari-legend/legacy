@@ -40,4 +40,4 @@ if (isset($action) and $action == "add_new_disk_box") {
 }
 
 //Send all smarty variables to the templates
-$smarty->display("file:" . $cpanel_template_folder . "ajax_menus.html");
+$smarty->display("file:" . $cpanel_template_folder . "menus/ajax_menus.html");

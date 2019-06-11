@@ -132,4 +132,4 @@ if (isset($list) and $list == "full") {
 }
 
 //Send all smarty variables to the templates
-$smarty->display("file:" . $cpanel_template_folder . "ajax_menus_add_docs.html");
+$smarty->display("file:" . $cpanel_template_folder . "menus/ajax_menus_add_docs.html");

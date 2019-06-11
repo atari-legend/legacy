@@ -42,7 +42,7 @@ while ($newsimages = $sql_newsimage->fetch_array(MYSQLI_BOTH)) {
 }
 
 //Send all smarty variables to the templates
-$smarty->display("file:" . $cpanel_template_folder . "ajax_news_post_edit.html");
+$smarty->display("file:" . $cpanel_template_folder . "news/ajax_news_post_edit.html");
 
 //close the connection
 mysqli_close($mysqli);

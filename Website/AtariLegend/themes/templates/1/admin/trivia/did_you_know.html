@@ -1,0 +1,64 @@
+{*
+/***************************************************************************
+*                           did_you_know.html
+*                           --------------------------
+*   begin                : Sept 29, 2005
+*   copyright            : (C) 2005 Atari Legend
+*   email                : admin@atarilegend.com
+*
+*   Id: did_you_know.html,v 0.10 2015/09/04 ST Graveyard
+*   Id: did_you_know.html,v 0.20 2015/11/12 ST Graveyard - HTML validated
+*
+***************************************************************************/
+*}
+{extends file='../main.html'}
+
+{block name=java_script}
+    <script src="{$template_dir}includes/js/trivia.js"></script> <!-- Load all trivia scripts -->
+{/block}
+
+{block name=main_tile}
+<div class="standard_tile">
+    <h1>DID YOU KNOW</h1>
+    <div class="standard_tile_line"></div>
+    <div class="standard_tile_padding">
+        <div class="left_nav_section">
+            Here you can add a new trivia by using the below text field or you can delete one of the old trivias.
+        </div>
+        <br>
+        <br>
+        <form action="../trivia/db_trivia.php" method="post" name="trivia" id="trivia">
+            <fieldset class="secondary_fieldset centered_fieldset">
+            <legend class="primary_legend">Add new Trivia</legend>
+                Trivia Text<br>
+                <textarea name="trivia_text" id="trivia_text" class="primary_textarea" rows="4" required></textarea>
+                <br><br>
+                <input type="hidden" name="action" value="did_you_know_insert">
+                <input type="submit" value="Submit" class="secondary_button">
+            </fieldset>
+        </form>
+        <br>
+        <div id="add_trivia_list">
+            {foreach from=$trivia item=line}
+                <fieldset class="secondary_fieldset" id="JStrivia_id_{$line.trivia_id}">
+                    <legend class="primary_legend">Trivia ID {$line.trivia_id}</legend>
+                    <form action="" method="post" name="trivia{$line.trivia_id}" id="JSTrivia{$line.trivia_id}">
+                        <br>
+                        <div id="JSDidYouKnow_{$line.trivia_id}">
+                            {$line.trivia_text}
+                        </div>
+                        <br>
+                        <br>
+                        <input type="hidden" name="trivia_id" value="{$line.trivia_id}">
+                        <input type="button" value="Delete"  class="secondary_button" onclick="DidyouknowdeleteConfirmation({$line.trivia_id})">
+                        <div id="JSDidYouKnowEdit_{$line.trivia_id}" style="display:inline-block;">
+                            <input type="button" value="Edit"  class="secondary_button" onclick="DidyouknowEdit({$line.trivia_id})">
+                        </div>
+                    </form>
+                </fieldset>
+                <br>
+            {/foreach}
+        </div>
+    </div>
+</div>
+{/block}

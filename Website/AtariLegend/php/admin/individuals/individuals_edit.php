@@ -43,7 +43,7 @@ if ($ind_id == '-') {
     $smarty->assign("user_id", $_SESSION['user_id']);
 
     //Send all smarty variables to the templates
-    $smarty->display("file:" . $cpanel_template_folder . "individuals_main.html");
+    $smarty->display("file:" . $cpanel_template_folder . "individuals/individuals_main.html");
 } else {
     //Let's see if we have selected a nickname
     $sql_nick = $mysqli->query("SELECT * FROM individual_nicks WHERE nick_id=$ind_id")
@@ -98,7 +98,7 @@ if ($ind_id == '-') {
     $smarty->assign("user_id", $_SESSION['user_id']);
 
     //Send all smarty variables to the templates
-    $smarty->display("file:" . $cpanel_template_folder . "individuals_edit.html");
+    $smarty->display("file:" . $cpanel_template_folder . "individuals/individuals_edit.html");
 }
 
 //close the connection

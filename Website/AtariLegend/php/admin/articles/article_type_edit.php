@@ -50,7 +50,7 @@ if ($article_type_id == '-' or $article_type_id == ' ') {
     }
 
     //Send all smarty variables to the templates
-    $smarty->display("file:" . $cpanel_template_folder . "article_type_edit.html");
+    $smarty->display("file:" . $cpanel_template_folder . "articles/article_type_edit.html");
 }
 
 //close the connection

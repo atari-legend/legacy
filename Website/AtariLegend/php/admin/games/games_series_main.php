@@ -31,4 +31,4 @@ $gameSeriesDao = new \AL\Common\DAO\GameSeriesDAO($mysqli);
 $smarty->assign('game_series', $gameSeriesDao->getAllGameSeries());
 
 //Send all smarty variables to the templates
-$smarty->display("file:" . $cpanel_template_folder . "games_series_main.html");
+$smarty->display("file:" . $cpanel_template_folder . "games/games_series_main.html");

@@ -63,7 +63,7 @@ while ($query_users = $sql_users->fetch_array(MYSQLI_BOTH)) {
 }
 
 //Send all smarty variables to the templates
-$smarty->display("file:" . $cpanel_template_folder . "user_detail.html");
+$smarty->display("file:" . $cpanel_template_folder . "user/user_detail.html");
 
 //close the connection
 mysqli_close($mysqli);

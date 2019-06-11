@@ -40,4 +40,4 @@ while ($stmt->fetch()) {
 }
 $stmt->close();
 
-$smarty->display("file:" . $cpanel_template_folder . "games_boxscans_to_merge.html");
+$smarty->display("file:" . $cpanel_template_folder . "games/games_boxscans_to_merge.html");

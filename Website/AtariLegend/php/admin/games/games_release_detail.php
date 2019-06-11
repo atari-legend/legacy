@@ -73,7 +73,7 @@ if ($_SERVER['REQUEST_METHOD'] == "GET") {
     $smarty->assign('media_scan_types', $mediaScanTypeDao->getAllMediaScanTypes());
     $smarty->assign('game_release_scan_types', $gameReleaseScanDao->getScanTypes());
     $smarty->assign('crews', $crewDao->getAllCrews());
-    
+
 
     // Edit existing release
     if (isset($release_id)) {
@@ -196,6 +196,6 @@ if ($_SERVER['REQUEST_METHOD'] == "GET") {
 }
 
 $smarty->assign("tab", isset($tab) ? $tab : "general");
-$smarty->display("file:" . $cpanel_template_folder . "games_release_detail.html");
+$smarty->display("file:" . $cpanel_template_folder . "games/games_release_detail.html");
 
 mysqli_close($mysqli);

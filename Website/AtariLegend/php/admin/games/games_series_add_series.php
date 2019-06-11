@@ -38,4 +38,4 @@ $smarty->assign('series_info', array(
 ));
 
 //Send all smarty variables to the templates
-$smarty->display("file:" . $cpanel_template_folder . "games_series_add_series.html");
+$smarty->display("file:" . $cpanel_template_folder . "games/games_series_add_series.html");

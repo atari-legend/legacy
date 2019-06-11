@@ -48,7 +48,7 @@ if ($doc_type_id == '-' or $doc_type_id == ' ') {
         ));
     }
     //Send all smarty variables to the templates
-    $smarty->display("file:" . $cpanel_template_folder . "doc_type_edit.html");
+    $smarty->display("file:" . $cpanel_template_folder . "docs/doc_type_edit.html");
 }
 
 //close the connection
