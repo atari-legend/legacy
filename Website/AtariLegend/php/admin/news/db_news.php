@@ -67,7 +67,8 @@ if (isset($action) and $action == "add_news") {
         // Insert the description and the image into the news_image table.
         $sdbquery = $mysqli->query("INSERT INTO news_submission
               (news_headline,news_text,news_image_id,user_id,news_date)
-               VALUES ('$headline','$descr','$icon','$members','$news_date')") or die("Error inserting news update: ".$mysqli->error);
+               VALUES ('$headline','$descr','$icon','$members','$news_date')")
+          or die("Error inserting news update: ".$mysqli->error);
 
         $_SESSION['edit_message'] = "News added correctly";
 
