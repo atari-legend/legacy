@@ -50,4 +50,4 @@ while ($fetch = $sql->fetch_array(MYSQLI_BOTH)) {
 }
 
 //Send all smarty variables to the templates
-$smarty->display("file:" . $cpanel_template_folder . "magazine_edit.html");
+$smarty->display("file:" . $cpanel_template_folder . "magazine/magazine_edit.html");

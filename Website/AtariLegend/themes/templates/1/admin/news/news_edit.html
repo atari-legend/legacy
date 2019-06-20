@@ -1,0 +1,64 @@
+{*
+/***************************************************************************
+*                                news_edit.html
+*                            ---------------------------
+*   begin                : Thursday, May 5, 2005
+*   copyright            : (C) 2005 Atari Legend
+*   email                : maarten.martens@freebel.net
+*   actual update        : File creation
+*
+*   Id: news_edit.html,v 0.10 2004/05/05 ST Graveyard
+*   Id: news_edit.html,v 0.10 2016/07/29 ST Graveyard
+*           - AL 2.0
+*
+***************************************************************************/
+****************************************************************************
+This is the sub template file to generate the news edit page
+****************************************************************************
+*}
+{extends file='../main.html'}
+
+{block name=left_tile}
+    {include file='./tiles/quick_search_news.html'}
+{/block}
+
+{block name=right_tile}
+    {include file='./tiles/quick_search_games.html'}
+{/block}
+
+{block name=java_script}
+<script src="{$template_dir}includes/js/bbcode.js"></script><!-- Load the BBCODE script -->
+<script src="{$template_dir}includes/js/news.js"></script><!-- Load all the news scripts -->
+<script src="{$template_dir}includes/js/ui.widgets.js"></script><!-- The autocomplete and dropdown switcher -->
+{/block}
+
+{block name=title}Edit News{/block}
+
+{block name=main_tile}
+<div class="standard_tile" id="news_approve">
+    <div class="help-tip">
+        <p>
+            <i class="fa fa-envelope" aria-hidden="true"></i> - Email <br>
+            <i class="fa fa-pencil fa-lg" aria-hidden="true"></i> - Edit <br>
+            <i class="fa fa-trash fa-lg" aria-hidden="true"></i> - Delete <br>
+            <i class="fa fa-floppy-o" aria-hidden="true"></i> - Save
+        </p>
+    </div>
+    <h1>EDIT NEWS</h1>
+    <div class="standard_tile_line"></div>
+    <div class="standard_tile_padding">
+        <div class="left_nav_section">
+            This is the news editing page. News posts can be changed or deleted here. As these are all approved news entries, keep in mind these changes are instantly visible on the main site! Use the left side to perform a search query on the news table.
+            There are currently {$nr_news} posts in the news table.
+        </div>
+        <br>
+        <br>
+        <form name="post" id="post">
+        <div class="jsNewsWrapper infinite-container">
+            {include file='./news/ajax_news_edit.html'}
+            <div id="JSuserId" style="display:none;">{if isset($user_id)}{$user_id}{/if}</div>
+        </div>
+        </form>
+    </div>
+</div>
+{/block}

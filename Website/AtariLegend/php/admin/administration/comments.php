@@ -53,9 +53,9 @@ $smarty->assign('links', array(
 ));
 
 //Get the authors for comment search
-$sql_author = $mysqli->query("SELECT comments.user_id,users.userid FROM comments 
-                              LEFT JOIN users ON ( comments.user_id = users.user_id ) 
-                              GROUP BY comments.user_id 
+$sql_author = $mysqli->query("SELECT comments.user_id,users.userid FROM comments
+                              LEFT JOIN users ON ( comments.user_id = users.user_id )
+                              GROUP BY comments.user_id
                               ORDER BY users.userid ASC") or die("Database error - getting members name");
 
 while ($authors = $sql_author->fetch_array(MYSQLI_BOTH)) {
@@ -66,4 +66,4 @@ while ($authors = $sql_author->fetch_array(MYSQLI_BOTH)) {
 }
 
 //Send all smarty variables to the templates
-$smarty->display("file:" . $cpanel_template_folder . "comments.html");
+$smarty->display("file:" . $cpanel_template_folder . "administration/comments.html");

@@ -192,7 +192,7 @@ if (isset($action) and $action == "search") {
                 $smarty->assign("user_id", $_SESSION['user_id']);
 
                 //Send all smarty variables to the templates
-                $smarty->display("file:" . $cpanel_template_folder . "demos_list.html");
+                $smarty->display("file:" . $cpanel_template_folder . "demos/demos_list.html");
             } else {
                 $message = "No entries found for your selection";
                 $smarty->assign("message", $message);

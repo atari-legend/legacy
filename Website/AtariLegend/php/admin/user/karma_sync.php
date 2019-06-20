@@ -129,7 +129,7 @@ while ($user_info = $sql_user2->fetch_array(MYSQLI_BOTH)) {
 }
 
 //Send all smarty variables to the templates
-$smarty->display("file:" . $cpanel_template_folder . "user_karmasync.html");
+$smarty->display("file:" . $cpanel_template_folder . "user/user_karmasync.html");
 
 //close the connection
 mysqli_close($mysqli);

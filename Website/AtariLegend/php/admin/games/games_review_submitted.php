@@ -53,4 +53,4 @@ $smarty->assign("submission_nr", $i);
 $smarty->assign("user_id", $_SESSION['user_id']);
 
 //Send all smarty variables to the templates
-$smarty->display("file:" . $cpanel_template_folder . "games_review_submitted.html");
+$smarty->display("file:" . $cpanel_template_folder . "games/games_review_submitted.html");

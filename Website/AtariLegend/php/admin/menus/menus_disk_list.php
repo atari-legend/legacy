@@ -85,4 +85,4 @@ $smarty->assign('nr_of_entries', $menu_disk_rows);
 $smarty->assign("user_id", $_SESSION['user_id']);
 
 //Send all smarty variables to the templates
-$smarty->display("file:" . $cpanel_template_folder . "menus_disk_list.html");
+$smarty->display("file:" . $cpanel_template_folder . "menus/menus_disk_list.html");

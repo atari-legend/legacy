@@ -1,0 +1,23 @@
+{extends file='../main.html'}
+{block name=main_tile}
+<div class="standard_tile">
+    <h1>{count($boxscans)} BOX SCANS TO MERGE</h1>
+    <div class="standard_tile_line"></div>
+
+    <table class="secondary_table_list table_hover table_sm text-nowrap">
+        <tr>
+            <th class="mw-40">Game Name</th>
+            <th class="mw-20">Box Scan</th>
+        </tr>
+        {foreach from=$boxscans item=scan}
+            <tr>
+                <td><a href="games_detail.php?game_id={$scan.game_id}" class="standard_tile_text_left">{$scan.game_name}</a></td>
+                <td>
+                    <a href="games_detail.php?game_id={$scan.game_id}" class="standard_tile_text_left">
+                        <img src="../../includes/show_image.php?file=../../data/images/game_boxscans/{$scan.game_boxscan_id}.{$scan.game_boxscan_imgext}&resize=null,150,null,null"></td>
+                    </a>
+            </tr>
+        {/foreach}
+    </table>
+</div>
+{/block}

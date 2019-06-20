@@ -62,7 +62,7 @@ while ($game_similar = $sql_game_similar->fetch_array(MYSQLI_BOTH)) {
 $smarty->assign("user_id", $_SESSION['user_id']);
 
 //Send all smarty variables to the templates
-$smarty->display("file:" . $cpanel_template_folder . "games_similar.html");
+$smarty->display("file:" . $cpanel_template_folder . "games/games_similar.html");
 
 //close the connection
 mysqli_close($mysqli);

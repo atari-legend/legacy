@@ -43,4 +43,4 @@ $smarty->assign('game', array(
 ));
 
 //Send all smarty variables to the templates
-$smarty->display("file:" . $cpanel_template_folder . "magazine_setscore.html");
+$smarty->display("file:" . $cpanel_template_folder . "magazine/magazine_setscore.html");

@@ -152,4 +152,4 @@ $smarty->assign('mySelect', 'num');
 $smarty->assign('game_series_id', $game_series_id);
 
 //Send all smarty variables to the templates
-$smarty->display("file:" . $cpanel_template_folder . "games_series_add_games.html");
+$smarty->display("file:" . $cpanel_template_folder . "games/games_series_add_games.html");

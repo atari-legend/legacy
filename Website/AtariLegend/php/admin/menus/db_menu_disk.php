@@ -224,7 +224,7 @@ if (isset($action) and ($action == "add_title_to_menu")) {
         $smarty->assign('menu_disk_id', $menu_disk_id);
 
         //Send to smarty for return value
-        $smarty->display("file:" . $cpanel_template_folder . "ajax_menus_detail.html");
+        $smarty->display("file:" . $cpanel_template_folder . "menus/ajax_menus_detail.html");
     }
 }
 
@@ -328,7 +328,7 @@ if (isset($action) and $action == "add_doc_to_menu") {
         $smarty->assign('menu_disk_id', $menu_disk_id);
 
         //Send to smarty for return value
-        $smarty->display("file:" . $cpanel_template_folder . "ajax_menus_detail.html");
+        $smarty->display("file:" . $cpanel_template_folder . "menus/ajax_menus_detail.html");
     }
 }
 
@@ -397,7 +397,7 @@ if (isset($action) and $action == "delete_from_menu_disk") {
     $smarty->assign('osd_message', $osd_message);
 
     //Send to smarty for return value
-    $smarty->display("file:" . $cpanel_template_folder . "ajax_menus_detail.html");
+    $smarty->display("file:" . $cpanel_template_folder . "menus/ajax_menus_detail.html");
 }
 
 //****************************************************************************************
@@ -494,7 +494,7 @@ if (isset($action) and $action == "delete_doc_from_menu_disk") {
     $smarty->assign('osd_message', $osd_message);
 
     //Send to smarty for return value
-    $smarty->display("file:" . $cpanel_template_folder . "ajax_menus_detail.html");
+    $smarty->display("file:" . $cpanel_template_folder . "menus/ajax_menus_detail.html");
 }
 
 //****************************************************************************************
@@ -594,7 +594,7 @@ if (isset($action) and $action == "add_screens") {
     $smarty->assign('menu_disk_id', $menu_disk_id);
 
     //Send to smarty for return value
-    $smarty->display("file:" . $cpanel_template_folder . "ajax_menus_detail.html");
+    $smarty->display("file:" . $cpanel_template_folder . "menus/ajax_menus_detail.html");
 }
 
 //****************************************************************************************
@@ -663,7 +663,7 @@ if (isset($action) and $action == "delete_screen_from_menu_disk") {
     $smarty->assign('menu_disk_id', $menu_disk_id);
 
     //Send to smarty for return value
-    $smarty->display("file:" . $cpanel_template_folder . "ajax_menus_detail.html");
+    $smarty->display("file:" . $cpanel_template_folder . "menus/ajax_menus_detail.html");
 }
 
 //****************************************************************************************
@@ -740,7 +740,7 @@ if (isset($action) and $action == "delete_download_from_menu_disk") {
     $smarty->assign('menu_disk_id', $menu_disk_id);
 
     //Send to smarty for return value
-    $smarty->display("file:" . $cpanel_template_folder . "ajax_menus_detail.html");
+    $smarty->display("file:" . $cpanel_template_folder . "menus/ajax_menus_detail.html");
 }
 
 //****************************************************************************************
@@ -894,7 +894,7 @@ if (isset($action) and $action == 'add_file') {
     $smarty->assign('menu_disk_id', $menu_disk_id);
 
     //Send to smarty for return value
-    $smarty->display("file:" . $cpanel_template_folder . "ajax_menus_detail.html");
+    $smarty->display("file:" . $cpanel_template_folder . "menus/ajax_menus_detail.html");
 }
 
 //****************************************************************************************
@@ -962,7 +962,7 @@ if (isset($action) and $action == "add_intro_credits") {
         $smarty->assign('osd_message', $osd_message);
         $smarty->assign('smarty_action', 'update_menu_disk_credits');
         //Send to smarty for return value
-        $smarty->display("file:" . $cpanel_template_folder . "ajax_menus_detail.html");
+        $smarty->display("file:" . $cpanel_template_folder . "menus/ajax_menus_detail.html");
     }
 }
 
@@ -1038,7 +1038,7 @@ if (isset($action) and $action == "delete_menu_disk_credits") {
         $smarty->assign('osd_message', $osd_message);
         $smarty->assign('smarty_action', 'update_menu_disk_credits');
         //Send to smarty for return value
-        $smarty->display("file:" . $cpanel_template_folder . "ajax_menus_detail.html");
+        $smarty->display("file:" . $cpanel_template_folder . "menus/ajax_menus_detail.html");
     }
 }
 
@@ -1521,7 +1521,7 @@ if (isset($action) and ($action == "change_menu_disk_state" or $action == "chang
         $smarty->assign('menu_disk_id', $menu_disk_id);
 
         //Send to smarty for return value
-        $smarty->display("file:" . $cpanel_template_folder . "ajax_menus_detail.html");
+        $smarty->display("file:" . $cpanel_template_folder . "menus/ajax_menus_detail.html");
     }
 }
 
@@ -1575,7 +1575,7 @@ if (isset($action) and ($action == "change_doctype")) {
     $smarty->assign('menu_disk_id', $menu_disk_id);
     $smarty->assign('smarty_action', 'add_doc_to_menu_return');
     //Send to smarty for return value
-    $smarty->display("file:" . $cpanel_template_folder . "ajax_menus_detail.html");
+    $smarty->display("file:" . $cpanel_template_folder . "menus/ajax_menus_detail.html");
 }
 
 //****************************************************************************************
@@ -1931,7 +1931,7 @@ if (isset($action) and ($action == "add_set_to_menu" or $action == "link_game_to
     $smarty->assign('menu_disk_title_id', $menu_disk_title_id);
 
     //Send all smarty variables to the templates
-    $smarty->display("file:" . $cpanel_template_folder . "ajax_menus_detail.html");
+    $smarty->display("file:" . $cpanel_template_folder . "menus/ajax_menus_detail.html");
 }
 
 //****************************************************************************************
@@ -2053,5 +2053,5 @@ if ($action == 'add_author' or $action == 'delete_menu_disk_title_credits') {
     $smarty->assign('az_output', $az_output);
 
     //Send all smarty variables to the templates
-    $smarty->display("file:" . $cpanel_template_folder . "ajax_menus_detail.html");
+    $smarty->display("file:" . $cpanel_template_folder . "menus/ajax_menus_detail.html");
 }

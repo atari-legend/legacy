@@ -26,7 +26,7 @@ if (isset($trivia_quote_id) and $action == "edit_trivia_quote") {
 
     $smarty->assign('smarty_action', 'trivia_quote_edit');
     //Send all smarty variables to the templates
-    $smarty->display("file:" . $cpanel_template_folder . "ajax_trivia_quotes_edit.html");
+    $smarty->display("file:" . $cpanel_template_folder . "trivia/ajax_trivia_quotes_edit.html");
 }
 
 if (isset($trivia_quote_id) and $action == "display_trivia_quoute") {
@@ -39,7 +39,7 @@ if (isset($trivia_quote_id) and $action == "display_trivia_quoute") {
 
     $smarty->assign('smarty_action', 'display_trivia_quoute');
     //Send all smarty variables to the templates
-    $smarty->display("file:" . $cpanel_template_folder . "ajax_trivia_quotes_edit.html");
+    $smarty->display("file:" . $cpanel_template_folder . "trivia/ajax_trivia_quotes_edit.html");
 }
 
 if (isset($trivia_id) and $action == "did_you_know_edit_view") {
@@ -50,7 +50,7 @@ if (isset($trivia_id) and $action == "did_you_know_edit_view") {
 
     $smarty->assign('smarty_action', 'did_you_know_edit_view');
     //Send all smarty variables to the templates
-    $smarty->display("file:" . $cpanel_template_folder . "ajax_trivia_quotes_edit.html");
+    $smarty->display("file:" . $cpanel_template_folder . "trivia/ajax_trivia_quotes_edit.html");
 }
 
 if (isset($spotlight_id) and $action == "spotlight_edit_view") {
@@ -75,5 +75,5 @@ if (isset($spotlight_id) and $action == "spotlight_edit_view") {
 
     $smarty->assign('smarty_action', 'spotlight_edit_view');
     //Send all smarty variables to the templates
-    $smarty->display("file:" . $cpanel_template_folder . "ajax_trivia_quotes_edit.html");
+    $smarty->display("file:" . $cpanel_template_folder . "trivia/ajax_trivia_quotes_edit.html");
 }

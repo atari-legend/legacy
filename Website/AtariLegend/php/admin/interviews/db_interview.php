@@ -145,7 +145,7 @@ if (isset($action2) and $action2 == 'add_screens') {
     $smarty->assign('interview_id', $interview_id);
 
     //Send to smarty for return value
-    $smarty->display("file:" . $cpanel_template_folder . "ajax_interview_add_screenshots.html");
+    $smarty->display("file:" . $cpanel_template_folder . "interviews/ajax_interview_add_screenshots.html");
 }
 
 //*************************************************************************
@@ -281,7 +281,7 @@ if (isset($action) and $action == 'delete_screenshot_comment') {
     $smarty->assign('interview_id', $interview_id);
 
     //Send to smarty for return value
-    $smarty->display("file:" . $cpanel_template_folder . "ajax_interview_add_screenshots.html");
+    $smarty->display("file:" . $cpanel_template_folder . "interviews/ajax_interview_add_screenshots.html");
 }
 
 //*************************************************************************

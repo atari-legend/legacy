@@ -18,4 +18,4 @@ include("../../config/admin.php");
 include("../../admin/games/quick_search_games.php");
 
 //Send all smarty variables to the templates
-$smarty->display("file:".$cpanel_template_folder."technical_doc.html");
+$smarty->display("file:".$cpanel_template_folder."administration/technical_doc.html");

@@ -201,7 +201,7 @@ if ($action == "fact_delete" or $action == "delete_screenshot") {
         $smarty->assign('osd_message', $osd_message);
 
         //Send to smarty for return value
-        $smarty->display("file:" . $cpanel_template_folder . "ajax_game_facts_edit.html");
+        $smarty->display("file:" . $cpanel_template_folder . "games/ajax_game_facts_edit.html");
     }
 }
 

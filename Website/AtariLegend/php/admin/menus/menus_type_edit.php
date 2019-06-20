@@ -49,7 +49,7 @@ if ($menu_type_id == '-' or $menu_type_id == ' ') {
     }
 
     //Send all smarty variables to the templates
-    $smarty->display("file:" . $cpanel_template_folder . "menus_type_edit.html");
+    $smarty->display("file:" . $cpanel_template_folder . "menus/menus_type_edit.html");
 }
 
 //close the connection

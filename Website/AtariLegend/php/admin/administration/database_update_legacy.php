@@ -247,4 +247,4 @@ foreach ($database_update as $key) {
 mysqli_commit($mysqli) or die("Unable to commit transaction: ".$mysqli->error);
 
 //Send all smarty variables to the templates
-$smarty->display("file:" . $cpanel_template_folder . "database_update.html");
+$smarty->display("file:" . $cpanel_template_folder . "administration/database_update.html");

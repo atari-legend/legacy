@@ -31,7 +31,7 @@ if (isset($_SESSION['edit_message'])) {
     $smarty->assign("message", $_SESSION['edit_message']);
 }
 
-$smarty->display("file:" . $cpanel_template_folder . "games_main.html");
+$smarty->display("file:" . $cpanel_template_folder . "games/games_main.html");
 
 //close the connection
 mysqli_close($mysqli);

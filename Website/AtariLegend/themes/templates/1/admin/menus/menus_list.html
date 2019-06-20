@@ -1,0 +1,89 @@
+{*
+/***************************************************************************
+*                            menus_list.html
+*                            --------------------------
+*   begin                : Sunday, August 28, 2005
+*   copyright            : (C) 2005 Atari Legend
+*   email                : admin@atarilegend.com
+*
+*   id : menus_list.html ,v 0.10 2016/08/26 ST Graveyard 23:22
+*           - AL 2.0
+*
+***************************************************************************/
+
+************************************************************************************************
+The main game page
+************************************************************************************************
+*}
+{extends file='../main.html'}
+
+{block name=title}Menus Search results{/block}
+
+{block name=left_tile}
+<div class="standard_tile">
+    <h1>MENU SET</h1>
+    <div class="standard_tile_line"></div>
+        <div class="standard_tile_text_center">
+            <form action="../menus/db_menu_set.php" method="post" name="post" id="menu_edit">
+                <br>
+                Add new Menu Set:
+                <br>
+                <input type="text" name="menu_sets_name" value="" class="standard_input input_large">
+                <br>
+                <br>
+                <input type="hidden" name="action" value="menu_set_new">
+                <input type="submit" value="Add New" class="primary_button">
+            </form>
+        </div>
+    <br>
+</div>
+<br>
+{/block}
+
+{block name=main_tile}
+<div class="standard_tile">
+    <div class="help-tip">
+        <p>We start with a menu set. A menu set contains different menu disks. These menu disks contain menu titles - the games, tools, docs ...</p>
+    </div>
+    <div style="margin-left:20px;"><h1>MENU SEARCH</h1></div>
+    <div class="standard_tile_line"></div>
+    <div class="standard_tile_padding">
+        {if (isset($nr_of_entries))}
+            <div class="left_nav_section">
+                This is the Menus search page. Select a menu set to browse its menu disks or start adding them.
+            </div>
+            <br>
+            <br>
+            <div class="table-responsive">
+                <table class="secondary_table_list table_md table_hover text-nowrap">
+                    <tr>
+                        <th class="mw-30">Menu Disk Set</th>
+                        <th class="mw-25">Crew</th>
+                        <th class="mw-25">Indvidual</th>
+                        <th class="mw-10">type</th>
+                        <th class="mw-10">Nr</th>
+                    </tr>
+                    {foreach from=$menus_list item=line}
+                        <tr>
+                            <td>{if null !== $line->getMenuSetsName()}<a href="../menus/menus_disk_list.php?menu_sets_id={$line->getMenuSetsId()}" class="standard_tile_text_left">{$line->getMenuSetsName()}</a>{else}<i>n/a</i>{/if}</td>
+                            <td>{if null !== $line->getCrew()}{$line->getCrew()->getName()}{else}<i>n/a</i>{/if}</td>
+                            <td>{if null !== $line->getIndividual()}{$line->getIndividual()->getName()}{else}<i>n/a</i>{/if}</td>
+                            <td>{if null !== $line->getMenuTypesText()}{$line->getMenuTypesText()}{else}<i>n/a</i>{/if}</td>
+                            <td>{if null !== $line->getMenuDiskCount()}{$line->getMenuDiskCount()}{else}<i>0</i>{/if}</td>
+                        </tr>
+                    {/foreach}
+                    <tr>
+                        <td colspan="5">
+                            <br><b>{if $nr_of_entries == 1}1 menus set found {else} {$nr_of_entries} menus sets found{/if} in {$querytime} sec</b>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        {else}
+            <div class="left_nav_section">
+                There are no menu sets in the database. Please create one.
+            </div>
+        {/if}
+    </div>
+</div>
+{/block}
