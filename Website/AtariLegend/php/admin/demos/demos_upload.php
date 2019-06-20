@@ -117,7 +117,7 @@ $smarty->assign('nr_downloads', $nr_downloads);
 $smarty->assign("user_id", $_SESSION['user_id']);
 
 //Send all smarty variables to the templates
-$smarty->display("file:" . $cpanel_template_folder . "demos_upload.html");
+$smarty->display("file:" . $cpanel_template_folder . "demos/demos_upload.html");
 
 //close the connection
 mysqli_close($mysqli);

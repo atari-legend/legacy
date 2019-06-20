@@ -320,10 +320,10 @@ if (isset($action) and $action == "search") {
         $smarty->assign("user_id", $_SESSION['user_id']);
 
         //Send all smarty variables to the templates
-        $smarty->display("file:" . $cpanel_template_folder . "ajax_game_search.html");
+        $smarty->display("file:" . $cpanel_template_folder . "games/ajax_game_search.html");
     } else {
         // If there are no search results
         $smarty->assign("nr_of_games", 'none');
-        $smarty->display("file:" . $cpanel_template_folder . "ajax_game_search.html");
+        $smarty->display("file:" . $cpanel_template_folder . "games/ajax_game_search.html");
     }
 }

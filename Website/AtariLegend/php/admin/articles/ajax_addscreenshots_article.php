@@ -19,4 +19,4 @@ include("../../config/admin.php");
 $smarty->assign('article_id', $article_id);
 
 //Send all smarty variables to the templates
-$smarty->display("file:".$cpanel_template_folder."ajax_article_add_screenshots.html");
+$smarty->display("file:".$cpanel_template_folder."articles/ajax_article_add_screenshots.html");

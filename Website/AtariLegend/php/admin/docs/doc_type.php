@@ -34,7 +34,7 @@ while ($row = $result_doc_type->fetch_array(MYSQLI_BOTH)) {
 $smarty->assign("user_id", $_SESSION['user_id']);
 
 //Send all smarty variables to the templates
-$smarty->display("file:" . $cpanel_template_folder . "doc_type.html");
+$smarty->display("file:" . $cpanel_template_folder . "docs/doc_type.html");
 
 //close the connection
 mysqli_free_result($result_doc_type);

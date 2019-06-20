@@ -72,4 +72,4 @@ while ($sql_games_facts = $query_games_facts->fetch_array(MYSQLI_BOTH)) {
 $smarty->assign('game_id', $game_id);
 
 //Send all smarty variables to the templates
-$smarty->display("file:" . $cpanel_template_folder . "games_facts.html");
+$smarty->display("file:" . $cpanel_template_folder . "games/games_facts.html");

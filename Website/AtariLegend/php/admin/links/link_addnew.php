@@ -72,4 +72,4 @@ if ($result->num_rows < 1) {
 }
 
 //Send all smarty variables to the templates
-$smarty->display("file:" . $cpanel_template_folder . "link_addnew.html");
+$smarty->display("file:" . $cpanel_template_folder . "links/link_addnew.html");

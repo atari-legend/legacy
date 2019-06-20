@@ -37,4 +37,4 @@ while ($query_trivia = $sql_trivia->fetch_array(MYSQLI_BOTH)) {
 }
 
 //Send all smarty variables to the templates
-$smarty->display("file:" . $cpanel_template_folder . "did_you_know.html");
+$smarty->display("file:" . $cpanel_template_folder . "trivia/did_you_know.html");

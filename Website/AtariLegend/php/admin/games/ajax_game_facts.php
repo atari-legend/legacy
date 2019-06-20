@@ -24,5 +24,5 @@ if (isset($fact_id) and $action == "game_fact_edit_view") {
 
     $smarty->assign('smarty_action', 'game_fact_edit_view');
     //Send all smarty variables to the templates
-    $smarty->display("file:" . $cpanel_template_folder . "ajax_game_facts_edit.html");
+    $smarty->display("file:" . $cpanel_template_folder . "games/ajax_game_facts_edit.html");
 }

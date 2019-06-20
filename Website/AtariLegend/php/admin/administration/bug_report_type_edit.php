@@ -50,7 +50,7 @@ if ($type_id == '-' or $type_id == ' ') {
     }
 
     //Send all smarty variables to the templates
-    $smarty->display("file:" . $cpanel_template_folder . "bug_report_type_edit.html");
+    $smarty->display("file:" . $cpanel_template_folder . "administration/bug_report_type_edit.html");
 }
 
 //close the connection

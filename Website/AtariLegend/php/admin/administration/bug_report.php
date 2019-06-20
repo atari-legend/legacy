@@ -42,4 +42,4 @@ while ($query_bug_report = $sql_bug_report->fetch_array(MYSQLI_BOTH)) {
 }
 
 //Send all smarty variables to the templates
-$smarty->display("file:" . $cpanel_template_folder . "bug_report.html");
+$smarty->display("file:" . $cpanel_template_folder . "administration/bug_report.html");

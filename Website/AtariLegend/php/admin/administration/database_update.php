@@ -143,4 +143,4 @@ foreach ($updates as $update) {
 }
 
 // Send all smarty variables to the templates
-$smarty->display("file:" . $cpanel_template_folder . "database_update.html");
+$smarty->display("file:" . $cpanel_template_folder . "administration/database_update.html");

@@ -77,7 +77,7 @@ if (isset($action) and $action == "did_you_know_delete") {
     $smarty->assign('smarty_action', 'delete_did_you_know');
 
     //Send to smarty for return value
-    $smarty->display("file:" . $cpanel_template_folder . "ajax_trivia_quotes_edit.html");
+    $smarty->display("file:" . $cpanel_template_folder . "trivia/ajax_trivia_quotes_edit.html");
 }
 
 //****************************************************************************************
@@ -113,7 +113,7 @@ if (isset($action) and $action == "delete_trivia_quote") {
     $smarty->assign('smarty_action', 'delete_trivia_quote');
 
     //Send to smarty for return value
-    $smarty->display("file:" . $cpanel_template_folder . "ajax_trivia_quotes_edit.html");
+    $smarty->display("file:" . $cpanel_template_folder . "trivia/ajax_trivia_quotes_edit.html");
 }
 
 //****************************************************************************************
@@ -168,7 +168,7 @@ if (isset($action) and $action == "edit_trivia_quote") {
 
         $smarty->assign('smarty_action', 'trivia_quote_update_returnview');
         //Send all smarty variables to the templates
-        $smarty->display("file:" . $cpanel_template_folder . "ajax_trivia_quotes_edit.html");
+        $smarty->display("file:" . $cpanel_template_folder . "trivia/ajax_trivia_quotes_edit.html");
     }
 }
 
@@ -205,7 +205,7 @@ if (isset($action) and $action == "update_trivia") {
 
         $smarty->assign('smarty_action', 'did_you_know_update_returnview');
         //Send all smarty variables to the templates
-        $smarty->display("file:" . $cpanel_template_folder . "ajax_trivia_quotes_edit.html");
+        $smarty->display("file:" . $cpanel_template_folder . "trivia/ajax_trivia_quotes_edit.html");
     }
 }
 
@@ -275,7 +275,7 @@ if ($action == "spotlight_delete") {
         $smarty->assign('smarty_action', 'delete_spotlight');
 
         //Send to smarty for return value
-        $smarty->display("file:" . $cpanel_template_folder . "ajax_trivia_quotes_edit.html");
+        $smarty->display("file:" . $cpanel_template_folder . "trivia/ajax_trivia_quotes_edit.html");
     }
 }
 
@@ -408,6 +408,6 @@ if (isset($action) and $action == "update_spotlight") {
 
         $smarty->assign('smarty_action', 'spotlight_update_returnview');
         //Send all smarty variables to the templates
-        $smarty->display("file:" . $cpanel_template_folder . "ajax_trivia_quotes_edit.html");
+        $smarty->display("file:" . $cpanel_template_folder . "trivia/ajax_trivia_quotes_edit.html");
     }
 }

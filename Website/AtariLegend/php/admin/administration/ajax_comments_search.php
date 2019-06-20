@@ -46,4 +46,4 @@ $smarty->assign('links', array(
 ));
 
 //Send all smarty variables to the templates
-$smarty->display("file:" . $cpanel_template_folder . "ajax_comments_search.html");
+$smarty->display("file:" . $cpanel_template_folder . "administration/ajax_comments_search.html");

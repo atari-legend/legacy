@@ -1,0 +1,49 @@
+{*
+/***************************************************************************
+*                                games_review_submitted.html
+*                            -------------------------------
+*   begin                : Sunday, December 04, 2005
+*   copyright            : (C) 2005 Atari Legend
+*   email                : maarten.martens@freebel.net
+*   actual update        : created this page
+*
+*   Id: games_review_submitted.html,v 0.10 2005/12/04 Gatekeeper
+*   Id: games_review_submitted.html,v 0.15 2016/07/24 Gatekeeper
+*                   - AL 2.0
+*   Id: games_review_submitted.html,,v 0.16 2017/09/01 10:20 ST Graveyard
+*                  - added some tweaks for review submissions
+***************************************************************************/
+
+************************************************************************************************
+The submitted review page
+************************************************************************************************
+*}
+{extends file='../main.html'}
+
+{block name=title}Submitted game reviews{/block}
+
+{block name=main_tile}
+<div class="standard_tile" id="games_review_submitted">
+    <h1>REVIEWS</h1>
+    <div class="standard_tile_line"></div>
+    <div class="standard_tile_padding">
+        <div class="left_nav_section">
+        In this section you can edit the submitted reviews
+        </div>
+        <br>
+        <br>
+        <fieldset class="secondary_fieldset">
+        <legend class="primary_legend">Submitted Reviews</legend>
+            {if $submission_nr != '0'}
+                {foreach from=$review item=line}
+                    <a href="../games/games_review_edit.php?reviewid={$line.review_id}&game_id={$line.game_id}&action=submitted" class="left_nav_link"><b>{$line.game_name}</b></a> reviewed by <a href="../user/user_detail.php?user_id_selected={$line.user_id}" class="left_nav_link"><b>{$line.userid}</b></a><br>
+                {/foreach}
+            {else}
+                No reviews submitted today!
+            {/if}
+        </fieldset>
+        <br>
+        <div class="standard_tile_text_center"><a href="javascript:history.go(-1)" class="standard_tile_link">back</a></div>
+    </div>
+</div>
+{/block}

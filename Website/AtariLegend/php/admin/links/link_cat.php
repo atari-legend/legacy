@@ -28,4 +28,4 @@ include("../../common/DAO/LinkCategoryDAO.php");
 
 $dao = new AL\Common\DAO\LinkCategoryDAO($mysqli);
 $smarty->assign('categories', $dao->getAllCategories());
-$smarty->display("file:".$cpanel_template_folder."link_cat.html");
+$smarty->display("file:".$cpanel_template_folder."links/link_cat.html");
