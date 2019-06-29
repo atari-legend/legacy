@@ -1,0 +1,39 @@
+<div class="al-tile">
+    <div class="al-tile-header">
+        <h1>Reviews</h1>
+    </div>
+    <div class="al-tile-content {if isset($review)}al-tile-content-separator-bottom{/if}">
+        {if isset($user_session)}
+            <p class="text-center">
+                Feel inspired to write your own review? Please click
+                <a href="../games/games_reviews_add.php?game_id={$game_info.game_id}">here</a>
+                and get started!
+            </p>
+        {else}
+            <p class="text-center al-not-logged-in">If you like to write a review yourself, please log in and follow the link.</p>
+        {/if}
+    </div>
+    {if isset($review)}
+        <div class="al-tile-content">
+            {foreach from=$reviews item=review}
+                <div class="al-game-review al-oddeven">
+                    <div class="al-row">
+                        <div class="al-column al-align-self-center">
+                            <img class="al-shadow" src="../../includes/show_image.php?file={$review.screenshot}">
+                        </div>
+                        <div class="al-column al-column-2">
+                            <h2>
+                                Written by <a href="../../admin/user/user_detail.php?user_id_selected={$review.user_id}">{$review.user_name}</a>
+                            </h2>
+                            <h3 class="al-text-muted">{$review.date}</h3>
+                            <p class="al-text-muted al-my-1">{$review.text}</p>
+                        </div>
+                    </div>
+
+                        <p class="al-text-right"><a href="../games/games_reviews_detail.php?game_id={$game_id}&review_id={$review.review_id}">Read more <i class="fa fa-chevron-right" aria-hidden="true"></i></a></p>
+
+                </div>
+            {/foreach}
+        </div>
+    {/if}
+</div>

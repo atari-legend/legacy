@@ -453,6 +453,18 @@ while ($developers = $sql_developer->fetch_array(MYSQLI_BOTH)) {
         'logo_path' => $company_screenshot_path
         )
     );
+
+    $smarty->append(
+        'developers', array(
+        'pub_id' => $developers['dev_pub_id'],
+        'pub_name' => $developers['pub_dev_name'],
+        'pub_profile' =>$profile,
+        'extra_info' => $developers['role'],
+        'logo' => $v_ind_image,
+        'logo_pop' => $v_ind_image_pop,
+        'logo_path' => $company_screenshot_path
+        )
+    );
 }
 
 //***********************************************************************************
@@ -469,6 +481,14 @@ while ($aka = $sql_aka->fetch_array(MYSQLI_BOTH)) {
     $game_akas[] = $aka['aka_name'];
     $smarty->append(
         'aka', array(
+        'game_aka_name' => $aka['aka_name'],
+        'game_id' => $aka['game_id'],
+        'language' => $aka['name'],
+        'game_aka_id' => $aka['game_aka_id']
+        )
+    );
+    $smarty->append(
+        'akas', array(
         'game_aka_name' => $aka['aka_name'],
         'game_id' => $aka['game_id'],
         'language' => $aka['name'],
@@ -629,20 +649,21 @@ while ($query_comment = $sql_comment->fetch_array(MYSQLI_BOTH)) {
 
     $smarty->append(
         'comments', array(
-        'comment' => $oldcomment,
-        'comment_edit' => $comment,
-        'comment_id' => $query_comment['comment_id'],
-        'date' => $date,
-        'game' => $query_comment['game_name'],
-        'game_id' => $query_comment['game_id'],
-        'user_name' => $query_comment['userid'],
-        'user_id' => $query_comment['user_id'],
-        'user_fb' => $query_comment['user_fb'],
-        'user_website' => $query_comment['user_website'],
-        'user_twitter' => $query_comment['user_twitter'],
-        'user_af' => $query_comment['user_af'],
-        'show_email' => $query_comment['show_email'],
-        'email' => $query_comment['email']
+            'comment' => $oldcomment,
+            'comment_edit' => $comment,
+            'comment_id' => $query_comment['comment_id'],
+            'date' => $date,
+            'game' => $query_comment['game_name'],
+            'game_id' => $query_comment['game_id'],
+            'user_name' => $query_comment['userid'],
+            'user_id' => $query_comment['user_id'],
+            'user_fb' => $query_comment['user_fb'],
+            'user_website' => $query_comment['user_website'],
+            'user_twitter' => $query_comment['user_twitter'],
+            'user_af' => $query_comment['user_af'],
+            'user_avatar_ext' => $query_comment['avatar_ext'],
+            'show_email' => $query_comment['show_email'],
+            'email' => $query_comment['email']
         )
     );
 }
@@ -698,6 +719,20 @@ while ($query_review = $sql_review->fetch_array(MYSQLI_BOTH)) {
 
     $smarty->append(
         'review', array(
+            'user_name' => $query_review['userid'],
+            'user_id' => $query_review['user_id'],
+            'review_id' => $query_review['review_id'],
+            'email' => $query_review['email'],
+            'game_id' => $query_review['game_id'],
+            'date' => $review_date,
+            'game_name' => $query_review['game_name'],
+            'text' => $review_text,
+            'screenshot' => $new_path,
+            'comment' => $sql_screenshots_review['comment_text']
+        )
+    );
+    $smarty->append(
+        'reviews', array(
             'user_name' => $query_review['userid'],
             'user_id' => $query_review['user_id'],
             'review_id' => $query_review['review_id'],
@@ -831,8 +866,10 @@ $smarty->assign(
     )
 );
 
+$smarty->assign('user_avatar_path', $user_avatar_path);
+
 //Send all smarty variables to the templates
-$smarty->display("file:" . $mainsite_template_folder . "games/games_detail.html");
+$smarty->display("file:" . $mainsite_template_folder . "games/games_detail.new.html");
 
 //close the connection
 mysqli_close($mysqli);

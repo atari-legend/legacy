@@ -177,7 +177,7 @@ $('#input-tags3').selectize({
                         <select name="progress_system_id" class="standard_select select_large">
                             <option value="">-</option>
                             {foreach from=$progress_system item=all_progress_systems}
-                                <option value="{$all_progress_systems->getId()}" {if $all_progress_systems->getId() eq $game_progress_system->getId()} selected{/if}>{$all_progress_systems->getName()}</option>
+                                <option value="{$all_progress_systems->getId()}" {if $game_progress_system != null && $all_progress_systems->getId() eq $game_progress_system->getId()} selected{/if}>{$all_progress_systems->getName()}</option>
                             {/foreach}
                         </select>
                         <br>
