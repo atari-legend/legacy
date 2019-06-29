@@ -1,0 +1,140 @@
+<div class="al-no-tile">
+    <div class="al-float-right">
+        {if isset($game_vs)}
+            {foreach from=$game_vs item=line name=game_vs}
+                {if isset($line.amiga_id) and $line.amiga_id != 0}
+                    <a href="http://www.lemonamiga.com/?game_id={$line.amiga_id}">
+                        <img class="al-game-vs" src="{$style_dir2}images/Amiga.png" alt="Lemon Amiga">
+                    </a>
+                {/if}
+                {if isset($line.C64_id) and $line.C64_id != 0}
+                    <a href="http://www.lemon64.com/?game_id={$line.C64_id}">
+                        <img class="al-game-vs" src="{$style_dir2}images/c64.jpg" alt="Lemon 64">
+                    </a>
+                {/if}
+            {/foreach}
+        {/if}
+    </div>
+
+    <h1>{$game_info.game_name}</h1>
+    <h2 class="al-text-muted">
+        {foreach from=$game_genres item=genre name=genre}
+            {$genre->getName()}{if not $smarty.foreach.genre.last}, {/if}
+        {/foreach}
+        {if not $game_genres}[no genre]{/if}
+
+        {if count($releases) > 0}
+            | <a href="#releases">{count($releases)} release{if count($releases) > 1}s{/if}</a>
+        {/if}
+
+        {if isset($developers)}
+            <h3 class="al-text-muted">
+                By:
+                {foreach from=$developers item=developer name=developer}
+                    {strip}
+                        <a href="games_main_list.php?developer={$developer.pub_id}&action=search">
+                            {$developer.pub_name}
+                        </a>
+                        {if isset($developer.extra_info)}
+                            &nbsp;<small class="al-text-muted">({$developer.extra_info})</small>
+                        {/if}
+
+                        {if not $smarty.foreach.developer.last}, {/if}
+                    {/strip}
+                {/foreach}
+            </h3>
+        {/if}
+
+    </h2>
+
+    <ul class="al-text-muted al-list-unstyled al-p-0">
+        {if isset($akas)}
+            <li>
+                <strong>Aka:</strong>
+                {foreach from=$akas item=aka name=aka}
+                    {$aka.game_aka_name}{if not $smarty.foreach.aka.last}, {/if}
+                {/foreach}
+            </li>
+        {/if}
+        {if isset($game_individual)}
+            <li>
+                <strong>Authors:</strong>
+                {foreach from=$game_individual item=author name=author}
+                    {strip}
+                        <a href="games_main_list.php?game_author={$author.ind_id}&action=search">{$author.ind_name}</a>
+                        {if $author.ind_nick} aka {$author.ind_nick}{/if}
+                        {if $author.individual_role} ({$author.individual_role}){/if}
+                        {if not $smarty.foreach.author.last}, {/if}
+                    {/strip}
+                {/foreach}
+            </li>
+        {/if}
+        {foreach from=$game_programming_languages item=linked_programming_languages name=language}
+            {foreach from=$programming_languages item=all_programming_languages}
+                {if $linked_programming_languages->getId() == $all_programming_languages->getId()}
+                    {if $smarty.foreach.language.first}
+                        <li>
+                            <strong>Programmed in:</strong>
+                    {/if}
+                    {$all_programming_languages->getName()}
+                    {if $smarty.foreach.language.first}
+                        </li>
+                    {/if}
+                {/if}
+            {/foreach}
+        {/foreach}
+        {if count($game_engines) > 0}
+            <li>
+                <strong>Made with:</strong>
+                {foreach from=$game_engines item=engine name=engine}
+                    {strip}
+                        {$engine->getName()}{if not $smarty.foreach.engine.last},{/if}
+                    {/strip}
+                {/foreach}
+            </li>
+        {/if}
+        {if isset($port) AND $port->getPort() != ''}
+            <li>
+                <strong>Conversion:</strong>
+                {$port->getPort()}
+            </li>
+        {/if}
+        {if count($game_controls) > 0}
+            <li>
+                <strong>Controls:</strong>
+                {foreach from=$game_controls item=control name=control}
+                    {$control->getName()}{if not $smarty.foreach.control.last}, {/if}
+                {/foreach}
+            </li>
+        {/if}
+        {if isset($progressSystem)}
+            <li>
+                <strong>Progress:</strong>
+                {$progressSystem->getName()}
+            </li>
+        {/if}
+        {if count($soundHardware) > 0}
+            <li>
+                <strong>Sound hardware:</strong>
+                {foreach from=$soundHardware item=hardware name=hardware}
+                    {strip}
+                        {$hardware->getName()}{if not $smarty.foreach.hardware.last},{/if}
+                    {/strip}
+                {/foreach}
+            </li>
+        {/if}
+        {if $game->getPlayersSameMachine() != null
+            || $game->getPlayersMultipleMachines() != null
+            || $game->getMultiplayerType() != null
+            || $game->getMultiplayerHardware()}
+            <li>
+                <strong>Multiplayer:</strong>
+                {if $game->getPlayersSameMachine() != null}{$game->getPlayersSameMachine()} (same machine){/if}
+                {if $game->getPlayersMultipleMachines() != null}{$game->getPlayersMultipleMachines()} (multiple machines){/if}
+                {if $game->getMultiplayerType() != null} - {$game->getMultiplayerType()}{/if}
+                {if $game->getMultiplayerHardware()}via {$game->getMultiplayerHardware()}{/if}
+            </li>
+        {/if}
+
+    </ul>
+</div>

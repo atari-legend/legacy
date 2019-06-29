@@ -1,0 +1,19 @@
+.al-row {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    flex-wrap: wrap;
+}
+
+.al-column {
+    display: flex;
+    flex-direction: column;
+    flex-basis: 100%;
+    margin: 0.5rem;
+}
+
+.al-column { flex: 1; }
+.al-column-2 { flex: 2; }
+.al-column-3 { flex: 3; }
+
+.al-align-self-center { align-self: center; }

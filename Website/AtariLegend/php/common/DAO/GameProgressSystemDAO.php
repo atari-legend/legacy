@@ -57,7 +57,7 @@ class GameProgressSystemDAO {
             "GameProgressSystemDAO: getProgressSystemForGame",
             $this->mysqli,
             "SELECT progress_system_id, name
-            FROM game LEFT JOIN game_progress_system ON (game.progress_system_id = game_progress_system.id)
+            FROM game_progress_system LEFT JOIN game ON (game.progress_system_id = game_progress_system.id)
             WHERE game_id = ?",
             "i", $game_id
         );
@@ -68,7 +68,7 @@ class GameProgressSystemDAO {
             $progress_system_id, $name
         );
 
-        $game_progress_system;
+        $game_progress_system = null;
         while ($stmt->fetch()) {
             $game_progress_system = new \AL\Common\Model\Game\GameProgressSystem(
                 $progress_system_id, $name
@@ -79,7 +79,7 @@ class GameProgressSystemDAO {
 
         return $game_progress_system;
     }
-    
+
     /**
      * Set the game progress system for this game
      *
@@ -99,7 +99,7 @@ class GameProgressSystemDAO {
 
         $stmt->close();
     }
-    
+
         /**
      * add a progres system to the database
      *
@@ -115,7 +115,7 @@ class GameProgressSystemDAO {
 
         $stmt->close();
     }
-    
+
     /**
      * delete a progress system
      *
@@ -131,7 +131,7 @@ class GameProgressSystemDAO {
 
         $stmt->close();
     }
-    
+
         /**
      * update a progress system
      *
@@ -145,7 +145,7 @@ class GameProgressSystemDAO {
             "UPDATE game_progress_system SET name = ? WHERE id = ?",
             "si", $name, $progress_system_id
         );
-        
+
         $stmt->close();
     }
 }

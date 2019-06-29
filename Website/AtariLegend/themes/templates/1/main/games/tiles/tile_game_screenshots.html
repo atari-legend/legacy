@@ -1,0 +1,16 @@
+{if isset($screenshots)}
+    <div class="al-tile">
+        <div class="al-tile-header">
+            <h1>Screenshots</h1>
+        </div>
+        <div class="al-tile-content">
+            <ul class="light-slider slider-screenshots" data-vertical="true">
+                {foreach from=$screenshots item=line name=screenshots}
+                    <li data-thumb="{$line.screenshot_image}">
+                        <img class="al-game-screenshot" alt="Screenshot #{$smarty.foreach.screenshots.index}" src="{$line.screenshot_image}">
+                    </li>
+                {/foreach}
+            </ul>
+        </div>
+    </div>
+{/if}
