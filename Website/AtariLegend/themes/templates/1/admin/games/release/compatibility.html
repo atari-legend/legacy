@@ -140,14 +140,14 @@
                     <input type="hidden" name="tos_id" value="{$tos_incompatible_linked->getId()}">
                     <input type="text" value="{$tos_incompatible_linked->getName()}" class="standard_input input_medium" disabled id="gd_game_dev">
                     <select name="new_language_id"
-                    onchange="jQuery('#update-toslanguage-{$tos_incompatible_linked->getLanguage()->getId()}').show()"
-                    class="standard_select select_medium">
-                    <option value="">-</option>
-                    {foreach from=$languages item=all_languages}
-                        <option value="{$all_languages->getId()}" {if $tos_incompatible_linked->getLanguage()->getId() eq $all_languages->getId()} selected{/if}>{$all_languages->getName()}</option>
-                    {/foreach}
+                        onchange="jQuery('#update-toslanguage-{$tos_incompatible_linked->getId()}').show()"
+                        class="standard_select select_medium">
+                        <option value="">-</option>
+                        {foreach from=$languages item=all_languages}
+                            <option value="{$all_languages->getId()}" {if $tos_incompatible_linked->getLanguage() != null && $tos_incompatible_linked->getLanguage()->getId() eq $all_languages->getId()} selected{/if}>{$all_languages->getName()}</option>
+                        {/foreach}
                     </select>
-                    <input type="submit" id="update-toslanguage-{$tos_incompatible_linked->getLanguage()->getId()}" style="display: none;" class="secondary_button" value="Update">
+                    <input type="submit" id="update-toslanguage-{$tos_incompatible_linked->getId()}" style="display: none;" class="secondary_button" value="Update">
                 </form>
             {/foreach}
         {/if}

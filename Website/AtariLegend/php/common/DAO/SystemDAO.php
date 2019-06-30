@@ -67,16 +67,16 @@ class SystemDAO {
      * @param integer Release ID
      * @return integer[] List of incompatible system IDs
      */
-    public function getIncompatibleSystemsForRelease($release_id) {
+    public function getIncompatibleSystemIdsForRelease($release_id) {
         $stmt = \AL\Db\execute_query(
-            "SystemDAO: getIncompatibleSystemsForRelease",
+            "SystemDAO: getIncompatibleSystemIdsForRelease",
             $this->mysqli,
             "SELECT system_id FROM game_release_system_incompatible WHERE game_release_id = ?",
             "i", $release_id
         );
 
         \AL\Db\bind_result(
-            "SystemDAO: getIncompatibleSystemsForRelease",
+            "SystemDAO: getIncompatibleSystemIdsForRelease",
             $stmt,
             $system_id
         );
@@ -90,6 +90,41 @@ class SystemDAO {
 
         return $systems;
     }
+
+    /**
+     * Get all system incompatible with a release
+     *
+     * @param integer Release ID
+     * @return integer[] List of incompatible system IDs
+     */
+    public function getIncompatibleSystemsForRelease($release_id) {
+        $stmt = \AL\Db\execute_query(
+            "SystemDAO: getIncompatibleSystemsForRelease",
+            $this->mysqli,
+            "SELECT system_id, name FROM game_release_system_incompatible
+            JOIN system on game_release_system_incompatible.system_id = system.id
+            WHERE game_release_id = ?",
+            "i", $release_id
+        );
+
+        \AL\Db\bind_result(
+            "SystemDAO: getIncompatibleSystemsForRelease",
+            $stmt,
+            $id, $name
+        );
+
+        $systems = [];
+        while ($stmt->fetch()) {
+            $systems[] = new \AL\Common\Model\Game\System(
+                $id, $name, null
+            );
+        }
+
+        $stmt->close();
+
+        return $systems;
+    }
+
 
     /**
      * Set the list of systems a release is incompatible with
@@ -118,7 +153,7 @@ class SystemDAO {
     }
 
     /**
-     * Get all system IDs enhanced for a release
+     * Get all system enhanced for a release
      *
      * @param integer Release ID
      * @return integer[] List of enhanced system IDs
@@ -127,8 +162,8 @@ class SystemDAO {
         $stmt = \AL\Db\execute_query(
             "SystemDAO: getEnhancedSystemsForRelease",
             $this->mysqli,
-            "SELECT system_id, system.name, enhancement_id, enhancement.name 
-            FROM game_release_system_enhanced 
+            "SELECT system_id, system.name, enhancement_id, enhancement.name
+            FROM game_release_system_enhanced
             LEFT JOIN system ON (game_release_system_enhanced.system_id = system.id)
             LEFT JOIN enhancement ON (game_release_system_enhanced.enhancement_id = enhancement.id)
             WHERE game_release_id = ?",
@@ -181,7 +216,7 @@ class SystemDAO {
 
         $stmt->close();
     }
-    
+
         /**
      * Set the list of system enhancements for a release
      *
@@ -200,8 +235,8 @@ class SystemDAO {
 
         $stmt->close();
     }
-    
-    
+
+
         /**
      * update system enhancements for a release
      *
@@ -240,7 +275,7 @@ class SystemDAO {
             "ii", $release_id, $system_id
         );
     }
-    
+
         /**
      * add a system to the database
      *
@@ -256,7 +291,7 @@ class SystemDAO {
 
         $stmt->close();
     }
-    
+
     /**
      * delete a system
      *
@@ -272,7 +307,7 @@ class SystemDAO {
 
         $stmt->close();
     }
-    
+
         /**
      * update a system
      *
@@ -286,7 +321,7 @@ class SystemDAO {
             "UPDATE system SET name = ? WHERE id = ?",
             "si", $system_name, $system_id
         );
-        
+
         $stmt->close();
     }
 }

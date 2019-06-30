@@ -66,16 +66,16 @@ class EmulatorDAO {
      * @param integer Release ID
      * @return integer[] List of incompatible emulator IDs
      */
-    public function getIncompatibleEmulatorsForRelease($release_id) {
+    public function getIncompatibleEmulatorIdsForRelease($release_id) {
         $stmt = \AL\Db\execute_query(
-            "EmulatorDAO: getIncompatibleEmulatorsForRelease",
+            "EmulatorDAO: getIncompatibleEmulatorIdsForRelease",
             $this->mysqli,
             "SELECT emulator_id FROM game_release_emulator_incompatibility WHERE release_id = ?",
             "i", $release_id
         );
 
         \AL\Db\bind_result(
-            "EmulatorDAO: getIncompatibleEmulatorsForRelease",
+            "EmulatorDAO: getIncompatibleEmulatorIdsForRelease",
             $stmt,
             $emulator_id
         );
@@ -83,6 +83,41 @@ class EmulatorDAO {
         $emulators = [];
         while ($stmt->fetch()) {
             $emulators[] = $emulator_id;
+        }
+
+        $stmt->close();
+
+        return $emulators;
+    }
+
+    /**
+     * Get all emulator incompatible with a release
+     *
+     * @param integer Release ID
+     * @return integer[] List of incompatible emulators
+     */
+    public function getIncompatibleEmulatorForRelease($release_id) {
+        $stmt = \AL\Db\execute_query(
+            "EmulatorDAO: getIncompatibleEmulatorForRelease",
+            $this->mysqli,
+            "SELECT emulator.id, emulator.name
+            FROM game_release_emulator_incompatibility
+            JOIN emulator on game_release_emulator_incompatibility.emulator_id = emulator.id
+            WHERE release_id = ?",
+            "i", $release_id
+        );
+
+        \AL\Db\bind_result(
+            "EmulatorDAO: getIncompatibleEmulatorForRelease",
+            $stmt,
+            $id, $name
+        );
+
+        $emulators = [];
+        while ($stmt->fetch()) {
+            $emulators[] = new \AL\Common\Model\Game\Emulator(
+                $id, $name
+            );
         }
 
         $stmt->close();
@@ -99,7 +134,7 @@ class EmulatorDAO {
      */
     public function getIncompatibleEmulatorsWithNameForRelease($release_id) {
         $stmt = \AL\Db\execute_query(
-            "EmulatorDAO: getIncompatibleEmulatorsForRelease",
+            "EmulatorDAO: getIncompatibleEmulatorIdsForRelease",
             $this->mysqli,
             "SELECT game_release_emulator_incompatibility.emulator_id,
                     emulator.name FROM game_release_emulator_incompatibility
@@ -109,7 +144,7 @@ class EmulatorDAO {
         );
 
         \AL\Db\bind_result(
-            "EmulatorDAO: getIncompatibleEmulatorsForRelease",
+            "EmulatorDAO: getIncompatibleEmulatorIdsForRelease",
             $stmt,
             $emulator_id, $emulator_name
         );
