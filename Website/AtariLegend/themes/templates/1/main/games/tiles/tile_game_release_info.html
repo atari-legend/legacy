@@ -1,0 +1,75 @@
+<div class="al-no-tile">
+
+    <h1>{$game->getName()}</h1>
+    <h2 class="al-text-muted">
+        {strip}
+            {$release->getDate()|date_format:"%Y"|default:"[no date]"} release
+            {if $release->getName()}
+                : <em>&quot;{$release->getName()}&quot;</em>
+            {/if}
+
+            {if $release->getType() != null or $release->getStatus() != null}
+                <h3 class="al-text-muted">
+                    {if $release->getType() != null}{$release->getType()}{/if}
+                    {if $release->getStatus() != null} ({$release->getStatus()}){/if}
+                    {if count($release_locations) > 0}
+                        {if $release->getType() != null || $release->getStatus() != null}&nbsp;-&nbsp;{/if}
+                        {foreach from=$release_locations item=location name=location}
+                            {$location->getName()}
+                            {if $location->getCountryISO2() != null}
+                                &nbsp;
+                                <img src="../../themes/templates/1/includes/img/vendor/country-flags-1.0/{$location->getCountryISO2()|lower}.svg"
+                                    class="al-location-flag"
+                                    title="Flag of {$location->getName()|escape}"
+                                    alt="Flag of {$location->getName()|escape}">
+                            {/if}
+                            {if not $smarty.foreach.location.last}, {/if}
+                        {/foreach}
+                    {/if}
+
+                </h3>
+            {/if}
+        {/strip}
+    </h2>
+
+    {if $release->getNotes()}
+        <p class="al-mt-1">{$release->getNotes()}</p>
+    {/if}
+
+    <ul class="al-text-muted al-list-unstyled al-p-0">
+        {if count($release_akas) > 0}
+            <li>
+                <strong>Aka:</strong>
+                {foreach from=$release_akas item=aka name=aka}
+                    {strip}
+                        {$aka->getName()}
+                        {if $aka->getLanguage() != null}
+                            &nbsp;({$aka->getLanguage()->getName()})
+                        {/if}
+                        {if not $smarty.foreach.aka.last}, {/if}
+                    {/strip}
+                {/foreach}
+            </li>
+        {/if}
+        {if $release->getLicense() != null}
+            <li>
+                <strong>License:</strong>
+                {$release->getLicense()}
+            </li>
+        {/if}
+        {if $release->getPublisher() != null}
+            <li>
+                <strong>Publisher:</strong>
+                {$release->getPublisher()->getName()}
+            </li>
+        {/if}
+        {if count($release_distributors) > 0}
+            <li>
+                <strong>Distributed by:</strong>
+                {foreach from=$release_distributors item=distributor name=distributor}
+                    {$distributor->getName()}{if not $smarty.foreach.distributor.last}, {/if}
+                {/foreach}
+            </li>
+        {/if}
+    </ul>
+</div>

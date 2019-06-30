@@ -48,14 +48,14 @@ class LocationDAO {
     }
 
     /**
-     * Get all the locations for a game release
+     * Get all the locations IDs for a game release
      *
      * @param integer Release ID
      * @return \AL\Common\Model\Location\Location[] A list of locations
      */
-    public function getLocationsForRelease($release_id) {
+    public function getLocationsIdsForRelease($release_id) {
         $stmt = \AL\Db\execute_query(
-            "LocationDAO: getLocationsForRelease",
+            "LocationDAO: getLocationsIdsForRelease",
             $this->mysqli,
             "SELECT location_id
             FROM game_release_location
@@ -66,7 +66,7 @@ class LocationDAO {
         );
 
         \AL\Db\bind_result(
-            "LocationDAO: getLocationsForRelease",
+            "LocationDAO: getLocationsIdsForRelease",
             $stmt,
             $location_id
         );
@@ -74,6 +74,42 @@ class LocationDAO {
         $locations = [];
         while ($stmt->fetch()) {
             $locations[] = $location_id;
+        }
+
+        $stmt->close();
+
+        return $locations;
+    }
+
+    /**
+     * Get all the locations for a release
+     *
+     * @param integer Release ID
+     * @return \AL\Common\Model\Location\Location[] A list of locations
+     */
+    public function getLocationsForRelease($release_id) {
+        $stmt = \AL\Db\execute_query(
+            "LocationDAO: getLocationsIdsForRelease",
+            $this->mysqli,
+            "SELECT location.id, continent_code, name, country_iso2, country_iso3, type
+            FROM game_release_location
+            LEFT JOIN location on location.id = game_release_location.location_id
+            WHERE game_release_id = ?
+            ORDER by continent_code, type, name",
+            "i", $release_id
+        );
+
+        \AL\Db\bind_result(
+            "LocationDAO: getLocationsIdsForRelease",
+            $stmt,
+            $id, $continent_code, $name, $country_iso2, $country_iso3, $type
+        );
+
+        $locations = [];
+        while ($stmt->fetch()) {
+            $locations[] = new \AL\Common\Model\Location\Location(
+                $id, $continent_code, $name, $country_iso2, $country_iso3, $type
+            );
         }
 
         $stmt->close();

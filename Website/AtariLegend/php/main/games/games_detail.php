@@ -220,10 +220,10 @@ $diskProtections = [];
 $release_language = [];
 
 foreach ($releases as $release) {
-    $system_incompatible[$release->getId()] = $systemDao->getIncompatibleSystemsForRelease($release->getId());
+    $system_incompatible[$release->getId()] = $systemDao->getIncompatibleSystemIdsForRelease($release->getId());
     $system_enhanced[$release->getId()] = $systemDao->getEnhancedSystemsForRelease($release->getId());
     $release_resolution[$release->getId()] = $resolutionDao->getResolutionsForRelease($release->getId());
-    $release_location[$release->getId()] = $locationDao->getLocationsForRelease($release->getId());
+    $release_location[$release->getId()] = $locationDao->getLocationsIdsForRelease($release->getId());
     $release_akas[$release->getId()] = $gameReleaseAkaDao->getAllGameReleaseAkas($release->getId());
     $emulator_incompatible[$release->getId()] =
         $emulatorDao->getIncompatibleEmulatorsWithNameForRelease($release->getId());
@@ -232,10 +232,10 @@ foreach ($releases as $release) {
     $memoryEnhancements[$release->getId()] = $memoryDao->getMemoryForRelease($release->getId());
     $memoryMinimum[$release->getId()] = $memoryDao->getMinimumMemoryForRelease($release->getId());
     $memoryIncompatible[$release->getId()] = $memoryDao->getMemoryIncompatibleForRelease($release->getId());
-    $tos_incompatible[$release->getId()] = $tosDao->getIncompatibleTosWithNameForRelease($release->getId());
+    $tos_incompatible[$release->getId()] = $tosDao->getIncompatibleTosForRelease($release->getId());
     $copyProtections[$release->getId()] = $copyProtectionDao->getCopyProtectionsForRelease($release->getId());
     $diskProtections[$release->getId()] = $diskProtectionDao->getDiskProtectionsForRelease($release->getId());
-    $release_language[$release->getId()] = $languageDao->getAllGameReleaseLanguages($release->getId());
+    $release_language[$release->getId()] = $languageDao->getReleaseLanguages($release->getId());
 }
 $smarty->assign('system_incompatible', $system_incompatible);
 $smarty->assign('emulator_incompatible', $emulator_incompatible);

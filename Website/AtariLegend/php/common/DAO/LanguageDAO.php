@@ -44,14 +44,14 @@ class LanguageDAO {
 
         return $languages;
     }
-    
+
     /* Get all Game Release languages
      *
      * @return "/../Model/Language/Language[] An array of languages
      */
-    public function getAllGameReleaseLanguages($game_release_id) {
+    public function getReleaseLanguages($game_release_id) {
         $stmt = \AL\Db\execute_query(
-            "LanguageDAO: getAllGameReleaseLanguages",
+            "LanguageDAO: getReleaseLanguages",
             $this->mysqli,
             "SELECT language.id, language.name FROM language
             LEFT JOIN game_release_language ON ( game_release_language.language_id = language.id )
@@ -60,7 +60,7 @@ class LanguageDAO {
         );
 
         \AL\Db\bind_result(
-            "LanguageDAO: getAllGameReleaseLanguages",
+            "LanguageDAO: getReleaseLanguages",
             $stmt,
             $id, $name
         );
@@ -76,7 +76,7 @@ class LanguageDAO {
 
         return $game_release_language;
     }
-    
+
     /**
      * Insert new language for release
      *
@@ -94,7 +94,7 @@ class LanguageDAO {
 
         $stmt->close();
     }
-    
+
     /**
      * Delete language from release
      *
@@ -112,7 +112,7 @@ class LanguageDAO {
 
         $stmt->close();
     }
-    
+
     /**
      * delete a language
      *
@@ -128,7 +128,7 @@ class LanguageDAO {
 
         $stmt->close();
     }
-    
+
         /**
      * update a language
      *
@@ -142,7 +142,7 @@ class LanguageDAO {
             "UPDATE language SET name = ? WHERE id = ?",
             "ss", $language_name, $language_id
         );
-        
+
         $stmt->close();
     }
 }

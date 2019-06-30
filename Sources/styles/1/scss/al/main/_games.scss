@@ -1,4 +1,7 @@
-.al-game-details {
+/**
+ * Common classes to the game and release pages
+ */
+.al-game-details, .al-game-release-details {
 
     .al-no-tile {
         h1 {
@@ -14,12 +17,6 @@
         ul {
             margin-top: 0.5rem;
         }
-
-        img.al-game-vs {
-            display: inline;
-            height: 1.75rem;
-            border: solid 1px #333;
-        }
     }
 
     .al-location-flag {
@@ -32,6 +29,21 @@
         margin-top: 3px;
         margin-bottom: 2px;
         border: solid 1px #ccc;
+    }
+
+}
+
+/**
+ * Game page
+ */
+.al-game-details {
+
+    .al-no-tile {
+        img.al-game-vs {
+            display: inline;
+            height: 1.75rem;
+            border: solid 1px #333;
+        }
     }
 
     .al-game-screenshot {

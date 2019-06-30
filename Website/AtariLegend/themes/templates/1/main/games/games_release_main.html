@@ -1,0 +1,26 @@
+{extends file='../front/main.html'}
+{block name=title}{strip}
+        {$game->getName()}, {$release->getDate()|date_format:"%Y"|default:"[no date]"} release
+        {if $release->getName()} {$release->getName()}{/if} - Atari ST release | Atari Legend
+
+{/strip}{/block}
+
+{block name=main_body}
+    <div id="main" class="al-reset al-game-release-details">
+
+        <div style="color: red;">TODO: meta description</div>
+        <div class="al-row">
+            <div class="al-column">
+                {include file='../games/tiles/tile_game_release_info.html'}
+            </div>
+        </div>
+        <div class="al-row">
+            <div class="al-column">
+                BOXSCANS
+            </div>
+            <div class="al-column">
+                {include file='../games/tiles/tile_game_release_details.html'}
+            </div>
+        </div>
+    </div>
+{/block}
