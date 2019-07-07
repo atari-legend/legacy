@@ -1,7 +1,8 @@
 /**
  * Common classes to the game and release pages
  */
-.al-game-details, .al-game-release-details {
+.al-game-details,
+.al-game-release-details {
 
     .al-no-tile {
         h1 {
@@ -31,6 +32,29 @@
         border: solid 1px #ccc;
     }
 
+    .al-game-scan {
+        width: 100%;
+        border: dotted 1px scale-color($brand_primary, $lightness: -30%);
+    }
+
+    .al-game-scan-thumbnails {
+        background-color: black;
+        border: solid 1px #555;
+        padding: 0;
+
+        li {
+            display: inline;
+
+            img {
+                max-width: 5rem;
+                max-height: 7rem;
+                display: inline;
+                margin-left: 1rem;
+                margin-right: 1rem;
+                margin-top: 0.3rem;
+            }
+        }
+    }
 }
 
 /**
@@ -46,12 +70,22 @@
         }
     }
 
-    .al-game-screenshot {
+    .al-game-screenshot,
+    .al-game-boxscan {
         height: 100%
+    }
+
+    .al-game-boxscan {
+        max-width: 20rem;
     }
 
     .lSSlideOuter img {
         border: dotted 1px scale-color($brand_primary, $lightness: -30%);
+    }
+
+    .lSGallery img {
+        max-width: 5rem;
+        max-height: 4rem;
     }
 
     figure {
@@ -83,6 +117,10 @@
         }
 
     }
+
+    .al-game-review img {
+        max-width: 20rem;
+    }
     /*
     .al-game-boxscan {
         width: 100%;
@@ -109,6 +147,7 @@
 
     .al-game-facts-screenshots {
         text-align: center;
+
         img {
             display: inline;
             margin-left: 0.5rem;
@@ -122,4 +161,71 @@
         max-height: 30rem;
         overflow: auto;
     }
+}
+
+/**
+ * Release page
+ */
+.al-game-release-details {
+
+    .al-tab {
+        background-color: $brand_primary;
+
+        li {
+            padding-left: 0.5rem;
+            a {
+                color: black;
+                padding-top: 0.5rem;
+                padding-bottom: 0.5rem;
+                display: block;
+
+                .al-text-muted {
+                    color: #444 !important;
+                }
+            }
+
+            margin: 1px;
+
+            &.active {
+                background-color: $brand_primary_dimmed;
+
+                a {
+                    color: white;
+
+                    .al-text-muted {
+                        color: $brand_muted !important;
+                    }
+                }
+            }
+        }
+    }
+
+    .al-tab-pane {
+        border: dotted 1px $brand_primary_dimmed;
+    }
+
+    .al-release-media-scans {
+         float: left;
+         margin-right: 0.5rem;
+    }
+
+    .al-release-media {
+        clear: both;
+        display: none;
+
+        &.active {
+            display: block;
+        }
+    }
+
+    .al-release-media-scan {
+        width: 10rem;
+
+        img {
+            width: 100%;
+            margin-bottom: 0.25rem;
+            border: solid 1px $brand_primary_dimmed;
+        }
+    }
+
 }

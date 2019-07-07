@@ -4,24 +4,23 @@
     </div>
     <div class="al-tile-content">
         {if isset($boxscan) or count($release_scans) > 1}
-            <!--
-            <ul class="light-slider slider-boxscans">
+            {if isset($boxscan)}
+                <img class="al-game-boxscan al-mx-auto" alt="Box scan" src="{$boxscan[0].image}">
+            {elseif count($release_scans) > 0}
+                <img class="al-game-boxscan al-mx-auto" alt="Box scan" src="{$release_scans[0]->getImage()}">
+            {/if}
+            <ul class="al-list-unstyled al-game-scan-thumbnails al-mt-1">
                 {if isset($boxscan)}
                     {foreach from=$boxscan item=line name=boxscan}
-                        <li data-thumb="{$line.image}">
-                            <img class="al-game-boxscan" alt="Box scan" src="{$line.image}">
-                        </li>
+                        <li><img alt="Box scan" src="{$line.image}"></li>
                     {/foreach}
                 {/if}
                 {foreach from=$release_scans item=scan}
-                    <li data-thumb="{$scan->getImage()}">
-                        <img class="al-game-boxscan" alt="Box scan" src="{$scan->getImage()}">
-                    </li>
+                    <li><img alt="Box scan" src="{$scan->getImage()}"></li>
                 {/foreach}
             </ul>
-            -->
         {else}
-            There is no boxscan in the database. You have one? Please use the submit tile to sent it to us.
+            There is no boxscan in the database. You have one? Please use the submit tile to send it to us.
         {/if}
     </div>
 </div>

@@ -1,36 +1,35 @@
 <div class="al-no-tile">
 
-    <h1>{$game->getName()}</h1>
+    <h1><a href="games_detail.php?game_id={$game->getId()}">{$game->getName()}</a></h1>
     <h2 class="al-text-muted">
-        {strip}
-            {$release->getDate()|date_format:"%Y"|default:"[no date]"} release
-            {if $release->getName()}
-                : <em>&quot;{$release->getName()}&quot;</em>
-            {/if}
-
-            {if $release->getType() != null or $release->getStatus() != null}
-                <h3 class="al-text-muted">
-                    {if $release->getType() != null}{$release->getType()}{/if}
-                    {if $release->getStatus() != null} ({$release->getStatus()}){/if}
-                    {if count($release_locations) > 0}
-                        {if $release->getType() != null || $release->getStatus() != null}&nbsp;-&nbsp;{/if}
-                        {foreach from=$release_locations item=location name=location}
-                            {$location->getName()}
-                            {if $location->getCountryISO2() != null}
-                                &nbsp;
-                                <img src="../../themes/templates/1/includes/img/vendor/country-flags-1.0/{$location->getCountryISO2()|lower}.svg"
-                                    class="al-location-flag"
-                                    title="Flag of {$location->getName()|escape}"
-                                    alt="Flag of {$location->getName()|escape}">
-                            {/if}
-                            {if not $smarty.foreach.location.last}, {/if}
-                        {/foreach}
-                    {/if}
-
-                </h3>
-            {/if}
-        {/strip}
+        {$release->getDate()|date_format:"%Y"|default:"[no date]"} release
+        {if $release->getName()}
+            : <em>&quot;{$release->getName()}&quot;</em>
+        {/if}
     </h2>
+
+    {if $release->getType() != null or $release->getStatus() != null}
+        <h3 class="al-text-muted">
+            {strip}
+                {if $release->getType() != null}{$release->getType()}{/if}
+                {if $release->getStatus() != null} ({$release->getStatus()}){/if}
+                {if count($release_locations) > 0}
+                    {if $release->getType() != null || $release->getStatus() != null}&nbsp;-&nbsp;{/if}
+                    {foreach from=$release_locations item=location name=location}
+                        {$location->getName()}
+                        {if $location->getCountryISO2() != null}
+                            &nbsp;
+                            <img src="../../themes/templates/1/includes/img/vendor/country-flags-1.0/{$location->getCountryISO2()|lower}.svg"
+                                {" "}class="al-location-flag al-mr-0"
+                                {" "}title="Flag of {$location->getName()|escape}"
+                                {" "}alt="Flag of {$location->getName()|escape}">
+                        {/if}
+                        {if not $smarty.foreach.location.last}, {/if}
+                    {/foreach}
+                {/if}
+            {/strip}
+        </h3>
+    {/if}
 
     {if $release->getNotes()}
         <p class="al-mt-1">{$release->getNotes()}</p>
@@ -48,6 +47,14 @@
                         {/if}
                         {if not $smarty.foreach.aka.last}, {/if}
                     {/strip}
+                {/foreach}
+            </li>
+        {/if}
+        {if count($release_languages) > 0}
+            <li>
+                <strong>Languages:</strong>
+                {foreach from=$release_languages item=language name=language}
+                    {$language->getName()}{if not $smarty.foreach.language.last}, {/if}
                 {/foreach}
             </li>
         {/if}

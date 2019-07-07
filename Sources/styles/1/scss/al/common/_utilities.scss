@@ -1,12 +1,14 @@
 .al-text-muted {
-    color: #bcbdbd !important;
+    color: $brand_muted !important;
 }
 
 .al-text-center { text-align: center; }
 .al-text-right { text-align: right; }
 
-.al-m-auto {
-    margin: auto;
+.al-m-auto { margin: auto; }
+.al-mx-auto {
+    margin-left: auto;
+    margin-right: auto;
 }
 
 .al-w-100 {
@@ -16,7 +18,10 @@
 .al-p-0 { padding: 0 !important; }
 .al-p-1 { padding: 0.5rem !important; }
 .al-p-2 { padding: 1rem !important; }
+.al-pl-1 { padding-left: 0.5rem !important; }
 
+.al-m-0 { margin: 0  !important; }
+.al-mr-0 { margin-right: 0 !important; }
 .al-mt-1 { margin-top: 0.5rem !important; }
 .al-mb-1 { margin-bottom: 0.5rem !important; }
 .al-my-1 {

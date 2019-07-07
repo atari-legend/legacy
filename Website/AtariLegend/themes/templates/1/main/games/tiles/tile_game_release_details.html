@@ -1,19 +1,8 @@
 <div class="al-tile">
     <div class="al-tile-header">
-        <h1>Details</h1>
+        <h1>Technical details</h1>
     </div>
     <div class="al-tile-content">
-        <ul class="al-list-unstyled">
-            {if count($release_languages) > 0}
-                <li>
-                    <strong>Languages:</strong>
-                    {foreach from=$release_languages item=language name=language}
-                        {$language->getName()}{if not $smarty.foreach.language.last}, {/if}
-                    {/foreach}
-                </li>
-            {/if}
-        </ul>
-
         <h2>Compatibility</h2>
         <ul class="al-list-unstyled">
             <li>
@@ -79,7 +68,7 @@
         </ul>
 
         {if count($systems_enhanced) > 0 or count($memory_enhancements) > 0}
-            <h2>Enhancements</h2>
+            <h2 class="al-mt-1">Enhancements</h2>
             <ul class="al-list-unstyled">
                 {if count($systems_enhanced) > 0}
                     <li>
@@ -113,7 +102,7 @@
         {/if}
 
         {if count($copy_protections) > 0 or count($disk_protections) > 0}
-            <h2>Protection</h2>
+            <h2 class="al-mt-1">Protection</h2>
             <ul class="al-list-unstyled">
                 {if count($copy_protections) > 0}
                     <li>
@@ -145,8 +134,5 @@
                 {/if}
             </ul>
         {/if}
-
-        trainer options
-
     </div>
 </div>

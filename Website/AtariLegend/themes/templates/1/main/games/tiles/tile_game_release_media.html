@@ -1,0 +1,97 @@
+<div class="al-tile">
+    <div class="al-tile-header">
+        <h1>Media</h1>
+    </div>
+    <div class="al-tile-content">
+        {if count($medias) > 0}
+
+            <div class="al-row">
+                <div class="al-column al-m-0">
+                    <ul class="al-list-unstyled al-p-0 al-tab">
+                        {foreach from=$medias item=media name=media}
+                            {strip}
+                                <li {if $smarty.foreach.media.first}class="active"{/if}>
+                                    <a href="#al-release-media-{$media->getId()}">
+                                        {$media->getMediaType()->getName()}
+                                        {if $media->getLabel() != null}
+                                            &nbsp;<span class="al-text-muted">({$media->getLabel()})</span>
+                                        {/if}
+                                    </a>
+                                </li>
+                            {/strip}
+                        {/foreach}
+                    </ul>
+                </div>
+
+                <div class="al-column-3 al-tab-pane al-p-1">
+                    <small style="color: red">TODO: Count downloads</small><br>
+                    {foreach from=$medias item=media name="media"}
+                        <div class="al-release-media {if $smarty.foreach.media.first}active{/if}" id="al-release-media-{$media->getId()}">
+                            <div class="al-release-media-scans">
+                                {foreach from=$media_scans[$media->getId()] item=scan}
+                                    <div class="al-release-media-scan al-text-center al-text-muted al-fontsize-small">
+                                        <img class="al-release-media-scan" alt="{$scan->getMediaScanType()->getName()}" src="{$media_scans_path}{$scan->getId()}.{$scan->getImage()}">
+                                        {$scan->getMediaScanType()->getName()}
+                                    </div>
+                                {/foreach}
+                            </div>
+
+                            <div>
+                                {if $dumps[$media->getId()] != null}
+                                    <h2>{count($dumps[$media->getId()])} dump{if count($dumps[$media->getId()]) > 1}s{/if}:</h2>
+                                    <ul class="al-list-unstyled">
+                                        {foreach from=$dumps[$media->getId()] item=dump}
+                                            <li>
+                                                {$dump->getFormat()}
+                                                <span class="al-text-muted">uploaded by</span> {$dump->getUser()->getName()}
+                                                <span class="al-text-muted">
+                                                    {$dump->getDate()|timeago}
+                                                    ({math equation="floor(x/y)" x=$dump->getSize() y=1024} KB)
+                                                </span>
+                                                {if isset($user_session)}
+                                                    <a href="../../../data/zips/games/{$dump->getId()}.zip"><i class="fa fa-download" aria-hidden="true"></i></a>
+                                                {else}
+                                                    <span class="al-not-logged-in">Please log in to download</span>
+                                                {/if}
+                                                <br>
+                                                <abbr title="SHA512: {$dump->getSha512()}">{$dump->getSha512()|truncate:8:""}</abbr>
+
+                                                <em class="al-text-muted">{$dump->getInfo()}</em>
+
+                                            </li>
+                                        {/foreach}
+                                    </ul>
+                                {else}
+                                    No dumps to download for this media
+                                {/if}
+                            </div>
+                        </div>
+                    {/foreach}
+                </div>
+            </div>
+        {else}
+            <p class="al-text-center">
+                No media dumps or media scans for this release.
+                Can you help? Do you have this release and can provide a dump or a scan of the disks?
+            </p>
+            {if isset($user_session)}
+                <form enctype="multipart/form-data" method="post" action="db_games_main_detail.php" class="al-text-center">
+
+                    <textarea class="al-my-1" rows="4" name="textfield" placeholder="Release info" required></textarea>
+
+                    <input type="file" name="image[]" multiple>
+                    <input type="hidden" name="action" value="submit_info">
+                    <input type="hidden" name="game_id" value="{$game->getId()}">
+                    <input type="hidden" name="release_id" value="{$release->getId()}">
+
+                    <div class="al-my-1">
+                        <input type="submit" value="Submit">
+                    </div>
+
+                </form>
+            {else}
+                <p class="al-text-center al-my-1 al-not-logged-in">Please log in to contribute</p>
+            {/if}
+        {/if}
+    </div>
+</div>
