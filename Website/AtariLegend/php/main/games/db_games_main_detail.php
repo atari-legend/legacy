@@ -114,7 +114,11 @@ if (isset($action)) {
                     }
                 }
                 $_SESSION['edit_message'] = "Game submission has been sent - waiting for approval";
-                header("Location: ../games/games_detail.php?game_id=$game_id");
+                if (isset($release_id)) {
+                    header("Location: ../games/games_release_main.php?release_id=$release_id");
+                } else {
+                    header("Location: ../games/games_detail.php?game_id=$game_id");
+                }
                 die();
             }
         } else {
@@ -192,13 +196,21 @@ if (isset($action)) {
                             }
                         } else {
                             $_SESSION['edit_message'] = "File is bigger than limit of 10MB";
-                            header("Location: ../games/games_detail.php?game_id=$game_id");
+                            if (isset($release_id)) {
+                                header("Location: ../games/games_release_main.php?release_id=$release_id");
+                            } else {
+                                header("Location: ../games/games_detail.php?game_id=$game_id");
+                            }
                             die();
                         }
                     }
                 }
                 $_SESSION['edit_message'] = "Game submission has been sent - waiting for approval";
-                header("Location: ../games/games_detail.php?game_id=$game_id");
+                if (isset($release_id)) {
+                    header("Location: ../games/games_release_main.php?release_id=$release_id");
+                } else {
+                    header("Location: ../games/games_detail.php?game_id=$game_id");
+                }
                 die();
             }
         }

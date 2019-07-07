@@ -3,6 +3,7 @@ namespace AL\Common\DAO;
 
 require_once __DIR__."/../../lib/Db.php" ;
 require_once __DIR__."/../Model/Dump/Dump.php" ;
+require_once __DIR__."/../Model/User/User.php" ;
 require_once __DIR__."/../../vendor/pclzip/pclzip/pclzip.lib.php" ;
 
 /**
@@ -55,7 +56,7 @@ class DumpDAO {
         $file_ext = strrchr($file_name, ".");
         $file_ext = explode(".", $file_ext);
         $file_ext = strtolower($file_ext[1]);
-        
+
         // If it is ZIP, do all the zippidy zip stuff
         if ($file_ext == 'zip') {
             // Time for zip magic
@@ -90,7 +91,7 @@ class DumpDAO {
                 exit("Try uploading a diskimage type that is allowed $file_ext");
             }
         }
-        
+
         // create a timestamp for the date of upload
         $timestamp = time();
 
@@ -103,7 +104,7 @@ class DumpDAO {
 
         //get the new dump id
         $new_dump_id = $this->mysqli->insert_id;
-        
+
         if ($file_ext == 'zip') {
             // Time to unzip the file to the temporary directory
             $archive = new \PclZip("$tempfilename");
@@ -187,7 +188,7 @@ class DumpDAO {
 
         return $dump;
     }
-    
+
       /**
      * delete a dump from a media
      *
@@ -200,9 +201,9 @@ class DumpDAO {
             "DELETE FROM dump WHERE id = ?",
             "i", $dump_id
         );
-        
+
         unlink("$game_file_path$dump_id.zip");
-        
+
         $stmt->close();
     }
 }

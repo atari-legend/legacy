@@ -21,14 +21,7 @@
                 speed: 2000,
                 pause: 4000,
                 loop: true,
-                auto: true,
-
-            });
-
-            jQuery(".light-slider.slider-boxscans").lightSlider({
-                item: 1,
-                thumbItem: 1,
-                gallery: true
+                auto: true
             });
         } );
     </script>
@@ -52,14 +45,15 @@
             {include file='../games/tiles/tile_game_facts.html'}
         </div>
         <div class="al-column">
-            {include file='../games/tiles/tile_game_boxscans.html'}
             {include file='../games/tiles/tile_game_releases.html'}
             {include file='../games/tiles/tile_game_series.html'}
             {include file='../games/tiles/tile_game_similar.html'}
+            {include file='../games/tiles/tile_game_submit_info.html'}
         </div>
         <div class="al-column">
+            {include file='../games/tiles/tile_game_boxscans.html'}
             {include file='../games/tiles/tile_game_comments.html'}
-            {include file='../games/tiles/tile_game_submit_info.html'}
+
         </div>
     </div>
 

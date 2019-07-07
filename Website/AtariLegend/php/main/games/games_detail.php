@@ -38,6 +38,7 @@ require_once __DIR__."/../../common/DAO/SoundHardwareDAO.php";
 require_once __DIR__."/../../common/DAO/GameProgressSystemDAO.php";
 require_once __DIR__."/../../common/DAO/GameReleaseScanDAO.php";
 require_once __DIR__."/../../common/DAO/GameDAO.php";
+require_once __DIR__."/../../common/DAO/MediaDAO.php";
 
 $gameReleaseDao = new \AL\Common\DAO\GameReleaseDAO($mysqli);
 $gameSeriesDao = new \AL\Common\DAO\GameSeriesDAO($mysqli);
@@ -62,6 +63,7 @@ $soundHardwareDao = new \AL\Common\DAO\SoundHardwareDAO($mysqli);
 $gameProgressSystemDao = new \AL\Common\DAO\GameProgressSystemDAO($mysqli);
 $gameReleaseScanDao = new \AL\Common\DAO\GameReleaseScanDAO($mysqli);
 $gameDao = new \AL\Common\DAO\GameDAO($mysqli);
+$mediaDao = new \AL\Common\DAO\MediaDAO($mysqli);
 
 /**
  * Generates an SEO-friendly description of a game, depending on the data available
@@ -218,6 +220,7 @@ $tos_incompatible = [];
 $copyProtections = [];
 $diskProtections = [];
 $release_language = [];
+$releases_media = [];
 
 foreach ($releases as $release) {
     $system_incompatible[$release->getId()] = $systemDao->getIncompatibleSystemIdsForRelease($release->getId());
@@ -236,6 +239,7 @@ foreach ($releases as $release) {
     $copyProtections[$release->getId()] = $copyProtectionDao->getCopyProtectionsForRelease($release->getId());
     $diskProtections[$release->getId()] = $diskProtectionDao->getDiskProtectionsForRelease($release->getId());
     $release_language[$release->getId()] = $languageDao->getReleaseLanguages($release->getId());
+    $releases_media[$release->getId()] = $mediaDao->getAllMediaFromRelease($release->getId());
 }
 $smarty->assign('system_incompatible', $system_incompatible);
 $smarty->assign('emulator_incompatible', $emulator_incompatible);
@@ -252,6 +256,7 @@ $smarty->assign('tos_incompatible', $tos_incompatible);
 $smarty->assign('copyProtections', $copyProtections);
 $smarty->assign('releaseLanguages', $release_language);
 $smarty->assign('diskProtections', $diskProtections);
+$smarty->assign('releases_media', $releases_media);
 
 //***********************************************************************************
 //get the game genres & the genres already selected for this game
