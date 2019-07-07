@@ -874,7 +874,11 @@ $smarty->assign(
 $smarty->assign('user_avatar_path', $user_avatar_path);
 
 //Send all smarty variables to the templates
-$smarty->display("file:" . $mainsite_template_folder . "games/games_detail.new.html");
+if (isset($use_old_layout)) {
+    $smarty->display("file:" . $mainsite_template_folder . "games/games_detail.html");
+} else {
+    $smarty->display("file:" . $mainsite_template_folder . "games/games_detail.new.html");
+}
 
 //close the connection
 mysqli_close($mysqli);
