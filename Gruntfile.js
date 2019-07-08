@@ -114,10 +114,7 @@ module.exports = function (grunt) {
         watch: {
             sass: {
                 files: [
-                    'Sources/styles/1/scss/*.scss',
-                    'Sources/styles/2/scss/*.scss',
-                    'Sources/styles/3/scss/*.scss',
-                    'Sources/styles/common/main_scss/**/*.scss'
+                    'Sources/styles/**/*.scss'
                 ],
                 tasks: ['lintspaces:sass', 'sass', 'pleeease']
             },

@@ -1,0 +1,18 @@
+{if isset($similar) AND $similar.screenshot != 'none'}
+    <div class="al-tile">
+        <div class="al-tile-header">
+            <h1>Similar games</h1>
+        </div>
+        <div class="al-tile-content al-p-0">
+            <figure>
+                <img src="../../includes/show_image.php?file={$similar.screenshot}"
+                    alt="Screenshot of similar game {$similar.game_name}"
+                    class="al-w-100 al-m-auto al-border">
+                <figcaption>
+                    <h2><a href="games_detail.php?game_id={$similar.game_id}">{$similar.game_name}</a></h2>
+                    <h3><a class="al-text-muted" href="games_main_list.php?developer={$similar.game_dev_id}&amp;action=search">{$similar.game_dev_name}</a></h3>
+                </figcaption>
+            </figure>
+        </div>
+    </div>
+{/if}

@@ -1,0 +1,47 @@
+/*
+    Resets CSS inherited from the old main CSS
+    and set some common rules
+*/
+
+.al-reset {
+    h1, h2, h3, h4, h5, h6 {
+        font-weight: initial;
+    }
+
+    h2, h3, h4, h5, h6 {
+        font-family: inherit;
+    }
+
+
+    a {
+        color: white;
+
+        &:hover {
+            color: $brand_primary;
+        }
+    }
+
+    figure {
+        margin: initial;
+    }
+
+    ul {
+        padding-left: 1rem;
+    }
+
+    textarea {
+        display: block;
+        resize: vertical;
+        width: 100%;
+        background-color: black;
+        border: solid 1px $brand_primary_dimmed;
+        padding: 0.5rem;
+    }
+
+    input[type=button], input[type=submit] {
+        background-color: $brand_background_light;
+        border: solid 1px $brand_primary_dimmed;
+        padding: 0.25rem 0.75rem 0.25rem 0.75rem;
+    }
+
+}

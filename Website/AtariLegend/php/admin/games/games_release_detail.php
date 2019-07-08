@@ -87,12 +87,12 @@ if ($_SERVER['REQUEST_METHOD'] == "GET") {
         $smarty->assign('game', $game);
         $smarty->assign('game_releases', $gameReleaseDao->getReleasesForGame($game->getId()));
 
-        $smarty->assign('system_incompatible', $systemDao->getIncompatibleSystemsForRelease($release->getId()));
-        $smarty->assign('emulator_incompatible', $emulatorDao->getIncompatibleEmulatorsForRelease($release->getId()));
-        $smarty->assign('tos_incompatible', $tosDao->getIncompatibleTosWithNameForRelease($release->getId()));
+        $smarty->assign('system_incompatible', $systemDao->getIncompatibleSystemIdsForRelease($release->getId()));
+        $smarty->assign('emulator_incompatible', $emulatorDao->getIncompatibleEmulatorIdsForRelease($release->getId()));
+        $smarty->assign('tos_incompatible', $tosDao->getIncompatibleTosForRelease($release->getId()));
         $smarty->assign('system_enhanced', $systemDao->getEnhancedSystemsForRelease($release->getId()));
         $smarty->assign('release_resolutions', $resolutionDao->getResolutionsForRelease($release->getId()));
-        $smarty->assign('release_locations', $locationDao->getLocationsForRelease($release->getId()));
+        $smarty->assign('release_locations', $locationDao->getLocationsIdsForRelease($release->getId()));
         $smarty->assign('release_akas', $gameReleaseAkaDao->getAllGameReleaseAkas($release->getId()));
         $smarty->assign('release_trainer_options', $trainerOptionDao->getTrainerOptionsForRelease($release->getId()));
         $smarty->assign('distributors', $pubDevDao->getAllPubDevs());
@@ -108,7 +108,7 @@ if ($_SERVER['REQUEST_METHOD'] == "GET") {
             'release_disk_protections',
             $diskProtectionDao->getDiskProtectionsForRelease($release->getId())
         );
-        $smarty->assign('release_languages', $languageDao->getAllGameReleaseLanguages($release->getId()));
+        $smarty->assign('release_languages', $languageDao->getReleaseLanguages($release->getId()));
         $smarty->assign('release_scans', $gameReleaseScanDao->getScansForRelease($release->getId()));
         $media = $mediaDao->getAllMediaFromRelease($release->getId());
         $smarty->assign('release_media', $media);

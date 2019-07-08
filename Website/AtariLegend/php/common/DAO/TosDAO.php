@@ -45,8 +45,8 @@ class TosDAO {
         return $tos_versions;
     }
 
-    /**
-     * Get all TOS IDs incompatible with a release
+     /**
+     * Get all tos IDs incompatible with a release
      *
      * @param integer Release ID
      * @return integer[] List of incompatible TOS IDs
@@ -55,56 +55,17 @@ class TosDAO {
         $stmt = \AL\Db\execute_query(
             "TosDAO: getIncompatibleTosForRelease",
             $this->mysqli,
-            "SELECT game_release_tos_version_incompatibility.id, 
-                    game_release_tos_version_incompatibility.language_id, 
-                    language.name 
-            FROM game_release_tos_version_incompatibility LEFT JOIN language 
-            ON (language.id = game_release_tos_version_incompatibility.language_id) 
-            WHERE release_id = ?",
-            "i", $release_id
-        );
-
-        \AL\Db\bind_result(
-            "TosDAO: getIncompatibleTosForRelease",
-            $stmt,
-            $tos_id, $language_id, $language_name
-        );
-
-        $tos_versions = [];
-        while ($stmt->fetch()) {
-            $tos_versions[] = new \AL\Common\Model\Game\Tos(
-                $tos_id, null,
-                new \AL\Common\Model\Language\Language($language_id, $language_name)
-            );
-        }
-
-        $stmt->close();
-
-        return $tos_versions;
-    }
-    
-        
-     /**
-     * Get all tos IDs incompatible with a release
-     *
-     * @param integer Release ID
-     * @return integer[] List of incompatible TOS IDs
-     */
-    public function getIncompatibleTosWithNameForRelease($release_id) {
-        $stmt = \AL\Db\execute_query(
-            "TosDAO: getIncompatibleTosWithNameForRelease",
-            $this->mysqli,
             "SELECT game_release_tos_version_incompatibility.tos_id,
-                    tos.name, game_release_tos_version_incompatibility.language_id, language.name 
-                    FROM game_release_tos_version_incompatibility 
+                    tos.name, game_release_tos_version_incompatibility.language_id, language.name
+                    FROM game_release_tos_version_incompatibility
                     LEFT JOIN tos ON (game_release_tos_version_incompatibility.tos_id = tos.id)
-                    LEFT JOIN language ON (language.id = game_release_tos_version_incompatibility.language_id) 
+                    LEFT JOIN language ON (language.id = game_release_tos_version_incompatibility.language_id)
                     WHERE release_id = ?",
             "i", $release_id
         );
 
         \AL\Db\bind_result(
-            "TosDAO: getIncompatibleTosWithNameForRelease",
+            "TosDAO: getIncompatibleTosForRelease",
             $stmt,
             $tos_id, $tos_name, $language_id, $language_name
         );
@@ -113,7 +74,9 @@ class TosDAO {
         while ($stmt->fetch()) {
             $tos_versions[] = new \AL\Common\Model\Game\Tos(
                 $tos_id, $tos_name,
-                new \AL\Common\Model\Language\Language($language_id, $language_name)
+                $language_id
+                    ? new \AL\Common\Model\Language\Language($language_id, $language_name)
+                    : null
             );
         }
 
@@ -139,8 +102,8 @@ class TosDAO {
 
         $stmt->close();
     }
-    
-    
+
+
     /**
      * Update language for incompatible TOS
      *
@@ -160,8 +123,8 @@ class TosDAO {
 
         $stmt->close();
     }
-    
-    
+
+
     /**
      * Delete incompatible TOS for release
      *
@@ -179,8 +142,8 @@ class TosDAO {
 
         $stmt->close();
     }
-    
-    
+
+
      /**
      * add a tos to the database
      *
@@ -196,7 +159,7 @@ class TosDAO {
 
         $stmt->close();
     }
-    
+
     /**
      * delete a tos version
      *
@@ -212,7 +175,7 @@ class TosDAO {
 
         $stmt->close();
     }
-    
+
      /**
      * update a tos version
      *
@@ -226,7 +189,7 @@ class TosDAO {
             "UPDATE tos SET name = ? WHERE id = ?",
             "si", $tos_name, $tos_id
         );
-        
+
         $stmt->close();
     }
 }

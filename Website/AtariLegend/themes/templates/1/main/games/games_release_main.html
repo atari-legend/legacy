@@ -1,0 +1,34 @@
+{extends file='../front/main.html'}
+{block name=title}{strip}
+        {$game->getName()}, {$release->getDate()|date_format:"%Y"|default:"[no date]"} release
+        {if $release->getName()} {$release->getName()}{/if} - Atari ST release | Atari Legend
+{/strip}{/block}
+{block name=description}{$release_description}{/block}
+
+{block name=additional_scripts}
+    <script src="{$template_dir}includes/js/ui.tabs.js"></script>
+    <script>
+        jQuery(document).ready( function() {
+            jQuery('.al-tab').tabs();
+        });
+    </script>
+{/block}
+
+{block name=main_body}
+    <div id="main" class="al-reset al-game-release-details">
+        <div class="al-row">
+            <div class="al-column">
+                {include file='../games/tiles/tile_game_release_info.html'}
+            </div>
+        </div>
+        <div class="al-row">
+            <div class="al-column al-column-2">
+                {include file='../games/tiles/tile_game_release_details.html'}
+                {include file='../games/tiles/tile_game_release_media.html'}
+            </div>
+            <div class="al-column">
+                {include file='../games/tiles/tile_game_release_scans.html'}
+            </div>
+        </div>
+    </div>
+{/block}

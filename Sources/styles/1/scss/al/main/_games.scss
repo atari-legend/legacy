@@ -1,0 +1,231 @@
+/**
+ * Common classes to the game and release pages
+ */
+.al-game-details,
+.al-game-release-details {
+
+    .al-no-tile {
+        h1 {
+            font-size: 2.5rem;
+            display: inline;
+        }
+
+        h2 {
+            display: inline;
+            margin-left: 1.5rem;
+        }
+
+        ul {
+            margin-top: 0.5rem;
+        }
+    }
+
+    .al-location-flag {
+        display: inline;
+        vertical-align: middle;
+        width: 24px;
+        opacity: .8;
+        -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=80)";
+        margin-right: 5px;
+        margin-top: 3px;
+        margin-bottom: 2px;
+        border: solid 1px #ccc;
+    }
+
+    .al-game-scan {
+        width: 100%;
+        border: dotted 1px scale-color($brand_primary, $lightness: -30%);
+    }
+
+    .al-game-scan-thumbnails {
+        background-color: black;
+        border: solid 1px #555;
+        padding: 0;
+
+        li {
+            display: inline;
+
+            img {
+                max-width: 5rem;
+                max-height: 7rem;
+                display: inline;
+                margin-left: 1rem;
+                margin-right: 1rem;
+                margin-top: 0.3rem;
+            }
+        }
+    }
+}
+
+/**
+ * Game page
+ */
+.al-game-details {
+
+    .al-no-tile {
+        img.al-game-vs {
+            display: inline;
+            height: 1.75rem;
+            border: solid 1px #333;
+        }
+    }
+
+    .al-game-screenshot,
+    .al-game-boxscan {
+        height: 100%
+    }
+
+    .al-game-boxscan {
+        max-width: 20rem;
+    }
+
+    .lSSlideOuter img {
+        border: dotted 1px scale-color($brand_primary, $lightness: -30%);
+    }
+
+    .lSGallery img {
+        max-width: 5rem;
+        max-height: 4rem;
+    }
+
+    figure {
+        position: relative;
+        overflow: hidden;
+
+        &:hover figcaption {
+            transform: translate3d(0, -50px, 0);
+        }
+
+    }
+
+    figcaption {
+        position: absolute;
+        bottom: -3.75rem;
+        width: 100%;
+        border-top: solid 1px white;
+        padding: 0.25rem 2rem 0.25rem 2rem;
+        background-color: adjust-color($brand_primary_dimmed, $alpha: -0.25, $lightness: -10%);
+        transition: transform .35s;
+
+        h3 {
+            font-family: $brand_font_family;
+            font-variant: small-caps;
+        }
+
+        h4 {
+            font-weight: bold;
+        }
+
+    }
+
+    .al-game-review img {
+        max-width: 20rem;
+    }
+    /*
+    .al-game-boxscan {
+        width: 100%;
+        height: 100%;
+    }
+    */
+
+    .al-game-comment {
+        margin-bottom: 0.5rem;
+        padding: 0.5rem;
+    }
+
+    .al-game-comment-header {
+        img {
+            display: inline;
+            vertical-align: middle;
+            width: 2.5rem;
+            margin: 0 0.25rem 0.5rem 0;
+            background-color: $brand_primary_dimmed;
+            border: dotted 1px $brand_primary_dimmed;
+
+        }
+    }
+
+    .al-game-facts-screenshots {
+        text-align: center;
+
+        img {
+            display: inline;
+            margin-left: 0.5rem;
+            margin-right: 0.5rem;
+            vertical-align: middle;
+            border: dotted 1px $brand_primary;
+        }
+    }
+
+    .al-tile-comments-list {
+        max-height: 30rem;
+        overflow: auto;
+    }
+}
+
+/**
+ * Release page
+ */
+.al-game-release-details {
+
+    .al-tab {
+        background-color: $brand_primary;
+
+        li {
+            padding-left: 0.5rem;
+            a {
+                color: black;
+                padding-top: 0.5rem;
+                padding-bottom: 0.5rem;
+                display: block;
+
+                .al-text-muted {
+                    color: #444 !important;
+                }
+            }
+
+            margin: 1px;
+
+            &.active {
+                background-color: $brand_primary_dimmed;
+
+                a {
+                    color: white;
+
+                    .al-text-muted {
+                        color: $brand_muted !important;
+                    }
+                }
+            }
+        }
+    }
+
+    .al-tab-pane {
+        border: dotted 1px $brand_primary_dimmed;
+    }
+
+    .al-release-media-scans {
+         float: left;
+         margin-right: 0.5rem;
+    }
+
+    .al-release-media {
+        clear: both;
+        display: none;
+
+        &.active {
+            display: block;
+        }
+    }
+
+    .al-release-media-scan {
+        width: 10rem;
+
+        img {
+            width: 100%;
+            margin-bottom: 0.25rem;
+            border: solid 1px $brand_primary_dimmed;
+        }
+    }
+
+}

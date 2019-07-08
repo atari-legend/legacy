@@ -103,6 +103,16 @@ $sizes: (
 @import '../../1/scss/cpanel-menus';                        //* --> menus section */
 @import '../../1/scss/cpanel-download';                     //* --> download section */
 
+// ----------------------------------------------------------
+// NEW CSS
+// ----------------------------------------------------------
+@import 'al/common/variables';
+@import 'al/common/reset';
+@import 'al/common/layout';
+@import 'al/common/utilities';
+@import 'al/common/tile';
+@import 'al/common/common';
+@import 'al/main/games';
 
 //*----------------------------------------------------------
 // Media Queries Main & CPanel
