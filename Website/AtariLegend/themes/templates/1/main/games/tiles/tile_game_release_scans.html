@@ -1,0 +1,15 @@
+{if count($release_scans) > 0}
+    <div class="al-tile">
+        <div class="al-tile-header">
+            <h1>Scans</h1>
+        </div>
+        <div class="al-tile-content">
+            <img class="al-game-scan al-mx-auto" alt="Release scan" src="{$release_scans[0]->getImage()}">
+            <ul class="al-list-unstyled al-game-scan-thumbnails al-mt-1">
+                {foreach from=$release_scans item=scan}
+                    <li><img alt="Release scan" src="{$scan->getImage()}"></li>
+                {/foreach}
+            </ul>
+        </div>
+    </div>
+{/if}

@@ -1,0 +1,26 @@
+<div class="al-tile">
+        <div class="al-tile-header">
+            <h1>Comments</h1>
+        </div>
+
+        <div class="al-tile-content {if isset($comments)}al-tile-content-separator-bottom{/if}">
+            {if isset($user_session)}
+                <form name="post" class="al-text-center">
+                    <input type="button" accesskey= "b" value="B" onclick="bbstyle(0,'textfield')" title="Bold">
+                    <input type="button" accesskey= "u" value="U" onclick="bbstyle(4,'textfield')" title="Underline">
+                    <input type="button" accesskey= "i" value="I" onclick="bbstyle(2,'textfield')" title="Recursive">
+                    <input type="button" accesskey="w" value="URL" onClick="bbstyle(6,'textfield')" title="Add links">
+                    <input type="button" accesskey="x" value="@" onClick="bbstyle(8,'textfield')" title="Add email address">
+                    <textarea id="comment_add" class="al-my-1" rows="4" name="textfield" onselect="javascript:storeCaret(this);" onclick="javascript:storeCaret(this);" onkeyup="javascript:storeCaret(this);" onchange="javascript:storeCaret(this);"></textarea>
+                    <br>
+                    <input type="button" value="Add" onClick="AddComment({$user_session.user_id},'db_games_main_detail.php','add_comment','game_id={$game_info.game_id}')">
+                </form>
+            {else}
+                <p class="al-text-center al-not-logged-in">Please log in to add coments to this game.</p>
+            {/if}
+        </div>
+
+        <div class="al-tile-content al-p-1 al-tile-comments-list" id="latest_comments_all">
+            {include file='../ajax_games_main_detail_comments.html'}
+        </div>
+    </div>
