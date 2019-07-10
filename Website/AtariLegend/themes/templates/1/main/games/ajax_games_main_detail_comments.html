@@ -1,4 +1,4 @@
-{*
+    {*
 /***************************************************************************
 *                            ajax_games_main_detail_comments.html
 *                            -----------------------------------
@@ -21,10 +21,12 @@
     {foreach from=$comments item=comment}
         <div class="al-game-comment al-oddeven">
             <div class="al-float-right al-fontsize-small">
-                {if $user_session.user_id == $comment.user_id}
-                    <a href="javascript:;" onClick="CommentEditable({$comment.comment_id},{$comment.user_id})"><i class="fa fa-pencil" id="comment_edit_icon{$comment.comment_id}" aria-hidden="true" title="Click to edit comment"></i></a>
-                    <a href="javascript:;" onClick="SaveEditable({$comment.comment_id},'db_games_main_detail.php','save_comment','game_id={$game_id}')"><i class="fa fa-floppy-o" id="comment_save_icon{$comment.comment_id}" aria-hidden="true" title="Click to save change" style="display:none;"></i></a>
-                    <a href="javascript:;" onClick="DeleteEditable({$comment.comment_id},'db_games_main_detail.php','delete_comment','game_id={$game_id}')"><i class="fa fa-trash-o" id="comment_delete_icon{$comment.comment_id}" aria-hidden="true" title="Click to delete comment"></i></a>
+                {if isset($user_session)}
+                    {if $user_session.user_id == $comment.user_id}
+                        <a href="javascript:;" onClick="CommentEditable({$comment.comment_id},{$comment.user_id})"><i class="fa fa-pencil" id="comment_edit_icon{$comment.comment_id}" aria-hidden="true" title="Click to edit comment"></i></a>
+                        <a href="javascript:;" onClick="SaveEditable({$comment.comment_id},'db_games_main_detail.php','save_comment','game_id={$game_id}')"><i class="fa fa-floppy-o" id="comment_save_icon{$comment.comment_id}" aria-hidden="true" title="Click to save change" style="display:none;"></i></a>
+                        <a href="javascript:;" onClick="DeleteEditable({$comment.comment_id},'db_games_main_detail.php','delete_comment','game_id={$game_id}')"><i class="fa fa-trash-o" id="comment_delete_icon{$comment.comment_id}" aria-hidden="true" title="Click to delete comment"></i></a>
+                    {/if}
                 {/if}
                 {if $comment.show_email == '1' and $comment.email != ''}
                     <a href="mailto:{$comment.email}?subject=Comment%20of%20{$comment.game|escape:'url'}%20at%20Atari%20Legend" title="Click to email {$comment.user_name}"><i class="fa fa-envelope" aria-hidden="true"></i></a>
