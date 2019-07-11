@@ -2,14 +2,17 @@
 
     <h1><a href="games_detail.php?game_id={$game->getId()}">{$game->getName()}</a></h1>
     <h2 class="al-text-muted">
-        {$release->getDate()|date_format:"%Y"|default:"[no date]"} release
-        {if $release->getName()}
-            : <em>&quot;{$release->getName()}&quot;</em>
-        {/if}
+        {strip}
+            {$release->getDate()|date_format:"%Y"|default:"[no date]"} release
+            {if $release->getName()}
+                : <em>&quot;{$release->getName()}&quot;</em>
+            {/if}
 
-        {if isset($smarty.session.permission) and $smarty.session.permission == 1}
-            <a href="../../admin/games/games_release_detail.php?release_id={$release->getId()}&game_id={$game->getId()}" title="Edit this release in CPANEL" class="al-inverse"><span class="fa fa-pencil"></span></a>
-        {/if}
+            {if isset($smarty.session.permission) and $smarty.session.permission == 1}
+                &nbsp;
+                <a href="../../admin/games/games_release_detail.php?release_id={$release->getId()}&game_id={$game->getId()}" title="Edit this release in CPANEL" class="al-inverse"><span class="fa fa-pencil"></span></a>
+            {/if}
+        {/strip}
     </h2>
 
     {if $release->getType() != null or $release->getStatus() != null}
@@ -71,7 +74,7 @@
         {if $release->getPublisher() != null}
             <li>
                 <strong>Publisher:</strong>
-                {$release->getPublisher()->getName()}
+                <a href="games_main_list.php?developer={$release->getPublisher()->getId()}&action=search">{$release->getPublisher()->getName()}</a>
             </li>
         {/if}
         {if count($crews) > 0}
