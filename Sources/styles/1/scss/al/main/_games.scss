@@ -228,4 +228,38 @@
         }
     }
 
+    .al-release-technical-details {
+        table {
+            width: 100%;
+            border-spacing: 0;
+            tr:nth-child(odd) {
+                background-color: $brand_background_light;
+            }
+
+            caption h2 {
+                padding: 1.25rem 1rem 0.25rem 1rem;
+                padding-left: 1rem;
+                text-align: left;
+                border-bottom: solid 1px black;
+            }
+
+            th, td {
+                padding: 0.25rem 1rem 0.25rem 2rem;
+                border-bottom: solid 1px black;
+            }
+
+            small {
+                padding-left: 0.25rem;
+            }
+
+            th {
+                font-weight: normal;
+                color: $brand_muted;
+                text-align: left;
+                vertical-align: top;
+                width: 25%;
+            }
+        }
+    }
+
 }
