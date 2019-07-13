@@ -1,21 +1,4 @@
 <div class="al-no-tile">
-    <div class="al-float-right">
-        {if isset($game_vs)}
-            {foreach from=$game_vs item=line name=game_vs}
-                {if isset($line.amiga_id) and $line.amiga_id != 0}
-                    <a href="http://www.lemonamiga.com/?game_id={$line.amiga_id}">
-                        <img class="al-game-vs" src="{$style_dir2}images/Amiga.png" alt="Lemon Amiga">
-                    </a>
-                {/if}
-                {if isset($line.C64_id) and $line.C64_id != 0}
-                    <a href="http://www.lemon64.com/?game_id={$line.C64_id}">
-                        <img class="al-game-vs" src="{$style_dir2}images/c64.jpg" alt="Lemon 64">
-                    </a>
-                {/if}
-            {/foreach}
-        {/if}
-    </div>
-
     <h1>{$game_info.game_name}</h1>
     <h2 class="al-text-muted">
         {foreach from=$game_genres item=genre name=genre}
@@ -25,6 +8,10 @@
 
         {if count($releases) > 0}
             | <a href="#releases">{count($releases)} release{if count($releases) > 1}s{/if}</a>
+        {/if}
+
+        {if isset($smarty.session.permission) and $smarty.session.permission == 1}
+            <a href="../../admin/games/games_detail.php?game_id={$game_id}" title="Edit this game in CPANEL" class="standard_tile_link_reverse"><span class="fa fa-pencil"></span></a>
         {/if}
 
         {if isset($developers)}
@@ -133,6 +120,26 @@
                 {if $game->getPlayersMultipleMachines() != null}{$game->getPlayersMultipleMachines()} (multiple machines){/if}
                 {if $game->getMultiplayerType() != null} - {$game->getMultiplayerType()}{/if}
                 {if $game->getMultiplayerHardware()}via {$game->getMultiplayerHardware()}{/if}
+            </li>
+        {/if}
+
+        {if isset($game_vs)}
+            <li>
+                <strong>Compare:</strong>
+                {foreach from=$game_vs item=line name=game_vs}
+                    {strip}
+                        {if isset($line.amiga_id) and $line.amiga_id != 0}
+                            <a href="http://www.lemonamiga.com/?game_id={$line.amiga_id}" target="_blank" title="View the Amiga version at Lemon Amiga">
+                                <img class="al-game-vs" src="{$style_dir2}images/Amiga.png" alt="Lemon Amiga">
+                            </a>
+                        {/if}
+                        {if isset($line.C64_id) and $line.C64_id != 0}
+                            <a href="http://www.lemon64.com/?game_id={$line.C64_id}" target="_blank" title="View the C64 version at Lemon 64">
+                                <img class="al-game-vs" src="{$style_dir2}images/c64.jpg" alt="Lemon 64">
+                            </a>
+                        {/if}
+                    {/strip}
+                {/foreach}
             </li>
         {/if}
 
