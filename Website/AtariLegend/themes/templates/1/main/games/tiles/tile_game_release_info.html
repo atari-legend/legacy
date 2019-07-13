@@ -70,6 +70,14 @@
                 {$release->getPublisher()->getName()}
             </li>
         {/if}
+        {if count($crews) > 0}
+            <li>
+                <strong>Crews:</strong>
+                {foreach from=$crews item=crew name=crew}
+                    {$crew->getName()}{if not $smarty.foreach.crew.last}, {/if}
+                {/foreach}
+            </li>
+        {/if}
         {if count($release_distributors) > 0}
             <li>
                 <strong>Distributed by:</strong>
