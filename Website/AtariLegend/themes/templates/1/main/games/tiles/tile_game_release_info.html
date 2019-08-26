@@ -6,6 +6,10 @@
         {if $release->getName()}
             : <em>&quot;{$release->getName()}&quot;</em>
         {/if}
+
+        {if isset($smarty.session.permission) and $smarty.session.permission == 1}
+            <a href="../../admin/games/games_release_detail.php?release_id={$release->getId()}&game_id={$game->getId()}" title="Edit this release in CPANEL" class="al-inverse"><span class="fa fa-pencil"></span></a>
+        {/if}
     </h2>
 
     {if $release->getType() != null or $release->getStatus() != null}
