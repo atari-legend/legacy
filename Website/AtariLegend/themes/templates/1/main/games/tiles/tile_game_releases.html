@@ -3,10 +3,10 @@
         <div class="al-tile-header">
             <h1>Releases</h1>
         </div>
-        <div class="al-tile-content">
+        <div class="al-tile-content al-p-0">
             <ul class="al-list-unstyled al-p-0">
                 {foreach from=$releases item=release name=release}
-                    <li>
+                    <li class="al-p-1 al-oddeven">
                         <a href="games_release_main.php?release_id={$release->getId()}">{$release->getDate()|date_format:"Y"|default:"[no date]"}</a>
                         {if $release->getName() != null} <span class="al-text-muted">as {$release->getName()}</span>{/if}
                         {if $release_location[$release->getId()]}

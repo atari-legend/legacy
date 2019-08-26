@@ -48,7 +48,12 @@ ul.al-list-unstyled {
 
 .al-oddeven {
     &:nth-child(even) {
-        background-color: $brand_background_light;
+        background-color: #0d2e2e;
+        border-bottom: solid 1px black;
+    }
+
+    &:nth-child(odd) {
+        border-bottom: solid 1px black;
     }
 }
 
