@@ -15,7 +15,7 @@
         {/strip}
     </h2>
 
-    {if $release->getType() != null or $release->getStatus() != null}
+    {if $release->getType() != null or $release->getStatus() != null or count($release_locations) > 0}
         <h3 class="al-text-muted">
             {strip}
                 {if $release->getType() != null}{$release->getType()}{/if}
@@ -27,9 +27,9 @@
                         {if $location->getCountryISO2() != null}
                             &nbsp;
                             <img src="../../themes/templates/1/includes/img/vendor/country-flags-1.0/{$location->getCountryISO2()|lower}.svg"
-                                {" "}class="al-location-flag al-mr-0"
-                                {" "}title="Flag of {$location->getName()|escape}"
-                                {" "}alt="Flag of {$location->getName()|escape}">
+                                class="al-location-flag al-mr-0"
+                                title="Flag of {$location->getName()|escape}"
+                                alt="Flag of {$location->getName()|escape}">
                         {/if}
                         {if not $smarty.foreach.location.last}, {/if}
                     {/foreach}
