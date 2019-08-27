@@ -3,21 +3,22 @@
         <div class="al-tile-header">
             <h1>Releases</h1>
         </div>
-        <div class="al-tile-content">
-            <ul class="al-list-unstyled">
+        <div class="al-tile-content al-p-0">
+            <ul class="al-list-unstyled al-p-0">
                 {foreach from=$releases item=release name=release}
-                    <li>
+                    <li class="al-p-1 al-oddeven">
                         <a href="games_release_main.php?release_id={$release->getId()}">{$release->getDate()|date_format:"Y"|default:"[no date]"}</a>
                         {if $release->getName() != null} <span class="al-text-muted">as {$release->getName()}</span>{/if}
                         {if $release_location[$release->getId()]}
                             {foreach from=$release_location[$release->getId()] item=location_id name=location}
+                                {$locations[$location_id]->getName()}
                                 {if $locations[$location_id]->getCountryISO2() != null}
                                     <img src="../../themes/templates/1/includes/img/vendor/country-flags-1.0/{$locations[$location_id]->getCountryISO2()|lower}.svg"
                                         class="al-location-flag"
                                         title="Flag of {$locations[$location_id]->getName()|escape}"
                                         alt="Flag of {$locations[$location_id]->getName()|escape}">
                                 {else}
-                                    {$locations[$location_id]->getName()}
+
                                 {/if}
                             {/foreach}
                         {else}
