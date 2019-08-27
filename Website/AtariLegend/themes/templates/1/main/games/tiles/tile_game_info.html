@@ -63,8 +63,8 @@
                         <li>
                             <strong>Programmed in:</strong>
                     {/if}
-                    {$all_programming_languages->getName()}
-                    {if $smarty.foreach.language.first}
+                    {$all_programming_languages->getName()}{if not $smarty.foreach.language.last}, {/if}
+                    {if $smarty.foreach.language.last}
                         </li>
                     {/if}
                 {/if}
