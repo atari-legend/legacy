@@ -65,8 +65,9 @@
     .al-no-tile {
         img.al-game-vs {
             display: inline;
-            height: 1.75rem;
-            border: solid 1px #333;
+            height: 1rem;
+            border: solid 1px $brand_muted;
+            vertical-align: middle;
         }
     }
 

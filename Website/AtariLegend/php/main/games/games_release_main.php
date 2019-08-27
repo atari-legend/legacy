@@ -18,6 +18,7 @@ require_once __DIR__."/../../common/DAO/MediaDAO.php";
 require_once __DIR__."/../../common/DAO/DumpDAO.php";
 require_once __DIR__."/../../common/DAO/MediaScanDAO.php";
 require_once __DIR__."/../../common/DAO/GameReleaseScanDAO.php";
+require_once __DIR__."/../../common/DAO/CrewDAO.php";
 
 $gameDao = new \AL\Common\DAO\GameDAO($mysqli);
 $gameReleaseDao = new \AL\Common\DAO\GameReleaseDAO($mysqli);
@@ -36,6 +37,7 @@ $mediaDao = new \AL\Common\DAO\MediaDAO($mysqli);
 $dumpDao = new \AL\Common\DAO\DumpDAO($mysqli);
 $mediaScanDao = new \AL\Common\DAO\MediaScanDAO($mysqli);
 $gameReleaseScanDao = new AL\Common\DAO\GameReleaseScanDAO($mysqli);
+$crewDao = new \AL\Common\DAO\CrewDAO($mysqli);
 
 function generate_release_description(
     $release,
@@ -110,6 +112,7 @@ $smarty->assign('memory_incompatible', $memoryDao->getMemoryIncompatibleForRelea
 $smarty->assign('copy_protections', $copyProtectionDao->getCopyProtectionsForRelease($release->getId()));
 $smarty->assign('disk_protections', $diskProtectionDao->getDiskProtectionsForRelease($release->getId()));
 $smarty->assign('release_scans', $gameReleaseScanDao->getScansForRelease($release->getId()));
+$smarty->assign('crews', $crewDao->getCrewsForRelease($release->getId()));
 
 $media = $mediaDao->getAllMediaFromRelease($release->getId());
 $smarty->assign('medias', $media);
