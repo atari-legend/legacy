@@ -50,144 +50,150 @@ if (isset($action) and $action == 'confirm') {
         header("Location: ../../main/front/front.php");
     }
 } else {
-    // Make sure all fields were entered
-    if (!$_POST['userid'] || !$_POST['password'] || !$_POST['password_again']
-        || !$_POST['email'] || !isset($_POST['accept_license']) || $_POST['accept_license'] !== "true") {
-        $_SESSION['edit_message'] = "You didn't fill in a required field.";
-        header("Location: ../../main/front/front.php?action=register");
-    } else {
-        // Spruce up username, check length
-        $_POST['userid'] = trim($_POST['userid']);
-
-        if (strlen($_POST['userid']) > 30) {
-            $_SESSION['edit_message'] = "Sorry, the username is longer than 30 characters, please shorten it.";
+    // bot alert
+    if (!$_POST['url']) {    
+        // Make sure all fields were entered
+        if (!$_POST['userid'] || !$_POST['password'] || !$_POST['password_again']
+            || !$_POST['email'] || !isset($_POST['accept_license']) || $_POST['accept_license'] !== "true") {
+            $_SESSION['edit_message'] = "You didn't fill in a required field.";
             header("Location: ../../main/front/front.php?action=register");
         } else {
-            // Check if username is already in use
-            $user_name = $mysqli->real_escape_string($_POST['userid']);
-            $query_rows = $mysqli->query("select userid from users where userid = '$user_name'");
-            $number = $query_rows->num_rows;
+            // Spruce up username, check length
+            $_POST['userid'] = trim($_POST['userid']);
 
-            if ($number > 0) {
-                $_SESSION['edit_message'] = "Sorry, the username is already taken, please pick another one";
+            if (strlen($_POST['userid']) > 30) {
+                $_SESSION['edit_message'] = "Sorry, the username is longer than 30 characters, please shorten it.";
                 header("Location: ../../main/front/front.php?action=register");
             } else {
-                // Check if both pwd fields are the same
-                if ($_POST['password'] != $_POST['password_again']) {
-                    $_SESSION['edit_message'] = "The password fields do not correspond!";
+                // Check if username is already in use
+                $user_name = $mysqli->real_escape_string($_POST['userid']);
+                $query_rows = $mysqli->query("select userid from users where userid = '$user_name'");
+                $number = $query_rows->num_rows;
+
+                if ($number > 0) {
+                    $_SESSION['edit_message'] = "Sorry, the username is already taken, please pick another one";
                     header("Location: ../../main/front/front.php?action=register");
                 } else {
-                    //check if the email addres is valid
-                    if (!filter_var($_POST["email"], FILTER_VALIDATE_EMAIL)) {
-                        $_SESSION['edit_message'] =  "Invalid email format";
+                    // Check if both pwd fields are the same
+                    if ($_POST['password'] != $_POST['password_again']) {
+                        $_SESSION['edit_message'] = "The password fields do not correspond!";
                         header("Location: ../../main/front/front.php?action=register");
                     } else {
-                        //check if the email already exists
-                        $query_rows = $mysqli->query("select * from users where email = '$_POST[email]'");
-                        $number = $query_rows->num_rows;
-
-                        if ($number > 0) {
-                            $_SESSION['edit_message'] =  "Email address already exists in database!";
+                        //check if the email addres is valid
+                        if (!filter_var($_POST["email"], FILTER_VALIDATE_EMAIL)) {
+                            $_SESSION['edit_message'] =  "Invalid email format";
                             header("Location: ../../main/front/front.php?action=register");
-                        } else {
-                            //Add the new account to the database but make it inactive for now
-                            $user_name = $mysqli->real_escape_string($_POST['userid']);
-                            $md5pass = hash('md5', $_POST['password']); // The md5 hashed password.
-                            $sha512 = hash('sha512', $_POST['password']); // The hashed password.
-                            $random_salt = hash(
-                                'sha512',
-                                uniqid(mt_rand(1, mt_getrandmax()), true)
-                            ); //create random salt
-                            $update_password = hash('sha512', $sha512 . $random_salt); // Create salted password
-                            $timestamp = time();
+                        } else {                          
+                            //check if the email already exists
+                            $query_rows = $mysqli->query("select * from users where email = '$_POST[email]'");
+                            $number = $query_rows->num_rows;
 
-                            $sdbquery = $mysqli->query("INSERT INTO users (
-                                userid, password, sha512_password, salt, email, permission, join_date,
-                                last_visit, user_website, user_fb, user_twitter, user_af, inactive)
-                                VALUES ('$user_name', '$md5pass', '$update_password', '$random_salt',
-                                '$email', 2, '$timestamp', '$timestamp', '$website', '$fb_profile', '$twitter_profile',
-                                '$af_profile', '1')") or die("Couldn't insert user into users table");
-                            $new_user_id = $mysqli->insert_id;
-
-                            //Let's create an email for verification
-                            // Create a url which we will direct them to reset their password
-                            $pwrurl = $confirm_account_link.'&pwd='.$md5pass.'&usn='.$user_name;
-
-                            $mail = new PHPMailer;
-
-                            $start = microtime(true);
-                            $i     = 0;
-
-                            $mail->AddAddress($email);
-
-                            // Create Email
-
-                            //We need to comment out this comment to have it to work from server, on localhost it runs
-                            //with this command $mail->isSMTP(); // Set mailer to use SMTP
-
-                            $mail->SMTPDebug  = 1;                      // enables SMTP debug information (for testing)
-                            // 1 = errors and messages
-                            // 2 = messages only
-                            //$mail->Host = 'smtp.live.com';                    // Specify main and backup SMTP servers
-                            $mail->Host       = $ms_host;
-                            $mail->SMTPAuth   = true; // Enable SMTP authentication
-                            //$mail->Username = 'atarilegend@hotmail.com';      // SMTP username
-                            //$mail->Password = '@Tar1L3geNd';                  // SMTP password
-                            $mail->Username   = $ms_usn;
-                            $mail->Password   = $ms_pwd;
-                            $mail->SMTPSecure = 'tls'; // Enable TLS encryption, `ssl` also accepted
-                            //$mail->SMTPSecure = 'ssl';
-                            //$mail->Port = 587;                                // TCP port to connect to
-                            $mail->Port       = $ms_port;
-
-                            $mail->setFrom($pwd_reset_from, 'Atarilegend');
-                            $mail->addReplyTo($pwd_reset_reply, 'Atarilegend');
-
-                            $mail->isHTML(false); // Set email format to HTML
-
-                            $mail->Subject = 'Atarilegend - Account confirmation';
-
-                            // Mail them their key
-                            $mailbody = "Dear user,\n\nIf this e-mail does not apply to you please ignore it. "
-                                ."Please activate your account at www.atarilegend.com\n\nby clicking the link below. "
-                                ."If you cannot click it, please paste it into your web browser's address bar.\n\n"
-                                . $pwrurl . "\n\nThanks,\nTEAM AL";
-
-                            $mail->Body    = $mailbody;
-
-                            if (!$mail->send()) {
-                                //$_SESSION['edit_message'] = "Message could not be sent.";
-                                $_SESSION['edit_message'] = "Failed sending email - please contact the administrators";
+                            if ($number > 0) {
+                                $_SESSION['edit_message'] =  "Email address already exists in database!";
+                                header("Location: ../../main/front/front.php?action=register");
                             } else {
-                                $_SESSION['edit_message'] = "An email was sent to ";
-                                $_SESSION['edit_message'] .= $_POST["email"];
-                                $_SESSION['edit_message'] .= ". Please follow the link";
-                            }
+                                //Add the new account to the database but make it inactive for now
+                                $user_name = $mysqli->real_escape_string($_POST['userid']);
+                                $md5pass = hash('md5', $_POST['password']); // The md5 hashed password.
+                                $sha512 = hash('sha512', $_POST['password']); // The hashed password.
+                                $random_salt = hash(
+                                    'sha512',
+                                    uniqid(mt_rand(1, mt_getrandmax()), true)
+                                ); //create random salt
+                                $update_password = hash('sha512', $sha512 . $random_salt); // Create salted password
+                                $timestamp = time();
 
-                            $time_elapsed_secs = microtime(true) - $start;
+                                $sdbquery = $mysqli->query("INSERT INTO users (
+                                    userid, password, sha512_password, salt, email, permission, join_date,
+                                    last_visit, user_website, user_fb, user_twitter, user_af, inactive)
+                                    VALUES ('$user_name', '$md5pass', '$update_password', '$random_salt',
+                                    '$email', 2, '$timestamp', '$timestamp', '$website', '$fb_profile', '$twitter_profile',
+                                    '$af_profile', '1')") or die("Couldn't insert user into users table");
+                                $new_user_id = $mysqli->insert_id;
 
-                            $changeLogDao->insertChangeLog(
-                                new \AL\Common\Model\Database\ChangeLog(
-                                    -1,
-                                    "Users",
-                                    $new_user_id,
-                                    $user_name,
-                                    "User",
-                                    $new_user_id,
-                                    $user_name,
-                                    $new_user_id,
-                                    \AL\Common\Model\Database\ChangeLog::ACTION_INSERT
-                                )
-                            );
+                                //Let's create an email for verification
+                                // Create a url which we will direct them to reset their password
+                                $pwrurl = $confirm_account_link.'&pwd='.$md5pass.'&usn='.$user_name;
 
-                            $_SESSION['edit_message'] = "An email was sent to you. Please follow the link to activate "
-                                ."the account";
-                            header("Location: ../../main/front/front.php");
+                                $mail = new PHPMailer;
+
+                                $start = microtime(true);
+                                $i     = 0;
+
+                                $mail->AddAddress($email);
+
+                                // Create Email
+
+                                //We need to comment out this comment to have it to work from server, on localhost it runs
+                                //with this command $mail->isSMTP(); // Set mailer to use SMTP
+
+                                $mail->SMTPDebug  = 1;                      // enables SMTP debug information (for testing)
+                                // 1 = errors and messages
+                                // 2 = messages only
+                                //$mail->Host = 'smtp.live.com';                    // Specify main and backup SMTP servers
+                                $mail->Host       = $ms_host;
+                                $mail->SMTPAuth   = true; // Enable SMTP authentication
+                                //$mail->Username = 'atarilegend@hotmail.com';      // SMTP username
+                                //$mail->Password = '@Tar1L3geNd';                  // SMTP password
+                                $mail->Username   = $ms_usn;
+                                $mail->Password   = $ms_pwd;
+                                $mail->SMTPSecure = 'tls'; // Enable TLS encryption, `ssl` also accepted
+                                //$mail->SMTPSecure = 'ssl';
+                                //$mail->Port = 587;                                // TCP port to connect to
+                                $mail->Port       = $ms_port;
+
+                                $mail->setFrom($pwd_reset_from, 'Atarilegend');
+                                $mail->addReplyTo($pwd_reset_reply, 'Atarilegend');
+
+                                $mail->isHTML(false); // Set email format to HTML
+
+                                $mail->Subject = 'Atarilegend - Account confirmation';
+
+                                // Mail them their key
+                                $mailbody = "Dear user,\n\nIf this e-mail does not apply to you please ignore it. "
+                                    ."Please activate your account at www.atarilegend.com\n\nby clicking the link below. "
+                                    ."If you cannot click it, please paste it into your web browser's address bar.\n\n"
+                                    . $pwrurl . "\n\nThanks,\nTEAM AL";
+
+                                $mail->Body    = $mailbody;
+
+                                if (!$mail->send()) {
+                                    //$_SESSION['edit_message'] = "Message could not be sent.";
+                                    $_SESSION['edit_message'] = "Failed sending email - please contact the administrators";
+                                } else {
+                                    $_SESSION['edit_message'] = "An email was sent to ";
+                                    $_SESSION['edit_message'] .= $_POST["email"];
+                                    $_SESSION['edit_message'] .= ". Please follow the link";
+                                }
+
+                                $time_elapsed_secs = microtime(true) - $start;
+
+                                $changeLogDao->insertChangeLog(
+                                    new \AL\Common\Model\Database\ChangeLog(
+                                        -1,
+                                        "Users",
+                                        $new_user_id,
+                                        $user_name,
+                                        "User",
+                                        $new_user_id,
+                                        $user_name,
+                                        $new_user_id,
+                                        \AL\Common\Model\Database\ChangeLog::ACTION_INSERT
+                                    )
+                                );
+
+                                $_SESSION['edit_message'] = "An email was sent to you. Please follow the link to activate "
+                                    ."the account";
+                                header("Location: ../../main/front/front.php");
+                            } 
                         }
                     }
                 }
             }
         }
+    } else {
+        $_SESSION['edit_message'] = "Whisper the password";
+        header("Location: ../../main/front/front.php");
     }
 }
 
