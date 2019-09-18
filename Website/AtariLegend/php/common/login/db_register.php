@@ -51,7 +51,7 @@ if (isset($action) and $action == 'confirm') {
     }
 } else {
     // bot alert
-    if (!$_POST['url']) {    
+    if (!$_POST['url']) {
         // Make sure all fields were entered
         if (!$_POST['userid'] || !$_POST['password'] || !$_POST['password_again']
             || !$_POST['email'] || !isset($_POST['accept_license']) || $_POST['accept_license'] !== "true") {
@@ -83,7 +83,7 @@ if (isset($action) and $action == 'confirm') {
                         if (!filter_var($_POST["email"], FILTER_VALIDATE_EMAIL)) {
                             $_SESSION['edit_message'] =  "Invalid email format";
                             header("Location: ../../main/front/front.php?action=register");
-                        } else {                          
+                        } else {
                             //check if the email already exists
                             $query_rows = $mysqli->query("select * from users where email = '$_POST[email]'");
                             $number = $query_rows->num_rows;
@@ -107,8 +107,9 @@ if (isset($action) and $action == 'confirm') {
                                     userid, password, sha512_password, salt, email, permission, join_date,
                                     last_visit, user_website, user_fb, user_twitter, user_af, inactive)
                                     VALUES ('$user_name', '$md5pass', '$update_password', '$random_salt',
-                                    '$email', 2, '$timestamp', '$timestamp', '$website', '$fb_profile', '$twitter_profile',
-                                    '$af_profile', '1')") or die("Couldn't insert user into users table");
+                                    '$email', 2, '$timestamp', '$timestamp', '$website', '$fb_profile',
+                                    '$twitter_profile', '$af_profile', '1')")
+                                    or die("Couldn't insert user into users table");
                                 $new_user_id = $mysqli->insert_id;
 
                                 //Let's create an email for verification
