@@ -125,8 +125,8 @@ if (isset($action) and $action == 'confirm') {
 
                                 // Create Email
 
-                                //We need to comment out this comment to have it to work from server, 
-                                // on localhost it runs with this command $mail->isSMTP(); 
+                                //We need to comment out this comment to have it to work from server,
+                                // on localhost it runs with this command $mail->isSMTP();
                                 // Set mailer to use SMTP
 
                                 $mail->SMTPDebug  = 1;  // enables SMTP debug information (for testing)
@@ -152,7 +152,7 @@ if (isset($action) and $action == 'confirm') {
                                 $mail->Subject = 'Atarilegend - Account confirmation';
 
                                 // Mail them their key
-                                $mailbody = 
+                                $mailbody =
                                 "Dear user,\n\nIf this e-mail does not apply to you please ignore it. "
                                 ."Please activate your account at www.atarilegend.com\n\nby clicking the link below. "
                                 ."If you cannot click it, please paste it into your web browser's address bar.\n\n"
@@ -162,7 +162,7 @@ if (isset($action) and $action == 'confirm') {
 
                                 if (!$mail->send()) {
                                     //$_SESSION['edit_message'] = "Message could not be sent.";
-                                    $_SESSION['edit_message'] = 
+                                    $_SESSION['edit_message'] =
                                         "Failed sending email - please contact the administrators";
                                 } else {
                                     $_SESSION['edit_message'] = "An email was sent to ";
@@ -186,11 +186,11 @@ if (isset($action) and $action == 'confirm') {
                                     )
                                 );
 
-                                $_SESSION['edit_message'] = 
+                                $_SESSION['edit_message'] =
                                     "An email was sent to you. Please follow the link to activate "
                                     ."the account";
                                 header("Location: ../../main/front/front.php");
-                            } 
+                            }
                         }
                     }
                 }
