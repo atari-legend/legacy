@@ -70,7 +70,6 @@ while ($sql_recent_reviews = $query_recent_reviews->fetch_array(MYSQLI_BOTH)) {
     $review_date = date("F j, Y", $sql_recent_reviews['review_date']);
 
     $smarty->append(
-
         'recent_reviews',
         array('review_name' => $sql_recent_reviews['game_name'],
            'review_id' => $sql_recent_reviews['review_id'],

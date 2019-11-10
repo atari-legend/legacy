@@ -66,7 +66,6 @@ $sql_screenstar = $query_screenstar->fetch_array(MYSQLI_BOTH);
     $screenstar_image .= $sql_screenstar['imgext'];
 
     $smarty->assign(
-
         'screenstar',
         array('screenstar_game_name' => $sql_screenstar['game_name'],
            'screenstar_review' => $screenstar_review,
