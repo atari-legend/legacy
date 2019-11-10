@@ -57,7 +57,6 @@ while ($query_comment = $sql_comment->fetch_array(MYSQLI_BOTH)) {
     $date = date("d/m/y", $query_comment['timestamp']);
 
     $smarty->append(
-
         'comments',
         array('comment' => $oldcomment,
               'comment_edit' => $comment,
