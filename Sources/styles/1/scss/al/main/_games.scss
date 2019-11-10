@@ -219,11 +219,13 @@
         }
     }
 
-    .al-release-media-scan {
-        width: 10rem;
+    .al-release-media-scans {
+        display: inline-block;
 
         img {
-            width: 100%;
+            display: inline;
+            width: 5rem;
+            margin-right: 0.25rem;
             margin-bottom: 0.25rem;
             border: solid 1px $brand_primary_dimmed;
         }

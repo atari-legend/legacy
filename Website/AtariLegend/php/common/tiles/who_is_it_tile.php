@@ -54,7 +54,6 @@ $int_text = trim($int_text);
 $int_text = RemoveSmillies($int_text);
 
 $smarty->assign(
-
     'who_is_it',
     array('ind_id' => $sql_interview['ind_id'],
                'ind_name' => $sql_interview['ind_name'],
