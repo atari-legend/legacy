@@ -6,69 +6,67 @@
         {if count($medias) > 0}
 
             <div class="al-row">
-                <div class="al-column al-m-0">
-                    <ul class="al-list-unstyled al-p-0 al-tab">
-                        {foreach from=$medias item=media name=media}
-                            {strip}
-                                <li {if $smarty.foreach.media.first}class="active"{/if}>
-                                    <a href="#al-release-media-{$media->getId()}">
-                                        {$media->getMediaType()->getName()}
-                                        {if $media->getLabel() != null}
-                                            &nbsp;<span class="al-text-muted">({$media->getLabel()})</span>
-                                        {/if}
-                                    </a>
-                                </li>
-                            {/strip}
-                        {/foreach}
-                    </ul>
-                </div>
+                <div class="al-column">
+                    {foreach from=$medias item=media name=media}
+                        <h2>{$media->getMediaType()->getName()}
+                        {if $media->getLabel() != null}
+                            <small class="al-text-muted">({$media->getLabel()})</small>
+                        {/if}
+                        </h2>
 
-                <div class="al-column-3 al-tab-pane al-p-1">
-                    <small style="color: red">TODO: Count downloads</small><br>
-                    {foreach from=$medias item=media name="media"}
-                        <div class="al-release-media {if $smarty.foreach.media.first}active{/if}" id="al-release-media-{$media->getId()}">
-                            <div class="al-release-media-scans">
-                                {foreach from=$media_scans[$media->getId()] item=scan}
-                                    <div class="al-release-media-scan al-text-center al-text-muted al-fontsize-small">
-                                        <img class="al-release-media-scan" alt="{$scan->getMediaScanType()->getName()}" src="{$media_scans_path}{$scan->getId()}.{$scan->getImage()}">
-                                        {$scan->getMediaScanType()->getName()}
-                                    </div>
-                                {/foreach}
-                            </div>
-
-                            <div>
-                                {if $dumps[$media->getId()] != null}
-                                    <h2>{count($dumps[$media->getId()])} dump{if count($dumps[$media->getId()]) > 1}s{/if}:</h2>
-                                    <ul class="al-list-unstyled">
-                                        {foreach from=$dumps[$media->getId()] item=dump}
-                                            <li>
-                                                {$dump->getFormat()}
-                                                <span class="al-text-muted">uploaded by</span> {$dump->getUser()->getName()}
-                                                <span class="al-text-muted">
-                                                    {$dump->getDate()|timeago}
-                                                    ({math equation="floor(x/y)" x=$dump->getSize() y=1024} KB)
-                                                </span>
-                                                {if isset($user_session)}
-                                                    <a href="../../../data/zips/games/{$dump->getId()}.zip"><i class="fa fa-download" aria-hidden="true"></i></a>
-                                                {else}
-                                                    <span class="al-not-logged-in">Please log in to download</span>
-                                                {/if}
-                                                <br>
-                                                <abbr title="SHA512: {$dump->getSha512()}">{$dump->getSha512()|truncate:8:""}</abbr>
-
-                                                <em class="al-text-muted">{$dump->getInfo()}</em>
-
-                                            </li>
-                                        {/foreach}
-                                    </ul>
-                                {else}
-                                    No dumps to download for this media
-                                {/if}
-                            </div>
+                        {if count($media_scans[$media->getId()]) gt 0}
+                        <div class="al-release-media-scans">
+                            {foreach from=$media_scans[$media->getId()] item=scan}
+                                <a href="{$media_scans_path}{$scan->getId()}.{$scan->getImage()}"
+                                    data-lightbox="image-{$scan->getId()}">
+                                    <img class="al-release-media-scan"
+                                        alt="{$scan->getMediaScanType()->getName()}"
+                                        src="{$media_scans_path}{$scan->getId()}.{$scan->getImage()}">
+                                </a>
+                            {/foreach}
                         </div>
+                        {/if}
+
+                        {if $dumps[$media->getId()] != null}
+                            <table class="al-table">
+                                <thead>
+                                    <tr>
+                                        <th>Format</th>
+                                        <th>Added</th>
+                                        <th>By</th>
+                                        <th>Notes</th>
+                                        <th>Size</th>
+                                        <th>sha512</th>
+                                        <th></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                {foreach from=$dumps[$media->getId()] item=dump}
+                                    <tr>
+                                        <td>{$dump->getFormat()}</td>
+                                        <td>{$dump->getDate()|timeago}</td>
+                                        <td>{$dump->getUser()->getName()}</td>
+                                        <td>{$dump->getInfo()|default:'-'}</td>
+                                        <td>{math equation="floor(x/y)" x=$dump->getSize() y=1024} KB</td>
+                                        <td><abbr title="SHA512: {$dump->getSha512()}">{$dump->getSha512()|truncate:8:""}</abbr></td>
+                                        <td>
+                                            {if isset($user_session)}
+                                                <a href="../../../data/zips/games/{$dump->getId()}.zip"><i class="fa fa-download" aria-hidden="true"></i></a>
+                                            {else}
+                                                <span class="al-not-logged-in">Please log in to download</span>
+                                            {/if}
+                                        </td>
+                                    </tr>
+                                {/foreach}
+                                </tbody>
+                            </table>
+                        {else}
+                            <p>No dump for this media.</p>
+                        {/if}
                     {/foreach}
                 </div>
             </div>
+
         {else}
             <p class="al-text-center">
                 No media dumps or media scans for this release.
