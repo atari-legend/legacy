@@ -5,7 +5,12 @@
 {/strip}{/block}
 {block name=description}{$release_description}{/block}
 
+{block name=additional_css}
+    <link type="text/css" href="{$style_dir}css/vendor/lightbox-2.9.0.css" hreflang="en" rel="stylesheet">
+{/block}
+
 {block name=additional_scripts}
+    <script src="{$template_dir}includes/js/vendor/lightbox-2.9.0.min.js"></script>
     <script src="{$template_dir}includes/js/ui.tabs.js"></script>
     <script>
         jQuery(document).ready( function() {

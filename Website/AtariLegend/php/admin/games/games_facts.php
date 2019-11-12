@@ -44,7 +44,6 @@ while ($sql_games_facts = $query_games_facts->fetch_array(MYSQLI_BOTH)) {
         $new_path .= $sql_screenshots_facts['imgext'];
 
         $smarty->append(
-
             'facts_screenshots',
             array('game_fact_id' => $sql_games_facts['game_fact_id'],
                'screenshot_id' => $sql_screenshots_facts['screenshot_id'],
