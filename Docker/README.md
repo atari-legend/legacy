@@ -10,17 +10,24 @@ Pre-requisites:
 This environment will:
 - Setup a MySQL image to run the database
 - Setup a PHP image to serve the site, on port 80
-- Setup a phpMySql image for database administration, on port 8080
+- Setup a NodeJS email to generate the CSS
+- Setup a Composer image to install dependencies
+- Setup a phpMyAdmin image for database administration, on port 8080
 
 ## Running the project
 
 Run `docker-compose up --build` in this folder. This will build all the
-required images and start them.
+required images and start them. Then:
+
+- http://localhost/ to access the site
+- http://localhost:8080/ to access phpMyAdmin
 
 ## Database setup
 
-Once the project is running, you need to import the database dump. To do so,
-you will run Docker commands to connect to the running MySQL instance in order
+Once the project is running, you need to import the database dump. The easiest
+way is to do it via phpMyAdmin, but it can also be done on the command line.
+
+You will run Docker commands to connect to the running MySQL instance in order
 to create the database and import the dump. The MySQL instance link name is
 `db` as per `docker-compose.yml`.
 

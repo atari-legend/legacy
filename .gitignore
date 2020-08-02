@@ -7,6 +7,9 @@ Website/AtariLegend/data/database-dumps/*.sql.gz
 # exclude temporary directory where Smarty templates are compiled
 /Website/AtariLegend/php/temp
 
+# exclude composer dependencies
+/Website/AtariLegend/php/vendor
+
 # exclude the database connection settings file
 /Website/AtariLegend/php/config/connection_settings.php
 
@@ -28,4 +31,3 @@ scss-lint-report.xml
 style.css
 style.css.map
 composer.phar
-composer.json

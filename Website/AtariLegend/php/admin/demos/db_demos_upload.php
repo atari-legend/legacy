@@ -18,13 +18,12 @@
 //load all common functions
 include("../../config/common.php");
 include("../../config/admin.php");
+require_once __DIR__."/../../vendor/autoload.php";
 
 //****************************************************************************************
 // We wanna add a new download
 //****************************************************************************************
 if (isset($action) and $action == 'add_download') {
-    require_once('../vendor/pclzip/pclzip/pclzip.lib.php');
-
     $demo_download_name = $_FILES['demo_download_name'];
 
     if (isset($demo_download_name)) {

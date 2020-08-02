@@ -30,6 +30,9 @@ jobs:
       - name: Install NPM modules
         run: docker run -v $PWD:/data -w /data atari-legend npm install
 
+      - name: Install Composer dependencies
+        run: docker run -v $PWD:/data atari-legend composer.phar install -d /data/Website/AtariLegend/php/
+
       - name: Run Grunt
         run: docker run -v $PWD:/data -w /data atari-legend npm run grunt
 
