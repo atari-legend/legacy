@@ -27,7 +27,7 @@ services:
     volumes:
       - ../:/app
     working_dir: /app
-    command: bash -c "npm rebuild node-sass; npm run grunt; npm run grunt -- watch"
+    command: bash -c "npm install; npm rebuild node-sass; npm run grunt; npm run grunt -- watch"
   # Convenience phpMyAdmin image to administer the database
   phpmyadmin:
     image: phpmyadmin/phpmyadmin
