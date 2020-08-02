@@ -17,10 +17,13 @@
 
 //load all common functions
 include("../../config/common.php");
-include("../../vendor/phpmailer/phpmailer/PHPMailerAutoload.php");
 
 require_once __DIR__."/../../common/Model/Database/ChangeLog.php" ;
 require_once __DIR__."/../../common/DAO/ChangeLogDAO.php" ;
+
+use PHPMailer\PHPMailer\PHPMailer;
+
+require_once __DIR__."/../../vendor/autoload.php";
 
 $changeLogDao = new \AL\Common\DAO\ChangeLogDAO($mysqli);
 
@@ -129,7 +132,7 @@ if (isset($action) and $action == 'confirm') {
                                 // on localhost it runs with this command $mail->isSMTP();
                                 // Set mailer to use SMTP
 
-                                $mail->SMTPDebug  = 1;  // enables SMTP debug information (for testing)
+                                $mail->SMTPDebug  = 0;  // enables SMTP debug information (for testing)
                                 // 1 = errors and messages
                                 // 2 = messages only
                                 //$mail->Host = 'smtp.live.com'; // Specify main and backup SMTP servers
@@ -160,14 +163,14 @@ if (isset($action) and $action == 'confirm') {
 
                                 $mail->Body    = $mailbody;
 
-                                if (!$mail->send()) {
-                                    //$_SESSION['edit_message'] = "Message could not be sent.";
-                                    $_SESSION['edit_message'] =
-                                        "Failed sending email - please contact the administrators";
-                                } else {
+                                try {
+                                    $mail->send();
                                     $_SESSION['edit_message'] = "An email was sent to ";
                                     $_SESSION['edit_message'] .= $_POST["email"];
                                     $_SESSION['edit_message'] .= ". Please follow the link";
+                                } catch (Exception $e) {
+                                    $_SESSION['edit_message'] = "Failed sending email ("
+                                        .$e->getMessage().") - please contact the administrators";
                                 }
 
                                 $time_elapsed_secs = microtime(true) - $start;

@@ -1,0 +1,8 @@
+{
+    "require": {
+        "chamilo/pclzip": "~2.8",
+        "phpmailer/phpmailer": "~6.1",
+        "smarty/smarty": "3.1.36",
+        "smottt/wideimage": "~1.1"
+    }
+}

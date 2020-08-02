@@ -19,11 +19,11 @@ This is the sub template file to generate the news edit page
 {extends file='../main.html'}
 
 {block name=left_tile}
-    {include file='./tiles/quick_search_news.html'}
+    {include file='../tiles/quick_search_news.html'}
 {/block}
 
 {block name=right_tile}
-    {include file='./tiles/quick_search_games.html'}
+    {include file='../tiles/quick_search_games.html'}
 {/block}
 
 {block name=java_script}
@@ -55,7 +55,7 @@ This is the sub template file to generate the news edit page
         <br>
         <form name="post" id="post">
         <div class="jsNewsWrapper infinite-container">
-            {include file='./news/ajax_news_edit.html'}
+            {include file='../news/ajax_news_edit.html'}
             <div id="JSuserId" style="display:none;">{if isset($user_id)}{$user_id}{/if}</div>
         </div>
         </form>

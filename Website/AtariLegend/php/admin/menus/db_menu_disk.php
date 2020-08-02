@@ -32,6 +32,7 @@ include("../../admin/menus/db_menu_functions.php");
 require_once __DIR__."/../../common/DAO/MenuSetDAO.php";
 require_once __DIR__."/../../common/DAO/CrewDAO.php";
 require_once __DIR__."/../../common/DAO/IndividualDAO.php";
+require_once __DIR__."/../../vendor/autoload.php";
 //include("../../config/admin_rights.php"); /*--> We can not use it like this because of the ajax. redirecting does
 // not work correctly with the inheritance of Ajax.
 
@@ -748,8 +749,6 @@ if (isset($action) and $action == "delete_download_from_menu_disk") {
 //****************************************************************************************
 if (isset($action) and $action == 'add_file') {
     if ($_SESSION['permission'] == 1 or $_SESSION['permission'] == '1') {
-        require_once('../../vendor/pclzip/pclzip/pclzip.lib.php');
-
         $menu_download_name = $_FILES['menu_download_name'];
 
         if (isset($menu_download_name)) {
