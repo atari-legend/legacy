@@ -1,0 +1,60 @@
+name: Build
+on: [push]
+
+jobs:
+  build:
+    name: Build
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Cache Docker layers
+        uses: satackey/action-docker-layer-caching@v0.0.4
+
+      - name: Build Docker image
+        run: docker build -t atari-legend Docker/php/
+
+      - name: Cache node_modules/
+        uses: actions/cache@v2
+        env:
+            cache-name: cache-node-modules
+        with:
+          path: node_modules/
+          key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-build-${{ env.cache-name }}-
+            ${{ runner.os }}-build-
+            ${{ runner.os }}-#
+
+      - name: Install NPM modules
+        run: docker run -v $PWD:/data -w /data atari-legend npm install
+
+      - name: Run Grunt
+        run: docker run -v $PWD:/data -w /data atari-legend npm run grunt
+
+  deploy-dev:
+    name: Deploy development
+    runs-on: ubuntu-latest
+    needs: build
+    if: github.ref == 'refs/heads/development'
+    steps:
+      - uses: actions/checkout@v2
+      - name: Deploy
+        run: |
+          eval "$(ssh-agent -s)"
+          ssh-add - <<< "${{ secrets.DEPLOY_SSH_KEY }}"
+          ./.github/workflows/deploy.sh "${{ secrets.DEV_DEPLOY_USER }}" "${{ secrets.DEV_DEPLOY_HOST }}" "${{ secrets.DEV_DEPLOY_PATH }}"
+
+  deploy-prod:
+    name: Deploy production
+    runs-on: ubuntu-latest
+    needs: build
+    if: github.ref == 'refs/heads/master'
+    steps:
+      - uses: actions/checkout@v2
+      - name: Deploy
+        run: |
+          eval "$(ssh-agent -s)"
+          ssh-add - <<< "${{ secrets.DEPLOY_SSH_KEY }}"
+          ./.github/workflows/deploy.sh "${{ secrets.PROD_DEPLOY_USER }}" "${{ secrets.PROD_DEPLOY_HOST }}" "${{ secrets.PROD_DEPLOY_PATH }}"
