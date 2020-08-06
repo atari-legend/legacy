@@ -37,7 +37,7 @@ if [ -z "${HEAD_BRANCH}" ] && [ "${BRANCH}" == "development" ]; then
     rsync ${RSYNC_FLAGS[@]} Website/AtariLegend/ $DEV_DEPLOY_USER@$DEV_DEPLOY_HOST:$DEV_DEPLOY_PATH/
 
     # Run the DB upgrade script via the PHP command-line interface
-    # ssh $DEV_DEPLOY_USER@$DEV_DEPLOY_HOST "cd $DEV_DEPLOY_PATH/php/admin/administration/ && php7.1-cli database_update.php"
+    ssh $DEV_DEPLOY_USER@$DEV_DEPLOY_HOST "cd $DEV_DEPLOY_PATH/php/admin/administration/ && php7.1-cli database_update.php"
 fi
 
 # Similarly, deploy only on prod when the master branch is built,
@@ -48,5 +48,5 @@ if [ -z "${HEAD_BRANCH}" ] && [ "${BRANCH}" == "master" ]; then
     rsync ${RSYNC_FLAGS[@]} Website/AtariLegend/ $PROD_DEPLOY_USER@$PROD_DEPLOY_HOST:$PROD_DEPLOY_PATH/
 
     # Run the DB upgrade script via the PHP command-line interface
-    # ssh $PROD_DEPLOY_USER@$PROD_DEPLOY_HOST "cd $PROD_DEPLOY_PATH/php/admin/administration/ && php7.1-cli database_update.php"
+    ssh $PROD_DEPLOY_USER@$PROD_DEPLOY_HOST "cd $PROD_DEPLOY_PATH/php/admin/administration/ && php7.1-cli database_update.php"
 fi
