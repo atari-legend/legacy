@@ -1,2 +1,2 @@
 ls
-put Website/AtariLegend/robots.txt /
+put -R Website/AtariLegend/* /
