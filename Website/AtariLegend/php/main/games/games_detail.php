@@ -874,10 +874,10 @@ $smarty->assign(
 $smarty->assign('user_avatar_path', $user_avatar_path);
 
 //Send all smarty variables to the templates
-if (isset($use_old_layout)) {
-    $smarty->display("file:" . $mainsite_template_folder . "games/games_detail.html");
-} else {
+if (isset($use_new_layout)) {
     $smarty->display("file:" . $mainsite_template_folder . "games/games_detail.new.html");
+} else {
+    $smarty->display("file:" . $mainsite_template_folder . "games/games_detail.html");
 }
 
 //close the connection
