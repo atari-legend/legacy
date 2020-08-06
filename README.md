@@ -1,6 +1,6 @@
 # AtariLegend
-The AtariLegend project
 
+The AtariLegend project
 
 AtariLegend is a website for Atari ST enthusiasts and retro gamers in general.
 The site has been up since 2004, but was abandoned around 2009. It is time for
