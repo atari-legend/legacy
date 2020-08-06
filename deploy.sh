@@ -4,7 +4,7 @@
 set -e
 
 RSYNC_FLAGS=(
-    -avzn
+    -avz
     # Delete all unknown files, except the ones excluded below
     --delete
     # Do not sync local data/ folder, keep the one on the server
