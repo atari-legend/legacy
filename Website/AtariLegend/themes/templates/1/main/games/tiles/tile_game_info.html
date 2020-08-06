@@ -22,6 +22,11 @@
                         <a href="games_main_list.php?developer={$developer.pub_id}&action=search">
                             {$developer.pub_name}
                         </a>
+                        {if $developer.logo != "none"}
+                            <a href="{$developer.logo}" data-lightbox="logo-{$developer.pub_id}">
+                                <img class="al-company-logo" src="{$developer.logo}">
+                            </a>
+                        {/if}
                         {if isset($developer.extra_info)}
                             &nbsp;<small class="al-text-muted">({$developer.extra_info})</small>
                         {/if}
