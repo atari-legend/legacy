@@ -36,7 +36,7 @@ if [ -z "${HEAD_BRANCH}" ] && [ "${BRANCH}" == "development" ]; then
 
     # 2020.08: Cannot use rsync anymore as 1and1 restricts it
     # rsync ${RSYNC_FLAGS[@]} Website/AtariLegend/ $DEV_DEPLOY_USER@$DEV_DEPLOY_HOST:$DEV_DEPLOY_PATH/
-    sftp -b deploy.sftp $DEV_DEPLOY_USER@$DEV_DEPLOY_HOST
+    sftp -v -b deploy.sftp $DEV_DEPLOY_USER@$DEV_DEPLOY_HOST
 
     # Run the DB upgrade script via the PHP command-line interface
     ssh $DEV_DEPLOY_USER@$DEV_DEPLOY_HOST "cd $DEV_DEPLOY_PATH/php/admin/administration/ && php7.1-cli database_update.php"
@@ -49,7 +49,7 @@ if [ -z "${HEAD_BRANCH}" ] && [ "${BRANCH}" == "master" ]; then
 
     # 2020.08: Cannot use rsync anymore as 1and1 restricts it
     # rsync ${RSYNC_FLAGS[@]} Website/AtariLegend/ $PROD_DEPLOY_USER@$PROD_DEPLOY_HOST:$PROD_DEPLOY_PATH/
-    sftp -b deploy.sftp $PROD_DEPLOY_USER@$PROD_DEPLOY_HOST
+    sftp -v -b deploy.sftp $PROD_DEPLOY_USER@$PROD_DEPLOY_HOST
 
     # Run the DB upgrade script via the PHP command-line interface
     ssh $PROD_DEPLOY_USER@$PROD_DEPLOY_HOST "cd $PROD_DEPLOY_PATH/php/admin/administration/ && php7.1-cli database_update.php"
