@@ -4,10 +4,12 @@ env:
     global:
         # Contains DEV_DEPLOY_HOST, DEV_DEPLOY_USER, DEV_DEPLOY_PATH
         # variables encrypted via Shippable
-        - secure: GxR6UudYqcM5tOqwrk4sfRGpjsIxbWfRxAGhPYwuf5qXyShuZBpxZyR6qvYHYpZKCAIWHuVr3sAUzQYXIcqShW6QJF8A3DqnM+ebO2+uocIyNL8eakqhwgKrnEGfi7NkqCfUrkSXFMSViWwSWbL8khqjjgXH+mx7tcRD3AYe8BhI4E1IrdpZPKH5Zlq49BiMHqacZjl9lT9Ovr+W8kkeZbX9KKBail9q9aN4GkuzsROdCyX0PzE2adK9EH5+/c/kLuXwCjWxTrZbvmb/oaEU2R3bz30xIy6ZJXY2NDAO3DDhZMfqpOOUfQ8cEB9cr69vTGg8FSzx6bakEBZQxJ9RdA==
+        # /!\ Only use the main account for the hosting, as it's the only one allowing SSH!
+        - secure: sDC9359474REUuUG1ZZjy765P2pCPEiZjFAQHE/QvYeDTLmXp1Wujjk3NZjzjF6etZzKgUA4S0vXlUDbLkWstJFVfiAWK1pliC2l31phwI8DsKrL3BfAlB3RSvbJF5dh5txb2GjbM+hhZX+bt33RcoRJNOaBfOuv9ZnI8NvpZtepvXKw+bliFMdJCvTo7wc25qVJEHU80KVtkKcoUCg0jD16guxBBED6AnFIip93xJnz+hYeNngAsTLCBwT4wzzA0MNJHgyL1Lr33pcVf6g1+zKUzdQxXQhIKCUBOeS20fIrJi9qOuVnkSXZocAuGEK0ZUYTf8A2xGsRIN04pfNiew==
         # Contains PROD_DEPLOY_HOST, PROD_DEPLOY_USER, PROD_DEPLOY_PATH
         # variables encrypted via Shippable
-        - secure: PogbOEj9818JfqopqZ1mPVfsd4LaHx5PF2S09ef/It37blbQAfw1UWDCAXEnb6GWpXDldHo00ySNszYTbvZGpmzkf/b6uanaXg38wO/bmbl9905joWNYiD62Mya9rsCjZWIhmCQskO5VbcNn2u4OE0a/3yopXwv3o9/llTlNptHZwdyAoMFm3dbW0CRWCZWlgLGyUKtlTNWqSWszI9/9vTLx+Rdo9afJrqRZiXNPwIDAQ1NgxXSu0iFud7kLx051Ai5c88u7fa2wdvmF5/em1HnJBhhmmi2gFfpVLnT/UZ6onF7/jjgg7QMtBYVJH2X9wSkTrL2jx96KFrndU6UrhQ==
+        # /!\ Only use the main account for the hosting, as it's the only one allowing SSH!
+        - secure: WjuFtLSG/j2YAHkVVcPwWdwc2SnkIPbnT6/RbiKIMM4RUWqJjnmWkyEr3/kUUJTp+Dz2U40mn/LmvjhUbhFTmjvH2l9a1/LScFii2ochBVRP9CuoHr3t5CW1vGwHnMu++ge3nH6pjizaWhkfuqLMasrQlV+ifBjF84G47/6VcLekDhWtXC5Q7xJ36DqdZZWdPL+OfUQiIBIh4TgUTXGIFFb39UBgGyvEZ8OWEci/Ibmfc2gVYjSIgb5Wl7tUiTt8chZVMYlFTHwMd/J/eO3gtFshsgM22RkPAWlC4xCNbqBTyNXG2bJiCCVRj85Pgymn7rf+NfitF3wm+gRXaSYlcw==
 
 build:
     # Build our custom Docker image with NodeJS + PHP as a pre step
