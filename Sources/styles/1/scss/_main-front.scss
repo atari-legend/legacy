@@ -71,6 +71,12 @@
     margin-top: 20px;
 }
 
+// Honeypot for bots
+.register_input input[name=name] {
+    position: absolute;
+    left: -2000px;
+}
+
 //*----------------------------------------------------------
 //latest news tile --> front page
 //------------------------------------------------------------ */

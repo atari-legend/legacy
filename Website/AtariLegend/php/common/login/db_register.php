@@ -51,7 +51,7 @@ if (isset($action) and $action == 'confirm') {
     }
 } else {
     // bot alert
-    if (!$_POST['url']) {
+    if (!$_POST['name']) {
         // Make sure all fields were entered
         if (!$_POST['userid'] || !$_POST['password'] || !$_POST['password_again']
             || !$_POST['email'] || !isset($_POST['accept_license']) || $_POST['accept_license'] !== "true") {
