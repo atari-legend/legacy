@@ -45,6 +45,11 @@ jobs:
           eval "$(ssh-agent -s)"
           ssh-add - <<< "${{ secrets.DEPLOY_SSH_KEY }}"
           ./.github/workflows/deploy.sh "${{ secrets.DEV_DEPLOY_USER }}" "${{ secrets.DEV_DEPLOY_HOST }}" "${{ secrets.DEV_DEPLOY_PATH }}"
+      # Preserve generated files (e.g. style.css) for the next workflow steps
+      - uses: actions/upload-artifact@v2
+        with:
+          name: website
+          path: Website/AtariLegend/
 
   deploy-prod:
     name: Deploy production
@@ -53,6 +58,10 @@ jobs:
     if: github.ref == 'refs/heads/master'
     steps:
       - uses: actions/checkout@v2
+      # Restore generated files from previous step
+      - uses: actions/download-artifact@v2
+        with:
+          name: website
       - name: Deploy
         run: |
           eval "$(ssh-agent -s)"
