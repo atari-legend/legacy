@@ -31,6 +31,8 @@ services:
   # Convenience phpMyAdmin image to administer the database
   phpmyadmin:
     image: phpmyadmin/phpmyadmin
+    environment:
+      UPLOAD_LIMIT: 8M
     links:
       - db:db
     ports:
