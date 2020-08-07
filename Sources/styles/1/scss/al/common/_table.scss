@@ -1,0 +1,13 @@
+table.al-table {
+    width: 100%;
+    border-spacing: 0;
+
+    th {
+        text-align: left;
+    }
+
+    td {
+        border-top: solid 1px $brand_primary_dimmed;
+        padding: 0.25rem;
+    }
+}

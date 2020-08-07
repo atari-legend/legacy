@@ -68,7 +68,7 @@ if (isset($_SESSION['edit_message'])) {
 }
 
 //Send all smarty variables to the templates
-$smarty->display("file:" . $mainsite_template_folder. "games_main.html");
+$smarty->display("file:" . $mainsite_template_folder. "games/games_main.html");
 
 //close the connection
 mysqli_close($mysqli);

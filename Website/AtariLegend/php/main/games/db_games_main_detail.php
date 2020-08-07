@@ -79,9 +79,9 @@ if (isset($action)) {
                                 // First we insert the directory path of where the file will be stored... this also
                                 // creates an autoinc number for us.
                                 $sdbquery = $mysqli->query(
-                                    "INSERT INTO screenshot_main (screenshot_id,imgext) "
-                                    ."VALUES ('','$ext')"
-                                ) or die("Database error - inserting screenshots");
+                                    "INSERT INTO screenshot_main (imgext) "
+                                    ."VALUES ('$ext')"
+                                ) or die("Database error - inserting screenshots: ".$mysqli->error);
 
                                 //select the newly entered screenshot_id from the main table
                                 $SCREENSHOT = $mysqli->query(
@@ -114,7 +114,11 @@ if (isset($action)) {
                     }
                 }
                 $_SESSION['edit_message'] = "Game submission has been sent - waiting for approval";
-                header("Location: ../games/games_detail.php?game_id=$game_id");
+                if (isset($release_id)) {
+                    header("Location: ../games/games_release_main.php?release_id=$release_id");
+                } else {
+                    header("Location: ../games/games_detail.php?game_id=$game_id");
+                }
                 die();
             }
         } else {
@@ -163,9 +167,9 @@ if (isset($action)) {
                                 // First we insert the directory path of where the file will be stored... this also
                                 // creates an autoinc number for us.
                                 $sdbquery = $mysqli->query(
-                                    "INSERT INTO screenshot_main (screenshot_id,imgext) "
-                                    ."VALUES ('','$ext')"
-                                ) or die("Database error - inserting screenshots");
+                                    "INSERT INTO screenshot_main (imgext) "
+                                    ."VALUES ('$ext')"
+                                ) or die("Database error - inserting screenshots: ".$mysqli->error);
 
                                 //select the newly entered screenshot_id from the main table
                                 $SCREENSHOT = $mysqli->query(
@@ -192,13 +196,21 @@ if (isset($action)) {
                             }
                         } else {
                             $_SESSION['edit_message'] = "File is bigger than limit of 10MB";
-                            header("Location: ../games/games_detail.php?game_id=$game_id");
+                            if (isset($release_id)) {
+                                header("Location: ../games/games_release_main.php?release_id=$release_id");
+                            } else {
+                                header("Location: ../games/games_detail.php?game_id=$game_id");
+                            }
                             die();
                         }
                     }
                 }
                 $_SESSION['edit_message'] = "Game submission has been sent - waiting for approval";
-                header("Location: ../games/games_detail.php?game_id=$game_id");
+                if (isset($release_id)) {
+                    header("Location: ../games/games_release_main.php?release_id=$release_id");
+                } else {
+                    header("Location: ../games/games_detail.php?game_id=$game_id");
+                }
                 die();
             }
         }
@@ -260,6 +272,7 @@ if (isset($action)) {
             'game' => $query_comment['game_name'],
             'game_id' => $query_comment['game_id'],
             'user_name' => $query_comment['userid'],
+            'user_avatar_ext' => $query_comment['avatar_ext'],
             'user_id' => $query_comment['user_id'],
             'user_fb' => $query_comment['user_fb'],
             'user_website' => $query_comment['user_website'],
@@ -273,6 +286,8 @@ if (isset($action)) {
     $smarty->assign('smarty_action', 'delete_comment');
     $smarty->assign('game_id', $game_id);
 
+    $smarty->assign('user_avatar_path', $user_avatar_path);
+
     //Send all smarty variables to the templates
-    $smarty->display("file:" . $mainsite_template_folder . "ajax_games_main_detail_comments.html");
+    $smarty->display("file:" . $mainsite_template_folder . "games/ajax_games_main_detail_comments.html");
 }

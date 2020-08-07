@@ -27,7 +27,7 @@ if (isset($action) and $action == 'add_review') {
 
     $sdbquery = $mysqli->query(
         "INSERT INTO review_main (user_id, review_text, review_date, review_edit) "
-        ."VALUES ($members, '$textfield', '$date', '1')"
+        ."VALUES ($members_add, '$textfield', '$date', '1')"
     ) or die("Couldn't insert into review_main");
     $new_review_main_id = $mysqli->insert_id;
 
@@ -39,7 +39,7 @@ if (isset($action) and $action == 'add_review') {
     $sdbquery = $mysqli->query(
         "INSERT INTO review_score "
         ."(review_id, review_graphics, review_sound, review_gameplay, review_overall) "
-        ."VALUES ($new_review_main_id, $graphics, $sound, $gameplay, $overall)"
+        ."VALUES ($new_review_main_id, $graphics, $sound, $gameplay, $conclusion)"
     )
         or die("Couldn't insert into review_score");
 

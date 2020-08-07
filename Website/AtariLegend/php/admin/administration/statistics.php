@@ -314,4 +314,4 @@ $smarty->assign('change_log_border_width', json_encode($change_log_border_width)
 $smarty->assign('change_log_border', json_encode($change_log_border));
 
 //Send all smarty variables to the templates
-$smarty->display("file:" . $cpanel_template_folder . "start_page.html");
+$smarty->display("file:" . $cpanel_template_folder . "administration/start_page.html");

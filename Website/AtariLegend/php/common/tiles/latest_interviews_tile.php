@@ -35,7 +35,6 @@ while ($sql_recent_interviews = $sql_interview->fetch_array(MYSQLI_BOTH)) {
     $v_interview_date = date("F j, Y", $sql_recent_interviews['interview_date']);
 
     $smarty->append(
-
         'recent_interviews',
         array( 'individual_name' => $sql_recent_interviews['ind_name'],
                 'individual_id' => $sql_recent_interviews['ind_id'],

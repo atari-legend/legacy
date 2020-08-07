@@ -1,0 +1,35 @@
+{if count($releases) > 0}
+    <div class="al-tile" id="releases">
+        <div class="al-tile-header">
+            <h1>Releases</h1>
+        </div>
+        <div class="al-tile-content al-p-0">
+            <ul class="al-list-unstyled al-p-0">
+                {foreach from=$releases item=release name=release}
+                    <li class="al-p-1 al-oddeven">
+                        <a href="games_release_main.php?release_id={$release->getId()}">{$release->getDate()|date_format:"Y"|default:"[no date]"}</a>
+                        {if $release->getName() != null} <span class="al-text-muted">as {$release->getName()}</span>{/if}
+                        {if $release_location[$release->getId()]}
+                            {foreach from=$release_location[$release->getId()] item=location_id name=location}
+                                {$locations[$location_id]->getName()}
+                                {if $locations[$location_id]->getCountryISO2() != null}
+                                    <img src="../../themes/templates/1/includes/img/vendor/country-flags-1.0/{$locations[$location_id]->getCountryISO2()|lower}.svg"
+                                        class="al-location-flag"
+                                        title="Flag of {$locations[$location_id]->getName()|escape}"
+                                        alt="Flag of {$locations[$location_id]->getName()|escape}">
+                                {else}
+
+                                {/if}
+                            {/foreach}
+                        {else}
+                            <span class="al-text-muted">[no location]</span>
+                        {/if}
+                        {if count($releases_media[$release->getId()]) > 0}
+                            {count($releases_media[$release->getId()])} &times; <i class="fa fa-floppy-o" aria-hidden="true"></i>
+                        {/if}
+                    </li>
+                {/foreach}
+            </ul>
+        </div>
+    </div>
+{/if}

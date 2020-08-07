@@ -1,0 +1,165 @@
+<div class="al-tile al-release-technical-details">
+    <div class="al-tile-header">
+        <h1>Technical details</h1>
+    </div>
+    <div class="al-tile-content al-p-0">
+
+        <table>
+            <caption><h2>Compatibility</h2></caption>
+            <tbody>
+                <tr>
+                    <th>Minimum memory</th>
+                    <td>
+                        {if count($minimum_memory) > 0}
+                            {foreach from=$minimum_memory item=memory name=memory}
+                                {$memory->getMemory()}{if not $smarty.foreach.memory.last}<br>{/if}
+                            {/foreach}
+                        {else}
+                            n/a
+                        {/if}
+                    </td>
+                </tr>
+                <tr>
+                    <th>Incompatible systems</th>
+                    <td>
+                        {if count($systems_incompatible) > 0}
+                            {foreach from=$systems_incompatible item=system name=system}
+                                {$system->getName()}{if not $smarty.foreach.system.last}<br>{/if}
+                            {/foreach}
+                        {else}
+                            No systems reported incompatible with this release
+                        {/if}
+                    </td>
+                </tr>
+                <tr>
+                    <th>Incompatible memory configurations</th>
+                    <td>
+                        {if count($memory_incompatible) > 0}
+                            {foreach from=$memory_incompatible item=memory name=memory}
+                                {$memory->getMemory()}{if not $smarty.foreach.memory.last}<br>{/if}
+                            {/foreach}
+                        {else}
+                            No memory configuration reported incompatible with this release
+                        {/if}
+                    </td>
+                </tr>
+                <tr>
+                    <th>Incompatile emulators</th>
+                    <td>
+                        {if count($emulators_incompatible) > 0}
+                            {foreach from=$emulators_incompatible item=emulator name=emulator}
+                                {$emulator->getName()}{if not $smarty.foreach.emulator.last}<br>{/if}
+                            {/foreach}
+                        {else}
+                            No emulators reported incompatible with this release
+                        {/if}
+                    </td>
+                </tr>
+                <tr>
+                    <th>Incompatile TOS</th>
+                    <td>
+                        {if count($tos_incompatible) > 0}
+                            {foreach from=$tos_incompatible item=tos name=tos}
+                                {strip}
+                                    {$tos->getName()}
+                                    {if $tos->getLanguage() != null}
+                                        &nbsp;<small class="al-text-muted">{$tos->getLanguage()->getName()}</small>
+                                    {/if}
+                                    {if not $smarty.foreach.tos.last}<br>{/if}
+                                {/strip}
+                            {/foreach}
+                        {else}
+                            No TOS reported incompatible with this release
+                        {/if}
+                    </td>
+                </tr>
+                <tr>
+                    <th>Installable on hard-disk</th>
+                    <td>
+                        {if $release->getHdInstallable()}Yes{else}No{/if}
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+
+        {if count($systems_enhanced) > 0 or count($memory_enhancements) > 0}
+            <table>
+                <caption><h2>Enhancements</h2></caption>
+                <tbody>
+                    {if count($systems_enhanced) > 0}
+                        <tr>
+                            <th>Systems</th>
+                            <td>
+                                {foreach from=$systems_enhanced item=system name=system}
+                                    {strip}
+                                        {$system->getName()}
+                                        {if $system->getEnhancement() != null}
+                                            &nbsp;<small class="al-text-muted">{$system->getEnhancement()->getName()}</small>
+                                        {/if}
+                                        {if not $smarty.foreach.system.last}<br>{/if}
+                                    {/strip}
+                                {/foreach}
+                            </td>
+                        </tr>
+                    {/if}
+                    {if count($memory_enhancements) > 0}
+                        <tr>
+                            <th>Memory</th>
+                            <td>
+                                {foreach from=$memory_enhancements item=memory name=memory}
+                                    {strip}
+                                        {$memory->getMemory()}
+                                        {if $memory->getEnhancement() != null}
+                                            &nbsp;<small class="al-text-muted">{$memory->getEnhancement()->getName()}</small>
+                                        {/if}
+                                        {if not $smarty.foreach.memory.last}<br>{/if}
+                                    {/strip}
+                                {/foreach}
+                            </td>
+                        </tr>
+                    {/if}
+                </tbody>
+            </table>
+        {/if}
+
+        {if count($copy_protections) > 0 or count($disk_protections) > 0}
+            <table>
+                <caption><h2>Protection</h2></caption>
+            <tbody>
+                {if count($copy_protections) > 0}
+                    <tr>
+                        <th>Copy protection</th>
+                        <td>
+                            {foreach from=$copy_protections item=protection name=protection}
+                                {strip}
+                                    {$protection->getName()}
+                                    {if $protection->getNote() != null}
+                                        &nbsp;<small class="al-text-muted">{$protection->getNote()}</small>
+                                    {/if}
+                                    {if not $smarty.foreach.protection.last}<br>{/if}
+                                {/strip}
+                            {/foreach}
+                        </td>
+                    </tr>
+                {/if}
+                {if count($disk_protections) > 0}
+                    <tr>
+                        <th>Disk protection</th>
+                        <td>
+                            {foreach from=$disk_protections item=protection name=protection}
+                                {strip}
+                                    {$protection->getName()}
+                                    {if $protection->getNote() != null}
+                                        &nbsp;<small class="al-text-muted">{$protection->getNote()}</small>
+                                    {/if}
+                                    {if not $smarty.foreach.protection.last}<br>{/if}
+                                {/strip}
+                            {/foreach}
+                        </td>
+                    </tr>
+                {/if}
+            </tbody>
+            </table>
+        {/if}
+    </div>
+</div>

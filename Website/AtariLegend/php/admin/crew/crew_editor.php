@@ -118,7 +118,7 @@ if ($crew_select == '-' or $crew_select == '') {
     header("Location: ../crew/crew_main.php");
 } else {
     //Send all smarty variables to the templates
-    $smarty->display("file:" . $cpanel_template_folder . "crew_editor.html");
+    $smarty->display("file:" . $cpanel_template_folder . "crew/crew_editor.html");
 }
 
 //close the connection

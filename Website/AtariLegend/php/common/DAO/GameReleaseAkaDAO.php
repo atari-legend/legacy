@@ -3,12 +3,12 @@ namespace AL\Common\DAO;
 
 require_once __DIR__."/../../lib/Db.php" ;
 require_once __DIR__."/../Model/Game/GameReleaseAka.php" ;
-require_once __DIR__."/../Model/PubDev/PubDev.php" ;
+require_once __DIR__."/../Model/Language/Language.php" ;
 
 /**
  * DAO for Game Releases AKAs
  */
- 
+
 class GameReleaseAkaDAO {
     private $mysqli;
 
@@ -25,7 +25,7 @@ class GameReleaseAkaDAO {
         $stmt = \AL\Db\execute_query(
             "GameReleaseAkaDAO: getAllGameReleaseAkas",
             $this->mysqli,
-            "SELECT game_release_aka.id, game_release_aka.game_release_id, game_release_aka.name, 
+            "SELECT game_release_aka.id, game_release_aka.game_release_id, game_release_aka.name,
             game_release_aka.language_id, language.name FROM game_release_aka
             LEFT JOIN language ON ( game_release_aka.language_id = language.id )
 			 WHERE game_release_id = ?",
@@ -50,7 +50,7 @@ class GameReleaseAkaDAO {
 
         return $game_release_aka;
     }
-    
+
     /**
      * update language_id for release AKA
      *
@@ -67,7 +67,7 @@ class GameReleaseAkaDAO {
 
         $stmt->close();
     }
-    
+
     /**
      * Insert new AKA for release
      *
@@ -86,7 +86,7 @@ class GameReleaseAkaDAO {
 
         $stmt->close();
     }
-    
+
      /**
      * Delete an AKA for a release
      *

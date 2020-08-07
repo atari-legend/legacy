@@ -1,0 +1,63 @@
+{extends file='../front/main.html'}
+{block name=title}{$game_info.game_name} - Atari ST game | Atari Legend{/block}
+{block name=description}{$game_description}{/block}
+
+{block name=additional_scripts}
+    <script src="{$template_dir}includes/js/bbcode.js"></script>
+    <script src="{$template_dir}includes/js/comments.js"></script>
+
+    <script src="{$template_dir}includes/js/vendor/lightslider-1.1.6.min.js"></script>
+    <script src="{$template_dir}includes/js/vendor/lightbox-2.9.0.min.js"></script>
+    <script>
+        jQuery(document).ready( function() {
+            jQuery(".light-slider.slider-screenshots").lightSlider({
+                item: 1,
+                thumbItem: 6,
+                pager: true,
+                gallery: true,
+                // thumbMargin: 5,
+                vertical: true,
+                // verticalHeight: 300,
+                vThumbWidth: 100,
+                speed: 2000,
+                pause: 4000,
+                loop: true,
+                auto: true
+            });
+        } );
+    </script>
+{/block}
+
+{block name=additional_css}
+    <link type="text/css" href="{$style_dir}css/vendor/lightslider-1.1.6/css/lightslider.min.css" rel="stylesheet">
+    <link type="text/css" href="{$style_dir}css/vendor/lightbox-2.9.0.css" rel="stylesheet">
+{/block}
+
+{block name=main_body}
+<div id="main" class="al-reset al-game-details">
+    <div class="al-row">
+        <div class="al-column">
+            {include file='../games/tiles/tile_game_info.html'}
+        </div>
+    </div>
+    <div class="al-row">
+        <div class="al-column al-column-2">
+            {include file='../games/tiles/tile_game_screenshots.html'}
+            {include file='../games/tiles/tile_game_reviews.html'}
+            {include file='../games/tiles/tile_game_facts.html'}
+        </div>
+        <div class="al-column">
+            {include file='../games/tiles/tile_game_releases.html'}
+            {include file='../games/tiles/tile_game_series.html'}
+            {include file='../games/tiles/tile_game_similar.html'}
+            {include file='../games/tiles/tile_game_submit_info.html'}
+        </div>
+        <div class="al-column">
+            {include file='../games/tiles/tile_game_boxscans.html'}
+            {include file='../games/tiles/tile_game_comments.html'}
+
+        </div>
+    </div>
+
+</div>
+{/block}

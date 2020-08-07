@@ -182,7 +182,7 @@ while ($query_articles_author = $sql_articles_author->fetch_array(MYSQLI_BOTH)) 
 $smarty->assign('nr_articles_author', $count);
 
 //Send all smarty variables to the templates
-$smarty->display("file:" . $mainsite_template_folder . "articles_detail.html");
+$smarty->display("file:" . $mainsite_template_folder . "articles/articles_detail.html");
 
 //close the connection
 mysqli_close($mysqli);

@@ -1,0 +1,95 @@
+<div class="al-tile">
+    <div class="al-tile-header">
+        <h1>Media</h1>
+    </div>
+    <div class="al-tile-content">
+        {if count($medias) > 0}
+
+            <div class="al-row">
+                <div class="al-column">
+                    {foreach from=$medias item=media name=media}
+                        <h2>{$media->getMediaType()->getName()}
+                        {if $media->getLabel() != null}
+                            <small class="al-text-muted">({$media->getLabel()})</small>
+                        {/if}
+                        </h2>
+
+                        {if count($media_scans[$media->getId()]) gt 0}
+                        <div class="al-release-media-scans">
+                            {foreach from=$media_scans[$media->getId()] item=scan}
+                                <a href="{$media_scans_path}{$scan->getId()}.{$scan->getImage()}"
+                                    data-lightbox="image-{$scan->getId()}">
+                                    <img class="al-release-media-scan"
+                                        alt="{$scan->getMediaScanType()->getName()}"
+                                        src="{$media_scans_path}{$scan->getId()}.{$scan->getImage()}">
+                                </a>
+                            {/foreach}
+                        </div>
+                        {/if}
+
+                        {if $dumps[$media->getId()] != null}
+                            <table class="al-table">
+                                <thead>
+                                    <tr>
+                                        <th>Format</th>
+                                        <th>Added</th>
+                                        <th>By</th>
+                                        <th>Notes</th>
+                                        <th>Size</th>
+                                        <th>sha512</th>
+                                        <th></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                {foreach from=$dumps[$media->getId()] item=dump}
+                                    <tr>
+                                        <td>{$dump->getFormat()}</td>
+                                        <td>{$dump->getDate()|timeago}</td>
+                                        <td>{$dump->getUser()->getName()}</td>
+                                        <td>{$dump->getInfo()|default:'-'}</td>
+                                        <td>{math equation="floor(x/y)" x=$dump->getSize() y=1024} KB</td>
+                                        <td><abbr title="SHA512: {$dump->getSha512()}">{$dump->getSha512()|truncate:8:""}</abbr></td>
+                                        <td>
+                                            {if isset($user_session)}
+                                                <a href="../../../data/zips/games/{$dump->getId()}.zip"><i class="fa fa-download" aria-hidden="true"></i></a>
+                                            {else}
+                                                <span class="al-not-logged-in">Please log in to download</span>
+                                            {/if}
+                                        </td>
+                                    </tr>
+                                {/foreach}
+                                </tbody>
+                            </table>
+                        {else}
+                            <p>No dump for this media.</p>
+                        {/if}
+                    {/foreach}
+                </div>
+            </div>
+
+        {else}
+            <p class="al-text-center">
+                No media dumps or media scans for this release.
+                Can you help? Do you have this release and can provide a dump or a scan of the disks?
+            </p>
+            {if isset($user_session)}
+                <form enctype="multipart/form-data" method="post" action="db_games_main_detail.php" class="al-text-center">
+
+                    <textarea class="al-my-1" rows="4" name="textfield" placeholder="Release info" required></textarea>
+
+                    <input type="file" name="image[]" multiple>
+                    <input type="hidden" name="action" value="submit_info">
+                    <input type="hidden" name="game_id" value="{$game->getId()}">
+                    <input type="hidden" name="release_id" value="{$release->getId()}">
+
+                    <div class="al-my-1">
+                        <input type="submit" value="Submit">
+                    </div>
+
+                </form>
+            {else}
+                <p class="al-text-center al-my-1 al-not-logged-in">Please log in to contribute</p>
+            {/if}
+        {/if}
+    </div>
+</div>

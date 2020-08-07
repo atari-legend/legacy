@@ -40,6 +40,7 @@ $smarty->assign('class_tile', 'class_position_front');
 $smarty->assign('almobile_tile', 'almobile_tile_front');
 $smarty->assign('tile_social_corner', 'social_corner_position_front');
 $smarty->assign('spotlight_tile', 'spotlight_position_front');
+$smarty->assign('al_tv', 'altv_position_front');
 
 $smarty->assign('database_dumps_path', $database_dumps_path);
 
@@ -72,7 +73,7 @@ if (isset($action) and $action=='first_time') {
 }
 
 //Send all smarty variables to the templates
-$smarty->display("file:".$mainsite_template_folder."frontpage.html");
+$smarty->display("file:".$mainsite_template_folder."front/frontpage.html");
 
 //close the connection
 mysqli_close($mysqli);

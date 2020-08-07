@@ -26,6 +26,7 @@ require_once __DIR__."/../../common/DAO/DumpDAO.php";
 require_once __DIR__."/../../common/DAO/MediaScanTypeDAO.php";
 require_once __DIR__."/../../common/DAO/MediaScanDAO.php";
 require_once __DIR__."/../../common/DAO/GameReleaseScanDAO.php";
+require_once __DIR__."/../../common/DAO/CrewDAO.php";
 
 $gameReleaseDao = new \AL\Common\DAO\GameReleaseDAO($mysqli);
 $gameDao = new \AL\Common\DAO\GameDao($mysqli);
@@ -49,6 +50,7 @@ $dumpDao = new \AL\Common\DAO\DumpDAO($mysqli);
 $mediaScanTypeDao = new \AL\Common\DAO\MediaScanTypeDAO($mysqli);
 $mediaScanDao = new \AL\Common\DAO\MediaScanDAO($mysqli);
 $gameReleaseScanDao = new AL\Common\DAO\GameReleaseScanDAO($mysqli);
+$crewDao = new \AL\Common\DAO\CrewDAO($mysqli);
 
 if ($_SERVER['REQUEST_METHOD'] == "GET") {
     $smarty->assign('license_types', $gameReleaseDao->getLicenseTypes());
@@ -70,6 +72,8 @@ if ($_SERVER['REQUEST_METHOD'] == "GET") {
     $smarty->assign('dump_formats', $dumpDao->getFormats());
     $smarty->assign('media_scan_types', $mediaScanTypeDao->getAllMediaScanTypes());
     $smarty->assign('game_release_scan_types', $gameReleaseScanDao->getScanTypes());
+    $smarty->assign('crews', $crewDao->getAllCrews());
+
 
     // Edit existing release
     if (isset($release_id)) {
@@ -83,12 +87,12 @@ if ($_SERVER['REQUEST_METHOD'] == "GET") {
         $smarty->assign('game', $game);
         $smarty->assign('game_releases', $gameReleaseDao->getReleasesForGame($game->getId()));
 
-        $smarty->assign('system_incompatible', $systemDao->getIncompatibleSystemsForRelease($release->getId()));
-        $smarty->assign('emulator_incompatible', $emulatorDao->getIncompatibleEmulatorsForRelease($release->getId()));
-        $smarty->assign('tos_incompatible', $tosDao->getIncompatibleTosWithNameForRelease($release->getId()));
+        $smarty->assign('system_incompatible', $systemDao->getIncompatibleSystemIdsForRelease($release->getId()));
+        $smarty->assign('emulator_incompatible', $emulatorDao->getIncompatibleEmulatorIdsForRelease($release->getId()));
+        $smarty->assign('tos_incompatible', $tosDao->getIncompatibleTosForRelease($release->getId()));
         $smarty->assign('system_enhanced', $systemDao->getEnhancedSystemsForRelease($release->getId()));
         $smarty->assign('release_resolutions', $resolutionDao->getResolutionsForRelease($release->getId()));
-        $smarty->assign('release_locations', $locationDao->getLocationsForRelease($release->getId()));
+        $smarty->assign('release_locations', $locationDao->getLocationsIdsForRelease($release->getId()));
         $smarty->assign('release_akas', $gameReleaseAkaDao->getAllGameReleaseAkas($release->getId()));
         $smarty->assign('release_trainer_options', $trainerOptionDao->getTrainerOptionsForRelease($release->getId()));
         $smarty->assign('distributors', $pubDevDao->getAllPubDevs());
@@ -104,7 +108,7 @@ if ($_SERVER['REQUEST_METHOD'] == "GET") {
             'release_disk_protections',
             $diskProtectionDao->getDiskProtectionsForRelease($release->getId())
         );
-        $smarty->assign('release_languages', $languageDao->getAllGameReleaseLanguages($release->getId()));
+        $smarty->assign('release_languages', $languageDao->getReleaseLanguages($release->getId()));
         $smarty->assign('release_scans', $gameReleaseScanDao->getScansForRelease($release->getId()));
         $media = $mediaDao->getAllMediaFromRelease($release->getId());
         $smarty->assign('release_media', $media);
@@ -156,6 +160,7 @@ if ($_SERVER['REQUEST_METHOD'] == "GET") {
         $smarty->assign('game_boxscan_path', $game_boxscan_path);
         $smarty->assign('game_boxscans', $game_boxscans);
     // ================ TEMPORARY END
+        $smarty->assign('release_crews', $crewDao->getCrewsForRelease($release->getId()));
     } else {
         // Creating a new release
         $game = $gameDao->getGame($game_id);
@@ -191,6 +196,6 @@ if ($_SERVER['REQUEST_METHOD'] == "GET") {
 }
 
 $smarty->assign("tab", isset($tab) ? $tab : "general");
-$smarty->display("file:" . $cpanel_template_folder . "games_release_detail.html");
+$smarty->display("file:" . $cpanel_template_folder . "games/games_release_detail.html");
 
 mysqli_close($mysqli);

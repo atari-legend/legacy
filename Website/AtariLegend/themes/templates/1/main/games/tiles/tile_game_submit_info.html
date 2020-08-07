@@ -1,0 +1,29 @@
+<div class="al-tile">
+    <div class="al-tile-header">
+        <h1>Submit info</h1>
+    </div>
+    <div class="al-tile-content">
+        <p>
+            Is there anything displayed on this page that is not correct or missing?
+            Do you have artwork or a screenshot you like to share? Or perhaps you are
+            one of the creators? Please let us know.
+        </p>
+        {if isset($user_session)}
+            <form enctype="multipart/form-data" method="post" action="../../main/games/db_games_main_detail.php" class="al-text-center">
+
+                <textarea class="al-my-1" rows="4" name="textfield" placeholder="Game info"></textarea>
+
+                <input type="file" name="image[]" multiple>
+                <input type="hidden" name="action" value="submit_info">
+                <input type="hidden" name="game_id" value="{$game_info.game_id}">
+
+                <div class="al-my-1">
+                    <input type="submit" value="Submit">
+                </div>
+
+            </form>
+        {else}
+            <p class="al-text-center al-my-1 al-not-logged-in">Please log in to submit info.</p>
+        {/if}
+    </div>
+</div>

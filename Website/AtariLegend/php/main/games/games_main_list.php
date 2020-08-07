@@ -663,7 +663,7 @@ if (isset($action) and $action == "search") {
                     $smarty->assign("query_time", $time_elapsed_secs);
 
                     //Send all smarty variables to the templates
-                    $smarty->display("file:" . $mainsite_template_folder . "games_main_list.html");
+                    $smarty->display("file:" . $mainsite_template_folder . "games/games_main_list.html");
                 }
             } else {
                 $edit_message             = "No entries found for your selection";

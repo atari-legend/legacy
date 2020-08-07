@@ -42,7 +42,7 @@ if (isset($action) and $action == 'delete_comment') {
             or die("failed deleting review_comments");
 
         //delete the screenshot linked to the review
-        $sdbquery = $mysqli->query("DELETE FROM screenshot_reviewWHERE review_id = $reviewid
+        $sdbquery = $mysqli->query("DELETE FROM screenshot_review WHERE review_id = $reviewid
             AND screenshot_id = $screenshot_id") or die("failed deleting screenshot_review");
 
         create_log_entry('Games', $game_id, 'Review comment', $reviewid, 'Delete', $_SESSION['user_id']);
@@ -144,7 +144,7 @@ if (isset($action) and $action == 'delete_comment') {
     $smarty->assign('game_id', $game_id);
 
     //Send to smarty for return value
-    $smarty->display("file:" . $cpanel_template_folder . "ajax_review_add_comment.html");
+    $smarty->display("file:" . $cpanel_template_folder . "games/ajax_review_add_comment.html");
 }
 
 if (isset($action) and ($action == 'delete_review' or $action == 'delete_submission')) {

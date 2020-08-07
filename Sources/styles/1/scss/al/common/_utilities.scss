@@ -1,0 +1,62 @@
+.al-text-muted {
+    color: $brand_muted !important;
+}
+
+.al-text-center { text-align: center; }
+.al-text-right { text-align: right; }
+
+.al-m-auto { margin: auto; }
+.al-mx-auto {
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.al-w-100 {
+    width: 100%;
+}
+
+.al-p-0 { padding: 0 !important; }
+.al-p-1 { padding: 0.5rem !important; }
+.al-p-2 { padding: 1rem !important; }
+.al-pl-1 { padding-left: 0.5rem !important; }
+
+.al-m-0 { margin: 0  !important; }
+.al-mr-0 { margin-right: 0 !important; }
+.al-mt-1 { margin-top: 0.5rem !important; }
+.al-mb-1 { margin-bottom: 0.5rem !important; }
+.al-my-1 {
+    margin-top: 0.5rem !important;
+    margin-bottom: 0.5rem !important;
+}
+
+.al-border {
+    border: dotted 1px scale-color($brand_primary, $lightness: -30%);
+}
+
+.al-float {
+    &-left { float: left; }
+    &-right { float: right; }
+}
+
+.al-fontsize {
+    &-small { font-size: .75rem; }
+}
+
+ul.al-list-unstyled {
+    list-style-type: none;
+}
+
+.al-oddeven {
+    &:nth-child(even) {
+        background-color: #0d2e2e;
+        border-bottom: solid 1px black;
+    }
+
+    &:nth-child(odd) {
+        border-bottom: solid 1px black;
+    }
+}
+
+.al-shadow {
+    box-shadow: 0 0 12px black;
+}

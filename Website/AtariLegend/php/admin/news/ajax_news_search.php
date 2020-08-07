@@ -38,7 +38,7 @@ $smarty->assign("user_id", $author_search);
 $smarty->assign("news_search", $newssearch);
 
 //Send all smarty variables to the templates
-$smarty->display("file:" . $cpanel_template_folder . "ajax_news_search.html");
+$smarty->display("file:" . $cpanel_template_folder . "news/ajax_news_search.html");
 
 //close the connection
 mysqli_close($mysqli);

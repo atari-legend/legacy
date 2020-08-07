@@ -218,7 +218,7 @@ while ($query_comment = $sql_comment->fetch_array(MYSQLI_BOTH)) {
 }
 
 //Send all smarty variables to the templates
-$smarty->display("file:" . $mainsite_template_folder . "interviews_detail.html");
+$smarty->display("file:" . $mainsite_template_folder . "interviews/interviews_detail.html");
 
 //close the connection
 mysqli_close($mysqli);

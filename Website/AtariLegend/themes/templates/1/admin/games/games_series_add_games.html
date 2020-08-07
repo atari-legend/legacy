@@ -1,0 +1,114 @@
+{*
+/***************************************************************************
+*                                games_series_add_games.html
+*                            -----------------------------------
+*   begin                : ?
+*   copyright            : (C) 2005 Atari Legend
+*   email                : maarten.martens@freebel.net
+*   actual update        : created this page
+*
+*   Id: games_series_add_games.html.html,v 0.10 ? Silver Surfer
+*   Id: games_series_add_games.html,v 0.15 2016/07/24 STG
+*                   - AL 2.0
+*
+***************************************************************************/
+
+************************************************************************************************
+The game series add games page
+************************************************************************************************
+*}
+
+{extends file='../main.html'}
+
+{block name=title}Game Series{/block}
+
+{block name=main_tile}
+<div class="standard_tile" id="games_series_add_games">
+    <h1>Add games to: <a href="games_series_editor.php?game_series_id={$game_series_id}">{$game_series->getName()}</a></h1>
+    <div class="standard_tile_line"></div>
+    <div class="standard_tile_padding">
+        <div class="left_nav_section">
+            Over here you can add games to a series.
+        </div>
+        <br>
+        <br>
+        <fieldset class="secondary_fieldset centered_fieldset">
+            <legend class="primary_legend">Search games</legend>
+                <form action="../games/games_series_add_games.php" method="post" name="game_search" id="game_search">
+                <div style="display: inline;align-items:center;margin: 0 auto;text-align:center;">
+                    <span style="margin-right:10px;"><strong>By name :</strong></span>
+                    <select name="gamebrowse" class="standard_select select_small">
+                        <option value="" SELECTED>-</option>
+                        {html_options values=$az_value output=$az_output}
+                    </select>
+                    <input type="text" name="gamesearch" class="standard_input input_large">
+                    <br>
+                    <br>
+                    <input type="hidden" name="action" value="add_games_search">
+                    <input type="hidden" name="game_series_id" value="{$game_series->getId()}">
+                    <span class="help-hint">Only games that are not already part of a series will be returned</span>
+                    <br>
+                    <input type="submit" value="Search" class="secondary_button">
+                    <br>
+                </div>
+                </form>
+        </fieldset>
+        <br>
+        <br>
+        <form action="../games/db_games_series.php" method="post" name="add_to_series" id="add_to_series">
+        {if (isset($series_link))}
+        <div class="table-responsive">
+            <table class="secondary_table_list table_md table_hover text-nowrap">
+                <tr>
+                    <th class="mw-5">Info</th>
+                    <th class="mw-40">Game Name</th>
+                    <th class="mw-20">Developer</th>
+                </tr>
+                {foreach from=$series_link item=line}
+                    <tr>
+                        <td>
+                            <div class="checkbox">
+                                <input type="checkbox" id="game-{$line.game_id}" name="game_ids[]" value="{$line.game_id}">
+                                <label for="game-{$line.game_id}"></label>
+                            </div>
+                        </td>
+                        <td>
+                            {if $line.game_name != ''}
+                                <a href="games_detail.php?game_id={$line.game_id}" class="standard_tile_text_left">{$line.game_name}</a>
+                            {else}
+                                <i>n/a</i>
+                            {/if}
+                        </td>
+                        <td>
+                            {if $line.developer_name != ''}
+                                <a href="games_main.php?developer={$line.developer_id}&amp;action=search" class="standard_tile_text_left">
+                                    {$line.developer_name}
+                                </a>
+                            {else}
+                                <i>n/a</i>
+                            {/if}
+                        </td>
+                    </tr>
+                {/foreach}
+                <tr>
+                    <td class="game_list_footer" colspan="5" style="width:100%;">
+                        <input type="hidden" name="series_page" value="series_editor">
+                        <input type="hidden" name="action" value="add_to_series">
+                        <input type="hidden" name="game_series_id" value="{$game_series->getId()}">
+                        <img src="../../../themes/templates/1/includes/img/arrow_ltr.gif" alt="" width="38" height="22" style="float:left;">
+                        <input type="submit" value="Add" class="secondary_button">
+                    </td>
+                </tr>
+            </table>
+        </div>
+        {else}
+            <div class="left_nav_section">
+                No entries found for your query
+            </div>
+        {/if}
+        </form>
+        <br>
+        <div class="standard_tile_text_center"><a href="../games/games_series_editor.php?series_page=series_editor&game_series_id={$game_series->getId()}" class="standard_tile_link">back</a></div>
+    </div>
+</div>
+{/block}

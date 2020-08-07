@@ -94,7 +94,7 @@ $smarty->assign("action", $action);
 $smarty->assign("last_timestamp", $date);
 
 //Send all smarty variables to the templates
-$smarty->display("file:" . $cpanel_template_folder . "ajax_submission_games_search.html");
+$smarty->display("file:" . $cpanel_template_folder . "games/ajax_submission_games_search.html");
 
 //close the connection
 mysqli_close($mysqli);

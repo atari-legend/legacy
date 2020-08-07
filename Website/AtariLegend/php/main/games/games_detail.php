@@ -38,6 +38,7 @@ require_once __DIR__."/../../common/DAO/SoundHardwareDAO.php";
 require_once __DIR__."/../../common/DAO/GameProgressSystemDAO.php";
 require_once __DIR__."/../../common/DAO/GameReleaseScanDAO.php";
 require_once __DIR__."/../../common/DAO/GameDAO.php";
+require_once __DIR__."/../../common/DAO/MediaDAO.php";
 
 $gameReleaseDao = new \AL\Common\DAO\GameReleaseDAO($mysqli);
 $gameSeriesDao = new \AL\Common\DAO\GameSeriesDAO($mysqli);
@@ -62,6 +63,7 @@ $soundHardwareDao = new \AL\Common\DAO\SoundHardwareDAO($mysqli);
 $gameProgressSystemDao = new \AL\Common\DAO\GameProgressSystemDAO($mysqli);
 $gameReleaseScanDao = new \AL\Common\DAO\GameReleaseScanDAO($mysqli);
 $gameDao = new \AL\Common\DAO\GameDAO($mysqli);
+$mediaDao = new \AL\Common\DAO\MediaDAO($mysqli);
 
 /**
  * Generates an SEO-friendly description of a game, depending on the data available
@@ -218,12 +220,13 @@ $tos_incompatible = [];
 $copyProtections = [];
 $diskProtections = [];
 $release_language = [];
+$releases_media = [];
 
 foreach ($releases as $release) {
-    $system_incompatible[$release->getId()] = $systemDao->getIncompatibleSystemsForRelease($release->getId());
+    $system_incompatible[$release->getId()] = $systemDao->getIncompatibleSystemIdsForRelease($release->getId());
     $system_enhanced[$release->getId()] = $systemDao->getEnhancedSystemsForRelease($release->getId());
     $release_resolution[$release->getId()] = $resolutionDao->getResolutionsForRelease($release->getId());
-    $release_location[$release->getId()] = $locationDao->getLocationsForRelease($release->getId());
+    $release_location[$release->getId()] = $locationDao->getLocationsIdsForRelease($release->getId());
     $release_akas[$release->getId()] = $gameReleaseAkaDao->getAllGameReleaseAkas($release->getId());
     $emulator_incompatible[$release->getId()] =
         $emulatorDao->getIncompatibleEmulatorsWithNameForRelease($release->getId());
@@ -232,10 +235,11 @@ foreach ($releases as $release) {
     $memoryEnhancements[$release->getId()] = $memoryDao->getMemoryForRelease($release->getId());
     $memoryMinimum[$release->getId()] = $memoryDao->getMinimumMemoryForRelease($release->getId());
     $memoryIncompatible[$release->getId()] = $memoryDao->getMemoryIncompatibleForRelease($release->getId());
-    $tos_incompatible[$release->getId()] = $tosDao->getIncompatibleTosWithNameForRelease($release->getId());
+    $tos_incompatible[$release->getId()] = $tosDao->getIncompatibleTosForRelease($release->getId());
     $copyProtections[$release->getId()] = $copyProtectionDao->getCopyProtectionsForRelease($release->getId());
     $diskProtections[$release->getId()] = $diskProtectionDao->getDiskProtectionsForRelease($release->getId());
-    $release_language[$release->getId()] = $languageDao->getAllGameReleaseLanguages($release->getId());
+    $release_language[$release->getId()] = $languageDao->getReleaseLanguages($release->getId());
+    $releases_media[$release->getId()] = $mediaDao->getAllMediaFromRelease($release->getId());
 }
 $smarty->assign('system_incompatible', $system_incompatible);
 $smarty->assign('emulator_incompatible', $emulator_incompatible);
@@ -252,6 +256,7 @@ $smarty->assign('tos_incompatible', $tos_incompatible);
 $smarty->assign('copyProtections', $copyProtections);
 $smarty->assign('releaseLanguages', $release_language);
 $smarty->assign('diskProtections', $diskProtections);
+$smarty->assign('releases_media', $releases_media);
 
 //***********************************************************************************
 //get the game genres & the genres already selected for this game
@@ -453,6 +458,18 @@ while ($developers = $sql_developer->fetch_array(MYSQLI_BOTH)) {
         'logo_path' => $company_screenshot_path
         )
     );
+
+    $smarty->append(
+        'developers', array(
+        'pub_id' => $developers['dev_pub_id'],
+        'pub_name' => $developers['pub_dev_name'],
+        'pub_profile' =>$profile,
+        'extra_info' => $developers['role'],
+        'logo' => $v_ind_image,
+        'logo_pop' => $v_ind_image_pop,
+        'logo_path' => $company_screenshot_path
+        )
+    );
 }
 
 //***********************************************************************************
@@ -469,6 +486,14 @@ while ($aka = $sql_aka->fetch_array(MYSQLI_BOTH)) {
     $game_akas[] = $aka['aka_name'];
     $smarty->append(
         'aka', array(
+        'game_aka_name' => $aka['aka_name'],
+        'game_id' => $aka['game_id'],
+        'language' => $aka['name'],
+        'game_aka_id' => $aka['game_aka_id']
+        )
+    );
+    $smarty->append(
+        'akas', array(
         'game_aka_name' => $aka['aka_name'],
         'game_id' => $aka['game_id'],
         'language' => $aka['name'],
@@ -570,19 +595,25 @@ if ($imagenum_rows > 0) {
             );
         }
     }
-
-    $smarty->assign("nr_box", $front);
 }
+
+$smarty->assign("nr_box", $front);
+
 
 // Get box scans for all release
 // This is temporary until we revamp the games/relase details page
+$nr_of_release_scans=0;
+
 $smarty->assign('release_scans', []);
 foreach ($releases as $release) {
     $release_scans = $gameReleaseScanDao->getScansForRelease($release->getId());
     foreach ($release_scans as $scan) {
         $smarty->append('release_scans', $scan);
+        $nr_of_release_scans++;
     }
 }
+
+$smarty->assign("nr_release", $nr_of_release_scans);
 
 //***********************************************************************************
 //Get the comments
@@ -623,20 +654,21 @@ while ($query_comment = $sql_comment->fetch_array(MYSQLI_BOTH)) {
 
     $smarty->append(
         'comments', array(
-        'comment' => $oldcomment,
-        'comment_edit' => $comment,
-        'comment_id' => $query_comment['comment_id'],
-        'date' => $date,
-        'game' => $query_comment['game_name'],
-        'game_id' => $query_comment['game_id'],
-        'user_name' => $query_comment['userid'],
-        'user_id' => $query_comment['user_id'],
-        'user_fb' => $query_comment['user_fb'],
-        'user_website' => $query_comment['user_website'],
-        'user_twitter' => $query_comment['user_twitter'],
-        'user_af' => $query_comment['user_af'],
-        'show_email' => $query_comment['show_email'],
-        'email' => $query_comment['email']
+            'comment' => $oldcomment,
+            'comment_edit' => $comment,
+            'comment_id' => $query_comment['comment_id'],
+            'date' => $date,
+            'game' => $query_comment['game_name'],
+            'game_id' => $query_comment['game_id'],
+            'user_name' => $query_comment['userid'],
+            'user_id' => $query_comment['user_id'],
+            'user_fb' => $query_comment['user_fb'],
+            'user_website' => $query_comment['user_website'],
+            'user_twitter' => $query_comment['user_twitter'],
+            'user_af' => $query_comment['user_af'],
+            'user_avatar_ext' => $query_comment['avatar_ext'],
+            'show_email' => $query_comment['show_email'],
+            'email' => $query_comment['email']
         )
     );
 }
@@ -692,6 +724,20 @@ while ($query_review = $sql_review->fetch_array(MYSQLI_BOTH)) {
 
     $smarty->append(
         'review', array(
+            'user_name' => $query_review['userid'],
+            'user_id' => $query_review['user_id'],
+            'review_id' => $query_review['review_id'],
+            'email' => $query_review['email'],
+            'game_id' => $query_review['game_id'],
+            'date' => $review_date,
+            'game_name' => $query_review['game_name'],
+            'text' => $review_text,
+            'screenshot' => $new_path,
+            'comment' => $sql_screenshots_review['comment_text']
+        )
+    );
+    $smarty->append(
+        'reviews', array(
             'user_name' => $query_review['userid'],
             'user_id' => $query_review['user_id'],
             'review_id' => $query_review['review_id'],
@@ -825,8 +871,14 @@ $smarty->assign(
     )
 );
 
+$smarty->assign('user_avatar_path', $user_avatar_path);
+
 //Send all smarty variables to the templates
-$smarty->display("file:" . $mainsite_template_folder . "games_detail.html");
+if (isset($use_new_layout)) {
+    $smarty->display("file:" . $mainsite_template_folder . "games/games_detail.new.html");
+} else {
+    $smarty->display("file:" . $mainsite_template_folder . "games/games_detail.html");
+}
 
 //close the connection
 mysqli_close($mysqli);

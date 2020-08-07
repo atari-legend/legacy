@@ -1,0 +1,256 @@
+{*
+/***************************************************************************
+*                                articles_edit.html
+*                            --------------------------
+*   begin                : Thursday, 06/10/2016
+*   copyright            : (C) 2016 Atari Legend
+*   email                : martens_maarten@hotmail.com
+*   actual update        : created this page
+*
+*   Id: articles_edit.html,v 0.10 2016/10/06 13:40 Gatekeeper
+*       - AL 2.0 / creation of file
+*   Id: articles_edit.html,v 0.15 2018/04/26 17:00 Gatekeeper
+*       - More user friendly interface
+*
+***************************************************************************/
+
+///****************************************************************************************
+// This is the sub template file to generate the articles edit page
+//****************************************************************************************
+*}
+{extends file='../main.html'}
+
+{block name=java_script}
+<!-- Lightbox for the screenshots -->
+<script src="{$template_dir}includes/js/vendor/lightbox-2.9.0.min.js"></script><!--lightbox popup script-->
+<link type="text/css" href="{$style_dir}css/vendor/lightbox-2.9.0.css" hreflang="en" rel="stylesheet">
+<script>
+    lightbox.option({
+        'showImageNumberLabel': false
+    })
+</script>
+<script src="{$template_dir}includes/js/bbcode.js"></script><!-- Load the BBCODE script -->
+<script src="{$template_dir}includes/js/articles.js"></script><!-- Load all aricles scripts -->
+<script src="{$template_dir}includes/js/ui.widgets.js"></script><!-- The autocomplete and dropdown switcher -->
+{/block}
+
+{block name=title}Edit Articles - <a href="../individuals/individuals_edit.php?ind_id={$article.article_ind_id}" class="left_nav_links">{$article.article_ind_name}</a>{/block}
+
+{block name=main_tile}
+    <div class="standard_tile" id="articles_edit">
+        <div class="help-tip">
+            <p>
+                Here you can edit an existing article. Overhere you'll notice 2 main text boxes.
+                <br>
+                <br>
+                <i><b>- Intro :</b></i> The introduction to the article. This is the short text you will see in the main article section.
+                <br>
+                <br>
+                <i><b>- Article :</b></i> This is where you'll add the actual article text.
+                <br>
+                <br>
+                You can add screenshots by pressing the link at the bottom of the screen. Once shots have been linked to an article, they will appear in this screen with their own comment fields for you to fill out if needed.
+                <br>
+                <br>
+                Use the 'preview' tab to get an idea of what the article will look like on the main website.
+                <br>
+                <br>
+                <i class="fa fa-trash-o" aria-hidden="true" title="Click to delete screenshot"></i> : Once a screenshot is added to the DB, you need to press this icon if you want to delete it.
+            </p>
+        </div>
+    {if isset($article.article_title)}
+    <h1>{$article.article_title|upper}</h1>
+    <div class="standard_tile_line"></div>
+    <div class="standard_tile_padding">
+        <div class="left_nav_section">
+            At this page you can change an existing Article in the AL database. The screen might seem a little complex,
+            therefor I suggest you first read the help provided with this section on the top right.
+        </div>
+        <br>
+        <br>
+        <div class="tab">
+                <button class="tablinks" onclick="openTab(event, 'edit', {$screenshots_nr})" id="defaultOpen">EDIT</button>
+                <button class="tablinks" onclick="openTab(event, 'preview', {$screenshots_nr})">PREVIEW</button>
+            </div>
+            <br>
+            <br>
+            <div id="edit" class="tabcontent">
+                <form action="../articles/db_articles.php" method="post" name="post" id="screenshot_add_to_article">
+                    <fieldset class="secondary_fieldset">
+                        <legend class="primary_legend">Edit article</legend>
+                        <br>
+                            <b>Title</b>
+                            <br>
+                            <input type="text" name="article_title" class="standard_input input_full" value="{$article.article_title}">
+                            <br>
+                            <br>
+                            <div style="display:inline-block;">
+                                <b>Written by : </b>
+                                <br>
+                                <select name="members"
+                                    data-alt-autocomplete-endpoint="../../../php/admin/common/autocomplete.php?extraParams=admin-user"
+                                    data-alt-autocomplete-toggle="#members_select_toggle"
+                                    id="member_select" class="standard_select select_large">
+                                    {foreach from=$authors item=line}
+                                        {if $line.user_id == $article.article_author}
+                                            <option value="{$line.user_id}" selected>{$line.user_name}</option>
+                                        {else}
+                                            <option value="{$line.user_id}">{$line.user_name}</option>
+                                        {/if}
+                                    {/foreach}
+                                </select>
+                                <a href="javascript:;" class="left_nav_link" id="members_select_toggle" ><i class="fa fa-chevron-circle-down" aria-hidden="true" ></i></a>
+                            </div>
+                        <br>
+                        <br>
+                        <div style="display:inline-block;">
+                            <b>Type :</b>
+                            <br>
+                            <select name="article_type" class="standard_select select_large">
+                                {foreach from=$article_types item=line}
+                                    {if $line.article_type_id == $article.article_type_id}
+                                        <option value="{$line.article_type_id}" selected>{$line.article_type}</option>
+                                    {else}
+                                        <option value="{$line.article_type_id}">{$line.article_type}</option>
+                                    {/if}
+                                {/foreach}
+                            </select>
+                            <br>
+                            <br>
+                        </div>
+                        <div style="width:100%;">
+                            <div><b>Date :</b></div>
+                            <div>{html_select_date time=$article.article_date start_year="2000" class="standard_select"}</div>
+                        </div>
+                        <br>
+                        <br>
+                        <b>Intro :</b>
+                        <br>
+                        <input type="button" class="secondary_button" accesskey= "b" name="addbbcode0" value="B" onclick="bbstyle(0,'textintro')">
+                        <input type="button" class="secondary_button" accesskey= "u" name="addbbcode4" value="U" onclick="bbstyle(4,'textintro')">
+                        <input type="button" class="secondary_button" accesskey= "i" name="addbbcode2" value="I" onclick="bbstyle(2,'textintro')">
+                        <input type="button" class="secondary_button" accesskey="w" name="addbbcode6" value="URL" onClick="bbstyle(6,'textintro')">
+                        <input type="button" class="secondary_button" accesskey="x" name="addbbcode8" value="@" onClick="bbstyle(8,'textintro')">
+                        <textarea name="textintro" rows="5" class="primary_textarea" ONSELECT="javascript:storeCaret(this);" ONCLICK="javascript:storeCaret(this);" ONKEYUP="javascript:storeCaret(this);" ONCHANGE="javascript:storeCaret(this);" required>{$article.article_intro}</textarea>
+                        <br>
+                        <br>
+                        <b>Article :</b>
+                        <br>
+                        <input type="button" class="secondary_button" accesskey= "b" name="addbbcode0" value="B" onclick="bbstyle(0,'textfield')">
+                        <input type="button" class="secondary_button" accesskey= "u" name="addbbcode4" value="U" onclick="bbstyle(4,'textfield')">
+                        <input type="button" class="secondary_button" accesskey= "i" name="addbbcode2" value="I" onclick="bbstyle(2,'textfield')">
+                        <input type="button" class="secondary_button" accesskey="w" name="addbbcode6" value="URL" onClick="bbstyle(6,'textfield')">
+                        <input type="button" class="secondary_button" accesskey="x" name="addbbcode8" value="@" onClick="bbstyle(8,'textfield')"/>
+                        <textarea name="textfield" rows="25" class="primary_textarea" ONSELECT="javascript:storeCaret(this);" ONCLICK="javascript:storeCaret(this);" ONKEYUP="javascript:storeCaret(this);" ONCHANGE="javascript:storeCaret(this);" required>{$article.article_text}</textarea>
+                    </fieldset>
+                    <br>
+                    <fieldset class="secondary_fieldset centered_fieldset">
+                        <legend class="primary_legend">Screenshots</legend>
+                        <br>
+                        <div id="article_screenshot_list">
+                        {if $screenshots_nr <> ''}
+                            <table class="primary_table_list">
+                            {foreach from=$screenshots item=line}
+                                <tr>
+                                    <td style="width:1%;border:0;">
+                                        <ul class="interview_buttons edit">
+                                            <a href="javascript:deletecomment({$line.article_screenshot_id},{$article.article_id})" class="standard_tile_link">
+                                                <li class="primary_button">
+                                                    <i class="fa fa-trash-o" aria-hidden="true" title="Click to delete screenshot"></i>
+                                                </li>
+                                            </a>
+                                        </ul>
+                                    </td>
+                                    <td style="width:9%;border:0;">
+                                        <a href="../../includes/show_image.php?file={$line.article_screenshot}" data-lightbox="image-1">
+                                            <img src="../../includes/show_image.php?file={$line.article_screenshot}&amp;resize=75,null,null,null&amp;crop=null,null,null,null" alt="screenshot" style="display:inline; margin:5px;" class="interview_screenshot_img">
+                                        </a>
+                                    </td>
+                                    <td style="width:90%;border:0;">
+                                        <input type="text" name="inputfield[]" value="{$line.article_screenshot_comment}" class="standard_input input_large" style="width:95%;" id="comment_{$line.article_screenshot_count}">
+                                    </td>
+                                </tr>
+                            {/foreach}
+                            </table>
+                            <br>
+                        {/if}
+                        </div>
+                        <div id="screenshot_link"><a onclick="popArticleAddScreenshots({$article.article_id})" style="cursor: pointer;" class="left_nav_link"><i class="fa fa-plus-square-o" aria-hidden="true"></i> Add screenshots</a></div>
+                        <div id="article_expand_screenshots"></div>
+                        <br>
+                        <br>
+                        <input type="hidden" name="article_id" value="{$article.article_id}">
+                        <input type="hidden" name="action" value="update_article">
+                    </fieldset>
+                    <br>
+                    <input type="submit" name="update" value="Update" class="secondary_button">
+                    <input type="button" name="delete" value="Delete" onclick="deletearticle({$article.article_id})" class="secondary_button">
+                </form>
+            </div>
+            <div id="preview" class="tabcontent">
+                <fieldset class="secondary_fieldset">
+                    <legend class="primary_legend">Preview</legend>
+                    <div class="review_container">
+                        <div class="review_child" id="review_text">
+                            Written by <span id="article_preview_user"></span>
+                            <b><div id="article_preview_date"></div></b>
+                            <br>
+                            <br>
+                            <u>INTRO</u>
+                            <br>
+                            <br>
+                            <div id="article_preview_intro"></div>
+                            <br>
+                            <br>
+                            <u>ARTICLE</u>
+                            <br>
+                            <br>
+                            <div id="article_preview_text"></div>
+                            <br>
+                            <br>
+                        </div>
+                        <div class="review_child" id="review_screenshots">
+                            <div class="review_screenshot_space">
+                                <br>
+                                <br>
+                                <br>
+                            </div>
+                            {if isset($screenshots)}
+                                {foreach from=$screenshots item=line}
+                                    <div id="output_{$line.article_screenshot_count}">
+                                        <div class="interview_preview_screenshot_order">
+                                            <a href="../../includes/show_image.php?file={$line.article_screenshot}" data-lightbox="image-1">
+                                                <img src="../../includes/show_image.php?file={$line.article_screenshot}&amp;resize=170,null,null,null" alt="Click to enlarge!" style="display:inline;" class="game_screenshot_img">
+                                            </a>
+                                            <br><b><span style="font-weight: bold;" id="preview_comment_{$line.article_screenshot_count}"></span></b>
+                                            <br>
+                                            <br>
+                                            <br>
+                                        </div>
+                                    </div>
+                                {/foreach}
+                            {/if}
+                        </div>
+                    </div>
+                    <br>
+                </fieldset>
+            </div>
+            <br>
+            {else}
+                <h1>Article edit</h1>
+                <div class="standard_tile_line"></div>
+                <div class="standard_tile_padding">
+                    <div class="left_nav_section">
+                        Article does not exist.
+                    </div>
+                </div>
+            {/if}
+            <div class="standard_tile_text_center"><a href="../articles/articles_main.php" class="standard_tile_link">back</a></div>
+            <br>
+        </div>
+    </div>
+    <script>
+        // Get the element with id="defaultOpen" and click on it
+        document.getElementById("defaultOpen").click();
+    </script>
+{/block}

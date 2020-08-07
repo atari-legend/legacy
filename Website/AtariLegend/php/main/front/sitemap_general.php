@@ -38,4 +38,4 @@ $smarty->assign("link_categories", $linkCategoryDao->getAllCategories());
 
 header("Content-Type: application/xml");
 
-$smarty->display("file:${mainsite_template_folder}sitemap_general.xml");
+$smarty->display("file:${mainsite_template_folder}front/sitemap_general.xml");

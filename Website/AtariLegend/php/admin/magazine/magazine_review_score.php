@@ -68,4 +68,4 @@ while ($fetch_game_name = $sql_game_name->fetch_array(MYSQLI_BOTH)) {
 }
 
 //Send all smarty variables to the templates
-$smarty->display("file:" . $cpanel_template_folder . "magazine_review_score.html");
+$smarty->display("file:" . $cpanel_template_folder . "magazine/magazine_review_score.html");

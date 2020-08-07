@@ -139,7 +139,7 @@ if (isset($i) and $i == 0) {
 $smarty->assign("user_id", $_SESSION['user_id']);
 
 //Send all smarty variables to the templates
-$smarty->display("file:" . $cpanel_template_folder . "games_music_detail.html");
+$smarty->display("file:" . $cpanel_template_folder . "games/games_music_detail.html");
 
 //close the connection
 mysqli_close($mysqli);

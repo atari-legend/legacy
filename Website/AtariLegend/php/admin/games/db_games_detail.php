@@ -153,7 +153,7 @@ if (isset($action) and $action == 'add_sound_hardware') {
 
     create_log_entry('Games', $game_id, 'Sound hardware', $sound_hardware_id, 'Insert', $_SESSION['user_id']);
 
-    $_SESSION['edit_message'] = "Sound hardware has been deleted";
+    $_SESSION['edit_message'] = "Sound hardware has been added";
     header("Location: ../games/games_detail.php?game_id=$game_id#gd_game_aka");
 }
 
@@ -165,7 +165,7 @@ if (isset($action) and $action == 'delete_sound_hardware') {
 
     create_log_entry('Games', $game_id, 'Sound hardware', $sound_hardware_id, 'Delete', $_SESSION['user_id']);
 
-    $_SESSION['edit_message'] = "Sound hardware has been added";
+    $_SESSION['edit_message'] = "Sound hardware has been deleted";
     header("Location: ../games/games_detail.php?game_id=$game_id#gd_game_aka");
 }
 

@@ -1,0 +1,63 @@
+{*
+/***************************************************************************
+*                               user_register_tile.html
+*                            ---------------------------
+*   begin                : Sunday, June 04, 2017
+*   copyright            : (C) 2017 Atari Legend
+*   email                : martens_maarten@hotmail.command
+*   actual update        : Creation of file
+*
+*   Id:user_register_tile.html,v 0.1 2017/06/04 Gatekeeper
+*
+***************************************************************************/
+
+//****************************************************************************************
+// This is the user register tile
+//****************************************************************************************
+*}
+{block name=user_register_tile}
+    <div class="register">
+        <div class="standard_tile">
+        <form action="../../common/login/db_register.php" method="post" name="register_form">
+            <h1>REGISTER</h1>
+            <div class="standard_tile_line"></div>
+            <br>
+            <div class="standard_tile_explanation" >
+                <h6>
+                    Create your personal Atari Legend account here, and help make this project get even better. With an account, you will have access to more features and are able to share your input.
+                    Your email address and other profile pages will only be visible by other Atari Legend members.
+                </h6>
+            </div>
+            <div class="register_input">
+                <input class="standard_input input_large" style="width:70%" type="text" name="userid" placeholder="Username (required)" required>
+                <br>
+                <input class="standard_input input_large" style="width:70%" type="password" name="password" placeholder="Password (required)" required>
+                <br>
+                <input class="standard_input input_large" style="width:70%" type="password" name="password_again" placeholder="Password again (required)" required>
+                <br>
+                <input class="standard_input input_large" style="width:70%" type="text" name="email" placeholder="Email (required)" required>
+                <br>
+                <input class="standard_input input_large" style="width:70%" type="text" name="website" placeholder="Website">
+                <br>
+                <input class="standard_input input_large" style="width:70%" type="text" name="fb_profile" placeholder="Facebook profile">
+                <br>
+                <input class="standard_input input_large" style="width:70%" type="text" name="twitter_profile" placeholder="Twitter profile">
+                <br>
+                <input class="standard_input input_large" style="width:70%" type="text" name="af_profile" placeholder="Atari Forum profile">
+                <br>
+                <input class="standard_input input_large" style="width:70%;display:none;" type="text" name="url" placeholder="url">
+                <br>
+                <div class="license checkbox_alt" style="text-align:left">
+                    <input type="checkbox" id="accept_license" name="accept_license" value="true" required>
+                    &nbsp; I accept to make my contributions publicly available with a <a class="standard_tile_link" rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank"><u>Creative Commons BY-NC-SA v4.0</u></a> license
+                </div>
+                <br>
+                <br>
+                <input type="submit" value="REGISTER" class="primary_button">
+                <br>
+                <br>
+            </div>
+        </form>
+        </div>
+    </div>
+{/block}

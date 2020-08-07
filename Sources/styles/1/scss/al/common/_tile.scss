@@ -1,0 +1,45 @@
+.al-tile {
+    margin-bottom: 1rem;
+    background-color:$brand_background;
+    border-top:10px solid $brand_primary;
+    border-bottom:3px solid $brand_primary;
+    color: white;
+}
+
+@mixin al-tile-content-separator($which) {
+    border-#{$which}: solid 2px black;
+}
+
+.al-tile-content-separator-top { @include al-tile-content-separator('top'); }
+.al-tile-content-separator-bottom { @include al-tile-content-separator('bottom'); }
+
+.al-tile-header {
+    @include al-tile-content-separator('bottom');
+    text-align: center;
+    font-family: 'Audiowide', cursive;
+    font-size: 1.5rem;
+    margin: 0;
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+    font-weight: normal;
+    text-transform: uppercase;
+
+    h1 {
+        font-size: 1.5rem;
+        margin-top: .5rem;
+        margin-bottom: .5rem;
+        font-weight: normal;
+    }
+}
+
+.al-tile-content {
+    padding: 1rem;
+
+    &.al-no-padding {
+        padding: 0;
+    }
+}
+
+.al-no-tile {
+    color: #fff;
+}

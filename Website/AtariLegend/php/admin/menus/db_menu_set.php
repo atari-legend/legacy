@@ -14,14 +14,14 @@
 include("../../config/common.php");
 include("../../config/admin.php");
 include("../../admin/menus/db_menu_functions.php");
-require_once __DIR__."/../../common/DAO/MenusSetDAO.php";
+require_once __DIR__."/../../common/DAO/MenuSetDAO.php";
 //include("../../config/admin_rights.php"); /*--> We can not use it like this because of the ajax. redirecting does not
 // work correctly with the inheritance of Ajax.
 
 //This is used for the AJAX parts when user rights do not suffice
 $osd_message = 'You do not have the necessary authorizations to perform this action';
 
-$menusetDao = new AL\Common\DAO\MenusSetDAO($mysqli);
+$menusetDao = new AL\Common\DAO\MenuSetDAO($mysqli);
 
 //****************************************************************************************
 // Add new menu set
