@@ -15,11 +15,12 @@ use the [pre-configured Docker setup](Docker/README.md).
 
 * A web server with PHP, with the `mysqli` and `gd` extensions (Require PNG and JPEG support)
 * MySQL, with the SQL mode `only_full_group_by` disabled (e.g. `sql_mode=''`)
-* NodeJS + NPM
+* NodeJS + NPM + Composer
 
 ## Instructions
 
 * Clone the project from GitHub
+* Install the Composer dependencies: `composer install -d Website/AtariLegend/php/`
 * Install the NPM dependencies: `npm install`
 * Run Grunt to generate the CSS files: `npm run grunt`
 * Point your web server document root to `Website/AtariLegend/`

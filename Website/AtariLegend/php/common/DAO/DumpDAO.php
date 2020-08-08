@@ -4,7 +4,7 @@ namespace AL\Common\DAO;
 require_once __DIR__."/../../lib/Db.php" ;
 require_once __DIR__."/../Model/Dump/Dump.php" ;
 require_once __DIR__."/../Model/User/User.php" ;
-require_once __DIR__."/../../vendor/pclzip/pclzip/pclzip.lib.php" ;
+require_once __DIR__."/../../vendor/autoload.php";
 
 /**
  * DAO for Dump

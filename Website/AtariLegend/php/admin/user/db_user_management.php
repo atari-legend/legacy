@@ -15,11 +15,14 @@
 
 include("../../config/common.php");
 include("../../config/admin.php");
-include("../../vendor/phpmailer/phpmailer/PHPMailerAutoload.php");
 include("../../config/admin_rights.php");
 
 require_once __DIR__."/../../common/Model/Database/ChangeLog.php";
 require_once __DIR__."/../../common/DAO/ChangeLogDAO.php";
+
+use PHPMailer\PHPMailer\PHPMailer;
+
+require_once __DIR__."/../../vendor/autoload.php";
 
 $changeLogDao = new \AL\Common\DAO\ChangeLogDAO($mysqli);
 
@@ -97,10 +100,11 @@ if (isset($action) and $action == "email_user") {
         $mail->Subject = $email_head;
         $mail->Body    = $email_descr;
 
-        if (!$mail->send()) {
-            $edit_message = "Mailer Error: ";
-        } else {
+        try {
+            $mail->send();
             $edit_message = "Email sent";
+        } catch (Exception $e) {
+            $edit_message = "Mailer Error: ".$e->getMessage();
         }
 
         $time_elapsed_secs = microtime(true) - $start;
