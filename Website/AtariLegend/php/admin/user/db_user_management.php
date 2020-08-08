@@ -62,7 +62,7 @@ if (isset($action) and $action == "delete_user") {
 
 if (isset($action) and $action == "email_user") {
     if (isset($user_id)) {
-        $mail = new PHPMailer;
+        $mail = new PHPMailer(true);
 
         $start = microtime(true);
         $i     = 0;
@@ -82,15 +82,13 @@ if (isset($action) and $action == "email_user") {
         //$mail->SMTPDebug  = 2;                            // enables SMTP debug information (for testing)
         // 1 = errors and messages
         // 2 = messages only
-        //$mail->Host = 'smtp.live.com';                    // Specify main and backup SMTP servers
-        $mail->Host       = $ms_host;
-        $mail->SMTPAuth   = true; // Enable SMTP authentication
-        $mail->Username   = $ms_usn;
-        $mail->Password   = $ms_pwd;
-        $mail->SMTPSecure = 'tls'; // Enable TLS encryption, `ssl` also accepted
-        //$mail->SMTPSecure = 'ssl';
-        //$mail->Port = 587;                                // TCP port to connect to
-        $mail->Port       = $ms_port;
+        $mail->Mailer     = $email_mailer;
+        $mail->Host       = $smtp_host;
+        $mail->SMTPAuth   = $smtp_auth;
+        $mail->Username   = $smtp_username;
+        $mail->Password   = $smtp_password;
+        $mail->SMTPSecure = $smtp_secure;
+        $mail->Port       = $smtp_port;
 
         $mail->setFrom($pwd_reset_from, 'Atarilegend');
         $mail->addReplyTo($pwd_reset_reply, 'Atarilegend');
