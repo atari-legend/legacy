@@ -16,8 +16,8 @@
 
 extract($_REQUEST);
 
+require_once __DIR__ . "/../vendor/autoload.php";
 include("../../config/connect.php");
-include("../../../php/vendor/smarty/smarty/libs/Smarty.class.php");
 include("../../config/config.php");
 include("../../lib/user_functions.php");
 include("../../lib/functions.php");

@@ -11,7 +11,6 @@
 extract($_REQUEST);
 
 require "../../config/connect.php";
-require "../../../php/vendor/smarty/smarty/libs/Smarty.class.php";
 require "../../config/config.php";
 require "../../lib/user_functions.php";
 require "../../lib/functions.php";
