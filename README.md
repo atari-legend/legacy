@@ -35,3 +35,17 @@ $db_username = "YOUR_DB_USER_NAME";
 $db_password = "YOUR_DB_PASSWORD";
 $db_databasename = "YOUR_DB_NAME";
 ```
+
+* Create a PHP file containing the SMTP settings in `Website/AtariLegend/php/config/email_settings.php`:
+
+```php
+<?php
+
+$email_mailer = 'smtp';   // See PHPMailer for possible values
+$smtp_username = '...';
+$smtp_password = '...';
+$smtp_port = 587;
+$smtp_host = '...';
+$smtp_auth = true;
+$smtp_secure = 'ssl';
+```
