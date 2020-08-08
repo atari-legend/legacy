@@ -12,6 +12,8 @@ Website/AtariLegend/data/database-dumps/*.sql.gz
 
 # exclude the database connection settings file
 /Website/AtariLegend/php/config/connection_settings.php
+# exclude the SMTP settings file
+/Website/AtariLegend/php/config/email_settings.php
 
 # exclude the SASS cache
 /Website/AtariLegend/themes/.sass-cache/

@@ -61,29 +61,6 @@ define("SECURE", false);    // FOR DEVELOPMENT ONLY!!!!
 // Mail server variables -- change these is we change server!
 //***************************************************************
 
-//GMAIL SERVER for testing
-//$ms_usn = 'atarilegendserver@gmail.com';
-//$ms_pwd = '@Tar1L3geNd';
-//$ms_port = 587;
-//$ms_host = 'smtp.gmail.com';
-
-// this is the data used when creating emails regarding reset pwd and registration
-//$pwd_reset_link = "http://dev.stonish.net/php/main/front/front.php?action=new_pwd&q=";
-//$pwd_reset_from = 'atarilegendserver@gmail.com';
-//$pwd_reset_reply = 'atarilegendserver@gmail.com';
-
-//$confirm_account_link = "http://localhost/atarilegend/php/common/login/db_register.php?action=confirm";
-
-//PROD SERVER @ 1and1
-//$ms_usn = '537971048';
-//$ms_pwd = 'Tomsguide1%';
-
-//PROD SERVER @ 1and1 - NEW
-$ms_usn = '172683540';
-$ms_pwd = 'spike99';
-$ms_port = 587;
-$ms_host = 'auth.smtp.1and1.fr';
-
 // this is the data used when creating emails regarding reset pwd and registration
 $pwd_reset_link = "http://www.atarilegend.com/php/main/front/front.php?action=new_pwd&q=";
 $pwd_reset_from = 'admin@atarilegend.com';

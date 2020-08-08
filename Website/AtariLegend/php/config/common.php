@@ -24,6 +24,20 @@ include("../../lib/functions.php");
 include("../../lib/karma.php");
 include("../../lib/who_is_online.php");
 
+// Define default email config that will get overwritten
+// in email_settings.php
+$email_mailer = 'mail';
+$smtp_host = '';
+$smtp_username = '';
+$smtp_password = '';
+$smtp_port = -1;
+$smtp_auth = false;
+$smtp_secure = '';
+
+// email_settings.php may not exist (to use the default settings)
+// So suppress errors with @
+@include("../../config/email_settings.php");
+
 if (file_exists("../../config/database_upgrade.php")==true) {
     exit("Upgrade mode");
 }
