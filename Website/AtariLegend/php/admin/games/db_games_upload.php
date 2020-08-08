@@ -21,13 +21,12 @@
 include("../../config/common.php");
 include("../../config/admin.php");
 include("../../config/admin_rights.php");
+require_once __DIR__."/../../vendor/autoload.php";
 
 //****************************************************************************************
 // We wanna add a new download
 //****************************************************************************************
 if (isset($action) and $action == 'add_download') {
-    require_once('../../vendor/pclzip/pclzip/pclzip.lib.php');
-
     $game_download_name = $_FILES['game_download_name'];
 
     if (isset($game_download_name)) {

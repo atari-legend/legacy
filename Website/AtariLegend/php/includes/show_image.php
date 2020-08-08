@@ -1,6 +1,7 @@
 <?php
+require_once __DIR__ . '/../vendor/autoload.php';
+
 extract($_REQUEST);
-include "../vendor/smottt/wideimage/WideImage.php";
 
 //Set image quality
 
@@ -37,7 +38,7 @@ foreach ($_GET as $key => $value) {
     if ($key == "file") {
         $file_path = $value;
 
-        $image = WideImage::load("$file_path");
+        $image = WideImage\WideImage::load("$file_path");
     }
 
     //set value for resizing

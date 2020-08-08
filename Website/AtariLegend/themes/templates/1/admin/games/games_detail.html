@@ -22,10 +22,10 @@
 {extends file='../main.html'}
 {block name=left_tile}
     {if $game_screenshot <> null}
-        {include file='./games/games_detail_editing.html'}
+        {include file='./games_detail_editing.html'}
         <br>
     {/if}
-    {include file='./games/games_release_list.html'}
+    {include file='./games_release_list.html'}
     <br>
     <div class="standard_tile text-center" id="gd_more_data_left">
         <h1>MORE DATA</h1>
@@ -118,9 +118,9 @@
     </div>
     <br>
 
-    {include file='./tiles/tile_shortlog.html'}
+    {include file='../tiles/tile_shortlog.html'}
     <br>
-    {include file='../main/tiles/tile_bug_report.html'}
+    {include file='../../main/tiles/tile_bug_report.html'}
 
 {/block}
 {block name=java_script}

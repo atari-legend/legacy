@@ -20,7 +20,13 @@ services:
     volumes:
       - ../Website/AtariLegend:/var/www/html
     depends_on:
-      - db
+      - php-composer
+  # PHP Composer  
+  php-composer:
+    build: ./php
+    volumes:
+      - ../Website/AtariLegend/php:/php
+    command: composer.phar install -d /php
   # Convenience image to run Grunt
   nodejs:
     build: ./php
