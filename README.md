@@ -24,7 +24,8 @@ use the [pre-configured Docker setup](Docker/README.md).
 * Install the NPM dependencies: `npm install`
 * Run Grunt to generate the CSS files: `npm run grunt`
 * Point your web server document root to `public/`
-* Obtain a dump of the database and import it into your MySQL server
+* Obtain a dump of the database and import it into your MySQL server (See: https://www.atarilegend.com/data/database-dumps/)
+* Obtain a copy of the images and import them in `public/data/images` (See same URL above)
 * Create a PHP file containing the MySQL connection details in `public/php/config/connection_settings.php`:
 
 ```php
