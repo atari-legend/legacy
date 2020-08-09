@@ -1,36 +1,36 @@
 # exclude everything except directory data
-/Website/AtariLegend/data/*
-!/Website/AtariLegend/data/database-*
-Website/AtariLegend/data/database-dumps/*.zip
-Website/AtariLegend/data/database-dumps/*.sql.gz
+/public/data/*
+!/public/data/database-*
+public/data/database-dumps/*.zip
+public/data/database-dumps/*.sql.gz
 
 # exclude temporary directory where Smarty templates are compiled
-/Website/AtariLegend/php/temp/*
-!/Website/AtariLegend/php/temp/.gitkeep
+/public/php/temp/*
+!/public/php/temp/.gitkeep
 
 # exclude composer dependencies
-/Website/AtariLegend/php/vendor
+/public/php/vendor
 
 # exclude the database connection settings file
-/Website/AtariLegend/php/config/connection_settings.php
+/public/php/config/connection_settings.php
 # exclude the SMTP settings file
-/Website/AtariLegend/php/config/email_settings.php
+/public/php/config/email_settings.php
 
 # exclude the SASS cache
-/Website/AtariLegend/themes/.sass-cache/
-/Website/AtariLegend/themes/.pleeeaserc
+/public/themes/.sass-cache/
+/public/themes/.pleeeaserc
 .sass-cache/
 /result/
 /node_modules/
 scss-lint-report.xml
 
 # exclude the SASS map file
-/Website/AtariLegend/themes/styles/1/css/style.css
-/Website/AtariLegend/themes/styles/1/css/style.css.map
-/Website/AtariLegend/themes/styles/2/css/style.css
-/Website/AtariLegend/themes/styles/2/css/style.css.map
-/Website/AtariLegend/themes/styles/3/css/style.css
-/Website/AtariLegend/themes/styles/3/css/style.css.map
+/public/themes/styles/1/css/style.css
+/public/themes/styles/1/css/style.css.map
+/public/themes/styles/2/css/style.css
+/public/themes/styles/2/css/style.css.map
+/public/themes/styles/3/css/style.css
+/public/themes/styles/3/css/style.css.map
 style.css
 style.css.map
 composer.phar

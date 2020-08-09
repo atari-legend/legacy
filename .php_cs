@@ -19,7 +19,7 @@ return PhpCsFixer\Config::create()
     ->setFinder(
         PhpCsFixer\Finder::create()
         ->exclude('templates_c', 'vendor')
-        ->in(__DIR__.'/Website/AtariLegend/php')
+        ->in(__DIR__.'/public/php')
     );
 
 /*

@@ -31,7 +31,7 @@ jobs:
         run: docker run -v $PWD:/data -w /data atari-legend npm install
 
       - name: Install Composer dependencies
-        run: docker run -v $PWD:/data atari-legend composer.phar install -d /data/Website/AtariLegend/php/
+        run: docker run -v $PWD:/data atari-legend composer.phar install -d /data/public/php/
 
       - name: Run Grunt
         run: docker run -v $PWD:/data -w /data atari-legend npm run grunt
@@ -41,7 +41,7 @@ jobs:
         uses: actions/upload-artifact@v2
         with:
           name: website
-          path: Website/AtariLegend/
+          path: public/
 
   deploy-dev:
     name: Deploy development
@@ -54,7 +54,7 @@ jobs:
       - uses: actions/download-artifact@v2
         with:
           name: website
-          path: Website/AtariLegend/
+          path: public/
       - name: Deploy
         run: |
           eval "$(ssh-agent -s)"
@@ -72,7 +72,7 @@ jobs:
       - uses: actions/download-artifact@v2
         with:
           name: website
-          path: Website/AtariLegend/
+          path: public/
       - name: Deploy
         run: |
           eval "$(ssh-agent -s)"

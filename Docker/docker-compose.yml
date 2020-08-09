@@ -18,14 +18,14 @@ services:
     ports:
       - 80:80
     volumes:
-      - ../Website/AtariLegend:/var/www/html
+      - ../public:/var/www/html
     depends_on:
       - php-composer
   # PHP Composer
   php-composer:
     build: ./php
     volumes:
-      - ../Website/AtariLegend/php:/php
+      - ../public/php:/php
     command: bash -c "composer.phar install -d /php; composer.phar update -d /php"
   # Convenience image to run Grunt
   nodejs:

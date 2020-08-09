@@ -20,12 +20,12 @@ use the [pre-configured Docker setup](Docker/README.md).
 ## Instructions
 
 * Clone the project from GitHub
-* Install the Composer dependencies: `composer install -d Website/AtariLegend/php/`
+* Install the Composer dependencies: `composer install -d public/php/`
 * Install the NPM dependencies: `npm install`
 * Run Grunt to generate the CSS files: `npm run grunt`
-* Point your web server document root to `Website/AtariLegend/`
+* Point your web server document root to `public/`
 * Obtain a dump of the database and import it into your MySQL server
-* Create a PHP file containing the MySQL connection details in `Website/AtariLegend/php/config/connection_settings.php`:
+* Create a PHP file containing the MySQL connection details in `public/php/config/connection_settings.php`:
 
 ```php
 <?php
@@ -36,7 +36,7 @@ $db_password = "YOUR_DB_PASSWORD";
 $db_databasename = "YOUR_DB_NAME";
 ```
 
-* Create a PHP file containing the SMTP settings in `Website/AtariLegend/php/config/email_settings.php`:
+* Create a PHP file containing the SMTP settings in `public/php/config/email_settings.php`:
 
 ```php
 <?php
