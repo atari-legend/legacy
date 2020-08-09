@@ -5,7 +5,8 @@ Website/AtariLegend/data/database-dumps/*.zip
 Website/AtariLegend/data/database-dumps/*.sql.gz
 
 # exclude temporary directory where Smarty templates are compiled
-/Website/AtariLegend/php/temp
+/Website/AtariLegend/php/temp/*
+!/Website/AtariLegend/php/temp/.gitkeep
 
 # exclude composer dependencies
 /Website/AtariLegend/php/vendor
