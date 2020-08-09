@@ -1,6 +1,6 @@
-# AtariLegend
+# The AtariLegend project
 
-The AtariLegend project
+![https://github.com/atari-legend/atari-legend/workflows/Build/badge.svg](https://github.com/atari-legend/atari-legend/actions) · ![https://scrutinizer-ci.com/g/atari-legend/atari-legend/badges/quality-score.png?b=master](https://scrutinizer-ci.com/g/atari-legend/atari-legend/)
 
 AtariLegend is a website for Atari ST enthusiasts and retro gamers in general.
 The site has been up since 2004, but was abandoned around 2009. It is time for
