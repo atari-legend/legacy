@@ -1,6 +1,7 @@
-# AtariLegend
+# The AtariLegend project
 
-The AtariLegend project
+[![Build Status](https://github.com/atari-legend/atari-legend/workflows/Build/badge.svg)](https://github.com/atari-legend/atari-legend/actions)
+[![Quality Score](https://scrutinizer-ci.com/g/atari-legend/atari-legend/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/atari-legend/atari-legend/)
 
 AtariLegend is a website for Atari ST enthusiasts and retro gamers in general.
 The site has been up since 2004, but was abandoned around 2009. It is time for
@@ -50,3 +51,10 @@ $smtp_host = '...';
 $smtp_auth = true;
 $smtp_secure = 'ssl';
 ```
+
+# Contributing
+
+Use feature branches and open pull requests again the `development` branch. Once
+it's merged in `development` it will be automatically deployed on the
+development server. We do a release to production from time to time by merging
+the current `development` branch into `master`.
