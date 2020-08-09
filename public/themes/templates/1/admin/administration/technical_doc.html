@@ -1,0 +1,471 @@
+{*
+/***************************************************************************
+*                            technical_doc.html
+*                            --------------------------
+*   begin                : Friday, October 21, 2016
+*   copyright            : (C) 2016 Atari Legend
+*   email                : admin@atarilegend.com
+*
+*   id : technical_doc.html ,v 0.10 2016/10/21 ST Graveyard 14:23
+*           - AL 2.0
+*
+***************************************************************************/
+
+************************************************************************************************
+The main doc page
+************************************************************************************************
+*}
+{extends file='../main.html'}
+
+{block name=java_script}
+<script src="{$template_dir}includes/js/vendor/lightbox-2.9.0.min.js"></script>
+<link type="text/css" href="{$style_dir}css/vendor/lightbox-2.9.0.css" hreflang="en" rel="stylesheet">
+{/block}
+
+{block name=title}Technical Documentation{/block}
+
+{block name=left_tile}
+{include file='../tiles/left_nav.html'}
+{/block}
+
+{block name=main_tile}
+<div class="standard_tile">
+    <h1>TECHNICAL DOC</h1>
+    <div class="standard_tile_line"></div>
+    <div class="standard_tile_padding">
+        <div class="left_nav_section">
+            This is the technical documentation of Atarilegend. This documentation will cover every aspect of the Atarilegend project.
+        </div>
+        <br>
+        <br>
+        <fieldset class="secondary_fieldset centered_fieldset w-50">
+            <legend class="primary_legend">Contents</legend>
+                <ul class="tech_doc_contents">
+                    <li>Database structure
+                    <ul class="tech_doc_contents">
+                        <li><a href="#menudisks" class="left_nav_link">Menu section</a>
+                            <ul style="margin-left:1em;">
+                                <li><a href="#menudisks" class="left_nav_link">Menudisks</a></li>
+                                <li><a href="#docdisks" class="left_nav_link">Docdisks</a></li>
+                            </ul>
+                        </li>
+                        <li><a href="#crews" class="left_nav_link">Crew/Scene Genealogy</a>
+                            <ul style="margin-left:1em;">
+                                <li><a href="#crews" class="left_nav_link">Crews</a></li>
+                            </ul>
+                        </li>
+                        <li><a href="#individuals" class="left_nav_link">Individuals</a>
+                            <ul style="margin-left:1em;">
+                                <li><a href="#individuals" class="left_nav_link">Individuals and Nicknames</a></li>
+                            </ul>
+                        </li>
+                        <li><a href="#downloads" class="left_nav_link">Downloads</a>
+                            <ul style="margin-left:1em;">
+                                <li><a href="#downloads" class="left_nav_link">Game downloads</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                    </li>
+                </ul>
+        </fieldset>
+        <br>
+        <br>
+        <br>
+        <div class="left_nav_section" style="padding-right:10px;font-weight:normal;">
+            <h1 id="menudisks">Menu section</h1>
+            <br>
+            <a href="../../includes/show_image.php?file=../../themes/templates/1/includes/technical_doc/img/menus.png" data-lightbox="image-1" data-title="The Menudisk DB tables">
+                <img src="../../includes/show_image.php?file=../../themes/templates/1/includes/technical_doc/img/menus.png&amp;resize=450,null,null,null" alt="Click to enlarge!" class="tech_doc_img">
+            </a>
+            <br>
+            <br>
+            The above Entity Relation (ER) diagram shows exactly how all of the tables are connected to each other.
+            This data is linked to the other sections of the database. Look at the other ER diagrams to get a better idea.
+            There is a complete description of each table used for the menu disks below.
+            <br>
+            <br>
+            <u>Layout of tables :</u>
+            <br>
+            <br>
+
+                    <table class="primary_table_list w-85 table_lg" style="margin:auto;">
+                    <tr>
+                        <td>
+                            <b>menu_type</b> : This table connects all menu sets and even menu disks to a certain type of menu
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <b>menu_types_main</b> : This table contains the actual menu types e.g. demo menu, game menu, tool menu…
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <b>menu_set</b> : Many crews made different "sets" of menu disks. One example would be the Pompey Pirates as they had 2 sets; the actual 'Pompey Pirates' set and another one named "Krappy Compacts".
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <b>menu_sets_order</b> : This table is needed specifically for ordering the disks in the correct way.
+                            We need to know how many disks were released, which number they start and end at, any known gaps and how they are ordered.
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <b>menu_disk</b> : This is the main table for the menu disks. Every menu disk belongs to a set, hence the set identifier.
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <b>menu_disk_title</b> : Menu disks can contain all kinds of software titles. These titles are stored in the menu_disk_title table and are linked to the actual menu disk using the menu_disk_id field. This title table also contains menu_disk_title_type field.
+                                This means that, even if a menu disk is linked to a 'game' type, each title individually has its own type. So, a game menu disk, can also contain a doc for example.
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <b>menu_disk_title_game</b> : All the game titles are contained in this table. We have separate table for each type of title so we can enhance search features on the site and for data consistency.
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <b>menu_disk_title_tools</b> : All the tool titles are contained in this table. We have separate table for each type of title so we can enhance search features on the site and for data consistency.
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <b>menu_disk_title_demo</b> : All the demo titles are contained in this table. We have separate table for each type of title so we can enhance search features on the site and for data consistency.
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <b>menu_disk_title_music</b> : All the music titles are contained in this table. We have separate table for each type of title so we can enhance search features on the site and for data consistency.
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <b>menu_disk_title_doc_games</b> : All the (doc disks with) game docs are contained in this table. We have separate table for each type of title so we can enhance search features on the site and for data consistency.
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <b>menu_disk_title_doc_tools</b> : All the (doc disks with) tool docs are contained in this table. We have separate table for each type of title so we can enhance search features on the site and for data consistency.
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <b>menu_disk_title_various</b> : All titles not belonging to any type of the above are contained in this table. We have separate table for each type of title so we can enhance search features on the site and for data consistency.
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <b>menu_disk_title_set</b> : This table contains the sets of titles. For example, let's say a menu disk contains the game title 'Gods'. However, this title is normally spread over 2 disks. Using this 'set' table, we can link a title over 2 discs.
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <b>screenshot_menu</b> : This is the screenshot cross table linking the menu disks to the screenshot main table (for more detail, see the screenshots section).
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <b>menu_user_comments</b> : This is the comments cross table linking the menu disks to the user comments main table (for more detail, see the comments section).
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <b>menu_disk_download</b> : This table contains the actual files for download of each menu disk.
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <b>menu_disk_submenu</b> : It sometimes happens that a menu disk is some kind of submenu of a totally different other menu disk. Using the cross table we can link menu disks to other menu disks.
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <b>menu_disk_state</b> : The main states table containing info like 'corrupt', 'complete' ...
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <b>menu_disk_credits</b> : This table contains the individual id's of the people who were responsible for the intro of the menu disk. This is a cross table between the menu disk and the individuals table.
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <b>menu_disk_year</b> : This table contains the release year of the menu disk.
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <b>menu_disk_title_author</b> : This table is used to store the credits for each menu disk. Such as the crackers, hackers, artists etc.
+                        </td>
+                    </tr>
+                    </table>
+
+            <br>
+            <br>
+            <h1 id="docdisks">Doc disk section</h1>
+            <br>
+            <a href="../../includes/show_image.php?file=../../themes/templates/1/includes/technical_doc/img/docs.png" data-lightbox="image-1" data-title="The docdisk DB tables">
+                <img src="../../includes/show_image.php?file=../../themes/templates/1/includes/technical_doc/img/docs.png&amp;resize=450,null,null,null" alt="Click to enlarge!" class="tech_doc_img">
+            </a>
+            <br>
+            <br>
+            Overhere we see a visual overview of how the doc tables are linked to the menu section by use of doc disks. As you also can see, not only doc disks are linked to the doc table. Other sections
+            will be linked as wel. Some examples :
+            <br>
+            <br>
+            - Let's say we are dealing with a SEWER DOC DISK containing a manual of "Xenon 2" and a cheat code for "Supercars". Both docs have got an entry in the menu_disk_title_doc_games, in the doc_disk_game and in the doc table. There can be more
+            docs of the same game (even with the same doc type!). These docs wil have the category "doc disk game".
+            <br>
+            <br>
+            - The game "Xenon 2" by itself can also be linked to the doc table. What if we are dealing with the official manual of the game. This has nothing to do with a doc disk. So a cross table between the game table and the doc table is used, in this case
+            the doc_game table.
+            <br>
+            <br>
+            <u>Layout of tables :</u>
+            <br>
+            <br>
+
+                    <table class="primary_table_list w-85 table_lg" style="margin:auto;">
+                    <tr>
+                        <td>
+                            <b>doc_disk_game</b> : This is the cross table linking the doc disk title (in this case a game doc) with the actual doc table.
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <b>doc_disk_tool</b> : This is the cross table linking the doc disk title (in this case a tool doc) with the actual doc table.
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <b>doc_game</b> : This is the cross table linking the game table with the doc table.
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <b>doc</b> : Main documents table containing all docs used on the site
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <b>doc_type</b> : The type of document we are dealing with eg. a cheatcode, a walkthrough, a manual ...
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <b>doc_categort</b> : The category this document belongs to eg. doc disk game, doc disk tool, doc game, doc tool ...
+                        </td>
+                    </tr>
+                    </table>
+
+            <br>
+            <br>
+            <h1 id="crews">Crew section</h1>
+            <br>
+            <a href="../../includes/show_image.php?file=../../themes/templates/1/includes/technical_doc/img/crew.png" data-lightbox="image-1" data-title="The crew DB tables">
+                <img src="../../includes/show_image.php?file=../../themes/templates/1/includes/technical_doc/img/crew.png&amp;resize=450,null,null,null" alt="Click to enlarge!" class="tech_doc_img">
+            </a>
+            <br>
+            <br>
+            Another big, complex part of the website. These table contain all data on the crews and individuals. Their complete relationship with eachother and their work.
+            <br>
+            <br>
+            <u>Layout of tables :</u>
+            <br>
+            <br>
+                    <table class="primary_table_list w-85 table_lg" style="margin:auto;">
+                    <tr>
+                        <td>
+                            <b>crew</b> : The main crew table containing all the crews.
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <b>sub_crew</b> : Crews sometimes consist of subcrews.
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <b>crew_individual</b> : The cross table linking the individuals(hackers, coders, musicians…) to their crew.
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <b>individuals</b> : The main individual table.
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <b>crew_menu_prod, crew_demo_prod, ind_demo_prod, ind_menu_prod</b> : The cross tables linking the crews and individuals to their work. Every crew or individual has got their own productions,
+                            these are always demos or menus. Games are dealt with in the game tables structure.
+                        </td>
+                    </tr>
+                    </table>
+
+            <br>
+            <br>
+            <h1 id="individuals">Individual section</h1>
+            <br>
+            <a href="../../includes/show_image.php?file=../../themes/templates/1/includes/technical_doc/img/individuals.png" data-lightbox="image-1" data-title="The individual DB tables">
+                <img src="../../includes/show_image.php?file=../../themes/templates/1/includes/technical_doc/img/individuals.png&amp;resize=450,null,null,null" alt="Click to enlarge!" class="tech_doc_img">
+            </a>
+            <br>
+            <br>
+            The following tables will stock the individuals. Sceners, game/demo creators, musicians … These tables are used in various structures all over the DB.
+            <br>
+            <br>
+            <u>Layout of tables :</u>
+            <br>
+            <br>
+
+                    <table class="primary_table_list w-85 table_lg" style="margin:auto;">
+                    <tr>
+                        <td>
+                            <b>individuals</b> : The main individuals table will hold the individual names AND nicknames.
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <b>individual_nicks</b> : A cross table linking the individual with its nick name(s).
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <b>individual_text</b> : This table contains extra details of the individual. eg history, email ...
+                        </td>
+                    </tr>
+                    </table>
+
+            <br>
+            <br>
+            <h1 id="downloads">Download section</h1>
+            <br>
+            <a href="../../includes/show_image.php?file=../../themes/templates/1/includes/technical_doc/img/downloads-game.png" data-lightbox="image-1" data-title="The download DB tables">
+                <img src="../../includes/show_image.php?file=../../themes/templates/1/includes/technical_doc/img/downloads-game.png&amp;resize=450,null,null,null" alt="Click to enlarge!" class="tech_doc_img">
+            </a>
+            <br>
+            <br>
+            The following tables will contain all download info.
+            <br>
+            <br>
+            <u>Layout of tables :</u>
+            <br>
+            <br>
+
+                    <table class="primary_table_list w-85 table_lg" style="margin:auto;">
+                    <tr>
+                        <td>
+                            <b>download_main</b> : this is the main table which holds all downloads from the site. These can be menu downloads, game downloads, demo downloads...
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <b>game_download</b> : This is the cross table linking the download to the game, thus we are dealing with a game download
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <b>game</b> : The main game table
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <b>game_download_details</b> : This table contains some extra details of the download
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <b>game_download_options</b> : This is the cross table to the download options table.
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <b>download_options</b> : This is the 'label' table. This table can hold 'labels' like : PAL, NTSC, HD, Crack, Menu, Original, Patch...
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <b>game_download_tos</b> : The cross table to the TOS version table
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <b>tos_version</b> : Table containing al TOS versions
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <b>game_download_lingo</b> : cross table to the main language table (lingo) which contains the actual language of the game download
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <b>lingo</b> : main language table
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <b>game_download_set</b> : cross table used for games spanned over more than 1 disk
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <b>game_download_crew</b> : cross table to the crew table - this one is filled if the download is a crew release
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <b>game_download_individual</b> : cross table to the individual table - this one is filled if the download is an individual release. Also contains the author_type_id to link to the author_type table explaining the job of the individual
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <b>game_download_trainer</b> : a cross table to the trainer table containing all the trainer options of the download
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <b>trainer_options</b> : table containing all types of trainers
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <b>game_download_intro</b> : cross table to the demo table in case the download contains a cracktro
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <b>demo</b> : main demo table
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <b>game_download_menu</b> : cross table to the menu section, should this download be part of a menu disk
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <b>download_format</b> : cross table to the format table
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <b>format</b> : main format table (Kyro, SCP, MSA, Past, Files ...)
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <b>game_download_info</b> : this table contains info on who downloaded what. This is an updated version of the old table in which I have added the game_download_id, making it possible to see which game was downloaded.
+                        </td>
+                    </tr>
+                    </table>
+
+            <br>
+            <br>
+        </div>
+    </div>
+</div>
+{/block}

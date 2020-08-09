@@ -1,0 +1,55 @@
+{block name=left_tile}
+    {if $game_screenshot <> null}
+        {include file='./games_detail_editing.html'}
+        <br>
+    {/if}
+    {include file='./games_release_list.html'}
+{/block}
+
+{block name=additional_scripts}
+    <script src="{$template_dir}includes/js/ui.widgets.js"></script><!-- The autocomplete and dropdown switcher -->
+    <script src="{$template_dir}includes/js/game_release.js"></script><!-- specific JS functions -->
+    <script src="{$template_dir}includes/js/vendor/lightbox-2.9.0.min.js"></script><!-- lightbox popup functions -->
+    <link type="text/css" href="{$style_dir}css/vendor/lightbox-2.9.0.css" hreflang="en" rel="stylesheet">
+{/block}
+
+{block name=right_tile}
+    {include file='../tiles/tile_shortlog.html'}
+    <br>
+    {include file='../../main/tiles/tile_bug_report.html'}
+{/block}
+
+
+{extends file='../main.html'} {block name=main_tile}
+<div class="standard_tile">
+    {if isset ($release)}
+        <h1>
+            {if $release->getDate()}{$release->getDate()|date_format:"%Y"}{/if}
+            RELEASE FOR
+            <a href="games_detail.php?game_id={$game->getId()}" class="standard_tile_link_reverse">{$game->getName()|UPPER}</a>
+        </h1>
+    {else}
+    <h1>Add a new release for
+            <a href="games_detail.php?game_id={$game->getId()}" class="standard_tile_link_reverse">{$game->getName()|UPPER}</a>
+        </h1>
+    {/if}
+
+    <div class="standard_tile_line"></div>
+
+        <div class="standard_tile_padding">
+
+            <ul class="tabs">
+                <li {if $tab == "general"}class="active"{/if}><a href="?game_id={$game->getId()}&release_id={$release->getId()}&tab=general">GENERAL</a></li>
+                <li {if $tab == "compatibility"}class="active"{/if}><a href="?game_id={$game->getId()}&release_id={$release->getId()}&tab=compatibility">SYSTEM INFO</a></li>
+                <li {if $tab == "scene"}class="active"{/if}><a href="?game_id={$game->getId()}&release_id={$release->getId()}&tab=scene">SCENE</a></li>
+                <li {if $tab == "dump"}class="active"{/if}><a href="?game_id={$game->getId()}&release_id={$release->getId()}&tab=dump">DUMP</a></li>
+                <li {if $tab == "scans"}class="active"{/if}><a href="?game_id={$game->getId()}&release_id={$release->getId()}&tab=scans">SCANS</a></li>
+            </ul>
+
+            {include file="./release/$tab.html"}
+
+        <br>
+    </div>
+
+</div>
+{/block}

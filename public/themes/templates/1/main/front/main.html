@@ -1,0 +1,277 @@
+{*
+/***************************************************************************
+*                                main.html
+*                            -----------------------
+*   begin                : Tuesday, April 14, 2015
+*   copyright            : (C) 2015 Atari Legend
+*   email                : martens_maarten@hotmail.com
+*   actual update        : Creation of file
+*
+*   Id: main.html,v 0.1 2015/04/14 23:09 ST Graveyard
+*   Id: main.html,v 0.2 2015/12/05 14:56 ST Graveyard - 1920 compatible/New menu/HTML validated
+*
+***************************************************************************/
+
+//****************************************************************************************
+// This is the part of the site which is called in all other html files
+//****************************************************************************************
+*}
+
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="description" content="{block name=description}{/block}">
+        <title>{block name=title}Atari ST games, reviews, interviews and news | Atari Legend{/block}</title>
+        <meta name="viewport" content="width=device-width, minimum-scale=1.0">
+        <!-- start - let the site behave like a mobile app on phone -->
+        <meta name="mobile-web-app-capable" content="yes"><!-- Chrome-->
+        <meta name="apple-mobile-web-app-capable" content="yes"><!-- apple -->
+        <!-- End - let the site behave like a mobile app on phone -->
+        <link type="text/css" href="{$style_dir}css/style.css" rel="stylesheet" id="main_stylesheet">
+        <link type="text/css" href="{$style_dir}css/vendor/jquery-ui-1.11.4.custom-theme.css" rel="Stylesheet">
+        <link type="text/css" href="{$style_dir}css/vendor/notify-osd-51f8de7.css" hreflang="en" rel="stylesheet">
+        <link type="text/css" href="{$style_dir}css/vendor/animsition-4.0.2.min.css" hreflang="en" rel="stylesheet"><!-- fade up script needed for the intro page -->
+        <link type="text/css" href="{$style_dir}css/vendor/font-awesome-4.7.0/css/font-awesome.min.css" hreflang="en" rel="stylesheet"> <!-- Font awesome for icons-->
+        <link rel="icon" href="{$template_dir}includes/icons/favicon.png"> <!-- fav icon -->
+        <!-- start - get the icons used for mobile devices -->
+        <link rel="apple-touch-icon" sizes="57x57" href="{$template_dir}includes/icons/icon-57x57.png">
+        <link rel="apple-touch-icon" sizes="72x72" href="{$template_dir}includes/icons/icon-72x72.png">
+        <link rel="apple-touch-icon" sizes="114x114" href="{$template_dir}includes/icons/icon-114x114.png">
+        <link rel="apple-touch-icon" sizes="144x144" href="{$template_dir}includes/icons/icon-144x144.png">
+        <!-- end - get the icons used for mobile devices -->
+        <!-- start - add social media meta data -->
+        <meta property="og:title" content="Atari Legend : Legends Never Die">
+        <meta property="og:description" content="Nostalgia trippin' down the Atari ST memory lane">
+        <meta property="og:image" content="https://www.atarilegend.com/AL.jpg">
+        <meta property="og:url" content="https://www.atarilegend.com">
+        <meta property="og:site_name" content="Atari Legend">
+        <meta name="twitter:card" content="summary_large_image">
+        <meta name="twitter:image:alt" content="Atari Legend">
+        <!-- end - add social media meta data -->
+        <link href="../../front/atom.php" type="application/atom+xml" rel="alternate" title="Latest News, Reviews and Interviews ATOM Feed" />
+
+        <script type="application/ld+json">
+            {
+                "@context": "http://schema.org",
+                "@type": "Organization",
+                "url": "{$smarty.const.REQUEST_SITEURL}",
+                "name": "Atari Legend",
+                "logo": "{$smarty.const.REQUEST_SITEURL}/themes/styles/1/images/class.png",
+                "sameAs": [
+                    "https://www.facebook.com/atarilegend",
+                    "https://twitter.com/AtariLegend"
+                ]
+            }
+        </script>
+
+        {* Inner page can inject additional CSS that gets put here *}
+        {block name=additional_css}{/block}
+
+        {* Insert Google Analytics tags only on production *}
+        {if $smarty.server.HTTP_HOST == $smarty.const.SITEHOST}
+        {literal}
+        <!-- Global site tag (gtag.js) - Google Analytics -->
+        <script async src="//www.googletagmanager.com/gtag/js?id=UA-108399799-1"></script>
+        <script>
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+
+            gtag('config', 'UA-108399799-1');
+        </script>
+        {/literal}
+        {/if}
+
+        {block name=javascript_slider} {/block}
+    </head>
+    <body id="body">
+        <div id="wrapper_header">
+            <header>
+                <div id="top_background">
+                    <!-- This is the side menu only visible for smartphones (max resolution 480pc)-->
+                    <div class="container">
+                        <div id="sidebar">
+                            <div class="no-wrap">
+                                <nav class="skin-menu">
+                                    <ul class="side_navigation">
+                                        <li><a href="../front/front.php" class="sidebutton" id="home_side">HOME</a></li>
+                                        <li><a href="../news/news.php" class="sidebutton" id="news_side">NEWS</a></li>
+                                        <li><a href="../games/games_main.php" class="sidebutton" id="games_side">GAMES</a></li>
+                                        <li><a href="../games/games_reviews_main.php" class="sidebutton" id="reveiws_side">REVIEWS</a></li>
+                                        <li><a href="../interviews/interviews_main.php" class="sidebutton" id="interviews_side">INTERVIEWS</a></li>
+                                        <li><a href="../articles/articles_main.php" class="sidebutton" id="articles_side">ARTICLES</a>
+                                        <li><a href="../links/links_main.php" class="sidebutton" id="links_side">LINKS</a></li>
+                                        <li><a href="../../admin/" class="sidebutton" id="cpanel_side">CPANEL</a></li>
+                                        <li><a href="http://www.atari-forum.com" class="sidebutton" id="forum_main_side">FORUM</a></li>
+                                        <li><a href="../about/about.php" class="sidebutton" id="about_side">ABOUT</a></li>
+                                    </ul>
+                                </nav>
+                            </div>
+                            <form action="../games/games_main_list.php" method="get">
+                                <input type="hidden" name="action" value="search">
+                                <ul id="search_ul">
+                                    <li id="searchbutton_side"><input id="search_text_side" type="text" name="gamesearch" maxlength="11"></li>
+                                    <li><input type="submit" id="search_side" value=""></li>
+                                </ul>
+                            </form>
+                            <div class="skin-wrap">
+                                <nav class="skin-menu">
+                                    <ul class="clearfix_home">
+                                        <li><a href="../front/front.php" class="sidebutton" id="home_side_high">HOME</a></li>
+                                    </ul>
+                                    <ul class="clearfix">
+                                        <li>
+                                            <button class="sidebutton" id="skin_side">SKIN</button>
+                                            <ul class="sub-menu">
+                                                <li><a href="#" data-skin="1" class="sidebutton_cpanel">LEGACY</a></li>
+                                                <!--
+                                                <li><a href="#" data-skin="2" class="sidebutton_cpanel">TOS 2.07</a></li>
+                                                <li><a href="#" data-skin="3" class="sidebutton_cpanel">PICASSO</a></li>
+                                                -->
+                                            </ul>
+                                        </li>
+                                    </ul>
+                                </nav>
+                            </div>
+                        </div>
+                        <div class="main-content">
+                            <button type="button" data-toggle=".container" id="sidebar-toggle" style="border:none; cursor: pointer;">
+                                <span class="bar"></span>
+                                <span class="bar"></span>
+                                <span class="bar"></span>
+                            </button>
+                        </div>
+                    </div>
+                    <!-- end of side menu-->
+                    <div id="left">
+                        <img id="logo_img" src="{$style_dir}images/logos/top_logo0{math equation='rand(1,5)'}.png" alt="logo" />
+                        <img id="logo_img_480" src="{$style_dir}images/logos/top_logo01_480.png" alt="logo_480" />
+                    </div>
+                    <div id="right">
+                        <img id="img_bee" src="{$style_dir}images/top_right0{math equation='rand(1,2)'}.png" alt="bee" />
+                    </div>
+                    <!--log on menu-->
+                    <div class="log_on_menu">
+                        <ul>
+                            <li id="login">
+                                <a id="login-trigger" href="#">
+                                {if ! isset($user_session.userid)}
+                                    <div id="log_on_button"><i class="fa fa-user-circle fa-lg" aria-hidden="true" ></i>&nbsp; Guest<span>▼</span></div>
+                                    <div id="log_on_button_480"><i class="fa fa-user-circle fa-lg" aria-hidden="true" ></i></div>
+                                {else}
+                                    {if $user_session.extension == ''}
+                                        <div id="log_on_button"><i class="fa fa-user-circle fa-lg" aria-hidden="true" style="color:green;"></i>&nbsp; {$user_session.userid}<span>▼</span></div>
+                                        <div id="log_on_button_480"><i class="fa fa-user-circle fa-lg" aria-hidden="true" style="color:green;"></i></div>
+                                    {else}
+                                        <div id="log_on_button"><img src="../../includes/show_image.php?file={$user_session.image}&amp;resize=23,null,null,null" alt="Avatar" class="log_on_avatar" style="display:inline;">&nbsp; {$user_session.userid}<span>▼</span></div>
+                                        <div id="log_on_button_480"><img src="../../includes/show_image.php?file={$user_session.image}&amp;resize=23,null,null,null" alt="Avatar" class="log_on_avatar" style="display:inline;"></div>
+                                    {/if}
+                                {/if}
+                                </a>
+                                <div id="login-content">
+                                    {if ! isset($user_session.userid)}
+                                        <form action="../../common/login/user_process_login.php" method="post" name="login_form" onsubmit="formhash(this, this.password);">
+                                        <fieldset class="primary_fieldset">
+                                            <input class="standard_input input_large" type="text" name="userid" placeholder="Username" required>
+                                            <input class="standard_input input_large" type="password" name="password" placeholder="Password" required>
+                                            <div class="links_mod_checkbox">
+                                                <input type="checkbox" id="remember_me" name="remember_me" value="1">
+                                                <label for="remember_me"></label>&nbsp;Remember me
+                                            </div>
+                                            <br>
+                                            <input type="submit" value="Sign in" class="primary_button">
+                                            <br><br>
+                                            <span class="log_on_text"><a href="../../main/front/front.php?action=reset" class="standard_tile_link_black"><i class="fa fa-angle-double-right" aria-hidden="true"></i>&nbsp;Forgot password?</a></span>
+                                            <br>
+                                            <span class="log_on_text"><a href="../../main/front/front.php?action=register" class="standard_tile_link_black"><i class="fa fa-angle-double-right" aria-hidden="true"></i>&nbsp;No account? Sign up now <i class="fa fa-chevron-right" aria-hidden="true"></i></a></span>
+                                        </fieldset>
+                                        </form>
+                                    {else}
+                                        <form action="../../common/login/user_process_logout.php" method="post" name="login_form">
+                                        <fieldset class="primary_fieldset">
+                                            <span class="log_on_text"><a href="../../admin/" class="standard_tile_link_black"><i class="fa fa-cogs" aria-hidden="true"></i>&nbsp; Control Panel</a></span>
+                                            <br>
+                                            <span class="log_on_text"><a href="../../admin/user/user_detail.php?user_id_selected={$user_session.user_id}" class="standard_tile_link_black"><i class="fa fa-user-circle-o" aria-hidden="true"></i>&nbsp; User Profile</a></span>
+                                            <br><br>
+                                            <input type="Submit" value="Sign out" class="primary_button">
+                                        </fieldset>
+                                        </form>
+                                    {/if}
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                    <!-- end of log on menu-->
+                    {assign var='number' value=1|rand:5}
+                    {if $number is odd}
+                        <img id="animation" src="{$style_dir}images/animations/animation0{math equation='rand(1,8)'}.gif" alt="animation" />
+                    {else}
+                        <img id="animation_vert" src="{$style_dir}images/animations/animation_vert0{math equation='rand(1,3)'}.gif" alt="animation" />
+                    {/if}
+                </div>
+                <nav id="main_nav">
+                    <form action="../games/games_main_list.php" method="get">
+                        <input type="hidden" name="action" value="search">
+                        <ul id="main_nav_ul">
+                            <li><a href="../front/front.php" id="home"></a></li>
+                            <li><a href="../news/news.php" class="topbutton" id="news">NEWS</a></li>
+                            <li><a href="../games/games_main.php" class="topbutton" id="games">GAMES</a></li>
+                            <li><a href="../games/games_reviews_main.php" class="topbutton" id="reviews">REVIEWS</a></li>
+                            <li><a href="../interviews/interviews_main.php" class="topbutton" id="interviews">INTERVIEWS</a></li>
+                            <li><a href="../articles/articles_main.php" class="topbutton" id="articles">ARTICLES</a></li>
+                            <li><a href="../links/links_main.php" class="topbutton" id="links">LINKS</a></li>
+                            <li><a href="../../admin/" class="topbutton" id="cpanel">CPANEL</a></li>
+                            <li><a href="http://www.atari-forum.com" class="topbutton" id="forum_top">FORUM</a></li>
+                            <li><a href="../about/about.php" class="topbutton" id="about">ABOUT</a></li>
+                            <li><div class="searchbutton" id="search_text"><input type="text" id="auto" name="gamesearch"></div></li>
+                            <li><input type="submit" id="search" value=""></li>
+                        </ul>
+                    </form>
+                </nav>
+            </header>
+        </div>
+        <div id="wrapper">
+            {block name=main_body}{/block}
+            <div class="main_online">
+                    {include file='./who_is_online.html'}
+            </div>
+        </div>
+        <footer class="footer">
+            <div class="footer_logo">
+                <br><br><br>
+                <div class="footer_logo_image"></div>
+                <h3>&copy; copyright 2004 - {'Y'|date} <a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank"><img class="license" src="{$style_dir}images/cc-by-nc-sa.png" alt="Creative Commons License"></a></h3>
+            </div>
+        </footer>
+        <div class="scroll-top-wrapper "> <!--back to top link -->
+            <span class="scroll-top-inner">
+                <i class="fa fa-2x fa-arrow-circle-up"></i>
+            </span>
+        </div>
+
+        <div id="JSGenericModal" title="" style="display:none;">
+            <p>
+                <span class="ui-icon ui-icon-alert" style="float:left; margin:0 7px 20px 0;"></span>
+                <div id="JSGenericModalText"></div>
+            </p>
+        </div>
+
+        <script src="{$template_dir}includes/js/vendor/md5-1.0.1.min.js"></script>  <!-- log on security script -->
+        <script src="{$template_dir}includes/js/vendor/sha512-2.2.min.js"></script> <!-- log on security script -->
+        <script src="{$template_dir}includes/js/vendor/respond-1.1.0.min.js"></script> <!-- script needed for the side menu -->
+        <script src="{$template_dir}includes/js/vendor/jquery-2.1.4.min.js"></script> <!-- main jquery stuff -->
+        <script src="{$template_dir}includes/js/vendor/jquery-ui-1.11.4.min.js"></script> <!-- main jqueryUI stuff -->
+        <script src="{$template_dir}includes/js/vendor/notify-osd-51f8de7.min.js"></script>
+        <script src="{$template_dir}includes/js/forms.js"></script> <!-- log on security script -->
+        <script src="{$template_dir}includes/js/main.js"></script> <!-- load all scripts used on site -->
+        {if isset($edit_message)}
+            <script>
+                OSDMessageDisplay("{$edit_message|escape:'quotes'}");
+            </script>
+        {/if}
+
+        {* Inner pages can inject additional JS that gets put here, after jQuery is included *}
+        {block name=additional_scripts}{/block}
+    </body>
+</html>

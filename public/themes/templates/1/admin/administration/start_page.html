@@ -1,0 +1,218 @@
+{*
+/***************************************************************************
+*                                start_page.html
+*                            --------------------------
+*   begin                : 2015-11-21
+*   copyright            : (C) 2015 Atari Legend
+*   email                : admin@atarilegend.com
+*
+*   Id: start_page.html,v 0.1 2015-11-21 Silver Surfer
+*   Id: start_page.html,v 0.2 2017/04/15 00:46 ST Graveyard
+*               - Complete re-write with charts
+*
+***************************************************************************/
+*}
+
+{extends file='../main.html'}
+
+{block name=java_script}
+<script src="{$template_dir}includes/js/vendor/Chart-2.5.0.min.js"></script> <!-- chart creation -->
+<script>
+window.onload = function () {
+    var ctx_good = document.getElementById('karma_good_chart').getContext("2d");
+    var data_good = {$karma_good_value|escape:'javascript'};
+    var labels_good = {$karma_good_label};
+    var bg = {$karma_bg};
+    var bg_hover = {$karma_hover};
+    var border = {$karma_border};
+    var border_width = {$karma_border_width};
+
+    var myChart = new Chart(ctx_good, {
+        responsive: true,
+        type: 'pie',
+        data: {
+            labels: labels_good,
+        datasets: [
+            {
+                data: data_good,
+                backgroundColor: bg,
+                borderColor: border,
+                borderWidth: border_width,
+                hoverBackgroundColor: bg_hover
+            }]
+        }
+    })
+
+    var ctx_bad = document.getElementById('karma_bad_chart').getContext("2d");
+    var data_bad = {$karma_bad_value|escape:'javascript'};
+    var labels_bad = {$karma_bad_label};
+
+    var myChart = new Chart(ctx_bad, {
+        responsive: true,
+        type: 'pie',
+        data: {
+            labels: labels_bad,
+        datasets: [
+            {
+                data: data_bad,
+                backgroundColor: bg,
+                borderColor: border,
+                borderWidth: border_width,
+                hoverBackgroundColor: bg_hover
+            }]
+        }
+    })
+
+    var data_cl_bar = {$change_log_data|escape:'javascript'};
+    var data_cl_labels = {$change_log_label};
+    var ctx_change_bar = document.getElementById('changelog_bar').getContext("2d");
+    var bg_cl = {$change_log_bg};
+    var border_width_cl = {$change_log_border_width};
+    var border_cl = {$change_log_border};
+
+    var myBarChart = new Chart(ctx_change_bar, {
+        responsive: true,
+        type: 'bar',
+        data: {
+            labels: data_cl_labels,
+            datasets: [
+                {
+                    label: "# of changes per section",
+                    backgroundColor: bg_cl,
+                    borderColor: border_cl,
+                    borderWidth: border_width_cl,
+                    data: data_cl_bar,
+                }
+            ]
+        }
+    })
+
+    var data_cl_monthly = {$change_log_monthly_data};
+    var labels_cl_monthly = {$change_log_monthly_label};
+    var ctx_change_line = document.getElementById('changelog_line').getContext("2d");
+
+    var myLineChart = new Chart(ctx_change_line, {
+        responsive: true,
+        type: 'line',
+        data: {
+            labels: labels_cl_monthly,
+            datasets: [
+                {
+                    label: "Changes per month",
+                    backgroundColor: bg_cl,
+                    borderColor: border_cl,
+                    borderWidth: border_width_cl,
+                    data: data_cl_monthly,
+                }
+            ]
+        }
+    })
+
+};
+</script>
+{/block}
+
+{block name=left_tile}
+    {include file='../tiles/tile_stats.html'}
+    <br>
+{/block}
+
+{block name=main_tile}
+<div class="standard_tile">
+    <h1>CPANEL</h1>
+    <div class="standard_tile_line"></div>
+    <div class="standard_tile_padding">
+        <div class="left_nav_section">
+            Welcome <b><a href="../../admin/user/user_detail.php?user_id_selected={$users.user_id}">{$users.user_name}</a></b> to the heart of AtariLegend, the Control Panel.
+            This will give you a quick overview of all the statistics of the website.
+            The links on the left-hand side and top of this screen allow you to control every aspect of your cpanel usage.
+            Each page has instructions on how to use the tools.
+            {if $user_session.permission != 1}<br><br><b>You are a regular user so you <u>don't</u> have update or insert authorizations! If you like to help out with this project and want to contribute more than currently
+            possible on the main site, get in touch with us.</b>{else}If you have remarks or questions, please use the private
+            <a href="http://www.atari-forum.com/viewforum.php?f=36">AtariLegend</a> forum on
+            <a href="http://www.atari-forum.com/">Atari-Forum.</a>{/if}
+        </div>
+        <br>
+    </div>
+    <div class="standard_tile_line"></div>
+    <h1>KARMA STATS</h1>
+    <div class="standard_tile_line"></div>
+    <div class="standard_tile_padding">
+        <br>
+        <div class="main_stats_container">
+            <div class="main_stats_child" id="child_good_karma_chart">
+                <div class="good_karma_chart">
+                    <canvas id="karma_good_chart"></canvas>
+                </div>
+            </div>
+            <div class="main_stats_child" id="child_good_karma">
+                <ul class="list-group secondary_list">
+                    <li class="list-group-item text-center">
+                        <b>Good Karma</b>
+                    </li>
+                {assign var="number" value=1}
+                {foreach from=$karma_good item=line}
+                    <li class="list-group-item list-group-item-action {if $number is even}{else}secondary_list_odd{/if}">
+                        <a href="../user/user_detail.php?user_id_selected={$line.user_id}" class="standard_tile_text_left">
+                            {$line.user_name}
+                        </a>
+                        <div class="text-right" style="float:right;">{$line.karma}</div>
+                    </li>
+                {$number=$number+1}
+                {/foreach}
+                </ul>
+            </div>
+        </div>
+        <br>
+        <br>
+        <div class="main_stats_container">
+            <div class="main_stats_child" id="child_bad_karma_chart">
+                <div class="bad_karma_chart">
+                    <canvas id="karma_bad_chart"></canvas>
+                </div>
+            </div>
+            <div class="main_stats_child" id="child_bad_karma">
+                <ul class="list-group secondary_list">
+                    <li class="list-group-item text-center">
+                        <b>Bad Voodoo</b>
+                    </li>
+                {assign var="number" value=1}
+                {foreach from=$karma_bad item=line}
+                    <li class="list-group-item list-group-item-action {if $number is even}{else}secondary_list_odd{/if}">
+                        <a href="../user/user_detail.php?user_id_selected={$line.user_id}" class="standard_tile_text_left">
+                            {$line.user_name}
+                        </a>
+                        <div class="text-right" style="float:right;">{$line.karma}</div>
+                    </li>
+                {$number=$number+1}
+                {/foreach}
+                </ul>
+            </div>
+        </div>
+    </div>
+    <br>
+    <div class="standard_tile_line"></div>
+    <h1>LATEST CHANGES</h1>
+    <div class="standard_tile_line"></div>
+    <div class="standard_tile_padding">
+        <div class="left_nav_section">
+            Here are some latest changes charts. For all the details of the changes made, please visit the <a href="../../admin/administration/change_log.php">change log</a> section.
+            <br>The pie chart below represents in which sections of the db the most changes are done. The line chart shows the nr of changes of the last 12 months.
+        </div>
+        <br>
+        <br>
+        <div class="main_stats_container" id="latest_changes_chart">
+            <div class="main_stats_child" id="child_bar">
+                <div class="bar_changelog">
+                    <canvas id="changelog_bar"></canvas>
+                </div>
+            </div>
+            <div class="main_stats_child" id="child_line">
+                <div class="line_changelog">
+                    <canvas id="changelog_line"></canvas>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{/block}

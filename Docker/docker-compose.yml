@@ -18,9 +18,15 @@ services:
     ports:
       - 80:80
     volumes:
-      - ../Website/AtariLegend:/var/www/html
+      - ../public:/var/www/html
     depends_on:
-      - db
+      - php-composer
+  # PHP Composer
+  php-composer:
+    build: ./php
+    volumes:
+      - ../public/php:/php
+    command: bash -c "composer.phar install -d /php; composer.phar update -d /php"
   # Convenience image to run Grunt
   nodejs:
     build: ./php
@@ -31,6 +37,8 @@ services:
   # Convenience phpMyAdmin image to administer the database
   phpmyadmin:
     image: phpmyadmin/phpmyadmin
+    environment:
+      UPLOAD_LIMIT: 8M
     links:
       - db:db
     ports:

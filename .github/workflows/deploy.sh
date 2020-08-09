@@ -12,6 +12,8 @@ RSYNC_FLAGS=(
     # Exclude the connection settings file from being deleted, as it's
     # not in Git
     --exclude php/config/connection_settings.php
+    # Exclude the email settings file from being deleted, as it's not in Git
+    --exclude php/config/email_settings.php
     # Exclude _elite folder, not in Git
     --exclude _elite
     # Exclude _stonish folder, not in Git
@@ -34,6 +36,6 @@ fi
 mkdir -p ~/.ssh/
 ssh-keyscan $DEPLOY_HOST >> ~/.ssh/known_hosts
 
-rsync ${RSYNC_FLAGS[@]} Website/AtariLegend/ $DEPLOY_USER@$DEPLOY_HOST:$DEPLOY_PATH/
+rsync ${RSYNC_FLAGS[@]} public/ $DEPLOY_USER@$DEPLOY_HOST:$DEPLOY_PATH/
 
 ssh $DEPLOY_USER@$DEPLOY_HOST "cd $DEPLOY_PATH/php/admin/administration/ && php7.1-cli database_update.php"
