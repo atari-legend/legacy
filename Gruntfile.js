@@ -10,17 +10,17 @@ module.exports = function (grunt) {
             },
             dist: {
                 files: {
-                    '<%= webRoot %>themes/styles/1/css/style.css': 'Sources/styles/1/scss/style.scss'
+                    '<%= webRoot %>themes/styles/1/css/style.css': 'scss/1/scss/style.scss'
                 }
             },
             dist2: {
                 files: {
-                    '<%= webRoot %>themes/styles/2/css/style.css': 'Sources/styles/2/scss/style.scss'
+                    '<%= webRoot %>themes/styles/2/css/style.css': 'scss/2/scss/style.scss'
                 }
             },
             dist3: {
                 files: {
-                    '<%= webRoot %>themes/styles/3/css/style.css': 'Sources/styles/3/scss/style.scss'
+                    '<%= webRoot %>themes/styles/3/css/style.css': 'scss/3/scss/style.scss'
                 }
             }
         },
@@ -48,11 +48,11 @@ module.exports = function (grunt) {
             },
             sass: {
                 src: [
-                    'Sources/styles/1/scss/*.scss',
-                    'Sources/styles/2/scss/*.scss',
-                    'Sources/styles/3/scss/*.scss',
-                    'Sources/styles/common/main_scss/**/*.scss',
-                    '!Sources/styles/common/main_scss/bootstrap/**/*.scss'
+                    'scss/1/scss/*.scss',
+                    'scss/2/scss/*.scss',
+                    'scss/3/scss/*.scss',
+                    'scss/common/main_scss/**/*.scss',
+                    '!scss/common/main_scss/bootstrap/**/*.scss'
                 ]
             },
             html: {
@@ -64,10 +64,10 @@ module.exports = function (grunt) {
 
         scsslint: {
             allFiles: [
-                'Sources/styles/1/scss/*.scss',
-                'Sources/styles/2/scss/*.scss',
-                'Sources/styles/3/scss/*.scss',
-                'Sources/styles/common/main_scss/**/*.scss'
+                'scss/1/scss/*.scss',
+                'scss/2/scss/*.scss',
+                'scss/3/scss/*.scss',
+                'scss/common/main_scss/**/*.scss'
             ],
             options: {
                 bundleExec: false,
@@ -85,10 +85,10 @@ module.exports = function (grunt) {
                 formatter: 'stylish'
             },
             target: [
-                'Sources/styles/1/scss/*.scss',
-                'Sources/styles/2/scss/*.scss',
-                'Sources/styles/3/scss/*.scss',
-                'Sources/styles/common/main_scss/**/*.scss'
+                'scss/1/scss/*.scss',
+                'scss/2/scss/*.scss',
+                'scss/3/scss/*.scss',
+                'scss/common/main_scss/**/*.scss'
             ]
         },
 
@@ -114,7 +114,7 @@ module.exports = function (grunt) {
         watch: {
             sass: {
                 files: [
-                    'Sources/styles/**/*.scss'
+                    'scss/**/*.scss'
                 ],
                 tasks: ['lintspaces:sass', 'sass', 'pleeease']
             },
@@ -175,27 +175,27 @@ module.exports = function (grunt) {
         csscomb: {
             dynamic_mappings: {
                 expand: true,
-                cwd: 'Sources/styles/1/scss/',
+                cwd: 'scss/1/scss/',
                 src: ['*.scss'],
-                dest: 'Sources/styles/1/scss/'
+                dest: 'scss/1/scss/'
             },
             dynamic_mappings2: {
                 expand: true,
-                cwd: 'Sources/styles/2/scss/',
+                cwd: 'scss/2/scss/',
                 src: ['*.scss'],
-                dest: 'Sources/styles/2/scss/'
+                dest: 'scss/2/scss/'
             },
             dynamic_mappings3: {
                 expand: true,
-                cwd: 'Sources/styles/3/scss/',
+                cwd: 'scss/3/scss/',
                 src: ['*.scss'],
-                dest: 'Sources/styles/3/scss/'
+                dest: 'scss/3/scss/'
             },
             dynamic_mappings4: {
                 expand: true,
-                cwd: 'Sources/styles/common/main_scss/',
+                cwd: 'scss/common/main_scss/',
                 src: ['*.scss'],
-                dest: 'Sources/styles/common/main_scss/'
+                dest: 'scss/common/main_scss/'
             }
 
         }
