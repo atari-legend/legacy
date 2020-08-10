@@ -81,7 +81,7 @@ if (isset($action) and $action == 'add_review') {
         $i++;
     }
 
-    create_log_entry('Games', $game_id, 'Review', $reviewid, 'Insert', $_SESSION['user_id']);
+    create_log_entry('Games', $game_id, 'Review', $new_review_main_id, 'Insert', $_SESSION['user_id']);
 
     $_SESSION['edit_message'] = "Review submitted - Awaiting approval by admin";
 
