@@ -18,6 +18,8 @@ RSYNC_FLAGS=(
     --exclude _elite
     # Exclude _stonish folder, not in Git
     --exclude _stonish
+    # Exclude _prototype folder which contains the Laravel prototype
+    --exclude _prototype
     # Exclude the atarilegend folder which contains the dev site
     --exclude atarilegend
     # Do not delete logs
