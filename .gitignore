@@ -3,6 +3,7 @@
 !/public/data/database-*
 public/data/database-dumps/*.zip
 public/data/database-dumps/*.sql.gz
+public/data/database-backups/
 
 # exclude temporary directory where Smarty templates are compiled
 /public/php/temp/*

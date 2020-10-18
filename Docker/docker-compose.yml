@@ -26,7 +26,7 @@ services:
     build: ./php
     volumes:
       - ../public/php:/php
-    command: bash -c "composer.phar install -d /php; composer.phar update -d /php"
+    command: bash -c "composer install -d /php; composer update -d /php"
   # Convenience image to run Grunt
   nodejs:
     build: ./php

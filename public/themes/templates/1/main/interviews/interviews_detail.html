@@ -56,7 +56,9 @@
                 {if $interview.interview_img != 'none'}
                         <div class="grid">
                             <figure class="effect-tile" style="margin:0px;">
-                            <img class="standard_tile_image" src="../../includes/show_image.php?file={$interview.interview_img}&amp;resize=410,null,null,null&amp;crop=left,top,410,260" alt="Interview">
+                            <a href="../../includes/show_image.php?file={$interview.interview_img}" data-lightbox="image-1" data-title="{$interview.individual_name}">
+                                <img class="standard_tile_image" src="../../includes/show_image.php?file={$interview.interview_img}&amp;resize=410,null,null,null&amp;crop=left,top,410,260" alt="Interview">
+                            </a>
                             <figcaption>
                                 <span class="standard_tile_subtext" style="left: 5%; position: absolute; top: 50%;">Click for credits</span><span class="tile_arrow"><i class="fa fa-chevron-up" aria-hidden="true"></i></span>
                                 <span class="tile_title"><a href="../games/games_main_list.php?game_author={$interview.individual_id}&amp;action=search#">{$interview.individual_name}</a></span>
