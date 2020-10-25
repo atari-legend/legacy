@@ -1,0 +1,53 @@
+Options +FollowSymlinks -MultiViews -Indexes
+
+# Custom error pages
+ErrorDocument 403 /themes/templates/1/forbidden.html
+ErrorDocument 404 /themes/templates/1/page_not_found.html
+
+# Configure compression on static resources
+<IfModule mod_deflate.c>
+    AddOutputFilterByType DEFLATE text/plain
+    AddOutputFilterByType DEFLATE text/html
+    AddOutputFilterByType DEFLATE text/xml
+    AddOutputFilterByType DEFLATE text/css
+    AddOutputFilterByType DEFLATE application/xml
+    AddOutputFilterByType DEFLATE application/xhtml+xml
+    AddOutputFilterByType DEFLATE application/rss+xml
+    AddOutputFilterByType DEFLATE application/javascript
+    AddOutputFilterByType DEFLATE application/x-javascript
+</IfModule>
+
+RewriteEngine On
+RewriteBase /
+
+# Send all traffic to HTTPS, except when serving on localhost for development
+RewriteCond "%{HTTPS}" "off"
+RewriteCond "%{SERVER_NAME}" (www\.)?atarilegend\.com
+RewriteRule (.*) https://%{SERVER_NAME}/$1 [R=301,L]
+
+# Rewrite old interviews URLs to the new structure, as multiple websites are
+# still linking to the old URLs. e.g.:
+# /interviews/interview.php?interview_id=4 -> /interviews/interviews_detail.php?selected_interview_id=4
+RewriteCond %{QUERY_STRING} "interview_id=([0-9]+)"
+RewriteRule "^interviews/interview\.php" "interviews/interviews_detail.php?selected_interview_id=%1" [R=301,L]
+
+# The following rules are to hide the root level /php/ and /php/main/
+# folders from the URL. We want to simulate users accessing files under these
+# folders as if they were are the root / of the website.
+# This is needed to maintain the links other websites (like Lemon Amiga) made
+# to /games/games_details.php?game_id=...
+
+# If request are coming for /php/something.php, redirect them to /something.php
+# Use 307 and not 301 to cover POST redirection (See issue #250)
+RewriteCond %{THE_REQUEST} ^[A-Z]{3,}\s+/legacy/php/([^\s]+) [NC]
+RewriteRule ^ /legacy/%1 [R=307,L]
+
+# If the requested folder or file doesn't exist, look it up under php/
+# For example if the request is /main/front/front.php, look it up
+# at php/main/front/front.php
+# __Note__  It works with conjunction with php/.htaccess, so that requests
+# to /front/front.php gets rewritten to main/front/front.php first, then
+# front/front.php by php/.htaccess
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteRule (?!^php/)^(.*)$ /legacy/php/$1 [L,NC]

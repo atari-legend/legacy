@@ -73,6 +73,10 @@ jobs:
         with:
           name: website
           path: public/
+      - name: Adjust .htaccess files to run inside the prototype folder
+        run: |
+          mv -f public/.htaccess.prototype public/.htaccess
+          rm -f public/php/.htaccess
       - name: Deploy
         run: |
           eval "$(ssh-agent -s)"
