@@ -103,7 +103,7 @@ function generate_game_description(
     $desc .= "game for the Atari ST ";
 
     if ($game_developers) {
-        $desc .= "developed by ".join($game_developers, ", ")." ";
+        $desc .= "developed by ".join(", ", $game_developers)." ";
     }
 
     if ($game_releases) {
@@ -122,7 +122,7 @@ function generate_game_description(
             }
         }
         if ($years) {
-            $desc .= "released in ".join($years, ", ");
+            $desc .= "released in ".join(", ", $years);
         }
     }
 
@@ -155,13 +155,13 @@ function generate_game_description(
     }
 
     if ($extra_info) {
-        $desc .= " (".join($extra_info, ", ").")";
+        $desc .= " (".join(", ", $extra_info).")";
     }
 
     $desc .= ".";
 
     if (count($game_akas) > 0) {
-        $desc .= " It's also known as: ".join($game_akas, ", ").".";
+        $desc .= " It's also known as: ".join(", ", $game_akas).".";
     }
 
     return $desc;
