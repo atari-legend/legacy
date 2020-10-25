@@ -82,6 +82,7 @@ jobs:
           eval "$(ssh-agent -s)"
           ssh-add - <<< "${{ secrets.DEPLOY_SSH_KEY }}"
           ./.github/workflows/deploy.sh "${{ secrets.DEV_DEPLOY_PROTOTYPE_USER }}" "${{ secrets.DEV_DEPLOY_PROTOTYPE_HOST }}" "${{ secrets.DEV_DEPLOY_PROTOTYPE_PATH }}"
+          ./.github/workflows/adjust-data-folder-prototype.sh "${{ secrets.DEV_DEPLOY_PROTOTYPE_USER }}" "${{ secrets.DEV_DEPLOY_PROTOTYPE_HOST }}" "${{ secrets.DEV_DEPLOY_PROTOTYPE_PATH }}"
 
   deploy-prod:
     name: Deploy production
