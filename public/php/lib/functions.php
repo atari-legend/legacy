@@ -84,6 +84,42 @@ function InsertALCode($alcode) {
         $alcode
     );
 
+    $alcode = preg_replace(
+        "@\[game=([0-9]+)\](.*?)\[/game\]@i",
+        "<a href=\"/games/games_detail.php?game_id=$1\" class=\"standard_tile_link_black\">$2</a>",
+        $alcode
+    );
+
+    $alcode = preg_replace(
+        "@\[review=([0-9]+)\](.*?)\[/review\]@i",
+        "<a href=\"/games/games_reviews_detail.php?review_id=$1\" class=\"standard_tile_link_black\">$2</a>",
+        $alcode
+    );
+
+    $alcode = preg_replace(
+        "@\[interview=([0-9]+)\](.*?)\[/interview\]@i",
+        "<a href=\"/interviews/interviews_detail.php?selected_interview_id=$1\" class=\"standard_tile_link_black\">$2</a>",
+        $alcode
+    );
+
+    $alcode = preg_replace(
+        "@\[article=([0-9]+)\](.*?)\[/article\]@i",
+        "<a href=\"/articles/articles_detail.php?selected_article_id=$1\" class=\"standard_tile_link_black\">$2</a>",
+        $alcode
+    );
+
+    $alcode = preg_replace(
+        "@\[company=([0-9]+)\](.*?)\[/company\]@i",
+        "<a href=\"/games/games_main_list.php?developer=$1&action=search\" class=\"standard_tile_link_black\">$2</a>",
+        $alcode
+    );
+
+    $alcode = preg_replace(
+        "@\[releaseYear=([0-9]+)\](.*?)\[/releaseYear\]@i",
+        "<a href=\"/games/games_main_list.php?year_input=$1&action=search\" class=\"standard_tile_link_black\">$2</a>",
+        $alcode
+    );
+
     return $alcode;
 }
 
@@ -1750,7 +1786,7 @@ function create_log_entry($section, $section_id, $subsection, $subsection_id, $a
             $subsection_name = $query_data['pub_dev_name'];
             $subsection_id = $query_data['game_release_id'];
         }
-        
+
         if ($subsection == 'Crew') {
             // get the distributor name
             $query_crew = "SELECT * FROM crew
