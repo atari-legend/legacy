@@ -133,7 +133,13 @@ function nickdelete(nick_id,ind_id) {
                 <input type="button" class="secondary_button" accesskey= "i" name="addbbcode2" value="I" onclick="bbstyle(2,'textfield')" onMouseOver="helpline('i')" />
                 <input type="button" class="secondary_button" accesskey="w" name="addbbcode6" value="URL" onClick="bbstyle(6,'textfield')" onMouseOver="helpline('h')" />
                 <input type="button" class="secondary_button" accesskey="x" name="addbbcode8" value="@" onClick="bbstyle(8,'textfield')" onMouseOver="helpline('e')" />
-                <textarea name="textfield" rows="15" class="primary_textarea" ONSELECT="javascript:storeCaret(this);" ONCLICK="javascript:storeCaret(this);" ONKEYUP="javascript:storeCaret(this);" ONCHANGE="javascript:storeCaret(this);">{$individuals.ind_profile}</textarea>
+                <input type="button" class="secondary_button" name="addbbcode18" value="Game" onClick="bbstyle(18,'textfield')">
+                <input type="button" class="secondary_button" name="addbbcode20" value="Review" onClick="bbstyle(20,'textfield')">
+                <input type="button" class="secondary_button" name="addbbcode22" value="Interview" onClick="bbstyle(22,'textfield')">
+                <input type="button" class="secondary_button" name="addbbcode24" value="Article" onClick="bbstyle(24,'textfield')">
+                <input type="button" class="secondary_button" name="addbbcode26" value="Company" onClick="bbstyle(26,'textfield')">
+                <input type="button" class="secondary_button" name="addbbcode28" value="Release Year" onClick="bbstyle(28,'textfield')">
+            <textarea name="textfield" rows="15" class="primary_textarea" ONSELECT="javascript:storeCaret(this);" ONCLICK="javascript:storeCaret(this);" ONKEYUP="javascript:storeCaret(this);" ONCHANGE="javascript:storeCaret(this);">{$individuals.ind_profile}</textarea>
                 <br>
                 <br>
                 <input type="submit" value="Update" class="secondary_button">
