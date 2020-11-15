@@ -98,7 +98,8 @@ function InsertALCode($alcode) {
 
     $alcode = preg_replace(
         "@\[interview=([0-9]+)\](.*?)\[/interview\]@i",
-        "<a href=\"/interviews/interviews_detail.php?selected_interview_id=$1\" class=\"standard_tile_link_black\">$2</a>",
+        "<a href=\"/interviews/interviews_detail.php?selected_interview_id=$1\""
+            ." class=\"standard_tile_link_black\">$2</a>",
         $alcode
     );
 
