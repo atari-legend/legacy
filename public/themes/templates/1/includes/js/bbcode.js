@@ -27,7 +27,13 @@ var is_win = ((clientPC.indexOf('win') != -1) || (clientPC.indexOf('16bit') != -
 var is_mac = (clientPC.indexOf('mac') != -1);
 
 // Define the bbCode tags
-bbtags = new Array('[b]', '[/b]', '[i]', '[/i]', '[u]', '[/u]', '[url=http://www.yourlink.com]', '[/url]', '[email]', '[/email]', '[hotspotUrl=#]', '[/hotspotUrl]', '[hotspot=]', '[/hotspot]', '[frontpage]', '[/frontpage]', '[screenstar]', '[/screenstar]');
+bbtags = new Array(
+    '[b]', '[/b]', '[i]', '[/i]', '[u]', '[/u]', '[url=http://www.yourlink.com]',
+    '[/url]', '[email]', '[/email]', '[hotspotUrl=#]', '[/hotspotUrl]', '[hotspot=]',
+    '[/hotspot]', '[frontpage]', '[/frontpage]', '[screenstar]', '[/screenstar]',
+    '[game=1234]', '[/game]', '[review=1234]', '[/review]', '[interview=1234]',
+    '[/interview]', '[article=1234]', '[/article]', '[company=1234]', '[/company]',
+    '[releaseYear=1989]', '[/releaseYear]');
 bbcode = new Array();
 imageTag = false;
 
@@ -41,7 +47,7 @@ function bbstyle (bbnumber, bbname) {
 
     if (bbnumber == -1) { // Close all open tags & default button names
         while (bbcode[0]) {
-            butnumber = arraypop(bbcode) - 1;
+            butnumber = bbcode.pop() - 1;
             txtarea.value += bbtags[butnumber + 1];
             buttext = eval('document.post.addbbcode' + butnumber + '.value');
             eval('document.post.addbbcode' + butnumber + '.value ="' + buttext.substr(0, (buttext.length - 1)) + '"');
@@ -75,7 +81,7 @@ function bbstyle (bbnumber, bbname) {
 
     if (donotinsert) {		// Close all open tags up to the one just clicked & default button names
         while (bbcode[bblast]) {
-            butnumber = arraypop(bbcode) - 1;
+            butnumber = bbcode.pop() - 1;
             txtarea.value += bbtags[butnumber + 1];
             buttext = eval('document.post.addbbcode' + butnumber + '.value');
             eval('document.post.addbbcode' + butnumber + '.value ="' + buttext.substr(0, (buttext.length - 1)) + '"');
@@ -86,7 +92,7 @@ function bbstyle (bbnumber, bbname) {
     } else { // Open tags
         if (imageTag && (bbnumber != 14)) {		// Close image tag before adding another
             txtarea.value += bbtags[15];
-            lastValue = arraypop(bbcode) - 1;	// Remove the close image tag from the list
+            lastValue = bbcode.pop() - 1;	// Remove the close image tag from the list
             document.post.addbbcode14.value = 'Img';	// Return button back to normal state
             imageTag = false;
         }
@@ -94,7 +100,7 @@ function bbstyle (bbnumber, bbname) {
         // Open tag
         txtarea.value += bbtags[bbnumber];
         if ((bbnumber == 14) && (imageTag == false)) imageTag = 1; // Check to stop additional tags after an unclosed image tag
-        arraypush(bbcode, bbnumber + 1);
+        bbcode.push(bbnumber + 1);
         eval('document.post.addbbcode' + bbnumber + '.value += "*"');
         txtarea.focus();
         return;
@@ -157,6 +163,25 @@ function previewText (text) {
     }
     text = text.replaceAll('[/hotspotUrl]', '</a>');
     text = text.replaceAll('[/hotspot]', '</a>');
+
+    text = text.replace(/\[game=([0-9]+)\]/ig, '<a href="/games/games_detail.php?game_id=$1">');
+    text = text.replace(/\[\/game\]/ig, '</a>');
+
+    text = text.replace(/\[review=([0-9]+)\]/ig, '<a href="/games/games_reviews_detail.php?review_id=$1">');
+    text = text.replace(/\[\/review\]/ig, '</a>');
+
+    text = text.replace(/\[interview=([0-9]+)\]/ig, '<a href="/interviews/interviews_detail.php?selected_interview_id=$1">');
+    text = text.replace(/\[\/interview\]/ig, '</a>');
+
+    text = text.replace(/\[article=([0-9]+)\]/ig, '<a href="/articles/articles_detail.php?selected_article_id=$1">');
+    text = text.replace(/\[\/article\]/ig, '</a>');
+
+    text = text.replace(/\[company=([0-9]+)\]/ig, '<a href="/games/games_main_list.php?developer=$1&action=search">');
+    text = text.replace(/\[\/company\]/ig, '</a>');
+
+    text = text.replace(/\[releaseYear=([0-9]+)\]/ig, '<a href="/games/games_main_list.php?year_input=$1&action=search">');
+    text = text.replace(/\[\/releaseYear\]/ig, '</a>');
+
     text = text.replaceAll(']', ' class=standard_tile_link_black>');
     return text;
 }
