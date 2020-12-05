@@ -1,5 +1,2 @@
 User-agent: *
-Disallow: /admin/
-Disallow: /data/database-dumps/
-
-Sitemap: https://www.atarilegend.com/front/sitemap_index.php
+Disallow: /
