@@ -186,7 +186,7 @@
                             <div class="no-wrap">
                                 <nav class="skin-menu">
                                     <ul class="side_navigation">
-                                        <li><a href="../../" class="sidebutton" id="main_side">MAIN SITE</a></li>
+                                        <li><a href="{$smarty.const.FRONT_URL}" class="sidebutton" id="main_side">MAIN SITE</a></li>
                                     </ul>
                                 </nav>
                             </div>
@@ -268,7 +268,7 @@
                                     {else}
                                         <form action="../../common/login/user_process_logout.php" method="post" name="login_form">
                                         <fieldset class="primary_fieldset">
-                                            <span class="log_on_text"><a href="../../main/front/front.php?" class="standard_tile_link_black"><i class="fa fa-desktop" aria-hidden="true"></i>&nbsp; Main site</a></span>
+                                            <span class="log_on_text"><a href="{$smarty.const.FRONT_URL}" class="standard_tile_link_black"><i class="fa fa-desktop" aria-hidden="true"></i>&nbsp; Main site</a></span>
                                             <br>
                                             <span class="log_on_text"><a href="../../admin/user/user_detail.php?user_id_selected={$user_session.user_id}" class="standard_tile_link_black"><i class="fa fa-user-circle-o" aria-hidden="true"></i>&nbsp; User Profile</a></span>
                                             <br><br>
@@ -368,7 +368,7 @@
                                 <li><a href="../administration/construction.php" title="Add magazines" class="subbutton">ADD MAGAZINES</a></li>
                             </ul>
                         </li>
-                        <li><a href="../../" class="topbutton" id="main_site">MAIN SITE</a></li>
+                        <li><a href="{$smarty.const.FRONT_URL}" class="topbutton" id="main_site">MAIN SITE</a></li>
                         <li><a href="http://www.atari-forum.com" class="topbutton" id="forum_top_cpanel">FORUM</a></li>
                     </ul>
                 </nav>

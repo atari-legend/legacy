@@ -52,6 +52,15 @@ $smtp_auth = true;
 $smtp_secure = 'ssl';
 ```
 
+* Create a PHP file containing some constants including the URL of the main site
+  in `public/php/config/local_settings.php`:
+
+```php
+<?php
+
+define("FRONT_URL", "http://localhost:8080");
+```
+
 # Contributing
 
 Use feature branches and open pull requests again the `development` branch. Once

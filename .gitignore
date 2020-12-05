@@ -16,6 +16,8 @@ public/data/database-backups/
 /public/php/config/connection_settings.php
 # exclude the SMTP settings file
 /public/php/config/email_settings.php
+# exclude local settings file
+/public/php/config/local_settings.php
 
 # exclude the SASS cache
 /public/themes/.sass-cache/

@@ -148,3 +148,6 @@ $user_avatar_save_path="../../../data/images/user_avatars/";
 //Dump
 $media_scan_path="../../data/images/media_scans/";
 $media_scan_save_path="../../../data/images/media_scans/";
+
+// Include environment-specific settings
+require('local_settings.php');
