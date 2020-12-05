@@ -28,7 +28,7 @@ RSYNC_FLAGS=(
 
 DEPLOY_USER=$1
 DEPLOY_HOST=$2
-DEPLOY_PATH=legacy.atarilegend.com
+DEPLOY_PATH=$3
 
 if [ -z "$DEPLOY_USER" ] || [ -z "$DEPLOY_HOST" ] || [ -z "$DEPLOY_PATH" ]; then
     echo "Missing mandatory deployment arguments"

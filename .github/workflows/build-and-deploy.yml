@@ -59,30 +59,7 @@ jobs:
         run: |
           eval "$(ssh-agent -s)"
           ssh-add - <<< "${{ secrets.DEPLOY_SSH_KEY }}"
-          ./.github/workflows/deploy.sh "${{ secrets.DEV_DEPLOY_USER }}" "${{ secrets.DEV_DEPLOY_HOST }}" "${{ secrets.DEV_DEPLOY_PATH }}"
-
-  deploy-prototype:
-    name: Deploy inside the Laravel prototype
-    runs-on: ubuntu-latest
-    needs: build
-    if: github.ref == 'refs/heads/development'
-    steps:
-      - uses: actions/checkout@v2
-      # Restore generated files from previous step
-      - uses: actions/download-artifact@v2
-        with:
-          name: website
-          path: public/
-      - name: Adjust .htaccess files to run inside the prototype folder
-        run: |
-          mv -f public/.htaccess.prototype public/.htaccess
-          rm -f public/php/.htaccess
-      - name: Deploy
-        run: |
-          eval "$(ssh-agent -s)"
-          ssh-add - <<< "${{ secrets.DEPLOY_SSH_KEY }}"
-          ./.github/workflows/deploy.sh "${{ secrets.DEV_DEPLOY_PROTOTYPE_USER }}" "${{ secrets.DEV_DEPLOY_PROTOTYPE_HOST }}" "${{ secrets.DEV_DEPLOY_PROTOTYPE_PATH }}"
-          ./.github/workflows/adjust-data-folder-prototype.sh "${{ secrets.DEV_DEPLOY_PROTOTYPE_USER }}" "${{ secrets.DEV_DEPLOY_PROTOTYPE_HOST }}" "${{ secrets.DEV_DEPLOY_PROTOTYPE_PATH }}"
+          ./.github/workflows/deploy.sh "${{ secrets.PROD_DEPLOY_USER }}" "${{ secrets.PROD_DEPLOY_HOST }}" "legacydev.atarilegend.com"
 
   deploy-prod:
     name: Deploy production
@@ -100,4 +77,4 @@ jobs:
         run: |
           eval "$(ssh-agent -s)"
           ssh-add - <<< "${{ secrets.DEPLOY_SSH_KEY }}"
-          ./.github/workflows/deploy.sh "${{ secrets.PROD_DEPLOY_USER }}" "${{ secrets.PROD_DEPLOY_HOST }}" "${{ secrets.PROD_DEPLOY_PATH }}"
+          ./.github/workflows/deploy.sh "${{ secrets.PROD_DEPLOY_USER }}" "${{ secrets.PROD_DEPLOY_HOST }}" "legacy.atarilegend.com"
