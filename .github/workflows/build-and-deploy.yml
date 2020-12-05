@@ -43,6 +43,24 @@ jobs:
           name: website
           path: public/
 
+  deploy-dev:
+    name: Deploy development
+    runs-on: ubuntu-latest
+    needs: build
+    if: github.ref == 'refs/heads/development'
+    steps:
+      - uses: actions/checkout@v2
+      # Restore generated files from previous step
+      - uses: actions/download-artifact@v2
+        with:
+          name: website
+          path: public/
+      - name: Deploy
+        run: |
+          eval "$(ssh-agent -s)"
+          ssh-add - <<< "${{ secrets.DEPLOY_SSH_KEY }}"
+          ./.github/workflows/deploy.sh "${{ secrets.PROD_DEPLOY_USER }}" "${{ secrets.PROD_DEPLOY_HOST }}" "${{ secrets.PROD_DEPLOY_PATH }}" "legacydev.atarilegend.com"
+
   deploy-prod:
     name: Deploy production
     runs-on: ubuntu-latest
@@ -59,4 +77,4 @@ jobs:
         run: |
           eval "$(ssh-agent -s)"
           ssh-add - <<< "${{ secrets.DEPLOY_SSH_KEY }}"
-          ./.github/workflows/deploy.sh "${{ secrets.PROD_DEPLOY_USER }}" "${{ secrets.PROD_DEPLOY_HOST }}" "${{ secrets.PROD_DEPLOY_PATH }}"
+          ./.github/workflows/deploy.sh "${{ secrets.PROD_DEPLOY_USER }}" "${{ secrets.PROD_DEPLOY_HOST }}" "${{ secrets.PROD_DEPLOY_PATH }}" "legacy.atarilegend.com"
