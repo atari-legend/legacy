@@ -14,6 +14,9 @@ RSYNC_FLAGS=(
     --exclude php/config/connection_settings.php
     # Exclude the email settings file from being deleted, as it's not in Git
     --exclude php/config/email_settings.php
+    # Exclude the local configuration file storing environment-specific settings
+    # as it's not in Git
+    --exclude php/config/local_settings.php
     # Exclude _elite folder, not in Git
     --exclude _elite
     # Exclude _stonish folder, not in Git
