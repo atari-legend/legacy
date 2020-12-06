@@ -109,15 +109,6 @@
                             <i class="fa fa-music" aria-hidden="true" title="Add Music"></i>
                         </a>
                     {/if}
-                    {if isset($line.boxscan)}
-                        <a href="../games/games_box.php?game_id={$line.game_id}" class="standard_tile_text_left">
-                            <i class="fa fa-cube" aria-hidden="true" title="Boxscan available"></i>
-                        </a>
-                    {else}
-                        <a href="../games/games_box.php?game_id={$line.game_id}" class="standard_tile_text_left" style="color:black;">
-                            <i class="fa fa-cube" aria-hidden="true" title="Add Boxscan"></i>
-                        </a>
-                    {/if}
                     {if isset($line.download)}
                         <a href="../games/games_upload.php?game_id={$line.game_id}" class="standard_tile_text_left">
                             <i class="fa fa-file-o" aria-hidden="true" title="Download available"></i>
