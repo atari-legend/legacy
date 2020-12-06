@@ -74,27 +74,4 @@
         </div>
     </fieldset>
 
-    {* ======== TEMPORARY START: Game Box Scans to move to Release *}
-    {if count($game_boxscans) > 0}
-        <br>
-        <fieldset class="secondary_fieldset">
-            <legend class="primary_legend">Game scans to merge</legend>
-            <div class="help-hint">
-                The scans below are currently associated to the game, and needs to be moved into a specific release.
-            </div>
-            <br>
-
-            {foreach from=$game_boxscans item=scan}
-                <a href="../../includes/show_image.php?file={$game_boxscan_path}{$scan.game_boxscan_id}.{$scan.imgext}" data-lightbox="image-2">
-                    <img src="{$game_boxscan_path}{$scan.game_boxscan_id}.{$scan.imgext}"
-                        style="display: inline; max-height: 150px; vertical-align: middle;">
-                </a>
-                {if $scan.game_boxscan_side == 0}Front{else}Back{/if} -
-                <a href="../games/db_games_release_scans.php?game_id={$game->getId()}&game_release_id={$release->getId()}&game_boxscan_id={$scan.game_boxscan_id}&imgext={$scan.imgext}&side={$scan.game_boxscan_side}&action=merge_game_boxscan">Move into this release ({$release->getDate()|date_format:"Y"|default:"[no date]"} {$release->getName()|default:""})</a>
-                <br>
-                <br>
-            {/foreach}
-        </fieldset>
-    {/if}
-    {* ======== TEMPORARY END: Game Box Scans to move to Release *}
 </div>

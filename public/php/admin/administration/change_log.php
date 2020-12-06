@@ -68,7 +68,8 @@ while ($log = $sql_log->fetch_array(MYSQLI_BOTH)) {
         $section_link = ("../games/games_detail.php" . '?game_id=' . $log['section_id']);
 
         if ($log['sub_section'] == 'Game' or $log['sub_section'] == 'AKA' or $log['sub_section'] == 'Year'
-            or $log['sub_section'] == 'Submission' or $log['sub_section'] == 'Sound hardware') {
+            or $log['sub_section'] == 'Submission' or $log['sub_section'] == 'Sound hardware'
+            or $log['sub_section'] == 'Box back' or $log['sub_section'] == 'Box front') {
             $subsection_link = ("../games/games_detail.php" . '?game_id=' . $log['sub_section_id']);
         }
 
@@ -101,11 +102,6 @@ while ($log = $sql_log->fetch_array(MYSQLI_BOTH)) {
         if ($log['sub_section'] == 'Mag score') {
             $subsection_link = ("../magazine/magazine_review_score.php" . '?game_id=' . $log['sub_section_id']
                 . '&game_name=' . $log['section_name']);
-        }
-
-        if ($log['sub_section'] == 'Box back' or $log['sub_section'] == 'Box front') {
-            $subsection_link = ("../games/games_box.php" . '?game_id=' . $log['sub_section_id'] . '&game_name='
-                . $log['section_name']);
         }
 
         if ($log['sub_section'] == 'Similar') {
