@@ -1,11 +1,13 @@
-# The AtariLegend project
+# Legacy AtariLegend source code
 
-[![Build Status](https://github.com/atari-legend/atari-legend/workflows/Build/badge.svg)](https://github.com/atari-legend/atari-legend/actions)
-[![Quality Score](https://scrutinizer-ci.com/g/atari-legend/atari-legend/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/atari-legend/atari-legend/)
+[![Build Status](https://github.com/atari-legend/legacy/workflows/Build/badge.svg)](https://github.com/atari-legend/legacy/actions)
+[![Quality Score](https://scrutinizer-ci.com/g/atari-legend/legacy/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/atari-legend/legacy/)
 
 AtariLegend is a website for Atari ST enthusiasts and retro gamers in general.
-The site has been up since 2004, but was abandoned around 2009. It is time for
-an update/upgrade :wink:
+
+This repository contains the source code for the legacy public site and control
+panel (aka CPANEL). The public site has been reimplemented in 2020, See the [main](https://github.com/atari-legend/atari-legend)
+repository. The control panel still runs on the code base of this repository.
 
 # Local installation
 
