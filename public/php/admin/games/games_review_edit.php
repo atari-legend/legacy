@@ -101,7 +101,7 @@ if (isset($reviewid) and isset($game_id)) {
         $smarty->append('screenshots', array(
             'screenshot_id' => $screenshots['screenshot_id'],
             'screenshot_link' => $v_screenshot,
-            'screenshot_comment' => htmlentities($screencomment['comment_text']),
+            'screenshot_comment' => htmlentities($screencomment['comment_text'] ?? ''),
             'screenshot_id' => $screenshots[2],
             'review_screenshot_count' => $i,
         ));
