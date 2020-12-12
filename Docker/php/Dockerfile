@@ -1,4 +1,6 @@
-FROM php:7.3-apache
+FROM php:7.4-apache
+
+RUN mv "$PHP_INI_DIR/php.ini-development" "$PHP_INI_DIR/php.ini"
 
 RUN curl -sL https://deb.nodesource.com/setup_12.x | bash -
 
@@ -13,7 +15,7 @@ RUN apt-get update && apt-get install -y \
     nodejs
 
 RUN docker-php-ext-install mysqli
-RUN docker-php-ext-configure gd --with-jpeg-dir=/usr/include
+RUN docker-php-ext-configure gd --with-jpeg
 RUN docker-php-ext-install gd
 
 RUN a2enmod rewrite
