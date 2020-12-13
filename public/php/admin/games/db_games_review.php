@@ -188,8 +188,10 @@ if ($action == 'edit_review' or $action == 'submitted') {
 
     $textfield = $mysqli->real_escape_string($textfield);
 
+    $draft = $draft ?? 0;
+
     $sdbquery = $mysqli->query("UPDATE review_main set user_id = '$members', review_text = '$textfield',
-        review_date = '$date', review_edit = '0'
+        review_date = '$date', review_edit = '0', draft = $draft
         WHERE review_id = '$reviewid'") or die("Couldn't update review_main");
 
     //check if comment already exists for this shot

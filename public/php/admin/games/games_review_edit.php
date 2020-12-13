@@ -54,7 +54,8 @@ if (isset($reviewid) and isset($game_id)) {
                                review_graphics,
                                review_sound,
                                review_gameplay,
-                               review_overall
+                               review_overall,
+                               draft
                                FROM review_game
                                LEFT JOIN review_main ON ( review_game.review_id = review_main.review_id )
                                LEFT JOIN review_score ON ( review_main.review_id = review_score.review_id )
@@ -73,7 +74,8 @@ if (isset($reviewid) and isset($game_id)) {
             'review_graphics' => $edit_review['review_graphics'],
             'review_sound' => $edit_review['review_sound'],
             'review_gameplay' => $edit_review['review_gameplay'],
-            'review_overall' => $edit_review['review_overall']
+            'review_overall' => $edit_review['review_overall'],
+            'review_draft' => $edit_review['draft'],
         ));
     }
 

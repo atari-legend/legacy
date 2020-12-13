@@ -68,7 +68,8 @@ while ($interview = $sql_interview->fetch_array(MYSQLI_BOTH)) {
         'interview_ind_name' => $interview['ind_name'],
         'interview_author' => $author_id ,
         'interview_author_name' => $interview['userid'],
-        'interview_ind_id' => $interview['ind_id']
+        'interview_ind_id' => $interview['ind_id'],
+        'interview_draft' => $interview['draft'],
     ));
 }
 

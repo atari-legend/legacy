@@ -119,6 +119,12 @@
                             </a>
                         {/if}
                     </div>
+                    {if $line.interview_draft}
+                        <div style="float: right" class="text-danger">
+                            <i class="fa fa-file-text-o" aria-hidden="true"></i>
+                            <b>DRAFT</b>
+                        </div>
+                    {/if}
                     <h4 style="white-space: nowrap;overflow: hidden;text-overflow: ellipsis">
                         <a href="../interviews/interviews_edit.php?interview_id={$line.interview_id}" class="standard_tile_link">{$line.individual_name}</a>
                     </h4>

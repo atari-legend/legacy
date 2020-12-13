@@ -69,7 +69,8 @@ while ($article = $sql_article->fetch_array(MYSQLI_BOTH)) {
         'article_intro' => $article['article_intro'],
         'article_type_id' => $article['article_type_id'],
         'article_text' => $article['article_text'],
-        'article_author' => $article['user_id']
+        'article_author' => $article['user_id'],
+        'article_draft' => $article['draft'],
     ));
 }
 
