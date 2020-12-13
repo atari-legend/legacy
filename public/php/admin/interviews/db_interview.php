@@ -329,7 +329,8 @@ if (isset($action) and $action == 'update_interview' and (!isset($action2))) {
         "db_interview: Update Draft status",
         $mysqli,
         "UPDATE interview_main set draft = ? where interview_id = ?",
-        "ii", $draft, $interview_id);
+        "ii", $draft, $interview_id
+    );
 
     //we're gonna add the screenhots into the screenshot_interview table and fill up the interview_comment table.
     //We need to loop on the screenshot table to check the shots used. If a comment field is filled,
