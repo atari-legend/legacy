@@ -334,7 +334,8 @@ if (isset($action) and $action == 'add_review') {
 
     $user_id_review = $_SESSION['user_id'];
 
-    $sdbquery = $mysqli->query("INSERT INTO review_main (review_date, user_id, draft) VALUES ('$date',$user_id_review, 1)")
+    $sdbquery = $mysqli->query("INSERT INTO review_main (review_date, user_id, draft)
+        VALUES ('$date',$user_id_review, 1)")
         or die("Couldn't insert into review_main");
 
     //get the id of the inserted review
