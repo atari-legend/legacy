@@ -380,7 +380,7 @@ if (isset($action) and $action == 'update_interview' and (!isset($action2))) {
         header("Location: ../interviews/interviews_main.php");
     } else {
         include("../../config/admin_rights.php");
-        $sdbquery = $mysqli->query("INSERT INTO interview_main (ind_id) VALUES ($individual_create)")
+        $sdbquery = $mysqli->query("INSERT INTO interview_main (ind_id, draft) VALUES ($individual_create, 1)")
             or die("Couldn't insert into interview_main");
 
         //get the id of the inserted interview

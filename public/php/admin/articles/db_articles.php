@@ -347,7 +347,7 @@ if (isset($action) and $action == 'update_article' and (!isset($action2))) {
     } else {
         include("../../config/admin_rights.php");
 
-        $sdbquery = $mysqli->query("INSERT INTO article_main (user_id) VALUES ($user_id)")
+        $sdbquery = $mysqli->query("INSERT INTO article_main (user_id, draft) VALUES ($user_id, 1)")
             or die("Couldn't insert into article_main");
 
         //get the id of the inserted interview
