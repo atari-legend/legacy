@@ -170,11 +170,11 @@
                             <br>
                         </div>
                     </fieldset>
-                </div>
                 {else}
                     There are currently no screenshots attached to this game. Go to the<a href="../games/games_detail.php?game_id={$game.game_id}" class="MAINNAV"> screenshot adding</a>
                     page to link specific screenshots to this game.
                 {/if}
+                </div>
                 <br>
                 <br>
                 <input type="hidden" name="action" value="{if isset($action) and $action == 'submitted'}submitted{else}edit_review{/if}">
