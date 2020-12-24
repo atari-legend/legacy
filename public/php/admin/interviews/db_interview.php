@@ -23,6 +23,8 @@ include("../../config/admin.php");
 //include("../../config/admin_rights.php"); /*--> We can not use it like this because of the ajax.
 // redirecting does not work correctly with the inheritance of Ajax.
 
+require_once __DIR__."/../../lib/Db.php" ;
+
 if (isset($action) and $action == "stop") {
     echo "test";
     exit;
@@ -320,6 +322,16 @@ if (isset($action) and $action == 'update_interview' and (!isset($action2))) {
             '$textchapters')") or die("Couldn't insert into interview_text");
     }
 
+    // Update draft status
+    $draft = $draft ?? 0;
+
+    $stmt = \AL\Db\execute_query(
+        "db_interview: Update Draft status",
+        $mysqli,
+        "UPDATE interview_main set draft = ? where interview_id = ?",
+        "ii", $draft, $interview_id
+    );
+
     //we're gonna add the screenhots into the screenshot_interview table and fill up the interview_comment table.
     //We need to loop on the screenshot table to check the shots used. If a comment field is filled,
     //the screenshot was used!
@@ -368,7 +380,7 @@ if (isset($action) and $action == 'update_interview' and (!isset($action2))) {
         header("Location: ../interviews/interviews_main.php");
     } else {
         include("../../config/admin_rights.php");
-        $sdbquery = $mysqli->query("INSERT INTO interview_main (ind_id) VALUES ($individual_create)")
+        $sdbquery = $mysqli->query("INSERT INTO interview_main (ind_id, draft) VALUES ($individual_create, 1)")
             or die("Couldn't insert into interview_main");
 
         //get the id of the inserted interview

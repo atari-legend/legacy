@@ -103,7 +103,8 @@ while ($query_interview = $sql_interview->fetch_array(MYSQLI_BOTH)) {
         'interview_id' => $query_interview['interview_id'],
         'interview_date' => $v_interview_date,
         'interview_img' => $v_ind_image,
-        'interview_intro' => $interview_text
+        'interview_intro' => $interview_text,
+        'interview_draft' => $query_interview['draft'],
     ));
 }
 

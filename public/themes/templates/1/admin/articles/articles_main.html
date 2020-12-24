@@ -80,6 +80,12 @@
                 <tr>
                     <td>
                     <div class="standard_tile_padding">
+                        {if $line.article_draft}
+                            <div style="float: right" class="text-danger">
+                                <i class="fa fa-file-text-o" aria-hidden="true"></i>
+                                <b>DRAFT</b>
+                            </div>
+                            {/if}
                         <h4 style="white-space: nowrap;overflow: hidden;text-overflow: ellipsis">
                             <a href="../articles/articles_edit.php?article_id={$line.article_id}" class="standard_tile_link">{$line.article_title}</a>
                         </h4>

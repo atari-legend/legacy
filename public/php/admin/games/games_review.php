@@ -52,7 +52,8 @@ $RESULTGAME = "SELECT
     pub_dev.pub_dev_id,
     users.userid,
     review_main.review_date,
-    review_main.review_id
+    review_main.review_id,
+    review_main.draft
     FROM game
     LEFT JOIN game_developer ON ( game.game_id = game_developer.game_id )
     LEFT JOIN pub_dev ON ( game_developer.dev_pub_id = pub_dev.pub_dev_id )
@@ -82,6 +83,7 @@ if ($rows > 0) {
             'game_developer' => $row['pub_dev_name'],
             'review_date' => $review_date,
             'review_id' => $row['review_id'],
+            'review_draft' => $row['draft'],
             'username' => $row['userid']
         ));
     }

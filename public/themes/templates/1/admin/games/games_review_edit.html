@@ -97,6 +97,13 @@
                         <div>{html_select_date time=$edit_review.review_date start_year="2000" class="standard_select"}</div>
                     </div>
                     <br>
+                    <div>
+                        <div class="checkbox_alt">
+                            <input type="checkbox" value="1" {if $edit_review.review_draft}checked{/if} id="draft" name="draft">&nbsp;&nbsp;Draft
+                            <label for="draft"></label>
+                        </div>
+                    </div>
+                    <br>
                     <br>
                     <b>Review :</b>
                     <br>
@@ -163,11 +170,11 @@
                             <br>
                         </div>
                     </fieldset>
-                </div>
                 {else}
                     There are currently no screenshots attached to this game. Go to the<a href="../games/games_detail.php?game_id={$game.game_id}" class="MAINNAV"> screenshot adding</a>
                     page to link specific screenshots to this game.
                 {/if}
+                </div>
                 <br>
                 <br>
                 <input type="hidden" name="action" value="{if isset($action) and $action == 'submitted'}submitted{else}edit_review{/if}">

@@ -123,6 +123,13 @@
                             <div>{html_select_date time=$article.article_date start_year="2000" class="standard_select"}</div>
                         </div>
                         <br>
+                        <div>
+                            <div class="checkbox_alt">
+                                <input type="checkbox" value="1" {if $article.article_draft}checked{/if} id="draft" name="draft">&nbsp;&nbsp;Draft
+                                <label for="draft"></label>
+                            </div>
+                        </div>
+                        <br>
                         <br>
                         <b>Intro :</b>
                         <br>

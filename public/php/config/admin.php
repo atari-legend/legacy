@@ -21,10 +21,5 @@ include("../../common/tiles/tile_bug_report.php");
 // DB upgrade script when we auto-deploy on DEV
 if (php_sapi_name() !== "cli" && login_check($mysqli) == false) {
     $_SESSION['edit_message'] = "Please log in to use this functionality";
-    if (isset($_SERVER['HTTP_REFERER'])) {
-        header('Location: ' . $_SERVER['HTTP_REFERER']);
-    } else {
-        header('Location:../../main/front/front.php');
-    }
-    die('');
+    header('Location:../../main/front/front.php');
 }

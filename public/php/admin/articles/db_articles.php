@@ -278,9 +278,12 @@ if (isset($action) and $action == 'delete_screenshot_comment') {
 //If the Update article has been triggered
 if (isset($action) and $action == 'update_article' and (!isset($action2))) {
     include("../../config/admin_rights.php");
+
+    $draft = $draft ?? 0;
     //First, we'll be filling up the main article table
-    $sdbquery = $mysqli->query("UPDATE article_main SET user_id = $members, article_type_id = $article_type
-               WHERE article_id = $article_id") or die("Couldn't Update into article_main");
+    $sdbquery = $mysqli->query("UPDATE article_main SET user_id = $members, article_type_id = $article_type,
+                draft = $draft
+               WHERE article_id = $article_id") or die("Couldn't Update into article_main: ".$mysqli->error);
 
     // first we have to convert the date vars into a time stamp to be inserted to article_date
     $date = date_to_timestamp($Date_Year, $Date_Month, $Date_Day);
@@ -344,7 +347,7 @@ if (isset($action) and $action == 'update_article' and (!isset($action2))) {
     } else {
         include("../../config/admin_rights.php");
 
-        $sdbquery = $mysqli->query("INSERT INTO article_main (user_id) VALUES ($user_id)")
+        $sdbquery = $mysqli->query("INSERT INTO article_main (user_id, draft) VALUES ($user_id, 1)")
             or die("Couldn't insert into article_main");
 
         //get the id of the inserted interview

@@ -50,24 +50,35 @@ switch ($extraParams) {
 
     case "individual":
         $stmt = $mysqli->prepare(
-            "SELECT ind_id, ind_name
-            FROM individuals
-            WHERE LOWER(ind_name) LIKE CONCAT('%',LOWER(?),'%')"
+            "SELECT
+                ind_id,
+                ind_name,
+                GROUP_CONCAT(game.game_name SEPARATOR ', ') AS games
+            FROM
+                individuals
+            LEFT JOIN game_individual ON game_individual.individual_id = individuals.ind_id
+            LEFT JOIN game ON game.game_id = game_individual.game_id
+            WHERE
+                LOWER(ind_name) LIKE CONCAT('%',LOWER(?),'%')
+            GROUP BY
+                ind_id"
         )
         or
         die("Error querying individuals: ".$mysqli->error);
 
         $stmt->bind_param("s", $term);
         $stmt->execute();
-        $stmt->bind_result($ind_id, $ind_name);
+        $stmt->bind_result($ind_id, $ind_name, $games);
 
         // phpcs:disable Generic.WhiteSpace.ScopeIndent
         while ($stmt->fetch()) {
+            $short_games = (strlen($games) > 45) ? substr($games, 0, 45 - strlen('…')).'…' : $games;
+            $short_games = (strlen($short_games) > 0) ? ' ('.$short_games.')' : '';
             array_push(
                 $json,
                 array(
                     "value" => $ind_id,
-                    "label" => $ind_name
+                    "label" => $ind_name.$short_games
                 )
             );
         }

@@ -188,8 +188,10 @@ if ($action == 'edit_review' or $action == 'submitted') {
 
     $textfield = $mysqli->real_escape_string($textfield);
 
+    $draft = $draft ?? 0;
+
     $sdbquery = $mysqli->query("UPDATE review_main set user_id = '$members', review_text = '$textfield',
-        review_date = '$date', review_edit = '0'
+        review_date = '$date', review_edit = '0', draft = $draft
         WHERE review_id = '$reviewid'") or die("Couldn't update review_main");
 
     //check if comment already exists for this shot
@@ -332,7 +334,8 @@ if (isset($action) and $action == 'add_review') {
 
     $user_id_review = $_SESSION['user_id'];
 
-    $sdbquery = $mysqli->query("INSERT INTO review_main (review_date, user_id) VALUES ('$date',$user_id_review)")
+    $sdbquery = $mysqli->query("INSERT INTO review_main (review_date, user_id, draft)
+        VALUES ('$date',$user_id_review, 1)")
         or die("Couldn't insert into review_main");
 
     //get the id of the inserted review
@@ -345,7 +348,7 @@ if (isset($action) and $action == 'add_review') {
 
     //Then, we'll be filling up the game review table
     $sdbquery = $mysqli->query("INSERT INTO review_game (review_id, game_id) VALUES ($reviewid, $game_create)")
-        or die("Couldn't insert into review_game");
+        or die("Couldn't insert into review_game: ".$mysqli->error);
 
     create_log_entry('Games', $game_create, 'Review', $reviewid, 'Insert', $_SESSION['user_id']);
 
