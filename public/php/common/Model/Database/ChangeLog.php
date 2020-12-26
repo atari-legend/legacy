@@ -233,10 +233,9 @@ class ChangeLog {
             && array_key_exists($this->sub_section, $messages[$this->section])
             && array_key_exists($this->action, $messages[$this->section][$this->sub_section])) {
             return $messages[$this->section][$this->sub_section][$this->action];
-        } else{
+        } else {
             return "ERROR: Message missing in ChangeLog.php for section {$this->section},
                 sub-section {$this->sub_section}, action {$this->action}";
         }
-
     }
 }

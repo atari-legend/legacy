@@ -118,7 +118,7 @@ if (isset($action2) and $action2 == 'add_screens') {
             'article_screenshot' => $v_int_image,
             'article_screenshot_id' => $screenshots['screenshot_id'],
             'article_screenshot_count' => $count,
-            'article_screenshot_comment' => $comments['comment_text']
+            'article_screenshot_comment' => $comments['comment_text'] ?? ''
         ));
 
         $count = $count + 1;
