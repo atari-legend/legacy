@@ -166,6 +166,10 @@ class ChangeLog {
                     "Update" => "Updated the boxscan of $section_name",
                     "Insert" => "Added boxscan to $section_name",
                     "Delete" => "Removed a boxscan from $section_name"),
+                "Comment" => array(
+                    "Update" => "Updated a comment on $section_name",
+                    "Insert" => "Added a comment on $section_name",
+                    "Delete" => "Removed a comment on $section_name"),
                 "Creator" => array(
                     "Update" => "Updated $section_name",
                     "Insert" => "Added $sub_section_name to $section_name",
@@ -218,9 +222,21 @@ class ChangeLog {
                     "Update" => "Updated $section_name",
                     "Insert" => "Added sound hardware to $section_name",
                     "Delete" => "Updated $section_name"),
+                "Submission" => array(
+                    "Update" => "Updated info submission for $section_name",
+                    "Insert" => "Submitted info for $section_name",
+                    "Delete" => "Removed an info submission for $section_name"),
             )
         );
 
-        return $messages[$this->section][$this->sub_section][$this->action];
+        if (array_key_exists($this->section, $messages)
+            && array_key_exists($this->sub_section, $messages[$this->section])
+            && array_key_exists($this->action, $messages[$this->section][$this->sub_section])) {
+            return $messages[$this->section][$this->sub_section][$this->action];
+        } else{
+            return "ERROR: Message missing in ChangeLog.php for section {$this->section},
+                sub-section {$this->sub_section}, action {$this->action}";
+        }
+
     }
 }
