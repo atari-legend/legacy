@@ -136,7 +136,7 @@ if (isset($action2) and $action2 == 'add_screens') {
             'interview_screenshot' => $v_int_image,
             'interview_screenshot_id' => $screenshots['screenshot_id'],
             'interview_screenshot_count' => $count,
-            'interview_screenshot_comment' => htmlentities($comments['comment_text'])
+            'interview_screenshot_comment' => htmlentities($comments['comment_text'] ?? '')
         ));
         $count = $count + 1;
     }
