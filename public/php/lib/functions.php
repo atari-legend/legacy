@@ -86,38 +86,50 @@ function InsertALCode($alcode) {
 
     $alcode = preg_replace(
         "@\[game=([0-9]+)\](.*?)\[/game\]@i",
-        "<a href=\"/games/games_detail.php?game_id=$1\" class=\"standard_tile_link_black\">$2</a>",
+        "<a href=\"".FRONT_URL."/games/$1\" class=\"standard_tile_link_black\">$2</a>",
         $alcode
     );
 
     $alcode = preg_replace(
         "@\[review=([0-9]+)\](.*?)\[/review\]@i",
-        "<a href=\"/games/games_reviews_detail.php?review_id=$1\" class=\"standard_tile_link_black\">$2</a>",
+        "<a href=\"".FRONT_URL."/reviews/$1\" class=\"standard_tile_link_black\">$2</a>",
         $alcode
     );
 
     $alcode = preg_replace(
         "@\[interview=([0-9]+)\](.*?)\[/interview\]@i",
-        "<a href=\"/interviews/interviews_detail.php?selected_interview_id=$1\""
+        "<a href=\"".FRONT_URL."/interviews/$1\""
             ." class=\"standard_tile_link_black\">$2</a>",
         $alcode
     );
 
     $alcode = preg_replace(
         "@\[article=([0-9]+)\](.*?)\[/article\]@i",
-        "<a href=\"/articles/articles_detail.php?selected_article_id=$1\" class=\"standard_tile_link_black\">$2</a>",
+        "<a href=\"".FRONT_URL."/articles/$1\" class=\"standard_tile_link_black\">$2</a>",
         $alcode
     );
 
     $alcode = preg_replace(
-        "@\[company=([0-9]+)\](.*?)\[/company\]@i",
-        "<a href=\"/games/games_main_list.php?developer=$1&action=search\" class=\"standard_tile_link_black\">$2</a>",
+        "@\[developer=([0-9]+)\](.*?)\[/developer\]@i",
+        "<a href=\"".FRONT_URL."/games/search?developer_id=$1\" class=\"standard_tile_link_black\">$2</a>",
         $alcode
     );
 
     $alcode = preg_replace(
-        "@\[releaseYear=([0-9]+)\](.*?)\[/releaseYear\]@i",
-        "<a href=\"/games/games_main_list.php?year_input=$1&action=search\" class=\"standard_tile_link_black\">$2</a>",
+        "@\[publisher=([0-9]+)\](.*?)\[/publisher\]@i",
+        "<a href=\"".FRONT_URL."/games/search?publisher_id=$1\" class=\"standard_tile_link_black\">$2</a>",
+        $alcode
+    );
+
+    $alcode = preg_replace(
+        "@\[individual=([0-9]+)\](.*?)\[/individual\]@i",
+        "<a href=\"".FRONT_URL."/games/search?individual_id=$1\" class=\"standard_tile_link_black\">$2</a>",
+        $alcode
+    );
+
+    $alcode = preg_replace(
+        "@\[releaseYear]([0-9]+)\[/releaseYear\]@i",
+        "<a href=\"".FRONT_URL."/games/search?year_id=$1\" class=\"standard_tile_link_black\">$1</a>",
         $alcode
     );
 
