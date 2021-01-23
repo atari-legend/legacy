@@ -32,8 +32,9 @@ bbtags = new Array(
     '[/url]', '[email]', '[/email]', '[hotspotUrl=#]', '[/hotspotUrl]', '[hotspot=]',
     '[/hotspot]', '[frontpage]', '[/frontpage]', '[screenstar]', '[/screenstar]',
     '[game=1234]', '[/game]', '[review=1234]', '[/review]', '[interview=1234]',
-    '[/interview]', '[article=1234]', '[/article]', '[company=1234]', '[/company]',
-    '[releaseYear=1989]', '[/releaseYear]');
+    '[/interview]', '[article=1234]', '[/article]', '[developer=1234]', '[/developer]',
+    '[releaseYear]', '[/releaseYear]', '[publisher=1234]', '[/publisher]',
+    '[individual=1234]', '[/individual]');
 bbcode = new Array();
 imageTag = false;
 
@@ -129,6 +130,7 @@ function storeCaret (textEl) {
 
 // This function is used for the 'on the fly' previews of interviews and reviews
 function previewText (text) {
+    frontBaseUrl = window.AL_FRONT_URL || '';
     text = text.replace(/</g, '&lt;').replace(/>/g, '&gt;');
     text = text.replace(/\n\r?/g, '<br />');
     text = text.replaceAll('[b]', '<b>');
@@ -164,22 +166,28 @@ function previewText (text) {
     text = text.replaceAll('[/hotspotUrl]', '</a>');
     text = text.replaceAll('[/hotspot]', '</a>');
 
-    text = text.replace(/\[game=([0-9]+)\]/ig, '<a href="/games/games_detail.php?game_id=$1">');
+    text = text.replace(/\[game=([0-9]+)\]/ig, '<a href="'+frontBaseUrl+'/games/$1">');
     text = text.replace(/\[\/game\]/ig, '</a>');
 
-    text = text.replace(/\[review=([0-9]+)\]/ig, '<a href="/games/games_reviews_detail.php?review_id=$1">');
+    text = text.replace(/\[review=([0-9]+)\]/ig, '<a href="'+frontBaseUrl+'/reviews/$1">');
     text = text.replace(/\[\/review\]/ig, '</a>');
 
-    text = text.replace(/\[interview=([0-9]+)\]/ig, '<a href="/interviews/interviews_detail.php?selected_interview_id=$1">');
+    text = text.replace(/\[interview=([0-9]+)\]/ig, '<a href="'+frontBaseUrl+'/interviews/$1">');
     text = text.replace(/\[\/interview\]/ig, '</a>');
 
-    text = text.replace(/\[article=([0-9]+)\]/ig, '<a href="/articles/articles_detail.php?selected_article_id=$1">');
+    text = text.replace(/\[article=([0-9]+)\]/ig, '<a href="'+frontBaseUrl+'/articles/$1">');
     text = text.replace(/\[\/article\]/ig, '</a>');
 
-    text = text.replace(/\[company=([0-9]+)\]/ig, '<a href="/games/games_main_list.php?developer=$1&action=search">');
-    text = text.replace(/\[\/company\]/ig, '</a>');
+    text = text.replace(/\[developer=([0-9]+)\]/ig, '<a href="'+frontBaseUrl+'/games/search?developer_id=$1">');
+    text = text.replace(/\[\/developer\]/ig, '</a>');
 
-    text = text.replace(/\[releaseYear=([0-9]+)\]/ig, '<a href="/games/games_main_list.php?year_input=$1&action=search">');
+    text = text.replace(/\[publisher=([0-9]+)\]/ig, '<a href="'+frontBaseUrl+'/games/search?publisher_id=$1">');
+    text = text.replace(/\[\/publisher\]/ig, '</a>');
+
+    text = text.replace(/\[individual=([0-9]+)\]/ig, '<a href="'+frontBaseUrl+'/games/search?individual_id=$1">');
+    text = text.replace(/\[\/individual\]/ig, '</a>');
+
+    text = text.replace(/\[releaseYear]([0-9]+)/ig, '<a href="'+frontBaseUrl+'/games/search?year_id=$1">');
     text = text.replace(/\[\/releaseYear\]/ig, '</a>');
 
     text = text.replaceAll(']', ' class=standard_tile_link_black>');

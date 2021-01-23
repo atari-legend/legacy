@@ -46,6 +46,10 @@
         <script src="{$template_dir}includes/js/vendor/jquery-2.1.4.min.js"></script> <!-- main jquery stuff -->
         <script src="{$template_dir}includes/js/vendor/selectize-0.12.4.min.js"></script>
 
+        <script>
+            window.AL_FRONT_URL = '{$smarty.const.FRONT_URL}';
+        </script>
+
         {* Insert Google Analytics tags only on production *}
         {if $smarty.server.HTTP_HOST == $smarty.const.SITEHOST}
         {literal}
