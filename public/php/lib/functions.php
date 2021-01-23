@@ -842,7 +842,7 @@ function create_log_entry($section, $section_id, $subsection, $subsection_id, $a
         if ($subsection == 'Nickname') {
             if ($action == 'Delete') {
                 // we need to get the ind id
-                $query_ind = "SELECT ind_id FROM individual_nicks WHERE individual_nicks_id = '$section_id'";
+                $query_ind = "SELECT ind_id FROM individual_nicks WHERE nick_id = '$section_id'";
                 $result = $mysqli->query($query_ind) or die("getting individual id failed");
                 $query_data    = $result->fetch_array(MYSQLI_BOTH);
                 $section_id    = $query_data['ind_id'];
