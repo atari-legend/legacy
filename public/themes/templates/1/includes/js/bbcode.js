@@ -187,7 +187,7 @@ function previewText (text) {
     text = text.replace(/\[individual=([0-9]+)\]/ig, '<a href="'+frontBaseUrl+'/games/search?individual_id=$1">');
     text = text.replace(/\[\/individual\]/ig, '</a>');
 
-    text = text.replace(/\[releaseYear]([0-9]+)/ig, '<a href="'+frontBaseUrl+'/games/search?year_id=$1">');
+    text = text.replace(/\[releaseYear\]([0-9]+)/ig, '<a href="'+frontBaseUrl+'/games/search?year_id=$1">$1');
     text = text.replace(/\[\/releaseYear\]/ig, '</a>');
 
     text = text.replaceAll(']', ' class=standard_tile_link_black>');
