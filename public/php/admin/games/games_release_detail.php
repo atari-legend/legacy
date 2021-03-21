@@ -133,7 +133,7 @@ if ($_SERVER['REQUEST_METHOD'] == "GET") {
 
         $smarty->assign(
             'release',
-            new AL\Common\Model\Game\GameRelease(-1, $game->getId(), '', '', '', '', null, null)
+            new AL\Common\Model\Game\GameRelease(-1, $game->getId(), '', '', '', '', null, null, null, null, null)
         );
 
         $smarty->assign('system_incompatible', []);

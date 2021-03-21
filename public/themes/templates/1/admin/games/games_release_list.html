@@ -22,6 +22,7 @@
                             {/if}
                             {if $release->getName() != null} <small> as "{$release->getName()}"</small>{/if}
                             {if $release->getPublisher() != null} <small> by {$release->getPublisher()->getName()}</small>{/if}
+                            {if $release->getMenu() != null} <small>on {$release->getMenu()}</small>{/if}
                         </a>
 
                     </li>

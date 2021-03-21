@@ -15,6 +15,12 @@
             <input type="hidden" name="action" value="general">
             <input type="hidden" name="tab" value="general">
 
+            {if $release->getMenu()}
+                <label class="input">On menu</label>
+                {$release->getMenu()}
+                <br><br>
+            {/if}
+
             <label class="input">Release date</label>
             {html_select_date time=$release->getDate() year_empty="Unknown" start_year=1984 display_days=0 display_months=0 class="standard_select select_large"}
             <br>

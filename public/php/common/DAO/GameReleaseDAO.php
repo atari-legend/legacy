@@ -24,7 +24,7 @@ class GameReleaseDAO {
     const TYPE_UNOFFICIAL = 'Unofficial';
     const TYPE_DATADISK = 'Data disk';
     const TYPE_REVIEWCOPY = 'Review copy';
-    
+
     const STATUS_DEVELOPMENT = 'Development';
     const STATUS_UNFINISHED = 'Unfinished';
     const STATUS_UNRELEASED = 'Unreleased';
@@ -61,7 +61,7 @@ class GameReleaseDAO {
             GameReleaseDAO::TYPE_REVIEWCOPY
         );
     }
-    
+
     /**
      * Get all the game release status
      * @return String[] A list of game release status
@@ -124,13 +124,19 @@ class GameReleaseDAO {
             "GameRelaseDAO: getReleasesForGame",
             $this->mysqli,
             "SELECT
-                game_release.id, game_release.name, `date`, license, game_release.type,
-                pub_dev.pub_dev_id, pub_dev.pub_dev_name, pub_dev_text.pub_dev_profile, 
-                pub_dev_text.pub_dev_imgext, game_release.status, game_release.hd_installable, game_release.notes
+                game_release.id, game_release.name, game_release.`date`, license, game_release.type,
+                pub_dev.pub_dev_id, pub_dev.pub_dev_name, pub_dev_text.pub_dev_profile,
+                pub_dev_text.pub_dev_imgext, game_release.status, game_release.hd_installable, game_release.notes,
+                menu_sets.name, menus.number, menus.issue, menu_disks.part
             FROM game_release
             LEFT JOIN pub_dev ON game_release.pub_dev_id = pub_dev.pub_dev_id
             LEFT JOIN pub_dev_text ON pub_dev.pub_dev_id = pub_dev_text.pub_dev_id
-            WHERE game_id = ?
+            LEFT JOIN menu_disk_contents ON menu_disk_contents.game_release_id = game_release.id
+            LEFT JOIN menu_disks ON menu_disk_contents.menu_disk_id = menu_disks.id
+            LEFT JOIN menus ON menu_disks.menu_id = menus.id
+            LEFT JOIN menu_sets ON menu_sets.id = menus.menu_set_id
+            WHERE game_release.game_id = ?
+            GROUP BY game_release.id
             ORDER BY date ASC",
             "i", $game_id
         );
@@ -140,7 +146,8 @@ class GameReleaseDAO {
             $stmt,
             $id, $name, $date, $license, $type,
             $pub_dev_id, $pub_dev_name, $pub_dev_profile, $pub_dev_imgext,
-            $status, $hd_installable, $notes
+            $status, $hd_installable, $notes,
+            $menu_set_name, $menu_number, $menu_issue, $menu_disk_part
         );
 
         $releases = [];
@@ -150,7 +157,7 @@ class GameReleaseDAO {
                 ($pub_dev_id != null)
                     ? new \AL\Common\Model\PubDev\PubDev($pub_dev_id, $pub_dev_name, $pub_dev_profile, $pub_dev_imgext)
                     : null,
-                $status, $hd_installable, $notes
+                $status, $hd_installable, $notes, $menu_set_name.' '.$menu_number.' '.$menu_issue.' '.$menu_disk_part
             );
         }
 
@@ -170,14 +177,20 @@ class GameReleaseDAO {
             "GameReleaseDAO: getRelease: $release_id",
             $this->mysqli,
             "SELECT
-                game_release.id, game_id, game_release.name, `date`, license, game_release.type, 
-                pub_dev.pub_dev_id, pub_dev.pub_dev_name, pub_dev_text.pub_dev_profile, 
+                game_release.id, game_release.game_id, game_release.name, game_release.`date`, license, game_release.type,
+                pub_dev.pub_dev_id, pub_dev.pub_dev_name, pub_dev_text.pub_dev_profile,
                 pub_dev_text.pub_dev_imgext, game_release.status, game_release.hd_installable,
-                game_release.notes
+                game_release.notes,
+                menu_sets.name, menus.number, menus.issue, menu_disks.part
             FROM game_release
             LEFT JOIN pub_dev ON game_release.pub_dev_id = pub_dev.pub_dev_id
             LEFT JOIN pub_dev_text ON pub_dev.pub_dev_id = pub_dev_text.pub_dev_id
-            WHERE game_release.id = ?",
+            LEFT JOIN menu_disk_contents ON menu_disk_contents.game_release_id = game_release.id
+            LEFT JOIN menu_disks ON menu_disk_contents.menu_disk_id = menu_disks.id
+            LEFT JOIN menus ON menu_disks.menu_id = menus.id
+            LEFT JOIN menu_sets ON menu_sets.id = menus.menu_set_id
+            WHERE game_release.id = ?
+            GROUP BY game_release.id",
             "i", $release_id
         );
 
@@ -186,7 +199,8 @@ class GameReleaseDAO {
             $stmt,
             $id, $game_id, $name, $date, $license, $type,
             $pub_dev_id, $pub_dev_name, $pub_dev_profile, $pub_dev_imgext,
-            $status, $hd_installable, $notes
+            $status, $hd_installable, $notes,
+            $menu_set_name, $menu_number, $menu_issue, $menu_disk_part
         );
 
         $release = null;
@@ -196,7 +210,7 @@ class GameReleaseDAO {
                 ($pub_dev_id != null)
                     ? new \AL\Common\Model\PubDev\PubDev($pub_dev_id, $pub_dev_name, $pub_dev_profile, $pub_dev_imgext)
                     : null,
-                $status, $hd_installable, $notes
+                $status, $hd_installable, $notes, $menu_set_name.' '.$menu_number.' '.$menu_issue.' '.$menu_disk_part
             );
         }
 
@@ -335,8 +349,8 @@ class GameReleaseDAO {
 
         $stmt->close();
     }
-    
-    
+
+
     /**
      * Update the hd_installable attribute of a release
      *
