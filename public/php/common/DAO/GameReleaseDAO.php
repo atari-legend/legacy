@@ -177,8 +177,8 @@ class GameReleaseDAO {
             "GameReleaseDAO: getRelease: $release_id",
             $this->mysqli,
             "SELECT
-                game_release.id, game_release.game_id, game_release.name, game_release.`date`, license, game_release.type,
-                pub_dev.pub_dev_id, pub_dev.pub_dev_name, pub_dev_text.pub_dev_profile,
+                game_release.id, game_release.game_id, game_release.name, game_release.`date`, license,
+                game_release.type, pub_dev.pub_dev_id, pub_dev.pub_dev_name, pub_dev_text.pub_dev_profile,
                 pub_dev_text.pub_dev_imgext, game_release.status, game_release.hd_installable,
                 game_release.notes,
                 menu_sets.name, menus.number, menus.issue, menu_disks.part
