@@ -68,7 +68,7 @@ if (isset($crew_select)) {
 
     $crew = $sql_crew->fetch_array(MYSQLI_BOTH);
 
-    $crew_history = stripslashes($crew['crew_history']);
+    $crew_history = stripslashes($crew['crew_history'] ?? '');
 
     if (isset($crew['crew_logo']) and $crew['crew_logo'] !== '') {
         $crew_logo = "$crew_logo_path$crew_select.$crew[crew_logo]";
@@ -78,7 +78,7 @@ if (isset($crew_select)) {
 
     $smarty->assign('crew_select', array(
         'crew_id' => $crew_select,
-        'crew_name' => $crew['crew_name'],
+        'crew_name' => $crew['crew_name'] ?? '',
         'crew_logo' => $crew_logo,
         'crew_history' => $crew_history
     ));

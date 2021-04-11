@@ -38,7 +38,7 @@ if ($action == "insert_crew") {
         $new_crew = $mysqli->real_escape_string($new_crew);
 
         $mysqli->query("INSERT INTO crew (crew_name) VALUES ('$new_crew')");
-    
+
         $_SESSION['edit_message'] = "New crew has been added";
 
         $new_crew_id = $mysqli->insert_id;
@@ -122,44 +122,51 @@ if ($action == "delete_logo") {
 if ($action == "delete_crew") {
     if (isset($crew_select)) {
         //  First let's see if this crew is linked to a production
-        $sql = $mysqli->query("SELECT * FROM crew_menu_prod
-                               WHERE crew_id = '$crew_select'") or die("error selecting crew from crew_menu_prod");
+        $sql = $mysqli->query("SELECT * FROM crew_menu_set
+                               WHERE crew_id = '$crew_select'") or die($mysqli->error);
         if ($sql->num_rows > 0) {
-            $_SESSION['edit_message'] =  "This crew is still linked to a menu disk - remove that link first";
+            $_SESSION['edit_message'] =  "This crew is still linked to a menu set - remove that link first";
             header("Location: ../crew/crew_main.php");
         } else {
             $sql = $mysqli->query("SELECT * FROM crew_demo_prod
-                                   WHERE crew_id = '$crew_select'") or die("error selecting crew from crew_demo_prod");
+                                   WHERE crew_id = '$crew_select'") or die($mysqli->error);
             if ($sql->num_rows > 0) {
                 $_SESSION['edit_message'] = "This crew is still linked to a demo - remove that link first";
                 header("Location: ../crew/crew_main.php");
             } else {
-                $sql_crew = $mysqli->query("SELECT crew_logo FROM crew
-                    WHERE crew_id = '$crew_select'") or die("Couldn't query Crew database");
+                $sql = $mysqli->query("SELECT * FROM game_release_crew
+                                        WHERE crew_id = '$crew_select'") or die($mysqli->error);
+                if ($sql->num_rows > 0) {
+                    $_SESSION['edit_message'] = "This crew is still linked to a game release - remove that link first";
+                    header("Location: ../crew/crew_main.php");
+                } else {
+                    $sql_crew = $mysqli->query("SELECT crew_logo FROM crew
+                        WHERE crew_id = '$crew_select'") or die("Couldn't query Crew database");
 
-                $crew = $sql_crew->fetch_array(MYSQLI_BOTH);
+                    $crew = $sql_crew->fetch_array(MYSQLI_BOTH);
 
-                $crew_logo = $crew['crew_logo'];
-                if ($crew['crew_logo'] =! '') {
-                    unlink("$crew_logo_save_path$crew_select.$crew_logo");
+                    $crew_logo = $crew['crew_logo'];
+                    if ($crew['crew_logo'] =! '') {
+                        unlink("$crew_logo_save_path$crew_select.$crew_logo");
+                    }
+
+                    $_SESSION['edit_message'] = "Crew deleted";
+                    create_log_entry('Crew', $crew_select, 'Crew', $crew_select, 'Delete', $_SESSION['user_id']);
+
+                    $mysqli->query("DELETE FROM crew WHERE crew_id='$crew_select'")
+                        or die('Error: ' . mysqli_error($mysqli));
+                    ;
+                    $mysqli->query("DELETE FROM sub_crew WHERE crew_id='$crew_select'")
+                        or die('Error: ' . mysqli_error($mysqli));
+                    ;
+                    $mysqli->query("DELETE FROM sub_crew WHERE parent_id='$crew_select'")
+                        or die('Error: ' . mysqli_error($mysqli));
+                    ;
+                    $mysqli->query("DELETE FROM crew_individual WHERE crew_id='$crew_select'")
+                        or die('Error: ' . mysqli_error($mysqli));
+                    ;
+                    header("Location: ../crew/crew_main.php");
                 }
-
-                $_SESSION['edit_message'] = "Crew deleted";
-                create_log_entry('Crew', $crew_select, 'Crew', $crew_select, 'Delete', $_SESSION['user_id']);
-
-                $mysqli->query("DELETE FROM crew WHERE crew_id='$crew_select'")
-                    or die('Error: ' . mysqli_error($mysqli));
-                ;
-                $mysqli->query("DELETE FROM sub_crew WHERE crew_id='$crew_select'")
-                    or die('Error: ' . mysqli_error($mysqli));
-                ;
-                $mysqli->query("DELETE FROM sub_crew WHERE parent_id='$crew_select'")
-                    or die('Error: ' . mysqli_error($mysqli));
-                ;
-                $mysqli->query("DELETE FROM crew_individual WHERE crew_id='$crew_select'")
-                    or die('Error: ' . mysqli_error($mysqli));
-                ;
-                header("Location: ../crew/crew_main.php");
             }
         }
     }
