@@ -8,11 +8,15 @@
             <ul class="navigation-list">
                 {foreach from=$game_releases item=release}
                     <li {if isset($release_id) and $release->getId() == $release_id}class="active"{/if}>
-                        <a title="Delete release"
-                            href="db_games_detail.php?action=delete_release&amp;game_id={$game->getId()}&amp;game_release_id[]={$release->getId()}"
-                            onclick="javascript:return confirm('This release will be deleted');" class="standard_tile_link">
-                            <i class="fa fa-fw fa-trash" aria-hidden="true"></i>
-                        </a>
+                        {if $release->getMenu() == null}
+                            <a title="Delete release"
+                                href="db_games_detail.php?action=delete_release&amp;game_id={$game->getId()}&amp;game_release_id[]={$release->getId()}"
+                                onclick="javascript:return confirm('This release will be deleted');" class="standard_tile_link">
+                                <i class="fa fa-fw fa-trash" aria-hidden="true"></i>
+                            </a>
+                        {else}
+                            <a><i class="fa fa-fw"></i></a>
+                        {/if}
 
                         <a href="games_release_detail.php?release_id={$release->getId()}&game_id={$game->getId()}&tab={$tab|default:"general"}">
                             {if $release->getDate()}
@@ -22,6 +26,7 @@
                             {/if}
                             {if $release->getName() != null} <small> as "{$release->getName()}"</small>{/if}
                             {if $release->getPublisher() != null} <small> by {$release->getPublisher()->getName()}</small>{/if}
+                            {if $release->getMenu() != null} <small>on {$release->getMenu()}</small>{/if}
                         </a>
 
                     </li>
