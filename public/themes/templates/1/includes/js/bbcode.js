@@ -147,7 +147,7 @@ function previewText (text) {
     text = text.replaceAll('[/screenstar]', '');
     text = text.replaceAll('[frontpage]', '');
     text = text.replaceAll('[/frontpage]', '');
-    for (i = 0; i < 30; i++) {
+    for (i = 0; i < 60; i++) {
         var hotspotUrl = '[hotspotUrl=#';
         var hotspotUrl_output = hotspotUrl.concat(i);
         var hotspotUrl_final = hotspotUrl_output.concat(']');
