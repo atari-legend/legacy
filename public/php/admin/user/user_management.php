@@ -41,7 +41,6 @@ if (isset($action) and $action == 'quick_search_users') {
     if ((isset($with_submissions) and $with_submissions == "1")
         || (isset($no_submissions) and $no_submissions == "1")) {
         $sql_query .= " LEFT JOIN game_submitinfo ON (users.user_id = game_submitinfo.user_id)";
-        $sql_query .= " LEFT JOIN demo_submitinfo ON (users.user_id = demo_submitinfo.user_id)";
     }
     if ((isset($with_interviews) and $with_interviews == "1") || (isset($no_interviews) and $no_interviews == "1")) {
         $sql_query .= " LEFT JOIN interview_main ON (users.user_id = interview_main.user_id)";
@@ -113,10 +112,10 @@ if (isset($action) and $action == 'quick_search_users') {
         $sql_query .= " AND users.last_visit < '$last_visit_timestamp'";
     }
     if (isset($with_submissions) and $with_submissions == "1") {
-        $sql_query .= " AND game_submitinfo.game_submitinfo_id OR demo_submitinfo.demo_submitinfo_id IS NOT NULL";
+        $sql_query .= " AND game_submitinfo.game_submitinfo_id IS NOT NULL";
     }
     if (isset($no_submissions) and $no_submissions == "1") {
-        $sql_query .= " AND game_submitinfo.game_submitinfo_id IS NULL AND demo_submitinfo.demo_submitinfo_id IS NULL";
+        $sql_query .= " AND game_submitinfo.game_submitinfo_id IS NULL";
     }
 
     // filter out duplicates

@@ -344,41 +344,31 @@ if (isset($action) and $action == 'delete_user') {
                         $_SESSION['edit_message'] = 'Deletion failed - This user has submitted news updates - '
                             .'Delete it in the appropriate section';
                     } else {
-                        $sql = $mysqli->query("SELECT * FROM comments
-                        LEFT JOIN demo_user_comments ON (comments.comments_id = demo_user_comments.comments_id)
-                        LEFT JOIN demo ON ( demo_user_comments.demo_id = demo.demo_id )
-                        WHERE comments.user_id = $user_id_selected") or die("error selecting demo comments");
+                        $changeLogDao->insertChangeLog(
+                            new \AL\Common\Model\Database\ChangeLog(
+                                -1,
+                                "Users",
+                                $user_id_selected,
+                                $user_name,
+                                "User",
+                                $user_id_selected,
+                                $user_name,
+                                $_SESSION["user_id"],
+                                \AL\Common\Model\Database\ChangeLog::ACTION_DELETE
+                            )
+                        );
 
-                        if ($sql->num_rows > 0) {
-                            $_SESSION['edit_message'] = 'Deletion failed - This user has submitted demo comments - '
-                                .'Delete it in the appropriate section';
-                        } else {
-                            $changeLogDao->insertChangeLog(
-                                new \AL\Common\Model\Database\ChangeLog(
-                                    -1,
-                                    "Users",
-                                    $user_id_selected,
-                                    $user_name,
-                                    "User",
-                                    $user_id_selected,
-                                    $user_name,
-                                    $_SESSION["user_id"],
-                                    \AL\Common\Model\Database\ChangeLog::ACTION_DELETE
-                                )
-                            );
+                        $mysqli->query("DELETE from users WHERE user_id='$user_id_selected'")
+                            or die('deleting user failed');
 
-                            $mysqli->query("DELETE from users WHERE user_id='$user_id_selected'")
-                                or die('deleting user failed');
+                        $_SESSION['edit_message'] = 'User deleted succesfully';
 
-                            $_SESSION['edit_message'] = 'User deleted succesfully';
-
-                            if ($user_id_selected == $_SESSION['user_id']) {
-                                // If the user deleted themselves, log them out
-                                $_SESSION = array();
-                                header("Location: /");
-                                mysqli_close($mysqli);
-                                die();
-                            }
+                        if ($user_id_selected == $_SESSION['user_id']) {
+                            // If the user deleted themselves, log them out
+                            $_SESSION = array();
+                            header("Location: /");
+                            mysqli_close($mysqli);
+                            die();
                         }
                     }
                 }
