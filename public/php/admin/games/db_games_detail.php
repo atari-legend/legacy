@@ -367,7 +367,7 @@ if (isset($action) and $action == 'delete_game') {
                                 ."Delete it in the appropriate section";
                             header("Location: ../games/games_detail.php?game_id=$game_id");
                         } else {
-                            $sdbquery = $mysqli->query("SELECT * FROM game_music WHERE game_id='$game_id'")
+                            $sdbquery = $mysqli->query("SELECT * FROM game_sndh WHERE game_id='$game_id'")
                                 or die("Error getting music info");
 
                             if ($sdbquery->num_rows > 0) {

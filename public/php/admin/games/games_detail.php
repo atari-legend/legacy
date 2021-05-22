@@ -262,7 +262,7 @@ $array = $numbergallery->fetch_array(MYSQLI_BOTH);
 $smarty->assign("nr_pics", $array['count']);
 
 //check how many music files this game has
-$numbermusic = $mysqli->query("SELECT count(*) as count FROM game_music WHERE game_id = '$game_id'")
+$numbermusic = $mysqli->query("SELECT count(*) as count FROM game_sndh WHERE game_id = '$game_id'")
     or die("couldn't get number of music files");
 $array = $numbermusic->fetch_array(MYSQLI_BOTH);
 

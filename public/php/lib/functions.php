@@ -617,7 +617,7 @@ function statistics_stack() {
     mysqli_free_result($query);
 
     // START - music STATS
-    $query   = $mysqli->query("SELECT COUNT(DISTINCT game_id) AS count FROM game_music");
+    $query   = $mysqli->query("SELECT COUNT(DISTINCT game_id) AS count FROM game_sndh");
     $music   = $query->fetch_array(MYSQLI_BOTH);
     $stack[] = "$music[count] games have music attached";
 
@@ -626,7 +626,7 @@ function statistics_stack() {
     mysqli_free_result($query);
 
     // START - music STATS
-    $query   = $mysqli->query("SELECT COUNT(music_id) AS count FROM game_music");
+    $query   = $mysqli->query("SELECT COUNT(id) AS count FROM sndhs");
     $music   = $query->fetch_array(MYSQLI_BOTH);
     $stack[] = "$music[count] gamemusic files are uploaded";
 
