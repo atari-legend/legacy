@@ -23,4 +23,7 @@ RUN a2enmod expires
 
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
 
-RUN pear install PHP_CodeSniffer
+RUN curl -L -o /usr/bin/phpcs https://squizlabs.github.io/PHP_CodeSniffer/phpcs.phar
+RUN chmod a+x /usr/bin/phpcs
+RUN curl -L -o /usr/bin/phpcbf https://squizlabs.github.io/PHP_CodeSniffer/phpcbf.phar
+RUN chmod a+x /usr/bin/phpcbf
