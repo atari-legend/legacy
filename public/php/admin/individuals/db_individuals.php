@@ -177,69 +177,53 @@ if (isset($ind_id) and isset($action) and $action == 'delete_ind') {
                 ."Delete it in the appropriate section";
             header("Location: ../individuals/individuals_main.php");
         } else {
-            $sdbquery = $mysqli->query("SELECT * FROM menu_disk_credits WHERE ind_id='$ind_id'")
-                or die("Error getting menu disk credits info");
+            $sdbquery = $mysqli->query("SELECT * FROM crew_individual WHERE ind_id='$ind_id'")
+                or die("Error getting crew_individual info");
             if ($sdbquery->num_rows > 0) {
-                $_SESSION['edit_message'] = "Deletion failed - This individual is linked to a menudisk - "
+                $_SESSION['edit_message'] = "Deletion failed - This individual is linked to a crew - "
                     ."delete in appropriate section";
                 header("Location: ../individuals/individuals_main.php");
             } else {
-                $sdbquery = $mysqli->query("SELECT * FROM menu_disk_title_author WHERE ind_id='$ind_id'")
-                    or die("Error getting menu_disk_title_author info");
-                if ($sdbquery->num_rows > 0) {
-                    $_SESSION['edit_message'] = "Deletion failed - This individual is linked to a menudisk - "
-                        ."delete in appropriate section";
-                    header("Location: ../individuals/individuals_main.php");
-                } else {
-                    $sdbquery = $mysqli->query("SELECT * FROM crew_individual WHERE ind_id='$ind_id'")
-                        or die("Error getting crew_individual info");
-                    if ($sdbquery->num_rows > 0) {
-                        $_SESSION['edit_message'] = "Deletion failed - This individual is linked to a crew - "
-                            ."delete in appropriate section";
-                        header("Location: ../individuals/individuals_main.php");
-                    } else {
-                        create_log_entry(
-                            'Individuals',
-                            $ind_id,
-                            'Individual',
-                            $ind_id,
-                            'Delete',
-                            $_SESSION['user_id']
-                        );
+                create_log_entry(
+                    'Individuals',
+                    $ind_id,
+                    'Individual',
+                    $ind_id,
+                    'Delete',
+                    $_SESSION['user_id']
+                );
 
-                        //first delete picture
-                        $photo = $mysqli->query("SELECT ind_imgext FROM individual_text WHERE ind_id='$ind_id'");
-                        list($ind_imgext) = $photo->fetch_row();
+                //first delete picture
+                $photo = $mysqli->query("SELECT ind_imgext FROM individual_text WHERE ind_id='$ind_id'");
+                list($ind_imgext) = $photo->fetch_row();
 
-                        if ($ind_imgext != '') {
-                            unlink("$individual_screenshot_save_path$ind_id.$ind_imgext");
-                        }
-
-                        //Let's get all the nicknames
-                        $nickname = $mysqli->query("SELECT * FROM individual_nicks where ind_id = '$ind_id'")
-                            or die("error getting nicknames");
-
-                        while ($name = mysqli_fetch_assoc($nickname)) {
-                            $nick_id = $name['nick_id'];
-                            $sql = $mysqli->query("DELETE FROM individuals WHERE ind_id = $nick_id")
-                                or die("Failed to delete the nicks from this person");
-                            ;
-                        }
-
-                        //then delete the rest
-                        $sql = $mysqli->query("DELETE FROM individuals WHERE ind_id = $ind_id")
-                            or die("Failed to delete individual");
-                        ;
-                        $sql = $mysqli->query("DELETE FROM individual_text WHERE ind_id = $ind_id")
-                            or die("Failed to delete ind text");
-                        ;
-                        $sql = $mysqli->query("DELETE FROM individual_nicks WHERE ind_id = $ind_id")
-                            or die("Failed to delete nickname");
-
-                        $_SESSION['edit_message'] = "individual succesfully deleted";
-                        header("Location: ../individuals/individuals_main.php");
-                    }
+                if ($ind_imgext != '') {
+                    unlink("$individual_screenshot_save_path$ind_id.$ind_imgext");
                 }
+
+                //Let's get all the nicknames
+                $nickname = $mysqli->query("SELECT * FROM individual_nicks where ind_id = '$ind_id'")
+                    or die("error getting nicknames");
+
+                while ($name = mysqli_fetch_assoc($nickname)) {
+                    $nick_id = $name['nick_id'];
+                    $sql = $mysqli->query("DELETE FROM individuals WHERE ind_id = $nick_id")
+                        or die("Failed to delete the nicks from this person");
+                    ;
+                }
+
+                //then delete the rest
+                $sql = $mysqli->query("DELETE FROM individuals WHERE ind_id = $ind_id")
+                    or die("Failed to delete individual");
+                ;
+                $sql = $mysqli->query("DELETE FROM individual_text WHERE ind_id = $ind_id")
+                    or die("Failed to delete ind text");
+                ;
+                $sql = $mysqli->query("DELETE FROM individual_nicks WHERE ind_id = $ind_id")
+                    or die("Failed to delete nickname");
+
+                $_SESSION['edit_message'] = "individual succesfully deleted";
+                header("Location: ../individuals/individuals_main.php");
             }
         }
     }
