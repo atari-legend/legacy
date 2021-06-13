@@ -24,7 +24,7 @@ class ChangeLog {
         "Games" => array("AKA", "Box back", "Box front", "Comment","Creator",
             "Developer", "Fact", "File", "Mag score", "Music","Game", "Publisher",
             "Review", "Review comment", "Screenshot", "Similar", "Submission", "Year",
-            "Release", "Sound hardware"
+            "Release", "Sound hardware", "Video"
         ),
         "Game Release" => array("Scan"),
         "Individuals" => array("Image", "Individual", "Nickname"),
