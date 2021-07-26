@@ -296,7 +296,7 @@ if (isset($action) and $action == 'move_to_comment') {
     $sql = $mysqli->query("INSERT INTO game_user_comments (game_id,comment_id) VALUES ('$game_id',LAST_INSERT_ID())")
         or die("something is wrong with INSERT mysql4");
 
-    create_log_entry('Games', $new_comment_id, 'Comment', $new_comment_id, 'Insert', $_SESSION['user_id']);
+    create_log_entry('Games', $game_id, 'Comment', $new_comment_id, 'Insert', $_SESSION['user_id']);
 
     $sql = $mysqli->query("DELETE FROM review_main WHERE review_id = '$reviewid' ")
         or die("deletion review_main failed");
