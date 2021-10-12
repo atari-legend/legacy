@@ -640,8 +640,6 @@ function statistics_stack() {
 function create_log_entry($section, $section_id, $subsection, $subsection_id, $action, $user_id) {
     global $mysqli;
 
-    $log_time = date_to_timestamp(date('Y'), date('m'), date('d'));
-
     //  Everything we do for the GAMES SECTION
     if ($section == 'Games') {
         if ($subsection == 'Submission') {
@@ -1816,6 +1814,7 @@ function create_log_entry($section, $section_id, $subsection, $subsection_id, $a
     $section_name    = $mysqli->real_escape_string($section_name);
     $subsection_name = $mysqli->real_escape_string($subsection_name);
 
+    $log_time = time();
     $sql_log = $mysqli->query("INSERT INTO change_log
         (section, section_id, section_name, sub_section, sub_section_id, sub_section_name, user_id, action, timestamp)
         VALUES ('$section', '$section_id', '$section_name', '$subsection', '$subsection_id', '$subsection_name',
