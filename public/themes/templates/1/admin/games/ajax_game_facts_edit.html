@@ -4,7 +4,7 @@
     {if (isset($facts))}
         {foreach from=$facts item=line}
             <fieldset class="secondary_fieldset centered_fieldset">
-                <legend class="primary_legend text-center">Fact nr {$line.game_fact_nr}</legend>
+                <legend class="primary_legend text-center">Fact #{$line.game_fact_nr}</legend>
                 <form enctype="multipart/form-data" action="../games/db_games_facts.php" method="post" name="fact{$line.game_fact_id}" id="JSFact{$line.game_fact_id}">
                     <br>
                     <div id="JSGameFact_{$line.game_fact_id}">{$line.game_fact}</div>
