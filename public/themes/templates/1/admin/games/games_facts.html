@@ -31,7 +31,7 @@
             remove a fact and its screenshots from the DB. More facts can be added to a game.
         </p>
     </div>
-    <h1>{$game->getName()|upper}</h1>
+    <h1><a href="games_detail.php?game_id={$game->getId()}">{$game->getName()|upper}</a></h1>
     <div class="standard_tile_line"></div>
     <div class="standard_tile_padding">
         <div class="left_nav_section">
