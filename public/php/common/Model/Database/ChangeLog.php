@@ -8,9 +8,10 @@ class ChangeLog {
     const ACTION_UPDATE = "Update";
     const ACTION_INSERT = "Insert";
     const ACTION_DELETE = "Delete";
+    const ACTION_DELETE_SHOT = "Delete shot";
 
     /** Permitted DB actions */
-    const ACTIONS = array(self::ACTION_UPDATE, self::ACTION_INSERT, self::ACTION_DELETE);
+    const ACTIONS = array(self::ACTION_UPDATE, self::ACTION_INSERT, self::ACTION_DELETE, self::ACTION_DELETE_SHOT);
 
     /** List of permitted sections and sub-sections */
     const SECTIONS = array(
@@ -181,7 +182,8 @@ class ChangeLog {
                 "Fact" => array(
                     "Update" => "Updated $section_name",
                     "Insert" => "Added fact to $section_name",
-                    "Delete" =>"Removed a fact from $section_name"),
+                    "Delete" =>"Removed a fact from $section_name",
+                    "Delete shot" => "Removed a fact shot from $section_name"),
                 "File" => array(
                     "Update" => "Updated $section_name",
                     "Insert" => "Added a file to $section_name",
