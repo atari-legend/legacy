@@ -23,7 +23,7 @@ class DeveloperRoleDAO {
         $stmt = \AL\Db\execute_query(
             "DeveloperRoleDAO: getAllDeveloperRoles",
             $this->mysqli,
-            "SELECT id, role FROM developer_role ORDER BY role",
+            "SELECT id, name FROM developer_role ORDER BY name",
             null, null
         );
 
@@ -44,7 +44,7 @@ class DeveloperRoleDAO {
 
         return $developer_roles;
     }
-    
+
     /**
      * Get role for a role id
      *
@@ -54,8 +54,8 @@ class DeveloperRoleDAO {
         $stmt = \AL\Db\execute_query(
             "DeveloperRoleDAO: getRoleForId",
             $this->mysqli,
-            "SELECT id, role
-            FROM developer_role 
+            "SELECT id, name
+            FROM developer_role
             WHERE id = ?",
             "i", $id
         );
@@ -77,7 +77,7 @@ class DeveloperRoleDAO {
 
         return $developer_roles;
     }
-    
+
     /**
      * add a role to the database
      *
@@ -87,13 +87,13 @@ class DeveloperRoleDAO {
         $stmt = \AL\Db\execute_query(
             "DeveloperRoleDAO: addDeveloperRole",
             $this->mysqli,
-            "INSERT INTO developer_role (`role`) VALUES (?)",
+            "INSERT INTO developer_role (`name`) VALUES (?)",
             "s", $role
         );
 
         $stmt->close();
     }
-    
+
     /**
      * delete a role
      *
@@ -109,7 +109,7 @@ class DeveloperRoleDAO {
 
         $stmt->close();
     }
-    
+
         /**
      * update a role
      *
@@ -120,10 +120,10 @@ class DeveloperRoleDAO {
         $stmt = \AL\Db\execute_query(
             "DeveloperRoleDAO: updateDeveloperRole",
             $this->mysqli,
-            "UPDATE developer_role SET role = ? WHERE id = ?",
+            "UPDATE developer_role SET name = ? WHERE id = ?",
             "si", $role_name, $role_id
         );
-        
+
         $stmt->close();
     }
 }

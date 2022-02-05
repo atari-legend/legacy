@@ -1675,7 +1675,7 @@ function create_log_entry($section, $section_id, $subsection, $subsection_id, $a
             $query = "SELECT role FROM developer_role WHERE id = '$section_id'";
             $result = $mysqli->query($query) or die("getting role name failed");
             $query_data   = $result->fetch_array(MYSQLI_BOTH);
-            $section_name = $query_data['role'];
+            $section_name = $query_data['name'];
         } elseif ($subsection == 'Language') {
             // Get the language name
             $query = "SELECT name FROM language WHERE id = '$section_id'";
@@ -1714,7 +1714,7 @@ function create_log_entry($section, $section_id, $subsection, $subsection_id, $a
             $section_name = $query_data['name'];
         } elseif ($subsection == 'Memory') {
             // Get the memory amount
-            $query = "SELECT memory FROM memory WHERE id = '$section_id'";
+            $query = "SELECT name FROM memory WHERE id = '$section_id'";
             $result = $mysqli->query($query) or die("getting memory amount failed");
             $query_data   = $result->fetch_array(MYSQLI_BOTH);
             $section_name = $query_data['memory'];

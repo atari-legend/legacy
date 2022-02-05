@@ -24,7 +24,7 @@ class MemoryDAO {
         $stmt = \AL\Db\execute_query(
             "MemoryDAO: getAllMemory",
             $this->mysqli,
-            "SELECT id, memory FROM memory ORDER BY memory",
+            "SELECT id, name FROM memory ORDER BY name",
             null, null
         );
 
@@ -55,8 +55,8 @@ class MemoryDAO {
         $stmt = \AL\Db\execute_query(
             "MemoryDAO: getMemoryForRelease",
             $this->mysqli,
-            "SELECT memory_id, memory, enhancement.id, enhancement.name
-            FROM game_release_memory_enhanced LEFT JOIN 
+            "SELECT memory_id, memory.name, enhancement.id, enhancement.name
+            FROM game_release_memory_enhanced LEFT JOIN
             memory ON (game_release_memory_enhanced.memory_id = memory.id)
             LEFT JOIN enhancement ON (game_release_memory_enhanced.enhancement_id = enhancement.id)
             WHERE release_id = ?",
@@ -83,7 +83,7 @@ class MemoryDAO {
 
         return $memory_linked;
     }
-    
+
     /**
      * Set the list of memory enhancements for this release
      *
@@ -91,7 +91,7 @@ class MemoryDAO {
      * @param integer[] List of memory IDs
      */
     public function setMemoryForRelease($release_id, $memory_id, $enhancement_id) {
-       
+
         $stmt = \AL\Db\execute_query(
             "MemoryDAO: setMemoryForRelease",
             $this->mysqli,
@@ -101,7 +101,7 @@ class MemoryDAO {
 
         $stmt->close();
     }
-    
+
      /**
      * Update enhancement for memory
      *
@@ -121,8 +121,8 @@ class MemoryDAO {
 
         $stmt->close();
     }
-    
-    
+
+
          /**
      * Delete Memory enhancement for release
      *
@@ -150,8 +150,8 @@ class MemoryDAO {
         $stmt = \AL\Db\execute_query(
             "MemoryDAO: getMinimumMemoryForRelease",
             $this->mysqli,
-            "SELECT memory_id, memory
-            FROM game_release_memory_minimum LEFT JOIN 
+            "SELECT memory_id, name
+            FROM game_release_memory_minimum LEFT JOIN
             memory ON (game_release_memory_minimum.memory_id = memory.id)
             WHERE release_id = ?",
             "i", $release_id
@@ -174,7 +174,7 @@ class MemoryDAO {
 
         return $memory_linked;
     }
-    
+
     /**
      * Set the list of minimum memory for this release
      *
@@ -182,7 +182,7 @@ class MemoryDAO {
      * @param integer[] List of memory IDs
      */
     public function setMinimumMemoryForRelease($release_id, $memory_id) {
-       
+
         $stmt = \AL\Db\execute_query(
             "MemoryDAO: setMinimumMemoryForRelease",
             $this->mysqli,
@@ -192,8 +192,8 @@ class MemoryDAO {
 
         $stmt->close();
     }
-    
-         /**
+
+    /**
      * Delete minimum memory for release
      *
      * @param integer Game Release ID
@@ -220,8 +220,8 @@ class MemoryDAO {
         $stmt = \AL\Db\execute_query(
             "MemoryDAO: getMemoryIncompatibleForRelease",
             $this->mysqli,
-            "SELECT memory_id, memory
-            FROM game_release_memory_incompatible LEFT JOIN 
+            "SELECT memory_id, name
+            FROM game_release_memory_incompatible LEFT JOIN
             memory ON (game_release_memory_incompatible.memory_id = memory.id)
             WHERE release_id = ?",
             "i", $release_id
@@ -244,7 +244,7 @@ class MemoryDAO {
 
         return $memory_linked;
     }
-    
+
     /**
      * Set the list of incompatible memory for this release
      *
@@ -252,7 +252,7 @@ class MemoryDAO {
      * @param integer[] List of memory IDs
      */
     public function setMemoryIncompatibleForRelease($release_id, $memory_id) {
-       
+
         $stmt = \AL\Db\execute_query(
             "MemoryDAO: setMemoryIncompatibleForRelease",
             $this->mysqli,
@@ -262,7 +262,7 @@ class MemoryDAO {
 
         $stmt->close();
     }
-    
+
          /**
      * Delete incompatible memory for release
      *
@@ -280,7 +280,7 @@ class MemoryDAO {
 
         $stmt->close();
     }
-        
+
      /**
      * add a memory amount to the database
      *
@@ -290,13 +290,13 @@ class MemoryDAO {
         $stmt = \AL\Db\execute_query(
             "MemoryDAO: addMemory",
             $this->mysqli,
-            "INSERT INTO memory (`memory`) VALUES (?)",
+            "INSERT INTO memory (`name`) VALUES (?)",
             "s", $memory
         );
 
         $stmt->close();
     }
-    
+
     /**
      * delete a $memory amount
      *
@@ -312,7 +312,7 @@ class MemoryDAO {
 
         $stmt->close();
     }
-    
+
         /**
      * update a memory amount
      *
@@ -323,10 +323,10 @@ class MemoryDAO {
         $stmt = \AL\Db\execute_query(
             "MemoryDAO: updateMemory",
             $this->mysqli,
-            "UPDATE memory SET memory = ? WHERE id = ?",
+            "UPDATE memory SET name = ? WHERE id = ?",
             "si", $memory, $memory_id
         );
-        
+
         $stmt->close();
     }
 }

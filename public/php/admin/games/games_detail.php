@@ -147,7 +147,7 @@ while ($developers = $sql_developer->fetch_array(MYSQLI_BOTH)) {
     $smarty->append('developers', array(
         'pub_dev_id' => $developers['pub_dev_id'],
         'pub_dev_name' => $developers['pub_dev_name'],
-        'developer_role' => $developers['role'],
+        'developer_role' => $developers['name'],
         'developer_role_id' => $developers['id']
     ));
 }
@@ -156,13 +156,13 @@ while ($developers = $sql_developer->fetch_array(MYSQLI_BOTH)) {
 //Get the developer roles
 //**********************************************************************************
 
-$sql_developer_role = $mysqli->query("SELECT * FROM developer_role ORDER BY role ASC")
+$sql_developer_role = $mysqli->query("SELECT * FROM developer_role ORDER BY name ASC")
     or die("Couldn't query developer_role database");
 
 while ($developer_role = $sql_developer_role->fetch_array(MYSQLI_BOTH)) {
     $smarty->append('developer_role', array(
         'developer_role_id' => $developer_role['id'],
-        'developer_role' => $developer_role['role']
+        'developer_role' => $developer_role['name']
     ));
 }
 
