@@ -247,7 +247,7 @@
                     <input type="hidden" name="release_id" value="{$release->getId()}">
                     <input type="hidden" name="pub_dev_id" value="{$release_distributor->getid()}">
                     <input type="text" value="{$release_distributor->getName()}" class="standard_input input_large" disabled id="gd_game_dev">
-                    <a href="../company/company_edit.php?comp_id={$release_distributor->getid()}" title="Edit distributor" class="standard_tile_link"><i class="fa fa-fw fa-pencil edit_author" aria-hidden="true"></i></a>
+                    <a href="{$smarty.const.FRONT_URL}/admin/games/companies/{$release_distributor->getid()}/edit" title="Edit distributor" class="standard_tile_link"><i class="fa fa-fw fa-pencil edit_author" aria-hidden="true"></i></a>
                 </form>
             {/foreach}
         {/if}

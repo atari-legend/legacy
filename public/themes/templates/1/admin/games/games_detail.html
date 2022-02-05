@@ -380,7 +380,7 @@ $('#input-tags3').selectize({
                             </a>
 
                             <input type="text" value="{$linked_individual->getIndividual()->getName()}" class="standard_input input_large" disabled id="gd_game_author">
-                            <a href="../individuals/individuals_edit.php?ind_id={$linked_individual->getIndividual()->getId()}" title="Edit individual" class="standard_tile_link"><i class="fa fa-fw fa-pencil edit_author" aria-hidden="true"></i></a>
+                            <a href="{$smarty.const.FRONT_URL}/admin/games/individuals/{$linked_individual->getIndividual()->getId()}/edit" title="Edit individual" class="standard_tile_link"><i class="fa fa-fw fa-pencil edit_author" aria-hidden="true"></i></a>
 
                             <select name="new_individual_role_id"
                                 onchange="jQuery('#update-author-{$linked_individual->getId()}').show()"
@@ -453,7 +453,7 @@ $('#input-tags3').selectize({
                             <input type="hidden" name="developer_role_id" value="{$developer.developer_role_id}">
 
                             <input type="text" value="{$developer.pub_dev_name}" class="standard_input input_large" disabled id="gd_game_dev">
-                            <a href="../company/company_edit.php?comp_id={$developer.pub_dev_id}" title="Edit developer" class="standard_tile_link"><i class="fa fa-fw fa-pencil edit_author" aria-hidden="true"></i></a>
+                            <a href="{$smarty.const.FRONT_URL}/admin/games/companies/{$developer.pub_dev_id}/edit" title="Edit developer" class="standard_tile_link"><i class="fa fa-fw fa-pencil edit_author" aria-hidden="true"></i></a>
 
                             <select name="new_developer_role_id"
                                 onchange="jQuery('#update-developer-{$developer.pub_dev_id}').show()"

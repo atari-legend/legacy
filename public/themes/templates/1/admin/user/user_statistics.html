@@ -144,7 +144,7 @@ The the user stats page
                 {foreach from=$users_news item=line}
                     <tr>
                         <td align="center">
-                            <a href="../news/news_edit.php?news_id={$line.news_id}" class="standard_tile_text_left">{$line.news_headline}</a><br>
+                            <a href="{$smarty.const.FRONT_URL}/admin/news/news/{$line.news_id}/edit" class="standard_tile_text_left">{$line.news_headline}</a><br>
                         </td>
                     </tr>
                 {/foreach}

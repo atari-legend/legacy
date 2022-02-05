@@ -73,7 +73,7 @@
             </p>
         </div>
         {if isset($interview.interview_ind_name)}
-        <h1><a href="../individuals/individuals_edit.php?ind_id={$interview.interview_ind_id}" class="standard_tile_link">{$interview.interview_ind_name|upper}</a></h1>
+        <h1><a href="{$smarty.const.FRONT_URL}/admin/games/individuals/{$interview.interview_ind_id}/edit" class="standard_tile_link">{$interview.interview_ind_name|upper}</a></h1>
         <div class="standard_tile_line"></div>
         <div class="standard_tile_padding">
             <div class="left_nav_section">

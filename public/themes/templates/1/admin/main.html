@@ -80,15 +80,10 @@
                                         <li><button class="sidebutton" id="games_side">GAMES</button>
                                             <ul class="sub-menu">
                                                 <li><a href="../games/games_main.php" title="Game editor" class="sidebutton_cpanel">GAME EDITOR</a></li>
-                                                <li><a href="../games/games_config.php" title="Game configurator" class="sidebutton_cpanel">GAME CONFIG</a></li>
                                                 <li><a href="../games/games_series_main.php" title="Game series" class="sidebutton_cpanel">GAME SERIES</a></li>
-                                                <li><a href="../games/games_music.php" title="Game music" class="sidebutton_cpanel">GAME MUSIC</a></li>
                                                 <li><a href="../games/submission_games.php" title="Game submissions" class="sidebutton_cpanel">GAME SUBMISSIONS</a></li>
                                                 <li><a href="../games/games_review.php" title="Game reviews" class="sidebutton_cpanel">REVIEWS</a></li>
                                                 <li><a href="../games/games_review_submitted.php" title="Submitted reviews" class="sidebutton_cpanel">REVIEW SUBMISSIONS</a></li>
-                                                <li><a href="../individuals/individuals_main.php" title="Individuals" class="sidebutton_cpanel">INDIVIDIUALS</a></li>
-                                                <li><a href="../company/company_main.php" title="Companies" class="sidebutton_cpanel">COMPANIES</a></li>
-                                                <li><a href="../company/company_logos.php" title="Company logo" class="sidebutton_cpanel">COMPANY LOGO</a></li>
                                                 <li><a href="../interviews/interviews_main.php" title="Interviews" class="sidebutton_cpanel">INTERVIEWS</a></li>
                                             </ul>
                                         </li>
@@ -102,20 +97,6 @@
                                             <ul class="sub-menu">
                                                 <li><a href="../user/user_management.php" class="sidebutton_cpanel">USER MANAGEMENT</a></li>
                                                 <li><a href="../administration/comments.php" class="sidebutton_cpanel">USER COMMENTS</a></li>
-                                            </ul>
-                                        </li>
-                                    </ul>
-                                </nav>
-                            </div>
-                            <div class="no-wrap">
-                                <nav class="skin-menu">
-                                    <ul class="side_navigation">
-                                        <li><button class="sidebutton" id="admin_side">NEWS</button>
-                                            <ul class="sub-menu">
-                                                <li><a href="../news/news_add.php" title="Add news" class="sidebutton_cpanel">ADD NEWS</a></li>
-                                                <li><a href="../news/news_approve.php" title="Approve news" class="sidebutton_cpanel">APPROVE NEWS</a></li>
-                                                <li><a href="../news/news_edit.php" title="Edit news" class="sidebutton_cpanel">EDIT NEWS</a></li>
-                                                <li><a href="../news/news_add_images.php" title="Add news image" class="sidebutton_cpanel">ADD NEWS IMAGE</a></li>
                                             </ul>
                                         </li>
                                     </ul>
@@ -155,6 +136,13 @@
                                 <nav class="skin-menu">
                                     <ul class="side_navigation">
                                         <li><a href="{$smarty.const.FRONT_URL}" class="sidebutton" id="main_side">MAIN SITE</a></li>
+                                    </ul>
+                                </nav>
+                            </div>
+                            <div class="no-wrap">
+                                <nav class="skin-menu">
+                                    <ul class="side_navigation">
+                                        <li><a href="{$smarty.const.FRONT_URL}/admin/" class="sidebutton" id="main_side">NEW CPANEL</a></li>
                                     </ul>
                                 </nav>
                             </div>
@@ -262,15 +250,10 @@
                         <li><button type="button" class="topbutton" id="games">GAMES</button>
                             <ul>
                                 <li><a href="../games/games_main.php" title="Game editor" class="subbutton">GAME EDITOR</a></li>
-                                <li><a href="../games/games_config.php" title="Game configurator" class="subbutton">GAME CONFIG</a></li>
                                 <li><a href="../games/games_series_main.php" title="Game series" class="subbutton">GAME SERIES</a></li>
-                                <li><a href="../games/games_music.php" title="Game music" class="subbutton">GAME MUSIC</a></li>
                                 <li><a href="../games/submission_games.php" title="Game submissions" class="subbutton">GAME SUBMISSIONS</a></li>
                                 <li><a href="../games/games_review.php" title="Game reviews" class="subbutton">REVIEWS</a></li>
                                 <li><a href="../games/games_review_submitted.php" title="submitted_reviews" class="subbutton">REVIEW SUBMISSIONS</a></li>
-                                <li><a href="../individuals/individuals_main.php" title="Individuals" class="subbutton">INDIVIDIUALS</a></li>
-                                <li><a href="../company/company_main.php" title="Companies" class="subbutton">COMPANIES</a></li>
-                                <li><a href="../company/company_logos.php" title="Company logo" class="subbutton">COMPANY LOGO</a></li>
                                 <li><a href="../interviews/interviews_main.php" title="Interviews" class="subbutton">INTERVIEWS</a></li>
                             </ul>
                         </li>
@@ -278,14 +261,6 @@
                             <ul>
                                 <li><a href="../user/user_management.php" class="subbutton">USER MANAGEMENT</a></li>
                                 <li><a href="../administration/comments.php" class="subbutton">USER COMMENTS</a></li>
-                            </ul>
-                        </li>
-                        <li><button type="button" class="topbutton" id="admin">NEWS</button>
-                            <ul>
-                                <li><a href="../news/news_add.php" title="Add news" class="subbutton">ADD NEWS</a></li>
-                                <li><a href="../news/news_approve.php" title="Approve news" class="subbutton">APPROVE NEWS</a></li>
-                                <li><a href="../news/news_edit.php" title="Adit news" class="subbutton">EDIT NEWS</a></li>
-                                <li><a href="../news/news_add_images.php" title="Add news image" class="subbutton">ADD NEWS IMAGE</a></li>
                             </ul>
                         </li>
                         <li><button type="button" class="topbutton" id="other">OTHER</button>
@@ -313,6 +288,7 @@
                             </ul>
                         </li>
                         <li><a href="{$smarty.const.FRONT_URL}" class="topbutton" id="main_site">MAIN SITE</a></li>
+                        <li><a href="{$smarty.const.FRONT_URL}/admin" class="topbutton" id="main_site">NEW CPANEL</a></li>
                         <li><a href="http://www.atari-forum.com" class="topbutton" id="forum_top_cpanel">FORUM</a></li>
                     </ul>
                 </nav>
