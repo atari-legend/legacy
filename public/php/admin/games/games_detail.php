@@ -268,13 +268,6 @@ $array = $numbermusic->fetch_array(MYSQLI_BOTH);
 
 $smarty->assign("nr_music", $array['count']);
 
-//check how many magazine reviews this game has
-$numbermag = $mysqli->query("SELECT count(*) as count FROM magazine_game WHERE game_id = '$game_id'")
-    or die("couldn't get number of mag reviews");
-$array = $numbermag->fetch_array(MYSQLI_BOTH);
-
-$smarty->assign("nr_magazines", $array['count']);
-
 $number_comments = $mysqli->query("SELECT count(*) as count FROM game_user_comments WHERE game_id = '$game_id'")
     or die("couldn't get number of comments");
 
