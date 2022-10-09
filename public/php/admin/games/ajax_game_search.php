@@ -30,7 +30,6 @@ $start = microtime(true);
 
 $RESULTGAME = "SELECT game.game_id,
         game.game_name,
-        game_boxscan.game_boxscan_id,
         screenshot_game.screenshot_id,
         game_sndh.sndh_id,
         pd1.pub_dev_name AS 'publisher_name',
@@ -39,7 +38,6 @@ $RESULTGAME = "SELECT game.game_id,
         pd2.pub_dev_id AS 'developer_id',
         YEAR(game_release.date) AS game_release_year
         FROM game
-        LEFT JOIN game_boxscan ON (game_boxscan.game_id = game.game_id)
         LEFT JOIN screenshot_game ON (screenshot_game.game_id = game.game_id)
         LEFT JOIN game_sndh ON (game_sndh.game_id = game.game_id)
         LEFT JOIN game_programming_language ON (game.game_id = game_programming_language.game_id)
@@ -53,7 +51,6 @@ $RESULTGAME = "SELECT game.game_id,
 $RESULTAKA = "SELECT
          game_aka.game_id,
          game_aka.aka_name,
-         game_boxscan.game_boxscan_id,
          screenshot_game.screenshot_id,
          game_sndh.sndh_id,
          pd1.pub_dev_name as 'publisher_name',
@@ -63,7 +60,6 @@ $RESULTAKA = "SELECT
          YEAR(game_release.date) as game_release_year
       FROM game_aka
       LEFT JOIN game ON (game_aka.game_id = game.game_id)
-      LEFT JOIN game_boxscan ON (game_boxscan.game_id = game_aka.game_id)
       LEFT JOIN screenshot_game ON (screenshot_game.game_id = game.game_id)
       LEFT JOIN game_sndh ON (game_sndh.game_id = game.game_id)
       LEFT JOIN game_programming_language ON (game.game_id = game_programming_language.game_id)
@@ -158,9 +154,6 @@ if (isset($action) and $action == "search") {
 
     if (isset($stac) and $stac == "1") {
         $stac_select = " AND game_engine.engine_id ='2'";
-    }
-    if (isset($no_boxscan) and $no_boxscan == "1") {
-        $no_boxscan_select = " AND game_boxscan.game_id IS NULL";
     }
     if (isset($no_screenshot) and $no_screenshot == "1") {
         $no_screenshot_select = " AND screenshot_game.game_id IS NULL";
@@ -307,7 +300,6 @@ if (isset($action) and $action == "search") {
                         'developer_name' => $dev_name,
                         'year' => $sql_game_search['game_release_year'],
                         'music' => $sql_game_search['sndh_id'],
-                        'boxscan' => $sql_game_search['game_boxscan_id'],
                         'screenshot' => $sql_game_search['screenshot_id']
                     ));
         }

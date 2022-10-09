@@ -240,13 +240,6 @@ $array = $numberscreen->fetch_array(MYSQLI_BOTH);
 
 $smarty->assign("nr_screenshots", $array['count']);
 
-//check the number of boxscans
-$numberbox = $mysqli->query("SELECT count(*) as count FROM game_boxscan WHERE game_id = '$game_id'")
-    or die("couldn't get number of boxscans");
-$array = $numberbox->fetch_array(MYSQLI_BOTH);
-
-$smarty->assign("nr_boxscans", $array['count']);
-
 //Check how many reviews a game has
 $numberreviews = $mysqli->query("SELECT count(*) as count FROM review_game WHERE game_id = '$game_id'")
     or die("couldn't get number of reviews");

@@ -554,15 +554,6 @@ function statistics_stack() {
 
     mysqli_free_result($query);
 
-    // START - COUNT HOW MANY GAMES HAS BOXSCANS
-    $query   = $mysqli->query("SELECT COUNT(DISTINCT game_id) AS count FROM game_boxscan");
-    $boxscan = $query->fetch_array(MYSQLI_BOTH);
-    $stack[] = "$boxscan[count] games have boxscans assigned";
-
-    // END - COUNT HOW MANY GAMES HAS BOXSCANS
-
-    mysqli_free_result($query);
-
     // START - COUNT HOW MANY GAMES HAS CATEGORIES SET
     $query         = $mysqli->query("SELECT COUNT(DISTINCT game_id) AS count FROM game_genre_cross");
     // Special case here due to the migration from game_categories to game_genre
