@@ -43,4 +43,4 @@ ssh-keyscan $DEPLOY_HOST >> ~/.ssh/known_hosts
 
 rsync ${RSYNC_FLAGS[@]} public/ $DEPLOY_USER@$DEPLOY_HOST:$DEPLOY_PATH/
 
-ssh $DEPLOY_USER@$DEPLOY_HOST "cd $DEPLOY_PATH/php/admin/administration/ && php7.1-cli database_update.php"
+ssh $DEPLOY_USER@$DEPLOY_HOST "cd $DEPLOY_PATH/php/admin/administration/ && php8.1-cli database_update.php"
