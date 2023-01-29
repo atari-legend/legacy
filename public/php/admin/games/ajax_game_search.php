@@ -276,7 +276,7 @@ if (isset($action) and $action == "search") {
             }
 
             //publishers can only be 18 chars long
-            if (strlen($sql_game_search['publisher_name']) > 18) {
+            if ($sql_game_search['publisher_name'] !== null && strlen($sql_game_search['publisher_name']) > 18) {
                 $pub_name = substr($sql_game_search['publisher_name'], 0, 18);
                 $pub_name = $pub_name . '...';
             } else {
@@ -284,7 +284,7 @@ if (isset($action) and $action == "search") {
             }
 
             //developers can only be 18 chars long
-            if (strlen($sql_game_search['developer_name']) > 18) {
+            if ($sql_game_search['developer_name'] !== null && strlen($sql_game_search['developer_name']) > 18) {
                 $dev_name = substr($sql_game_search['developer_name'], 0, 18);
                 $dev_name = $dev_name . '...';
             } else {
