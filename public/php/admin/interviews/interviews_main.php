@@ -77,7 +77,7 @@ while ($query_interview = $sql_interview->fetch_array(MYSQLI_BOTH)) {
     $interview_chapters = InsertALCode($interview_chapters);
 
     //get the profile of the author
-    if (preg_match("/[a-z]/i", $query_interview['ind_profile'])) {
+    if (preg_match("/[a-z]/i", $query_interview['ind_profile'] ?? '')) {
         $profile = $query_interview['ind_profile'];
     } else {
         $profile = 'none';

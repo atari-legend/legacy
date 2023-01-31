@@ -11,6 +11,7 @@ require_once __DIR__."/../../../config/config.php";
 class Comments {
     private $comments_id;
     private $timestamp;
+    private $post_date;
     private $user_id;
     private $user_comment_count;
     private $user_subm_count;
@@ -19,7 +20,7 @@ class Comments {
     private $join_date;
     private $karma;
     private $show_email;
-    private $avatar_ext;
+    private $avatar_image;
     private $game_id;
     private $game_name;
     private $comment_type;
@@ -55,7 +56,6 @@ class Comments {
         $this->join_date = $join_date;
         $this->karma = $karma;
         $this->show_email = $show_email;
-        $this->avatar_ext = $avatar_ext;
         $this->game_id = $game_id;
         $this->game_name = $game_name;
         $this->comment_type = $comment_type;
@@ -63,7 +63,7 @@ class Comments {
         $this->review_id = $review_id;
 
         if ($avatar_ext && $avatar_ext !== "") {
-            $this->avatar_image = $GLOBALS['user_avatar_path']."/${user_id}.${avatar_ext}";
+            $this->avatar_image = $GLOBALS['user_avatar_path']."/{$user_id}.{$avatar_ext}";
         } else {
             $this->avatar_image = $GLOBALS['style_folder']."/images/default_avatar_image.png";
         }
@@ -110,7 +110,7 @@ class Comments {
     public function getKarma() {
         return $this->karma;
     }
-    
+
     public function getShowEmail() {
         return $this->show_email;
     }
@@ -126,7 +126,7 @@ class Comments {
     public function getGameId() {
         return $this->game_id;
     }
-    
+
     public function getReviewId() {
         return $this->review_id;
     }

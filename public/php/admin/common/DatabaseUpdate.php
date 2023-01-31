@@ -23,6 +23,7 @@ class DatabaseUpdate {
     private $execute_on;
     private $sql;
     private $autoexecute;
+    private $disable_fk;
 
     /** Wether there's an additional PHP script to run */
     private $has_addition_script;
