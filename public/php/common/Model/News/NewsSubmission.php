@@ -47,32 +47,32 @@ class NewsSubmission {
         $this->userid = $userid;
         $this->username = $username;
         $this->email = $email;
-        
+
         if ($join_date == "") {
             $this->join = "unknown";
         } else {
             $this->join = date("d-m-y", $join_date);
         }
-       
+
         $this->karma = $karma;
         $this->show_email = $show_email;
         $this->user_subm_count = $user_subm_count;
-        
+
         if ($avatar_ext && $avatar_ext !== "") {
-            $this->avatar_image = $GLOBALS['user_avatar_path']."/${userid}.${avatar_ext}";
+            $this->avatar_image = $GLOBALS['user_avatar_path']."/{$userid}.{$avatar_ext}";
         } else {
             $this->avatar_image = $GLOBALS['style_folder']."/images/default_avatar_image.png";
         }
 
         if ($image) {
-            $this->image = $GLOBALS['news_images_path']."/${image}";
+            $this->image = $GLOBALS['news_images_path']."/{$image}";
         }
     }
 
     public function getId() {
         return $this->id;
     }
-    
+
     public function getImageId() {
         return $this->image_id;
     }
@@ -96,11 +96,11 @@ class NewsSubmission {
     public function getUserId() {
         return $this->userid;
     }
-    
+
     public function getUserName() {
         return $this->username;
     }
-    
+
     public function getEmail() {
         return $this->email;
     }
@@ -112,15 +112,15 @@ class NewsSubmission {
     public function getKarma() {
         return $this->karma;
     }
-    
+
     public function getShowEmail() {
         return $this->show_email;
     }
-    
+
     public function getAvatarImage() {
         return $this->avatar_image;
     }
-    
+
     public function getUserSubCount() {
         return $this->user_subm_count;
     }

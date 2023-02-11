@@ -41,7 +41,7 @@ class Link {
         $this->category_name = $category_name;
 
         if ($imgext && $imgext !== "") {
-            $this->image = $GLOBALS['website_image_path']."/${id}.${imgext}";
+            $this->image = $GLOBALS['website_image_path']."/{$id}.{$imgext}";
         }
     }
 
@@ -76,7 +76,7 @@ class Link {
     public function getDate() {
         return $this->date;
     }
-    
+
     public function getCategoryName() {
         return $this->category_name;
     }

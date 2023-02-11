@@ -19,11 +19,11 @@ class GameReleaseScan {
         $this->notes = $notes;
 
         if ($imgext && $imgext !== "") {
-            $this->image = $GLOBALS['game_release_scan_path']."${id}.${imgext}";
+            $this->image = $GLOBALS['game_release_scan_path']."{$id}.{$imgext}";
         }
 
         if ($imgext && $imgext !== "") {
-            $this->file = $GLOBALS['game_release_scan_save_path']."${id}.${imgext}";
+            $this->file = $GLOBALS['game_release_scan_save_path']."{$id}.{$imgext}";
         }
     }
 
