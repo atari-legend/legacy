@@ -15,17 +15,18 @@ jobs:
       - name: Build Docker image
         run: docker build -t atari-legend Docker/php/
 
+      - name: Get npm cache directory
+        id: npm-cache-dir
+        shell: bash
+        run: echo "dir=$(npm config get cache)" >> ${GITHUB_OUTPUT}
+
       - name: Cache node_modules/
-        uses: actions/cache@v2
-        env:
-            cache-name: cache-node-modules
+        uses: actions/cache@v3
+        id: npm-cache
         with:
-          path: node_modules/
-          key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('**/package-lock.json') }}
-          restore-keys: |
-            ${{ runner.os }}-build-${{ env.cache-name }}-
-            ${{ runner.os }}-build-
-            ${{ runner.os }}-#
+            path: ${{ steps.npm-cache-dir.outputs.dir }}
+            key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+            restore-keys: ${{ runner.os }}-node-
 
       - name: Install NPM modules
         run: docker run -v $PWD:/data -w /data atari-legend npm install
