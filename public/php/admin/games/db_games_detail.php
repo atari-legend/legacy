@@ -240,55 +240,6 @@ if (isset($action) and $action == 'modify_game') {
     //Update the game controls
     $controlDao->setGameControlForGame($game_id, isset($game_control) ? $game_control : []);
 
-    // Update the Unreleased tick box info
-    // Start off by deleting previos value
-    $sdbquery = $mysqli->query("DELETE FROM game_unreleased WHERE game_id='$game_id'");
-
-    // then insert the new value if it has been passed.
-    if (isset($unreleased)) {
-        $sdbquery = $mysqli->query("INSERT INTO game_unreleased (game_id,unreleased)
-            VALUES ('$game_id','$unreleased')");
-    }
-
-    // Update the In Development tick box info
-    // Start off by deleting previos value
-    $sdbquery = $mysqli->query("DELETE FROM game_development WHERE game_id='$game_id'");
-
-    // then insert the new value if it has been passed.
-    if (isset($development)) {
-        $sdbquery = $mysqli->query("INSERT INTO game_development (game_id,development)
-            VALUES ('$game_id','$development')");
-    }
-
-    // Update the GAME UNFINISHED tick box info
-    // Start off by deleting previos value
-    $sdbquery = $mysqli->query("DELETE FROM game_unfinished WHERE game_id='$game_id'");
-
-    // then insert the new value if it has been passed.
-    if (isset($unfinished)) {
-        $sdbquery = $mysqli->query("INSERT INTO game_unfinished (game_id,unfinished)
-            VALUES ('$game_id','$unfinished')");
-    }
-
-    // Update the game wanted tick box info
-    // Start off by deleting previos value
-    $sdbquery = $mysqli->query("DELETE FROM game_wanted WHERE game_id='$game_id'");
-
-    // then insert the new value if it has been passed.
-    if (isset($wanted)) {
-        $sdbquery = $mysqli->query("INSERT INTO game_wanted (game_id) VALUES ('$game_id')");
-    }
-
-    // UPDATE THE ARCADE TICK BOX INFO
-    // Start off by deleting previos value
-    $sdbquery = $mysqli->query("DELETE FROM game_arcade WHERE game_id='$game_id'");
-
-    // then insert the new value if it has been passed.
-    if (isset($arcade)) {
-        $sdbquery = $mysqli->query("INSERT INTO game_arcade (game_id,arcade)
-            VALUES ('$game_id','$arcade')") or die("Couldn't insert arcade tick box info");
-    }
-
     $_SESSION['edit_message'] = "Game has been modified";
 
     create_log_entry('Games', $game_id, 'Game', $game_id, 'Update', $_SESSION['user_id']);
