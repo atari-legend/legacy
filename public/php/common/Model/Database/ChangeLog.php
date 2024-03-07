@@ -25,7 +25,7 @@ class ChangeLog {
         "Games" => array("AKA", "Box back", "Box front", "Comment","Creator",
             "Developer", "Fact", "File", "Mag score", "Music","Game", "Publisher",
             "Review", "Review comment", "Screenshot", "Similar", "Submission", "Year",
-            "Release", "Sound hardware", "Video"
+            "Release", "Sound hardware", "Video", "Vs"
         ),
         "Game Release" => array("Scan"),
         "Individuals" => array("Image", "Individual", "Nickname"),
@@ -228,6 +228,10 @@ class ChangeLog {
                     "Update" => "Updated info submission for $section_name",
                     "Insert" => "Submitted info for $section_name",
                     "Delete" => "Removed an info submission for $section_name"),
+                "Vs" => array(
+                    "Update" => "Updated versus info for $section_name",
+                    "Insert" => "Submitted versus info for $section_name",
+                    "Delete" => "Removed a versus info for $section_name"),
             )
         );
 
