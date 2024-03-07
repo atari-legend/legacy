@@ -9,8 +9,8 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v2
 
-      - name: Cache Docker layers
-        uses: jpribyl/action-docker-layer-caching@v0.1.1
+#      - name: Cache Docker layers
+#        uses: jpribyl/action-docker-layer-caching@v0.1.1
 
       - name: Build Docker image
         run: docker build -t atari-legend Docker/php/
