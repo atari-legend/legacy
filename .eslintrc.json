@@ -4,7 +4,14 @@
         "semi": ["off", "always"],
         "indent": ["error", 4],
         "one-var": ["off"],
-        "linebreak-style": ["error", "unix"]
+        "linebreak-style": ["error", "unix"],
+        "no-var": ["off"],
+        "quote-props": ["off"],
+        "prefer-const": ["off"],
+        "object-curly-spacing": ["off"],
+        "no-empty": ["off"],
+        "array-bracket-spacing": ["off"],
+        "object-shorthand": ["off"]
     },
     "env": {
         "browser": true,

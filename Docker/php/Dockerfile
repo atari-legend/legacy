@@ -2,7 +2,7 @@ FROM php:8.2-apache
 
 RUN mv "$PHP_INI_DIR/php.ini-development" "$PHP_INI_DIR/php.ini"
 
-RUN curl -sL https://deb.nodesource.com/setup_12.x | bash -
+RUN curl -sL https://deb.nodesource.com/setup_20.x | bash -
 
 RUN apt-get update && apt-get install -y \
     build-essential \

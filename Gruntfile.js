@@ -1,3 +1,5 @@
+const sass = require('node-sass');
+
 module.exports = function (grunt) {
     // Project configuration.
     grunt.initConfig({
@@ -6,7 +8,8 @@ module.exports = function (grunt) {
 
         sass: {
             options: {
-                sourceMap: true
+                sourceMap: true,
+                implementation: sass
             },
             dist: {
                 files: {
@@ -91,32 +94,12 @@ module.exports = function (grunt) {
                 'scss/common/main_scss/**/*.scss'
             ]
         },
-
-        pleeease: {
-            custom: {
-                options: {
-                    autoprefixer: {'browsers': ['last 4 versions', 'ios 6']},
-                    filters: {'oldIE': true},
-                    rem: ['12px'],
-                    opacity: true,
-                    minifier: true,
-                    mqpacker: false,
-                    pseudoElements: true
-                },
-                files: {
-                    '<%= webRoot %>themes/styles/1/css/style.css': '<%= webRoot %>themes/styles/1/css/style.css',
-                    '<%= webRoot %>themes/styles/2/css/style.css': '<%= webRoot %>themes/styles/2/css/style.css',
-                    '<%= webRoot %>themes/styles/3/css/style.css': '<%= webRoot %>themes/styles/3/css/style.css'
-                }
-            }
-        },
-
         watch: {
             sass: {
                 files: [
                     'scss/**/*.scss'
                 ],
-                tasks: ['lintspaces:sass', 'sass', 'pleeease']
+                tasks: ['lintspaces:sass', 'sass']
             },
             html: {
                 files: [
@@ -202,11 +185,8 @@ module.exports = function (grunt) {
 
     });
 
-    // Load the plugin that provides the "uglify" task.
-    // grunt.loadNpmTasks('grunt-contrib-uglify');
     grunt.loadNpmTasks('grunt-sass');
     grunt.loadNpmTasks('grunt-scss-lint');
-    grunt.loadNpmTasks('grunt-pleeease');
     grunt.loadNpmTasks('grunt-contrib-watch');
     grunt.loadNpmTasks('grunt-phpcs');
     grunt.loadNpmTasks('grunt-phpcbf');
@@ -217,7 +197,7 @@ module.exports = function (grunt) {
     grunt.loadNpmTasks('grunt-php-cs-fixer');
 
     // Default task(s).
-    grunt.registerTask('default', ['eslint:application', 'lintspaces', 'sass', 'pleeease', 'phpcs:all']);
+    grunt.registerTask('default', ['eslint:application', 'lintspaces', 'sass', 'phpcs:all']);
     grunt.registerTask('lint', ['scsslint']);
     grunt.registerTask('sass-lint', ['sasslint']);
     grunt.registerTask('css-fix', ['csscomb']);
