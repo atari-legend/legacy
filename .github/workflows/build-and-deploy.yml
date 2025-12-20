@@ -39,7 +39,7 @@ jobs:
 
       # Preserve generated files (e.g. style.css) for the next workflow steps
       - name: Save generated files
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v6
         with:
           name: website
           path: public/
@@ -52,7 +52,7 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       # Restore generated files from previous step
-      - uses: actions/download-artifact@v2
+      - uses: actions/download-artifact@v6
         with:
           name: website
           path: public/
@@ -70,7 +70,7 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       # Restore generated files from previous step
-      - uses: actions/download-artifact@v2
+      - uses: actions/download-artifact@v6
         with:
           name: website
           path: public/
