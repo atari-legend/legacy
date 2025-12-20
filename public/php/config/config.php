@@ -47,6 +47,7 @@ $smarty->compile_dir = '../../../php/temp/smarty/templates_c/';
 $smarty->config_dir = '../../../php/temp/smarty/configs/';
 $smarty->cache_dir = '../../../php/temp/smarty/cache/';
 $smarty->addPluginsDir('../../../php/lib/smarty_plugins/');
+$smarty->registerPlugin('modifier', 'rand', 'rand');
 
 //***************************************************************
 // Some configs for the user management
